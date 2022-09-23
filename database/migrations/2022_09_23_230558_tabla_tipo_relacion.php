@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('Prueba', function (Blueprint $table) {
+        Schema::create('tipo_relacion', function (Blueprint $table) {
             $table->id();
+            $table->string("nombre");
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Prueba');
+        Schema::dropIfExists('tipo_relacion');
     }
 };
