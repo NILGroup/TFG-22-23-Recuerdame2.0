@@ -1,9 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Departamento;
-use App\Models\Empleado;
-use App\Models\Telefono;
+use App\Models\Paciente;
+use App\Models\Actividad;
+use App\Models\Evaluacion;
+use App\Models\Estado;
+use App\Models\Etapa;
+use App\Models\Tipo_relacion;
+use App\Models\Persona_relacionada;
+use Illuminate\Support\Carbon;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,40 +27,95 @@ Route::get('/', function () {
 });
 
 Route::get('prueba/', function () {
+   
     /*
-    EJECUTAR LA PRIMERA VEZ PARA CREAR FILAS EN LA BBDD
-    $departamento = new Departamento();
-    $departamento->nombre = "Departamento 1";
-    $departamento->save();
 
-    $emp = new Empleado();
-    $emp->nombre = "Juan";
-    $emp->departamento_id = 1;
-    $emp->save();
+----------------------------------------------------------
+    CREA DATOS EN LA BASE DE DATOS
+----------------------------------------------------------
 
-    $emp = new Empleado();
-    $emp->nombre = "Manuel";
-    $emp->departamento_id = 1;
-    $emp->save();
+    $paciente = new Paciente();
 
-    $tlf = new Telefono();
-    $tlf->numero = "676543467";
-    $tlf->empleado_id = 1;
-    $tlf->save();
+    $paciente->nombre = "Miguel";
+    $paciente->apellidos = "Martinez-Almeida Nistal";
+    $paciente->genero = 'H';
+    $paciente->lugar_nacimiento = "Madrid";
+    $paciente->nacionalidad = "Español";
+    $paciente->fecha_nacimiento = Carbon::create(2001, 7, 30);
+    $paciente->tipo_residencia = "Piso";
+    $paciente->residencia_actual = "secreto";
 
+    $paciente->save();
 
-    OBTENER DEPARTAMENTO 1 Y SUS EMPLEADOS
-    Departamento::find(1)->empleados;
+    $actividad = new Actividad();
 
-    OBTENER EMPLEADO 1 Y SU DEPARTAMENTO
-    Empleado::find(1)->departamento;
+    $actividad->start = Carbon::now();
+    $actividad->title = "Primera terapia";
+    $actividad->description = "Primera terapia de evaluación al paciente Miguel";
+    $actividad->paciente_id = 1;
+    $actividad->color = "rojo";
 
-    OBTENER EMPELADO 1 Y SU TELEFONO
-    Empleado::find(1)->telefono;
+    $actividad->save();
 
-   */ 
+    $actividad = new Actividad();
 
+    $actividad->start = Carbon::now();
+    $actividad->title = "Segunda terapia";
+    $actividad->description = "Segunda terapia de evaluación al paciente Miguel";
+    $actividad->paciente_id = 1;
+    $actividad->color = "amarillo";
 
+    $actividad->save();
+
+    $ev = new Evaluacion();
+
+    $ev->paciente_id = 1;
+    $ev->fecha = Carbon::now();
+    $ev->gds = 2;
+    $ev->gds_fecha = Carbon::now();
+    $ev->mental  = 2;
+    $ev->mental_fecha = Carbon::now();
+    $ev->cdr  = 2;
+    $ev->cdr_fecha = Carbon::now();
+    $ev->diagnostico  = 2;
+    $ev->observaciones  = 2;
+    $ev->nombre_escala  = "otro nombre cualquiera";
+    $ev->escala  = 2;
+    $ev->fecha_escala = Carbon::now();
+    $ev->save();
+
+    $ev = new Evaluacion();
+
+    $ev->paciente_id = 1;
+    $ev->fecha = Carbon::now();
+    $ev->gds = 1;
+    $ev->gds_fecha = Carbon::now();
+    $ev->mental  = 1;
+    $ev->mental_fecha = Carbon::now();
+    $ev->cdr  = 1;
+    $ev->cdr_fecha = Carbon::now();
+    $ev->diagnostico  = 1;
+    $ev->observaciones  = 1;
+    $ev->nombre_escala  = "nombre cualquiera";
+    $ev->escala  = 1;
+    $ev->fecha_escala = Carbon::now();
+    $ev->save();
+
+    $e = Estado::create(["nombre" => "estado 1"]);
+    Etapa::create(["nombre" => "etapa 1"]);
+
+    Tipo_relacion::create(["nombre" => "hermanos"]);
+
+    Persona_relacionada::create([
+        "nombre" => "Ignacio",
+        "apellidos" => "Martinez-Almeida",
+        "telefono" => "678765456",
+        "ocupacion" => "Desconocido",
+        "email" => "Email desconocido",
+        "tipo_relacion_id" => 1
+    ]);
+    
+    */
 
     
 });

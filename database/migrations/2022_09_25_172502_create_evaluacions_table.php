@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('evaluacion', function (Blueprint $table) {
+        Schema::create('evaluacions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("id_paciente");
+            $table->unsignedBigInteger("paciente_id");
             $table->date("fecha");
             $table->integer("gds");
             $table->date("gds_fecha");
@@ -28,9 +28,12 @@ return new class extends Migration
             $table->string("nombre_escala");
             $table->integer("escala");
             $table->date("fecha_escala");
+
             $table->timestamps();
 
-            $table->foreign("id_paciente")->references("id")->on("paciente")->onDelete("cascade");
+
+           
+            
         });
     }
 
@@ -41,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('evaluacion');
+        Schema::dropIfExists('evaluacions');
     }
 };

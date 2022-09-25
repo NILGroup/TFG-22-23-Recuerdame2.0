@@ -13,16 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('actividad', function (Blueprint $table) {
+        Schema::create('tipo_relacions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("id_paciente");
-            $table->date("start");
-            $table->string("title");
-            $table->string("description");
-            $table->string("color");
+            $table->string("nombre");
             $table->timestamps();
-
-            $table->foreign("id_paciente")->references("id")->on("paciente")->onDelete("cascade");
         });
     }
 
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('actividad');
+        Schema::dropIfExists('tipo_relacions');
     }
 };

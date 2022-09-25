@@ -13,10 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('etapa', function (Blueprint $table) {
+        Schema::create('actividads', function (Blueprint $table) {
             $table->id();
-            $table->string("nombre")->unique();
+            $table->date("start");
+            $table->string("title");
+            $table->string("description");
+            $table->unsignedBigInteger("paciente_id");
+            $table->string("color");
             $table->timestamps();
+
+            $table->foreign("paciente_id")->references("id")->on("pacientes");
         });
     }
 
@@ -27,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('etapa');
+        Schema::dropIfExists('actividads');
     }
 };

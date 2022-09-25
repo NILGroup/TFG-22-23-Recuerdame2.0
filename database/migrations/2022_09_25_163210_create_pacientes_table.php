@@ -13,13 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('telefonos', function (Blueprint $table) {
+        Schema::create('pacientes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("empleado_id");
-            $table->string("numero");
+            $table->string("nombre");
+            $table->string("apellidos");
+            $table->char("genero");
+            $table->string("lugar_nacimiento");
+            $table->string("nacionalidad");
+            $table->date("fecha_nacimiento");
+            $table->string("tipo_residencia");
+            $table->string("residencia_actual");
             $table->timestamps();
-
-            $table->foreign("empleado_id")->references("id")->on("empleados");
         });
     }
 
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('telefonos');
+        Schema::dropIfExists('pacientes');
     }
 };

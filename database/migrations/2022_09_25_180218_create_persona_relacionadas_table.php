@@ -13,13 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('empleados', function (Blueprint $table) {
+        Schema::create('persona_relacionadas', function (Blueprint $table) {
             $table->id();
             $table->string("nombre");
-            $table->unsignedBigInteger("departamento_id");
+            $table->string("apellidos");
+            $table->string("telefono");
+            $table->string("ocupacion");
+            $table->string("email");
+            $table->unsignedBigInteger("tipo_relacion_id");
             $table->timestamps();
 
-            $table->foreign("departamento_id")->references("id")->on("departamentos");
+            $table->foreign("tipo_relacion_id")->references("id")->on("tipo_relacions");
         });
     }
 
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('empleados');
+        Schema::dropIfExists('persona_relacionadas');
     }
 };
