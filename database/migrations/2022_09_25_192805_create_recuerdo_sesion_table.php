@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('recuerdo_multimedia', function (Blueprint $table) {
+        Schema::create('recuerdo_sesion', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recuerdo_multimedia');
+        Schema::dropIfExists('recuerdo_sesion');
     }
 };
