@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('multimedia_recuerdo', function (Blueprint $table) {
+        Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->string('apellidos');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('multimedia_recuerdo');
+        Schema::dropIfExists('usuarios');
     }
 };
