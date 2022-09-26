@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Persona_relacionada extends Model
+class Personarelacionada extends Model
 {
     use HasFactory;
 
@@ -15,11 +15,10 @@ class Persona_relacionada extends Model
         "telefono",
         "ocupacion",
         "email",
-        "tipo_relacion_id"
+        "tiporelacion_id"
     ];
 
     public function tipo_relacion(){
-        return $this->belongsTo(Tipo_relacion::class);
+        return $this->belongsTo(Tiporelacion::class);
     }
-
 }

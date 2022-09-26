@@ -15,4 +15,8 @@ class Etapa extends Model
         return "Falta conectar con modelo : Recuerdo";
         //return $this->hasMany(Recuerdo::class);
     }
+
+    public function sesiones(){
+        return $this->hasMany(Sesion::class);
+    }
 }

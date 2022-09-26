@@ -13,10 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_relacions', function (Blueprint $table) {
+        Schema::create('personarelacionadas', function (Blueprint $table) {
             $table->id();
             $table->string("nombre");
+            $table->string("apellidos");
+            $table->string("telefono");
+            $table->string("ocupacion");
+            $table->string("email");
+            $table->unsignedBigInteger("tiporelacion_id");
             $table->timestamps();
+
+            $table->foreign("tiporelacion_id")->references("id")->on("tiporelacions");
         });
     }
 
@@ -27,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_relacions');
+        Schema::dropIfExists('personarelacionadas');
     }
 };

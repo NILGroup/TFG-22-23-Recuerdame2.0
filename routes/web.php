@@ -6,8 +6,12 @@ use App\Models\Actividad;
 use App\Models\Evaluacion;
 use App\Models\Estado;
 use App\Models\Etapa;
-use App\Models\Tipo_relacion;
-use App\Models\Persona_relacionada;
+use App\Models\TipoRelacion;
+use App\Models\PersonaRelacionada;
+use App\Models\Usuario;
+use App\Models\Sesion;
+use App\Models\Categoria;
+use App\Models\Multimedia;
 use Illuminate\Support\Carbon;
 
 
@@ -33,6 +37,8 @@ Route::get('prueba/', function () {
 ----------------------------------------------------------
     CREA DATOS EN LA BASE DE DATOS
 ----------------------------------------------------------
+
+
 
     $paciente = new Paciente();
 
@@ -104,17 +110,38 @@ Route::get('prueba/', function () {
     $e = Estado::create(["nombre" => "estado 1"]);
     Etapa::create(["nombre" => "etapa 1"]);
 
-    Tipo_relacion::create(["nombre" => "hermanos"]);
+    TipoRelacion::create(["nombre" => "hermanos"]);
 
-    Persona_relacionada::create([
+    PersonaRelacionada::create([
         "nombre" => "Ignacio",
         "apellidos" => "Martinez-Almeida",
         "telefono" => "678765456",
         "ocupacion" => "Desconocido",
         "email" => "Email desconocido",
-        "tipo_relacion_id" => 1
+        "tiporelacion_id" => 1
     ]);
+
+    Usuario::create(["nombre" => "Eros", "apellidos" => "Guerrero Sosa"]);
+    Usuario::create(["nombre" => "Adrian", "apellidos" => "Prieto Campos"]);
+
+    Sesion::create(["fecha" => Carbon::now(),
+    "etapa_id" => 1,
+    "objetivo" => "objetivo 1",
+    "descripcion" => "descripcion del objetivo",
+    "barreras"=> "muchas",
+    "facilitadores" => "ninguno",
+    "fecha_finalizada" => Carbon::now(),
+    "paciente_id" => 1,
+    "usuario_id" => 1,
+    "respuesta"=> "ninguna respuesta"]);
+
+    Categoria::create(["nombre" => "categoria 1"]);
+    Categoria::create(["nombre" => "categoria 2"]);
+
+    Multimedia::create(["nombre" => "multimedia 1", "fichero" => "ruta fichero 1"]);
+    Multimedia::create(["nombre" => "multimedia 2", "fichero" => "ruta fichero 2"]);
     
+    return Sesion::find(1)->etapa;
     */
 
     

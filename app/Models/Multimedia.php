@@ -9,6 +9,7 @@ class Multimedia extends Model
 {
     use HasFactory;
 
+    protected $table = "multimedias";
     protected $fillable = [
         "nombre",
         "fichero"

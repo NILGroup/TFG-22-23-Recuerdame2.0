@@ -34,7 +34,6 @@ class Paciente extends Model
     }
 
     public function sesiones(){
-        return "Falta conectar con modelo : Sesion";
-        //return $this->hasMany(Sesion::class);
+        return $this->hasMany(Sesion::class);
     }
 }
