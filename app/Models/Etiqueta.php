@@ -12,4 +12,9 @@ class Etiqueta extends Model
     protected $fillable = [
         "nombre"
     ];
+
+    public function recuerdos()
+    {
+        return $this->hasMany(Recuerdo::class);
+    }
 }

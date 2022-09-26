@@ -13,5 +13,9 @@ class Categoria extends Model
         "nombre"
     ];
 
+    public function recuerdos()
+    {
+        return $this->hasMany(Recuerdo::class);
+    }
 
 }

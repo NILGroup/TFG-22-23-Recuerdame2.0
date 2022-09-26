@@ -13,4 +13,9 @@ class Usuario extends Model
         "nombre",
         "apellidos"
     ];
+
+    public function sesions()
+    {
+        return $this->hasMany(Sesion::class);
+    }
 }
