@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('multimedia_sesion', function (Blueprint $table) {
+        Schema::create('recuerdo_sesion', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('multimedia_id');
+            $table->unsignedBigInteger('recuerdo_id');
             $table->unsignedBigInteger('sesion_id');
             $table->timestamps();
+
+            $table->foreign("recuerdo_id")->references("id")->on("recuerdos");
+            $table->foreign("sesion_id")->references("id")->on("sesions");
         });
     }
 
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('multimedia_sesion');
+        Schema::dropIfExists('recuerdo_sesion');
     }
 };

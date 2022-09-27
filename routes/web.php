@@ -13,6 +13,7 @@ use App\Models\Sesion;
 use App\Models\Categoria;
 use App\Models\Multimedia;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 /*
@@ -107,8 +108,10 @@ Route::get('prueba/', function () {
     $ev->fecha_escala = Carbon::now();
     $ev->save();
 
-    $e = Estado::create(["nombre" => "estado 1"]);
+    Estado::create(["nombre" => "estado 1"]);
+
     Etapa::create(["nombre" => "etapa 1"]);
+    Etapa::create(["nombre" => "etapa 2"]);
 
     TipoRelacion::create(["nombre" => "hermanos"]);
 
@@ -135,14 +138,33 @@ Route::get('prueba/', function () {
     "usuario_id" => 1,
     "respuesta"=> "ninguna respuesta"]);
 
+    Sesion::create(["fecha" => Carbon::now(),
+    "etapa_id" => 2,
+    "objetivo" => "objetivo 2",
+    "descripcion" => "descripcion del objetivo numero 2",
+    "barreras"=> "muchas",
+    "facilitadores" => "ninguno",
+    "fecha_finalizada" => Carbon::now(),
+    "paciente_id" => 1,
+    "usuario_id" => 2,
+    "respuesta"=> "ninguna respuesta"]);
+
     Categoria::create(["nombre" => "categoria 1"]);
     Categoria::create(["nombre" => "categoria 2"]);
 
     Multimedia::create(["nombre" => "multimedia 1", "fichero" => "ruta fichero 1"]);
     Multimedia::create(["nombre" => "multimedia 2", "fichero" => "ruta fichero 2"]);
+
+    DB::table("multimedia_sesion")->insert([
+        ["multimedia_id" => 1, "sesion_id" => 1],
+        ["multimedia_id" => 2, "sesion_id" => 1],
+        ["multimedia_id" => 1, "sesion_id" => 2],
+    ]);
+
     
-    return Sesion::find(1)->etapa;
     */
+    
+    
 
     
 });
