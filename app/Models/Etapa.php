@@ -12,8 +12,7 @@ class Etapa extends Model
     protected $fillable = ["nombre"];
 
     public function recuerdos(){
-        return "Falta conectar con modelo : Recuerdo";
-        //return $this->hasMany(Recuerdo::class);
+        return $this->hasMany(Recuerdo::class);
     }
 
     public function sesiones(){

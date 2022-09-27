@@ -20,7 +20,7 @@ class Multimedia extends Model
         return $this->belongsToMany(Recuerdo::class);
     }
 
-    public function sesions(){
+    public function sesiones(){
         return $this->belongsToMany(Sesion::class);
     }
 }

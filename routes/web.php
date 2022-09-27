@@ -12,6 +12,10 @@ use App\Models\Usuario;
 use App\Models\Sesion;
 use App\Models\Categoria;
 use App\Models\Multimedia;
+use App\Models\Etiqueta;
+use App\Models\Emocion;
+use App\Models\Personarelacionada as ModelsPersonarelacionada;
+use App\Models\Recuerdo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -39,6 +43,7 @@ Route::get('prueba/', function () {
     CREA DATOS EN LA BASE DE DATOS
 ----------------------------------------------------------
 
+*/
 
 
     $paciente = new Paciente();
@@ -109,19 +114,30 @@ Route::get('prueba/', function () {
     $ev->save();
 
     Estado::create(["nombre" => "estado 1"]);
+    Estado::create(["nombre" => "estado 2"]);
 
     Etapa::create(["nombre" => "etapa 1"]);
     Etapa::create(["nombre" => "etapa 2"]);
 
     TipoRelacion::create(["nombre" => "hermanos"]);
+    TipoRelacion::create(["nombre" => "amantes ocasionales"]);
 
-    PersonaRelacionada::create([
+    Personarelacionada::create([
         "nombre" => "Ignacio",
         "apellidos" => "Martinez-Almeida",
         "telefono" => "678765456",
         "ocupacion" => "Desconocido",
         "email" => "Email desconocido",
         "tiporelacion_id" => 1
+    ]);
+
+    Personarelacionada::create([
+        "nombre" => "Pablo",
+        "apellidos" => "Martinez Gonzalez",
+        "telefono" => "600000000",
+        "ocupacion" => "Desconocido",
+        "email" => "Email desconocido",
+        "tiporelacion_id" => 2
     ]);
 
     Usuario::create(["nombre" => "Eros", "apellidos" => "Guerrero Sosa"]);
@@ -161,8 +177,66 @@ Route::get('prueba/', function () {
         ["multimedia_id" => 1, "sesion_id" => 2],
     ]);
 
-    
-    */
+    Etiqueta::create(["nombre" => "etiqueta 1"]);
+    Etiqueta::create(["nombre" => "etiqueta 2"]);
+
+    Emocion::create(["nombre" => "alegria"]);
+    Emocion::create(["nombre" => "tristeza"]);
+
+    Recuerdo::create([
+        "fecha" => Carbon::now(),
+        "nombre" => "Primer recuerdo",
+        "descripcion" => "Descripcion de mi primer recuerdo",
+        "localizacion" => "Facultad de informatica",
+        "etapa_id" => 1,
+        "categoria_id" => 1,
+        "emocion_id" => 1,
+        "estado_id" => 1,
+        "etiqueta_id" => 1,
+        "puntuacion" => 10,
+        "paciente_id" => 1
+    ]);
+
+    Recuerdo::create([
+        "fecha" => Carbon::now(),
+        "nombre" => "Segundo recuerdo",
+        "descripcion" => "Descripcion de mi segundo recuerdo",
+        "localizacion" => "Mercadona",
+        "etapa_id" => 1,
+        "categoria_id" => 1,
+        "emocion_id" => 1,
+        "estado_id" => 1,
+        "etiqueta_id" => 1,
+        "puntuacion" => 10,
+        "paciente_id" => 1
+    ]);
+
+    DB::table("personarelacionada_recuerdo")->insert([
+        ["personarelacionada_id" => 1, "recuerdo_id" => 1],
+        ["personarelacionada_id" => 2, "recuerdo_id" => 1],
+        ["personarelacionada_id" => 1, "recuerdo_id" => 2],
+        ["personarelacionada_id" => 2, "recuerdo_id" => 2]
+    ]);
+
+    DB::table("recuerdo_sesion")->insert([
+        ["recuerdo_id" => 1, "sesion_id" => 1],
+        ["recuerdo_id" => 2, "sesion_id" => 1],
+        ["recuerdo_id" => 1, "sesion_id" => 2],
+        ["recuerdo_id" => 2, "sesion_id" => 2]
+    ]);
+
+    DB::table("multimedia_recuerdo")->insert([
+        ["multimedia_id" => 1, "recuerdo_id" => 1],
+        ["multimedia_id" => 2, "recuerdo_id" => 1],
+        ["multimedia_id" => 1, "recuerdo_id" => 2],
+        ["multimedia_id" => 2, "recuerdo_id" => 2]
+    ]);
+
+    return Recuerdo::find(1)->multimedias;
+
+   
+
+
     
     
 

@@ -21,4 +21,8 @@ class Personarelacionada extends Model
     public function tipo_relacion(){
         return $this->belongsTo(Tiporelacion::class);
     }
+
+    public function recuerdos(){
+        return $this->belongsToMany(Recuerdo::class);
+    }
 }

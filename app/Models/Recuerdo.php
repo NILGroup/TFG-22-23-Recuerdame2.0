@@ -51,7 +51,11 @@ class Recuerdo extends Model
         return $this->belongsToMany(Multimedia::class);
     }
 
-    public function sesions(){
+    public function sesiones(){
         return $this->belongsToMany(Sesion::class);
+    }
+
+    public function personas_relacionadas(){
+        return $this->belongsToMany(Personarelacionada::class);
     }
 }
