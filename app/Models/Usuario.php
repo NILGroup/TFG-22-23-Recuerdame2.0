@@ -11,7 +11,11 @@ class Usuario extends Model
 
     protected $fillable = [
         "nombre",
-        "apellidos"
+        "apellidos",
+        "email",
+        "usuario",
+        "password",
+        "rol"
     ];
 
     public function sesions()

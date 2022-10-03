@@ -17,6 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('apellidos');
+            $table->string('email');
+            $table->string('usuario');
+            $table->string('password'); //Deberia ser Hash o tener un Password controller
+            $table->string('rol');
+
             $table->timestamps();
         });
     }
