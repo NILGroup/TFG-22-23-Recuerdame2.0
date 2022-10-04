@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string("color");
             $table->timestamps();
 
-            $table->foreign("paciente_id")->references("id")->on("pacientes");
+            $table->foreign("paciente_id")->references("id")->on("pacientes")->onDelete("cascade");
         });
     }
 
