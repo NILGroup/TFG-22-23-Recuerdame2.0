@@ -152,8 +152,23 @@ Route::get('prueba/', function () {
         "tiporelacion_id" => 2
     ]);
 
-    Usuario::create(["nombre" => "Eros", "apellidos" => "Guerrero Sosa"]);
-    Usuario::create(["nombre" => "Adrian", "apellidos" => "Prieto Campos"]);
+    Usuario::create([
+        "nombre" => "Eros",
+        "apellidos" => "Guerrero Sosa",
+        "email" => "erosmacaco@gmail.com",
+        "usuario" => "XErosX",
+        "password" => "1234",
+        "rol" => "Terapeuta"
+    ]);
+   
+    Usuario::create([
+        "nombre" => "Adrian",
+        "apellidos" => "Prieto Campos",
+        "email" => "adrielcrack@gmail.com",
+        "usuario" => "AdriCrack",
+        "password" => "1234",
+        "rol" => "Terapeuta"
+    ]);
 
     Sesion::create(["fecha" => Carbon::now(),
     "etapa_id" => 1,
@@ -244,10 +259,10 @@ Route::get('prueba/', function () {
         ["multimedia_id" => 2, "recuerdo_id" => 2]
     ]);
 
-    return Paciente::find(1)->delete();
-
    
 
+   
+    return "<h1> Se ha llenado la base de datos </h1>";
 
     
     

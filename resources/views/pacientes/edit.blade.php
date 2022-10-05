@@ -65,7 +65,7 @@
                 <div class="row col-sm-12 col-md-6 col-lg-7">
                     <label for="lugarNacimiento" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Lugar de nacimiento<span class="asterisco">*</span></label>
                     <div class="col-sm-12 col-md-12 col-lg-8">
-                        <input type="text" name="lugarNac" class="form-control form-control-sm" id="lugarNacimiento" placeholder="Ciudad..." value="{{$paciente->lugar_nacimiento}}">
+                        <input type="text" name="lugar_nacimiento" class="form-control form-control-sm" id="lugarNacimiento" placeholder="Ciudad..." value="{{$paciente->lugar_nacimiento}}">
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                 <div class="row col-sm-12 col-md-6 col-lg-5">
                     <label for="fecha" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Fecha de nacimiento<span class="asterisco">*</span></label>
                     <div class="col-sm-12 col-md-12 col-lg-6">
-                        <input type="date" name="fecha" class="form-control form-control-sm" id="fecha" value="{{$paciente->fecha_nacimiento}}">
+                        <input type="date" name="fecha_nacimiento" class="form-control form-control-sm" id="fecha" value="{{$paciente->fecha_nacimiento}}">
                     </div>
                 </div>
 
@@ -90,14 +90,14 @@
                 <div class="row col-sm-12 col-md-6 col-lg-5">
                     <label for="residencia" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Tipo de residencia<span class="asterisco">*</span></label>
                     <div class="col-sm-12 col-md-12 col-lg-6">
-                        <input type="text" name="casa" class="form-control form-control-sm" id="residencia" value="{{$paciente->tipo_residencia}}">
+                        <input type="text" name="tipo_residencia" class="form-control form-control-sm" id="residencia" value="{{$paciente->tipo_residencia}}">
                     </div>
                 </div>
 
                 <div class="row col-sm-12 col-md-6 col-lg-7">
                     <label for="casa" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Residencia actual<span class="asterisco">*</span></label>
                     <div class="col-sm-12 col-md-12 col-lg-8">
-                        <input type="text" name="residencia" class="form-control form-control-sm" id="casa" value="{{$paciente->residencia_actual}}">
+                        <input type="text" name="residencia_actual" class="form-control form-control-sm" id="casa" value="{{$paciente->residencia_actual}}">
                     </div>
                 </div>
             </div>
