@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PacientesController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Paciente;
 use App\Models\Actividad;
@@ -37,19 +38,34 @@ Route::get('/', function () {
 });
 
 Route::resource('pacientes', PacientesController::class);
-//Usuario Controller
+/*
+
+----------------------------------------------------------
+    Controlador Usuario
+----------------------------------------------------------
+
+*/
+
+Route::resource('usuarios', UsuarioController::class);
+Route::get('/registro', 'App\Http\Controllers\UsuarioController@create');
+//Route::post('/registrarUsuario', 'App\Http\Controllers\UsuarioController@store');
+
+//END OF Usuario Controller
+
+//
 //Route::get('/users', [UsuarioController::class, 'index']);
 //Route::resource('/usuario', 'App\Http\Controllers\UsuarioController');
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
 Route::resources([
     'recuerdo' => 'App\Http\Controllers\RecuerdosController',
-    'usuario' => 'App\Http\Controllers\UsuarioController',
+    //'usuario' => 'App\Http\Controllers\UsuarioController',
     'sesion' => 'App\Http\Controllers\SesionesController',
 ]);
-//END OF Usuario Controller
+
+
 Route::get('prueba/', function () {
    
-    /*
+/*
 
 ----------------------------------------------------------
     CREA DATOS EN LA BASE DE DATOS
@@ -163,7 +179,7 @@ Route::get('prueba/', function () {
    
     Usuario::create([
         "nombre" => "Adrian",
-        "apellidos" => "Prieto Campos",
+        "apellidos" => "Prieto Campo",
         "email" => "adrielcrack@gmail.com",
         "usuario" => "AdriCrack",
         "password" => "1234",

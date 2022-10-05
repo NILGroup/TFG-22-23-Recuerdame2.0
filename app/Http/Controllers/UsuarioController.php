@@ -31,8 +31,15 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
-        return "Aquí el formulario de creación";
+        $usuario = new Usuario();
+
+        $usuario->nombre = " ";
+        $usuario->apellidos = " ";
+        $usuario->usuario = " ";
+        $usuario->email = " ";
+        $usuario->password = " ";
+        $usuario->password2 = " ";
+        return view("usuarios.registro", compact("usuario"));
     }
 
    
@@ -44,16 +51,23 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+        $usuario = new Usuario();
+
+        $usuario->nombre = $request->nombre;
+        $usuario->apellidos = $request->apellidos;
+        $usuario->usuario = $request->usuario;
+        $usuario->email = $request->email;
+        $usuario->password = $request->password;
+        $usuario->password2 = $request->password2;
         $validated = $request->validate([
-            'email' => 'required|unique',
-            'usuario' => 'required|unique',
-            'password' => 'required',
-            'rol' => 'required',
             'nombre' => 'required',
-            'apellidos' => 'required'
+            'apellidos' => 'required',
+            'email' => 'required|unique:usuarios|email:rfc,dns',
+            'usuario' => 'required|unique:usuarios',
+            'password' => 'required',
+            'password2' => 'required|same:password'
+            //'rol' => 'required',
         ]);
-
-
         $usuario = Usuario::updateOrCreate(
             ['id' => $request->id],
             ['nombre' => $request->nombre,
@@ -61,7 +75,7 @@ class UsuarioController extends Controller
              'usuario' => $request->usuario,
              'email' => $request->email,
              'password' => $request->password,
-             'rol' => $request->rol]
+             'rol' => "Terapeuta"]
         );
 
         $usuario->save();
