@@ -55,10 +55,10 @@
                         <select id="genero" name="genero" class="form-select form-select-sm">
                             
                             
-                            <?php if ($paciente->genero == 'H') echo ' <option value="H" selected>Hombre</option> <option value="M" >Mujer</option>'; ?> 
-                            <!--TODO: no funciona -->
-                          
-                            <?php if ($paciente->genero == 'M') echo ' <option value="H" >Hombre</option> <option value="M" selected>Mujer</option>'; ?> 
+                            <?php if ($paciente->genero == 'H') echo ' <option value="H" selected>Hombre</option> <option value="M" >Mujer</option>';
+                           else if ($paciente->genero == 'M') echo ' <option value="H" >Hombre</option> <option value="M" selected>Mujer</option>';
+                           else echo ' <option value="H" >Hombre</option> <option value="M">Mujer</option>'; ?> 
+                           
                         </select>
                     </div>
                 </div>
