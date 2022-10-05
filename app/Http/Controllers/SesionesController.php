@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sesion;
+use App\Models\Recuerdo;
+use App\Models\Multimedia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SesionesController extends Controller
 {
@@ -15,6 +18,7 @@ class SesionesController extends Controller
     public function index()
     {
         //
+        return "Index de las sesiones";
     }
 
     /**
@@ -35,18 +39,78 @@ class SesionesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sesion = Sesion::updateOrCreate(
+            ['id' => $request->id],
+            ['fecha' => $request->fecha,
+             'etapa_id' => $request->etapa_id,
+             'objetivo' => $request->objetivo,
+             'descripcion' => $request->descripcion,
+             'barreras' => $request->barreras,
+             'facilitadores' => $request->facilitadores,
+             'fecha_finalizada' => $request->fecha_finalizada,
+             'paciente_id' => $request->paciente_id,
+             'usuario_id' => $request->usuario_id,
+             'respuesta' => $request->respuesta]
+        );
+
+        $sesion->save();
+        return $sesion->id;
     }
 
+    public function storeRecuerdo($idPaciente, $idSesion, $recuerdo)
+    {
+        $recuerdo = Recuerdo::updateOrCreate(
+            ['id' => $recuerdo->id],
+            ['fecha' => $recuerdo->fecha,
+             'nombre' => $recuerdo->etapa_id,
+             'descripcion' => $recuerdo->objetivo,
+             'localizacion' => $recuerdo->descripcion,
+             'etapa_id' => $recuerdo->barreras,
+             'categoria_id' => $recuerdo->facilitadores,
+             'emocion_id' => $recuerdo->fecha_finalizada,
+             'estado_id' => $recuerdo->paciente_id,
+             'etiqueta_id' => $recuerdo->usuario_id,
+             'puntuacion' => $recuerdo->respuesta,
+             'paciente_id' => $idPaciente]
+        );
+
+        $recuerdo->save();
+        return $recuerdo->id;
+    }
+
+    public function storeRecuerdos($idSesion, $listaRecuerdos)
+    {
+        return "TO DO";
+    }
+
+    public function storeMultimedia($idSesion, $listaFicheros)
+    {
+        return "TO DO";
+    }
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Sesion  $sesion
      * @return \Illuminate\Http\Response
      */
-    public function show(Sesion $sesion)
+    public function show($id)
     {
         //
+        return Sesion::findOrFail($id);
+    }
+
+    public function showByPaciente($idPaciente)
+    {
+        //https://www.youtube.com/watch?v=y3p10h_00A8&ab_channel=CodeStepByStep
+
+        return Sesion::where('paciente_id', $idPaciente);
+    }
+
+    public function showMultimedia($idSesion)
+    {
+        //https://www.youtube.com/watch?v=y3p10h_00A8&ab_channel=CodeStepByStep
+
+        return Sesion::find($idSesion)->multimedias;
     }
 
     /**
@@ -78,8 +142,21 @@ class SesionesController extends Controller
      * @param  \App\Models\Sesion  $sesion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sesion $sesion)
+    public function destroy($id)
     {
         //
+        Sesion::destroy($id);
+    }
+
+    public function destroyRecuerdo($idSesion, $idRecuerdo)
+    {
+        //
+       // Sesion::destroy($id);
+    }
+
+    public function destroyMultimedia($idSesion, $idMultimedia)
+    {
+        //
+       return Sesion::find($idSesion)->multimedias::destroy($idMultimedia);
     }
 }

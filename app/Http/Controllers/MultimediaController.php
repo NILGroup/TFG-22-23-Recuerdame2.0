@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Multimedia;
+use App\Models\Sesion;
+use App\Models\Recuerdo;
 use Illuminate\Http\Request;
 
 class MultimediaController extends Controller
@@ -15,6 +17,7 @@ class MultimediaController extends Controller
     public function index()
     {
         //
+        return "Index de la Multimedia";
     }
 
     /**
@@ -39,16 +42,27 @@ class MultimediaController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Muestra todos los multimedias de la base de datos
      *
      * @param  \App\Models\Multimedia  $multimedia
      * @return \Illuminate\Http\Response
      */
     public function show(Multimedia $multimedia)
     {
-        //
+        return Multimedia::all();
     }
 
+    //Devuelve los archivos multimedia de un recuerdo concreto
+    public function showByRecuerdo($idRecuerdo)
+    {
+        return Recuerdo::find($idRecuerdo)->multimedias;
+    }
+
+    //Devuelve los archivos multimedia de un recuerdo concreto
+    public function showBySesion($idSesion)
+    {
+        return Sesion::find($idSesion)->multimedias;
+    }
     /**
      * Show the form for editing the specified resource.
      *

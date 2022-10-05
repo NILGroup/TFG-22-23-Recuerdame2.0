@@ -37,7 +37,16 @@ Route::get('/', function () {
 });
 
 Route::resource('pacientes', PacientesController::class);
-
+//Usuario Controller
+//Route::get('/users', [UsuarioController::class, 'index']);
+//Route::resource('/usuario', 'App\Http\Controllers\UsuarioController');
+Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
+Route::resources([
+    'recuerdo' => 'App\Http\Controllers\RecuerdosController',
+    'usuario' => 'App\Http\Controllers\UsuarioController',
+    'sesion' => 'App\Http\Controllers\SesionesController',
+]);
+//END OF Usuario Controller
 Route::get('prueba/', function () {
    
     /*
