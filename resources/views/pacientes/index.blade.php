@@ -71,6 +71,7 @@
                         <td class="tableActions">
                                 <!--<a href="verDatosPaciente.php?idPaciente=<!?php echo ($row['id_paciente']) ?>">--><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                                 <a href="{{route('pacientes.edit',$paciente->id)}}"><button class="fa-solid fa-pencil text-primary tableIcon">Editar</button></a>
+                                <a href="{{route('pacientes.show',$paciente->id)}}"><button class="fa-solid fa-pencil text-primary tableIcon">Mostrar</button></a>
                                 <!--<a href="asignarTerapeuta.php?idPaciente=<!?php echo ($row['id_paciente']) ?>">--><i class="fa-solid fa-users-line text-success tableIcon"></i></a>
                                 <!--<a href="gestor.php?accion=eliminarPaciente&idPaciente=<!?php echo ($row['id_paciente']) ?>">--><i class="fa-solid fa-trash-can text-danger tableIcon"></i></a>
                         </td>
