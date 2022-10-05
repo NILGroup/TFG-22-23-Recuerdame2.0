@@ -32,9 +32,9 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreign('etapa_id')->references('id')->on('etapas');
-            $table->foreign('paciente_id')->references('id')->on('pacientes');
-            $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->foreign('etapa_id')->references('id')->on('etapas')->onDelete("cascade");
+            $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete("cascade");
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete("cascade");
         });
     }
 

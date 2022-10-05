@@ -14,7 +14,14 @@ class PacientesController extends Controller
      */
     public function index()
     {
-        //
+
+        //Sacamos a todos los pacientes de la bd
+        $pacientes = Paciente::all();
+
+        //Redireccionamos a la vista devolviendo la lista de pacientes
+        return view("pacientes.index", compact("pacientes"));
+
+        
     }
 
     /**
@@ -24,7 +31,7 @@ class PacientesController extends Controller
      */
     public function create()
     {
-        //
+        return view("pacientes.create");
     }
 
     /**
@@ -35,7 +42,28 @@ class PacientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Creamos un paciente vacio
+        $paciente = new Paciente();
+
+        //Rellenamos al paciente
+
+        $paciente->nombre = $request->nombre;
+        $paciente->apellidos = $request->apellidos;
+        $paciente->genero = $request->genero;
+        $paciente->lugar_nacimiento = $request->lugar_nacimiento;
+
+        //NO ESTOY MUY SEGURO DE SI ESTO FUNCIONA O HAY QUE CONVERTIR LA FECHA
+        $paciente->fecha_nacimiento = $request->fecha_nacimiento; 
+
+        $paciente->nacionalidad = $request->nacionalidad;
+        $paciente->tipo_residencia = $request->tipo_residencia;
+        $paciente->residencia_actual = $request->residencia_actual;
+
+        //Guardamos al paciente
+        $paciente->save();
+
+
+        
     }
 
     /**
@@ -44,9 +72,15 @@ class PacientesController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function show(Paciente $paciente)
+    public function show($id)
     {
-        //
+        
+        //Sacamos al paciente
+        $paciente = Paciente::findOrFail($id);
+
+        //Devolvemos al paciente a la vista de mostrar
+        return view("pacientes.show", compact("paciente"));
+
     }
 
     /**
@@ -55,9 +89,13 @@ class PacientesController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Paciente $paciente)
+    public function edit($id)
     {
-        //
+        //Sacamos al paciente de la bd
+        $paciente = Paciente::findOrFail($id);
+
+        //Devolvemos al paciente a la vista de editar
+        return view("pacientes.edit", compact("paciente"));
     }
 
     /**
@@ -67,9 +105,17 @@ class PacientesController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Paciente $paciente)
+    public function update(Request $request, $id)
     {
-        //
+        //Sacamos al paciente de la bd
+        $paciente = Paciente::findOrFail($id);
+
+        //Actualizamos masivamente los datos del paciente
+        $paciente->update($request->all());
+
+        //Redireccionamos al index
+        return redirect("/pacientes");
+        
     }
 
     /**
@@ -78,8 +124,16 @@ class PacientesController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Paciente $paciente)
+    public function destroy($id)
     {
-        //
+        //Sacamos al paciente
+        $paciente = Paciente::findOrFail($id);
+
+        //Borramos al paciente
+        $paciente->delete();
+
+        //Redireccionamos al index
+        return redirect("/pacientes");
+        
     }
 }

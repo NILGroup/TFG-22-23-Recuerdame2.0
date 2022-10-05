@@ -37,12 +37,12 @@ return new class extends Migration
 
             $table->timestamps();
 
-            $table->foreign('etapa_id')->references('id')->on('etapas');
-            $table->foreign('categoria_id')->references('id')->on('categorias');
-            $table->foreign('emocion_id')->references('id')->on('emocions');
-            $table->foreign('estado_id')->references('id')->on('estados');
-            $table->foreign('etiqueta_id')->references('id')->on('etiquetas');
-            $table->foreign('paciente_id')->references('id')->on('pacientes');
+            $table->foreign('etapa_id')->references('id')->on('etapas')->onDelete("cascade");
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete("cascade");
+            $table->foreign('emocion_id')->references('id')->on('emocions')->onDelete("cascade");
+            $table->foreign('estado_id')->references('id')->on('estados')->onDelete("cascade");
+            $table->foreign('etiqueta_id')->references('id')->on('etiquetas')->onDelete("cascade");
+            $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete("cascade");
 
         });
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PacientesController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Paciente;
 use App\Models\Actividad;
@@ -34,6 +35,8 @@ use Illuminate\Support\Facades\DB;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('pacientes', PacientesController::class);
 
 Route::get('prueba/', function () {
    
@@ -232,7 +235,7 @@ Route::get('prueba/', function () {
         ["multimedia_id" => 2, "recuerdo_id" => 2]
     ]);
 
-    return Recuerdo::find(1)->multimedias;
+    return Paciente::find(1)->delete();
 
    
 

@@ -30,7 +30,7 @@ return new class extends Migration
             $table->date("fecha_escala");
 
             $table->timestamps();
-            $table->foreign("paciente_id")->references("id")->on("pacientes");
+            $table->foreign("paciente_id")->references("id")->on("pacientes")->onDelete("cascade");
 
 
            
