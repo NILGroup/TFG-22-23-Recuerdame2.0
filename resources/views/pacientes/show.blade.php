@@ -50,7 +50,8 @@
                         <label for="nombre" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Género</label>
                         <div class="col-sm-12 col-md-12 col-lg-6">
                             <!--TODO: distinguir entre hombre y mujer -->
-                            <input type="text" disabled class="form-control form-control-sm" id="genero" value="">
+                            <input type="text" disabled class="form-control form-control-sm" id="genero" value="<?php if ($paciente->genero == 'H') echo 'Hombre';
+                                                                                                                else if ($paciente->genero == 'M') echo 'Mujer'; ?>  ">
                         </div>
                     </div>
 
@@ -94,7 +95,7 @@
                 </div>
             </div>
             <div class="col-12">
-            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
+                <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
             </div>
         </form>
     </div>
