@@ -144,7 +144,8 @@ Route::get('prueba/', function () {
         "telefono" => "678765456",
         "ocupacion" => "Desconocido",
         "email" => "Email desconocido",
-        "tiporelacion_id" => 1
+        "tiporelacion_id" => 1,
+        "paciente_id" => 1
     ]);
 
     Personarelacionada::create([
@@ -153,7 +154,8 @@ Route::get('prueba/', function () {
         "telefono" => "600000000",
         "ocupacion" => "Desconocido",
         "email" => "Email desconocido",
-        "tiporelacion_id" => 2
+        "tiporelacion_id" => 2,
+        "paciente_id" => 1
     ]);
 
     Usuario::create([

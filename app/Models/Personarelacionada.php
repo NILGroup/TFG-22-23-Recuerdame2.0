@@ -15,7 +15,8 @@ class Personarelacionada extends Model
         "telefono",
         "ocupacion",
         "email",
-        "tiporelacion_id"
+        "tiporelacion_id",
+        "paciente_id"
     ];
 
     public function tipo_relacion(){
@@ -24,5 +25,9 @@ class Personarelacionada extends Model
 
     public function recuerdos(){
         return $this->belongsToMany(Recuerdo::class);
+    }
+
+    public function paciente(){
+        return $this->belongsTo(Paciente::class);
     }
 }
