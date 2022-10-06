@@ -8,25 +8,19 @@ use Illuminate\Http\Request;
 class EtapaController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Devuelve la lista de etapas
      */
 
     public function showAll()
-    {
-        
+    {     
         return Etapa::all();
-
     }
   
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Etapa  $etapa
-     * @return \Illuminate\Http\Response
+     * Devuelvee la etapa especificada
      */
+
     public function show($id)
     {
 

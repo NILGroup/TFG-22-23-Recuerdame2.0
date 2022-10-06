@@ -8,23 +8,18 @@ use Illuminate\Http\Request;
 class CategoriaController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Devuelve la lista completa de categorias
      */
+
     public function showAll()
     {
         return Categoria::all();
     }
 
    
-   
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Categoria  $categoria
-     * @return \Illuminate\Http\Response
+     * Devuelve la categoria especificada
      */
     public function show($id)
     {

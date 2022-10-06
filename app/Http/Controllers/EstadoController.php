@@ -8,10 +8,9 @@ use Illuminate\Http\Request;
 class EstadoController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Devuelve la lista de estados
      */
+
     public function index()
     {
         return Estado::all();
