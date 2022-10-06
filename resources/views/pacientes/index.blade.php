@@ -52,9 +52,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($pacientes as $paciente)
                     <tr>
+                    
                         <th scope="row"><?php echo $i ?></th>
-                        @foreach($pacientes as $paciente)
+                       
                         <td>{{$paciente->nombre}}</td>
                         <td>{{$paciente->apellidos}}</td>
                         <td>
@@ -75,9 +77,10 @@
                                 <!--<a href="asignarTerapeuta.php?idPaciente=<!?php echo ($row['id_paciente']) ?>">--><i class="fa-solid fa-users-line text-success tableIcon"></i></a>
                                 <!--<a href="gestor.php?accion=eliminarPaciente&idPaciente=<!?php echo ($row['id_paciente']) ?>">--><i class="fa-solid fa-trash-can text-danger tableIcon"></i></a>
                         </td>
+                        <?php   $i++; ?>
                         @endforeach
                     </tr>
-                    <?php   $i++; ?>
+                   
                           
 
 
