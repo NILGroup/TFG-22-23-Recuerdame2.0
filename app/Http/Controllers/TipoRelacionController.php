@@ -24,7 +24,7 @@ class TipoRelacionController extends Controller
      * @param  \App\Models\Tiporelacion  $tiporelacion
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         return Tiporelacion::findOrFail($id);
     }

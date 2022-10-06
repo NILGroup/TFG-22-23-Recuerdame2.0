@@ -21,7 +21,7 @@ class CategoriaController extends Controller
     /**
      * Devuelve la categoria especificada
      */
-    public function show($id)
+    public function show(int $id)
     {
         return Categoria::findOrFail($id);
     }

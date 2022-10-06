@@ -21,7 +21,7 @@ class EtiquetaController extends Controller
      * Devuelve la etiqueta especificada
      */
 
-    public function show($id)
+    public function show(int $id)
     {
         return Etiqueta::findOrFail($id);
     }

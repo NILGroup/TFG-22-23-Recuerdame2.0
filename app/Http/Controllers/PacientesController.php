@@ -73,45 +73,38 @@ class PacientesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Paciente  $paciente
-     * @return \Illuminate\Http\Response
+     * Obtiene el paciente especificado y lo devuelve a la vista de mostrar paciente
      */
-    public function show($id)
+
+    public function show(int $id)
     {
         
-        //Sacamos al paciente
+        //Obtenemos al paciente
         $paciente = Paciente::findOrFail($id);
 
-        //Devolvemos al paciente a la vista de mostrar
+        //Devolvemos al paciente a la vista de mostrar paciente
         return view("pacientes.show", compact("paciente"));
 
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Paciente  $paciente
-     * @return \Illuminate\Http\Response
+     * Obtiene al paciente a editar y lo devuelve a la vista de editar paciente
      */
-    public function edit($id)
+
+    public function edit(int $id)
     {
         //Sacamos al paciente de la bd
         $paciente = Paciente::findOrFail($id);
 
-        //Devolvemos al paciente a la vista de editar
+        //Devolvemos al paciente a la vista de editar paciente
         return view("pacientes.edit", compact("paciente"));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Paciente  $paciente
-     * @return \Illuminate\Http\Response
+     * Actualiza al paciente especificado y redirecciona a la lista de pacientes
      */
-    public function update(Request $request, $id)
+
+    public function update(Request $request, int $id)
     {
         //Sacamos al paciente de la bd
         $paciente = Paciente::findOrFail($id);
@@ -119,23 +112,21 @@ class PacientesController extends Controller
         //Actualizamos masivamente los datos del paciente
         $paciente->update($request->all());
 
-        //Redireccionamos al index
+        //Redireccionamos a lista pacientes
         return redirect("/pacientes");
         
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Paciente  $paciente
-     * @return \Illuminate\Http\Response
+     * Elimina al paciente especificado de la base de datos y redirecciona a la lista de pacientes
      */
-    public function destroy($id)
+
+    public function destroy(int $id)
     {
         //Sacamos al paciente y lo borramos
         Paciente::findOrFail($id)->delete();
 
-        //Redireccionamos al index
+        //Redireccionamos a lista pacientes
         return redirect("/pacientes");
         
     }

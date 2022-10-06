@@ -3,28 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Personarelacionada;
+use App\Models\Paciente;
 use Illuminate\Http\Request;
 
 class PersonasRelacionadasController extends Controller
 {
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Obtiene al paciente y la lista de sus personas relacionadas. Redirecciona a lista personasrelacionadas
+     * de un paciente pasandole el propio paciente y la lista
      */
 
-    public function create()
+    public function index(int $idPaciente){
+
+        $paciente = Paciente::find($idPaciente);
+        $personas = $paciente->personas_relacionadas;
+
+        return view("personasrelacionadas.index", compact("paciente", "personas"));
+
+    }
+
+
+    /**
+     * Redirecciona a la vista de crear personarelacionada pasando al paciente concreto al que queremos añadirla
+     */
+
+    public function create(Paciente $paciente)
     {
-        return view("personasrelacionadas.create");
+        return view("personasrelacionadas.create", compact("paciente"));
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Almacena una nueva personarelacionada en la base de datos
      */
+
     public function store(Request $request)
     {
 
@@ -35,7 +47,8 @@ class PersonasRelacionadasController extends Controller
             "telefono"  => "required",
             "ocupacion" => "required",
             "email" => "required|unique:personarelacionadas",
-            "tiporelacion_id"  => "required"
+            "tiporelacion_id"  => "required",
+            "paciente_id" => "required"
 
         ]);
 
@@ -46,49 +59,42 @@ class PersonasRelacionadasController extends Controller
             "telefono" => $request->telefono,
             "ocupacion" => $request->ocupacion,
             "email" => $request->email,
-            "tiporelacion_id" => $request->tiporelacion_id
+            "tiporelacion_id" => $request->tiporelacion_id,
+            "paciente_id" => $request->paciente_id
 
         ]);
 
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Personarelacionada  $personarelacionada
-     * @return \Illuminate\Http\Response
+     * Devuelve una personarelacionada concreta
      */
-    public function show($id)
+
+    public function show(int $id)
     {
         $persona = Personarelacionada::findOrFail($id);
         return view("personarelacionada.show", compact($persona));
     }
 
+
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Personarelacionada  $personarelacionada
-     * @return \Illuminate\Http\Response
+     * Edita una personarelacionada concreta
      */
-    public function edit($id)
+
+    public function edit(int $id)
     {
         $persona = Personarelacionada::findOrFail($id);
-
         return view("personarelacionada.edit", compact("persona"));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Personarelacionada  $personarelacionada
-     * @return \Illuminate\Http\Response
+     * Actualiza una persona relacionada concreta y redirecciona a la lista de personasrelacionadas
      */
-    public function update(Request $request, $id)
+
+    public function update(Request $request, int $id)
     {
         
         $persona = Personarelacionada::findOrFail($id);
-
         $persona->update($request->all());
 
         return redirect("/personarelacionada");
@@ -97,12 +103,10 @@ class PersonasRelacionadasController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Personarelacionada  $personarelacionada
-     * @return \Illuminate\Http\Response
+     * Elimina una persona relacionada concreta
      */
-    public function destroy($id)
+
+    public function destroy(int $id)
     {
         
         Personarelacionada::find($id)->delete();

@@ -21,11 +21,9 @@ class EtapaController extends Controller
      * Devuelvee la etapa especificada
      */
 
-    public function show($id)
+    public function show(int $id)
     {
-
-        return Etapa::findOrFail($id);
-        
+        return Etapa::findOrFail($id);    
     }
 
     

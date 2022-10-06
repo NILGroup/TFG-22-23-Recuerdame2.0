@@ -40,6 +40,7 @@ class UsuarioController extends Controller
         $usuario->email = "";
         $usuario->password = "";
         $usuario->password2 = "";
+
         return view("usuarios.registro", compact("usuario"));
     }
 
@@ -58,7 +59,7 @@ class UsuarioController extends Controller
             'email' => 'required|unique:usuarios|email:rfc,dns',
             'usuario' => 'required|unique:usuarios',
             'password' => 'required',
-            'password2' => 'required|same:password'
+            'password2' => 'required|same:password',
             //'rol' => 'required',
         ]);
         $usuario = Usuario::updateOrCreate(
