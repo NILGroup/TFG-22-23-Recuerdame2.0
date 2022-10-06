@@ -33,12 +33,12 @@ class UsuarioController extends Controller
     {
         $usuario = new Usuario();
 
-        $usuario->nombre = " ";
-        $usuario->apellidos = " ";
-        $usuario->usuario = " ";
-        $usuario->email = " ";
-        $usuario->password = " ";
-        $usuario->password2 = " ";
+        $usuario->nombre = "";
+        $usuario->apellidos = "";
+        $usuario->usuario = "";
+        $usuario->email = "";
+        $usuario->password = "";
+        $usuario->password2 = "";
         return view("usuarios.registro", compact("usuario"));
     }
 

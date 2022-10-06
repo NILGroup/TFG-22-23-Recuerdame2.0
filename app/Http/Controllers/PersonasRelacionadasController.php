@@ -14,7 +14,11 @@ class PersonasRelacionadasController extends Controller
      */
     public function index()
     {
-        //
+        //Obtenemos la lista de personas relacionadas
+        $personas = Personarelacionada::all();
+
+        //Devolvemos la lista
+        return view("personasrelacionadas.index", compact("personas"));
     }
 
     /**
@@ -24,7 +28,7 @@ class PersonasRelacionadasController extends Controller
      */
     public function create()
     {
-        //
+        return view("personasrelacionadas.create");
     }
 
     /**
@@ -35,7 +39,29 @@ class PersonasRelacionadasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validate = $request->validate([
+
+            "nombre" => "required",
+            "apellidos"  => "required",
+            "telefono"  => "required",
+            "ocupacion" => "required",
+            "email" => "required|unique:personarelacionadas",
+            "tiporelacion_id"  => "required"
+
+        ]);
+
+        Personarelacionada::create([
+
+            "nombre" => $request->nombre,
+            "apellidos" => $request->apellidos,
+            "telefono" => $request->telefono,
+            "ocupacion" => $request->ocupacion,
+            "email" => $request->email,
+            "tiporelacion_id" => $request->tiporelacion_id
+
+        ]);
+
     }
 
     /**
@@ -44,9 +70,10 @@ class PersonasRelacionadasController extends Controller
      * @param  \App\Models\Personarelacionada  $personarelacionada
      * @return \Illuminate\Http\Response
      */
-    public function show(Personarelacionada $personarelacionada)
+    public function show($id)
     {
-        //
+        $persona = Personarelacionada::find($id);
+        return view("personarelacionada.show", compact($persona));
     }
 
     /**
@@ -57,7 +84,7 @@ class PersonasRelacionadasController extends Controller
      */
     public function edit(Personarelacionada $personarelacionada)
     {
-        //
+        return view("personarelacionada.edit");
     }
 
     /**
@@ -67,9 +94,16 @@ class PersonasRelacionadasController extends Controller
      * @param  \App\Models\Personarelacionada  $personarelacionada
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Personarelacionada $personarelacionada)
+    public function update(Request $request, $id)
     {
-        //
+        
+        $persona = Personarelacionada::findOrFail($id);
+
+        $persona->update($request->all());
+
+        return redirect("/personarelacionada");
+
+
     }
 
     /**
@@ -78,8 +112,13 @@ class PersonasRelacionadasController extends Controller
      * @param  \App\Models\Personarelacionada  $personarelacionada
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Personarelacionada $personarelacionada)
+    public function destroy($id)
     {
-        //
+        
+        Personarelacionada::find($id)->delete();
+        return redirect("/personarelacionada");
+
     }
+
+   
 }

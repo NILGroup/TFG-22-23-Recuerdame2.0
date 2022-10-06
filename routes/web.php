@@ -37,30 +37,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('pacientes', PacientesController::class);
-/*
 
-----------------------------------------------------------
-    Controlador Usuario
-----------------------------------------------------------
-
-*/
-
-Route::resource('usuarios', UsuarioController::class);
-Route::get('/registro', 'App\Http\Controllers\UsuarioController@create');
-//Route::post('/registrarUsuario', 'App\Http\Controllers\UsuarioController@store');
-
-//END OF Usuario Controller
-
-//
-//Route::get('/users', [UsuarioController::class, 'index']);
-//Route::resource('/usuario', 'App\Http\Controllers\UsuarioController');
-Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
 Route::resources([
-    'recuerdo' => 'App\Http\Controllers\RecuerdosController',
-    //'usuario' => 'App\Http\Controllers\UsuarioController',
-    'sesion' => 'App\Http\Controllers\SesionesController',
+    'recuerdo' => RecuerdosController::class,
+    'usuarios' => UsuarioController::class,
+    'sesion' => SesionesController::class,
+    'pacientes' => PacientesController::class
 ]);
+
+Route::get('/registro', 'App\Http\Controllers\UsuarioController@create');
+Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
 
 
 Route::get('prueba/', function () {

@@ -42,25 +42,32 @@ class PacientesController extends Controller
      */
     public function store(Request $request)
     {
-        //Creamos un paciente vacio
-        $paciente = new Paciente();
 
-        //Rellenamos al paciente
+        $validate = $request->validate([
 
-        $paciente->nombre = $request->nombre;
-        $paciente->apellidos = $request->apellidos;
-        $paciente->genero = $request->genero;
-        $paciente->lugar_nacimiento = $request->lugar_nacimiento;
+            "nombre" => "required",
+            "apellidos" => "required",
+            "genero" => "required",
+            "lugar_nacimiento" => "required",
+            "nacionalidad" => "required",
+            "fecha_nacimiento" => "required",
+            "tipo_residencia" => "required",
+            "residencia_actual" => "required"
 
-        //NO ESTOY MUY SEGURO DE SI ESTO FUNCIONA O HAY QUE CONVERTIR LA FECHA
-        $paciente->fecha_nacimiento = $request->fecha_nacimiento; 
+        ]);
 
-        $paciente->nacionalidad = $request->nacionalidad;
-        $paciente->tipo_residencia = $request->tipo_residencia;
-        $paciente->residencia_actual = $request->residencia_actual;
+        Paciente::create([
 
-        //Guardamos al paciente
-        $paciente->save();
+            "nombre" => $request->nombre,
+            "apellidos" => $request->apellidos,
+            "genero" => $request->genero,
+            "lugar_nacimiento" => $request->lugar_nacimiento,
+            "nacionalidad" => $request->nacionalidad,
+            "fecha_nacimiento" => $request->fecha_nacimiento,
+            "tipo_residencia" => $request->tipo_residencia,
+            "residencia_actual" => $request->residencia_actual
+
+        ]);
 
 
         
