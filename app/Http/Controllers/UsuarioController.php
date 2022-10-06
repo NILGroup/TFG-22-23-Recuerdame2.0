@@ -51,14 +51,6 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $usuario = new Usuario();
-
-        $usuario->nombre = $request->nombre;
-        $usuario->apellidos = $request->apellidos;
-        $usuario->usuario = $request->usuario;
-        $usuario->email = $request->email;
-        $usuario->password = $request->password;
-        $usuario->password2 = $request->password2;
         $validated = $request->validate([
             'nombre' => 'required',
             'apellidos' => 'required',
@@ -74,7 +66,7 @@ class UsuarioController extends Controller
              'apellidos' => $request->apellidos,
              'usuario' => $request->usuario,
              'email' => $request->email,
-             'password' => $request->password,
+             'password' => Hash::make($request->password),
              'rol' => "Terapeuta"]
         );
 
@@ -132,7 +124,7 @@ class UsuarioController extends Controller
         $usuario->nombre = $usuario->nombre;
         $usuario->apellidos = $usuario->apellidos;
         $usuario->email = $usuario->email;
-        $usuario->password = $usuario->password;
+        $usuario->password = Hash::make($request->password);
         $usuario->rol = $usuario->rol;
         $usuario->save();
         return "Editando usuario";
