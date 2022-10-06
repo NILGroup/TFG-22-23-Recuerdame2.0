@@ -6,6 +6,8 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+//throw new \Exception(Text);
 class UsuarioController extends Controller
 {
     /**
@@ -16,8 +18,8 @@ class UsuarioController extends Controller
     public function index()
     {
         //
-
-        return "Esta es la index del usuario ";
+        $registrado = false;
+        return view("usuarios.login", compact("registrado"));
     }
 
 
@@ -141,5 +143,24 @@ class UsuarioController extends Controller
     public function destroy(Usuario $usuario)
     {
         //
+    }
+
+    public function loguear(Request $request)
+    {
+        $usuarios = Usuario::where('email', $request->usuario)->orWhere('usuario', $request->usuario)->get()->toArray();
+        
+        $validated = Validator::make(
+            ['usuarios' => $usuarios],
+            ['usuarios' => 'array|size:1'],
+            ['size' => 'Usuario o contraseña incorrectos'],
+        )->validate();
+
+        $usuario = Usuario::find($usuarios[0]['id']);
+        $validated = Validator::make(
+            ['hash' => Hash::check($request->password, $usuario->password)],
+            ['hash' => 'accepted'],
+            ['accepted' => 'Usuario o contraseña incorrectos'],
+        )->validate();
+        return redirect('/pacientes');
     }
 }

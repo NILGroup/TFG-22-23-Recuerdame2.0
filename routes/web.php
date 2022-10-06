@@ -36,7 +36,7 @@ use Illuminate\Support\Facades\DB;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 
@@ -48,6 +48,10 @@ Route::resources([
 ]);
 
 Route::get('/registro', 'App\Http\Controllers\UsuarioController@create');
+Route::get('/login', 'App\Http\Controllers\UsuarioController@index');
+Route::post('/loguear', 'App\Http\Controllers\UsuarioController@loguear');
+
+
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
 
 
