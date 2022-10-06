@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\RecuerdosController;
+use App\Http\Controllers\SesionesController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Paciente;
 use App\Models\Actividad;
