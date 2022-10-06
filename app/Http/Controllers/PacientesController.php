@@ -69,7 +69,7 @@ class PacientesController extends Controller
 
         ]);
 
-
+        return redirect("/pacientes");
         
     }
 
