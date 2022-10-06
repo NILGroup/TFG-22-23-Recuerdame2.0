@@ -8,10 +8,9 @@ use Illuminate\Http\Request;
 class PacientesController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Obtiene la lista completa de pacientes y se los devuelve a la vista de lista pacientes
      */
+
     public function index()
     {
 
@@ -25,24 +24,22 @@ class PacientesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Devuelve la vista de crear paciente
      */
+
     public function create()
     {
         return view("pacientes.create");
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Almacena un paciente en la base de datos y redireccionamos a la lista de pacientes
      */
+
     public function store(Request $request)
     {
 
+        //Se valida la request
         $validate = $request->validate([
 
             "nombre" => "required",
@@ -56,6 +53,7 @@ class PacientesController extends Controller
 
         ]);
 
+        //Almacenamos al paciente en la bd
         Paciente::create([
 
             "nombre" => $request->nombre,
@@ -69,6 +67,7 @@ class PacientesController extends Controller
 
         ]);
 
+        //Redireccionamos a la vista de lista pacientes
         return redirect("/pacientes");
         
     }
@@ -133,11 +132,8 @@ class PacientesController extends Controller
      */
     public function destroy($id)
     {
-        //Sacamos al paciente
-        $paciente = Paciente::findOrFail($id);
-
-        //Borramos al paciente
-        $paciente->delete();
+        //Sacamos al paciente y lo borramos
+        Paciente::findOrFail($id)->delete();
 
         //Redireccionamos al index
         return redirect("/pacientes");

@@ -8,10 +8,9 @@ use Illuminate\Http\Request;
 class EmocionController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Devuelve la lista de emociones
      */
+    
     public function index()
     {
         return Emocion::all();

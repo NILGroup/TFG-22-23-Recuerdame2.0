@@ -8,10 +8,9 @@ use Illuminate\Http\Request;
 class EtiquetaController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Devuelve la lista de etiquetas
      */
+
     public function showAll()
     {
         return Etiqueta::all();
@@ -19,11 +18,9 @@ class EtiquetaController extends Controller
 
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Etiqueta  $etiqueta
-     * @return \Illuminate\Http\Response
+     * Devuelve la etiqueta especificada
      */
+
     public function show($id)
     {
         return Etiqueta::findOrFail($id);
