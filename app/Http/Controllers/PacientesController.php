@@ -121,7 +121,7 @@ class PacientesController extends Controller
      * Elimina al paciente especificado de la base de datos y redirecciona a la lista de pacientes
      */
 
-    public function destroy(int $id)
+    public function destroy($id)
     {
         //Sacamos al paciente y lo borramos
         Paciente::findOrFail($id)->delete();
