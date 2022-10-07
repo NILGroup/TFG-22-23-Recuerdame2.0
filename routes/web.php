@@ -20,8 +20,11 @@ use App\Models\Etiqueta;
 use App\Models\Emocion;
 use App\Models\Personarelacionada as ModelsPersonarelacionada;
 use App\Models\Recuerdo;
+use App\Models\Rol;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Facades\Auth;
 
 
 /*
@@ -39,6 +42,10 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+//Registro y login
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::resources([
     'recuerdo' => RecuerdosController::class,
@@ -46,6 +53,7 @@ Route::resources([
     'sesion' => SesionesController::class,
     'pacientes' => PacientesController::class
 ]);
+
 
 Route::get('/registro', 'App\Http\Controllers\UsuarioController@create');
 //Route::get('/login', 'App\Http\Controllers\UsuarioController@index');
@@ -270,6 +278,8 @@ Route::get('prueba/', function () {
     ]);
 
    
+    Rol::create(["nombre" => "Terapeuta"]);
+    Rol::create(["nombre" => "Cuidador"]);
 
    
     return "<h1> Se ha llenado la base de datos </h1>";
@@ -279,8 +289,3 @@ Route::get('prueba/', function () {
 
     
 });
-use Illuminate\Support\Facades\Auth;
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
