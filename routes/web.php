@@ -48,7 +48,7 @@ Route::resources([
 ]);
 
 Route::get('/registro', 'App\Http\Controllers\UsuarioController@create');
-Route::get('/login', 'App\Http\Controllers\UsuarioController@index');
+//Route::get('/login', 'App\Http\Controllers\UsuarioController@index');
 Route::post('/loguear', 'App\Http\Controllers\UsuarioController@loguear');
 
 
@@ -279,3 +279,6 @@ Route::get('prueba/', function () {
 
     
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

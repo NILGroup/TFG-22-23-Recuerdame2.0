@@ -161,6 +161,7 @@ class UsuarioController extends Controller
             ['hash' => 'accepted'],
             ['accepted' => 'Usuario o contraseña incorrectos'],
         )->validate();
+        
         return redirect('/pacientes');
     }
 }
