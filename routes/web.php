@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\PacientesController;
-use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RecuerdosController;
 use App\Http\Controllers\SesionesController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +20,7 @@ use App\Models\Emocion;
 use App\Models\Personarelacionada as ModelsPersonarelacionada;
 use App\Models\Recuerdo;
 use App\Models\Rol;
+use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -44,20 +44,17 @@ Route::get('/', function () {
 
 //Registro y login
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/home', function () {
+    return redirect('/pacientes');
+});
 
 Route::resources([
     'recuerdo' => RecuerdosController::class,
-    'usuarios' => UsuarioController::class,
     'sesion' => SesionesController::class,
     'pacientes' => PacientesController::class
 ]);
-
-
-Route::get('/registro', 'App\Http\Controllers\UsuarioController@create');
-//Route::get('/login', 'App\Http\Controllers\UsuarioController@index');
-Route::post('/loguear', 'App\Http\Controllers\UsuarioController@loguear');
 
 
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
@@ -72,6 +69,27 @@ Route::get('prueba/', function () {
 ----------------------------------------------------------
 
 */
+       
+    Rol::create(["nombre" => "Terapeuta"]);
+    Rol::create(["nombre" => "Cuidador"]);
+
+    User::create([
+        'nombre' => "Terapeuta",
+        'apellidos' => "Numero Uno",
+        'email' => "terapeuta@gmail.com",
+        'usuario' => "Terapeuta",
+        'rol_id' => 1,
+        'password' => Hash::make("terapeuta"),
+    ]);
+
+    User::create([
+        'nombre' => "Cuidador",
+        'apellidos' => "Numero Uno",
+        'email' => "cuidador@gmail.com",
+        'usuario' => "cuidador",
+        'rol_id' => 2,
+        'password' => Hash::make("cuidador"),
+    ]);
 
 
     $paciente = new Paciente();
@@ -170,24 +188,6 @@ Route::get('prueba/', function () {
         "paciente_id" => 1
     ]);
 
-    Usuario::create([
-        "nombre" => "Eros",
-        "apellidos" => "Guerrero Sosa",
-        "email" => "erosmacaco@gmail.com",
-        "usuario" => "XErosX",
-        "password" => "1234",
-        "rol" => "Terapeuta"
-    ]);
-   
-    Usuario::create([
-        "nombre" => "Adrian",
-        "apellidos" => "Prieto Campo",
-        "email" => "adrielcrack@gmail.com",
-        "usuario" => "AdriCrack",
-        "password" => "1234",
-        "rol" => "Terapeuta"
-    ]);
-
     Sesion::create(["fecha" => Carbon::now(),
     "etapa_id" => 1,
     "objetivo" => "objetivo 1",
@@ -196,7 +196,7 @@ Route::get('prueba/', function () {
     "facilitadores" => "ninguno",
     "fecha_finalizada" => Carbon::now(),
     "paciente_id" => 1,
-    "usuario_id" => 1,
+    "user_id" => 1,
     "respuesta"=> "ninguna respuesta"]);
 
     Sesion::create(["fecha" => Carbon::now(),
@@ -207,7 +207,7 @@ Route::get('prueba/', function () {
     "facilitadores" => "ninguno",
     "fecha_finalizada" => Carbon::now(),
     "paciente_id" => 1,
-    "usuario_id" => 2,
+    "user_id" => 2,
     "respuesta"=> "ninguna respuesta"]);
 
     Categoria::create(["nombre" => "categoria 1"]);
@@ -277,11 +277,7 @@ Route::get('prueba/', function () {
         ["multimedia_id" => 2, "recuerdo_id" => 2]
     ]);
 
-   
-    Rol::create(["nombre" => "Terapeuta"]);
-    Rol::create(["nombre" => "Cuidador"]);
 
-   
     return "<h1> Se ha llenado la base de datos </h1>";
 
     

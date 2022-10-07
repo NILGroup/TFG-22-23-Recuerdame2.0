@@ -27,14 +27,14 @@ return new class extends Migration
             //id_paciente
             $table->unsignedBigInteger('paciente_id');
             //id_usuario
-            $table->unsignedBigInteger('usuario_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('respuesta');
             $table->timestamps();
 
 
             $table->foreign('etapa_id')->references('id')->on('etapas')->onDelete("cascade");
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete("cascade");
-            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete("cascade");
+            $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
         });
     }
 

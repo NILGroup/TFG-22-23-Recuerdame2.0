@@ -45,6 +45,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function sesions()
+    {
+        return $this->hasMany(Sesion::class);
+    }
+    
     public function rol(){
         return $this->belongsTo(Rol::class);
     }

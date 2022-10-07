@@ -18,7 +18,7 @@ class Sesion extends Model
         "facilitadores",
         "fecha_finalizada",
         "paciente_id",
-        "usuario_id",
+        "user_id",
         "respuesta"
     ];
 
@@ -30,8 +30,8 @@ class Sesion extends Model
         return $this->belongsTo(Paciente::class);
     }
 
-    public function usuario(){
-        return $this->belongsTo(Usuario::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
     public function multimedias(){

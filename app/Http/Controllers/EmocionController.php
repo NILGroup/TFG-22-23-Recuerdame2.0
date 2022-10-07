@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 class EmocionController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
      * Devuelve la lista de emociones
      */
     

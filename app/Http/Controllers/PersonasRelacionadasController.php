@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class PersonasRelacionadasController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Obtiene al paciente y la lista de sus personas relacionadas. Redirecciona a lista personasrelacionadas

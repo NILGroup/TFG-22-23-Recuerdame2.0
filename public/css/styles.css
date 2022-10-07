@@ -1,3 +1,18 @@
+body {
+    font-family: 'Nunito', sans-serif;
+}
+footer {
+    background-color: #fef9e7 !important;
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:50px;
+    width: 100%;
+}
+.yellowbg {
+    background-color: #fef9e7 !important;
+}
 /*Cuerpo del cuadrado*/
 .cuerpo {
 
@@ -31,12 +46,6 @@
 
 .header {
     background-color: #fef9e7 !important;
-}
-
-.footer {
-    background-color: #fef9e7 !important;
-    bottom: 0;
-    width: 100%;
 }
 
 .logotipoMarca {

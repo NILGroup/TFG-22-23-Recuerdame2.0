@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\DB;
 class SesionesController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -49,7 +59,7 @@ class SesionesController extends Controller
              'facilitadores' => $request->facilitadores,
              'fecha_finalizada' => $request->fecha_finalizada,
              'paciente_id' => $request->paciente_id,
-             'usuario_id' => $request->usuario_id,
+             'user_id' => $request->user_id,
              'respuesta' => $request->respuesta]
         );
 
@@ -69,7 +79,7 @@ class SesionesController extends Controller
              'categoria_id' => $recuerdo->facilitadores,
              'emocion_id' => $recuerdo->fecha_finalizada,
              'estado_id' => $recuerdo->paciente_id,
-             'etiqueta_id' => $recuerdo->usuario_id,
+             'etiqueta_id' => $recuerdo->user_id,
              'puntuacion' => $recuerdo->respuesta,
              'paciente_id' => $idPaciente]
         );

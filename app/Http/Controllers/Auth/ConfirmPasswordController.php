@@ -8,6 +8,16 @@ use Illuminate\Foundation\Auth\ConfirmsPasswords;
 
 class ConfirmPasswordController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /*
     |--------------------------------------------------------------------------
     | Confirm Password Controller
@@ -28,13 +38,4 @@ class ConfirmPasswordController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 }

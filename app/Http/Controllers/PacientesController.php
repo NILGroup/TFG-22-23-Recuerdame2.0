@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 class PacientesController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
      * Obtiene la lista completa de pacientes y se los devuelve a la vista de lista pacientes
      */
 
