@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <ul class="navbar-nav">
-                    @if (Auth::user()->getRol()->id == 1)
+                    @if (Auth::user()->rol_id == 1)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('pacientes.index') }}"><i class="fa-solid fa-users"></i></a>
                         </li>
