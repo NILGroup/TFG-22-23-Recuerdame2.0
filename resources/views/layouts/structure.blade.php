@@ -30,69 +30,11 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm yellowbg">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url('/') }}"><img class="logotipoMarca" src="/img/Marca_recuerdame.png" /></a>
-
-            
-            <div class ="d-flex flex-row-reverse">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item btn">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
-                        </li>
-                    @endif
-
-                    @if (Route::has('register'))
-                        <li class="nav-item btn">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a>
-                        </li>
-                    @endif
-                    @else
-                        <div class="row align-items-center">
-                            <div class="col-12">
-                                {{ Auth::user()->usuario }}
-                                <!-- <div data-letters="PP"></div> -->
-                            </div>
-                        </div>
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('pacientes.index') }}"><i class="fa-solid fa-users"></i></a>
-                            </li>
-                            <li class="nav-item dropdown btn btn-outline-danger">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                        <i class="fa-solid fa-right-from-bracket"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                        </ul>
-                @endguest
-                </div>
-            </div>
-        </nav>
+        @include('layouts.navbar')
         <main class="py-4">
             @yield('content')
         </main>
     </div>
-    <div style="height:50px;">
-        <footer class="mt-auto text-lg-start text-muted">
-            <div class="p-2">
-                <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a>
-                <?php echo date('Y'); ?> Recuérdame2.0
-            </div>
-        </footer>
-    </div>
+    @include('layouts.footer')
 </body>
 </html>
