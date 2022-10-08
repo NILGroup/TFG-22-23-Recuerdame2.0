@@ -113,7 +113,7 @@ class RecuerdosController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina el recuerdo en cuestión
      *
      * @param  \App\Models\Recuerdo  $recuerdo
      * @return \Illuminate\Http\Response
@@ -123,11 +123,14 @@ class RecuerdosController extends Controller
         Recuerdo::destroy($idRecuerdo);
     }
 
+    //Elimina a la persona relacionada del recuerdo en cuestión (su relación)
     public function destroyPersonaRelacionada($idRecuerdo, $idPersona)
     {
         //¿unsetRelation?
     //    Recuerdo::find($idRecuerdo)->personas_relacionadas   destroy($idRecuerdo);
     }
+
+    //Devuelve la fecha del recuerdo más antiguo del paciente
     public function oldestMemoryDate($idPaciente)
     {
         $memory = Paciente::find($idPaciente)->recuerdos
