@@ -31,71 +31,39 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm yellowbg">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <!-- TODO Cambiar el logo -->
-                    <img class="logotipoMarca" src="img/Marca_recuerdame.png">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ url('/') }}"><img class="logotipoMarca" src="/img/Marca_recuerdame.png" /></a>
+
+            
+            <div class ="d-flex flex-row-reverse">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                @guest
+                    @if (Route::has('login'))
+                        <li class="nav-item btn">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
+                        </li>
+                    @endif
 
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item btn">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item btn">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a>
-                                </li>
-                            @endif
-                            @else
-                            <div class="container-fluid">
-                            <!-- TODO 
-                            <?php //if (Session::esCuidador() && Session::getIdPaciente() != null) { ?>
-                                <a class="navbar-brand" href="verDatosPaciente.php?idPaciente=<?php //echo Session::getIdPaciente() ?>"><img class="logotipoMarca" src="public/img/Marca_recuerdame.png" /></a>
-                            <?php //} ?>
-                            -->
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                                <div class="row align-items-center">
-                                    <div class="col-12">
-                                        <?php
-                                        /* TODO
-                                        if (isset($_SESSION['usuario'])) {
-                                        $usuario = unserialize($_SESSION['usuario']);
-                                        if ($usuario->getIniciales() != '') {
-                                        ?>
-                                            <div data-letters="<?php echo (isset($usuario) ? $usuario->getIniciales() : '') ?>"></div>
-                                        <?php
-                                        }
-                                        }
-                                        */
-                                        ?>
-                                    </div>
-                                </div>
-                                @if (Auth::user()->rol_id == 1)
-                                <div class="btn">
-                                    <a class="nav-link" href="{{ route('pacientes.index') }}"><i class="fa-solid fa-users"></i></a>
-                                </div>
-                                @endif
-                                <div class="btn">
+                    @if (Route::has('register'))
+                        <li class="nav-item btn">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a>
+                        </li>
+                    @endif
+                    @else
+                        <div class="row align-items-center">
+                            <div class="col-12">
                                 {{ Auth::user()->usuario }}
-                                </div>
-                                <li class="nav-item dropdown btn btn-outline-danger">
+                                <!-- <div data-letters="PP"></div> -->
+                            </div>
+                        </div>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('pacientes.index') }}"><i class="fa-solid fa-users"></i></a>
+                            </li>
+                            <li class="nav-item dropdown btn btn-outline-danger">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
@@ -109,14 +77,11 @@
                                         </form>
                                     </div>
                                 </li>
-                            </div>
-                           
-                        @endguest
-                    </ul>
+                        </ul>
+                @endguest
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>
