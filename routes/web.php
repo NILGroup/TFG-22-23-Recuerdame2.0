@@ -60,6 +60,9 @@ Route::resources([
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
 
 
+
+
+
 Route::get('prueba/', function () {
    
 /*
@@ -102,6 +105,7 @@ Route::get('prueba/', function () {
     $paciente->fecha_nacimiento = Carbon::create(2001, 7, 30);
     $paciente->tipo_residencia = "Piso";
     $paciente->residencia_actual = "secreto";
+    $paciente->cuidador_id = 2;
 
     $paciente->save();
 
@@ -279,9 +283,4 @@ Route::get('prueba/', function () {
 
 
     return "<h1> Se ha llenado la base de datos </h1>";
-
-    
-    
-
-    
 });

@@ -28,9 +28,11 @@
                     </div>
                 </div>
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('pacientes.index') }}"><i class="fa-solid fa-users"></i></a>
-                    </li>
+                    @if (Auth::user()->getRol()->id == 1)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('pacientes.index') }}"><i class="fa-solid fa-users"></i></a>
+                        </li>
+                    @endif
                     <li class="nav-item dropdown btn btn-outline-danger">
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();

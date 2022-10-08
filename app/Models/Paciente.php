@@ -17,7 +17,8 @@ class Paciente extends Model
         "nacionalidad",
         "fecha_nacimiento",
         "tipo_residencia",
-        "residencia_actual"
+        "residencia_actual",
+        "cuidador_id"
     ];
 
     public function actividades(){
@@ -38,5 +39,9 @@ class Paciente extends Model
 
     public function personas_relacionadas(){
         return $this->hasMany(Personarelacionada::class);
+    }
+
+    public function cuidador(){
+        return $this->hasOne(User::class);
     }
 }

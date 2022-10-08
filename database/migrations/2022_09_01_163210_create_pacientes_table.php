@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date("fecha_nacimiento");
             $table->string("tipo_residencia");
             $table->string("residencia_actual");
+            $table->integer("cuidador_id")->nullable();
             $table->timestamps();
         });
     }
