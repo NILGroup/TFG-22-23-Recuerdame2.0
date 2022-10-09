@@ -6,6 +6,7 @@ use App\Models\Sesion;
 use App\Models\Recuerdo;
 use App\Models\Multimedia;
 use App\Models\Paciente;
+use App\Models\Etapa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -106,8 +107,10 @@ class SesionesController extends Controller
      */
     public function show($id)
     {
-        //
-        return Sesion::findOrFail($id);
+        $sesion = Sesion::findOrFail($id);
+        $etapas = Etapa::all();
+        //throw new \Exception($sesion->multimedias);
+        return view('sesiones.show', compact('sesion', 'etapas'));
     }
 
     public function showByPaciente($idPaciente)

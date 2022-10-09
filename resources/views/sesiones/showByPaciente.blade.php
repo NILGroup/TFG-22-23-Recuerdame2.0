@@ -27,8 +27,9 @@
                 </thead>
                 <tbody>
                 @foreach($sesiones as $sesion)
+                    <?php $i=1; ?>
                     <tr>
-                        <th scope="row">{{$sesion->id}}</th>
+                        <th scope="row"><?php echo $i ?></th>
                         <td><a href="{{route('sesion.show',$sesion->id)}}">{{date("d/m/Y", strtotime($sesion->fecha))}}</a></td>
                         <td>{{$sesion->objetivo}}</td>
                         <td>
@@ -47,6 +48,7 @@
                             <a href="{{route('sesion.destroy',$sesion->id)}}"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></a>
                         </td>
                     </tr>
+                    <?php $i++;?>
                 @endforeach
             </tbody>
         </table>
