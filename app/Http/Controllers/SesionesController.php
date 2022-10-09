@@ -184,4 +184,31 @@ class SesionesController extends Controller
         //
        return Sesion::find($idSesion)->multimedias::destroy($idMultimedia);
     }
+
+    //Agregar un nuevo recuerdo cuando editas una sesión
+    //Guarda los cambios y te redirige a la vista de crear recuerdo
+    public function updateAndRecuerdoNuevo(Request $request){
+        $sesion = Sesion::find($request->id);
+        $sesion->fecha = $request->fecha;
+        $sesion->etapa_id = $request->etapa;
+        $sesion->objetivo = $request->objetivo;
+        $sesion->descripcion = $request->descripcion;
+        $sesion->barreras = $request->barreras;
+        $sesion->facilitadores = $request->facilitadores;
+        $sesion->save();
+        return redirect("recuerdo/crear");
+    }
+    public function updateAndSeleccionarRecuerdos(Request $request){
+        $sesion = Sesion::find($request->id);
+        $sesion->fecha = $request->fecha;
+        $sesion->etapa_id = $request->etapa;
+        $sesion->objetivo = $request->objetivo;
+        $sesion->descripcion = $request->descripcion;
+        $sesion->barreras = $request->barreras;
+        $sesion->facilitadores = $request->facilitadores;
+        $sesion->save();
+        return redirect("/recuerdos/paciente/{$sesion->paciente->id}");
+    }
+
+    
 }

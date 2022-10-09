@@ -117,7 +117,7 @@
     </div>
 
     <div>
-        <a href="/showByPaciente/{{$sesion->paciente->id}}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
+        <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
     </div>
 </div>
 @endsection

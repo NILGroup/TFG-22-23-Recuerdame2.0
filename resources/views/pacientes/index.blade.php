@@ -34,7 +34,7 @@
                     
                         <th scope="row"><?php echo $i ?></th>
                        
-                        <td><a href="/showByPaciente/{{$paciente->id}}"> {{$paciente->nombre}}</a></td>
+                        <td><a href="/paciente/sesiones/{{$paciente->id}}"> {{$paciente->nombre}}</a></td>
                         <td>{{$paciente->apellidos}}</td>
                         <td>
                         <?php  if($paciente->genero == 'H') echo 'Hombre';

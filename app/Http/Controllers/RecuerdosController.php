@@ -40,7 +40,7 @@ class RecuerdosController extends Controller
      */
     public function create()
     {
-        //
+        return view("recuerdos.create");
     }
 
     /**

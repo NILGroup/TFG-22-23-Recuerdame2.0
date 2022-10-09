@@ -53,16 +53,32 @@ Route::get('/home', function () {
 
 Route::resources([
     'recuerdo' => RecuerdosController::class,
-    'sesion' => SesionesController::class,
-    'pacientes' => PacientesController::class
+    'sesiones' => SesionesController::class,
+    'pacientes' => PacientesController::class,
+    'multimedias' => MultimediaControntroller::class
 ]);
 
 //RUTAS CUSTOMIZADAS PACIENTE
 
 //RUTAS CUSTOMIZADAS SESION
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
-Route::get('/showByPaciente/{id}', 'App\Http\Controllers\SesionesController@showByPaciente');
-Route::get('/showEditable/{id}', 'App\Http\Controllers\SesionesController@showEditable');
+Route::get('/paciente/sesiones/{id}', 'App\Http\Controllers\SesionesController@showByPaciente');
+Route::get('/sesiones/editar/{id}', 'App\Http\Controllers\SesionesController@showEditable');
+Route::post('/updateAndRecuerdoNuevo','App\Http\Controllers\SesionesController@updateAndRecuerdoNuevo');
+Route::post('/updateAndSeleccionarRecuerdos','App\Http\Controllers\SesionesController@updateAndSeleccionarRecuerdos');
+
+//RUTAS CUSTOMIZADAS SESION
+Route::get('/recuerdos/paciente/{id}', 'App\Http\Controllers\RecuerdosController@showByPaciente');
+
+
+
+
+
+
+
+
+
+
 
 
 
