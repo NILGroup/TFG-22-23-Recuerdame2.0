@@ -11,7 +11,7 @@
         <div class="col-12 justify-content-end d-flex">
         <div class="row mb-2">
             <div class="col-12 justify-content-end d-flex">
-                <a href="modificarDatosRecuerdo.php"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
+                <a href="/recuerdo/crear"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
             </div>
         </div>
           

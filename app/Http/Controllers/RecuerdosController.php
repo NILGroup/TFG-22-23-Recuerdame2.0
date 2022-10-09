@@ -9,6 +9,7 @@ use App\Models\Categoria;
 use App\Models\Estado;
 use App\Models\Etiqueta;
 use App\Models\Paciente;
+use App\Models\Emocion;
 use Illuminate\Http\Request;
 
 class RecuerdosController extends Controller
@@ -40,7 +41,14 @@ class RecuerdosController extends Controller
      */
     public function create()
     {
-        //
+
+        $estados = Estado::all();
+        $etiquetas = Etiqueta::all();
+        $etapas = Etapa::all();
+        $emociones = Emocion::all();
+        $categorias = Categoria::all();
+        return view("recuerdos.create", compact("estados","etiquetas","etapas","emociones","categorias"));
+
     }
 
     /**
@@ -82,6 +90,8 @@ class RecuerdosController extends Controller
     public function showByPaciente($idPaciente)
     {
         $paciente =Paciente::find($idPaciente);
+        if(is_null($paciente)) return "ID de paciente no encontrada";
+
         $recuerdos = $paciente->recuerdos;
         foreach ($recuerdos as $r) {
                 $r->etapa_id = Etapa::find($r->etapa_id)->nombre;
