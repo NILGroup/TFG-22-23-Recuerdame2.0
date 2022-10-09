@@ -113,6 +113,14 @@ class SesionesController extends Controller
         return view('sesiones.show', compact('sesion', 'etapas'));
     }
 
+    public function showEditable($id)
+    {
+        $sesion = Sesion::findOrFail($id);
+        $etapas = Etapa::all();
+        //throw new \Exception($sesion->multimedias);
+        return view('sesiones.edit', compact('sesion', 'etapas'));
+    }
+
     public function showByPaciente($idPaciente)
     {
         //https://www.youtube.com/watch?v=y3p10h_00A8&ab_channel=CodeStepByStep

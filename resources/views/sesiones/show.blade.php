@@ -81,8 +81,8 @@
                 </thead>
 
                 <tbody>
-                    <?php $i=1; ?>
-                    @foreach ($sesion->recuerdos as $recuerdo) {
+                    <?php $i=1 ?>
+                    @foreach($sesion->recuerdos as $recuerdo)
                         <tr>
                             <th scope="row"><?php echo $i ?></th>
                             <td><a href="{{route('recuerdo.show',$recuerdo->id)}}">{{$recuerdo->nombre}}</a></td>
@@ -95,7 +95,7 @@
                                 <a href="{{route('recuerdo.show',$recuerdo->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                             </td>
                         </tr>
-                    <?php $i++;?>
+                    <?php $i++?>
                     @endforeach
                 </tbody>
             </table>
