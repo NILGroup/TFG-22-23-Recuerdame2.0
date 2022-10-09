@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sesion;
 use App\Models\Recuerdo;
 use App\Models\Multimedia;
+use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -113,7 +114,10 @@ class SesionesController extends Controller
     {
         //https://www.youtube.com/watch?v=y3p10h_00A8&ab_channel=CodeStepByStep
 
-        return Sesion::where('paciente_id', $idPaciente);
+        $paciente = Paciente::find($idPaciente);
+        session()->put('paciente', $paciente->toArray());
+        $sesiones = $paciente->sesiones;
+        return view('sesiones.showByPaciente', compact('sesiones'));
     }
 
     public function showMultimedia($idSesion)
