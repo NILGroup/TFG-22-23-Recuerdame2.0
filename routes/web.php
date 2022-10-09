@@ -56,8 +56,11 @@ Route::resources([
     'pacientes' => PacientesController::class
 ]);
 
+//RUTAS CUSTOMIZADAS PACIENTE
 
+//RUTAS CUSTOMIZADAS SESION
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
+Route::get('/showByPaciente/{id}', 'App\Http\Controllers\SesionesController@showByPaciente');
 
 
 
