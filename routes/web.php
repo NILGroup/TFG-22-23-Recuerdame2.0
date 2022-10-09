@@ -62,6 +62,7 @@ Route::resources([
 
 //RUTAS CUSTOMIZADAS SESION
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
+<<<<<<< HEAD
 Route::get('/paciente/sesiones/{id}', 'App\Http\Controllers\SesionesController@showByPaciente');
 Route::get('/sesiones/editar/{id}', 'App\Http\Controllers\SesionesController@showEditable');
 Route::post('/updateAndRecuerdoNuevo','App\Http\Controllers\SesionesController@updateAndRecuerdoNuevo');
@@ -79,6 +80,9 @@ Route::get('/recuerdos/paciente/{id}', 'App\Http\Controllers\RecuerdosController
 
 
 
+=======
+Route::get('/recuerdos/{id}', 'App\Http\Controllers\RecuerdosController@showByPaciente');
+>>>>>>> f5e6de2078bba6965cc3f24fbeeff31456f12856
 
 
 
