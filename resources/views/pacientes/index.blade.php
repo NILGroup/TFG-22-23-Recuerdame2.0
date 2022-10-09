@@ -48,16 +48,17 @@
                                 echo $edad->y ?>   
                         </td>
                         <td class="tableActions">
-                                <!--<a href="verDatosPaciente.php?idPaciente=<!?php echo ($row['id_paciente']) ?>">--><i class="fa-solid fa-eye text-black tableIcon"></i></a>
-                                <a href="{{route('pacientes.edit',$paciente->id)}}"><button class="fa-solid fa-pencil text-primary tableIcon">Editar</button></a>
-                                <a href="{{route('pacientes.show',$paciente->id)}}"><button class="fa-solid fa-pencil text-primary tableIcon">Mostrar</button></a>
-                                <form method="post" action="/pacientes/{{$paciente->id}}">
+                            <div class="d-inline">
+                            
+                                <a href="{{route('pacientes.show',$paciente->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                                <a href="{{route('pacientes.edit',$paciente->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
+                                <form method="post" action="/pacientes/{{$paciente->id}}" style="display:inline!important;">
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <input type="submit" class="fa-solid fa-pencil text-primary tableIcon" value="Eliminar">
+                                    <button  type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                                 </form>
-                                <!--<a href="asignarTerapeuta.php?idPaciente=<!?php echo ($row['id_paciente']) ?>">--><i class="fa-solid fa-users-line text-success tableIcon"></i></a>
-                                <!--<a href="gestor.php?accion=eliminarPaciente&idPaciente=<!?php echo ($row['id_paciente']) ?>">--><i class="fa-solid fa-trash-can text-danger tableIcon"></i></a>
+                                <i class="fa-solid fa-users-line text-success tableIcon"></i></a>
+                            </div>
                         </td>
                         <?php   $i++; ?>
                     </tr>
