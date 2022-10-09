@@ -1,33 +1,19 @@
-<html>
+@extends('layouts.structure')
 
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Fonts -->
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="public/bootstrap-5.1.3-dist/js/bootstrap.js"></script>
-    <title>Recuérdame</title>
+@section('content')
 
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-        }
-    </style>
-</head>
+<div class="container-fluid">
+    <div class="pt-4 pb-2">
+        <h5 class="text-muted">Datos paciente</h5>
+        <hr class="lineaTitulo">
+    </div>
 
-<body class="d-flex flex-column min-vh-100">
-
-    <div class="container-fluid">
-        <div class="pt-4 pb-2">
-            <h5 class="text-muted">Datos paciente</h5>
-            <hr class="lineaTitulo">
-        </div>
-
-        <form method="get" action="/pacientes/{{$paciente->id}}">
-            <div class="card p-4 h-80">
-                <div class="row justify-content-center p-3">
-                    <img src="/img/avatar_hombre.png" alt="Avatar" class="avatar img-thumbnail">
+    <form method="get" action="/pacientes/{{$paciente->id}}">
+        <div class="card p-4 h-80">
+            <div class="row justify-content-center p-3">
+                <div class="row col-sm-6 col-md-4 col-lg-2">
+                    <img src="<?php if ($paciente->genero == 'H') echo '/img/avatar_hombre.png';
+                                else if ($paciente->genero == 'M') echo '/img/avatar_mujer.png'; ?> " alt="Avatar" class="avatar img-thumbnail">
                 </div>
                 <div class="row form-group justify-content-between">
                     <div class="row col-sm-12 col-md-6 col-lg-5">
@@ -49,7 +35,6 @@
                     <div class="row col-sm-12 col-md-6 col-lg-5">
                         <label for="nombre" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Género</label>
                         <div class="col-sm-12 col-md-12 col-lg-6">
-                            <!--TODO: distinguir entre hombre y mujer -->
                             <input type="text" disabled class="form-control form-control-sm" id="genero" value="<?php if ($paciente->genero == 'H') echo 'Hombre';
                                                                                                                 else if ($paciente->genero == 'M') echo 'Mujer'; ?>  ">
                         </div>
@@ -97,6 +82,7 @@
             <div class="col-12">
                 <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
             </div>
-        </form>
-    </div>
-</body>
+    </form>
+</div>
+
+@endsection
