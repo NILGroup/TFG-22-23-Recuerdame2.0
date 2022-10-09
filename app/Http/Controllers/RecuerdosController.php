@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Recuerdo;
 use App\Models\Sesion;
+use App\Models\Etapa;
+use App\Models\Categoria;
+use App\Models\Estado;
+use App\Models\Etiqueta;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 
@@ -77,7 +81,16 @@ class RecuerdosController extends Controller
 
     public function showByPaciente($idPaciente)
     {
-        return Paciente::find($idPaciente)->recuerdos;
+        $paciente =Paciente::find($idPaciente);
+        $recuerdos = $paciente->recuerdos;
+        foreach ($recuerdos as $r) {
+                $r->etapa_id = Etapa::find($r->etapa_id)->nombre;
+                $r->categoria_id = Categoria::find($r->categoria_id)->nombre;
+                $r->estado_id = Estado::find($r->estado_id)->nombre;
+                $r->etiqueta_id = Etiqueta::find($r->etiqueta_id)->nombre;
+            }
+        //Devolvemos los recuerdos
+        return view("recuerdos.showByPaciente", compact("recuerdos"));
     }
 
     public function showBySesion($idSesion)

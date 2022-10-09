@@ -85,7 +85,7 @@
                         <a class="nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Historia de Vida</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="historiaVida.php">Ver Historia de Vida</a></li>
-                            <li><a class="dropdown-item" href="listadoRecuerdos.php">Ver recuerdos</a></li>
+                            <li><a class="dropdown-item" href="/recuerdos/{{Session::get('paciente')['id']}}">Ver recuerdos</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -105,6 +105,7 @@
                     {{ Session::get('paciente')['nombre'] }}
                 </div>
             </div>
+
             <div class="row align-items-center pe-4">
                 <div class="col-12">
                     {{ Session::get('paciente')['genero'] }}
@@ -112,7 +113,13 @@
             </div>
             <div class="row align-items-center pe-4">
                 <div class="col-12">
-                    {{ Session::get('paciente')['fecha_nacimiento'] }}
+                <?php 
+                                // Aunque da error funciona, se sugiera cambiar el modelo de paciente para ahorrar el calculo
+                                $fecha_nacimiento = new DateTime ( Session::get('paciente')['fecha_nacimiento']);
+                                $hoy = new DateTime();
+                                $edad = $hoy->diff($fecha_nacimiento);
+                                echo $edad->y ?>  
+                    
                 </div>
             </div>
         </div>

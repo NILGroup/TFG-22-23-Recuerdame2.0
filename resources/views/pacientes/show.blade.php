@@ -24,10 +24,10 @@
             <hr class="lineaTitulo">
         </div>
 
-        <form method="post" action="/pacientes/{{$paciente->id}}">
+        <form method="get" action="/pacientes/{{$paciente->id}}">
             <div class="card p-4 h-80">
                 <div class="row justify-content-center p-3">
-                    <img src="avatar_hombre.png" alt="Avatar" class="avatar img-thumbnail">
+                    <img src="/img/avatar_hombre.png" alt="Avatar" class="avatar img-thumbnail">
                 </div>
                 <div class="row form-group justify-content-between">
                     <div class="row col-sm-12 col-md-6 col-lg-5">
