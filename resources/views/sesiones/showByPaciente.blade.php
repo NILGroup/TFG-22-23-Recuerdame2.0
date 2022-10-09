@@ -31,7 +31,10 @@
                         <th scope="row">{{$sesion->id}}</th>
                         <td><a href="{{route('sesion.show',$sesion->id)}}">{{date("d/m/Y", strtotime($sesion->fecha))}}</a></td>
                         <td>{{$sesion->objetivo}}</td>
-                        <td>{{$sesion->fecha_finalizada == null ? "" : $sesion->fecha_finalizada}}</td>
+                        <td>
+                            @if($sesion->fecha_finalizada != null)
+                            <i class="fa-solid fa-check text-success tableIcon"></i>{{$sesion->fecha_finalizada}}</td>
+                            @endif
                         <td class="tableActions">
                             <a href="{{route('sesion.show',$sesion->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                             <a href="{{route('sesion.update',$sesion->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>

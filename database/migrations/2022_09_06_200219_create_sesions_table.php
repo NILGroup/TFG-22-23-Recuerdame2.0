@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('descripcion');
             $table->string('barreras');
             $table->string('facilitadores');
-            $table->date('fecha_finalizada');
+            $table->date('fecha_finalizada')->nullable();
             //id_paciente
             $table->unsignedBigInteger('paciente_id');
             //id_usuario

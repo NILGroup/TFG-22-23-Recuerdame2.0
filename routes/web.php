@@ -212,7 +212,7 @@ Route::get('prueba/', function () {
     "descripcion" => "descripcion del objetivo numero 2",
     "barreras"=> "muchas",
     "facilitadores" => "ninguno",
-    "fecha_finalizada" => Carbon::now(),
+    "fecha_finalizada" => null,
     "paciente_id" => 1,
     "user_id" => 2,
     "respuesta"=> "ninguna respuesta"]);
