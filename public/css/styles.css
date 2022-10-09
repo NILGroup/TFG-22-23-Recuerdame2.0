@@ -61,7 +61,7 @@ footer {
 }
 
 .letra-primary-color {
-    color: #4F7BC5;
+    color: #4F7BC5 !important;
 }
 
 .button-primary-color {

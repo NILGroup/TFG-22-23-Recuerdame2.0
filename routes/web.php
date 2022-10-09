@@ -24,8 +24,9 @@ use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
-use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,7 @@ Route::resources([
 
 
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
+Route::get('/recuerdos/{id}', 'App\Http\Controllers\RecuerdosController@showByPaciente');
 
 
 
