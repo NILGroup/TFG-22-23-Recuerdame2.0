@@ -41,7 +41,7 @@ class Paciente extends Model
         return $this->hasMany(Personarelacionada::class);
     }
 
-    public function usuarios(){
-        return $this->belongsToMany(User::class);
+    public function cuidador(){
+        return $this->hasOne(User::class);
     }
 }

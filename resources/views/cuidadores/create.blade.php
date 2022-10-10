@@ -2,20 +2,12 @@
 
 @section('content')
 <div class="container-fluid">
-        <!--<!?php
-        if (Session::getIdPaciente() != null) {
-            $pacientesController = new PacientesController();
-            $paciente = $pacientesController->verPaciente(Session::getIdPaciente());
-        } else {
-            $pacientesController = new PacientesController();
-        }
-        ?>-->
          <div class="pt-4 pb-2">
             <h5 class="text-muted">Registro cuidador</h5>
             <hr class="lineaTitulo">
         </div>
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="/registroCuidador">
         @csrf
             <div class="row form-group justify-content-between">
                 <div class="row col-sm-12 col-md-6 col-lg-5">
@@ -89,7 +81,14 @@
                     <div class="col-sm-12 col-md-12 col-lg-6">
                         <select class="form-select form-select-sm" id="paciente" name="paciente" required>
                             <option value="" selected="selected"></option>
-                            <?php
+                           
+                            @foreach($pacientes as $paciente)
+                            <option value="{{$paciente->id}}" >
+                                {{$paciente->nombre}} {{$paciente->apellido}}     
+                            </option>
+                            @endforeach
+                           
+                          <!-- <!?php
                                     
                                     $pacientesCuidador = $pacientesController->getListaPacientesSinCuidador($usuario->getIdUsuario());
                                      if($pacientesCuidador != null){
@@ -100,11 +99,11 @@
                                             $apellido = $fila['apellidos'];
 
                                         ?>
-                                    <option value=" <?php echo $id; ?>"> <?php echo $nombre . " " . $apellido; ?></option>
-                            <?php
+                                    <option value=" <!?php echo $id; ?>"> <!?php echo $nombre . " " . $apellido; ?></option>
+                            <!?php
                                 }
                             }
-                            ?>
+                            ?>-->
 
                         </select>
                     </div>

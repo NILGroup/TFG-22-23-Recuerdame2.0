@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class PacientesController extends Controller
 {
@@ -91,9 +92,9 @@ class PacientesController extends Controller
         
         //Obtenemos al paciente
         $paciente = Paciente::findOrFail($id);
-
+        $cuidador = User::findOrFail($paciente->cuidador_id);
         //Devolvemos al paciente a la vista de mostrar paciente
-        return view("pacientes.show", compact("paciente"));
+        return view("pacientes.show", compact("paciente","cuidador"));
 
     }
 

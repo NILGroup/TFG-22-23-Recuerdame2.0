@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,6 +69,7 @@ Route::get('/sesiones/editar/{id}', 'App\Http\Controllers\SesionesController@sho
 Route::get('/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
 Route::post('/updateAndRecuerdoNuevo','App\Http\Controllers\SesionesController@updateAndRecuerdoNuevo');
 Route::post('/updateAndSeleccionarRecuerdos','App\Http\Controllers\SesionesController@updateAndSeleccionarRecuerdos');
+Route::post('/registroCuidador','App\Http\Controllers\CuidadoresController@registroCuidador');
 
 
 //RUTAS CUSTOMIZADAS SESION

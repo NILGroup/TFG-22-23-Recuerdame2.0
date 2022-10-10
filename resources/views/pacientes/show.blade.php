@@ -78,6 +78,17 @@
                         </div>
                     </div>
                 </div>
+
+                
+                <div class="row form-group justify-content-between">
+                    <div class="row col-sm-12 col-md-6 col-lg-5">
+                        <label for="cuidador" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Cuidador</label>
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <input type="text" disabled class="form-control form-control-sm" id="cuidador" value="{{$cuidador->nombre}} {{$cuidador->apellidos}}">
+                        </div>
+                    </div>
+                </div>
+                
             </div>
             <div class="col-12">
                 <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
