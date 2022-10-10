@@ -10,7 +10,7 @@
             <div class="row mb-2">
             <div class="col-12 justify-content-end d-flex">
            
-            <!--<a href="nuevoCuidador.php">--><button type="button" style="background: transparent; border: 2px solid #0099CC; border-radius: 6px;" id="mybutton" class="btn-registro">Registro cuidador</button></a>
+            <a href="{{route('cuidadores.create')}}"><button type="button" style="background: transparent; border: 2px solid #0099CC; border-radius: 6px;" id="mybutton" class="btn-registro">Registro cuidador</button></a>
             <a href="{{route('pacientes.create')}}"><button type="button" style="background: transparent; border: 2px solid #0099CC; border-radius: 6px; border-color:green;" class="btn-newpaciente">Nuevo paciente</i></button></a>
             </div>
         </div>
