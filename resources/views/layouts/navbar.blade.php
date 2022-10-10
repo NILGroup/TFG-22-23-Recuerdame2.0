@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse justify-content-left" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link letra-primary-color menu" aria-current="page" href="listadoSesiones.php">Sesiones</a>
+                    <a class="nav-link letra-primary-color menu" aria-current="page" href="/listadoSesiones.php">Sesiones</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Evaluaciones</a>
@@ -33,7 +33,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="historiaVida.php">Ver Historia de Vida</a></li>
                         <li><a class="dropdown-item" href="/recuerdos/{{Session::get('paciente')['id']}}">Ver recuerdos</a></li>
-                        <li><a class="dropdown-item" href="listadoPersonasRelacionadas.php">Personas relacionadas</a></li>
+                        <li><a class="dropdown-item" href="/personarelacionada/{{Session::get('paciente')['id']}}">Personas relacionadas</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -41,7 +41,16 @@
                 </li>
             </ul>
         </div>
+        <div class="row align-items-center pe-4">
+            <div class="col-12">
+                @if( Session::get('paciente')['genero'] == 'H')
+                <img src="/img/avatar_hombre.png" alt="Avatar" class="avatar-mini">
+                @elseif( Session::get('paciente')['genero'] == 'M')
+                <img src="/img/avatar_mujer.png" alt="Avatar" class="avatar-mini">
+                @endif
 
+            </div>
+        </div>
         <div class="row align-items-center pe-4">
             <div class="col-12">
                 {{ Session::get('paciente')['nombre'] }}
