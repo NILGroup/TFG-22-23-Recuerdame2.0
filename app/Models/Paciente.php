@@ -40,4 +40,8 @@ class Paciente extends Model
     public function personasrelacionadas(){
         return $this->hasMany(Personarelacionada::class);
     }
+
+    public function usuarios(){
+        return $this->belongsToMany(User::class);
+    }
 }

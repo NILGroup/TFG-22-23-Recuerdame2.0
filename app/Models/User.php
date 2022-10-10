@@ -57,4 +57,8 @@ class User extends Authenticatable
     public function getRol(){
         return $this->rol;
     }
+
+    public function pacientes(){
+        return $this->belongsToMany(Paciente::class);
+    }
 }
