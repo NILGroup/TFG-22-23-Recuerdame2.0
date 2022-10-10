@@ -41,9 +41,6 @@ class RecuerdosController extends Controller
      */
     public function create()
     {
-<<<<<<< HEAD
-        return view("recuerdos.create");
-=======
 
         $estados = Estado::all();
         $etiquetas = Etiqueta::all();
@@ -52,7 +49,6 @@ class RecuerdosController extends Controller
         $categorias = Categoria::all();
         return view("recuerdos.create", compact("estados","etiquetas","etapas","emociones","categorias"));
 
->>>>>>> f5e6de2078bba6965cc3f24fbeeff31456f12856
     }
 
     /**

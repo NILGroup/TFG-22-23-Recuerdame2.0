@@ -24,7 +24,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Evaluaciones</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="listadoInformessesiones.php">Informes de las sesiones</a></li>
+                        <li><a class="dropdown-item" href="listadoInformesSesion.php">Informes de las sesiones</a></li>
                         <li><a class="dropdown-item" href="listadoInformesSeguimiento.php">Informes de seguimiento</a></li>
                     </ul>
                 </li>
@@ -61,7 +61,6 @@
                 $hoy = new DateTime();
                 $edad = $hoy->diff($fecha_nacimiento);
                 echo $edad->y ?>
-
             </div>
         </div>
     </div>
