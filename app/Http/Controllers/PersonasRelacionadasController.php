@@ -81,7 +81,7 @@ class PersonasRelacionadasController extends Controller
     public function show(int $id)
     {
         $persona = Personarelacionada::findOrFail($id);
-        return view("personarelacionada.show", compact($persona));
+        return view("personasrelacionadas.show", compact("persona"));
     }
 
 

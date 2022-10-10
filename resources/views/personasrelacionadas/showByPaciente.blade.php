@@ -39,7 +39,7 @@
 
 
                         <td class="tableActions">
-                            <a href=""><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                            <a href="{{route('personasrelacionadas.show', $persona->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                             <a href=""><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
                             <a href=""><i class="fa-solid fa-trash-can text-danger tableIcon"></i></a>
 
