@@ -64,21 +64,15 @@ Route::resources([
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
 Route::get('/paciente/sesiones/{id}', 'App\Http\Controllers\SesionesController@showByPaciente');
 Route::get('/sesiones/editar/{id}', 'App\Http\Controllers\SesionesController@showEditable');
+Route::get('/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
 Route::post('/updateAndRecuerdoNuevo','App\Http\Controllers\SesionesController@updateAndRecuerdoNuevo');
 Route::post('/updateAndSeleccionarRecuerdos','App\Http\Controllers\SesionesController@updateAndSeleccionarRecuerdos');
+
 
 //RUTAS CUSTOMIZADAS SESION
 Route::get('/recuerdos/paciente/{id}', 'App\Http\Controllers\RecuerdosController@showByPaciente');
 
 Route::get('/recuerdos/{id}', 'App\Http\Controllers\RecuerdosController@showByPaciente');
-
-
-
-
-
-
-
-
 
 
 Route::get('prueba/', function () {
