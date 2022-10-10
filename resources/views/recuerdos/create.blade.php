@@ -113,12 +113,48 @@
                     </div>
                 </div>
 
-          <!-- A partir de la linea 199 del codigo de R1.0       -->
+                <div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellidos</th>
+                                <th scope="col">Tipo de relación/parentesco</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Lista de las personas relacionadas. Actualizarse con JS-->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pt-4 pb-2">
+                    <h5 class="text-muted">Material</h5>
+                    <hr class="lineaTitulo">
+                </div>
+
+                <div class="row">
+                    <div class="col-12 justify-content-end d-flex p-2">
+                    </div>
+                </div>
+
+                <div class="dropzone dropzone-previews dropzone-custom" id="mydropzone">
+                    <div class="dz-message text-muted" data-dz-message>
+                        <span>Click aquí o arrastrar y soltar</span>
+                    </div>
+                </div>
+
+                <div id="showMultimedia" class="row pb-2">
+                    <!-- Mostrar las multimedias con JS -->
+                </div>
+
         <div class="col-12">
             <button type="submit" value="Guardar" class="btn btn-outline-primary btn-sm">Guardar</button>
             <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
         </div>
     </form>
 </div>
-
+<script src="public/dropzone/dropzone.min.js"></script>
 @endsection

@@ -11,7 +11,7 @@ class Tiporelacion extends Model
 
     protected $fillable = ["nombre"];
 
-    public function personas_relacionadas(){
+    public function personasrelacionadas(){
         return $this->hasMany(Personarelacionada::class);
     }
 }

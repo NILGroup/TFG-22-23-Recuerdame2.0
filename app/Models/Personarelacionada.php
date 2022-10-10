@@ -19,7 +19,7 @@ class Personarelacionada extends Model
         "paciente_id"
     ];
 
-    public function tipo_relacion(){
+    public function tiporelacion(){
         return $this->belongsTo(Tiporelacion::class);
     }
 

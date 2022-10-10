@@ -112,7 +112,7 @@
                 <th scope="row"><?php echo $i ?></th>
                 <td><a href="VerDatosPersonaRelacionada">{{$persona->nombre}}</a></td>
                 <td>{{$persona->apellidos}}</td>
-                <td>{{$persona->tiporelacion_id}}</td>
+                <td>{{$persona->tiporelacion->nombre}}</td>
                 <td class="tableActions">
                     <a href="VerDatosPersonaRelacionada"></i></a>
                 </td>
@@ -145,4 +145,6 @@
     <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
 </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
 @endsection
