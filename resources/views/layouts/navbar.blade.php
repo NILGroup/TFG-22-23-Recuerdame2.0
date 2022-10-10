@@ -33,7 +33,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="historiaVida.php">Ver Historia de Vida</a></li>
                         <li><a class="dropdown-item" href="/recuerdos/{{Session::get('paciente')['id']}}">Ver recuerdos</a></li>
-                        <li><a class="dropdown-item" href="/personarelacionada/{{Session::get('paciente')['id']}}">Personas relacionadas</a></li>
+                        <li><a class="dropdown-item" href="/paciente/{{Session::get('paciente')['id']}}/personas">Personas relacionadas</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

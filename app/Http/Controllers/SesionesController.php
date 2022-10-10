@@ -65,7 +65,7 @@ class SesionesController extends Controller
              'respuesta' => $request->respuesta]
         );
 
-        $sesion->save();
+        
         return $sesion->id;
     }
 
@@ -86,7 +86,7 @@ class SesionesController extends Controller
              'paciente_id' => $idPaciente]
         );
 
-        $recuerdo->save();
+        
         return $recuerdo->id;
     }
 

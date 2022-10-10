@@ -81,7 +81,7 @@ class RecuerdosController extends Controller
              'puntuacion' => $request->puntuacion,
              'paciente_id' => $request->paciente_id]
         );
-        $recuerdo->save();
+  
         return $recuerdo->id;
     }
 

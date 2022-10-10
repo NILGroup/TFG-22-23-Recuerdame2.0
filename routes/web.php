@@ -77,6 +77,8 @@ Route::get('/recuerdos/paciente/{id}', 'App\Http\Controllers\RecuerdosController
 
 Route::get('/recuerdos/{id}', 'App\Http\Controllers\RecuerdosController@showByPaciente');
 
+Route::get('/paciente/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
+
 
 Route::get('prueba/', function () {
    

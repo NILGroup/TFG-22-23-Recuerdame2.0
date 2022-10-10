@@ -20,16 +20,15 @@ class PersonasRelacionadasController extends Controller
 
     /**
      * Obtiene al paciente y la lista de sus personas relacionadas. Redirecciona a lista personasrelacionadas
-     * de un paciente pasandole el propio paciente y la lista
+     * de un paciente pasandole la lista
      */
 
-    public function index(int $idPaciente){
 
-        $paciente = Paciente::find($idPaciente);
-        $personas = $paciente->personas_relacionadas;
+    public function showByPaciente(int $idPaciente){
 
-        return view("personasrelacionadas.index", compact("paciente", "personas"));
-
+        $personas = Paciente::findOrFail($idPaciente)->personasrelacionadas;
+     
+        return view("personasrelacionadas.showByPaciente", compact("personas"));
     }
 
 
