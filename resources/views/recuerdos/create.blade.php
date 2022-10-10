@@ -6,7 +6,7 @@
         <h5 class="text-muted">Crear recuerdo</h5>
         <hr class="lineaTitulo">
     </div>
-    <form method="post" action="/recuerdo">
+    <form method="post" action="/recuerdo" class="dropzone">
 
         <div class="row form-group justify-content-between">
             <div class="row col-sm-12 col-md-6 col-lg-5">
@@ -33,7 +33,7 @@
             <div class="row col-sm-6 col-md-6 col-lg-6">
                 <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha<span class="asterisco">*</span></label>
                 <div class="col-sm-9 col-md-6 col-lg-4">
-                    <input type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="fecha">
+                    <input type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="{{Carbon\Carbon::now()->format('Y-m-d')}}">
                 </div>
             </div>
             <div class="row col-sm-6 col-md-6 col-lg-6">
@@ -140,7 +140,7 @@
                     </div>
                 </div>
 
-                <div class="dropzone dropzone-previews dropzone-custom" id="mydropzone">
+                <div class="dropzone dropzone-previews dropzone-custom" id="my-awesome-dropzone">
                     <div class="dz-message text-muted" data-dz-message>
                         <span>Click aquí o arrastrar y soltar</span>
                     </div>
@@ -156,5 +156,7 @@
         </div>
     </form>
 </div>
-<script src="public/dropzone/dropzone.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 @endsection

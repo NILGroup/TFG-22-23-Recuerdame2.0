@@ -11,6 +11,7 @@ use App\Models\Etiqueta;
 use App\Models\Paciente;
 use App\Models\Emocion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RecuerdosController extends Controller
 {
@@ -59,6 +60,14 @@ class RecuerdosController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'file' => 'image|max:2048'
+        ]);
+
+        $imagenes = $request->file('file')->store('public/img');
+
+        $url = Storage::url($imagenes);
+
         $recuerdo = Recuerdo::updateOrCreate(
             ['id' => $request->id],
             ['fecha' => $request->fecha,
