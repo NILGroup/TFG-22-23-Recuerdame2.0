@@ -17,6 +17,7 @@ class PacientesController extends Controller
     {
         $this->middleware(['auth', 'role']);
         $this->middleware('isTerapeuta')->except('show');
+        $this->middleware('esCuidadorDe')->only('show');
     }
     
     /**
