@@ -3,6 +3,7 @@
 use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\RecuerdosController;
 use App\Http\Controllers\SesionesController;
+use App\Http\Controllers\MultimediasController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Paciente;
 use App\Models\Actividad;
@@ -55,7 +56,7 @@ Route::resources([
     'recuerdo' => RecuerdosController::class,
     'sesiones' => SesionesController::class,
     'pacientes' => PacientesController::class,
-    'multimedias' => MultimediaControntroller::class
+    'multimedias' => MultimediasController::class
 ]);
 
 //RUTAS CUSTOMIZADAS PACIENTE

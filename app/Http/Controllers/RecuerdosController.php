@@ -84,13 +84,19 @@ class RecuerdosController extends Controller
      */
     public function show($idRecuerdo)
     {
-        return Recuerdo::find($idRecuerdo);
+        $recuerdo = Recuerdo::find($idRecuerdo);
+        $estado = Estado::find($recuerdo->estado_id);
+        $etiqueta = Etiqueta::find($recuerdo->etiqueta_id);
+        $etapa = Etapa::find($recuerdo->etapa_id);
+        $emocion = Emocion::find($recuerdo->emocion_id);
+        $categoria = Categoria::find($recuerdo->categoria_id);
+        return view("recuerdos.show", compact("recuerdo","estado","etiqueta","etapa","emocion","categoria"));
     }
 
     public function showByPaciente($idPaciente)
     {
         $paciente =Paciente::find($idPaciente);
-        if(is_null($paciente)) return "ID de paciente no encontrada";
+        if(is_null($paciente)) return "ID de paciente no encontrada"; //ESTUDIAR SI SOBRA
 
         $recuerdos = $paciente->recuerdos;
         foreach ($recuerdos as $r) {

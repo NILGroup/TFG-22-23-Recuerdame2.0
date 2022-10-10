@@ -7,7 +7,7 @@ use App\Models\Sesion;
 use App\Models\Recuerdo;
 use Illuminate\Http\Request;
 
-class MultimediaController extends Controller
+class MultimediasController extends Controller
 {
     /**
      * Create a new controller instance.

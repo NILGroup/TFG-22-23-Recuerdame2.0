@@ -22,7 +22,7 @@
                     <select class="form-select form-select-sm" id="idEstado" name="idEstado">
                         <option></option>
                         @foreach ($estados as $estado)
-                        <option value="$estado->id">{{$estado->nombre}}</option>
+                        <option value="{{$estado->id}}">{{$estado->nombre}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -42,7 +42,7 @@
                     <select class="form-select form-select-sm" id="idEtiqueta" name="idEtiqueta">
                         <option></option>
                         @foreach ($etiquetas as $etiqueta)
-                        <option value="$etiqueta->id">{{$etiqueta->nombre}}</option>
+                        <option value="{{$etiqueta->id}}">{{$etiqueta->nombre}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -70,7 +70,7 @@
                 <div class="col-sm-3 col-md-3 col-lg-2">
                     <select class="form-select form-select-sm" id="idEtapa" name="idEtapa">
                         @foreach ($etapas as $etapa)
-                        <option value="$etapa->id">{{$etapa->nombre}}</option>
+                        <option value="{{$etapa->id}}">{{$etapa->nombre}}</option>
                         @endforeach
 
                     </select>
@@ -81,7 +81,7 @@
                     <select class="form-select form-select-sm" id="idEmocion" name="idEmocion">
                         <option></option>
                         @foreach ($emociones as $emocion)
-                        <option value="$emocion->id">{{$emocion->nombre}}</option>
+                        <option value="{{$emocion->id}}">{{$emocion->nombre}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -91,7 +91,7 @@
                     <select class="form-select form-select-sm" id="idCategoria" name="idCategoria">
                         <option></option>
                         @foreach ($categorias as $categoria)
-                        <option value="$categoria->id">{{$categoria->nombre}}</option>
+                        <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                         @endforeach
                     </select>
                 </div>

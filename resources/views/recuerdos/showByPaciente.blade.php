@@ -47,7 +47,7 @@
                 <td>{{$recuerdo->estado_id}}</td>
                 <td>{{$recuerdo->etiqueta_id}}</td>
                 <td class="tableActions">
-                                <a href=""><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                                <a href="/recuerdo/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                                 <?php if (Auth::user()->rol_id == 1) { ?>
                                     <a href=""><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
                                     <a href=""><i class="fa-solid fa-trash-can text-danger tableIcon"></i></a>
