@@ -4,13 +4,12 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Paciente;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Paciente;
 
-use function PHPUnit\Framework\isNull;
 
-class RolMiddleware
+class isTerapeuta
 {
     /**
      * Handle an incoming request.
@@ -21,15 +20,13 @@ class RolMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        //Asignamos a un cuidador su paciente relacionado si no lo tenía ya
         $user = Auth::user();
-        $sesion = $request->session();
-        if($user->rol_id == 2 && !$request->session()->has('paciente')){
+        if($user->rol_id != 1){
             $paciente = Paciente::where('cuidador_id',$user->id)->get();
-            $request->session()->put('paciente', $paciente->toArray()[0]);
             $id = $paciente[0]->id;
             return redirect()->route('pacientes.show', ['paciente'=>$id]);
         }
-        return $next($request);
+        else
+            return $next($request);
     }
 }

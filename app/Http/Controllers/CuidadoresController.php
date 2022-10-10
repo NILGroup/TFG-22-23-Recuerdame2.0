@@ -8,7 +8,15 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 class CuidadoresController extends Controller
 {
-    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'role', 'isTerapeuta']);
+    }
     public function create(){
         $pacientes = Paciente::whereNull('cuidador_id')->get();
         return view('cuidadores.create', compact('pacientes'));

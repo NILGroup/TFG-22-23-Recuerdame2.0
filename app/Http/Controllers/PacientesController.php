@@ -16,6 +16,7 @@ class PacientesController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role']);
+        $this->middleware('isTerapeuta')->except('show');
     }
     
     /**
