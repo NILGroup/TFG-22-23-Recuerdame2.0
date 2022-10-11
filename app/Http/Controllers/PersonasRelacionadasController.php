@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Personarelacionada;
 use App\Models\Paciente;
+use App\Models\Tiporelacion;
 use Illuminate\Http\Request;
 
 class PersonasRelacionadasController extends Controller
@@ -26,9 +27,10 @@ class PersonasRelacionadasController extends Controller
 
     public function showByPaciente(int $idPaciente){
 
-        $personas = Paciente::findOrFail($idPaciente)->personasrelacionadas;
+        $paciente = Paciente::findOrFail($idPaciente);
+        $personas = $paciente->personasrelacionadas;
      
-        return view("personasrelacionadas.showByPaciente", compact("personas"));
+        return view("personasrelacionadas.showByPaciente", compact("paciente", "personas"));
     }
 
 
@@ -36,9 +38,10 @@ class PersonasRelacionadasController extends Controller
      * Redirecciona a la vista de crear personarelacionada pasando al paciente concreto al que queremos añadirla
      */
 
-    public function create(Paciente $paciente)
+    public function createByPaciente(int $idPaciente)
     {
-        return view("personasrelacionadas.create", compact("paciente"));
+        $tipos = Tiporelacion::all();
+        return view("personasrelacionadas.create", compact("idPaciente", "tipos"));
     }
 
     /**
@@ -48,6 +51,7 @@ class PersonasRelacionadasController extends Controller
     public function store(Request $request)
     {
 
+        /*
         $validate = $request->validate([
 
             "nombre" => "required",
@@ -58,7 +62,7 @@ class PersonasRelacionadasController extends Controller
             "tiporelacion_id"  => "required",
             "paciente_id" => "required"
 
-        ]);
+        ]);*/
 
         Personarelacionada::create([
 
@@ -71,6 +75,8 @@ class PersonasRelacionadasController extends Controller
             "paciente_id" => $request->paciente_id
 
         ]);
+      
+        return redirect("/paciente/$request->paciente_id/personas");
 
     }
 
@@ -92,7 +98,7 @@ class PersonasRelacionadasController extends Controller
     public function edit(int $id)
     {
         $persona = Personarelacionada::findOrFail($id);
-        return view("personarelacionada.edit", compact("persona"));
+        return view("personasrelacionadas.edit", compact("persona"));
     }
 
     /**
@@ -105,7 +111,7 @@ class PersonasRelacionadasController extends Controller
         $persona = Personarelacionada::findOrFail($id);
         $persona->update($request->all());
 
-        return redirect("/personarelacionada");
+        return redirect("/paciente/$id/personas");
 
 
     }
@@ -117,8 +123,11 @@ class PersonasRelacionadasController extends Controller
     public function destroy(int $id)
     {
         
-        Personarelacionada::find($id)->delete();
-        return redirect("/personarelacionada");
+        $persona = Personarelacionada::findOrFail($id);
+        $paciente = $persona->paciente;
+        $persona->delete();
+
+        return redirect("/paciente/$paciente->id/personas");
 
     }
 
