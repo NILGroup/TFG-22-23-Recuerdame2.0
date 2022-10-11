@@ -50,7 +50,7 @@
                         <td class="tableActions">
                             <div class="d-inline">
                             
-                                <a href="{{route('pacientes.show',$paciente->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                                <a href="/pacientes/{{$paciente->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                                 <a href="{{route('pacientes.edit',$paciente->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
                                 <form method="post" action="/pacientes/{{$paciente->id}}" style="display:inline!important;">
                                     {{csrf_field()}}

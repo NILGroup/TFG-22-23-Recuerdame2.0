@@ -6,6 +6,8 @@ use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\User;
 
+use function PHPUnit\Framework\isNull;
+
 class PacientesController extends Controller
 {
     /**
@@ -89,12 +91,11 @@ class PacientesController extends Controller
      * Obtiene el paciente especificado y lo devuelve a la vista de mostrar paciente
      */
 
-    public function show(int $id)
+    public function show($id)
     {
-        
         //Obtenemos al paciente
         $paciente = Paciente::findOrFail($id);
-        $cuidador = User::findOrFail($paciente->cuidador_id);
+        $cuidador = User::find($paciente->cuidador_id);
         //Devolvemos al paciente a la vista de mostrar paciente
         return view("pacientes.show", compact("paciente","cuidador"));
 

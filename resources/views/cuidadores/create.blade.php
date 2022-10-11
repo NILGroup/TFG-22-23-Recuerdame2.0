@@ -10,15 +10,16 @@
         <form method="POST" action="/registroCuidador">
         @csrf
             <div class="row form-group justify-content-between">
-                <div class="row col-sm-12 col-md-6 col-lg-5">
-                    <label for="nombre" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Nombre<span class="asterisco">*</span></label>
+            <div class="row col-sm-12 col-md-6 col-lg-5">
+                    <label for="nick" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Nombre<span class="asterisco">*</span></label>
                     <div class="col-sm-12 col-md-12 col-lg-6">
-                        <input type="text" class="form-control form-control-sm" id="nombre" class="form-control @error('nombre') is-invalid @enderror" placeholder="Nombre" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
+                        <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" placeholder="Nombre" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
+
                         @error('nombre')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror               
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
 
