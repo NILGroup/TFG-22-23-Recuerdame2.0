@@ -17,18 +17,18 @@ return new class extends Migration
             $table->id();
             $table->date('fecha');
             $table->string('nombre');
-            $table->string('descripcion');
-            $table->string('localizacion');
+            $table->string('descripcion')->nullable();
+            $table->string('localizacion')->nullable();
             //id_etapa
             $table->unsignedBigInteger('etapa_id');
             //id_categoria
-            $table->unsignedBigInteger('categoria_id');
+            $table->unsignedBigInteger('categoria_id')->nullable();
             //id_emocion
-            $table->unsignedBigInteger('emocion_id');
+            $table->unsignedBigInteger('emocion_id')->nullable();
             //id_estado
-            $table->unsignedBigInteger('estado_id');
+            $table->unsignedBigInteger('estado_id')->nullable();
             //id_etiqueta
-            $table->unsignedBigInteger('etiqueta_id');
+            $table->unsignedBigInteger('etiqueta_id')->nullable();
 
             $table->integer('puntuacion');
 

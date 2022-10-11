@@ -9,9 +9,12 @@ use App\Models\Categoria;
 use App\Models\Estado;
 use App\Models\Etiqueta;
 use App\Models\Paciente;
+use App\Models\Multimedia;
 use App\Models\Emocion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+
+use function PHPUnit\Framework\isNull;
 
 class RecuerdosController extends Controller
 {
@@ -64,9 +67,16 @@ class RecuerdosController extends Controller
             'file' => 'image|max:2048'
         ]);
 
+        if(!is_null($request->file)){
         $imagenes = $request->file('file')->store('public/img');
 
         $url = Storage::url($imagenes);
+
+        Multimedia::create([
+            'nombre' => $url,
+            'fichero' => $url
+        ]);
+        }
 
         $recuerdo = Recuerdo::updateOrCreate(
             ['id' => $request->id],
@@ -82,7 +92,7 @@ class RecuerdosController extends Controller
              'paciente_id' => $request->paciente_id]
         );
   
-        return $recuerdo->id;
+        return self::showByPaciente($recuerdo->paciente_id);
     }
 
     /**
@@ -110,9 +120,13 @@ class RecuerdosController extends Controller
         $recuerdos = $paciente->recuerdos;
         foreach ($recuerdos as $r) {
                 $r->etapa_id = Etapa::find($r->etapa_id)->nombre;
-                $r->categoria_id = Categoria::find($r->categoria_id)->nombre;
-                $r->estado_id = Estado::find($r->estado_id)->nombre;
-                $r->etiqueta_id = Etiqueta::find($r->etiqueta_id)->nombre;
+                
+                $categoria = Categoria::find($r->categoria_id);
+                $estado = Estado::find($r->estado_id);
+                $etiqueta =  Etiqueta::find($r->etiqueta_id);
+                $r->categoria_id = isNull($categoria)?"Sin categoría":$categoria->nombre;
+                $r->estado_id = isNull($estado)?"Sin estado":$estado->nombre;
+                $r->etiqueta_id = isNull($etiqueta)?"Sin etiqueta":$etiqueta->nombre;
             }
         //Devolvemos los recuerdos
         return view("recuerdos.showByPaciente", compact("recuerdos"));

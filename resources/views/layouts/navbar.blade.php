@@ -63,13 +63,7 @@
             </div>
         </div>
         <div class="row align-items-center pe-4">
-            <div class="col-12">
-                <?php
-                // Aunque da error funciona, se sugiera cambiar el modelo de paciente para ahorrar el calculo
-                $fecha_nacimiento = new DateTime(Session::get('paciente')['fecha_nacimiento']);
-                $hoy = new DateTime();
-                $edad = $hoy->diff($fecha_nacimiento);
-                echo $edad->y ?>
+            <div class="col-12">{{Carbon\Carbon::parse(Session::get('paciente')['fecha_nacimiento'])->age}}
             </div>
         </div>
     </div>
@@ -121,14 +115,7 @@
             </div>
         </div>
         <div class="row align-items-center pe-4">
-            <div class="col-12">
-                <?php
-                // Aunque da error funciona, se sugiera cambiar el modelo de paciente para ahorrar el calculo
-                $fecha_nacimiento = new DateTime(Session::get('paciente')['fecha_nacimiento']);
-                $hoy = new DateTime();
-                $edad = $hoy->diff($fecha_nacimiento);
-                echo $edad->y ?>
-
+            <div class="col-12">{{Carbon\Carbon::parse(Session::get('paciente')['fecha_nacimiento'])->age}}
             </div>
         </div>
     </div>
@@ -140,3 +127,4 @@
 
 
 @endguest
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
