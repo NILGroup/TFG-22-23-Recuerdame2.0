@@ -64,18 +64,19 @@ Route::resources([
     'calendario' => CalendarioController::class
 ]);
 
-//RUTAS CUSTOMIZADAS PACIENTE
-Route::get('/sesiones/{id}/editar', 'App\Http\Controllers\SesionesController@showEditable');
-
 //RUTAS CUSTOMIZADAS CUIDADOR
 Route::get('/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
 Route::post('/registroCuidador','App\Http\Controllers\CuidadoresController@registroCuidador');
 
 //RUTAS CUSTOMIZADAS SESION
+Route::get('/pacientes/{id}/sesiones/{idS}/editar', 'App\Http\Controllers\SesionesController@showEditable');
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
 Route::get('/pacientes/{id}/sesiones', 'App\Http\Controllers\SesionesController@showByPaciente');
 Route::post('/updateAndRecuerdoNuevo','App\Http\Controllers\SesionesController@updateAndRecuerdoNuevo');
 Route::post('/updateAndSeleccionarRecuerdos','App\Http\Controllers\SesionesController@updateAndSeleccionarRecuerdos');
+Route::get('/pacientes/{id}/sesiones/{idS}/generarInforme', 'App\Http\Controllers\SesionesController@generarInforme');
+Route::get('/pacientes/{id}/sesiones/{idS}/informe', 'App\Http\Controllers\SesionesController@verInforme');
+Route::post('/cerrarInforme', 'App\Http\Controllers\SesionesController@cerrarInforme');
 
 
 //RUTAS CUSTOMIZADAS RECUERDO
@@ -220,26 +221,30 @@ Route::get('prueba/', function () {
     ]);
 
     Sesion::create(["fecha" => Carbon::now(),
-    "etapa_id" => 1,
-    "objetivo" => "objetivo 1",
-    "descripcion" => "descripcion del objetivo",
-    "barreras"=> "muchas",
-    "facilitadores" => "ninguno",
-    "fecha_finalizada" => Carbon::now(),
-    "paciente_id" => 1,
-    "user_id" => 1,
-    "respuesta"=> "ninguna respuesta"]);
+        "etapa_id" => 1,
+        "objetivo" => "objetivo 1",
+        "descripcion" => "descripcion del objetivo",
+        "barreras"=> "muchas",
+        "facilitadores" => "ninguno",
+        "fecha_finalizada" => Carbon::now(),
+        "paciente_id" => 1,
+        "user_id" => 1,
+        "respuesta" => "ninguna respuesta",
+        "observaciones" => "ninguna observacion"
+    ]);
 
     Sesion::create(["fecha" => Carbon::now(),
-    "etapa_id" => 2,
-    "objetivo" => "objetivo 2",
-    "descripcion" => "descripcion del objetivo numero 2",
-    "barreras"=> "muchas",
-    "facilitadores" => "ninguno",
-    "fecha_finalizada" => null,
-    "paciente_id" => 1,
-    "user_id" => 2,
-    "respuesta"=> "ninguna respuesta"]);
+        "etapa_id" => 2,
+        "objetivo" => "objetivo 2",
+        "descripcion" => "descripcion del objetivo numero 2",
+        "barreras"=> "muchas",
+        "facilitadores" => "ninguno",
+        "fecha_finalizada" => null,
+        "paciente_id" => 1,
+        "user_id" => 2,
+        "respuesta"=> null,
+        "observaciones" => null
+    ]);
 
     Categoria::create(["nombre" => "categoria 1"]);
     Categoria::create(["nombre" => "categoria 2"]);
