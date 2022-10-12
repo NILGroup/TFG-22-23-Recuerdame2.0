@@ -7,6 +7,7 @@ use App\Http\Controllers\SesionesController;
 use App\Http\Controllers\MultimediasController;
 use App\Http\Controllers\PersonasRelacionadasController;
 use App\Http\Controllers\InformesController;
+use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Paciente;
 use App\Models\Actividad;
@@ -92,10 +93,10 @@ Route::get('/pacientes/{id}/calendario', 'App\Http\Controllers\CalendarioControl
 Route::post('/eliminarActividad', 'App\Http\Controllers\CalendarioController@destroy');
 Route::post('/modificarActividad', 'App\Http\Controllers\CalendarioController@update');
 
-//RUTAS CUSTOMIZADAS informes
+//RUTAS CUSTOMIZADAS INFORMES
 Route::get('/pacientes/{id}/informes', 'App\Http\Controllers\InformesController@showByPaciente');
 Route::get('/pacientes/{id}/sesiones/{idS}/generarInforme', 'App\Http\Controllers\InformesController@generarInforme');
-Route::get('/pacientes/{id}/sesiones/{idS}/informe', 'App\Http\Controllers\InformesController@verInforme');
+Route::get('/pacientes/{id}/sesiones/{idS}/informe', 'App\Http\Controllers\PDFController@verInforme');
 Route::post('/cerrarInforme', 'App\Http\Controllers\InformesController@cerrarInforme');
 Route::post('/generarPDFInformeSesion', 'App\Http\Controllers\InformesController@generarPDFInformeSesion');
 

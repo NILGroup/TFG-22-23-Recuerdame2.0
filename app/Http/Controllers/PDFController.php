@@ -34,7 +34,21 @@ class PDFController extends Controller
         $paciente = $sesion->paciente;
         
         $usuario = $sesion->user;
+        
+        $this->obtenerPDF($paciente, $sesion, $usuario);
+    }
+
+    public function verInforme($idPaciente, $idSesion){
+        $sesion = Sesion::find($idSesion);
     
+        $paciente = $sesion->paciente;
+        
+        $usuario = $sesion->user;
+
+        $this->obtenerPDF($paciente, $sesion, $usuario);
+    }
+    public function obtenerPDF($paciente, $sesion, $usuario){
+
         $pdf = new PDF( 'P', 'mm', 'A4' );
         $pdf->AliasNbPages();
         $pdf->AddPage();
@@ -44,12 +58,6 @@ class PDFController extends Controller
     
         $pdf->Output();
     }
-
-    public function obtenerPDF($idPaciente, $idSesion){
-        $request = ['id'=> $idPaciente];
-        generarPDFInformeSesion($request);
-    }
-
 }
 
 function pdfBody($pdf, $paciente, $sesion, $usuario){

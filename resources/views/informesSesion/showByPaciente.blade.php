@@ -23,7 +23,7 @@
                 @foreach ($sesiones as $sesion)
                     <tr>
                         <th scope="row"><?php echo $i ?></th>
-                        <td><a href="/pacientes/{{$sesion->paciente_id}}/informe/{{$sesion->id}}">Informe de la sesión Nº {{$sesion->id}}</td>
+                        <td><a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe">Informe de la sesión Nº {{$sesion->id}}</td>
                         <td>{{$sesion->fecha_finalizada}}</td>
                         <td class="tableActions">
                             <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
