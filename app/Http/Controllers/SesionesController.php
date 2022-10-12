@@ -8,6 +8,7 @@ use App\Models\Multimedia;
 use App\Models\Paciente;
 use App\Models\Etapa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SesionesController extends Controller
@@ -40,7 +41,9 @@ class SesionesController extends Controller
      */
     public function create()
     {
-        //
+        $etapas = Etapa::all();
+        $user = Auth::user();
+        return view("sesiones.create", compact('etapas', 'user'));
     }
 
     /**
@@ -128,7 +131,7 @@ class SesionesController extends Controller
         $paciente = Paciente::find($idPaciente);
         session()->put('paciente', $paciente->toArray());
         $sesiones = $paciente->sesiones;
-        return view('sesiones.showByPaciente', compact('sesiones'));
+        return view('sesiones.showByPaciente', compact('paciente', 'sesiones'));
     }
 
     public function showMultimedia($idSesion)
@@ -169,8 +172,11 @@ class SesionesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        throw new \Exception("Destruir");
+        $sesion = Sesion::find($id);
+        $id = $sesion->paciente->id;
         Sesion::destroy($id);
+        return redirect("/pacientes/$id/sesiones");
     }
 
     public function destroyRecuerdo($idSesion, $idRecuerdo)
@@ -210,5 +216,24 @@ class SesionesController extends Controller
         return redirect("pacientes/{$sesion->paciente->id}/recuerdos");
     }
 
-    
+    public function generarInforme($idPaciente, $idSesion){
+        $sesion = Sesion::find($idSesion);
+        $paciente = $sesion->paciente;
+        return view('sesiones.generarInforme', compact('paciente', 'sesion'));
+    }
+
+    public function cerrarInforme(Request $request){
+        $sesion = Sesion::find($request->id);
+        $sesion->fecha = $request->fecha;
+        $sesion->fecha_finalizada = $request->fecha_finalizada;
+        $sesion->respuesta = $request->respuesta;
+        $sesion->observaciones = $request->observaciones;
+        $sesion->save();
+        return redirect("pacientes/{$sesion->paciente->id}/sesiones");
+    }
+    public function verInforme($idPaciente, $idSesion){
+        $sesion = Sesion::find($idSesion);
+        $paciente = $sesion->paciente;
+        return view('sesiones.verInforme', compact('paciente', 'sesion'));
+    }
 }

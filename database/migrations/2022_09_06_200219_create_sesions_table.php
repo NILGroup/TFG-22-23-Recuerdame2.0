@@ -28,7 +28,8 @@ return new class extends Migration
             $table->unsignedBigInteger('paciente_id');
             //id_usuario
             $table->unsignedBigInteger('user_id');
-            $table->string('respuesta');
+            $table->string('respuesta')->nullable();
+            $table->string('observaciones')->nullable();
             $table->timestamps();
 
 

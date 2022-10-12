@@ -19,7 +19,8 @@ class Sesion extends Model
         "fecha_finalizada",
         "paciente_id",
         "user_id",
-        "respuesta"
+        "respuesta",
+        "observaciones"
     ];
 
     public function etapa(){

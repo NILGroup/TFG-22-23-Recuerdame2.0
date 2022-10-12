@@ -3,7 +3,7 @@
 @section('content')
 
 
-<form action="/sesion/{{$sesion->id}}" method="POST">
+<form action="/crearSesion" method="POST">
     {{csrf_field()}}
     <div class="container-fluid">
         <div class="pt-4 pb-2">
@@ -12,52 +12,48 @@
         </div>
 
         <div class="row">
-            <input hidden id="idSesion" name="id" value="{{$sesion->id}}">
             <div class="row">
-                <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha</label>
+                <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha<span class="asterisco">*</span></label>
                 <div class="col-sm-9 col-md-6 col-lg-2">
-                    <input type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$sesion->fecha}}">
+                    <input type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="" required>
                 </div>
 
-                <label for="etapa" class="form-label col-form-label-sm col-sm-2 col-md-12col-lg-1">Etapa</label>
+                <label for="etapa" class="form-label col-form-label-sm col-sm-2 col-md-12col-lg-1">Etapa<span class="asterisco">*</span></label>
                 <div class="col-sm-3 col-md-3 col-lg-2">
                     <select class="form-select form-select-sm" name="etapa">
                         @foreach($etapas as $etapa)
-                            <option value="{{$etapa->id}}" 
-                                @if($sesion->etapa->id == $etapa->id) 
-                                    selected="selected" 
-                                @endif
-                            >{{$etapa->nombre}}</option>
+                            <option value="{{$etapa->id}}" >{{$etapa->nombre}}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <label for="terapeuta" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-1">Terapeuta:</label>
                 <div class="col-sm-3 col-md-3 col-lg-2">
-                    <label for="terapeuta" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-12">{{$sesion->user->nombre}} {{$sesion->user->apellidos}}</label>
+                    <label for="terapeuta" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-12">{{$user->nombre}} {{$user->apellidos}}</label>
+                    <input hidden id="terapeuta_id" name="terapeuta_id" value="{{$user->id}}">
                 </div>
             </div>
         </div>
 
         <div class="mb-3">
-            <label for="objetivo" class="form-label col-form-label-sm">Objetivo</label>
-            <textarea class="form-control form-control-sm" id="objetivo" name="objetivo" rows="3">{{$sesion->objetivo}}</textarea>
+            <label for="objetivo" class="form-label col-form-label-sm">Objetivo<span class="asterisco">*</span></label>
+            <textarea class="form-control form-control-sm" id="objetivo" name="objetivo" rows="3" required></textarea>
         </div>
 
         <div class="mb-3">
             <label for="descripcion" class="form-label col-form-label-sm">Descripción</label>
-            <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" rows="3">{{$sesion->descripcion}}</textarea>
+            <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" rows="3"></textarea>
         </div>
 
         <div>
             <div class="mb-3">
                 <label for="barreras" class="form-label col-form-label-sm">Barreras</label>
-                <textarea class="form-control form-control-sm" id="barreras" name="barreras" rows="3">{{$sesion->barreras}}</textarea>
+                <textarea class="form-control form-control-sm" id="barreras" name="barreras" rows="3"></textarea>
             </div>
 
             <div class="mb-3">
                 <label for="facilitadores" class="form-label col-form-label-sm">Facilitadores</label>
-                <textarea class="form-control form-control-sm" id="facilitadores" name="facilitadores" rows="3">{{$sesion->facilitadores}}</textarea>
+                <textarea class="form-control form-control-sm" id="facilitadores" name="facilitadores" rows="3"></textarea>
             </div>
         </div>
 
@@ -95,24 +91,7 @@
                     </thead>
 
                     <tbody>
-                        <?php $i=1; ?>
-                        @foreach ($sesion->recuerdos as $recuerdo)
-                            <tr>
-                                <th scope="row"><?php echo $i ?></th>
-                                <td>{{$recuerdo->nombre}}</td>
-                                <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
-                                <td>{{$recuerdo->etapa->nombre}}</td>
-                                <td>{{$recuerdo->categoria->nombre}}</td>
-                                <td>{{$recuerdo->estado->nombre}}</td>
-                                <td>{{$recuerdo->etiqueta->nombre}}</td>
-                                <td class="tableActions">
-                                    <a href="{{route('recuerdo.show',$recuerdo->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
-                                    <a href="{{route('recuerdo.edit',$recuerdo->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                                    <a href="{{route('recuerdo.destroy',$recuerdo->id)}}"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></a>
-                                </td>
-                            </tr>
-                        <?php $i++;?>
-                        @endforeach
+                        
                     </tbody>
                 </table>
             </div>
@@ -132,14 +111,7 @@
         </div>
 
         <div id="showMultimedia" class="row pb-2">
-            @foreach ($recuerdo->multimedias as $multimedia)
-                <div class="col-sm-4 p-2">
-                    <div class="img-wrap">
-                        <a href="{{route('multimedias.destroy',$multimedia->id)}}"><i class="fa-solid fa-circle-xmark text-danger fa-lg"></i></a>
-                        <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon"></a>
-                    </div>
-                </div>
-            @endforeach
+            
         </div>
 
         <div>
