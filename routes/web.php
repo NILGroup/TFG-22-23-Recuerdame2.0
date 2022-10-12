@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\RecuerdosController;
 use App\Http\Controllers\SesionesController;
@@ -59,7 +60,8 @@ Route::resources([
     'sesiones' => SesionesController::class,
     'pacientes' => PacientesController::class,
     'multimedias' => MultimediasController::class,
-    'personas' => PersonasRelacionadasController::class
+    'personas' => PersonasRelacionadasController::class,
+    'calendario' => CalendarioController::class
 ]);
 
 //RUTAS CUSTOMIZADAS PACIENTE
@@ -81,6 +83,8 @@ Route::get('/pacientes/{id}/recuerdos', 'App\Http\Controllers\RecuerdosControlle
 Route::get('/recuerdos/{id}', 'App\Http\Controllers\RecuerdosController@showByPaciente');
 Route::get('/pacientes/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
 Route::get('/pacientes/{id}/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@createByPaciente');
+
+Route::get('/paciente/{id}/calendario', 'App\Http\Controllers\CalendarioController@showByPaciente');
 
 
 Route::get('prueba/', function () {
