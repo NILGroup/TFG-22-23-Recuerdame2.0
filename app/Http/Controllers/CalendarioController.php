@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 
 class CalendarioController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'role']);
+        $this->middleware('esCuidadorDe')->only('showByPaciente');
+    }
+
     public function showByPaciente(int $idPaciente) {
         $actividades = Actividad::all();
         return view('calendario.showByPaciente', compact("idPaciente", "actividades"));
