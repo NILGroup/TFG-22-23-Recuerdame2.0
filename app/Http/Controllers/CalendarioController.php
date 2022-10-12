@@ -45,8 +45,32 @@ class CalendarioController extends Controller
         return redirect("/pacientes/$request->id/calendario");
     }
 
-    public function show(Actividad $actividad) {
-        /*$actividad = Actividad::all();
-        return response()->json($actividad);*/
+    public function update(Request $request)
+    {
+        
+        $actividad = Actividad::findOrFail($request->id);
+        $actividad->update($request->all());
+
+        return redirect("/pacientes/$request->id/calendario");
+
+
+    }
+
+    public function show() {
+       /* $paciente =Paciente::find($idPaciente);
+        throw new \Exception("{$paciente}");
+        $actividad = $paciente->actividads;*/
+        $actividad = Actividad::all();
+        return response()->json($actividad);
+    }
+
+    public function destroy(Request $request)
+    {
+        $actividad = Actividad::findOrFail($request->id);
+        $paciente = $actividad->paciente_id;
+        $actividad->delete();
+
+        return redirect("/pacientes/$paciente/calendario");
+
     }
 }
