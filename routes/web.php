@@ -78,15 +78,20 @@ Route::get('/pacientes/{id}/sesiones/{idS}/generarInforme', 'App\Http\Controller
 Route::get('/pacientes/{id}/sesiones/{idS}/informe', 'App\Http\Controllers\SesionesController@verInforme');
 Route::post('/cerrarInforme', 'App\Http\Controllers\SesionesController@cerrarInforme');
 
-
 //RUTAS CUSTOMIZADAS RECUERDO
 Route::get('/pacientes/{id}/recuerdos', 'App\Http\Controllers\RecuerdosController@showByPaciente');
 Route::get('/recuerdos/{id}', 'App\Http\Controllers\RecuerdosController@showByPaciente');
+
+//RUTAS CUSTOMIZADAS PERSONA RELACIONADA
 Route::get('/pacientes/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
 Route::get('/pacientes/{id}/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@createByPaciente');
 
 //RUTAS CUSTOMIZADAS CALENDARIO
 Route::get('/pacientes/{id}/calendario', 'App\Http\Controllers\CalendarioController@showByPaciente');
+
+//RUTAS CUSTOMIZADAS PDFs
+Route::post('/generarPDFInformeSesion', 'App\Http\Controllers\PDFController@generarPDFInformeSesion');
+
 
 
 Route::get('prueba/', function () {

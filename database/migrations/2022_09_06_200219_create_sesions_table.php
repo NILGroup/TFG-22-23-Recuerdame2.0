@@ -20,9 +20,9 @@ return new class extends Migration
             $table->unsignedBigInteger('etapa_id');
             
             $table->string('objetivo'); //varchar en laravel
-            $table->string('descripcion');
-            $table->string('barreras');
-            $table->string('facilitadores');
+            $table->string('descripcion')->nullable();
+            $table->string('barreras')->nullable();
+            $table->string('facilitadores')->nullable();
             $table->date('fecha_finalizada')->nullable();
             //id_paciente
             $table->unsignedBigInteger('paciente_id');

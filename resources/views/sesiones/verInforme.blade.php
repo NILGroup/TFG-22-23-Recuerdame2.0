@@ -8,7 +8,7 @@
         <hr class="lineaTitulo">
     </div>
 
-    <form action="/generarInforme.php" method="POST">
+    <form action="/generarPDFInformeSesion" method="POST">
     {{csrf_field()}}
         <div>
             <input type="hidden" id="id" name="id" value="{{$sesion->id}}">

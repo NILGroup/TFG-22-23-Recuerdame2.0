@@ -194,26 +194,39 @@ class SesionesController extends Controller
     //Agregar un nuevo recuerdo cuando editas una sesión
     //Guarda los cambios y te redirige a la vista de crear recuerdo
     public function updateAndRecuerdoNuevo(Request $request){
-        $sesion = Sesion::find($request->id);
-        $sesion->fecha = $request->fecha;
-        $sesion->etapa_id = $request->etapa;
-        $sesion->objetivo = $request->objetivo;
-        $sesion->descripcion = $request->descripcion;
-        $sesion->barreras = $request->barreras;
-        $sesion->facilitadores = $request->facilitadores;
-        $sesion->save();
-        return redirect("recuerdo/crear");
+        $sesion = Sesion::updateOrCreate(
+            ['id' => $request->id],
+            ['fecha' => $request->fecha,
+             'etapa_id' => $request->etapa_id,
+             'objetivo' => $request->objetivo,
+             'descripcion' => $request->descripcion,
+             'barreras' => $request->barreras,
+             'facilitadores' => $request->facilitadores,
+             'fecha_finalizada' => $request->fecha_finalizada,
+             'paciente_id' => $request->paciente_id,
+             'user_id' => $request->user_id,
+             'respuesta' => $request->respuesta,
+             'observaciones' => $request->observaciones
+            ]);
+        return redirect("/recuerdos/crearAndVolverEditar");
     }
+    
     public function updateAndSeleccionarRecuerdos(Request $request){
-        $sesion = Sesion::find($request->id);
-        $sesion->fecha = $request->fecha;
-        $sesion->etapa_id = $request->etapa;
-        $sesion->objetivo = $request->objetivo;
-        $sesion->descripcion = $request->descripcion;
-        $sesion->barreras = $request->barreras;
-        $sesion->facilitadores = $request->facilitadores;
-        $sesion->save();
-        return redirect("pacientes/{$sesion->paciente->id}/recuerdos");
+        $sesion = Sesion::updateOrCreate(
+            ['id' => $request->id],
+            ['fecha' => $request->fecha,
+             'etapa_id' => $request->etapa_id,
+             'objetivo' => $request->objetivo,
+             'descripcion' => $request->descripcion,
+             'barreras' => $request->barreras,
+             'facilitadores' => $request->facilitadores,
+             'fecha_finalizada' => $request->fecha_finalizada,
+             'paciente_id' => $request->paciente_id,
+             'user_id' => $request->user_id,
+             'respuesta' => $request->respuesta,
+             'observaciones' => $request->observaciones
+            ]);
+        return redirect("/recuerdos/agregarAndVolverEditar");
     }
 
     public function generarInforme($idPaciente, $idSesion){

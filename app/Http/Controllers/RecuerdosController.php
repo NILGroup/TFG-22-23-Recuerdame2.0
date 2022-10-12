@@ -191,4 +191,14 @@ class RecuerdosController extends Controller
                                                 ->get();
         return $memory->fecha;
     }
+
+    //Crear un nuevo recuerdo, asignarlo a la sesión y redireccionar a editar esa sesión. Se llama desde sesiones.updateAndRecuerdoNuevo
+    public function crearAndVolverEditar(){
+
+    }
+
+    //Seleccionar los recuerdos de esa sesión entre los existente y redireccionar a editar la sesión. Se llama desde sesiones.updateAndSeleccionarRecuerdos
+    public function agregarAndVolverEditar(){
+
+    }
 }

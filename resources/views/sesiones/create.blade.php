@@ -10,6 +10,8 @@
             <h5 class="text-muted">Datos de la sesión</h5>
             <hr class="lineaTitulo">
         </div>
+        <input hidden id="idPaciente" name="paciente_id" value="{{ Session::get('paciente')['id'] }}">
+        <input hidden id="idUser" name="user_id" value="{{ $user->id }}">
 
         <div class="row">
             <div class="row">
@@ -20,7 +22,8 @@
 
                 <label for="etapa" class="form-label col-form-label-sm col-sm-2 col-md-12col-lg-1">Etapa<span class="asterisco">*</span></label>
                 <div class="col-sm-3 col-md-3 col-lg-2">
-                    <select class="form-select form-select-sm" name="etapa">
+                    <select class="form-select form-select-sm" name="etapa_id" required>
+                        <option disabled selected value>Seleccione una etapa</option>
                         @foreach($etapas as $etapa)
                             <option value="{{$etapa->id}}" >{{$etapa->nombre}}</option>
                         @endforeach

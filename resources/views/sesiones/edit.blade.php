@@ -13,6 +13,7 @@
 
         <div class="row">
             <input hidden id="idSesion" name="id" value="{{$sesion->id}}">
+            <input hidden id="idPaciente" name="paciente_id" value="{{$sesion->paciente->id}}">
             <div class="row">
                 <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha</label>
                 <div class="col-sm-9 col-md-6 col-lg-2">
