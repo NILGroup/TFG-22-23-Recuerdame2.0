@@ -2,10 +2,10 @@
 
 namespace App;
 
-use App\pdf184\fpdf;
-    
-class PDF extends FPDF{
+use Codedge\Fpdf\Fpdf\Fpdf;
+use File;
 
+class PDF extends FPDF{
     private $numInforme;
 /*
     function __construct($id) {
@@ -20,7 +20,7 @@ class PDF extends FPDF{
     // Page header
     function Header()
     {
-        $this->Image('img/Marca_recuerdame.png',150,8,50);
+        $this->Image('../public/img/Marca_recuerdame.png',150,8,50);
         // Arial bold 15
         $this->SetFont('Arial','B',18);
         // Move to the right
@@ -42,7 +42,6 @@ class PDF extends FPDF{
         // Page number
         $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
     }
-
 }
 
 
