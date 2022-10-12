@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse justify-content-left" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link letra-primary-color menu" aria-current="page" href="/listadoSesiones.php">Sesiones</a>
+                    <a class="nav-link letra-primary-color menu" aria-current="page" href="/pacientes/{{Session::get('paciente')['id']}}/sesiones">Sesiones</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Evaluaciones</a>
@@ -33,7 +33,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="historiaVida.php">Ver Historia de Vida</a></li>
                         <li><a class="dropdown-item" href="/recuerdos/{{Session::get('paciente')['id']}}">Ver recuerdos</a></li>
-                        <li><a class="dropdown-item" href="/paciente/{{Session::get('paciente')['id']}}/personas">Personas relacionadas</a></li>
+                        <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/personas">Personas relacionadas</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -79,7 +79,7 @@
         <div class="collapse navbar-collapse justify-content-left" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link letra-primary-color menu" aria-current="page" href="pacientes/{{ Session::get('paciente')['id'] }}">Paciente</a>
+                    <a class="nav-link letra-primary-color menu" aria-current="page" href="/pacientes/{{ Session::get('paciente')['id'] }}">Paciente</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link letra-primary-color menu" href="calendario.php">Calendario</a>

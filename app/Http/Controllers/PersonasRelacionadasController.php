@@ -76,7 +76,7 @@ class PersonasRelacionadasController extends Controller
 
         ]);
       
-        return redirect("/paciente/$request->paciente_id/personas");
+        return redirect("/pacientes/$request->paciente_id/personas");
 
     }
 
@@ -111,7 +111,7 @@ class PersonasRelacionadasController extends Controller
         $persona = Personarelacionada::findOrFail($id);
         $persona->update($request->all());
 
-        return redirect("/paciente/$id/personas");
+        return redirect("/pacientes/$id/personas");
 
 
     }
@@ -127,7 +127,7 @@ class PersonasRelacionadasController extends Controller
         $paciente = $persona->paciente;
         $persona->delete();
 
-        return redirect("/paciente/$paciente->id/personas");
+        return redirect("/pacientes/$paciente->id/personas");
 
     }
 

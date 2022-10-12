@@ -207,7 +207,7 @@ class SesionesController extends Controller
         $sesion->barreras = $request->barreras;
         $sesion->facilitadores = $request->facilitadores;
         $sesion->save();
-        return redirect("/recuerdos/paciente/{$sesion->paciente->id}");
+        return redirect("pacientes/{$sesion->paciente->id}/recuerdos");
     }
 
     

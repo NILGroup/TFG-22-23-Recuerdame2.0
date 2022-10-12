@@ -63,23 +63,24 @@ Route::resources([
 ]);
 
 //RUTAS CUSTOMIZADAS PACIENTE
+Route::get('/sesiones/{id}/editar', 'App\Http\Controllers\SesionesController@showEditable');
+
+//RUTAS CUSTOMIZADAS CUIDADOR
+Route::get('/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
+Route::post('/registroCuidador','App\Http\Controllers\CuidadoresController@registroCuidador');
 
 //RUTAS CUSTOMIZADAS SESION
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
-Route::get('/paciente/sesiones/{id}', 'App\Http\Controllers\SesionesController@showByPaciente');
-Route::get('/sesiones/editar/{id}', 'App\Http\Controllers\SesionesController@showEditable');
-Route::get('/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
+Route::get('/pacientes/{id}/sesiones', 'App\Http\Controllers\SesionesController@showByPaciente');
 Route::post('/updateAndRecuerdoNuevo','App\Http\Controllers\SesionesController@updateAndRecuerdoNuevo');
 Route::post('/updateAndSeleccionarRecuerdos','App\Http\Controllers\SesionesController@updateAndSeleccionarRecuerdos');
-Route::post('/registroCuidador','App\Http\Controllers\CuidadoresController@registroCuidador');
 
 
-//RUTAS CUSTOMIZADAS SESION
-Route::get('/recuerdos/paciente/{id}', 'App\Http\Controllers\RecuerdosController@showByPaciente');
+//RUTAS CUSTOMIZADAS RECUERDO
+Route::get('/pacientes/{id}/recuerdos', 'App\Http\Controllers\RecuerdosController@showByPaciente');
 Route::get('/recuerdos/{id}', 'App\Http\Controllers\RecuerdosController@showByPaciente');
-
-Route::get('/paciente/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
-Route::get('/paciente/{id}/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@createByPaciente');
+Route::get('/pacientes/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
+Route::get('/pacientes/{id}/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@createByPaciente');
 
 
 Route::get('prueba/', function () {
