@@ -28,12 +28,26 @@
 
             },
 
+            events: "{{url('/calendario/show')}}",
+
             dateClick: function(info) {
                 formulario.reset();
-                //document.getElementById('id').value = '';
                 document.getElementById('start').value = info.dateStr;
                 document.getElementById('titulo').textContent = "Registro de actividad";
-                document.getElementById('btnGuardar').value = "Registrar";
+                $('#evento').modal('show');
+            },
+
+            eventClick: function(info) {
+                document.getElementById('id').value = info.event.id;
+                document.getElementById('titulo').textContent = "Modificar actividad";
+                document.getElementById('btnGuardar').classList.add('d-none');
+                document.getElementById('btnEliminar').classList.remove('d-none');
+                document.getElementById('btnModificar').classList.remove('d-none');
+                document.getElementById('title').value = info.event.title;
+                document.getElementById('start').value = info.event.startStr;
+                document.getElementById('color').value = info.event.backgroundColor;
+                document.getElementById('obs').value = info.event.extendedProps.description;
+                console.log(info);
                 $('#evento').modal('show');
             },
 
@@ -55,10 +69,6 @@
 
         calendar.render();
 
-        $('#btnGuardar').click(function() {
-            const datos = new FormData(formulario);
-            console.log(datos);
-        })
     });
 </script>
 
@@ -80,7 +90,8 @@
                 <form id="formulario" method="post" action="/calendario">
 
                     {{csrf_field()}}
-                    <input type="hidden" class="form-control" id="id" name="id" value="{{$idPaciente}}">
+                    <input type="hidden" class="form-control" id="idPaciente" name="idPaciente" value="{{$idPaciente}}">
+                    <input type="hidden" class="form-control" id="id" name="id">
 
                     <div class="modal-body">
                         <div class="form-floating mb-3">
@@ -100,8 +111,9 @@
                             <label for="obs" class="form-label">Observaciones</label>
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-outline-primary btn-sm">
-                            <input type="submit" id="btnGuardar" name="btnAccion" class="btn btn-outline-primary btn-sm">
+                            <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-danger btn-sm d-none">
+                            <input type="submit" formaction="/modificarActividad" id="btnModificar" name="btnModificar" value="Modificar actividad" class="btn btn-warning btn-sm d-none">
+                            <input type="submit" id="btnGuardar" name="btnAccion" value="Registrar" class="btn btn-primary btn-sm">
                         </div>
                     </div>
                 </form>

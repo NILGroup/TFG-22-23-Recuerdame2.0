@@ -86,6 +86,8 @@ Route::get('/pacientes/{id}/crearPersona', 'App\Http\Controllers\PersonasRelacio
 
 //RUTAS CUSTOMIZADAS CALENDARIO
 Route::get('/pacientes/{id}/calendario', 'App\Http\Controllers\CalendarioController@showByPaciente');
+Route::post('/eliminarActividad', 'App\Http\Controllers\CalendarioController@destroy');
+Route::post('/modificarActividad', 'App\Http\Controllers\CalendarioController@update');
 
 
 Route::get('prueba/', function () {
