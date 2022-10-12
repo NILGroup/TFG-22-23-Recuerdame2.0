@@ -84,7 +84,8 @@ Route::get('/recuerdos/{id}', 'App\Http\Controllers\RecuerdosController@showByPa
 Route::get('/pacientes/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
 Route::get('/pacientes/{id}/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@createByPaciente');
 
-Route::get('/paciente/{id}/calendario', 'App\Http\Controllers\CalendarioController@showByPaciente');
+//RUTAS CUSTOMIZADAS CALENDARIO
+Route::get('/pacientes/{id}/calendario', 'App\Http\Controllers\CalendarioController@showByPaciente');
 
 
 Route::get('prueba/', function () {

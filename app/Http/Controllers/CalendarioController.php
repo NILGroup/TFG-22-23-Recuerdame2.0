@@ -31,7 +31,7 @@ class CalendarioController extends Controller
             "description" => $request->obs
         ]);
 
-        return redirect("/paciente/$request->id/calendario");
+        return redirect("/pacientes/$request->id/calendario");
     }
 
     public function show(Actividad $actividad) {

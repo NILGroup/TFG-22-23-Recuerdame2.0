@@ -37,7 +37,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link letra-primary-color menu" href="/paciente/{{Session::get('paciente')['id']}}/calendario">Calendario</a>
+                    <a class="nav-link letra-primary-color menu" href="/pacientes/{{Session::get('paciente')['id']}}/calendario">Calendario</a>
                 </li>
             </ul>
         </div>
@@ -82,7 +82,7 @@
                     <a class="nav-link letra-primary-color menu" aria-current="page" href="/pacientes/{{ Session::get('paciente')['id'] }}">Paciente</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link letra-primary-color menu" href="/calendario">Calendario</a>
+                    <a class="nav-link letra-primary-color menu" href="/pacientes/{{Session::get('paciente')['id']}}/calendario">Calendario</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Historia de Vida</a>
