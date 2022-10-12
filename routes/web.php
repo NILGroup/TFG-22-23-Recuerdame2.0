@@ -6,6 +6,7 @@ use App\Http\Controllers\RecuerdosController;
 use App\Http\Controllers\SesionesController;
 use App\Http\Controllers\MultimediasController;
 use App\Http\Controllers\PersonasRelacionadasController;
+use App\Http\Controllers\InformesController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Paciente;
 use App\Models\Actividad;
@@ -61,7 +62,8 @@ Route::resources([
     'pacientes' => PacientesController::class,
     'multimedias' => MultimediasController::class,
     'personas' => PersonasRelacionadasController::class,
-    'calendario' => CalendarioController::class
+    'calendario' => CalendarioController::class,
+    'informes' => InformesController::class
 ]);
 
 //RUTAS CUSTOMIZADAS CUIDADOR
@@ -69,14 +71,13 @@ Route::get('/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@creat
 Route::post('/registroCuidador','App\Http\Controllers\CuidadoresController@registroCuidador');
 
 //RUTAS CUSTOMIZADAS SESION
+Route::post('/crearSesion', 'App\Http\Controllers\SesionesController@store');
+Route::delete('/eliminarSesion/{id}', 'App\Http\Controllers\SesionesController@destroy');
 Route::get('/pacientes/{id}/sesiones/{idS}/editar', 'App\Http\Controllers\SesionesController@showEditable');
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
 Route::get('/pacientes/{id}/sesiones', 'App\Http\Controllers\SesionesController@showByPaciente');
 Route::post('/updateAndRecuerdoNuevo','App\Http\Controllers\SesionesController@updateAndRecuerdoNuevo');
 Route::post('/updateAndSeleccionarRecuerdos','App\Http\Controllers\SesionesController@updateAndSeleccionarRecuerdos');
-Route::get('/pacientes/{id}/sesiones/{idS}/generarInforme', 'App\Http\Controllers\SesionesController@generarInforme');
-Route::get('/pacientes/{id}/sesiones/{idS}/informe', 'App\Http\Controllers\SesionesController@verInforme');
-Route::post('/cerrarInforme', 'App\Http\Controllers\SesionesController@cerrarInforme');
 
 //RUTAS CUSTOMIZADAS RECUERDO
 Route::get('/pacientes/{id}/recuerdos', 'App\Http\Controllers\RecuerdosController@showByPaciente');
@@ -91,8 +92,12 @@ Route::get('/pacientes/{id}/calendario', 'App\Http\Controllers\CalendarioControl
 Route::post('/eliminarActividad', 'App\Http\Controllers\CalendarioController@destroy');
 Route::post('/modificarActividad', 'App\Http\Controllers\CalendarioController@update');
 
-//RUTAS CUSTOMIZADAS PDFs
-Route::post('/generarPDFInformeSesion', 'App\Http\Controllers\PDFController@generarPDFInformeSesion');
+//RUTAS CUSTOMIZADAS informes
+Route::get('/pacientes/{id}/informes', 'App\Http\Controllers\InformesController@showByPaciente');
+Route::get('/pacientes/{id}/sesiones/{idS}/generarInforme', 'App\Http\Controllers\InformesController@generarInforme');
+Route::get('/pacientes/{id}/sesiones/{idS}/informe', 'App\Http\Controllers\InformesController@verInforme');
+Route::post('/cerrarInforme', 'App\Http\Controllers\InformesController@cerrarInforme');
+Route::post('/generarPDFInformeSesion', 'App\Http\Controllers\InformesController@generarPDFInformeSesion');
 
 
 

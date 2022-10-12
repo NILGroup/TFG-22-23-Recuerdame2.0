@@ -9,6 +9,16 @@ use App\PDF;
 
 class PDFController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'role', 'isTerapeuta']);
+    }
+    
     public function generarPDFInformeSesion(Request $request){
         /*
         $pdf = new PDF( 'P', 'mm', 'A4' );
@@ -34,6 +44,12 @@ class PDFController extends Controller
     
         $pdf->Output();
     }
+
+    public function obtenerPDF($idPaciente, $idSesion){
+        $request = ['id'=> $idPaciente];
+        generarPDFInformeSesion($request);
+    }
+
 }
 
 function pdfBody($pdf, $paciente, $sesion, $usuario){

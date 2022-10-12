@@ -26,8 +26,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($sesiones as $sesion)
                     <?php $i=1; ?>
+                @foreach($sesiones as $sesion)
                     <tr>
                         <th scope="row"><?php echo $i ?></th>
                         <td><a href="{{route('sesiones.show',$sesion->id)}}">{{date("d/m/Y", strtotime($sesion->fecha))}}</a></td>
@@ -44,8 +44,10 @@
                             @else
                                 <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/informe"><i class="fa-solid fa-file-circle-check text-success tableIcon"></i></a>
                             @endif
-                            <form method="POST" action="{{route('sesiones.destroy',$sesion->id)}}" onclick="confirmar(event)" class="d-inline">
-                                <i class="fa-solid fa-trash-can text-danger tableIcon" type="submit"></i>
+                            <form method="POST" action="{{ route('sesiones.destroy', $sesion->id) }}"  class="d-inline">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <button type="submit" class="btn btn-link shadow-none tableIcon" onclick="confirmar(event)"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></input>
                             </form>
                         </td>
                     </tr>
@@ -55,7 +57,7 @@
         </table>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  
 <script>
 function confirmar(e)
 {

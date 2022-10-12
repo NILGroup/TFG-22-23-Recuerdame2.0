@@ -24,7 +24,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Evaluaciones</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="listadoInformesSesion.php">Informes de las sesiones</a></li>
+                        <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/informes">Informes de las sesiones</a></li>
                         <li><a class="dropdown-item" href="listadoInformesSeguimiento.php">Informes de seguimiento</a></li>
                     </ul>
                 </li>
@@ -127,4 +127,3 @@
 
 
 @endguest
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

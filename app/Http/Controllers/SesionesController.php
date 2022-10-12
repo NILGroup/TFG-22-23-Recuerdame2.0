@@ -67,9 +67,7 @@ class SesionesController extends Controller
              'user_id' => $request->user_id,
              'respuesta' => $request->respuesta]
         );
-
-        
-        return $sesion->id;
+        return redirect("pacientes/{$sesion->paciente->id}/sesiones");
     }
 
     public function storeRecuerdo($idPaciente, $idSesion, $recuerdo)
@@ -174,7 +172,7 @@ class SesionesController extends Controller
     {
         throw new \Exception("Destruir");
         $sesion = Sesion::find($id);
-        $id = $sesion->paciente->id;
+        $id = $sesion->paciente_id;
         Sesion::destroy($id);
         return redirect("/pacientes/$id/sesiones");
     }
@@ -229,24 +227,4 @@ class SesionesController extends Controller
         return redirect("/recuerdos/agregarAndVolverEditar");
     }
 
-    public function generarInforme($idPaciente, $idSesion){
-        $sesion = Sesion::find($idSesion);
-        $paciente = $sesion->paciente;
-        return view('sesiones.generarInforme', compact('paciente', 'sesion'));
-    }
-
-    public function cerrarInforme(Request $request){
-        $sesion = Sesion::find($request->id);
-        $sesion->fecha = $request->fecha;
-        $sesion->fecha_finalizada = $request->fecha_finalizada;
-        $sesion->respuesta = $request->respuesta;
-        $sesion->observaciones = $request->observaciones;
-        $sesion->save();
-        return redirect("pacientes/{$sesion->paciente->id}/sesiones");
-    }
-    public function verInforme($idPaciente, $idSesion){
-        $sesion = Sesion::find($idSesion);
-        $paciente = $sesion->paciente;
-        return view('sesiones.verInforme', compact('paciente', 'sesion'));
-    }
 }
