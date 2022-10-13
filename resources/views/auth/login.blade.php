@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card-body">
                 <form method="POST" action="{{ route('login') }}">
-                    @csrf
+                {{csrf_field()}}
                     <div class="card form-login">
                         <img src="/img/Marca_recuerdame.png" class="card-img-top">
                         <div class="card-body">

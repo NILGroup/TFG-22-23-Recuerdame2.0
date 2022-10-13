@@ -170,11 +170,10 @@ class SesionesController extends Controller
      */
     public function destroy($id)
     {
-        throw new \Exception("Destruir");
         $sesion = Sesion::find($id);
-        $id = $sesion->paciente_id;
+        $idP = $sesion->paciente_id;
         Sesion::destroy($id);
-        return redirect("/pacientes/$id/sesiones");
+        return redirect("/pacientes/$idP/sesiones");
     }
 
     public function destroyRecuerdo($idSesion, $idRecuerdo)

@@ -28,10 +28,10 @@
                         <td class="tableActions">
                             <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                             <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/generarInforme"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                            <form method="POST" action="{{ route('informes.destroy', $sesion->id) }}"  class="d-inline">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                                <button type="submit" class="btn btn-link shadow-none tableIcon" onclick="confirmar(event)"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></input>
+                            <form method="post" action="{{ route('informes.destroy', $sesion->id) }}" onclick="confirmar(event)" style="display:inline!important;">
+                                {{csrf_field()}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button  type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                             </form>
                         </td>
                     </tr>

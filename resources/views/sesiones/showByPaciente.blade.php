@@ -44,10 +44,10 @@
                             @else
                                 <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/informe"><i class="fa-solid fa-file-circle-check text-success tableIcon"></i></a>
                             @endif
-                            <form method="POST" action="{{ route('sesiones.destroy', $sesion->id) }}"  class="d-inline">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                                <button type="submit" class="btn btn-link shadow-none tableIcon" onclick="confirmar(event)"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></input>
+                            <form method="post" action="{{ route('sesiones.destroy', $sesion->id) }}" onclick="confirmar(event)" style="display:inline!important;">
+                                {{csrf_field()}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button  type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                             </form>
                         </td>
                     </tr>
