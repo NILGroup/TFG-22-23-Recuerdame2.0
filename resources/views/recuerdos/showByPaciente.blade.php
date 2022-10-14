@@ -9,12 +9,12 @@
 
     <div class="row mb-2">
         <div class="col-12 justify-content-end d-flex">
-        <div class="row mb-2">
-            <div class="col-12 justify-content-end d-flex">
-                <a href="/recuerdo/crear"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
+            <div class="row mb-2">
+                <div class="col-12 justify-content-end d-flex">
+                    <a href="/recuerdo/crear"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
+                </div>
             </div>
-        </div>
-          
+
         </div>
     </div>
 
@@ -47,12 +47,18 @@
                 <td>{{$recuerdo->estado_id}}</td>
                 <td>{{$recuerdo->etiqueta_id}}</td>
                 <td class="tableActions">
-                                <a href="/recuerdo/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
-                                <?php if (Auth::user()->rol_id == 1) { ?>
-                                    <a href=""><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                                    <a href=""><i class="fa-solid fa-trash-can text-danger tableIcon"></i></a>
-                                <?php } ?>
-                            </td>
+                    <a href="/recuerdo/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                    <?php if (Auth::user()->rol_id == 1) { ?>
+                        <!-- Boton de editar -->
+                        <a href="/recuerdo/{{$recuerdo->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
+<!-- Boton de eliminar -->
+                        <form method="post" action="{{ route('recuerdo.destroy', $recuerdo->id) }}" onclick="confirmar(event)" style="display:inline!important;">
+                            {{csrf_field()}}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                        </form>
+                    <?php } ?>
+                </td>
                 <?php $i++; ?>
             </tr>
             @endforeach
@@ -60,5 +66,11 @@
 
         </table>
     </div>
-
+    <script>
+        function confirmar(e) {
+            if (!confirm('¿Seguro que desea eliminar esta sesión?')) {
+                e.preventDefault();
+            }
+        }
+    </script>
     @endsection

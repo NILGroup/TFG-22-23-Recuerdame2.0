@@ -108,8 +108,10 @@
                 </div>
                 <div class="row">
                     <div class="col-12 justify-content-end d-flex p-2">
-                        <button type="submit" name="guardarRecuerdo"  class="btn btn-success btn-sm btn-icon me-2"><i class="fa-solid fa-plus"></i></button>
-                        <button type="submit" name="guardarRecuerdo"  class="btn btn-success btn-sm me-2">Añadir existente</button>
+                        <!-- Nueva persona relacionada -->
+                    <button type="submit" name="guardarRecuerdo"  class="btn btn-success btn-sm btn-icon me-2"><i class="fa-solid fa-plus"></i></button>
+                       <!-- Persona existente -->
+                    <button type="submit" name="guardarRecuerdo"  class="btn btn-success btn-sm me-2">Añadir existente</button>
                     </div>
                 </div>
 

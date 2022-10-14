@@ -143,13 +143,19 @@ class RecuerdosController extends Controller
     }
     /**
      * Show the form for editing the specified resource.
-     *
+     * 
      * @param  \App\Models\Recuerdo  $recuerdo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Recuerdo $recuerdo)
+    public function edit($idRecuerdo)
     {
-        //
+        $recuerdo = Recuerdo::find($idRecuerdo);
+        $estado = Estado::find($recuerdo->estado_id);
+        $etiqueta = Etiqueta::find($recuerdo->etiqueta_id);
+        $etapa = Etapa::find($recuerdo->etapa_id);
+        $emocion = Emocion::find($recuerdo->emocion_id);
+        $categoria = Categoria::find($recuerdo->categoria_id);
+        return view("recuerdos.edit", compact("recuerdo","estado","etiqueta","etapa","emocion","categoria"));
     }
 
     /**
@@ -172,7 +178,16 @@ class RecuerdosController extends Controller
      */
     public function destroy($idRecuerdo)
     {
-        Recuerdo::destroy($idRecuerdo);
+        $recuerdo = Recuerdo::find($idRecuerdo); //busca el recuerdo en sí
+        if(!isNull($recuerdo)){
+            $idPaciente = $recuerdo->paciente_id; //accede a la id del paciente
+            Recuerdo::destroy($idRecuerdo); //elimina el recuerdo
+            return self::showByPaciente($idPaciente);
+        }else{
+            return "Sin recuerdo";
+        }
+
+
     }
 
     //Elimina a la persona relacionada del recuerdo en cuestión (su relación)

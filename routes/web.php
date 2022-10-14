@@ -83,6 +83,8 @@ Route::post('/updateAndSeleccionarRecuerdos','App\Http\Controllers\SesionesContr
 //RUTAS CUSTOMIZADAS RECUERDO
 Route::get('/pacientes/{id}/recuerdos', 'App\Http\Controllers\RecuerdosController@showByPaciente');
 Route::get('/recuerdos/{id}', 'App\Http\Controllers\RecuerdosController@showByPaciente');
+Route::delete('/eliminarRecuerdo/{id}', 'App\Http\Controllers\RecuerdosController@destroy');
+
 
 //RUTAS CUSTOMIZADAS PERSONA RELACIONADA
 Route::get('/pacientes/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
@@ -261,8 +263,8 @@ Route::get('prueba/', function () {
     Categoria::create(["nombre" => "categoria 1"]);
     Categoria::create(["nombre" => "categoria 2"]);
 
-    Multimedia::create(["nombre" => "multimedia 1", "fichero" => "ruta fichero 1"]);
-    Multimedia::create(["nombre" => "multimedia 2", "fichero" => "ruta fichero 2"]);
+    Multimedia::create(["nombre" => "multimedia 1", "fichero" => "avatarHombre.png"]);
+    Multimedia::create(["nombre" => "multimedia 2", "fichero" => "avatarMujer.png"]);
 
     DB::table("multimedia_sesion")->insert([
         ["multimedia_id" => 1, "sesion_id" => 1],
