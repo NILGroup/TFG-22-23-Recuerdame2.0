@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Modificar datos persona relacionada</h5>
+        <h5 class="text-muted">Crear nueva persona relacionada</h5>
         <hr class="lineaTitulo">
     </div>
     <form method="post" action="/personas">

@@ -97,8 +97,9 @@ class PersonasRelacionadasController extends Controller
 
     public function edit(int $id)
     {
+        $tipos = Tiporelacion::all();
         $persona = Personarelacionada::findOrFail($id);
-        return view("personasrelacionadas.edit", compact("persona"));
+        return view("personasrelacionadas.edit", compact("persona","tipos"));
     }
 
     /**
@@ -110,8 +111,7 @@ class PersonasRelacionadasController extends Controller
         
         $persona = Personarelacionada::findOrFail($id);
         $persona->update($request->all());
-
-        return redirect("/pacientes/$id/personas");
+        return redirect("/pacientes/$persona->paciente_id/personas");
 
 
     }

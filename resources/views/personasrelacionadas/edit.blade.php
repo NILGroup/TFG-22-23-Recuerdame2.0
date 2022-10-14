@@ -62,8 +62,16 @@
             <div class="row col-sm-12 col-md-6 col-lg-5">
                 <label for="tipo" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Tipo de relación</label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
-                    <input type="text" name="tipo" class="form-control form-control-sm" id="tipo" value="{{$persona->tiporelacion->nombre}}">
-                   
+                    <select class="form-select form-select-sm" id="tiporelacion_id" name="tiporelacion_id" >
+                        
+                        @foreach ($tipos as $tipo)
+                        
+                        
+                        <?php if ($tipo->nombre == $persona->tiporelacion->nombre) echo "<option  value='{$tipo->id}' selected > {$tipo->nombre}  </option>"; 
+                        else echo "<option  value='{$tipo->id}' >{$tipo->nombre} </option>";?>
+                        
+                        @endforeach
+                    </select>
                 </div>
             </div>
         </div>
