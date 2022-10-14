@@ -29,7 +29,7 @@
 
             },
 
-            events: "{{url('/calendario/show')}}",
+            events: "{{route('calendario.show',$idPaciente)}}",
 
             dateClick: function(info) {
                 formulario.reset();
@@ -114,7 +114,7 @@
                             <textarea maxlength="255" class="form-control form-control-sm" id="obs" name="obs" rows="3" required></textarea>
                             <label for="obs" class="form-label">Observaciones</label>
                         </div>
-                       <div class="modal-footer">
+                        <div class="modal-footer">
                             <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-danger btn-sm d-none">
                             <input type="submit" formaction="/modificarActividad" id="btnModificar" name="btnModificar" value="Modificar actividad" class="btn btn-warning btn-sm d-none">
                             <input type="submit" id="btnGuardar" name="btnAccion" value="Registrar" class="btn btn-primary btn-sm">

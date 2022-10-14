@@ -56,8 +56,8 @@ class CalendarioController extends Controller
 
     }
 
-    public function show() {
-        $actividad = Actividad::all();
+    public function show(int $idPaciente) {
+        $actividad = Actividad::where("paciente_id","=",$idPaciente)->get();
         return response()->json($actividad);
     }
 
