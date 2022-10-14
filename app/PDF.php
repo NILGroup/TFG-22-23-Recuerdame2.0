@@ -5,18 +5,9 @@ namespace App;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use File;
 
-class PDF extends FPDF{
-    private $numInforme;
-/*
-    function __construct($id) {
-        $this->numInforme = $id;
-    }
-*/
-    function LoadData($num){
-        // Read file lines
-        //$this->numInforme = $num;
-    }
+global $numInforme;
 
+class PDF extends FPDF{
     // Page header
     function Header()
     {
@@ -26,7 +17,7 @@ class PDF extends FPDF{
         // Move to the right
         //$this->Cell(80);
         // Title
-        $this->Cell(190,11,utf8_decode('Informe de Sesión #'. $this->numInforme),0,1);
+        $this->Cell(190,11,utf8_decode('Informe de Sesión #'.$GLOBALS['numInforme']),0,1);
         $this->Line(10,25,200,25);
         // Line break
         $this->Ln(10);
@@ -149,7 +140,7 @@ function writeInformeSesion($pdf, $informeSesion){
 }
 
 function pdfBody($pdf, $paciente, $sesion, $usuario){
-    
+    $pdf->addPage();
     $pdf->SetFillColor(220);
 
     $pdf->SetFont('Times','B',15);
