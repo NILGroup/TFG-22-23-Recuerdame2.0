@@ -7,7 +7,7 @@
         <hr class="lineaTitulo">
     </div>
     <form method="post" action="/recuerdo" class="dropzone">
-
+        <input type="hidden" name="paciente_id"  id="paciente_id"  value="{{Session::get('paciente')['id']}}">
         <div class="row form-group justify-content-between">
             <div class="row col-sm-12 col-md-6 col-lg-5">
                 <label for="nombre" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Nombre<span class="asterisco">*</span></label>
@@ -19,7 +19,7 @@
             <div class="row col-sm-6 col-md-6 col-lg-6">
                 <label for="estado" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Estado</label>
                 <div class="col-sm-9 col-md-6 col-lg-4">
-                    <select class="form-select form-select-sm" id="idEstado" name="idEstado">
+                    <select class="form-select form-select-sm" id="idEstado" name="estado_id">
                         <option></option>
                         @foreach ($estados as $estado)
                         <option value="{{$estado->id}}">{{$estado->nombre}}</option>
@@ -39,10 +39,10 @@
             <div class="row col-sm-6 col-md-6 col-lg-6">
                 <label for="etiqueta" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Etiqueta</label>
                 <div class="col-sm-9 col-md-6 col-lg-4">
-                    <select class="form-select form-select-sm" id="idEtiqueta" name="idEtiqueta">
+                    <select class="form-select form-select-sm" id="idEtiqueta" name="etiqueta_id">
                         <option></option>
                         @foreach ($etiquetas as $etiqueta)
-                        <option value="{{$etiqueta->id}}">{{$etiqueta->nombre}}</option>
+                            <option value="{{$etiqueta->id}}">{{$etiqueta->nombre}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -68,7 +68,7 @@
             <div class="row">
                 <label for="etapa" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Etapa de la vida<span class="asterisco">*</span></label>
                 <div class="col-sm-3 col-md-3 col-lg-2">
-                    <select class="form-select form-select-sm" id="idEtapa" name="idEtapa">
+                    <select class="form-select form-select-sm" id="idEtapa" name="etapa_id" required>
                         @foreach ($etapas as $etapa)
                         <option value="{{$etapa->id}}">{{$etapa->nombre}}</option>
                         @endforeach
@@ -78,7 +78,7 @@
 
                 <label for="emocion" class="form-label col-form-label-sm col-sm-2 col-md-12col-lg-1">Emoción</label>
                 <div class="col-sm-3 col-md-3 col-lg-2">
-                    <select class="form-select form-select-sm" id="idEmocion" name="idEmocion">
+                    <select class="form-select form-select-sm" id="idEmocion" name="emocion_id">
                         <option></option>
                         @foreach ($emociones as $emocion)
                         <option value="{{$emocion->id}}">{{$emocion->nombre}}</option>
@@ -88,7 +88,7 @@
 
                 <label for="categoria" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-1">Categoría</label>
                 <div class="col-sm-3 col-md-3 col-lg-2">
-                    <select class="form-select form-select-sm" id="idCategoria" name="idCategoria">
+                    <select class="form-select form-select-sm" id="idCategoria" name="categoria_id">
                         <option></option>
                         @foreach ($categorias as $categoria)
                         <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>

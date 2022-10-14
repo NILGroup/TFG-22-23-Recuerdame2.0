@@ -20,8 +20,8 @@ class CalendarioController extends Controller
     }
 
     public function showByPaciente(int $idPaciente) {
-        $actividades = Actividad::all();
-        return view('calendario.showByPaciente', compact("idPaciente", "actividades"));
+        //$actividades = Actividad::all();
+        return view('calendario.showByPaciente', compact("idPaciente"));
     }
 
     public function store(Request $request) {
@@ -37,12 +37,12 @@ class CalendarioController extends Controller
         Actividad::create([
             "start" => $request->start,
             "title" => $request->title,
-            "paciente_id" => $request->id,
+            "paciente_id" => $request->idPaciente,
             "color" => $request->color,
             "description" => $request->obs
         ]);
 
-        return redirect("/pacientes/$request->id/calendario");
+        return redirect("/pacientes/$request->idPaciente/calendario");
     }
 
     public function update(Request $request)
@@ -57,9 +57,6 @@ class CalendarioController extends Controller
     }
 
     public function show() {
-       /* $paciente =Paciente::find($idPaciente);
-        throw new \Exception("{$paciente}");
-        $actividad = $paciente->actividads;*/
         $actividad = Actividad::all();
         return response()->json($actividad);
     }
