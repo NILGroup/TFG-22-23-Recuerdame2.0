@@ -2,8 +2,8 @@
 
 @section('content')
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.css">
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         let formulario = document.getElementById('formulario');
@@ -14,6 +14,7 @@
                     text: '+',
                     hint: 'Nueva actividad',
                     click: function() {
+                        formulario.reset();
                         document.getElementById('titulo').textContent = "Registro de actividad";
                         $('#evento').modal('show');
                     }
@@ -34,10 +35,13 @@
                 formulario.reset();
                 document.getElementById('start').value = info.dateStr;
                 document.getElementById('titulo').textContent = "Registro de actividad";
+
+                console.log(info);
                 $('#evento').modal('show');
             },
 
             eventClick: function(info) {
+                formulario.reset();
                 document.getElementById('id').value = info.event.id;
                 document.getElementById('titulo').textContent = "Modificar actividad";
                 document.getElementById('btnGuardar').classList.add('d-none');
@@ -79,7 +83,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="evento" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal fade" id="evento" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="evento" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-info">
@@ -107,10 +111,10 @@
                             <label for="color" class="form-label">Color</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <textarea maxlength="255" class="form-control form-control-sm" id="obs" name="obs" rows="3"></textarea>
+                            <textarea maxlength="255" class="form-control form-control-sm" id="obs" name="obs" rows="3" required></textarea>
                             <label for="obs" class="form-label">Observaciones</label>
                         </div>
-                        <div class="modal-footer">
+                       <div class="modal-footer">
                             <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-danger btn-sm d-none">
                             <input type="submit" formaction="/modificarActividad" id="btnModificar" name="btnModificar" value="Modificar actividad" class="btn btn-warning btn-sm d-none">
                             <input type="submit" id="btnGuardar" name="btnAccion" value="Registrar" class="btn btn-primary btn-sm">
@@ -125,7 +129,5 @@
 
     <!-- Modal -->
 
-
-
-
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
     @endsection
