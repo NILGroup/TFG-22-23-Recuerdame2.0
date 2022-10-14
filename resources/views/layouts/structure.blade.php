@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="/css/registro.css">
     <link rel="stylesheet" href="/css/styles.css">
 
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.css">
     <!-- Scripts -->
     <!-- Hay un stack para blade para aportar cosas aquí, estudiar -->
     @stack('scripts')
@@ -41,6 +43,6 @@
         </main>
     </div>
     @include('layouts.footer')
-    @yield('scripts');
+    @stack('scripts');
 </body>
 </html>
