@@ -28,11 +28,6 @@
 
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.css">
-    <!-- Scripts -->
-    <!-- Hay un stack para blade para aportar cosas aquí, estudiar -->
-    @stack('scripts')
-
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
     <div id="app">
@@ -43,6 +38,6 @@
         </main>
     </div>
     @include('layouts.footer')
-    @stack('scripts');
 </body>
+    @stack('scripts')
 </html>
