@@ -17,14 +17,14 @@
             <div class="row col-sm-12 col-md-6 col-lg-5">
                 <label for="nombre" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Nombre<span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
-                    <input type="text" name="nombre" class="form-control form-control-sm" id="nombre">
+                    <input type="text" name="nombre" class="form-control form-control-sm" id="nombre" required>
                    
                 </div>
             </div>
             <div class="row col-sm-12 col-md-6 col-lg-7">
                 <label for="apellidos" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Apellidos<span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-12 col-lg-8">
-                    <input type="text" name="apellidos" class="form-control form-control-sm" id="apellidos">
+                    <input type="text" name="apellidos" class="form-control form-control-sm" id="apellidos" required>
                 </div>
             </div>
         </div>
@@ -35,14 +35,14 @@
            <div class="row col-sm-12 col-md-6 col-lg-5">
                 <label for="telefono" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Teléfono<span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
-                    <input type="text" name="telefono" class="form-control form-control-sm" id="telefono">
+                    <input type="text" name="telefono" class="form-control form-control-sm" id="telefono" required>
                    
                 </div>
             </div>
             <div class="row col-sm-12 col-md-6 col-lg-7">
                 <label for="ocupacion" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Ocupación<span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-12 col-lg-8">
-                    <input type="text" name="ocupacion" class="form-control form-control-sm" id="ocupacion">
+                    <input type="text" name="ocupacion" class="form-control form-control-sm" id="ocupacion" required>
                 </div>
             </div>
 
@@ -52,7 +52,7 @@
             <div class="row col-sm-12 col-md-6 col-lg-5">
                 <label for="email" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Email<span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
-                    <input type="text" name="email" class="form-control form-control-sm" id="email">
+                    <input type="text" name="email" class="form-control form-control-sm" id="email" required>
                    
                 </div>
             </div>
@@ -62,7 +62,7 @@
             <div class="row col-sm-12 col-md-6 col-lg-5">
                 <label for="tipo" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Tipo relación</label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
-                    <select class="form-select form-select-sm" id="tiporelacion_id" name="tiporelacion_id">
+                    <select class="form-select form-select-sm" id="tiporelacion_id" name="tiporelacion_id" required>
                         <option></option>
                         @foreach ($tipos as $tipo)
                        
