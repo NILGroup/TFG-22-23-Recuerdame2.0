@@ -6,7 +6,8 @@ use App\Http\Controllers\RecuerdosController;
 use App\Http\Controllers\SesionesController;
 use App\Http\Controllers\MultimediasController;
 use App\Http\Controllers\PersonasRelacionadasController;
-use App\Http\Controllers\InformesController;
+use App\Http\Controllers\InformesSesionController;
+use App\Http\Controllers\EvaluacionController;
 use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Paciente;
@@ -49,10 +50,6 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-//Registro y login
-Auth::routes();
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/home', function () {
     return redirect('/pacientes');
 });
@@ -64,8 +61,12 @@ Route::resources([
     'multimedias' => MultimediasController::class,
     'personas' => PersonasRelacionadasController::class,
     'calendario' => CalendarioController::class,
-    'informes' => InformesController::class
+    'informesSesion' => InformesSesionController::class,
+    'evaluaciones' => EvaluacionController::class
 ]);
+
+//Registro y login
+Auth::routes();
 
 //RUTAS CUSTOMIZADAS CUIDADOR
 Route::get('/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
@@ -96,24 +97,28 @@ Route::get('/mostrarActividades/{id}', 'App\Http\Controllers\CalendarioControlle
 Route::post('/eliminarActividad', 'App\Http\Controllers\CalendarioController@destroy');
 Route::post('/modificarActividad', 'App\Http\Controllers\CalendarioController@update');
 
-//RUTAS CUSTOMIZADAS INFORMES
-Route::get('/pacientes/{id}/informes', 'App\Http\Controllers\InformesController@showByPaciente');
-Route::get('/pacientes/{id}/sesiones/{idS}/generarInforme', 'App\Http\Controllers\InformesController@generarInforme');
-Route::get('/pacientes/{id}/sesiones/{idS}/informe', 'App\Http\Controllers\PDFController@verInforme');
-Route::post('/cerrarInforme', 'App\Http\Controllers\InformesController@cerrarInforme');
-Route::post('/generarPDFInformeSesion', 'App\Http\Controllers\InformesController@generarPDFInformeSesion');
+//RUTAS CUSTOMIZADAS INFORMES SESION
+Route::get('/pacientes/{id}/informesSesion', 'App\Http\Controllers\InformesSesionController@showByPaciente');
+Route::get('/pacientes/{id}/sesiones/{idS}/generarInforme', 'App\Http\Controllers\InformesSesionController@generarInforme');
+Route::get('/pacientes/{id}/sesiones/{idS}/informe', 'App\Http\Controllers\PDFController@verInformeSesion');
+Route::post('/cerrarInformeSesion', 'App\Http\Controllers\InformesSesionController@cerrarInformeSesion');
+Route::post('/generarPDFInformeSesion', 'App\Http\Controllers\InformesSesionController@generarPDFInformeSesion');
+
+//RUTAS CUSTOMIZADAS EVALUACION
+Route::get('/pacientes/{id}/evaluaciones', 'App\Http\Controllers\EvaluacionController@showByPaciente');
+Route::get('/pacientes/{id}/evaluaciones/generarInforme', 'App\Http\Controllers\EvaluacionController@generarInforme');
+Route::get('/pacientes/{id}/evaluaciones/{idE}/informe', 'App\Http\Controllers\PDFController@verInformeEvaluacion');
+Route::get('/pacientes/{id}/evaluaciones/{idE}/editar', 'App\Http\Controllers\EvaluacionController@showEditable');
+Route::post('/cerrarEvaluacion', 'App\Http\Controllers\EvaluacionController@store');
+Route::post('/generarPDFEvaluacion', 'App\Http\Controllers\EvaluacionController@generarPDFInformeEvaluacion');
 
 
-
-Route::get('prueba/', function () {
    
-/*
-
-----------------------------------------------------------
+/*********************************************************
     CREA DATOS EN LA BASE DE DATOS
-----------------------------------------------------------
+*********************************************************/
+Route::get('prueba/', function () {
 
-*/
        
     Rol::create(["nombre" => "Terapeuta"]);
     Rol::create(["nombre" => "Cuidador"]);
@@ -181,8 +186,8 @@ Route::get('prueba/', function () {
     $ev->mental_fecha = Carbon::now();
     $ev->cdr  = 2;
     $ev->cdr_fecha = Carbon::now();
-    $ev->diagnostico  = 2;
-    $ev->observaciones  = 2;
+    $ev->diagnostico  = "Empeora poco a poco";
+    $ev->observaciones  = "Ninguna";
     $ev->nombre_escala  = "otro nombre cualquiera";
     $ev->escala  = 2;
     $ev->fecha_escala = Carbon::now();

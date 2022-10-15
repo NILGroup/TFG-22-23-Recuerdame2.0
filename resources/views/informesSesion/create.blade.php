@@ -8,7 +8,7 @@
         <hr class="lineaTitulo">
     </div>
 
-    <form action="/cerrarInforme" method="POST">
+    <form action="/cerrarInformeSesion" method="POST">
     {{csrf_field()}}
         <div>
             <input type="hidden" id="id" name="id" value="{{$sesion->id}}">

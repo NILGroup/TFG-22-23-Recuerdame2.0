@@ -24,8 +24,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Evaluaciones</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/informes">Informes de las sesiones</a></li>
-                        <li><a class="dropdown-item" href="listadoInformesSeguimiento.php">Informes de seguimiento</a></li>
+                        <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/informesSesion">Informes de las sesiones</a></li>
+                        <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/evaluaciones">Informes de seguimiento</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

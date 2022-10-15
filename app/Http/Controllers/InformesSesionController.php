@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Sesion;
 
-class InformesController extends Controller
+class InformesSesionController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -25,10 +25,10 @@ class InformesController extends Controller
     public function generarInforme($idPaciente, $idSesion){
         $sesion = Sesion::find($idSesion);
         $paciente = $sesion->paciente;
-        return view('informesSesion.generarInforme', compact('paciente', 'sesion'));
+        return view('informesSesion.create', compact('paciente', 'sesion'));
     }
 
-    public function cerrarInforme(Request $request){
+    public function cerrarInformeSesion(Request $request){
         $sesion = Sesion::find($request->id);
         $sesion->fecha = $request->fecha;
         $sesion->fecha_finalizada = $request->fecha_finalizada;
@@ -44,13 +44,13 @@ class InformesController extends Controller
         $sesion->fecha_finalizada = null;
         $sesion->observaciones = null;
         $sesion->save();
-        return redirect("/pacientes/$sesion->paciente_id/informes");
+        return redirect("/pacientes/$sesion->paciente_id/informesSesion");
 
     }
 
-    public function verInforme($idPaciente, $idSesion){
+    public function verInformeSesion($idPaciente, $idSesion){
         $sesion = Sesion::find($idSesion);
         $paciente = $sesion->paciente;
-        return view('informesSesion.verInforme', compact('paciente', 'sesion'));
+        return view('informesSesion.show', compact('paciente', 'sesion'));
     }
 }
