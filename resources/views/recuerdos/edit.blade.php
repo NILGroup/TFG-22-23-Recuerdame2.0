@@ -7,6 +7,7 @@
         <hr class="lineaTitulo">
     </div>
     <form method="post" action="/recuerdo" class="dropzone">
+    <input type="hidden" name="id" id="id" value="{{$recuerdo->id}}">
         <input type="hidden" name="paciente_id" id="paciente_id" value="{{Session::get('paciente')['id']}}">
         <div class="row form-group justify-content-between">
             <div class="row col-sm-12 col-md-6 col-lg-5">

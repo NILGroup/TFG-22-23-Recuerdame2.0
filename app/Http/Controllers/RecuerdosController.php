@@ -14,6 +14,7 @@ use App\Models\Emocion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use function PHPUnit\Framework\isNan;
 use function PHPUnit\Framework\isNull;
 
 class RecuerdosController extends Controller
@@ -179,12 +180,12 @@ class RecuerdosController extends Controller
     public function destroy($idRecuerdo)
     {
         $recuerdo = Recuerdo::find($idRecuerdo); //busca el recuerdo en sí
-        if(!isNull($recuerdo)){
+        if(!is_null($recuerdo)){
             $idPaciente = $recuerdo->paciente_id; //accede a la id del paciente
             Recuerdo::destroy($idRecuerdo); //elimina el recuerdo
-            return self::showByPaciente($idPaciente);
+            return redirect("/recuerdos/$idPaciente");
         }else{
-            return "Sin recuerdo";
+            return redirect("/");
         }
 
 
