@@ -150,12 +150,12 @@ class RecuerdosController extends Controller
     public function edit($idRecuerdo)
     {
         $recuerdo = Recuerdo::find($idRecuerdo);
-        $estado = Estado::find($recuerdo->estado_id);
-        $etiqueta = Etiqueta::find($recuerdo->etiqueta_id);
-        $etapa = Etapa::find($recuerdo->etapa_id);
-        $emocion = Emocion::find($recuerdo->emocion_id);
-        $categoria = Categoria::find($recuerdo->categoria_id);
-        return view("recuerdos.edit", compact("recuerdo","estado","etiqueta","etapa","emocion","categoria"));
+        $estados = Estado::all();
+        $etiquetas = Etiqueta::all();
+        $etapas = Etapa::all();
+        $emociones = Emocion::all();
+        $categorias = Categoria::all();
+        return view("recuerdos.edit", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias"));
     }
 
     /**

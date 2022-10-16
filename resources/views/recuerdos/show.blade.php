@@ -20,7 +20,9 @@
             <label for="estado" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Estado</label>
             <div class="col-sm-9 col-md-6 col-lg-4">
                 <select disabled class="form-select form-select-sm" name="estado">
+                    @if(!is_null($estado))
                     <option value="{{$estado->id}}" selected="selected">{{$estado->nombre}}</option>
+                    @endif
                 </select>
             </div>
         </div>
@@ -37,7 +39,9 @@
             <label for="etiqueta" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Etiqueta</label>
             <div class="col-sm-9 col-md-6 col-lg-4">
                 <select disabled class="form-select form-select-sm" name="etiqueta">
+                @if(!is_null($etiqueta))
                         <option value="{{$etiqueta->id}}" selected="selected">{{$etiqueta->nombre}}</option>
+                        @endif
                     </select>
             </div>
         </div>
@@ -70,14 +74,18 @@
             <label for="emocion" class="form-label col-form-label-sm col-sm-2 col-md-12col-lg-1">Emoción</label>
             <div class="col-sm-3 col-md-3 col-lg-2">
                 <select disabled class="form-select form-select-sm" name="emocion">
+                @if(!is_null($emocion))
                         <option value="{{$emocion->id}}" selected="selected">{{$emocion->nombre}}</option>
+                        @endif
                 </select>
             </div>
 
             <label for="categoria" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-1">Categoría</label>
             <div class="col-sm-3 col-md-3 col-lg-2">
                 <select disabled class="form-select form-select-sm" name="categoria">
+                @if(!is_null($categoria))
                         <option value="{{$categoria->id}}" selected="selected">{{$categoria->nombre}}</option>
+                        @endif
                 </select>
             </div>
         </div>
