@@ -68,13 +68,63 @@
 
             <div class="row">
                 <div class="col-12 justify-content-end d-flex p-2">
-                    <div class="col-12 justify-content-end d-flex p-2">
-                        <!-- Nuevo-->
-                        <button type="submit" formaction="/updateAndRecuerdoNuevo" name="guardarSesion" class="btn btn-success btn-sm btn-icon me-2"><i class="fa-solid fa-plus"></i></button>
-                        <!-- Existente -->
-                        <!-- TODO REDIRIGIR A LA PÁGINA DE CREACION Y NO A LA LISTA DE RECUERDOS -->
-                        <button type="submit" formaction="/updateAndSeleccionarRecuerdos" name="guardarSesion" class="btn btn-success btn-sm me-2">Añadir existente</button>
-                    </div>
+                    <!-- Nuevo-->
+                    <button type="submit" formaction="/updateAndRecuerdoNuevo" name="guardarSesion" class="btn btn-success btn-sm btn-icon me-2"><i class="fa-solid fa-plus"></i></button>
+                    <button type="button" class="btn btn-success btn-sm me-2" data-bs-toggle="modal" data-bs-target="#recuerdosExistentes">Añadir existente</button>
+
+                    <!-- Ventana emergente recuerdos existentes -->
+                    <div class="modal fade" id="recuerdosExistentes" tabindex="-1" aria-labelledby="recuerdosExistentesLabel" aria-hidden="true">
+                        <form>
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="recuerdosExistentesLabel">Recuerdos existentes</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <table class="table table-bordered recuerdameTable">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Nombre</th>
+                                                    <th scope="col">Fecha</th>
+                                                    <th scope="col">Etapa</th>
+                                                    <th scope="col">Categoría</th>
+                                                    <th scope="col">Estado</th>
+                                                    <th scope="col">Etiqueta</th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $i = 1 ?>
+                                                @foreach ($recuerdos as $recuerdo)
+                                                    <tr>
+                                                        <th scope="row"><?php echo $i ?></th>
+                                                        <td>{{$recuerdo->nombre}}</td>
+                                                        <td>{{$recuerdo->fecha}}</td>
+                                                        <td>{{$recuerdo->etapa->nombre}}</td>
+                                                        <td>{{$recuerdo->categoria->nombre}}</td>
+                                                        <td>{{$recuerdo->estado->nombre}}</td>
+                                                        <td>{{$recuerdo->etiqueta->nombre}}</td>
+                                                        <td id="recuerdosSeleccionados" class="tableActions">
+                                                            <input class="form-check-input" type="checkbox" value="{{$recuerdo->id}}" name="checkRecuerdo[]" id="checkRecuerdo">
+                                                        </td>
+                                                    </tr>
+                                                <?php $i++ ?>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="return agregarRecuerdos(checkRecuerdo);">Guardar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>    
                 </div>
             </div>
 
@@ -93,8 +143,7 @@
                         </tr>
                     </thead>
 
-                    <tbody>
-                        
+                    <tbody id="divRecuerdos">
                     </tbody>
                 </table>
             </div>
@@ -106,8 +155,8 @@
                 <a href="#" class="btn btn-success btn-sm">Añadir existente</button></a>
             </div>
         </div>
-
-        <div class="dropzone dropzone-previews dropzone-custom" id="mydropzone">
+<!--
+        <div class="dropzone dropzone-previews dropzone-custom" id="my-awesome-dropzone">
             <div class="dz-message text-muted" data-dz-message>
                 <span>Click aquí o arrastrar y soltar</span>
             </div>
@@ -116,7 +165,7 @@
         <div id="showMultimedia" class="row pb-2">
             
         </div>
-
+-->
         <div>
             <button type="submit" name="guardarSesion" value="Guardar" class="btn btn-outline-primary btn-sm">Guardar</button>
             <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
@@ -127,10 +176,37 @@
 @endsection
 
 @push('scripts')
-
+<script type="text/javascript">
+    function agregarRecuerdos(r){
+        //console.log(r.length);
+        document.getElementById("divRecuerdos").innerHTML = "";
+        let allRecuerdos = {!! json_encode($recuerdos) !!};
+        allRecuerdos = Object.values(allRecuerdos);
+        let n = 1;
+        for(let i = 0; i < r.length; i++){
+            let rec = allRecuerdos.filter(function(o){
+                if(o.id == r[i].value)
+                    return o; 
+            })[0];
+            if(rec != null && r[i].checked){
+                document.getElementById("divRecuerdos").innerHTML += '<tr>' +
+                                                                        '<th scope="row">' + (n++) + '</th>'+
+                                                                        '<td>' + rec.nombre + '</td>'+
+                                                                        '<td>' + rec.fecha + '</td>'+
+                                                                        '<td>' + rec.etapa.nombre + '</td>'+
+                                                                        '<td>' + rec.categoria.nombre + '</td>'+
+                                                                        '<td>' + rec.estado.nombre + '</td>'+
+                                                                        '<td>' + rec.etiqueta.nombre + '</td>'+
+                                                                        '<input type="hidden" value='+rec.id+' name="recuerdos[]">'+
+                                                                    '</tr>';
+                    
+                }
+            }
+    }
+</script>
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 
 @endpush

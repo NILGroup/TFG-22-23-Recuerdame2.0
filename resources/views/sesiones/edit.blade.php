@@ -3,7 +3,7 @@
 @section('content')
 
 
-<form action="/sesion/{{$sesion->id}}" method="POST">
+<form action="/sesion/{{$sesion->id}}" method="POST" class="dropzone">
     {{csrf_field()}}
     <div class="container-fluid">
         <div class="pt-4 pb-2">
@@ -126,17 +126,17 @@
             </div>
         </div>
 
-        <div class="dropzone dropzone-previews dropzone-custom" id="mydropzone">
+        <div class="dropzone dropzone-previews dropzone-custom" id="my-awesome-dropzone">
             <div class="dz-message text-muted" data-dz-message>
                 <span>Click aquí o arrastrar y soltar</span>
             </div>
         </div>
 
         <div id="showMultimedia" class="row pb-2">
-            @foreach ($recuerdo->multimedias as $multimedia)
+            @foreach ($sesion->multimedias as $multimedia)
                 <div class="col-sm-4 p-2">
                     <div class="img-wrap">
-                        <a href="{{route('multimedias.destroy',$multimedia->id)}}"><i class="fa-solid fa-circle-xmark text-danger fa-lg"></i></a>
+                        <a href="#" class="clear"><i class="fa-solid fa-circle-xmark text-danger fa-lg"></i></a>
                         <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon"></a>
                     </div>
                 </div>

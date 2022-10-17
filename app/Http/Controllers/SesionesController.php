@@ -10,6 +10,7 @@ use App\Models\Etapa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class SesionesController extends Controller
 {
@@ -43,7 +44,8 @@ class SesionesController extends Controller
     {
         $etapas = Etapa::all();
         $user = Auth::user();
-        return view("sesiones.create", compact('etapas', 'user'));
+        $recuerdos = Recuerdo::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
+        return view("sesiones.create", compact('etapas', 'user', 'recuerdos'));
     }
 
     /**
