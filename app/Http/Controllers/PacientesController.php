@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 use function PHPUnit\Framework\isNull;
 
@@ -30,7 +31,8 @@ class PacientesController extends Controller
     {
 
         //Sacamos a todos los pacientes de la bd
-        $pacientes = Paciente::all();
+        $idTerapeuta = Auth::id();
+        $pacientes = User::find($idTerapeuta)->pacientes;
 
         //Redireccionamos a la vista devolviendo la lista de pacientes
         return view("pacientes.index", compact("pacientes"));
@@ -69,6 +71,9 @@ class PacientesController extends Controller
         ]);
 
         //Almacenamos al paciente en la bd
+        $idTerapeuta = Auth::id();
+        $user = User::find($idTerapeuta);
+
         Paciente::create([
 
             "nombre" => $request->nombre,
@@ -80,7 +85,7 @@ class PacientesController extends Controller
             "tipo_residencia" => $request->tipo_residencia,
             "residencia_actual" => $request->residencia_actual
 
-        ]);
+        ])->users()->save($user);
 
         //Redireccionamos a la vista de lista pacientes
         return redirect("/pacientes");

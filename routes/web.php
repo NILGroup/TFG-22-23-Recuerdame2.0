@@ -332,6 +332,10 @@ Route::get('prueba/', function () {
         ["multimedia_id" => 2, "recuerdo_id" => 2]
     ]);
 
+    DB::table("paciente_user")->insert([
+        ["paciente_id" => 1, "user_id" => 1]
+    ]);
+
 
     return "<h1> Se ha llenado la base de datos </h1>";
 });

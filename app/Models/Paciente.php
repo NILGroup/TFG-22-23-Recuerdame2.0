@@ -44,4 +44,8 @@ class Paciente extends Model
     public function cuidador(){
         return $this->hasOne(User::class);
     }
+
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
 }
