@@ -51,7 +51,7 @@ class CalendarioController extends Controller
         $actividad = Actividad::findOrFail($request->id);
         $actividad->update($request->all());
 
-        return redirect("/pacientes/$request->id/calendario");
+        return redirect("/pacientes/$request->idPaciente/calendario");
 
 
     }
