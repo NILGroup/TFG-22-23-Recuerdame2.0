@@ -106,7 +106,6 @@
                         @endforeach
                     </select>
                 </div>
-
                 <label for="categoria" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-1">Categoría</label>
                 <div class="col-sm-3 col-md-3 col-lg-2">
                     <select class="form-select form-select-sm" id="idCategoria" name="categoria_id">

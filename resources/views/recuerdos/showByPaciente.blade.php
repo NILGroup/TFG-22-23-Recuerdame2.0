@@ -40,7 +40,7 @@
 
                 <th scope="row"><?php echo $i ?></th>
 
-                <td>{{$recuerdo->nombre}}</td>
+                <td><a href="/recuerdo/{{$recuerdo->id}}">{{$recuerdo->nombre}}</a></td>
                 <td>{{$recuerdo->fecha}}</td>
                 <td>{{$recuerdo->etapa_id}}</td>
                 <td>{{$recuerdo->categoria_id}}</td>
@@ -68,7 +68,7 @@
     </div>
     <script>
         function confirmar(e) {
-            if (!confirm('¿Seguro que desea eliminar esta sesión?')) {
+            if (!confirm('¿Seguro que desea eliminar este recuerdo?')) {
                 e.preventDefault();
             }
         }
