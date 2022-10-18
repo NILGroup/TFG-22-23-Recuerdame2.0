@@ -165,7 +165,7 @@ Route::get('prueba/', function () {
     $actividad->title = "Primera terapia";
     $actividad->description = "Primera terapia de evaluación al paciente Miguel";
     $actividad->paciente_id = 1;
-    $actividad->color = "rojo";
+    $actividad->color = "#00c7fc";
 
     $actividad->save();
 
@@ -175,7 +175,7 @@ Route::get('prueba/', function () {
     $actividad->title = "Segunda terapia";
     $actividad->description = "Segunda terapia de evaluación al paciente Miguel";
     $actividad->paciente_id = 1;
-    $actividad->color = "amarillo";
+    $actividad->color = "#00c7fc";
 
     $actividad->save();
 
