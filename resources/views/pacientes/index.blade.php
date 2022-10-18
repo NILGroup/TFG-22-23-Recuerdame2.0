@@ -57,7 +57,7 @@
                             <input type="hidden" name="_method" value="DELETE">
                             <button  type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                         </form>
-                        <i class="fa-solid fa-users-line text-success tableIcon"></i></a>
+                        <a href="/pacientes/{{$paciente->id}}/asignar"><i class="fa-solid fa-users-line text-success tableIcon"></i></a>
                     </div>
                 </td>
                 <?php   $i++; ?>

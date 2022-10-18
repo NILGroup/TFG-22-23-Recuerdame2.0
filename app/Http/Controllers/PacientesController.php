@@ -149,4 +149,11 @@ class PacientesController extends Controller
         return redirect("/pacientes");
         
     }
+
+    public function addPacienteToTerapeuta(int $id) {
+        $paciente = Paciente::findOrFail($id);
+        $users = User::where("rol_id","=",1)->get();
+
+        return view("pacientes.addPacienteToTerapeuta", compact("paciente", "users"));
+    }
 }

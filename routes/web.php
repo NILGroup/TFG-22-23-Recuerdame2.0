@@ -68,6 +68,9 @@ Route::resources([
 //Registro y login
 Auth::routes();
 
+
+Route::get('/pacientes/{id}/asignar', 'App\Http\Controllers\PacientesController@addPacienteToTerapeuta');
+
 //RUTAS CUSTOMIZADAS CUIDADOR
 Route::get('/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
 Route::post('/registroCuidador','App\Http\Controllers\CuidadoresController@registroCuidador');
