@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use App\PDFSesion;
 use App\PDFEvaluacion;
+use App\PDFHistoria;
 
 class PDFController extends Controller
 {
@@ -83,6 +84,26 @@ class PDFController extends Controller
         $pdf->SetFont('Times','',12);
     
         $pdf->pdfBody($pdf, $evaluacion, $paciente);
+    
+        $pdf->Output();
+    }
+
+        /***********************************************************
+     * PDFs HISTORIA
+    ************************************************************/
+    public function generarPDFHistoria(Request $request){
+           
+        $this->obtenerPDFHistoria();
+    }
+
+    public function obtenerPDFHistoria(){
+        $GLOBALS['numInforme'] = "1";
+        $pdf = new PDFHistoria( 'P', 'mm', 'A4' );
+        $pdf->AliasNbPages();
+        $pdf->AddPage();
+        $pdf->SetFont('Times','',12);
+    
+        //$pdf->pdfBody($pdf, "hola", "hey");
     
         $pdf->Output();
     }

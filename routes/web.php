@@ -115,7 +115,10 @@ Route::get('/pacientes/{id}/evaluaciones/{idE}/editar', 'App\Http\Controllers\Ev
 Route::post('/cerrarEvaluacion', 'App\Http\Controllers\EvaluacionController@store');
 Route::post('/generarPDFEvaluacion', 'App\Http\Controllers\EvaluacionController@generarPDFInformeEvaluacion');
 
-
+//RUTAS CUSTOMIZADAS HISTORIAS DE VIDA
+Route::get('/pacientes/{id}/historias/generarHistoria', 'App\Http\Controllers\HistoriaController@generarHistoria');
+Route::get('/historias/generarLibro', 'App\Http\Controllers\HistoriaController@generarLibroHistoria');
+Route::get('/generarPDFHistoria', 'App\Http\Controllers\PDFController@generarPDFHistoria');
    
 /*********************************************************
     CREA DATOS EN LA BASE DE DATOS
