@@ -2,7 +2,33 @@
 
 @section('content')
 
-<h1>Hola</h1>
+<div class="container-fluid" style="height: 75%">
+    <?php
+    if ($listaRecuerdos == null || empty($listaRecuerdos) || $listaRecuerdos=='[]') {
+    ?>
+    <div class="carousel-inner container pt-4 pb-4">
+        <div class="hv-box p-4">
+            <span class="align-middle text-muted">No se han encontrado recuerdos para esos filtros.</span>
+        </div>
+    </div>
+    <?php
+        } else {   
+        ?>
+            <h1 value="{{$listaRecuerdos}}">{{$listaRecuerdos}}</h1>
+            <!--<div id="carouselPrincipal" style="height: 85%" class="carousel carousel-dark slide" data-bs-interval="false" data-bs-ride="carousel">
+                <div class="carousel-inner container pt-4">
+                    <div class="hv-box p-4">
+                        <!?php
+                        $i = 1;
+                        $totalRecuerdos = count($listaRecuerdos);  ?>
+                        
+                    </div>
+                </div>
+            </div>-->
+        <?php
+        } 
+        ?>
+</div>
 
 @endsection
 

@@ -9,7 +9,7 @@
         <hr class="lineaTitulo">
     </div>
 
-    <form action="/historias/generarLibroHistoria" method="GET">
+    <form action="/historias/generarLibro" method="GET">
         <div class="row p-2">
             <div class="row col-sm-6 col-md-6 col-lg-6">
                 <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha de inicio</label>
@@ -26,10 +26,13 @@
             </div>
         </div>
 
+        <input type="hidden" name="paciente_id"  id="paciente_id"  value="{{Session::get('paciente')['id']}}">
+
         <div class="row">
             <label for="etapa" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Etapa de la vida</label>
             <div class="col-sm-3 col-md-3 col-lg-2">
                 <select class="form-select form-select-sm" id="idEtapa" name="idEtapa">
+                    <option></option>    
                     @foreach ($etapas as $etapa)
                         <option value="{{$etapa->id}}">{{$etapa->nombre}}</option>
                     @endforeach
@@ -42,9 +45,10 @@
             <label for="etapa" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Categoría</label>
             <div class="col-sm-3 col-md-3 col-lg-2">
                 <select class="form-select form-select-sm" id="idCategoria" name="idCategoria">
-                @foreach ($categorias as $categoria)
-                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
-                @endforeach
+                    <option></option>      
+                    @foreach ($categorias as $categoria)
+                        <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -53,9 +57,10 @@
             <label for="etapa" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Etiqueta</label>
             <div class="col-sm-3 col-md-3 col-lg-2">
                 <select class="form-select form-select-sm" id="idEtiqueta" name="idEtiqueta">
-                @foreach ($etiquetas as $etiqueta)
-                    <option value="{{$etiqueta->id}}">{{$etiqueta->nombre}}</option>
-                @endforeach
+                    <option></option>  
+                    @foreach ($etiquetas as $etiqueta)
+                        <option value="{{$etiqueta->id}}">{{$etiqueta->nombre}}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
