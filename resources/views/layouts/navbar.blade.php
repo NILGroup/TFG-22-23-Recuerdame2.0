@@ -31,7 +31,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Historias de Vida</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="historiaVida.php">Ver Historia de Vida</a></li>
+                        <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/historias/generarHistoria">Ver Historia de Vida</a></li>
                         <li><a class="dropdown-item" href="/recuerdos/{{Session::get('paciente')['id']}}">Ver recuerdos</a></li>
                         <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/personas">Personas relacionadas</a></li>
                     </ul>

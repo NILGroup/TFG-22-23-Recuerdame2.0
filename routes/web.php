@@ -68,6 +68,9 @@ Route::resources([
 //Registro y login
 Auth::routes();
 
+
+Route::get('/pacientes/{id}/asignar', 'App\Http\Controllers\PacientesController@addPacienteToTerapeuta');
+
 //RUTAS CUSTOMIZADAS CUIDADOR
 Route::get('/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
 Route::post('/registroCuidador','App\Http\Controllers\CuidadoresController@registroCuidador');
@@ -112,7 +115,10 @@ Route::get('/pacientes/{id}/evaluaciones/{idE}/editar', 'App\Http\Controllers\Ev
 Route::post('/cerrarEvaluacion', 'App\Http\Controllers\EvaluacionController@store');
 Route::post('/generarPDFEvaluacion', 'App\Http\Controllers\EvaluacionController@generarPDFInformeEvaluacion');
 
-
+//RUTAS CUSTOMIZADAS HISTORIAS DE VIDA
+Route::get('/pacientes/{id}/historias/generarHistoria', 'App\Http\Controllers\HistoriaController@generarHistoria');
+Route::get('/historias/generarLibro', 'App\Http\Controllers\HistoriaController@generarLibroHistoria');
+Route::get('/generarPDFHistoria', 'App\Http\Controllers\PDFController@generarPDFHistoria');
    
 /*********************************************************
     CREA DATOS EN LA BASE DE DATOS
@@ -162,7 +168,7 @@ Route::get('prueba/', function () {
     $actividad->title = "Primera terapia";
     $actividad->description = "Primera terapia de evaluación al paciente Miguel";
     $actividad->paciente_id = 1;
-    $actividad->color = "rojo";
+    $actividad->color = "#00c7fc";
 
     $actividad->save();
 
@@ -172,7 +178,7 @@ Route::get('prueba/', function () {
     $actividad->title = "Segunda terapia";
     $actividad->description = "Segunda terapia de evaluación al paciente Miguel";
     $actividad->paciente_id = 1;
-    $actividad->color = "amarillo";
+    $actividad->color = "#00c7fc";
 
     $actividad->save();
 
