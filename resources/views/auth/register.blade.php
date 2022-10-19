@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form method="POST" action="{{ route('register') }}">
-                @csrf
+                {{csrf_field()}}
                 <div class="card form-registro">
                     <div class="d-flex justify-content-center">
                         <img src="/img/Marca_recuerdame.png" class="card-img-top logo">

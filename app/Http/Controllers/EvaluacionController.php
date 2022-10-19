@@ -20,7 +20,7 @@ class EvaluacionController extends Controller
     
     public function showByPaciente($idPaciente){
         $evaluaciones = Evaluacion::where('paciente_id',$idPaciente)->get();
-        $paciente = $evaluaciones[0]->paciente;
+        $paciente = Paciente::find($idPaciente);
         return view("evaluaciones.showByPaciente", compact('evaluaciones', 'paciente'));
     }
     public function generarInforme($idPaciente){

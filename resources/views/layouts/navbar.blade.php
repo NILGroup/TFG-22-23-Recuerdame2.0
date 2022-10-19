@@ -59,11 +59,15 @@
 
         <div class="row align-items-center pe-4">
             <div class="col-12">
-                {{ Session::get('paciente')['genero'] }}
+                @if( Session::get('paciente')['genero'] == 'H')
+                    Hombre
+                @elseif( Session::get('paciente')['genero'] == 'M')
+                    Mujer
+                @endif
             </div>
         </div>
         <div class="row align-items-center pe-4">
-            <div class="col-12">{{Carbon\Carbon::parse(Session::get('paciente')['fecha_nacimiento'])->age}}
+            <div class="col-12">Edad: {{Carbon\Carbon::parse(Session::get('paciente')['fecha_nacimiento'])->age}}
             </div>
         </div>
     </div>

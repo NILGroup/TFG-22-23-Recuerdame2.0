@@ -21,33 +21,31 @@
                 </li>
             @endif
             @else
-                <div class="row align-items-center">
-                    <div class="col-12">
-                        {{ Auth::user()->usuario }}
-                        <!-- <div data-letters="PP"></div> -->
-                    </div>
-                </div>
                 <ul class="navbar-nav">
                     @if (Auth::user()->rol_id == 1)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('pacientes.index') }}"><i class="fa-solid fa-users"></i></a>
                         </li>
                     @endif
+                    <li class="nav-item align-items-center">
+                        <div class="col-12">
+                            <div data-letters="{{ Session::get('paciente')['nombre'][0] }}{{ Session::get('paciente')['apellidos'][0] }}"></div>
+                        </div>
+                    </li>
                     <li class="nav-item dropdown btn btn-outline-danger">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
                             Cerrar sesión
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                {{csrf_field()}}
+                            </form>
+                        </div>
+                    </li>
+                        
                 </ul>
         @endguest
         </div>

@@ -18,6 +18,7 @@ class InformesSesionController extends Controller
     }
     
     public function showByPaciente($idPaciente){
+        throw new \Exception("a");
         $sesiones = Sesion::where('paciente_id',$idPaciente)->whereNotNull("fecha_finalizada")->get();
         return view("informesSesion.showByPaciente", compact('sesiones'));
     }
