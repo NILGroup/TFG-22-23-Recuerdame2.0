@@ -29,7 +29,7 @@
                     @endif
                     <li class="nav-item align-items-center">
                         <div class="col-12">
-                            <div data-letters="{{ Session::get('paciente')['nombre'][0] }}{{ Session::get('paciente')['apellidos'][0] }}"></div>
+                            <div data-letters="{{ Auth::user()->nombre[0] }}{{ Auth::user()->apellidos[0] }}"></div> 
                         </div>
                     </li>
                     <li class="nav-item dropdown btn btn-outline-danger">
