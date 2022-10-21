@@ -3,7 +3,7 @@
 @section('content')
 
 
-<form action="/crearSesion" method="POST">
+<form action="/crearSesion" method="POST" >
     {{csrf_field()}}
     <div class="container-fluid">
         <div class="pt-4 pb-2">
@@ -25,7 +25,7 @@
                     <select class="form-select form-select-sm" name="etapa_id" required>
                         <option disabled selected value>Seleccione una etapa</option>
                         @foreach($etapas as $etapa)
-                            <option value="{{$etapa->id}}" >{{$etapa->nombre}}</option>
+                        <option value="{{$etapa->id}}">{{$etapa->nombre}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -99,18 +99,18 @@
                                             <tbody>
                                                 <?php $i = 1 ?>
                                                 @foreach ($recuerdos as $recuerdo)
-                                                    <tr>
-                                                        <th scope="row"><?php echo $i ?></th>
-                                                        <td>{{$recuerdo->nombre}}</td>
-                                                        <td>{{$recuerdo->fecha}}</td>
-                                                        <td>{{$recuerdo->etapa->nombre}}</td>
-                                                        <td>{{$recuerdo->categoria->nombre}}</td>
-                                                        <td>{{$recuerdo->estado->nombre}}</td>
-                                                        <td>{{$recuerdo->etiqueta->nombre}}</td>
-                                                        <td id="recuerdosSeleccionados" class="tableActions">
-                                                            <input class="form-check-input" type="checkbox" value="{{$recuerdo->id}}" name="checkRecuerdo[]" id="checkRecuerdo">
-                                                        </td>
-                                                    </tr>
+                                                <tr>
+                                                    <th scope="row"><?php echo $i ?></th>
+                                                    <td>{{$recuerdo->nombre}}</td>
+                                                    <td>{{$recuerdo->fecha}}</td>
+                                                    <td>{{$recuerdo->etapa->nombre}}</td>
+                                                    <td>{{$recuerdo->categoria->nombre}}</td>
+                                                    <td>{{$recuerdo->estado->nombre}}</td>
+                                                    <td>{{$recuerdo->etiqueta->nombre}}</td>
+                                                    <td id="recuerdosSeleccionados" class="tableActions">
+                                                        <input class="form-check-input" type="checkbox" value="{{$recuerdo->id}}" name="checkRecuerdo[]" id="checkRecuerdo">
+                                                    </td>
+                                                </tr>
                                                 <?php $i++ ?>
                                                 @endforeach
                                             </tbody>
@@ -122,9 +122,10 @@
                                         <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="return agregarRecuerdos(checkRecuerdo);">Guardar</button>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                    </div>    
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
             </div>
 
@@ -148,14 +149,14 @@
                 </table>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-12 justify-content-end d-flex p-2">
                 <!-- TODO REDIRIGIR A SELECCION DE MULTIMEDIA -->
                 <a href="#" class="btn btn-success btn-sm">Añadir existente</button></a>
             </div>
         </div>
-<!--
+        <!--
         <div class="dropzone dropzone-previews dropzone-custom" id="my-awesome-dropzone">
             <div class="dz-message text-muted" data-dz-message>
                 <span>Click aquí o arrastrar y soltar</span>
@@ -177,31 +178,31 @@
 
 @push('scripts')
 <script type="text/javascript">
-    function agregarRecuerdos(r){
+    function agregarRecuerdos(r) {
         //console.log(r.length);
         document.getElementById("divRecuerdos").innerHTML = "";
-        let allRecuerdos = {!! json_encode($recuerdos) !!};
+        let allRecuerdos = {!!json_encode($recuerdos) !!};
         allRecuerdos = Object.values(allRecuerdos);
         let n = 1;
-        for(let i = 0; i < r.length; i++){
-            let rec = allRecuerdos.filter(function(o){
-                if(o.id == r[i].value)
-                    return o; 
+        for (let i = 0; i < r.length; i++) {
+            let rec = allRecuerdos.filter(function(o) {
+                if (o.id == r[i].value)
+                    return o;
             })[0];
-            if(rec != null && r[i].checked){
+            if (rec != null && r[i].checked) {
                 document.getElementById("divRecuerdos").innerHTML += '<tr>' +
-                                                                        '<th scope="row">' + (n++) + '</th>'+
-                                                                        '<td>' + rec.nombre + '</td>'+
-                                                                        '<td>' + rec.fecha + '</td>'+
-                                                                        '<td>' + rec.etapa.nombre + '</td>'+
-                                                                        '<td>' + rec.categoria.nombre + '</td>'+
-                                                                        '<td>' + rec.estado.nombre + '</td>'+
-                                                                        '<td>' + rec.etiqueta.nombre + '</td>'+
-                                                                        '<input type="hidden" value='+rec.id+' name="recuerdos[]">'+
-                                                                    '</tr>';
-                    
-                }
+                    '<th scope="row">' + (n++) + '</th>' +
+                    '<td>' + rec.nombre + '</td>' +
+                    '<td>' + rec.fecha + '</td>' +
+                    '<td>' + rec.etapa.nombre + '</td>' +
+                    '<td>' + rec.categoria.nombre + '</td>' +
+                    '<td>' + rec.estado.nombre + '</td>' +
+                    '<td>' + rec.etiqueta.nombre + '</td>' +
+                    '<input type="hidden" value=' + rec.id + ' name="recuerdos[]">' +
+                    '</tr>';
+
             }
+        }
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
