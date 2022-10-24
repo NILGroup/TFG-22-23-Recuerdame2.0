@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("telefono");
             $table->string("ocupacion");
             $table->string("email");
-            $table->unsignedBigInteger("tiporelacion_id");
+            $table->unsignedBigInteger("tiporelacion_id")->nullable();
             $table->unsignedBigInteger("paciente_id");
             $table->timestamps();
 

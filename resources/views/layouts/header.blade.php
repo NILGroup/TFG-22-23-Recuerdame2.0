@@ -1,40 +1,39 @@
-<nav class="navbar navbar-expand-md navbar-light shadow-sm yellowbg">
+<nav class="navbar navbar-expand-md navbar-light shadow-sm bg-info">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url('/') }}"><img class="logotipoMarca" src="/img/Marca_recuerdame.png" /></a>
+        <div class="bg-image hover-zoom"><a class="navbar-brand " href="{{ url('/') }}"><img class="logotipoMarca w-100" src="/img/Marca_recuerdame.png" /></a></div>
 
-    
-    <div class ="d-flex flex-row-reverse">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        @guest
-            @if (Route::has('login'))
+
+        <div class="d-flex flex-row-reverse">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                @guest
+                @if (Route::has('login'))
                 <li class="nav-item btn">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
                 </li>
-            @endif
+                @endif
 
-            @if (Route::has('register'))
+                @if (Route::has('register'))
                 <li class="nav-item btn">
                     <a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a>
                 </li>
-            @endif
-            @else
+                @endif
+                @else
                 <ul class="navbar-nav">
                     @if (Auth::user()->rol_id == 1)
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('pacientes.index') }}"><i class="fa-solid fa-users"></i></a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('pacientes.index') }}"><i class="fa-solid fa-users"></i></a>
+                    </li>
                     @endif
                     <li class="nav-item align-items-center">
                         <div class="col-12">
-                            <div data-letters="{{ Session::get('paciente')['nombre'][0] }}{{ Session::get('paciente')['apellidos'][0] }}"></div>
+                            <div data-letters="{{ Auth::user()->nombre[0] }}{{ Auth::user()->apellidos[0] }}"></div>
                         </div>
                     </li>
-                    <li class="nav-item dropdown btn btn-outline-danger">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
+                    <li class="nav-item dropdown btn btn-danger">
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
                             Cerrar sesión
                             <i class="fa-solid fa-right-from-bracket"></i>
@@ -45,9 +44,9 @@
                             </form>
                         </div>
                     </li>
-                        
+
                 </ul>
-        @endguest
+                @endguest
+            </div>
         </div>
-    </div>
 </nav>

@@ -10,8 +10,8 @@
     <div class="row mb-2">
     <div class="col-12 justify-content-end d-flex">
     
-    <a href="/cuidadores/crear"><button type="button" style="background: transparent; border: 2px solid #0099CC; border-radius: 6px;" id="mybutton" class="btn-registro">Registro cuidador</button></a>
-    <a href="{{route('pacientes.create')}}"><button type="button" style="background: transparent; border: 2px solid #0099CC; border-radius: 6px; border-color:green;" class="btn-newpaciente">Nuevo paciente</i></button></a>
+    <a href="/cuidadores/crear"><button type="button"  id="mybutton" class="btn btn-primary btn-registro ">Registro cuidador</button></a>
+    <a href="{{route('pacientes.create')}}"><button type="button"  class="btn btn-newpaciente btn-info">Nuevo paciente</i></button></a>
     </div>
 </div>
 

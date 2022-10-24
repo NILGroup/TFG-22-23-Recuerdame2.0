@@ -11,10 +11,13 @@ use App\Models\Etiqueta;
 use App\Models\Paciente;
 use App\Models\Multimedia;
 use App\Models\Emocion;
+use App\Models\Personarelacionada;
+use App\Models\Tiporelacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 
-use function PHPUnit\Framework\isNan;
+
 use function PHPUnit\Framework\isNull;
 
 class RecuerdosController extends Controller
@@ -52,7 +55,12 @@ class RecuerdosController extends Controller
         $etapas = Etapa::all();
         $emociones = Emocion::all();
         $categorias = Categoria::all();
-        return view("recuerdos.create", compact("estados","etiquetas","etapas","emociones","categorias"));
+        $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
+        foreach ($prelacionadas as $p) {
+            $p->tiporelacion_id = isNull($p->tiporelacion_id)?"No relacionado":Tiporelacion::find($p->tiporelacion_id)->nombre;
+        }
+        $tipos = Tiporelacion::all();
+        return view("recuerdos.create", compact("estados","etiquetas","etapas","emociones","categorias", "prelacionadas","tipos"));
 
     }
 

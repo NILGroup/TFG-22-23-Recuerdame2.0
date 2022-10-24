@@ -63,7 +63,6 @@
                 <label for="tipo" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Tipo relación</label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
                     <select class="form-select form-select-sm" id="tiporelacion_id" name="tiporelacion_id" required>
-                        <option></option>
                         @foreach ($tipos as $tipo)
                        
                         <option value="{{$tipo->id}}">{{$tipo->nombre}}</option>

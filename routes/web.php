@@ -93,7 +93,7 @@ Route::delete('/eliminarRecuerdo/{id}', 'App\Http\Controllers\RecuerdosControlle
 //RUTAS CUSTOMIZADAS PERSONA RELACIONADA
 Route::get('/pacientes/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
 Route::get('/pacientes/{id}/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@createByPaciente');
-
+Route::post('/storeNoView', 'App\Http\Controllers\PersonasRelacionadasController@storeNoView');
 //RUTAS CUSTOMIZADAS CALENDARIO
 Route::get('/pacientes/{id}/calendario', 'App\Http\Controllers\CalendarioController@showByPaciente');
 Route::get('/mostrarActividades/{id}', 'App\Http\Controllers\CalendarioController@show');
