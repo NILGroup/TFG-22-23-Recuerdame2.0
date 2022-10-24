@@ -52,7 +52,7 @@
                     
                         <a href="/pacientes/{{$paciente->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                         <a href="{{route('pacientes.edit',$paciente->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                        <form method="post" action="{{ route('sesiones.destroy', $paciente->id) }}" onclick="confirmar(event)" style="display:inline!important;">
+                        <form method="post" action="{{ route('pacientes.destroy', $paciente->id) }}"  style="display:inline!important;">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
                             <button  type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
@@ -67,14 +67,7 @@
 
     </table>
 </div>
-<script>
-    function confirmar(e)
-    {
-        if(!confirm('¿Seguro que desea reabrir esta sesión?')) {
-            e.preventDefault();
-        }
-    }
-</script>
+
 
 @endsection
 
