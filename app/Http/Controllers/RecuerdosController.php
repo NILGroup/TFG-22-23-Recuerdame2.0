@@ -57,7 +57,7 @@ class RecuerdosController extends Controller
         $categorias = Categoria::all();
         $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
         foreach ($prelacionadas as $p) {
-            $p->tiporelacion_id = Tiporelacion::find($p->tiporelacion_id)->nombre;
+            $p->tiporelacion_id = isNull($p->tiporelacion_id)?"No relacionado":Tiporelacion::find($p->tiporelacion_id)->nombre;
         }
         $tipos = Tiporelacion::all();
         return view("recuerdos.create", compact("estados","etiquetas","etapas","emociones","categorias", "prelacionadas","tipos"));

@@ -8,11 +8,11 @@
                 <form method="POST" action="{{ route('login') }}">
                     {{csrf_field()}}
                     <div class="card form-login">
-                        <img src="/img/Marca_recuerdame.png" class="card-img-top">
+                        <img src="/img/Marca_recuerdame-nobg.png" class="card-img-top">
                         <div class="card-body">
-                            <div class="row mb-3">
+                            <div class="row mb-3 form-floating mb-3">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Correo electrónico" autofocus>
-
+                            <label class="text-muted" for="email">Correo electrónico</label>
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong> Correo electrónico o contraseña incorrectos</strong>
@@ -20,9 +20,9 @@
                             @enderror
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="row mb-3 form-floating mb-3">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Contraseña" required autocomplete="current-password">
-
+                                <label class="text-muted" for="email">Contraseña</label>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>Correo electrónico o contraseña incorrectos</strong>
@@ -38,8 +38,8 @@
                             </div>
                             <div class="d-grid gap-2  justify-content-md-end">
                                 <div class="btn-group">
-                                    <a href="/register" class="btn btn-outline-primary btn-sm">{{ __('Registro terapeuta') }}</a>
-                                    <button type="submit" name="login" style="border-color:green;" class="btn btn-primary btn-sm">{{ __('Iniciar sesión') }}</button>
+                                    <a href="/register" class="btn btn-outline-primary">{{ __('Registro terapeuta') }}</a>
+                                    <button type="submit" name="login" style="border-color:green;" class="btn btn-primary">{{ __('Iniciar sesión') }}</button>
                                 </div>
                             </div>
                             <p></p>

@@ -340,6 +340,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         $.ajax({
             type: "post",
             url: '/storeNoView',
@@ -348,50 +349,35 @@
             data: fd,
             success: function(data) {
                 console.log(data);
+                reloadPersonas(data);
             },
             error: function(data) {
                 console.log('Error:', data);
             }
         });
+    }
 
-
-
-        /* document.getElementById("divPersonas").innerHTML = "";
-        let allPersonas = {
-            !!json_encode($prelacionadas);!!
-        };
-
-        allPersonas = Object.values(allPersonas);
-        let n = 1;
-        for (let i = 0; i < p.length; i++) {
-
-            let persR = allPersonas.filter(function(o) { //Para cada persona
-                if (o.id == p[i].value)
-                    return o;
-            })[0];
-
-            if (persR != null && p[i].checked) {
+    function reloadPersonas(pList) {
+        document.getElementById("divPersonas").innerHTML = "";
+        for (let i = 0; i < pList.length;) {
                 document.getElementById("divPersonas").innerHTML += '<tr>' +
-                    '<th scope="row">' + (n++) + '</th>' +
-                    '<td>' + persR.nombre + '</td>' +
-                    '<td>' + persR.apellidos + '</td>' +
-                    '<td>' + persR.tiporelacion_id + '</td>' +
-                    '<input type="hidden" value=' + persR.id + ' name="checkPersona[]">' +
+                    '<th scope="row">' + (++i) + '</th>' +
+                    '<td>' + pList[i]["nombre"] + '</td>' +
+                    '<td>' + pList[i]["apellidos"] + '</td>' +
+                    '<td>' + pList[i]["tiporelacion_id"] + '</td>' +
                     '</tr>';
 
             }
         }
-        */
-    }
 </script>
 
 <script type="text/javascript">
+
     function agregarPersonas(p) {
         console.log(p);
         document.getElementById("divPersonas").innerHTML = "";
-        let allPersonas = {
-            !!json_encode($prelacionadas);!!
-        };
+        let allPersonas = 
+        {!!json_encode($prelacionadas);!!};
 
         allPersonas = Object.values(allPersonas);
         let n = 1;

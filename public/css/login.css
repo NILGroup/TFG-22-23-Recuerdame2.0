@@ -5,10 +5,11 @@
 }
 
 .form-login {
-    width: 400px;
+    width: 480px;
     margin: auto;
-    margin-top: 10%;
-    box-shadow: 2px 2px 5px #808B96;
+    margin-top: 5%;
+    box-shadow: 2px 2px 5px #5b6065;
     padding: 20px 30px;
     border-radius: 30px;
+    
 }

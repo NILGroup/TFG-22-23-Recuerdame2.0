@@ -96,8 +96,9 @@ class PersonasRelacionadasController extends Controller
             "paciente_id" => $request->paciente_id
 
         ]);
-      
-        return $persona;
+        $paciente = Paciente::find($persona->paciente_id);
+        
+        return $paciente->personasrelacionadas;
 
     }
     /**

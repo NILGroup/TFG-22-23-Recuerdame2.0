@@ -10,9 +10,11 @@ footer {
     width: 100%;
 }
 .yellowbg {
-    background-color: #fef9e7 !important;
+    background-color: #d2f9f9 !important;
 }
-
+.lightbluebg {
+    background-color: #e5f1f1 !important;
+}
 /*Cuerpo del cuadrado*/
 .cuerpo {
 
