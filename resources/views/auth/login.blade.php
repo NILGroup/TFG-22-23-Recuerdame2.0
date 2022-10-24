@@ -33,7 +33,7 @@
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                 <label class="form-check-label" for="remember">
-                                    {{ __('Recuerdame') }}
+                                    {{ __('Recuérdame') }}
                                 </label>
                             </div>
                             <div class="d-grid gap-2  justify-content-md-end">
