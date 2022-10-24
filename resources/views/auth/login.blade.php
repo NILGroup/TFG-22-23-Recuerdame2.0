@@ -37,7 +37,7 @@
                                 </label>
                             </div>
                             <div class="d-grid gap-2  justify-content-md-end">
-                                <div class="btn-group">
+                                <div class="btn-group mt-5">
                                     <a href="/register" class="btn btn-outline-primary">{{ __('Registro terapeuta') }}</a>
                                     <button type="submit" name="login" style="border-color:green;" class="btn btn-primary">{{ __('Iniciar sesión') }}</button>
                                 </div>
