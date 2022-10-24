@@ -96,10 +96,11 @@ class PersonasRelacionadasController extends Controller
             "paciente_id" => $request->paciente_id
 
         ]);
+        
         $paciente = Paciente::find($persona->paciente_id);
         
-        return $paciente->personasrelacionadas;
-
+        return $paciente->personasrelacionadas; //No es de las personas, es del recuerdo
+        //return $persona; //falta relacionarlo con el recuerdo
     }
     /**
      * Devuelve una personarelacionada concreta

@@ -10,16 +10,17 @@
     <div class="row mb-2">
     <div class="col-12 justify-content-end d-flex">
     
-    <a href="/cuidadores/crear"><button type="button"  id="mybutton" class="btn btn-primary btn-registro ">Registro cuidador</button></a>
+    <a href="/cuidadores/crear"><button type="button"  id="mybutton" class="btn btn-primary btn-registro mx-3">Registro cuidador</button></a>
     <a href="{{route('pacientes.create')}}"><button type="button"  class="btn btn-newpaciente btn-info">Nuevo paciente</i></button></a>
     </div>
 </div>
 
 <div>
     <?php $i = 1;?>
-    <table class="table table-bordered recuerdameTable">
-        <thead>
-            <tr>
+    <table class="table table-bordered table-striped table-responsive">
+    <caption>Listado de pacientes</caption>
+        <thead >
+            <tr class="bg-primary">
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
@@ -30,11 +31,11 @@
         </thead>
         <!--<tbody>-->
         @foreach($pacientes as $paciente)
-            <tr>
+            <tr class="">
             
-                <th scope="row"><?php echo $i ?></th>
+                <th scope="row" ><?php echo $i ?></th>
                 
-                <td><a href="/pacientes/{{$paciente->id}}/sesiones"> {{$paciente->nombre}}</a></td>
+                <td><a href="/pacientes/{{$paciente->id}}/sesiones" class="link-primary"> {{$paciente->nombre}}</a></td>
                 <td>{{$paciente->apellidos}}</td>
                 <td>
                 <?php  if($paciente->genero == 'H') echo 'Hombre';

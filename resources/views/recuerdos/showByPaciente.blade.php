@@ -20,9 +20,10 @@
 
     <div>
         <?php $i = 1; ?>
-        <table class="table table-bordered recuerdameTable">
-            <thead>
-                <tr>
+        <table class="table table-bordered table-striped table-responsive">
+        <caption>Listado de recuerdos</caption>
+        <thead>
+        <tr class="bg-primary">
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
