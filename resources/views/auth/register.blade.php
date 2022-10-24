@@ -8,7 +8,7 @@
                 {{csrf_field()}}
                 <div class="card form-registro">
                     <div class="d-flex justify-content-center">
-                        <img src="/img/Marca_recuerdame.png" class="card-img-top logo">
+                        <img src="/img/Marca_recuerdame-nobg.png" class="card-img-top logo">
                     </div>
 
                     <h5 class="text-center text-muted">Registro terapeuta</h5>
@@ -76,7 +76,7 @@
                     <input id="rol" type="hidden" name="rol" value=1 required autocomplete="apellidos" autofocus>
 
                     <div class="d-flex justify-content-center">
-                        <button type="submit" id="registrarNuevo" class="btn btn-primary btn-sm">{{ __('Registrar') }}</button>
+                        <button type="submit" id="registrarNuevo" class="btn btn-primary btn">{{ __('Registrar') }}</button>
                     </div>
                 </div>
             </form>
