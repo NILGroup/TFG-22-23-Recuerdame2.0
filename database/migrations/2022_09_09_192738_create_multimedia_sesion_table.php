@@ -21,6 +21,7 @@ return new class extends Migration
 
             $table->foreign("multimedia_id")->references("id")->on("multimedias")->onDelete("cascade");
             $table->foreign("sesion_id")->references("id")->on("sesions")->onDelete("cascade");
+            $table->unique(['multimedia_id', 'sesion_id']);
         });
     }
 
