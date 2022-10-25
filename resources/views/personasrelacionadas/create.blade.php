@@ -74,7 +74,7 @@
 
         <div class="col-12">
             <button type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary btn-sm">Guardar</button>
-            <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
+            <a href="/pacientes/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
         </div>
     </form>
 </div>
