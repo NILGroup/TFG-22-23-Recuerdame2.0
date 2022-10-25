@@ -101,7 +101,7 @@ class PacientesController extends Controller
         //Obtenemos al paciente
         $paciente = Paciente::findOrFail($id);
         $cuidador = User::find($paciente->cuidador_id);
-
+       
         session()->put('paciente', $paciente->toArray()); 
         //Devolvemos al paciente a la vista de mostrar paciente
         return view("pacientes.show", compact("paciente","cuidador"));
@@ -133,6 +133,7 @@ class PacientesController extends Controller
 
         //Actualizamos masivamente los datos del paciente
         $paciente->update($request->all());
+        session()->put('paciente', $paciente->toArray()); 
 
         //Redireccionamos a lista pacientes
         return redirect("/pacientes");
@@ -147,6 +148,7 @@ class PacientesController extends Controller
     {
         //Sacamos al paciente y lo borramos
         Paciente::findOrFail($id)->delete();
+        session()->forget('paciente');
 
         //Redireccionamos a lista pacientes
         return redirect("/pacientes");
