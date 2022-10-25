@@ -66,8 +66,8 @@
         </div>
 
         <div>
-            <button type="submit" name="generarLibro" value="Generar libro" class="btn btn-outline-primary btn-sm">Generar libro</button>
-            <button type="submit" name="generarPdf" formaction="/generarPDFHistoria" value="Generar PDF" class="btn btn-outline-primary btn-sm">Generar PDF</button>
+            <button type="submit" name="generarLibro" value="Generar libro" class="btn btn-outline-primary ">Generar libro</button>
+            <button type="submit" name="generarPdf" formaction="/generarPDFHistoria" value="Generar PDF" class="btn btn-outline-primary ">Generar PDF</button>
         </div>
     </form>
 
