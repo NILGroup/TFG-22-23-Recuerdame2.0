@@ -21,7 +21,7 @@ return new class extends Migration
 
             $table->foreign("multimedia_id")->references("id")->on("multimedias")->onDelete("cascade");
             $table->foreign("recuerdo_id")->references("id")->on("recuerdos")->onDelete("cascade");
-            
+            $table->unique(['multimedia_id', 'recuerdo_id']);
         });
     }
 

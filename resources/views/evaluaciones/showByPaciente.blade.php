@@ -15,9 +15,10 @@
         </div>
 
         <div>
-            <table class="table table-bordered recuerdameTable">
-                <thead>
-                    <tr>
+        <table class="table table-bordered table-striped table-responsive">
+    <caption>Listado de evaluaciones</caption>
+        <thead >
+            <tr class="bg-primary">
                         <th scope="col">#</th>
                         <th scope="col">Informe</th>
                         <th scope="col">Fecha</th>

@@ -277,7 +277,7 @@ Route::get('prueba/', function () {
     Multimedia::create(["nombre" => "multimedia 1", "fichero" => "avatarHombre.png"]);
     Multimedia::create(["nombre" => "multimedia 2", "fichero" => "avatarMujer.png"]);
 
-    DB::table("multimedia_sesion")->insert([
+    DB::table("multimedia_sesion")->insertOrIgnore([
         ["multimedia_id" => 1, "sesion_id" => 1],
         ["multimedia_id" => 2, "sesion_id" => 1],
         ["multimedia_id" => 1, "sesion_id" => 2],
@@ -317,29 +317,29 @@ Route::get('prueba/', function () {
         "paciente_id" => 1
     ]);
 
-    DB::table("personarelacionada_recuerdo")->insert([
+    DB::table("personarelacionada_recuerdo")->insertOrIgnore([
         ["personarelacionada_id" => 1, "recuerdo_id" => 1],
         ["personarelacionada_id" => 2, "recuerdo_id" => 1],
         ["personarelacionada_id" => 1, "recuerdo_id" => 2],
         ["personarelacionada_id" => 2, "recuerdo_id" => 2]
     ]);
 
-    DB::table("recuerdo_sesion")->insert([
+    DB::table("recuerdo_sesion")->insertOrIgnore([
         ["recuerdo_id" => 1, "sesion_id" => 1],
         ["recuerdo_id" => 2, "sesion_id" => 1],
         ["recuerdo_id" => 1, "sesion_id" => 2],
         ["recuerdo_id" => 2, "sesion_id" => 2]
     ]);
 
-    DB::table("multimedia_recuerdo")->insert([
+    DB::table("multimedia_recuerdo")->insertOrIgnore([
         ["multimedia_id" => 1, "recuerdo_id" => 1],
         ["multimedia_id" => 2, "recuerdo_id" => 1],
         ["multimedia_id" => 1, "recuerdo_id" => 2],
         ["multimedia_id" => 2, "recuerdo_id" => 2]
     ]);
 
-    DB::table("paciente_user")->insert([
-        ["paciente_id" => 1, "user_id" => 1]
+    DB::table("paciente_user")->insertOrIgnore([
+        ["paciente_id" => $paciente->id, "user_id" => 1]
     ]);
 
 

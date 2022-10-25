@@ -21,6 +21,7 @@ return new class extends Migration
 
             $table->foreign("recuerdo_id")->references("id")->on("recuerdos")->onDelete("cascade");
             $table->foreign("personarelacionada_id")->references("id")->on("personarelacionadas")->onDelete("cascade");
+            $table->unique(['recuerdo_id', 'personarelacionada_id'], 'unique_persona_recuerdo');
         });
     }
 

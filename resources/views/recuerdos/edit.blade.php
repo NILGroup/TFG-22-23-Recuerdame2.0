@@ -152,7 +152,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Lista de las personas relacionadas. Actualizarse con JS-->
+                <?php $n = 1; ?>
+                    @foreach ($personas as $persona)
+                    <tr>
+                    <th scope="row"><?php echo $n; ?></th>
+                    <td> {{$persona->nombre}}</td>
+                    <td>{{$persona->apellidos}}</td>
+                    <td>{{$persona->tiporelacion_id}}</td>
+                    </tr>
+                    <?php $n++ ?>
+                    @endforeach
                 </tbody>
             </table>
         </div>

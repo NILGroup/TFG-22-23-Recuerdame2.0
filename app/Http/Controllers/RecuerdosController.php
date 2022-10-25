@@ -164,7 +164,11 @@ class RecuerdosController extends Controller
         $etapas = Etapa::all();
         $emociones = Emocion::all();
         $categorias = Categoria::all();
-        return view("recuerdos.edit", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias"));
+        $personas = $recuerdo->personas_relacionadas;
+        foreach ($personas as $p) {
+            $p->tiporelacion_id = $p->tiporelacion->nombre;
+        }
+        return view("recuerdos.edit", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "personas"));
     }
 
     /**

@@ -21,6 +21,7 @@ return new class extends Migration
 
             $table->foreign("paciente_id")->references("id")->on("pacientes")->onDelete("cascade");
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
+            $table->unique(['paciente_id', 'user_id']);
         });
     }
 

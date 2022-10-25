@@ -8,12 +8,12 @@
                 {{csrf_field()}}
                 <div class="card form-registro">
                     <div class="d-flex justify-content-center">
-                        <img src="/img/Marca_recuerdame.png" class="card-img-top logo">
+                        <img src="/img/Marca_recuerdame-nobg.png" class="card-img-top">
                     </div>
 
                     <h5 class="text-center text-muted">Registro terapeuta</h5>
 
-                    <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="d-flex flex-row align-items-center mb-4 mt-2">
                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                         <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" placeholder="Nombre" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
 
@@ -75,8 +75,8 @@
 
                     <input id="rol" type="hidden" name="rol" value=1 required autocomplete="apellidos" autofocus>
 
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" id="registrarNuevo" class="btn btn-primary btn-sm">{{ __('Registrar') }}</button>
+                    <div class="d-grid gap-2">
+                        <button type="submit" id="registrarNuevo" class="btn btn-lg btn-primary">{{ __('Registrar') }}</button>
                     </div>
                 </div>
             </form>
