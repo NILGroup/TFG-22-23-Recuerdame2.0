@@ -24,6 +24,7 @@
                     <th scope="col">Objetivo</th>
                     <th scope="col">Finalizada/No finalizada</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -36,16 +37,24 @@
                     <td>
                         @if($sesion->fecha_finalizada != null)
                         <i class="fa-solid fa-check text-success tableIcon"></i>{{date("d/m/Y", strtotime($sesion->fecha_finalizada))}}
+                        @endif 
                     </td>
-                    @endif
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            @if($sesion->fecha_finalizada == null)
+                            <a class="btn btn-success btn-sm" style="width: 50%;" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
+                            @else
+                            <a class="btn btn-danger btn-sm" style="width: 50%;" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/informe">Ver PDF</a>
+                            @endif
+                        </div>
+                        
+                
+                    </td>
+             
                     <td class="tableActions">
                         <a href="{{route('sesiones.show',$sesion->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                         <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                        @if($sesion->fecha_finalizada == null)
-                        <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme"><i class="fa-solid fa-file-pen text-success tableIcon"></i></a>
-                        @else
-                        <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/informe"><i class="fa-solid fa-file-circle-check text-success tableIcon"></i></a>
-                        @endif
+                        
                         <form method="post" action="{{ route('sesiones.destroy', $sesion->id) }}" onclick="confirmar(event)" style="display:inline!important;">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
