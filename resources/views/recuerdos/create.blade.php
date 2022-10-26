@@ -6,11 +6,11 @@
         <h5 class="text-muted">Crear recuerdo</h5>
         <hr class="lineaTitulo">
     </div>
-    <form method="post" action="/recuerdo" class="dropzone">
+    <form method="post" action="/recuerdo">
         <input type="hidden" name="paciente_id" id="paciente_id" value="{{Session::get('paciente')['id']}}">
 
         <div class="row form-group justify-content-between">
-            <div class="row col-sm-12 col-md-6 col-lg-5">
+            <div class="row col-sm-6 col-md-6 col-lg-6">
                 <label for="nombre" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Nombre<span class="asterisco">*</span></label>
                 <div class="col-sm-9 col-md-6 col-lg-4">
                     <input type="text" name="nombre" class="form-control form-control-sm" id="nombre" maxlength="50" required>
@@ -53,11 +53,15 @@
         <div class="row">
             <div class="row col-sm-12 col-md-12 col-lg-12">
                 <label for="puntuacion" class="form-label col-form-label-sm col-sm-2 col-md-2 col-lg-1">Puntuación</label>
+
+                <div class="col-md-auto">0</div>
                 <div class="col-sm-5 col-md-5 col-lg-3">
                     <input type="range" class="form-range puntuacion" id="puntuacion" name="puntuacion" min="0" max="10" step="1" value="puntuacion">
                 </div>
-                <label id="valorPuntuacion" class="form-label col-sm-2 col-md-2 col-lg-2"></label>
+                <div class="col">10</div>
             </div>
+
+            <label id="valorPuntuacion" class="form-label col-sm-2 col-md-2 col-lg-2"></label>
         </div>
 
         <div class="mb-3">
@@ -360,24 +364,24 @@
     function reloadPersonas(pList) {
         document.getElementById("divPersonas").innerHTML = "";
         for (let i = 0; i < pList.length;) {
-                document.getElementById("divPersonas").innerHTML += '<tr>' +
-                    '<th scope="row">' + (++i) + '</th>' +
-                    '<td>' + pList[i]["nombre"] + '</td>' +
-                    '<td>' + pList[i]["apellidos"] + '</td>' +
-                    '<td>' + pList[i]["tiporelacion_id"] + '</td>' +
-                    '</tr>';
+            document.getElementById("divPersonas").innerHTML += '<tr>' +
+                '<th scope="row">' + (++i) + '</th>' +
+                '<td>' + pList[i]["nombre"] + '</td>' +
+                '<td>' + pList[i]["apellidos"] + '</td>' +
+                '<td>' + pList[i]["tiporelacion_id"] + '</td>' +
+                '</tr>';
 
-            }
         }
+    }
 </script>
 
 <script type="text/javascript">
-
     function agregarPersonas(p) {
         console.log(p);
         document.getElementById("divPersonas").innerHTML = "";
-        let allPersonas = 
-        {!!json_encode($prelacionadas);!!};
+        let allPersonas = {
+            !!json_encode($prelacionadas);!!
+        };
 
         allPersonas = Object.values(allPersonas);
         let n = 1;

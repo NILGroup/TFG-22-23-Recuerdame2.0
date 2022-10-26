@@ -12,7 +12,7 @@
     <form action="/historias/generarLibro" method="GET">
         <div class="row p-2">
             <div class="row col-sm-6 col-md-6 col-lg-6">
-                <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha de inicio</label>
+                <label for="fecha" class="form-label col-form-label-sm col-md-auto">Fecha de inicio</label>
                 <div class="col-sm-9 col-md-6 col-lg-4">
                     <input type="date" class="form-control form-control-sm" id="fechaInicio" name="fechaInicio" value="<?php echo ($fecha) ?>">
                 </div>
