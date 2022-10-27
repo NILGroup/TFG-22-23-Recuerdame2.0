@@ -223,6 +223,8 @@ class RecuerdosController extends Controller
     //Crear un nuevo recuerdo, asignarlo a la sesión y redireccionar a editar esa sesión. Se llama desde sesiones.updateAndRecuerdoNuevo
     public function crearAndVolverEditar(){
 
+        //https://youtu.be/g-Y9uiAjOE4
+
     }
 
     //Seleccionar los recuerdos de esa sesión entre los existente y redireccionar a editar la sesión. Se llama desde sesiones.updateAndSeleccionarRecuerdos

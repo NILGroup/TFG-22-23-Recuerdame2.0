@@ -23,6 +23,7 @@ class isTerapeuta
         $user = Auth::user();
         if($user->rol_id != 1){
             $paciente = Paciente::where('cuidador_id',$user->id)->get();
+            //https://youtu.be/g-Y9uiAjOE4
             $id = $paciente[0]->id;
             return redirect()->route('pacientes.show', ['paciente'=>$id]);
         }

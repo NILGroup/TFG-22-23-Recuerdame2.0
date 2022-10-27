@@ -110,6 +110,7 @@ class SesionesController extends Controller
      */
     public function show($id)
     {
+        //https://youtu.be/g-Y9uiAjOE4
         $sesion = Sesion::findOrFail($id);
         $etapas = Etapa::all();
         //throw new \Exception($sesion->multimedias);
