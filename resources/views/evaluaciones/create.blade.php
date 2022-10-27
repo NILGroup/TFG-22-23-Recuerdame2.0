@@ -88,8 +88,8 @@
             </div>
 
             <div>
-                <button type="submit" name="guardarInformeSeguimiento" value="Guardar" class="btn btn-outline-primary btn-sm">Guardar</button>
-                <a href="/pacientes/{{$paciente->id}}/evaluaciones"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
+                <button type="submit" name="guardarInformeSeguimiento" value="Guardar" class="btn btn-outline-primary">Guardar</button>
+                <a href="/pacientes/{{$paciente->id}}/evaluaciones"><button type="button" class="btn btn-primary">Atrás</button></a>
             </div>
         </div>
         </form>

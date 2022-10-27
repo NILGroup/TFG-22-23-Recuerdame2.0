@@ -37,8 +37,8 @@
             </div>
 
             <div>
-                <button type="submit" name="guardarInformeSesion" value="Guardar" class="btn btn-outline-primary btn-sm">Guardar</button>
-                <a href="/pacientes/{{$sesion->paciente->id}}/sesiones"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
+                <button type="submit" name="guardarInformeSesion" value="Guardar" class="btn btn-outline-primary">Guardar</button>
+                <a href="/pacientes/{{$sesion->paciente->id}}/sesiones"><button type="button" class="btn btn-primary">Atrás</button></a>
             </div>
 
         </div>
