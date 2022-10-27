@@ -38,6 +38,11 @@
                 </tr>
                 <?php $i++ ?>
                 @endforeach
+                @if(sizeof($sesiones) == 0)
+                    <tr>
+                        <td colspan="6" align="center">No se han generado informes de sesión</td>
+                    </tr>
+                @endif
             </tbody>
         </table>
     </div>

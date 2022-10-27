@@ -33,7 +33,6 @@ class PacientesController extends Controller
         //Sacamos a todos los pacientes de la bd
         $idTerapeuta = Auth::id();
         $pacientes = User::find($idTerapeuta)->pacientes;
-
         //Redireccionamos a la vista devolviendo la lista de pacientes
         return view("pacientes.index", compact("pacientes"));
 

@@ -63,7 +63,11 @@
                 <?php $i++; ?>
             </tr>
             @endforeach
-
+            @if(sizeof($recuerdos) == 0)
+                <tr>
+                    <td colspan="8" align="center">No se han generado recuerdos</td>
+                </tr>
+            @endif
 
         </table>
     </div>

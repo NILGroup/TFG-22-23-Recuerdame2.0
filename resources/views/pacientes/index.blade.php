@@ -64,7 +64,11 @@
                 <?php   $i++; ?>
             </tr>
         @endforeach
-        
+        @if(sizeof($pacientes) == 0)
+            <tr>
+                <td colspan="6" align="center">No ha registrado ningún paciente</td>
+            </tr>
+        @endif
 
     </table>
 </div>

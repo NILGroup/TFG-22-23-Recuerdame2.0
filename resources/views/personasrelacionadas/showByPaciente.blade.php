@@ -50,11 +50,13 @@
                 <?php $i++; ?>
 
                 @endforeach
+                @if(sizeof($personas) == 0)
+                    <tr>
+                        <td colspan="8" align="center">No se han generado personas relacionadas</td>
+                    </tr>
+                @endif
             </tbody>
         </table>
-        <div class="col-12">
-            <a href="/pacientes"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
-        </div>
     </div>
 </div>
 

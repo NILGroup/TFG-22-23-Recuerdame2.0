@@ -64,6 +64,11 @@
                 </tr>
                 <?php $i++; ?>
                 @endforeach
+                @if(sizeof($sesiones) == 0)
+                    <tr>
+                        <td colspan="6" align="center">No se ha realizado ninguna sesión</td>
+                    </tr>
+                @endif
             </tbody>
         </table>
     </div>

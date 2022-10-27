@@ -46,6 +46,11 @@
                 </tr>
                 <?php $i++ ?>
                 @endforeach
+                @if(sizeof($evaluaciones) == 0)
+                    <tr>
+                        <td colspan="6" align="center">No se han generado informes de seguimiento</td>
+                    </tr>
+                @endif
             </tbody>
         </table>
     </div>
