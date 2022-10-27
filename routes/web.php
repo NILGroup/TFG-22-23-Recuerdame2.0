@@ -216,14 +216,26 @@ Route::get('prueba/', function () {
     $ev->fecha_escala = Carbon::now();
     $ev->save();
 
-    Estado::create(["nombre" => "estado 1"]);
-    Estado::create(["nombre" => "estado 2"]);
+    Estado::updateOrcreate(["nombre" => "Conservado"]);
+    Estado::updateOrcreate(["nombre" => "En riesgo"]);
+    Estado::updateOrcreate(["nombre" => "Perdido"]);
 
-    Etapa::create(["nombre" => "etapa 1"]);
-    Etapa::create(["nombre" => "etapa 2"]);
 
-    TipoRelacion::create(["nombre" => "hermanos"]);
-    TipoRelacion::create(["nombre" => "amantes ocasionales"]);
+    Etapa::updateOrcreate(["nombre" => "Infancia"]);
+    Etapa::updateOrcreate(["nombre" => "Adolescencia"]);
+    Etapa::updateOrcreate(["nombre" => "Adulto joven"]);
+    Etapa::updateOrcreate(["nombre" => "Adulto"]);
+    Etapa::updateOrcreate(["nombre" => "Adulto Mayor"]);
+ 
+
+    TipoRelacion::updateOrcreate(["nombre" => "Padre / Madre"]);
+    TipoRelacion::updateOrcreate(["nombre" => "Hermano / Hermana"]);
+    TipoRelacion::updateOrcreate(["nombre" => "Hijo / Hija"]);
+    TipoRelacion::updateOrcreate(["nombre" => "Primo / Prima"]);
+    TipoRelacion::updateOrcreate(["nombre" => "Tío / Tía"]);
+    TipoRelacion::updateOrcreate(["nombre" => "Amigo / Amiga"]);
+    TipoRelacion::updateOrcreate(["nombre" => "Otro"]);
+
 
     Personarelacionada::create([
         "nombre" => "Ignacio",
@@ -231,7 +243,7 @@ Route::get('prueba/', function () {
         "telefono" => "678765456",
         "ocupacion" => "Desconocido",
         "email" => "Email desconocido",
-        "tiporelacion_id" => 1,
+        "tiporelacion_id" => 2,
         "paciente_id" => 1
     ]);
 
@@ -241,7 +253,7 @@ Route::get('prueba/', function () {
         "telefono" => "600000000",
         "ocupacion" => "Desconocido",
         "email" => "Email desconocido",
-        "tiporelacion_id" => 2,
+        "tiporelacion_id" => 4,
         "paciente_id" => 1
     ]);
 
@@ -271,8 +283,14 @@ Route::get('prueba/', function () {
         "observaciones" => null
     ]);
 
-    Categoria::create(["nombre" => "categoria 1"]);
-    Categoria::create(["nombre" => "categoria 2"]);
+    Categoria::updateOrcreate(["nombre" => "Familia"]);
+    Categoria::updateOrcreate(["nombre" => "Amistad"]);
+    Categoria::updateOrcreate(["nombre" => "Hobbies"]);
+    Categoria::updateOrcreate(["nombre" => "Trabajo"]);
+    Categoria::updateOrcreate(["nombre" => "Política"]);
+    Categoria::updateOrcreate(["nombre" => "Estudios"]);
+    Categoria::updateOrcreate(["nombre" => "Otro"]);
+
 
     Multimedia::create(["nombre" => "multimedia 1", "fichero" => "avatarHombre.png"]);
     Multimedia::create(["nombre" => "multimedia 2", "fichero" => "avatarMujer.png"]);
@@ -283,12 +301,17 @@ Route::get('prueba/', function () {
         ["multimedia_id" => 1, "sesion_id" => 2],
     ]);
 
-    Etiqueta::create(["nombre" => "etiqueta 1"]);
-    Etiqueta::create(["nombre" => "etiqueta 2"]);
+    Etiqueta::updateOrcreate(["nombre" => "Positivo"]);
+    Etiqueta::updateOrcreate(["nombre" => "Neutro"]);
+    Etiqueta::updateOrcreate(["nombre" => "Negativo"]);
 
-    Emocion::create(["nombre" => "alegria"]);
-    Emocion::create(["nombre" => "tristeza"]);
+    Emocion::updateOrcreate(["nombre" => "Alegría"]);
+    Emocion::updateOrcreate(["nombre" => "Nostalgia"]);
+    Emocion::updateOrcreate(["nombre" => "Ira"]);
+    Emocion::updateOrcreate(["nombre" => "Enfado"]);
+    Emocion::updateOrcreate(["nombre" => "Tristeza"]);
 
+    
     Recuerdo::create([
         "fecha" => Carbon::now(),
         "nombre" => "Primer recuerdo",
