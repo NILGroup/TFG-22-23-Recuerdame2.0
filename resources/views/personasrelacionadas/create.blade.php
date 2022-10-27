@@ -33,9 +33,9 @@
 
         <div class="row form-group justify-content-between">
            <div class="row col-sm-12 col-md-6 col-lg-5">
-                <label for="telefono" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Teléfono<span class="asterisco">*</span></label>
+                <label for="telefono" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Teléfono</label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
-                    <input type="text" name="telefono" class="form-control form-control-sm" id="telefono" required>
+                    <input type="text" name="telefono" class="form-control form-control-sm" id="telefono">
                    
                 </div>
             </div>
@@ -60,7 +60,7 @@
 
         <div class="row form-group justify-content-between">
             <div class="row col-sm-12 col-md-6 col-lg-5">
-                <label for="tipo" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Tipo relación</label>
+                <label for="tipo" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Tipo relación<span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
                     <select class="form-select form-select-sm" id="tiporelacion_id" name="tiporelacion_id" required>
                         @foreach ($tipos as $tipo)

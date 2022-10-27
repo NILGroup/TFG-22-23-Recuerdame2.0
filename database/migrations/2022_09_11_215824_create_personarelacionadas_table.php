@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string("nombre");
             $table->string("apellidos");
-            $table->string("telefono");
+            $table->string("telefono")->nullable();
             $table->string("ocupacion");
             $table->string("email");
-            $table->unsignedBigInteger("tiporelacion_id")->nullable();
+            $table->unsignedBigInteger("tiporelacion_id");
             $table->unsignedBigInteger("paciente_id");
             $table->timestamps();
 
