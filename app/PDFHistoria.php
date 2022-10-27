@@ -4,6 +4,7 @@ namespace App;
 
 use Codedge\Fpdf\Fpdf\Fpdf;
 use File;
+use DateTime;
 
 global $numInforme;
 
@@ -77,7 +78,10 @@ class PDFHistoria extends FPDF{
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,7,'Edad: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
-        $pdf->Cell(160,7,' 87',1);
+        $fecha_nacimiento = new DateTime ($paciente->fecha_nacimiento);
+        $hoy = new DateTime();
+        $edad = $hoy->diff($fecha_nacimiento);
+        $pdf->Cell(160,7,' '.$edad->y,1);
         $pdf->Ln();
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,7,'Genero: ',1,0,'L',true);
