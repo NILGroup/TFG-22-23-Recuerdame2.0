@@ -129,7 +129,7 @@ class SesionesController extends Controller
     {
         //https://www.youtube.com/watch?v=y3p10h_00A8&ab_channel=CodeStepByStep
 
-        $paciente = Paciente::find($idPaciente);
+        $paciente = Paciente::findOrFail($idPaciente);
         session()->put('paciente', $paciente->toArray());
         $sesiones = $paciente->sesiones;
         return view('sesiones.showByPaciente', compact('paciente', 'sesiones'));
