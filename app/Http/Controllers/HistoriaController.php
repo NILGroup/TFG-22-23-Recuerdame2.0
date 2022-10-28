@@ -15,56 +15,63 @@ class HistoriaController extends Controller
 
     public function oldestMemoryDate($idPaciente)
     {
-        
+
         $memory = Paciente::find($idPaciente)->recuerdos
-                                                ->sortBy('fecha')
-                                                ->first();
-        return $memory->fecha;
+            ->sortBy('fecha')
+            ->first();
+        if ($memory != null) return $memory->fecha;
     }
 
-    public function generarHistoria(int $idPaciente) {
-    $paciente = Paciente::findOrFail($idPaciente); 
-    $fecha= $this->oldestMemoryDate($idPaciente);
-    $etapas = Etapa::all();
-    $categorias = Categoria::all();
-    $etiquetas = Etiqueta::all();
-       
-    return view("historias.generateHistoria", compact("paciente", "fecha","etapas" ,"etiquetas","categorias" ));
+    public function generarHistoria(int $idPaciente)
+    {
+        $paciente = Paciente::findOrFail($idPaciente);
+        $fecha = $this->oldestMemoryDate($idPaciente);
+        $etapas = Etapa::all();
+        $categorias = Categoria::all();
+        $etiquetas = Etiqueta::all();
+
+        return view("historias.generateHistoria", compact("paciente", "fecha", "etapas", "etiquetas", "categorias"));
     }
 
     public function getListaRecuerdosHistoriaVida($idPaciente, $fechaInicio, $fechaFin, $idEtapa, $idCategoria, $idEtiqueta)
     {
-        $paciente =Paciente::find($idPaciente);
-        if(is_null($paciente)) return "ID de paciente no encontrada"; 
-      
-     
-        $listaRecuerdosHistoriaVida =Recuerdo::where('paciente_id',$idPaciente)->get();
-        
-        if(!empty($idCategoria ))
-            $listaRecuerdosHistoriaVida = $listaRecuerdosHistoriaVida->where('categoria_id',$idCategoria);
-        if(!empty($idEtapa ))
-            $listaRecuerdosHistoriaVida = $listaRecuerdosHistoriaVida->where('etapa_id',$idEtapa);
-        if(!empty($idEtiqueta ))
-            $listaRecuerdosHistoriaVida = $listaRecuerdosHistoriaVida->where('etiqueta_id',$idEtiqueta);
-   
+        $paciente = Paciente::find($idPaciente);
+        if (is_null($paciente)) return "ID de paciente no encontrada";
+
+
+        $listaRecuerdosHistoriaVida = Recuerdo::where('paciente_id', $idPaciente)->get();
+
+        if (!empty($idCategoria))
+            $listaRecuerdosHistoriaVida = $listaRecuerdosHistoriaVida->where('categoria_id', $idCategoria);
+        if (!empty($idEtapa))
+            $listaRecuerdosHistoriaVida = $listaRecuerdosHistoriaVida->where('etapa_id', $idEtapa);
+        if (!empty($idEtiqueta))
+            $listaRecuerdosHistoriaVida = $listaRecuerdosHistoriaVida->where('etiqueta_id', $idEtiqueta);
+
         return $listaRecuerdosHistoriaVida;
     }
 
-      public function generarLibroHistoria(Request $request) {
-        
+    public function generarLibroHistoria(Request $request)
+    {
+
         $idCategoria = $request->idCategoria;
         $fechaInicio = $request->fechaInicio;
         $fechaFin = $request->fechaFin;
         $idEtapa = $request->idEtapa;
         $idEtiqueta = $request->idEtiqueta;
-        $idEtiqueta = $request->idEtiqueta;
         $idPaciente = $request->paciente_id;
-       
-        
-       $listaRecuerdos= $this->getListaRecuerdosHistoriaVida($idPaciente, $fechaInicio, $fechaFin, $idEtapa, $idCategoria, $idEtiqueta);
-       
-       return view("historias.generarLibro", compact("idCategoria","fechaInicio","fechaFin","idEtapa","idEtiqueta","listaRecuerdos"));
-        
-    }
 
+        $etapa = null;
+        if($idEtapa!=null)$etapa = Etapa::find($idEtapa)->nombre;
+
+        $categoria = null;
+        if($idCategoria!=null)$categoria = Categoria::find($idCategoria)->nombre;
+        
+        $etiqueta = null;
+        if($idEtiqueta!=null)$etiqueta = Etiqueta::find($idEtiqueta)->nombre;
+
+        $listaRecuerdos = $this->getListaRecuerdosHistoriaVida($idPaciente, $fechaInicio, $fechaFin, $idEtapa, $idCategoria, $idEtiqueta);
+
+        return view("historias.generarLibro", compact("categoria", "fechaInicio", "fechaFin", "etapa", "etiqueta", "listaRecuerdos"));
+    }
 }
