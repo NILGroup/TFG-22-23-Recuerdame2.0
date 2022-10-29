@@ -88,12 +88,14 @@ Route::post('/updateAndSeleccionarRecuerdos','App\Http\Controllers\SesionesContr
 Route::get('/pacientes/{id}/recuerdos', 'App\Http\Controllers\RecuerdosController@showByPaciente');
 Route::get('/recuerdos/{id}', 'App\Http\Controllers\RecuerdosController@showByPaciente');
 Route::delete('/eliminarRecuerdo/{id}', 'App\Http\Controllers\RecuerdosController@destroy');
+Route::post('/storeRecuerdoNoView', 'App\Http\Controllers\RecuerdosController@storeNoView');
 
 
 //RUTAS CUSTOMIZADAS PERSONA RELACIONADA
 Route::get('/pacientes/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
 Route::get('/pacientes/{id}/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@createByPaciente');
-Route::post('/storeNoView', 'App\Http\Controllers\PersonasRelacionadasController@storeNoView');
+Route::post('/storePersonaNoView', 'App\Http\Controllers\PersonasRelacionadasController@storeNoView');
+
 //RUTAS CUSTOMIZADAS CALENDARIO
 Route::get('/pacientes/{id}/calendario', 'App\Http\Controllers\CalendarioController@showByPaciente');
 Route::get('/mostrarActividades/{id}', 'App\Http\Controllers\CalendarioController@show');
@@ -292,8 +294,8 @@ Route::get('prueba/', function () {
     Categoria::updateOrcreate(["nombre" => "Otro"]);
 
 
-    Multimedia::create(["nombre" => "multimedia 1", "fichero" => "avatarHombre.png"]);
-    Multimedia::create(["nombre" => "multimedia 2", "fichero" => "avatarMujer.png"]);
+    Multimedia::create(["nombre" => "multimedia 1", "fichero" => "avatar_hombre.png"]);
+    Multimedia::create(["nombre" => "multimedia 2", "fichero" => "avatar_hujer.png"]);
 
     DB::table("multimedia_sesion")->insertOrIgnore([
         ["multimedia_id" => 1, "sesion_id" => 1],

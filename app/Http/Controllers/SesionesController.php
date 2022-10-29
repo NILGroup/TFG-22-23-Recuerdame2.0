@@ -7,6 +7,11 @@ use App\Models\Recuerdo;
 use App\Models\Multimedia;
 use App\Models\Paciente;
 use App\Models\Etapa;
+use App\Models\Estado;
+use App\Models\Etiqueta;
+use App\Models\Emocion;
+use App\Models\Categoria;
+use App\Models\PersonaRelacionada;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -42,10 +47,16 @@ class SesionesController extends Controller
      */
     public function create()
     {
-        $etapas = Etapa::all();
         $user = Auth::user();
         $recuerdos = Recuerdo::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
-        return view("sesiones.create", compact('etapas', 'user', 'recuerdos'));
+        $estados = Estado::all();
+        $etiquetas = Etiqueta::all();
+        $etapas = Etapa::all();
+        $emociones = Emocion::all();
+        $categorias = Categoria::all();
+        $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
+
+        return view("sesiones.create", compact('etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas'));
     }
 
     /**
@@ -212,6 +223,7 @@ class SesionesController extends Controller
     }
     
     public function updateAndSeleccionarRecuerdos(Request $request){
+        
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->id],
             ['fecha' => $request->fecha,

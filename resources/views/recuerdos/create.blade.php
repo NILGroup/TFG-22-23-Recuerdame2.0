@@ -347,7 +347,7 @@
 
         $.ajax({
             type: "post",
-            url: '/storeNoView',
+            url: '/storePersonaNoView',
             processData: false, // tell jQuery not to process the data
             contentType: false, // tell jQuery not to set contentType
             data: fd,

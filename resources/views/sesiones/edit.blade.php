@@ -68,15 +68,13 @@
                 <hr class="lineaTitulo">
             </div>
 
-            <div class="row">
+            <div class="col-12 justify-content-end d-flex p-2">
                 <div class="col-12 justify-content-end d-flex p-2">
-                    <div class="col-12 justify-content-end d-flex p-2">
-                        <!-- Nuevo-->
-                        <button type="submit" formaction="/updateAndRecuerdoNuevo" name="guardarSesion" class="btn btn-success btn-sm btn-icon me-2"><i class="fa-solid fa-plus"></i></button>
-                        <!-- Existente -->
-                        <!-- TODO REDIRIGIR A LA PÁGINA DE CREACION Y NO A LA LISTA DE RECUERDOS -->
-                        <button type="submit" formaction="/updateAndSeleccionarRecuerdos" name="guardarSesion" class="btn btn-success btn-sm me-2">Añadir existente</button>
-                    </div>
+                    <!-- Nuevo-->
+                    <button type="submit" formaction="/updateAndRecuerdoNuevo" name="guardarSesion" class="btn btn-success btn-sm btn-icon me-2"><i class="fa-solid fa-plus"></i></button>
+                    <!-- Existente -->
+                    <!-- TODO REDIRIGIR A LA PÁGINA DE CREACION Y NO A LA LISTA DE RECUERDOS -->
+                    <button type="submit" formaction="/updateAndSeleccionarRecuerdos" name="guardarSesion" class="btn btn-success btn-sm ">Añadir existente</button>
                 </div>
             </div>
 

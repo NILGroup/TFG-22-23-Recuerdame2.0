@@ -111,7 +111,7 @@
         @foreach($sesion->multimedias as $multimedia)
             <div class="col-sm-4">
                 <!-- TODO HACER QUE MUESTRE ARCHIVOS DE LA BBDD -->
-                <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon"></a>
+                <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="img-responsive-sm img-thumbnail multimedia-icon"></a>
             </div>
         @endforeach
     </div>

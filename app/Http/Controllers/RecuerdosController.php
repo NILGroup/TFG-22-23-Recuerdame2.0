@@ -92,6 +92,7 @@ class RecuerdosController extends Controller
             ['fecha' => $request->fecha,
              'nombre' => $request->nombre,
              'descripcion' => $request->descripcion,
+             'localizacion' => $request->localizacion,
              'etapa_id' => $request->etapa_id,
              'categoria_id' => $request->categoria_id,
              'emocion_id' => $request->emocion_id,
@@ -219,16 +220,46 @@ class RecuerdosController extends Controller
                                                 ->get();
         return $memory->fecha;
     }
+    
+    /*Como el store pero no devuelve a una vista*/
+    public function storeNoView(Request $request)
+    {
+        $recuerdo = Recuerdo::updateOrCreate(
+            ['id' => $request->id],
+            ['fecha' => $request->fecha,
+             'nombre' => $request->nombre,
+             'descripcion' => $request->descripcion,
+             'localizacion' => $request->localizacion,
+             'etapa_id' => $request->etapa_id,
+             'categoria_id' => $request->categoria_id,
+             'emocion_id' => $request->emocion_id,
+             'estado_id' => $request->estado_id,
+             'etiqueta_id' => $request->etiqueta_id,
+             'puntuacion' => $request->puntuacion,
+             'paciente_id' => $request->paciente_id]
+        );
 
-    //Crear un nuevo recuerdo, asignarlo a la sesión y redireccionar a editar esa sesión. Se llama desde sesiones.updateAndRecuerdoNuevo
-    public function crearAndVolverEditar(){
+        $recuerdo->etapa = $recuerdo->etapa->nombre;
+        if(is_null($recuerdo->categoria_id)){
+            $recuerdo->categoria = " ";
+        }
+        else{
+            $recuerdo->categoria = $recuerdo->categoria->nombre;
+        }
 
-        //https://youtu.be/g-Y9uiAjOE4
+        if(is_null($recuerdo->estado_id)){
+            $recuerdo->estado = " ";
+        }
+        else{
+            $recuerdo->estado = $recuerdo->estado->nombre;
+        }
 
-    }
-
-    //Seleccionar los recuerdos de esa sesión entre los existente y redireccionar a editar la sesión. Se llama desde sesiones.updateAndSeleccionarRecuerdos
-    public function agregarAndVolverEditar(){
-
+        if(is_null($recuerdo->etiqueta_id)){
+            $recuerdo->etiqueta = " ";
+        }
+        else{
+            $recuerdo->etiqueta = $recuerdo->etiqueta->nombre;
+        }
+        return $recuerdo;
     }
 }

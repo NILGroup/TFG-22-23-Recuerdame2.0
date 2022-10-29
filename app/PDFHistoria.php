@@ -38,7 +38,7 @@ class PDFHistoria extends FPDF{
     
             $listaMultimedia = $row->multimedias;
             foreach ($listaMultimedia as $multimedia) {
-                $image = "archivos/" . $multimedia->fichero;
+                $image = "../public/img/" . $multimedia->fichero;
                 $pdf->MultiCell(0,35,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 40));
                 $pdf->Ln();
             }

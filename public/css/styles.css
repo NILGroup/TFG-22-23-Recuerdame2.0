@@ -238,7 +238,7 @@ footer {
     overflow: hidden;
     width: 150px;
     height: auto;
-    position: relative;
+    /*position: relative;*/
     display: block;
     z-index: 10;
 }
