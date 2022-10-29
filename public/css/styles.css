@@ -1,12 +1,14 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Nunito', sans-serif;
 }
 
 footer {
-    background-color: #fef9e7 !important;
     position:fixed;
     bottom:0;
-    height:50px;
     width: 100%;
 }
 .yellowbg {
@@ -15,6 +17,12 @@ footer {
 .lightbluebg {
     background-color: #e5f1f1 !important;
 }
+
+.scrollUp{    
+    font-size:3em;
+    z-index: 999;
+}
+
 /*Cuerpo del cuadrado*/
 .cuerpo {
 
