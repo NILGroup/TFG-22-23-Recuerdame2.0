@@ -48,7 +48,8 @@ class SesionesController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $recuerdos = Recuerdo::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
+        $paciente = Paciente::find(Session::get('paciente')['id']);
+        $recuerdos = Recuerdo::where('paciente_id', $paciente->id)->get();
         $estados = Estado::all();
         $etiquetas = Etiqueta::all();
         $etapas = Etapa::all();
@@ -56,7 +57,7 @@ class SesionesController extends Controller
         $categorias = Categoria::all();
         $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
 
-        return view("sesiones.create", compact('etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas'));
+        return view("sesiones.create", compact('etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente'));
     }
 
     /**
@@ -67,6 +68,7 @@ class SesionesController extends Controller
      */
     public function store(Request $request)
     {
+        //throw new \Exception(json_encode($request->recuerdos));
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->id],
             ['fecha' => $request->fecha,
@@ -80,6 +82,9 @@ class SesionesController extends Controller
              'user_id' => $request->user_id,
              'respuesta' => $request->respuesta]
         );
+        foreach($request->recuerdos as $recuerdo_id){
+            $sesion->recuerdos()->attach($recuerdo_id);
+        }
         return redirect("pacientes/{$sesion->paciente->id}/sesiones");
     }
 
@@ -131,9 +136,17 @@ class SesionesController extends Controller
     public function showEditable($id)
     {
         $sesion = Sesion::findOrFail($id);
+        $user = Auth::user();
+        $paciente = Paciente::find(Session::get('paciente')['id']);
+        $recuerdos = Recuerdo::where('paciente_id', $paciente->id)->get();
+        $estados = Estado::all();
+        $etiquetas = Etiqueta::all();
         $etapas = Etapa::all();
+        $emociones = Emocion::all();
+        $categorias = Categoria::all();
+        $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
         //throw new \Exception($sesion->multimedias);
-        return view('sesiones.edit', compact('sesion', 'etapas'));
+        return view('sesiones.edit', compact('sesion', 'etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente'));
     }
 
     public function showByPaciente($idPaciente)

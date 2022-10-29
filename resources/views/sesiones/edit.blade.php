@@ -69,15 +69,10 @@
             </div>
 
             <div class="col-12 justify-content-end d-flex p-2">
-                <div class="col-12 justify-content-end d-flex p-2">
-                    <!-- Nuevo-->
-                    <button type="submit" formaction="/updateAndRecuerdoNuevo" name="guardarSesion" class="btn btn-success btn-sm btn-icon me-2"><i class="fa-solid fa-plus"></i></button>
-                    <!-- Existente -->
-                    <!-- TODO REDIRIGIR A LA PÁGINA DE CREACION Y NO A LA LISTA DE RECUERDOS -->
-                    <button type="submit" formaction="/updateAndSeleccionarRecuerdos" name="guardarSesion" class="btn btn-success btn-sm ">Añadir existente</button>
-                </div>
+                <button type="button" name="crearRecuerdo" class="btn btn-success btn-sm btn-icon me-2" data-bs-toggle="modal" data-bs-target="#recuerdosCreator"><i class="fa-solid fa-plus"></i></button>
+                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#recuerdosExistentes">Añadir existente</button>
             </div>
-
+            
             <div>
                 <table class="table table-bordered">
                     <thead>
@@ -147,6 +142,8 @@
         </div>
     </div>
 </form>
+
+@include('sesiones.models')
 
 @endsection
 
