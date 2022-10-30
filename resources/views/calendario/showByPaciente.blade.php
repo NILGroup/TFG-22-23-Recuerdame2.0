@@ -23,7 +23,9 @@
             headerToolbar: {
                 left: 'prev,next',
                 center: 'title',
-                right: 'add_event,dayGridMonth,timeGridWeek,timeGridDay,listMonth,today',
+                //right: 'add_event,dayGridMonth,timeGridWeek,timeGridDay,listMonth,today',
+                right: 'add_event,dayGridMonth,dayGridWeek,dayGridDay,listMonth,today',
+
 
             },
 
@@ -76,9 +78,7 @@
 
 <!-- Tu contenido aquí -->
 <div class="container">
-    <div class="container">
-        <div id="calendar">
-        </div>
+    <div id="calendar">
     </div>
 
     <div class="modal fade" id="evento" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="evento" aria-hidden="true">
@@ -113,9 +113,9 @@
                             <label for="obs" class="form-label">Observaciones</label>
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-danger btn-sm d-none">
-                            <input type="submit" formaction="/modificarActividad" id="btnModificar" name="btnModificar" value="Modificar actividad" class="btn btn-warning btn-sm d-none">
-                            <input type="submit" id="btnGuardar" name="btnAccion" value="Registrar" class="btn btn-primary btn-sm">
+                            <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-danger btn-md d-none">
+                            <input type="submit" formaction="/modificarActividad" id="btnModificar" name="btnModificar" value="Modificar actividad" class="btn btn-warning btn-md d-none">
+                            <input type="submit" id="btnGuardar" name="btnAccion" value="Registrar" class="btn btn-primary btn-md">
                         </div>
                     </div>
                 </form>
