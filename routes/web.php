@@ -114,6 +114,7 @@ Route::get('/pacientes/{id}/evaluaciones', 'App\Http\Controllers\EvaluacionContr
 Route::get('/pacientes/{id}/evaluaciones/generarInforme', 'App\Http\Controllers\EvaluacionController@generarInforme');
 Route::get('/pacientes/{id}/evaluaciones/{idE}/informe', 'App\Http\Controllers\PDFController@verInformeEvaluacion');
 Route::get('/pacientes/{id}/evaluaciones/{idE}/editar', 'App\Http\Controllers\EvaluacionController@showEditable');
+Route::get('/pacientes/{id}/evaluaciones/{idE}/ver', 'App\Http\Controllers\EvaluacionController@show');
 Route::post('/cerrarEvaluacion', 'App\Http\Controllers\EvaluacionController@store');
 Route::post('/generarPDFEvaluacion', 'App\Http\Controllers\EvaluacionController@generarPDFInformeEvaluacion');
 

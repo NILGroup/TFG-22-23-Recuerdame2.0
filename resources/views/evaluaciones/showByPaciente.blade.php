@@ -34,7 +34,7 @@
                     <td>{{$informe->fecha}}</td>
                     <td>{{$informe->diagnostico}}</td>
                     <td class="tableActions">
-                        <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                        <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                         <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
                         <form method="post" action="{{ route('evaluaciones.destroy', $informe->id) }}" onclick="confirmar(event)" style="display:inline!important;">
                             {{csrf_field()}}

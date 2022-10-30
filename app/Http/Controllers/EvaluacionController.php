@@ -41,15 +41,19 @@ class EvaluacionController extends Controller
              'cdr' => $request->cdr,
              'cdr_fecha' => $request->cdr_fecha,
              'diagnostico' => $request->diagnostico,
-             'observaciones' => $request->observaciones
+             'observaciones' => $request->observaciones,
+             'nombre_escala' => $request->nombre_escala,
+             'escala' => $request->escala,
+             'fecha_escala' => $request->fecha_escala
             ]);
-        if($request->nombre_escala != null){
-            $evaluacion->nombre_escala = $request->nombre_escala;
-            $evaluacion->escala = $request->escala;
-            $evaluacion->fecha_escala = $request->fecha_escala;
-            $evaluacion->save();
-        }
-        return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones");
+        return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones/$evaluacion->id/ver");
+    }
+
+    public function show($id, $idE)
+    {
+        $evaluacion = Evaluacion::findOrFail($idE);
+        $paciente = $evaluacion->paciente;
+        return view('evaluaciones.show', compact('evaluacion', 'paciente'));
     }
 
     public function showEditable($id, $idE)
