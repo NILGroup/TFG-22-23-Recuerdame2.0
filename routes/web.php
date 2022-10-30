@@ -126,7 +126,7 @@ Route::get('/generarPDFHistoria', 'App\Http\Controllers\PDFController@generarPDF
 /*********************************************************
     CREA DATOS EN LA BASE DE DATOS
 *********************************************************/
-Route::get('prueba/', function () {
+Route::post('/prueba', function () {
 
        
     Rol::create(["nombre" => "Terapeuta"]);
