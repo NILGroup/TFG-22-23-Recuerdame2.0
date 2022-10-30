@@ -79,7 +79,7 @@
                     </div>
                 </div>
 
-                @if(!is_null($cuidador)))
+                @if(!is_null($cuidador))
                 <div class="row form-group justify-content-between">
                     <div class="row col-sm-12 col-md-6 col-lg-5">
                         <label for="cuidador" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Cuidador</label>
@@ -92,7 +92,7 @@
                 
             </div>
             <div class="col-12">
-                <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
+                <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a>
             </div>
     </form>
 </div>

@@ -110,8 +110,8 @@
         <div id="showMultimedia" class="row pb-2"> </div>
         
         <div>
-            <button type="submit" name="guardarSesion" value="Guardar" class="btn btn-outline-primary btn-sm">Guardar</button>
-            <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
+            <button type="submit" name="guardarSesion" value="Guardar" class="btn btn-outline-primary">Guardar</button>
+            <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a>
         </div>
     </div>
 </form>

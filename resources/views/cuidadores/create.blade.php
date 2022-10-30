@@ -114,8 +114,8 @@
             <input id="rol" type="hidden" name="rol" value=2 required autocomplete="apellidos" autofocus>
 
             <div class="col-12">
-                <button type="submit" value="Guardar" class="btn btn-outline-primary btn-sm">Guardar</button>
-                <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
+                <button type="submit" value="Guardar" class="btn btn-outline-primary">Guardar</button>
+                <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a>
             </div>
         </form>
     </div>

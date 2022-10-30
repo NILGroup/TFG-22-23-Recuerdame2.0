@@ -41,9 +41,8 @@
             <input type="hidden" name="numT" value="" />
         </div>
         <div class="col-12">
-            <!--<input value="Guardar" class="btn btn-outline-primary btn-sm">-->
-            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-outline-primary btn-sm">Guardar</button></a>
-            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
+            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-outline-primary">Guardar</button></a>
+            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a>
         </div>
     </form>
 </div>
