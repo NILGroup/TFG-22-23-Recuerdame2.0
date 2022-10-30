@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->date('fecha');
             $table->string('nombre');
-            $table->string('descripcion')->nullable();
+            $table->longText('descripcion')->nullable();
             $table->string('localizacion')->nullable();
             //id_etapa
             $table->unsignedBigInteger('etapa_id');
