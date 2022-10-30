@@ -6,7 +6,7 @@
         <h5 class="text-muted">Crear recuerdo</h5>
         <hr class="lineaTitulo">
     </div>
-    <form method="post" action="/recuerdo">
+    <form method="post" action="/recuerdo" id="recuerdoForm">
         <input type="hidden" name="paciente_id" id="paciente_id" value="{{Session::get('paciente')['id']}}">
 
         <div class="row form-group justify-content-between">
@@ -131,14 +131,14 @@
 
 
         <div>
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped table-responsive">
+                <caption>Listado de personas relacionadas</caption>
                 <thead>
-                    <tr>
+                    <tr class="bg-primary">
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellidos</th>
                         <th scope="col">Tipo de relación/parentesco</th>
-                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody id="divPersonas">
@@ -167,244 +167,18 @@
             <!-- Mostrar las multimedias con JS -->
         </div>
 
-        <div class="col-12">
-            <button type="submit" value="Guardar" class="btn btn-outline-primary btn-sm">Guardar</button>
-            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
+        <div class="col-12 ">
+            <button type="submit" value="Guardar" class="btn btn-outline-primary btn">Guardar</button>
+            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary btn">Atrás</button></a>
         </div>
     </form>
 </div>
 
-<!-- MODALES -->
-<div class="modal fade" id="personasCreator" tabindex="-1" aria-labelledby="personasCreatorLabel" aria-hidden="true">
+@include('recuerdos.models')
 
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h5 class="modal-title" id="personasExistentesLabel">Crear: Personas relacionadas</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body" id="personasCreatorForm">
-
-                {{csrf_field()}}
-                <input type="hidden" name="paciente_id" id="paciente_id" value="{{Session::get('paciente')['id']}}">
-
-
-
-                <div class="row form-group justify-content-between">
-                    <div class="row col-sm-12 col-md-6 col-lg-5">
-                        <label for="nombre" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Nombre<span class="asterisco">*</span></label>
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <input type="text" name="nombre" class="form-control form-control-sm" id="nombre" required>
-
-                        </div>
-                    </div>
-                    <div class="row col-sm-12 col-md-6 col-lg-7">
-                        <label for="apellidos" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Apellidos<span class="asterisco">*</span></label>
-                        <div class="col-sm-12 col-md-12 col-lg-8">
-                            <input type="text" name="apellidos" class="form-control form-control-sm" id="apellidos" required>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="row form-group justify-content-between">
-                    <div class="row col-sm-12 col-md-6 col-lg-5">
-                        <label for="telefono" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Teléfono<span class="asterisco">*</span></label>
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <input type="text" name="telefono" class="form-control form-control-sm" id="telefono" required>
-
-                        </div>
-                    </div>
-                    <div class="row col-sm-12 col-md-6 col-lg-7">
-                        <label for="ocupacion" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Ocupación<span class="asterisco">*</span></label>
-                        <div class="col-sm-12 col-md-12 col-lg-8">
-                            <input type="text" name="ocupacion" class="form-control form-control-sm" id="ocupacion" required>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row form-group justify-content-between">
-                    <div class="row col-sm-12 col-md-6 col-lg-5">
-                        <label for="email" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Email<span class="asterisco">*</span></label>
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <input type="text" name="email" class="form-control form-control-sm" id="email" required>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row form-group justify-content-between">
-                    <div class="row col-sm-12 col-md-6 col-lg-5">
-                        <label for="tipo" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Tipo relación</label>
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <select class="form-select form-select-sm" id="tiporelacion_id" name="tiporelacion_id" required>
-                                <option></option>
-                                @foreach ($tipos as $tipo)
-                                <option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-            </div> <!-- Modal body -->
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="CrearPersonas()">Guardar</button>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<div class="modal fade" id="personasExistentes" tabindex="-1" aria-labelledby="personasExistentesLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="personasExistentesLabel">Personas relacionadas existentes</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body">
-                <table class="table table-bordered recuerdameTable">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellidos</th>
-                            <th scope="col">Tipo de Relacion</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $i = 1 ?>
-                        @foreach ($prelacionadas as $persona)
-                        <tr>
-                            <th scope="row"><?php echo $i ?></th>
-                            <td>{{$persona->nombre}}</td>
-                            <td>{{$persona->apellidos}}</td>
-                            <td>{{$persona->tiporelacion_id}}</td>
-                            <td id="recuerdosSeleccionados" class="tableActions">
-                                <input class="form-check-input" type="checkbox" value="{{$persona->id}}" name="checkPersona[]" id="checkPersona">
-                            </td>
-                        </tr>
-                        <?php $i++ ?>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="return agregarPersonas(checkPersona);">Guardar</button>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @push('scripts')
-
-<script type="text/javascript">
-    function CrearPersonas() {
-        /*
-        0 Token
-        1 Paciente_id
-        2 Nombre
-        3 Apellidos
-        4 Telefono
-        5 Ocupaacion
-        6 Email
-        */
-        const inputValues = document.querySelectorAll('#personasCreatorForm input')
-        console.log(inputValues);
-        console.log(inputValues[2].value);
-        var rel = document.getElementById("tiporelacion_id");
-        console.log(rel.value);
-        console.log(rel.options[rel.selectedIndex].text);
-        console.log($('meta[name=csrf-token]').attr('content'));
-
-        var fd = new FormData();
-        fd.append('nombre', inputValues[2].value);
-        fd.append('apellidos', inputValues[3].value);
-        fd.append('telefono', inputValues[4].value);
-        fd.append('ocupacion', inputValues[5].value);
-        fd.append('email', inputValues[6].value);
-        fd.append('tiporelacion_id', rel.value);
-        fd.append('paciente_id', inputValues[1].value);
-        console.log(fd)
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $.ajax({
-            type: "post",
-            url: '/storePersonaNoView',
-            processData: false, // tell jQuery not to process the data
-            contentType: false, // tell jQuery not to set contentType
-            data: fd,
-            success: function(data) {
-                console.log(data);
-                reloadPersonas(data);
-            },
-            error: function(data) {
-                console.log('Error:', data);
-            }
-        });
-    }
-
-    function reloadPersonas(pList) {
-        document.getElementById("divPersonas").innerHTML = "";
-        for (let i = 0; i < pList.length;) {
-            document.getElementById("divPersonas").innerHTML += '<tr>' +
-                '<th scope="row">' + (++i) + '</th>' +
-                '<td>' + pList[i]["nombre"] + '</td>' +
-                '<td>' + pList[i]["apellidos"] + '</td>' +
-                '<td>' + pList[i]["tiporelacion_id"] + '</td>' +
-                '</tr>';
-
-        }
-    }
-</script>
-
-<script type="text/javascript">
-    function agregarPersonas(p) {
-        console.log(p);
-        document.getElementById("divPersonas").innerHTML = "";
-        let allPersonas = {
-            !!json_encode($prelacionadas);!!
-        };
-
-        allPersonas = Object.values(allPersonas);
-        let n = 1;
-        for (let i = 0; i < p.length; i++) {
-
-            let persR = allPersonas.filter(function(o) { //Para cada persona
-                if (o.id == p[i].value)
-                    return o;
-            })[0];
-
-            if (persR != null && p[i].checked) {
-                document.getElementById("divPersonas").innerHTML += '<tr>' +
-                    '<th scope="row">' + (n++) + '</th>' +
-                    '<td>' + persR.nombre + '</td>' +
-                    '<td>' + persR.apellidos + '</td>' +
-                    '<td>' + persR.tiporelacion_id + '</td>' +
-                    '<input type="hidden" value=' + persR.id + ' name="checkPersona[]">' +
-                    '</tr>';
-
-            }
-        }
-    }
-</script>
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>

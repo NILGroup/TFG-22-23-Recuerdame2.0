@@ -57,7 +57,7 @@ class RecuerdosController extends Controller
         $categorias = Categoria::all();
         $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
         foreach ($prelacionadas as $p) {
-            $p->tiporelacion_id = isNull($p->tiporelacion_id)?"No relacionado":Tiporelacion::find($p->tiporelacion_id)->nombre;
+            $p->tiporelacion_id = !isNull($p->tiporelacion_id)?"No relacionado":Tiporelacion::find($p->tiporelacion_id)->nombre;
         }
         $tipos = Tiporelacion::all();
         return view("recuerdos.create", compact("estados","etiquetas","etapas","emociones","categorias", "prelacionadas","tipos"));
@@ -72,9 +72,7 @@ class RecuerdosController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'file' => 'image|max:2048'
-        ]);
+
 
         if(!is_null($request->file)){
         $imagenes = $request->file('file')->store('public/img');
@@ -87,6 +85,7 @@ class RecuerdosController extends Controller
         ]);
         }
 
+        //Ahora que tenemos creado el recuerdo
         $recuerdo = Recuerdo::updateOrCreate(
             ['id' => $request->id],
             ['fecha' => $request->fecha,
@@ -101,7 +100,14 @@ class RecuerdosController extends Controller
              'puntuacion' => $request->puntuacion,
              'paciente_id' => $request->paciente_id]
         );
-  
+        
+        $personas_relacionar = $request->checkPersona; //Array de ids de las personas
+        if(!is_null($personas_relacionar)){
+            foreach ($personas_relacionar as $p_id) {
+                $recuerdo->personas_relacionadas()->attach( $p_id);
+            }
+        }
+
         return self::showByPaciente($recuerdo->paciente_id);
     }
 
@@ -166,10 +172,12 @@ class RecuerdosController extends Controller
         $emociones = Emocion::all();
         $categorias = Categoria::all();
         $personas = $recuerdo->personas_relacionadas;
+        $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
         foreach ($personas as $p) {
             $p->tiporelacion_id = $p->tiporelacion->nombre;
         }
-        return view("recuerdos.edit", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "personas"));
+        $tipos = Tiporelacion::all();
+        return view("recuerdos.edit", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "personas", "tipos", "prelacionadas"));
     }
 
     /**

@@ -6,7 +6,7 @@
         <h5 class="text-muted">Crear recuerdo</h5>
         <hr class="lineaTitulo">
     </div>
-    <form method="post" action="/recuerdo" class="dropzone">
+    <form method="post" action="/recuerdo">
     <input type="hidden" name="id" id="id" value="{{$recuerdo->id}}">
         <input type="hidden" name="paciente_id" id="paciente_id" value="{{Session::get('paciente')['id']}}">
         <div class="row form-group justify-content-between">
@@ -134,17 +134,25 @@
         </div>
         <div class="row">
             <div class="col-12 justify-content-end d-flex p-2">
-                <!-- Nueva persona relacionada -->
-                <button type="submit" name="guardarRecuerdo" class="btn btn-success btn-sm btn-icon me-2"><i class="fa-solid fa-plus"></i></button>
-                <!-- Persona existente -->
-                <button type="submit" name="guardarRecuerdo" class="btn btn-success btn-sm me-2">Añadir existente</button>
-            </div>
-        </div>
 
+                <!-- Nueva persona relacionada -->
+                <button type="button" name="crearPersona" class="btn btn-success btn-sm btn-icon me-2" data-bs-toggle="modal" data-bs-target="#personasCreator"><i class="fa-solid fa-plus"></i></button>
+
+
+
+                <!-- Persona existente -->
+                <button type="button" name="anadiendoPersona" class="btn btn-success btn-sm me-2" data-bs-toggle="modal" data-bs-target="#personasExistentes">Añadir existente</button>
+
+
+            </div>
+
+
+        </div> <!-- col 12 -->
         <div>
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped table-responsive">
+                <caption>Listado de personas relacionadas</caption>
                 <thead>
-                    <tr>
+                    <tr class="bg-primary">
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellidos</th>
@@ -152,7 +160,7 @@
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="divPersonas">
                 <?php $n = 1; ?>
                     @foreach ($personas as $persona)
                     <tr>
@@ -194,12 +202,13 @@
         </div>
 
         <div class="col-12">
-            <button type="submit" value="Guardar" class="btn btn-outline-primary btn-sm">Guardar</button>
-            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
+            <button type="submit" value="Guardar" class="btn btn-outline-primary btn">Guardar</button>
+            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary btn">Atrás</button></a>
         </div>
     </form>
 </div>
 
+@include('recuerdos.models')
 @endsection
 
 @push('scripts')

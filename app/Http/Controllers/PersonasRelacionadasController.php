@@ -83,8 +83,6 @@ class PersonasRelacionadasController extends Controller
     /*Como el store pero no devuelve a una vista*/
     public function storeNoView(Request $request)
     {
-
-
         $persona = Personarelacionada::create([
 
             "nombre" => $request->nombre,
@@ -97,10 +95,9 @@ class PersonasRelacionadasController extends Controller
 
         ]);
         
-        $paciente = Paciente::find($persona->paciente_id);
-        
-        return $paciente->personasrelacionadas; //No es de las personas, es del recuerdo
-        //return $persona; //falta relacionarlo con el recuerdo
+        $persona->tiporelacion_id = Tiporelacion::find($persona->tiporelacion_id)->nombre;
+
+        return $persona; //falta relacionarlo con el recuerdo
     }
     /**
      * Devuelve una personarelacionada concreta
