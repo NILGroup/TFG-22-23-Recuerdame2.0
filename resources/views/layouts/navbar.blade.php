@@ -18,16 +18,15 @@
 
         <div class="collapse navbar-collapse justify-content-left" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link letra-primary-color menu" aria-current="page" href="/pacientes/{{Session::get('paciente')['id']}}/sesiones">Sesiones</a>
-                </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Evaluaciones</a>
+                    <a class="nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Sesiones</a>
                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/sesiones">Lista de sesiones</a></li>
                         <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/informesSesion">Informes de las sesiones</a></li>
-                        <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/evaluaciones">Informes de seguimiento</a></li>
                     </ul>
                 </li>
+                <li><a class="nav-link letra-primary-color menu" aria-current="page" href="/pacientes/{{Session::get('paciente')['id']}}/evaluaciones">Evaluaciones</a></li>
+                <li class="nav-item"></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Historias de Vida</a>
                     <ul class="dropdown-menu">
