@@ -1,3 +1,5 @@
+<div style="height:70px;">
+</div>
 <footer class="mt-auto text-end">
     <a href="#"><i class="fa-solid fa-circle-arrow-up mx-3 mb-2 scrollUp"></i></button>
     <div class="p-2 bg-secondary text-lg-start">
