@@ -8,18 +8,17 @@
     </div>
 
     <div class="row mb-2">
-    <div class="col-12 justify-content-end d-flex">
-    
-    <a href="/cuidadores/crear"><button type="button"  id="mybutton" class="btn btn-primary btn-registro mx-3">Registro cuidador</button></a>
-    <a href="{{route('pacientes.create')}}"><button type="button"  class="btn btn-newpaciente btn-info">Nuevo paciente</i></button></a>
+        <div class="col-12 justify-content-end d-flex">
+            
+            <a href="/cuidadores/crear"><button type="button"  id="mybutton" class="btn btn-primary btn-registro mx-3">Registro cuidador</button></a>
+            <a href="{{route('pacientes.create')}}"><button type="button"  class="btn btn-newpaciente btn-info">Nuevo paciente</i></button></a>
+        </div>
     </div>
-</div>
 
 <div>
     <?php $i = 1;?>
-    <table class="table table-bordered table-striped table-responsive">
-    <caption>Listado de pacientes</caption>
-        <thead >
+    <table id="tabla" class="table table-bordered table-striped table-responsive">
+        <thead>
             <tr class="bg-primary">
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
@@ -70,6 +69,7 @@
             </tr>
         @endif
 
+        <caption>Listado de pacientes</caption>
     </table>
 </div>
 
@@ -83,4 +83,23 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
 
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
+<script>
+    $(document).ready(function () {
+        $('#tabla').DataTable({
+            responsive: {
+                details: {
+                type: 'column',
+                target: 'tr'
+                }
+            },
+            "bPaginate": false,
+            language: {
+                search: "",
+                searchPlaceholder:"Buscar..."
+            },
+            dom : "<'row' <'form-control-sm' f>>" 
+        });
+    });
+</script>
 @endpush

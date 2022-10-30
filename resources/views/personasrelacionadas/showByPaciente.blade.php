@@ -16,7 +16,7 @@
     </div>
 
     <div>
-        <table class="table table-bordered table-striped table-responsive">
+        <table id="tabla" class="table table-bordered table-striped table-responsive">
             <caption>Listado de personas relacionadas</caption>
             <thead>
                 <tr class="bg-primary">
@@ -50,11 +50,6 @@
                 <?php $i++; ?>
 
                 @endforeach
-                @if(sizeof($personas) == 0)
-                    <tr>
-                        <td colspan="8" align="center">No se han generado personas relacionadas</td>
-                    </tr>
-                @endif
             </tbody>
         </table>
     </div>
@@ -68,5 +63,24 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
-
+<script>
+    $(document).ready(function () {
+        $('#tabla').DataTable({
+            paging: false,
+            info: false,
+            language: { 
+                search: "_INPUT_",
+                searchPlaceholder: "Buscar...",
+                emptyTable: "No hay datos disponibles"
+            },
+            responsive: {
+                details: {
+                type: 'column',
+                target: 'tr'
+                }
+            },
+            dom : "<'row' <'form-control-sm mr-5' f>>"
+        });
+    });
+</script>
 @endpush
