@@ -26,21 +26,27 @@ class PDFHistoria extends FPDF{
     }
 
     function writeRecuerdos($pdf, $listadoRecuerdos){
-            
+        $size = 7*8 +12; //size que ocupa los datos del paciente en primera página
+  
         foreach($listadoRecuerdos as $row) {
             $pdf->SetFont('Times','B',12);
             $pdf->Cell(160,7,iconv('UTF-8', 'windows-1252',$row->nombre));
             $pdf->Cell(160,7,$row->fecha);
-            $pdf->Ln();
+            $pdf->Ln(7);
+            $size+= 7*3;
             $pdf->SetFont('Times','',12);
             $pdf->MultiCell(0,7,iconv('UTF-8', 'windows-1252', $row->descripcion));
-            $pdf->Ln();
+            $pdf->Ln(7);
+            $size+= 7*2;
+           
     
             $listaMultimedia = $row->multimedias;
             foreach ($listaMultimedia as $multimedia) {
+                if($size+35+7 > 297)  $pdf->addPage();$size = 0; //297 es el alto de un A4
                 $image = "../public/img/" . $multimedia->fichero;
                 $pdf->MultiCell(0,35,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 40));
-                $pdf->Ln();
+                $pdf->Ln(12);
+                $size+= 35+12;
             }
         }
     }
@@ -63,7 +69,7 @@ class PDFHistoria extends FPDF{
         $pdf->SetFont('Times','',12);
         $s = utf8_decode(' ' . $paciente->nombre . ' ' . $paciente->apellidos);
         $pdf->Cell(160,7, $s ,1);
-        $pdf->Ln();
+        $pdf->Ln(7);
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,7,'Edad: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
@@ -71,7 +77,7 @@ class PDFHistoria extends FPDF{
         $hoy = new DateTime();
         $edad = $hoy->diff($fecha_nacimiento);
         $pdf->Cell(160,7,' '.$edad->y,1);
-        $pdf->Ln();
+        $pdf->Ln(7);
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,7,'Genero: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
@@ -88,7 +94,7 @@ class PDFHistoria extends FPDF{
         //$pdf->Cell(0,10,'Fecha del informe: '.$informeSeguimiento->getFecha(),0,1);
         // Colors, line width and bold font
         $pdf->SetFillColor(220);
-    
+        
         $pdf->SetFont('Times','B',15);
         $pdf->Cell(0,7,'Datos del usuario ');
         $pdf->Ln(9);
