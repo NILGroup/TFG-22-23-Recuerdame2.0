@@ -13,7 +13,7 @@ class PDFHistoria extends FPDF{
     // Page header
     function Header()
     {
-        $this->Image('../public/img/Marca_recuerdame.png',150,8,50);
+        $this->Image('../public/img/Marca_recuerdame-nobg.png',150,8,50);
         // Arial bold 15
         $this->SetFont('Arial','B',18);
         // Move to the right

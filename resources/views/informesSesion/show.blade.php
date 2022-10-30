@@ -37,9 +37,9 @@
             </div>
 
             <div>
-                <button type="submit" name="generarPDF" value="generarPDF" class="btn btn-outline-primary btn-sm">Generar PDF</button>
-                <a href="/pacientes/{{$sesion->paciente->id}}/sesiones"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
-                <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme"><button type="button" class="btn btn-secondary btn-sm">Editar</button></a>
+                <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe" ><button type="button" class="btn btn-outline-primary">Generar PDF</button></a>
+                <a href="/pacientes/{{$sesion->paciente->id}}/informesSesion"><button type="button" class="btn btn-primary">Atrás</button></a>
+                <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme"><button type="button" class="btn btn-secondary">Editar</button></a>
             </div>
 
         </div>

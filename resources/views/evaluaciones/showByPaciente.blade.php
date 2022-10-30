@@ -10,10 +10,9 @@
 
     <div class="row mb-2">
         <div class="col-12 justify-content-end d-flex">
-            <a href="/pacientes/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success btn-icon"><i class="fa-solid fa-plus"></i></button></a>
+            <a href="/pacientes/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
         </div>
     </div>
-
     <div>
         <table class="table table-bordered table-striped table-responsive">
             <caption>Listado de evaluaciones</caption>

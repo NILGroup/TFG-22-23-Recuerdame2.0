@@ -90,7 +90,6 @@ Route::get('/recuerdos/{id}', 'App\Http\Controllers\RecuerdosController@showByPa
 Route::delete('/eliminarRecuerdo/{id}', 'App\Http\Controllers\RecuerdosController@destroy');
 Route::post('/storeRecuerdoNoView', 'App\Http\Controllers\RecuerdosController@storeNoView');
 
-
 //RUTAS CUSTOMIZADAS PERSONA RELACIONADA
 Route::get('/pacientes/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
 Route::get('/pacientes/{id}/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@createByPaciente');
@@ -106,7 +105,8 @@ Route::post('/modificarActividad', 'App\Http\Controllers\CalendarioController@up
 Route::get('/pacientes/{id}/informesSesion', 'App\Http\Controllers\InformesSesionController@showByPaciente');
 Route::get('/pacientes/{id}/sesiones/{idS}/generarInforme', 'App\Http\Controllers\InformesSesionController@generarInforme');
 Route::get('/pacientes/{id}/sesiones/{idS}/informe', 'App\Http\Controllers\PDFController@verInformeSesion');
-Route::post('/cerrarInformeSesion', 'App\Http\Controllers\InformesSesionController@cerrarInformeSesion');
+Route::get('/pacientes/{id}/sesiones/{idS}/ver', 'App\Http\Controllers\InformesSesionController@show');
+Route::post('/cerrarInformeSesion', 'App\Http\Controllers\InformesSesionController@store');
 Route::post('/generarPDFInformeSesion', 'App\Http\Controllers\InformesSesionController@generarPDFInformeSesion');
 
 //RUTAS CUSTOMIZADAS EVALUACION

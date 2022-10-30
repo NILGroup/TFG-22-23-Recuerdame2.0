@@ -27,7 +27,7 @@
                     <td><a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe">Informe de la sesión Nº {{$sesion->id}}</td>
                     <td>{{$sesion->fecha_finalizada}}</td>
                     <td class="tableActions">
-                        <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                        <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                         <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/generarInforme"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
                         <form method="post" action="{{ route('informesSesion.destroy', $sesion->id) }}" onclick="confirmar(event)" style="display:inline!important;">
                             {{csrf_field()}}

@@ -28,14 +28,21 @@ class InformesSesionController extends Controller
         return view('informesSesion.create', compact('paciente', 'sesion'));
     }
 
-    public function cerrarInformeSesion(Request $request){
+    public function store(Request $request){
         $sesion = Sesion::find($request->id);
         $sesion->fecha = $request->fecha;
         $sesion->fecha_finalizada = $request->fecha_finalizada;
         $sesion->respuesta = $request->respuesta;
         $sesion->observaciones = $request->observaciones;
         $sesion->save();
-        return redirect("pacientes/{$sesion->paciente->id}/sesiones");
+        return redirect("/pacientes/$sesion->paciente_id/sesiones/$sesion->id/ver");
+    }
+
+    public function show(int $idP, int $idS)
+    {
+        $sesion = Sesion::findOrFail($idS);
+        $paciente = $sesion->paciente;
+        return view("informesSesion.show", compact("sesion", "paciente"));
     }
 
     public function destroy($id){
