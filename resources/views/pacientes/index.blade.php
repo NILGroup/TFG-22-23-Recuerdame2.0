@@ -87,18 +87,20 @@
 <script>
     $(document).ready(function () {
         $('#tabla').DataTable({
+            paging: false,
+            info: false,
+            language: { 
+                search: "_INPUT_",
+                searchPlaceholder: "Buscar...",
+                emptyTable: "No hay datos disponibles"
+            },
             responsive: {
                 details: {
                 type: 'column',
                 target: 'tr'
                 }
             },
-            "bPaginate": false,
-            language: {
-                search: "",
-                searchPlaceholder:"Buscar..."
-            },
-            dom : "<'row' <'form-control-sm' f>>" 
+            dom : "<'row' <'form-control-sm mr-5' f>>"
         });
     });
 </script>
