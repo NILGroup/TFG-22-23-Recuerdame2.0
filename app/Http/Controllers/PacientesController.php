@@ -73,8 +73,7 @@ class PacientesController extends Controller
         $idTerapeuta = Auth::id();
         $user = User::find($idTerapeuta);
 
-        Paciente::create([
-
+        Paciente::updateOrcreate([
             "nombre" => $request->nombre,
             "apellidos" => $request->apellidos,
             "genero" => $request->genero,
@@ -83,7 +82,6 @@ class PacientesController extends Controller
             "fecha_nacimiento" => $request->fecha_nacimiento,
             "tipo_residencia" => $request->tipo_residencia,
             "residencia_actual" => $request->residencia_actual
-
         ])->users()->save($user);
 
         //Redireccionamos a la vista de lista pacientes
