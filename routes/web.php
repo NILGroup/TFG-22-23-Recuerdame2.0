@@ -69,7 +69,6 @@ Route::resources([
 Auth::routes();
 
 
-Route::get('/pacientes/{id}/asignar', 'App\Http\Controllers\PacientesController@addPacienteToTerapeuta');
 
 //RUTAS CUSTOMIZADAS CUIDADOR
 Route::get('/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
@@ -83,6 +82,8 @@ Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll')
 Route::get('/pacientes/{id}/sesiones', 'App\Http\Controllers\SesionesController@showByPaciente');
 Route::post('/updateAndRecuerdoNuevo','App\Http\Controllers\SesionesController@updateAndRecuerdoNuevo');
 Route::post('/updateAndSeleccionarRecuerdos','App\Http\Controllers\SesionesController@updateAndSeleccionarRecuerdos');
+Route::get('/pacientes/{id}/asignarTerapeutas', 'App\Http\Controllers\PacientesController@addPacienteToTerapeuta');
+Route::post('/asignacionTerapeutas','App\Http\Controllers\PacientesController@asignacionTerapeutas');
 
 //RUTAS CUSTOMIZADAS RECUERDO
 Route::get('/pacientes/{id}/recuerdos', 'App\Http\Controllers\RecuerdosController@showByPaciente');

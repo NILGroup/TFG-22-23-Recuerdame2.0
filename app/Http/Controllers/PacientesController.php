@@ -97,9 +97,9 @@ class PacientesController extends Controller
     {
         //Obtenemos al paciente
         $paciente = Paciente::findOrFail($id);
+        session()->put('paciente', $paciente->toArray()); 
         $cuidador = User::find($paciente->cuidador_id);
        
-        session()->put('paciente', $paciente->toArray()); 
         //Devolvemos al paciente a la vista de mostrar paciente
         return view("pacientes.show", compact("paciente","cuidador"));
 
@@ -154,8 +154,17 @@ class PacientesController extends Controller
 
     public function addPacienteToTerapeuta(int $id) {
         $paciente = Paciente::findOrFail($id);
+        session()->put('paciente', $paciente->toArray());
         $users = User::where("rol_id","=",1)->get();
 
         return view("pacientes.addPacienteToTerapeuta", compact("paciente", "users"));
     }
+
+    public function asignacionTerapeutas(Request $request)
+    {
+        $paciente = Paciente::find($request->paciente_id);
+        $paciente->users()->sync($request->seleccion);
+        return redirect("/pacientes");
+    }
+
 }
