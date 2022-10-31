@@ -3,9 +3,12 @@ html {
 }
 
 body {
+    overflow-x: hidden;
     font-family: 'Nunito', sans-serif;
 }
-
+#app {
+    width: 100%;
+}
 footer {
     position:fixed;
     bottom:0;

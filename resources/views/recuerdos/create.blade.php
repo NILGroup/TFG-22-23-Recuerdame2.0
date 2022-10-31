@@ -50,15 +50,18 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-4">
             <div class="row col-sm-12 col-md-12 col-lg-12">
                 <label for="puntuacion" class="form-label col-form-label-sm col-sm-2 col-md-2 col-lg-1">Puntuación</label>
 
                 <div class="col-md-auto">0</div>
                 <div class="col-sm-5 col-md-5 col-lg-3">
-                    <input type="range" class="form-range puntuacion" id="puntuacion" name="puntuacion" min="0" max="10" step="1" value="puntuacion">
+                    <div class="range-wrap">
+                        <div class="range-value" id="rangeV"></div>
+                        <input type="range" class="form-range puntuacion" id="puntuacion" name="puntuacion" min="0" max="10" step="1" value="puntuacion">
+                    </div>
                 </div>
-                <div class="col">10</div>
+                <div class="col mx-5">10</div>
             </div>
 
             <label id="valorPuntuacion" class="form-label col-sm-2 col-md-2 col-lg-2"></label>
@@ -178,7 +181,24 @@
 
 @endsection
 
+@push('styles')
+<link rel="stylesheet" href="/css/slider.css">
+@endpush
 @push('scripts')
+<script>
+    const
+        range = document.getElementById('puntuacion'),
+        rangeV = document.getElementById('rangeV'),
+        setValue = () => {
+            const
+                newValue = Number((range.value - range.min) * 100 / (range.max - range.min)),
+                newPosition = 10 - (newValue * 0.2);
+            rangeV.innerHTML = `<span>${range.value}</span>`;
+            rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
+        };
+    document.addEventListener("DOMContentLoaded", setValue);
+    range.addEventListener('input', setValue);
+</script>
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>

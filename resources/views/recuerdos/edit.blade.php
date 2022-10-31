@@ -10,7 +10,7 @@
     <input type="hidden" name="id" id="id" value="{{$recuerdo->id}}">
         <input type="hidden" name="paciente_id" id="paciente_id" value="{{Session::get('paciente')['id']}}">
         <div class="row form-group justify-content-between">
-            <div class="row col-sm-12 col-md-6 col-lg-5">
+        <div class="row col-sm-6 col-md-6 col-lg-6">
                 <label for="nombre" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Nombre<span class="asterisco">*</span></label>
                 <div class="col-sm-9 col-md-6 col-lg-4">
                     <input type="text" name="nombre" value="{{$recuerdo->nombre}}" class="form-control form-control-sm" id="nombre" maxlength="50" required>
@@ -210,7 +210,9 @@
 
 @include('recuerdos.models')
 @endsection
-
+@push('styles')
+<link rel="stylesheet" href="/css/slider.css">
+@endpush
 @push('scripts')
 
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
