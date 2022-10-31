@@ -112,15 +112,15 @@
                     <textarea maxlength="255" class="form-control form-control-sm" id="localizacion" name="localizacion" rows="3"></textarea>
                 </div>
 
-                </div> <!-- Modal body -->
+            </div> <!-- Modal body -->
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearRecuerdo()">Guardar</button>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearRecuerdo()">Guardar</button>
             </div>
         </div>
     </div>
+</div>
 
 </div>
 
@@ -135,9 +135,10 @@
             </div>
 
             <div class="modal-body">
-                <table class="table table-bordered recuerdameTable">
+                <table class="table table-bordered table-striped table-responsive">
+                    <caption>Listado de recuerdos</caption>
                     <thead>
-                        <tr>
+                        <tr class="bg-primary">
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Fecha</th>
@@ -184,27 +185,27 @@
         let n = 1;
         for (let i = 0; i < allRecuerdos.length; i++) {
 
-            let rec =  allRecuerdos[i].getElementsByTagName("td")
+            let rec = allRecuerdos[i].getElementsByTagName("td")
             rec = {
                 "id": allRecuerdos[i].getElementsByTagName("th")[0].textContent,
                 "nombre": rec[0].textContent,
-                "fecha":rec[1].textContent,
-                "etapa":rec[2].textContent,
-                "categoria":rec[3].textContent,
-                "estado":rec[4].textContent,
-                "etiqueta":rec[5].textContent,
+                "fecha": rec[1].textContent,
+                "etapa": rec[2].textContent,
+                "categoria": rec[3].textContent,
+                "estado": rec[4].textContent,
+                "etiqueta": rec[5].textContent,
                 "checked": allRecuerdos[i].getElementsByTagName("input")[0].checked,
             }
 
             if (rec.checked) {
                 document.getElementById("divRecuerdos").innerHTML += '<tr>' +
                     '<th scope="row">' + (n++) + '</th>' +
-                    '<td>' +rec.nombre+ '</td>' +
-                    '<td>' +rec.fecha+ '</td>' +
-                    '<td>' +rec.etapa+ '</td>' +
-                    '<td>' +rec.categoria+ '</td>' +
-                    '<td>' +rec.estado+ '</td>' +
-                    '<td>' +rec.etiqueta+ '</td>' +
+                    '<td>' + rec.nombre + '</td>' +
+                    '<td>' + rec.fecha + '</td>' +
+                    '<td>' + rec.etapa + '</td>' +
+                    '<td>' + rec.categoria + '</td>' +
+                    '<td>' + rec.estado + '</td>' +
+                    '<td>' + rec.etiqueta + '</td>' +
                     '<input type="hidden" value=' + rec.id + ' name="recuerdos[]">' +
                     '</tr>';
 
@@ -230,7 +231,7 @@
         fd.append('etapa_id', selectValues[2].value);
         fd.append('emocion_id', selectValues[3].value);
         fd.append('categoria_id', selectValues[4].value);
-        
+
         fd.append('descripcion', textValues[0].value);
         fd.append('localizacion', textValues[1].value);
 
@@ -256,26 +257,26 @@
     }
 
     function reloadRecuerdos(r) {
-        let selected = Array.from(document.getElementById("divRecuerdos").getElementsByTagName("input"), function(s){
+        let selected = Array.from(document.getElementById("divRecuerdos").getElementsByTagName("input"), function(s) {
             console.log(s.value)
             return s.value
         })
 
-        if(!r.categoria_id){
+        if (!r.categoria_id) {
             r.categoria = {};
             r.categoria.nombre = " ";
         }
-        if(!r.estado_id){
+        if (!r.estado_id) {
             r.estado = {};
             r.estado.nombre = " ";
         }
-        if(!r.etiqueta_id){
+        if (!r.etiqueta_id) {
             r.etiqueta = {};
             r.etiqueta.nombre = " ";
         }
 
-        document.getElementById("tablaRecuerdosExistentes").innerHTML += 
-        '<tr>' +
+        document.getElementById("tablaRecuerdosExistentes").innerHTML +=
+            '<tr>' +
             '<th scope="row">' + r.id + '</th>' +
             '<td>' + r.nombre + '</td>' +
             '<td>' + r.fecha + '</td>' +
@@ -283,19 +284,19 @@
             '<td>' + r.categoria.nombre + '</td>' +
             '<td>' + r.estado.nombre + '</td>' +
             '<td>' + r.etiqueta.nombre + '</td>' +
-                '<td id="recuerdosSeleccionados" class="tableActions">' +
-                    '<input class="form-check-input" type="checkbox" value=' + r.id + ' name="checkRecuerdo[]" id="checkRecuerdo" checked>' +
-                '</td>' +
-        '</tr>';
+            '<td id="recuerdosSeleccionados" class="tableActions">' +
+            '<input class="form-check-input" type="checkbox" value=' + r.id + ' name="checkRecuerdo[]" id="checkRecuerdo" checked>' +
+            '</td>' +
+            '</tr>';
 
         document.getElementById("tablaRecuerdosExistentes").getElementsByTagName("input").forEach(c => {
-            if(selected.includes(c.value)){
+            if (selected.includes(c.value)) {
                 c.checked = true;
             }
         })
 
-        document.getElementById("divRecuerdos").innerHTML += 
-        '<tr>' +
+        document.getElementById("divRecuerdos").innerHTML +=
+            '<tr>' +
             '<th scope="row">' + (document.getElementById("divRecuerdos").getElementsByTagName("tr").length + 1) + '</th>' +
             '<td>' + r.nombre + '</td>' +
             '<td>' + r.fecha + '</td>' +
@@ -304,6 +305,6 @@
             '<td>' + r.estado.nombre + '</td>' +
             '<td>' + r.etiqueta.nombre + '</td>' +
             '<input type="hidden" value=' + r.id + ' name="recuerdos[]">' +
-        '</tr>';
+            '</tr>';
     }
 </script>

@@ -104,9 +104,10 @@
     <hr class="lineaTitulo">
 </div>
 <div>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
+<table class="table table-bordered table-striped table-responsive">
+                <caption>Listado de personas relacionadas</caption>
+                <thead>
+                    <tr class="bg-primary">
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
@@ -150,8 +151,8 @@
 </div>
 
 <div class="col-12">
-    <button type="submit" value="Guardar" class="btn btn-outline-primary btn-sm">Guardar</button>
-    <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
+    <button type="submit" value="Guardar" class="btn btn-outline-primary btn">Guardar</button>
+    <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary btn">Atrás</button></a>
 </div>
 </div>
   

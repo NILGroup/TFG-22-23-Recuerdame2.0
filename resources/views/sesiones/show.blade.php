@@ -66,9 +66,10 @@
         </div>
 
         <div>
-            <table class="table table-bordered">
+        <table class="table table-bordered table-striped table-responsive">
+                <caption>Listado de recuerdos</caption>
                 <thead>
-                    <tr>
+                    <tr class="bg-primary">
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Fecha</th>

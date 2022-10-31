@@ -24,10 +24,9 @@
                 <div class="col-sm-3 col-md-3 col-lg-2">
                     <select class="form-select form-select-sm" name="etapa">
                         @foreach($etapas as $etapa)
-                            <option value="{{$etapa->id}}" 
-                                @if($sesion->etapa->id == $etapa->id) 
-                                    selected="selected" 
-                                @endif
+                        <option value="{{$etapa->id}}" @if($sesion->etapa->id == $etapa->id)
+                            selected="selected"
+                            @endif
                             >{{$etapa->nombre}}</option>
                         @endforeach
                     </select>
@@ -72,11 +71,12 @@
                 <button type="button" name="crearRecuerdo" class="btn btn-success btn-sm btn-icon me-2" data-bs-toggle="modal" data-bs-target="#recuerdosCreator"><i class="fa-solid fa-plus"></i></button>
                 <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#recuerdosExistentes">Añadir existente</button>
             </div>
-            
+
             <div>
-                <table class="table table-bordered">
+                <table class="table table-bordered table-striped table-responsive">
+                    <caption>Listado de recuerdos</caption>
                     <thead>
-                        <tr>
+                        <tr class="bg-primary">
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Fecha</th>
@@ -89,29 +89,29 @@
                     </thead>
 
                     <tbody>
-                        <?php $i=1; ?>
+                        <?php $i = 1; ?>
                         @foreach ($sesion->recuerdos as $recuerdo)
-                            <tr>
-                                <th scope="row"><?php echo $i ?></th>
-                                <td>{{$recuerdo->nombre}}</td>
-                                <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
-                                <td>{{$recuerdo->etapa->nombre}}</td>
-                                <td>{{$recuerdo->categoria->nombre}}</td>
-                                <td>{{$recuerdo->estado->nombre}}</td>
-                                <td>{{$recuerdo->etiqueta->nombre}}</td>
-                                <td class="tableActions">
-                                    <a href="{{route('recuerdo.show',$recuerdo->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
-                                    <a href="{{route('recuerdo.edit',$recuerdo->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                                    <a href="{{route('recuerdo.destroy',$recuerdo->id)}}"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></a>
-                                </td>
-                            </tr>
-                        <?php $i++;?>
+                        <tr>
+                            <th scope="row"><?php echo $i ?></th>
+                            <td>{{$recuerdo->nombre}}</td>
+                            <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
+                            <td>{{$recuerdo->etapa->nombre}}</td>
+                            <td>{{$recuerdo->categoria->nombre}}</td>
+                            <td>{{$recuerdo->estado->nombre}}</td>
+                            <td>{{$recuerdo->etiqueta->nombre}}</td>
+                            <td class="tableActions">
+                                <a href="{{route('recuerdo.show',$recuerdo->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                                <a href="{{route('recuerdo.edit',$recuerdo->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
+                                <a href="{{route('recuerdo.destroy',$recuerdo->id)}}"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></a>
+                            </td>
+                        </tr>
+                        <?php $i++; ?>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-12 justify-content-end d-flex p-2">
                 <!-- TODO REDIRIGIR A SELECCION DE MULTIMEDIA -->
@@ -127,12 +127,12 @@
 
         <div id="showMultimedia" class="row pb-2">
             @foreach ($sesion->multimedias as $multimedia)
-                <div class="col-sm-4 p-2">
-                    <div class="img-wrap">
-                        <a href="#" class="clear"><i class="fa-solid fa-circle-xmark text-danger fa-lg"></i></a>
-                        <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon"></a>
-                    </div>
+            <div class="col-sm-4 p-2">
+                <div class="img-wrap">
+                    <a href="#" class="clear"><i class="fa-solid fa-circle-xmark text-danger fa-lg"></i></a>
+                    <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon"></a>
                 </div>
+            </div>
             @endforeach
         </div>
 

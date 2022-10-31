@@ -3,7 +3,7 @@
 @section('content')
 
 
-<form action="/crearSesion" method="POST" >
+<form action="/crearSesion" method="POST">
     {{csrf_field()}}
     <div class="container-fluid">
         <div class="pt-4 pb-2">
@@ -72,9 +72,10 @@
             </div>
 
             <div>
-                <table class="table table-bordered">
+                <table class="table table-bordered table-striped table-responsive">
+                    <caption>Listado de recuerdos</caption>
                     <thead>
-                        <tr>
+                        <tr class="bg-primary">
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Fecha</th>
@@ -92,9 +93,9 @@
         </div>
 
         <div class="pt-4 pb-2">
-                <h5 class="text-muted">Material</h5>
-                <hr class="lineaTitulo">
-            </div>
+            <h5 class="text-muted">Material</h5>
+            <hr class="lineaTitulo">
+        </div>
         <div class="row">
             <div class="col-12 justify-content-end d-flex p-2">
                 <!-- TODO REDIRIGIR A SELECCION DE MULTIMEDIA -->
@@ -108,7 +109,7 @@
         </div>
 
         <div id="showMultimedia" class="row pb-2"> </div>
-        
+
         <div>
             <button type="submit" name="guardarSesion" value="Guardar" class="btn btn-outline-primary">Guardar</button>
             <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a>
