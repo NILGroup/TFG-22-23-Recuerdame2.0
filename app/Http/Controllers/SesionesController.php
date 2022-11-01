@@ -238,7 +238,7 @@ class SesionesController extends Controller
              'respuesta' => $request->respuesta,
              'observaciones' => $request->observaciones
             ]);
-        return redirect("/recuerdos/crearAndVolverEditar");
+        return redirect("/pacientes/{id}/recuerdos/crearAndVolverEditar");
     }
     
     public function updateAndSeleccionarRecuerdos(Request $request){
@@ -257,7 +257,7 @@ class SesionesController extends Controller
              'respuesta' => $request->respuesta,
              'observaciones' => $request->observaciones
             ]);
-        return redirect("/recuerdos/agregarAndVolverEditar");
+        return redirect("/pacientes/{id}/recuerdos/agregarAndVolverEditar");
     }
 
 }

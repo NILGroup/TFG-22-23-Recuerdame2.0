@@ -38,10 +38,12 @@ class PersonasRelacionadasController extends Controller
      * Redirecciona a la vista de crear personarelacionada pasando al paciente concreto al que queremos añadirla
      */
 
-    public function createByPaciente(int $idPaciente)
+    public function create(int $idPaciente)
     {
+        $show = false;
         $tipos = Tiporelacion::all()->sortBy("id");
-        return view("personasrelacionadas.create", compact("idPaciente", "tipos"));
+        $persona = new Personarelacionada();
+        return view("personasrelacionadas.create", compact("idPaciente", "tipos", "persona", "show"));
     }
 
     /**
@@ -98,8 +100,11 @@ class PersonasRelacionadasController extends Controller
 
     public function show(int $id)
     {
+        $show = true;
+        $tipos = Tiporelacion::all()->sortBy("id");
         $persona = Personarelacionada::findOrFail($id);
-        return view("personasrelacionadas.show", compact("persona"));
+        $idPaciente = $persona->paciente_id;
+        return view("personasrelacionadas.show", compact("persona", "tipos", "show", "idPaciente"));
     }
 
 
@@ -109,23 +114,22 @@ class PersonasRelacionadasController extends Controller
 
     public function edit(int $id)
     {
+        $show = false;
         $tipos = Tiporelacion::all()->sortBy("id");
         $persona = Personarelacionada::findOrFail($id);
-        return view("personasrelacionadas.edit", compact("persona","tipos"));
+        $idPaciente = $persona->paciente_id;
+        return view("personasrelacionadas.edit", compact("persona","tipos", "show", "idPaciente"));
     }
 
     /**
      * Actualiza una persona relacionada concreta y redirecciona a la lista de personasrelacionadas
      */
 
-    public function update(Request $request, int $id)
+    public function update(Request $request)
     {
-        
-        $persona = Personarelacionada::findOrFail($id);
+        $persona = Personarelacionada::findOrFail($request->id);
         $persona->update($request->all());
-        return redirect("/pacientes/$persona->paciente_id/personas");
-
-
+        return redirect("/personas/$persona->id");
     }
 
     /**

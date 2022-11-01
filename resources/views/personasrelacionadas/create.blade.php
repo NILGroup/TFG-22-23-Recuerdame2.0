@@ -8,10 +8,12 @@
         <hr class="lineaTitulo">
     </div>
     <form method="post" action="/personas">
+        {{csrf_field()}}
+        @include('personasrelacionadas.listaItems')
 
+        <!--
         <input type="hidden" name="paciente_id" value="{{$idPaciente}}">
 
-        {{csrf_field()}}
 
         <div class="row form-group justify-content-between">
             <div class="row col-sm-12 col-md-6 col-lg-5">
@@ -87,10 +89,10 @@
             <label for="observaciones" class="form-label col-form-label-sm">Observaciones</label>
             <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3"></textarea>
         </div>
-
+        -->
         <div class="col-12">
-            <button type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary btn-sm">Guardar</button>
-            <a href="/pacientes/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
+            <button type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Guardar</button>
+            <a href="/pacientes/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary">Atrás</button></a>
         </div>
     </form>
 </div>
@@ -99,10 +101,5 @@
 @endsection
 
 @push('scripts')
-
-<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
-
+    @include('layouts.scripts')
 @endpush

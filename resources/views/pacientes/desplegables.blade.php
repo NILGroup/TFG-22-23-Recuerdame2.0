@@ -59,7 +59,7 @@
         <div id="cuidadores" class="accordion-collapse collapse show" aria-labelledby="cuidadores1">
             <div class="row mb-2">
                 <div class="col-12 justify-content-end d-flex">
-                    <a href="/cuidadores/crear"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
+                    <a href="/cuidadores/crear"><button type="button" class="btn btn-success btn-sm btn-icon mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
 
@@ -113,7 +113,7 @@
         <div id="personasrelacionadas" class="accordion-collapse collapse show" aria-labelledby="personasrelacionadas1">
             <div class="row mb-2">
                 <div class="col-12 justify-content-end d-flex">
-                    <a href="/pacientes/{{$paciente->id}}/crearPersona"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
+                    <a href="/pacientes/{{$paciente->id}}/crearPersona"><button type="button" class="btn btn-success btn-sm btn-icon  mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
 

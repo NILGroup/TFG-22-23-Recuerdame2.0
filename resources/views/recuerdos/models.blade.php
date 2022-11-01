@@ -11,8 +11,7 @@
 
             <div class="modal-body" id="personasCreatorForm">
 
-                {{csrf_field()}}
-                <input type="hidden" name="paciente_id" id="paciente_id" value="{{Session::get('paciente')['id']}}">
+                <input type="hidden" name="paciente_id" id="paciente_id" value="{{$paciente->id}}">
 
 
 
@@ -68,7 +67,7 @@
                             <select class="form-select form-select-sm" id="tiporelacion_id" name="tiporelacion_id" required>
                                 <option></option>
                                 @foreach ($tipos as $tipo)
-                                <option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
+                                    <option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>

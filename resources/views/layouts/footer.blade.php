@@ -7,18 +7,3 @@
         <?php echo date('Y'); ?> Recuérdame 2.0
     </div>
 </footer>
-<script>
-// Get the button
-let mybutton = document.getElementById("scrollBtn");
-mybutton.style.display = "none";
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollHider()};
-
-function scrollHider() {
-  if (document.documentElement.scrollTop > 300) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
-}
-</script>

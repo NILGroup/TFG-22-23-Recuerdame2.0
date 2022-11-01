@@ -49,18 +49,18 @@ class RecuerdosController extends Controller
      */
     public function create()
     {
-
+        $show = false;
+        $recuerdo = new Recuerdo();
+        $paciente = Paciente::find(Session::get('paciente')['id']);
         $estados = Estado::all()->sortBy("id");
         $etiquetas = Etiqueta::all()->sortBy("id");
         $etapas = Etapa::all()->sortBy("id");
         $emociones = Emocion::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
-        $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
-        foreach ($prelacionadas as $p) {
-            $p->tiporelacion_id = !isNull($p->tiporelacion_id)?"No relacionado":Tiporelacion::find($p->tiporelacion_id)->nombre;
-        }
+        $prelacionadas = $paciente->personasrelacionadas;
         $tipos = Tiporelacion::all()->sortBy("id");
-        return view("recuerdos.create", compact("estados","etiquetas","etapas","emociones","categorias", "prelacionadas","tipos"));
+        $personas = [];
+        return view("recuerdos.create", compact("estados","etiquetas","etapas","emociones","categorias", "prelacionadas","tipos", "recuerdo", "personas", "paciente", "show"));
 
     }
 
@@ -104,7 +104,7 @@ class RecuerdosController extends Controller
         $personas_relacionar = $request->checkPersona; //Array de ids de las personas
         if(!is_null($personas_relacionar)){
             foreach ($personas_relacionar as $p_id) {
-                $recuerdo->personas_relacionadas()->attach( $p_id);
+                $recuerdo->personas_relacionadas()->attach($p_id);
             }
         }
 
@@ -119,13 +119,17 @@ class RecuerdosController extends Controller
      */
     public function show($idRecuerdo)
     {
+        $show = true;
         $recuerdo = Recuerdo::find($idRecuerdo);
-        $estado = Estado::find($recuerdo->estado_id);
-        $etiqueta = Etiqueta::find($recuerdo->etiqueta_id);
-        $etapa = Etapa::find($recuerdo->etapa_id);
-        $emocion = Emocion::find($recuerdo->emocion_id);
-        $categoria = Categoria::find($recuerdo->categoria_id);
-        return view("recuerdos.show", compact("recuerdo","estado","etiqueta","etapa","emocion","categoria"));
+        $paciente = $recuerdo->paciente;
+        $estados = Estado::all()->sortBy("id");
+        $etiquetas = Etiqueta::all()->sortBy("id");
+        $etapas = Etapa::all()->sortBy("id");
+        $emociones = Emocion::all()->sortBy("id");
+        $categorias = Categoria::all()->sortBy("id");
+        $tipos = Tiporelacion::all()->sortBy("id");
+        $personas = $recuerdo->personas_relacionadas;
+        return view("recuerdos.show", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "personas", "paciente", "show"));
     }
 
     public function showByPaciente($idPaciente)
@@ -134,16 +138,6 @@ class RecuerdosController extends Controller
         if(is_null($paciente)) return "ID de paciente no encontrada"; //ESTUDIAR SI SOBRA
 
         $recuerdos = $paciente->recuerdos;
-        foreach ($recuerdos as $r) {
-                $r->etapa_id = Etapa::find($r->etapa_id)->nombre;
-                
-                $categoria = Categoria::find($r->categoria_id);
-                $estado = Estado::find($r->estado_id);
-                $etiqueta =  Etiqueta::find($r->etiqueta_id);
-                $r->categoria_id = isNull($categoria)?"Sin categoría":$categoria->nombre;
-                $r->estado_id = isNull($estado)?"Sin estado":$estado->nombre;
-                $r->etiqueta_id = isNull($etiqueta)?"Sin etiqueta":$etiqueta->nombre;
-            }
         //Devolvemos los recuerdos
         return view("recuerdos.showByPaciente", compact("recuerdos"));
     }
@@ -165,19 +159,18 @@ class RecuerdosController extends Controller
      */
     public function edit($idRecuerdo)
     {
+        $show = false;
         $recuerdo = Recuerdo::find($idRecuerdo);
+        $paciente = $recuerdo->paciente;
         $estados = Estado::all()->sortBy("id");
         $etiquetas = Etiqueta::all()->sortBy("id");
         $etapas = Etapa::all()->sortBy("id");
         $emociones = Emocion::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
         $personas = $recuerdo->personas_relacionadas;
-        $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
-        foreach ($personas as $p) {
-            $p->tiporelacion_id = $p->tiporelacion->nombre;
-        }
+        $prelacionadas = $paciente->personasrelacionadas;
         $tipos = Tiporelacion::all()->sortBy("id");
-        return view("recuerdos.edit", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "personas", "tipos", "prelacionadas"));
+        return view("recuerdos.edit", compact("paciente", "recuerdo","estados","etiquetas","etapas","emociones","categorias", "personas", "tipos", "prelacionadas", "show"));
     }
 
     /**
@@ -204,7 +197,7 @@ class RecuerdosController extends Controller
         if(!is_null($recuerdo)){
             $idPaciente = $recuerdo->paciente_id; //accede a la id del paciente
             Recuerdo::destroy($idRecuerdo); //elimina el recuerdo
-            return redirect("/recuerdos/$idPaciente");
+            return redirect("/pacientes/{id}/recuerdos/$idPaciente");
         }else{
             return redirect("/");
         }
