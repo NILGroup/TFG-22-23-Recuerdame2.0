@@ -53,7 +53,12 @@
                 <label for="email" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Email<span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
                     <input type="text" name="email" class="form-control form-control-sm" id="email" required>
-                   
+                </div>
+            </div>
+            <div class="row col-sm-12 col-md-6 col-lg-7">
+                <label for="localidad" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Localidad<span class="asterisco">*</span></label>
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <input required type="text" name="localidad" class="form-control form-control-sm" id="localidad">   
                 </div>
             </div>
         </div>
@@ -70,6 +75,17 @@
                     </select>
                 </div>
             </div>
+            <div class="row col-sm-12 col-md-6 col-lg-7">
+                <label for="contacto" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Contacto<span class="asterisco">*</span></label>
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <input required type="text" name="contacto" class="form-control form-control-sm" id="contacto">   
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3 mb-3">
+            <label for="observaciones" class="form-label col-form-label-sm">Observaciones</label>
+            <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3"></textarea>
         </div>
 
         <div class="col-12">

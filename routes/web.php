@@ -251,13 +251,21 @@ Route::post('/prueba', function () {
 
     DB::table("personarelacionadas")->insert([
         ["nombre" => "Ignacio", "apellidos" => "Martinez-Almeida", "telefono" => "678765456", 
-            "ocupacion" => "Desconocido", "email" => "igMar@gmail.com", "tiporelacion_id" => 2, "paciente_id" => 1 ],
+            "ocupacion" => "Desconocido", "email" => "igMar@gmail.com", "localidad" => "Collado Villalba",
+            "contacto" => "Mega mucho", "observaciones" => "Es literalmente su hermano, vive con el",
+            "tiporelacion_id" => 2, "paciente_id" => 1 ],
         ["nombre" => "Pablo", "apellidos" => "Martinez Gonzalez", "telefono" => "600000000",
-            "ocupacion" => "Estudiante", "email" => "pabMar@gmail.com", "tiporelacion_id" => 4, "paciente_id" => 1 ],
+            "ocupacion" => "Estudiante", "email" => "pabMar@gmail.com", "localidad" => "Collado Villalba",
+            "contacto" => "Mucho contacto (fisico y mental)", "observaciones" => "Es su rival pokemon desde hace años",
+            "tiporelacion_id" => 4, "paciente_id" => 1 ],
         ["nombre" => "Eros", "apellidos" => "Guerrero Sosa", "telefono" => "666666666", 
-            "ocupacion" => "Estudiante", "email" => "erGuer@gmail.com", "tiporelacion_id" => 6, "paciente_id" => 2 ],
+            "ocupacion" => "Estudiante", "email" => "erGuer@gmail.com", "localidad" => "Madrid o Canarias",
+            "contacto" => "Se quieren", "observaciones" => "Tiene muchos perros",
+             "tiporelacion_id" => 6, "paciente_id" => 2 ],
         ["nombre" => "Adrián", "apellidos" => "Prieto Campo", "telefono" => "000000000",
-            "ocupacion" => "Estudiante", "email" => "adrPri@gmail.com", "tiporelacion_id" => 7, "paciente_id" => 2 ]
+            "ocupacion" => "Estudiante", "email" => "adrPri@gmail.com", "localidad" => "Leon o Madrid",
+            "contacto" => "Demasiado", "observaciones" => "A menudo discuten sobre rol y apuestas deportivas",
+             "tiporelacion_id" => 7, "paciente_id" => 2 ]
     ]);
 
     DB::table("actividads")->insert([

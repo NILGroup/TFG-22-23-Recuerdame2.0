@@ -16,6 +16,9 @@ class Personarelacionada extends Model
         "telefono",
         "ocupacion",
         "email",
+        "localidad",
+        "contacto",
+        "observaciones",
         "tiporelacion_id",
         "paciente_id"
     ];

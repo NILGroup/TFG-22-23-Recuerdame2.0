@@ -52,6 +52,12 @@
                    
                 </div>
             </div>
+            <div class="row col-sm-12 col-md-6 col-lg-7">
+                <label for="localidad" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Localidad</label>
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <input disabled type="text" name="localidad" class="form-control form-control-sm" id="localidad" value="{{$persona->localidad}}">   
+                </div>
+            </div>
         </div>
 
         <div class="row form-group justify-content-between">
@@ -62,6 +68,17 @@
                    
                 </div>
             </div>
+            <div class="row col-sm-12 col-md-6 col-lg-7">
+                <label for="contacto" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Contacto</label>
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <input disabled type="text" name="contacto" class="form-control form-control-sm" id="contacto" value="{{$persona->contacto}}">   
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label for="observaciones" class="form-label col-form-label-sm">Observaciones</label>
+            <textarea disabled class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3">{{$persona->observaciones}}</textarea>
         </div>
 
         <div class="col-12">

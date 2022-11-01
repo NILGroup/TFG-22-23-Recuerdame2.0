@@ -33,7 +33,7 @@
                 <tr>
                     <th scope="row"><?php echo $i ?></th>
 
-                    <td>{{$persona->nombre}}</td>
+                    <td><a href="/personas/{{$persona->id}}">{{$persona->nombre}}</a></td>
                     <td>{{$persona->apellidos}}</td>
                     <td>{{$persona->tiporelacion->nombre}}</td>
 

@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string("telefono")->nullable();
             $table->string("ocupacion");
             $table->string("email");
+            $table->string("localidad");
+            $table->string("contacto");
+            $table->text("observaciones")->nullable();
             $table->unsignedBigInteger("tiporelacion_id");
             $table->unsignedBigInteger("paciente_id");
 

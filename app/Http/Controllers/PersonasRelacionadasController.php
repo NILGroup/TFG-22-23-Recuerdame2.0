@@ -51,19 +51,6 @@ class PersonasRelacionadasController extends Controller
     public function store(Request $request)
     {
 
-        /*
-        $validate = $request->validate([
-
-            "nombre" => "required",
-            "apellidos"  => "required",
-            "telefono"  => "required",
-            "ocupacion" => "required",
-            "email" => "required|unique:personarelacionadas",
-            "tiporelacion_id"  => "required",
-            "paciente_id" => "required"
-
-        ]);*/
-
         Personarelacionada::create([
 
             "nombre" => $request->nombre,
@@ -71,6 +58,9 @@ class PersonasRelacionadasController extends Controller
             "telefono" => $request->telefono,
             "ocupacion" => $request->ocupacion,
             "email" => $request->email,
+            "localidad" => $request->localidad,
+            "contacto" => $request->contacto,
+            "observaciones" => $request->observaciones,
             "tiporelacion_id" => $request->tiporelacion_id,
             "paciente_id" => $request->paciente_id
 
@@ -90,6 +80,9 @@ class PersonasRelacionadasController extends Controller
             "telefono" => $request->telefono,
             "ocupacion" => $request->ocupacion,
             "email" => $request->email,
+            "localidad" => $request->localidad,
+            "contacto" => $request->contacto,
+            "observaciones" => $request->observaciones,
             "tiporelacion_id" => $request->tiporelacion_id,
             "paciente_id" => $request->paciente_id
 
