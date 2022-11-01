@@ -44,7 +44,7 @@
             <input type="date" class="form-control form-control-sm" id="cdr_fecha" name="cdr_fecha" value="{{$evaluacion->cdr_fecha}}" required @if($show) disabled @endif>
         </div>
     </div>
-    
+    @if(!$show || !is_null($evaluacion->nombre_escala))
         <div class="row">
             <label for="Otra_escala" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2"><b>Otra escala</b></label>
         </div>
@@ -55,18 +55,18 @@
 
         </div>
 
-    <div class="row">
-        <div class="col-sm-9 col-md-6 col-lg-2">
-                <input type="text" class="form-control form-control-sm escalaPersonalizada" id="nombre_escala" name="nombre_escala" value="{{$evaluacion->nombre_escala}}" @if($show) disabled @endif >
+        <div class="row">
+            <div class="col-sm-9 col-md-6 col-lg-2">
+                    <input type="text" class="form-control form-control-sm escalaPersonalizada" id="nombre_escala" name="nombre_escala" value="{{$evaluacion->nombre_escala}}" @if($show) disabled @endif >
+            </div>
+            <div class="col-sm-9 col-md-6 col-lg-2">
+                    <input type="number" class="form-control form-control-sm escalaPersonalizada" id="escala" name="escala" value="{{$evaluacion->escala}}" @if($show) disabled @endif >
+            </div>
+            <div class="col-sm-9 col-md-6 col-lg-2">
+                <input type="date" class="form-control form-control-sm escalaPersonalizada" id="fecha_escala" name="fecha_escala" value="{{$evaluacion->fecha_escala}}" @if($show) disabled @endif>
+            </div>
         </div>
-        <div class="col-sm-9 col-md-6 col-lg-2">
-                <input type="number" class="form-control form-control-sm escalaPersonalizada" id="escala" name="escala" value="{{$evaluacion->escala}}" @if($show) disabled @endif >
-        </div>
-        <div class="col-sm-9 col-md-6 col-lg-2">
-            <input type="date" class="form-control form-control-sm escalaPersonalizada" id="fecha_escala" name="fecha_escala" value="{{$evaluacion->fecha_escala}}" @if($show) disabled @endif>
-        </div>
-    </div>
-    
+    @endif
     <div class="mb-3">
         <label for="diagnostico" class="form-label col-form-label-sm">Diagnostico<span class="asterisco">*</span></label>
         <textarea class="form-control form-control-sm" id="diagnostico" name="diagnostico" rows="3" required @if($show) disabled @endif>{{$evaluacion->diagnostico}}</textarea>
