@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container-fluid">
-    <form method="post" action="/pacientes/{{$paciente->id}}">
+    <form method="post" action="/actualizarPaciente">
         {{csrf_field()}}
         <div class="pt-4 pb-2">
             <h5 class="text-muted">Datos paciente</h5>

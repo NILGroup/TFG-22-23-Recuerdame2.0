@@ -1,4 +1,5 @@
 <div class="row form-group justify-content-between">
+    <input type="hidden" name="id" class="form-control form-control-sm" id="nombre" value="{{$paciente->id}}" required @if($show) disabled @endif>
     <div class="row col-sm-12 col-md-6 col-lg-5">
         <label for="nombre" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Nombre<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6">
@@ -9,7 +10,7 @@
     <div class="row col-sm-12 col-md-6 col-lg-7">
         <label for="apellidos" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Apellidos<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-8">
-            <input type="apellidos" name="apellidos" class="form-control form-control-sm" id="apellidos" value="{{$paciente->apellidos}}" required @if($show) disabled @endif>
+            <input type="text" name="apellidos" class="form-control form-control-sm" id="apellidos" value="{{$paciente->apellidos}}" required @if($show) disabled @endif>
         </div>
     </div>
 </div>
@@ -18,7 +19,7 @@
     <div class="row col-sm-12 col-md-6 col-lg-5">
         <label for="genero" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Género<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6">
-            <select id="genero" name="genero" class="form-control form-select form-select-sm" required @if($show) disabled @endif>
+            <select id="genero" name="genero_id" class="form-control form-select form-select-sm" required @if($show) disabled @endif>
                 <option selected disabled></option>
                     @foreach($generos as $genero)
                         <option value="{{$genero->id}}" @if($genero->id == $paciente->genero_id) selected @endif>{{$genero->nombre}}</option>
@@ -55,7 +56,7 @@
     <div class="row col-sm-12 col-md-6 col-lg-5">
         <label for="estado" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Estado civil<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6">
-            <select id="estado" name="estado_id" class="form-control form-select form-select-sm" required @if($show) disabled @endif>
+            <select id="estado" name="situacion_id" class="form-control form-select form-select-sm" required @if($show) disabled @endif>
                 <option selected disabled></option>
                 @foreach($situaciones as $situacion)
                     <option value="{{$situacion->id}}" @if($situacion->id == $paciente->situacion_id) selected @endif>{{$situacion->nombre}}</option>
@@ -98,7 +99,7 @@
         <label for="residencia" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Tipo de residencia<span class="asterisco">*</span></label>
         
         <div class="col-sm-12 col-md-12 col-lg-6">
-            <select id="residencia" name="tipo_residencia" class="form-control form-select form-select-sm" required @if($show) disabled @endif>
+            <select id="residencia" name="residencia_id" class="form-control form-select form-select-sm" required @if($show) disabled @endif>
                     <option selected disabled></option>
                 @foreach($residencias as $residencia)
                     <option value="{{$residencia->id}}" @if($residencia->id == $paciente->residencia_id) selected @endif>{{$residencia->nombre}}</option>

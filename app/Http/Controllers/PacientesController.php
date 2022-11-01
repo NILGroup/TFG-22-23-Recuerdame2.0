@@ -65,7 +65,6 @@ class PacientesController extends Controller
 
     public function store(Request $request)
     {
-
         //Se valida la request
         $validate = $request->validate([
             "nombre" => "required",
@@ -83,7 +82,6 @@ class PacientesController extends Controller
 
         //Almacenamos al paciente en la bd
         $user = User::find(Auth::id());
-
         Paciente::updateOrcreate([
             "nombre" => $request->nombre,
             "apellidos" => $request->apellidos,
@@ -151,17 +149,17 @@ class PacientesController extends Controller
      * Actualiza al paciente especificado y redirecciona a la lista de pacientes
      */
 
-    public function update(Request $request, int $id)
+    public function update(Request $request)
     {
         //Sacamos al paciente de la bd
-        $paciente = Paciente::findOrFail($id);
+        $paciente = Paciente::findOrFail($request->id);
 
         //Actualizamos masivamente los datos del paciente
         $paciente->update($request->all());
         session()->put('paciente', $paciente->toArray()); 
 
         //Redireccionamos a lista pacientes
-        return redirect("/pacientes");
+        return redirect("/pacientes/$request->id");
         
     }
 
