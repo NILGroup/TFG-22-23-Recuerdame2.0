@@ -15,7 +15,6 @@ mybutton.style.display = "none";
 window.onscroll = function() {scrollHider()};
 
 function scrollHider() {
-    console.log(document.documentElement.scrollTop);
   if (document.documentElement.scrollTop > 300) {
     mybutton.style.display = "block";
   } else {

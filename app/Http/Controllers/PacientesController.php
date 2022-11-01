@@ -9,6 +9,7 @@ use App\Models\Residencia;
 use App\Models\Situacion;
 use App\Models\Estudio;
 use App\Models\Genero;
+use App\Models\Evaluacion;
 use Illuminate\Support\Facades\Auth;
 
 use function PHPUnit\Framework\isNull;
@@ -113,10 +114,12 @@ class PacientesController extends Controller
         $situaciones = Situacion::all()->sortBy("id");
         $estudios = Estudio::all()->sortBy("id");
         $generos = Genero::all()->sortBy("id");
+        $personas = $paciente->personasrelacionadas;
+        $evaluaciones = $paciente->evaluaciones;
         session()->put('paciente', $paciente->toArray()); 
        
         //Devolvemos al paciente a la vista de mostrar paciente
-        return view("pacientes.show", compact("paciente", "residencias", "situaciones", "estudios", "generos"));
+        return view("pacientes.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas"));
 
     }
 
