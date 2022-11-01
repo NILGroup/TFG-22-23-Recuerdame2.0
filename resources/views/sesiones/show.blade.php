@@ -2,7 +2,8 @@
 
 @section('content')
 
-
+@include('sesiones.listaItems')
+<!--
 <div class="container-fluid">
     <div class="pt-4 pb-2">
         <h5 class="text-muted">Datos de la sesión</h5>
@@ -32,7 +33,7 @@
 
             <label for="terapeuta" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-1">Terapeuta:</label>
             <div class="col-sm-3 col-md-3 col-lg-2">
-                <label for="terapeuta" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-12">{{$sesion->user->nombre}} {{$sesion->user->nombre}}</label>
+                <label for="terapeuta" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-12">{{$sesion->user->nombre}}</label>
             </div>
         </div>
     </div>
@@ -66,7 +67,7 @@
         </div>
 
         <div>
-        <table class="table table-bordered table-striped table-responsive">
+        <table id="tabla" class="table table-bordered table-striped table-responsive">
                 <caption>Listado de recuerdos</caption>
                 <thead>
                     <tr class="bg-primary">
@@ -111,7 +112,6 @@
     <div class="row pb-2">
         @foreach($sesion->multimedias as $multimedia)
             <div class="col-sm-4">
-                <!-- TODO HACER QUE MUESTRE ARCHIVOS DE LA BBDD -->
                 <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="img-responsive-sm img-thumbnail multimedia-icon"></a>
             </div>
         @endforeach
@@ -121,6 +121,7 @@
         <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a>
     </div>
 </div>
+-->
 @endsection
 
 @push('scripts')
@@ -129,5 +130,25 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
-
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
+<script>
+    $(document).ready(function () {
+        $('#tabla').DataTable({
+            paging: false,
+            info: false,
+            language: { 
+                search: "_INPUT_",
+                searchPlaceholder: "Buscar...",
+                emptyTable: "No hay datos disponibles"
+            },
+            responsive: {
+                details: {
+                type: 'column',
+                target: 'tr'
+                }
+            },
+            dom : "<'row' <'form-control-sm mr-5' f>>"
+        });
+    });
+</script>
 @endpush

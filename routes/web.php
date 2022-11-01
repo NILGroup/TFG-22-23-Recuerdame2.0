@@ -78,7 +78,7 @@ Route::get('/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@creat
 Route::post('/registroCuidador','App\Http\Controllers\CuidadoresController@registroCuidador');
 
 //RUTAS CUSTOMIZADAS SESION
-Route::post('/crearSesion', 'App\Http\Controllers\SesionesController@store');
+Route::post('/guardarSesion', 'App\Http\Controllers\SesionesController@store');
 Route::delete('/eliminarSesion/{id}', 'App\Http\Controllers\SesionesController@destroy');
 Route::get('/pacientes/{id}/sesiones/{idS}/editar', 'App\Http\Controllers\SesionesController@showEditable');
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');

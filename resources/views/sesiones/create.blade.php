@@ -3,8 +3,10 @@
 @section('content')
 
 
-<form action="/crearSesion" method="POST">
+<form action="/guardarSesion" method="POST">
     {{csrf_field()}}
+    @include('sesiones.listaItems')
+    <!--
     <div class="container-fluid">
         <div class="pt-4 pb-2">
             <h5 class="text-muted">Datos de la sesión</h5>
@@ -72,7 +74,7 @@
             </div>
 
             <div>
-                <table class="table table-bordered table-striped table-responsive">
+                <table id="tabla" class="table table-bordered table-striped table-responsive">
                     <caption>Listado de recuerdos</caption>
                     <thead>
                         <tr class="bg-primary">
@@ -98,7 +100,7 @@
         </div>
         <div class="row">
             <div class="col-12 justify-content-end d-flex p-2">
-                <!-- TODO REDIRIGIR A SELECCION DE MULTIMEDIA -->
+
                 <a href="#" class="btn btn-success btn-sm">Añadir existente</button></a>
             </div>
         </div>
@@ -115,6 +117,7 @@
             <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a>
         </div>
     </div>
+    -->
 </form>
 
 @include('sesiones.models')

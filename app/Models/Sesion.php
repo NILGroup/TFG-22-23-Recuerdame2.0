@@ -12,16 +12,16 @@ class Sesion extends Model
 
     protected $fillable = [
         "fecha",
-        "etapa_id",
         "objetivo",
         "descripcion",
+        "fecha_finalizada",
         "barreras",
         "facilitadores",
-        "fecha_finalizada",
+        "respuesta",
+        "observaciones",
+        "etapa_id",
         "paciente_id",
         "user_id",
-        "respuesta",
-        "observaciones"
     ];
 
     public function etapa(){
