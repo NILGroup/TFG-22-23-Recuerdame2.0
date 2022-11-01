@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string("email");
             $table->unsignedBigInteger("tiporelacion_id");
             $table->unsignedBigInteger("paciente_id");
-            $table->timestamps();
 
             $table->foreign("tiporelacion_id")->references("id")->on("tiporelacions")->onDelete("cascade");
             $table->foreign("paciente_id")->references("id")->on("pacientes")->onDelete("cascade");

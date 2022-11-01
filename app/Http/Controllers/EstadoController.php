@@ -23,7 +23,7 @@ class EstadoController extends Controller
 
     public function index()
     {
-        return Estado::all();
+        return Estado::all()->sortBy("id");
     }
 
    

@@ -37,13 +37,7 @@
                 <td><a href="/pacientes/{{$paciente->id}}/sesiones" class="link-primary"> {{$paciente->nombre}}</a></td>
                 <td>{{$paciente->apellidos}}</td>
                 <td>
-                @if($paciente->genero == 'H') 
-                    Hombre
-                @elseif($paciente->genero == 'M') 
-                    Mujer
-                @else
-                    Otro 
-                @endif
+                    {{$paciente->genero->nombre}}
                 </td>
                 <td>
                 <?php 

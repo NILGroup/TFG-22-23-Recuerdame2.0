@@ -26,9 +26,9 @@ class HistoriaController extends Controller
     {
         $paciente = Paciente::findOrFail($idPaciente);
         $fecha = $this->oldestMemoryDate($idPaciente);
-        $etapas = Etapa::all();
-        $categorias = Categoria::all();
-        $etiquetas = Etiqueta::all();
+        $etapas = Etapa::all()->sortBy("id");
+        $categorias = Categoria::all()->sortBy("id");
+        $etiquetas = Etiqueta::all()->sortBy("id");
 
         return view("historias.generateHistoria", compact("paciente", "fecha", "etapas", "etiquetas", "categorias"));
     }

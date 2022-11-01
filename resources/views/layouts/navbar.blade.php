@@ -42,9 +42,9 @@
         </div>
         <div class="row align-items-center pe-4">
             <div class="col-12">
-                @if( Session::get('paciente')['genero'] == 'H')
+                @if( Session::get('paciente')['genero_id'] == 1 || Session::get('paciente')['genero_id'] == 3)
                 <img src="/img/avatar_hombre.png" alt="Avatar" class="avatar-mini">
-                @elseif( Session::get('paciente')['genero'] == 'M')
+                @elseif( Session::get('paciente')['genero_id'] == 2)
                 <img src="/img/avatar_mujer.png" alt="Avatar" class="avatar-mini">
                 @endif
 
@@ -58,10 +58,12 @@
 
         <div class="row align-items-center pe-4">
             <div class="col-12">
-                @if( Session::get('paciente')['genero'] == 'H')
+                @if( Session::get('paciente')['genero_id'] == 1)
                     Hombre
-                @elseif( Session::get('paciente')['genero'] == 'M')
+                @elseif( Session::get('paciente')['genero_id'] == 2)
                     Mujer
+                @else
+                    Otro
                 @endif
             </div>
         </div>

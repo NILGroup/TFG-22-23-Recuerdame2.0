@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Evaluacion extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
         "paciente_id",

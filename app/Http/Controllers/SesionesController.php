@@ -50,11 +50,11 @@ class SesionesController extends Controller
         $user = Auth::user();
         $paciente = Paciente::find(Session::get('paciente')['id']);
         $recuerdos = Recuerdo::where('paciente_id', $paciente->id)->get();
-        $estados = Estado::all();
-        $etiquetas = Etiqueta::all();
-        $etapas = Etapa::all();
-        $emociones = Emocion::all();
-        $categorias = Categoria::all();
+        $estados = Estado::all()->sortBy("id");
+        $etiquetas = Etiqueta::all()->sortBy("id");
+        $etapas = Etapa::all()->sortBy("id");
+        $emociones = Emocion::all()->sortBy("id");
+        $categorias = Categoria::all()->sortBy("id");
         $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
 
         return view("sesiones.create", compact('etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente'));
@@ -128,7 +128,7 @@ class SesionesController extends Controller
     {
         //https://youtu.be/g-Y9uiAjOE4
         $sesion = Sesion::findOrFail($id);
-        $etapas = Etapa::all();
+        $etapas = Etapa::all()->sortBy("id");
         //throw new \Exception($sesion->multimedias);
         return view('sesiones.show', compact('sesion', 'etapas'));
     }
@@ -139,11 +139,11 @@ class SesionesController extends Controller
         $user = Auth::user();
         $paciente = Paciente::find(Session::get('paciente')['id']);
         $recuerdos = Recuerdo::where('paciente_id', $paciente->id)->get();
-        $estados = Estado::all();
-        $etiquetas = Etiqueta::all();
-        $etapas = Etapa::all();
-        $emociones = Emocion::all();
-        $categorias = Categoria::all();
+        $estados = Estado::all()->sortBy("id");
+        $etiquetas = Etiqueta::all()->sortBy("id");
+        $etapas = Etapa::all()->sortBy("id");
+        $emociones = Emocion::all()->sortBy("id");
+        $categorias = Categoria::all()->sortBy("id");
         $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
         //throw new \Exception($sesion->multimedias);
         return view('sesiones.edit', compact('sesion', 'etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente'));

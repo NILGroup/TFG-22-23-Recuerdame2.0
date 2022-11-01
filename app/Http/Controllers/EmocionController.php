@@ -23,7 +23,7 @@ class EmocionController extends Controller
     
     public function index()
     {
-        return Emocion::all();
+        return Emocion::all()->sortBy("id");
     }
 
     

@@ -16,22 +16,16 @@ return new class extends Migration
         Schema::create('sesions', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
-            //id_etapa int(11)
-            $table->unsignedBigInteger('etapa_id');
-            
             $table->string('objetivo'); //varchar en laravel
             $table->string('descripcion')->nullable();
+            $table->date('fecha_finalizada')->nullable();
+            $table->string('respuesta')->nullable();
             $table->string('barreras')->nullable();
             $table->string('facilitadores')->nullable();
-            $table->date('fecha_finalizada')->nullable();
-            //id_paciente
-            $table->unsignedBigInteger('paciente_id');
-            //id_usuario
-            $table->unsignedBigInteger('user_id');
-            $table->string('respuesta')->nullable();
             $table->string('observaciones')->nullable();
-            $table->timestamps();
-
+            $table->unsignedBigInteger('paciente_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('etapa_id');
 
             $table->foreign('etapa_id')->references('id')->on('etapas')->onDelete("cascade");
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete("cascade");

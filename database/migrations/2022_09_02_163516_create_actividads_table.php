@@ -18,10 +18,9 @@ return new class extends Migration
             $table->date("start");
             $table->string("title");
             $table->string("description");
-            $table->unsignedBigInteger("paciente_id");
             $table->string("color");
-            $table->timestamps();
-
+            $table->unsignedBigInteger("paciente_id");
+            
             $table->foreign("paciente_id")->references("id")->on("pacientes")->onDelete("cascade");
         });
     }

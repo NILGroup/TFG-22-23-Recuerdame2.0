@@ -20,7 +20,7 @@ class CalendarioController extends Controller
     }
 
     public function showByPaciente(int $idPaciente) {
-        //$actividades = Actividad::all();
+        //$actividades = Actividad::all()->sortBy("id");
         return view('calendario.showByPaciente', compact("idPaciente"));
     }
 

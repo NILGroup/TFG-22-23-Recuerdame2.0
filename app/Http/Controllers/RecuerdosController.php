@@ -50,16 +50,16 @@ class RecuerdosController extends Controller
     public function create()
     {
 
-        $estados = Estado::all();
-        $etiquetas = Etiqueta::all();
-        $etapas = Etapa::all();
-        $emociones = Emocion::all();
-        $categorias = Categoria::all();
+        $estados = Estado::all()->sortBy("id");
+        $etiquetas = Etiqueta::all()->sortBy("id");
+        $etapas = Etapa::all()->sortBy("id");
+        $emociones = Emocion::all()->sortBy("id");
+        $categorias = Categoria::all()->sortBy("id");
         $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
         foreach ($prelacionadas as $p) {
             $p->tiporelacion_id = !isNull($p->tiporelacion_id)?"No relacionado":Tiporelacion::find($p->tiporelacion_id)->nombre;
         }
-        $tipos = Tiporelacion::all();
+        $tipos = Tiporelacion::all()->sortBy("id");
         return view("recuerdos.create", compact("estados","etiquetas","etapas","emociones","categorias", "prelacionadas","tipos"));
 
     }
@@ -166,17 +166,17 @@ class RecuerdosController extends Controller
     public function edit($idRecuerdo)
     {
         $recuerdo = Recuerdo::find($idRecuerdo);
-        $estados = Estado::all();
-        $etiquetas = Etiqueta::all();
-        $etapas = Etapa::all();
-        $emociones = Emocion::all();
-        $categorias = Categoria::all();
+        $estados = Estado::all()->sortBy("id");
+        $etiquetas = Etiqueta::all()->sortBy("id");
+        $etapas = Etapa::all()->sortBy("id");
+        $emociones = Emocion::all()->sortBy("id");
+        $categorias = Categoria::all()->sortBy("id");
         $personas = $recuerdo->personas_relacionadas;
         $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
         foreach ($personas as $p) {
             $p->tiporelacion_id = $p->tiporelacion->nombre;
         }
-        $tipos = Tiporelacion::all();
+        $tipos = Tiporelacion::all()->sortBy("id");
         return view("recuerdos.edit", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "personas", "tipos", "prelacionadas"));
     }
 

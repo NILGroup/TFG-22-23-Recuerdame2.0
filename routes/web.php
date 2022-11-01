@@ -14,6 +14,7 @@ use App\Models\Paciente;
 use App\Models\Actividad;
 use App\Models\Evaluacion;
 use App\Models\Estado;
+use App\Models\Residencia;
 use App\Models\Etapa;
 use App\Models\TipoRelacion;
 use App\Models\PersonaRelacionada;
@@ -23,10 +24,11 @@ use App\Models\Categoria;
 use App\Models\Multimedia;
 use App\Models\Etiqueta;
 use App\Models\Emocion;
-use App\Models\Personarelacionada as ModelsPersonarelacionada;
 use App\Models\Recuerdo;
 use App\Models\Rol;
 use App\Models\User;
+use App\Models\Estudio;
+use App\Models\Situacion;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -67,8 +69,6 @@ Route::resources([
 
 //Registro y login
 Auth::routes();
-
-
 
 //RUTAS CUSTOMIZADAS CUIDADOR
 Route::get('/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
@@ -124,131 +124,195 @@ Route::get('/pacientes/{id}/historias/generarHistoria', 'App\Http\Controllers\Hi
 Route::get('/historias/generarLibro', 'App\Http\Controllers\HistoriaController@generarLibroHistoria');
 Route::get('/generarPDFHistoria', 'App\Http\Controllers\PDFController@generarPDFHistoria');
    
+
+
+
+
 /*********************************************************
     CREA DATOS EN LA BASE DE DATOS
 *********************************************************/
 Route::post('/prueba', function () {
+    
+    DB::table("rols")->insert([
+        ["nombre" => "Terapeuta"],
+        ["nombre" => "Cuidador"]
+    ]);
 
-    Rol::updateOrcreate(["nombre" => "Terapeuta"]);
-    Rol::updateOrcreate(["nombre" => "Cuidador"]);
+    DB::table("generos")->insert([
+        ["nombre" => "Hombre"],
+        ["nombre" => "Mujer"],
+        ["nombre" => "Otro"],
+    ]);
 
+    DB::table("etapas")->insert([
+        ["nombre" => "Infancia"],
+        ["nombre" => "Adolescencia"],
+        ["nombre" => "Adulto joven"],
+        ["nombre" => "Adulto"],
+        ["nombre" => "Adulto Mayor"]
+    ]);
 
-    Etapa::updateOrcreate(["nombre" => "Infancia"]);
-    Etapa::updateOrcreate(["nombre" => "Adolescencia"]);
-    Etapa::updateOrcreate(["nombre" => "Adulto joven"]);
-    Etapa::updateOrcreate(["nombre" => "Adulto"]);
-    Etapa::updateOrcreate(["nombre" => "Adulto Mayor"]);
+    DB::table("estados")->insert([
+        ["nombre" => "Conservado"],
+        ["nombre" => "En riesgo"],
+        ["nombre" => "Perdido"]
+    ]);
 
+    DB::table("emocions")->insert([
+        ["nombre" => "Alegría"],
+        ["nombre" => "Nostalgia"],
+        ["nombre" => "Ira"],
+        ["nombre" => "Enfado"],
+        ["nombre" => "Tristeza"]
+    ]);
+    
+    DB::table("estudios")->insert([
+        ["nombre" => "Educación infantil"],
+        ["nombre" => "Educación primaria"],
+        ["nombre" => "ESO"],
+        ["nombre" => "Bachillerato"],
+        ["nombre" => "Formación profesional"],
+        ["nombre" => "Carrera universitaria"],
+        ["nombre" => "Másteres o postgrados"],
+        ["nombre" => "Doctorado"],
+        ["nombre" => "Sin estudios"]
+    ]);
 
-    Estado::updateOrcreate(["nombre" => "Conservado"]);
-    Estado::updateOrcreate(["nombre" => "En riesgo"]);
-    Estado::updateOrcreate(["nombre" => "Perdido"]);
+    DB::table("etiquetas")->insert([
+        ["nombre" => "Positivo"],
+        ["nombre" => "Neutro"],
+        ["nombre" => "Negativo"]
+    ]);
 
+    DB::table("categorias")->insert([
+        ["nombre" => "Familia"],
+        ["nombre" => "Amistad"],
+        ["nombre" => "Hobbies"],
+        ["nombre" => "Trabajo"],
+        ["nombre" => "Política"],
+        ["nombre" => "Estudios"],
+        ["nombre" => "Otro"]
+    ]);
 
-    Emocion::updateOrcreate(["nombre" => "Alegría"]);
-    Emocion::updateOrcreate(["nombre" => "Nostalgia"]);
-    Emocion::updateOrcreate(["nombre" => "Ira"]);
-    Emocion::updateOrcreate(["nombre" => "Enfado"]);
-    Emocion::updateOrcreate(["nombre" => "Tristeza"]);
+    DB::table("situacions")->insert([
+        ["nombre" => "Soltero/a"],
+        ["nombre" => "Casado/a"],
+        ["nombre" => "Unión de hecho"],
+        ["nombre" => "Separado/a"],
+        ["nombre" => "Divorciado/a"],
+        ["nombre" => "Viudo/a"]
+    ]);
 
+    DB::table("residencias")->insert([
+        ["nombre" => "Piso"],
+        ["nombre" => "Casa"],
+        ["nombre" => "Centro de día"],
+        ["nombre" => "Vivienda unifamiliar"],
+        ["nombre" => "Residencia para mayores"],
+        ["nombre" => "Otros"]
+    ]);
 
-    Etiqueta::updateOrcreate(["nombre" => "Positivo"]);
-    Etiqueta::updateOrcreate(["nombre" => "Neutro"]);
-    Etiqueta::updateOrcreate(["nombre" => "Negativo"]);
- 
+    DB::table("multimedias")->insert([
+        ["nombre" => "multimedia 1", "fichero" => "avatar_hombre.png"],
+        ["nombre" => "multimedia 2", "fichero" => "avatar_hujer.png"]
+    ]);
 
-    Categoria::updateOrcreate(["nombre" => "Familia"]);
-    Categoria::updateOrcreate(["nombre" => "Amistad"]);
-    Categoria::updateOrcreate(["nombre" => "Hobbies"]);
-    Categoria::updateOrcreate(["nombre" => "Trabajo"]);
-    Categoria::updateOrcreate(["nombre" => "Política"]);
-    Categoria::updateOrcreate(["nombre" => "Estudios"]);
-    Categoria::updateOrcreate(["nombre" => "Otro"]);
+    DB::table("tiporelacions")->insert([
+        ["nombre" => "Padre / Madre"],
+        ["nombre" => "Hermano / Hermana"],
+        ["nombre" => "Hijo / Hija"],
+        ["nombre" => "Primo / Prima"],
+        ["nombre" => "Tío / Tía"],
+        ["nombre" => "Amigo / Amiga"],
+        ["nombre" => "Otro"]
+    ]);
 
+    DB::table("users")->insert([
+        ['nombre' => "Terapeuta", 'apellidos' => "Uno", 'email' => "terapeuta@gmail.com", 
+            'usuario' => "Terapeuta", 'rol_id' => 1, 'password' => Hash::make("terapeuta")],
+        ['nombre' => "Cuidador", 'apellidos' => "Uno", 'email' => "cuidador@gmail.com",
+            'usuario' => "cuidador", 'rol_id' => 2, 'password' => Hash::make("cuidador")],
+        ['nombre' => "Cuidador", 'apellidos' => "Dos", 'email' => "cuidador2@gmail.com",
+            'usuario' => "cuidador2", 'rol_id' => 2, 'password' => Hash::make("cuidador")],
+        ['nombre' => "Terapeuta", 'apellidos' => "Dos", 'email' => "terapeuta2@gmail.com", 
+            'usuario' => "Terapeuta2", 'rol_id' => 1, 'password' => Hash::make("terapeuta")]
+    ]);
 
-    Multimedia::updateOrcreate(["nombre" => "multimedia 1", "fichero" => "avatar_hombre.png"]);
-    Multimedia::updateOrcreate(["nombre" => "multimedia 2", "fichero" => "avatar_hujer.png"]);
+    DB::table("pacientes")->insert([
+        ["nombre" => "Miguel", "apellidos" => "Martinez-Almeida Nistal", "genero_id" => 1,
+            "lugar_nacimiento" => "Madrid", "nacionalidad" => "Española", "fecha_nacimiento" => Carbon::create(2001, 7, 30),
+            "residencia_id" => 1, "residencia_actual" => "secreto", "cuidador_id" => 2, "ocupacion" => "Estudiante", 
+            "situacion_id" => 1, "estudio_id" => 4, "fecha_inscripcion" => Carbon::create(2021, 7, 7)],
+        ["nombre" => "Cristina", "apellidos" => "Díez Sobrino", "genero_id" => 2,
+            "lugar_nacimiento" => "Madrid", "nacionalidad" => "Española", "fecha_nacimiento" => Carbon::create(1999, 1, 21),
+            "residencia_id" => 2, "residencia_actual" => "secreto","cuidador_id" => 3, "ocupacion" => "Estudiante", 
+            "situacion_id" => 1, "estudio_id" => 4, "fecha_inscripcion" => Carbon::create(2019, 4, 7)]
+    ]);
 
+    DB::table("personarelacionadas")->insert([
+        ["nombre" => "Ignacio", "apellidos" => "Martinez-Almeida", "telefono" => "678765456", 
+            "ocupacion" => "Desconocido", "email" => "igMar@gmail.com", "tiporelacion_id" => 2, "paciente_id" => 1 ],
+        ["nombre" => "Pablo", "apellidos" => "Martinez Gonzalez", "telefono" => "600000000",
+            "ocupacion" => "Estudiante", "email" => "pabMar@gmail.com", "tiporelacion_id" => 4, "paciente_id" => 1 ],
+        ["nombre" => "Eros", "apellidos" => "Guerrero Sosa", "telefono" => "666666666", 
+            "ocupacion" => "Estudiante", "email" => "erGuer@gmail.com", "tiporelacion_id" => 6, "paciente_id" => 2 ],
+        ["nombre" => "Adrián", "apellidos" => "Prieto Campo", "telefono" => "000000000",
+            "ocupacion" => "Estudiante", "email" => "adrPri@gmail.com", "tiporelacion_id" => 7, "paciente_id" => 2 ]
+    ]);
 
-    TipoRelacion::updateOrcreate(["nombre" => "Padre / Madre"]);
-    TipoRelacion::updateOrcreate(["nombre" => "Hermano / Hermana"]);
-    TipoRelacion::updateOrcreate(["nombre" => "Hijo / Hija"]);
-    TipoRelacion::updateOrcreate(["nombre" => "Primo / Prima"]);
-    TipoRelacion::updateOrcreate(["nombre" => "Tío / Tía"]);
-    TipoRelacion::updateOrcreate(["nombre" => "Amigo / Amiga"]);
-    TipoRelacion::updateOrcreate(["nombre" => "Otro"]);
-
-
-    User::updateOrcreate(['nombre' => "Terapeuta", 'apellidos' => "Uno", 'email' => "terapeuta@gmail.com", 
-                        'usuario' => "Terapeuta", 'rol_id' => 1, 'password' => Hash::make("terapeuta") ]);
-    User::updateOrcreate(['nombre' => "Cuidador", 'apellidos' => "Uno", 'email' => "cuidador@gmail.com",
-                        'usuario' => "cuidador", 'rol_id' => 2, 'password' => Hash::make("cuidador") ]);
-    User::updateOrcreate(['nombre' => "Cuidador", 'apellidos' => "Dos", 'email' => "cuidador2@gmail.com",
-                        'usuario' => "cuidador2", 'rol_id' => 2, 'password' => Hash::make("cuidador") ]);
-    User::updateOrcreate(['nombre' => "Terapeuta", 'apellidos' => "Dos", 'email' => "terapeuta2@gmail.com", 
-                        'usuario' => "Terapeuta2", 'rol_id' => 1, 'password' => Hash::make("terapeuta") ]);
-
-
-    Paciente::updateOrcreate(["nombre" => "Miguel", "apellidos" => "Martinez-Almeida Nistal", "genero" => 'H',
-                        "lugar_nacimiento" => "Madrid", "nacionalidad" => "Española", "fecha_nacimiento" => Carbon::create(2001, 7, 30),
-                        "tipo_residencia" => "Piso", "residencia_actual" => "secreto", "cuidador_id" => 2 ]);
-    Paciente::updateOrcreate(["nombre" => "Cristina", "apellidos" => "Díez Sobrino", "genero" => 'M',
-                        "lugar_nacimiento" => "Madrid", "nacionalidad" => "Española", "fecha_nacimiento" => Carbon::create(1999, 1, 21),
-                        "tipo_residencia" => "Casa", "residencia_actual" => "secreto","cuidador_id" => 3 ]);
-
-
-    Personarelacionada::updateOrcreate(["nombre" => "Ignacio", "apellidos" => "Martinez-Almeida", "telefono" => "678765456", 
-                        "ocupacion" => "Desconocido", "email" => "igMar@gmail.com", "tiporelacion_id" => 2, "paciente_id" => 1 ]);
-    Personarelacionada::updateOrcreate(["nombre" => "Pablo", "apellidos" => "Martinez Gonzalez", "telefono" => "600000000",
-                        "ocupacion" => "Estudiante", "email" => "pabMar@gmail.com", "tiporelacion_id" => 4, "paciente_id" => 1 ]);
-    Personarelacionada::updateOrcreate(["nombre" => "Eros", "apellidos" => "Guerrero Sosa", "telefono" => "666666666", 
-                        "ocupacion" => "Estudiante", "email" => "erGuer@gmail.com", "tiporelacion_id" => 6, "paciente_id" => 2 ]);
-    Personarelacionada::updateOrcreate(["nombre" => "Adrián", "apellidos" => "Prieto Campo", "telefono" => "000000000",
-                        "ocupacion" => "Estudiante", "email" => "adrPri@gmail.com", "tiporelacion_id" => 7, "paciente_id" => 2 ]);
-
-
-    Actividad::updateOrcreate(["start" => Carbon::now(), "title" => "Primera terapia", "paciente_id" => 1,
-                        "description" => "Primera terapia de evaluación al paciente Miguel", "color" => "#00c7fc" ]);
-    Actividad::updateOrcreate(["start" => Carbon::now(), "title" => "Primera terapia", "paciente_id" => 2,
-                        "description" => "Primera terapia de evaluación a la paciente Cristina", "color" => "#ff00fb" ]);
-
+    DB::table("actividads")->insert([
+        ["start" => Carbon::now(), "title" => "Primera terapia", "paciente_id" => 1,
+            "description" => "Primera terapia de evaluación al paciente Miguel", "color" => "#00c7fc" ],
+        ["start" => Carbon::now(), "title" => "Primera terapia", "paciente_id" => 2,
+            "description" => "Primera terapia de evaluación a la paciente Cristina", "color" => "#ff00fb" ]
+    ]);
                                 
-    Evaluacion::updateOrcreate(["paciente_id"=> 1, "fecha" => Carbon::create(2022, 9, 30), "gds" => 2, "gds_fecha" => Carbon::create(2022, 9, 30),
-                        "mental" => 2, "mental_fecha" => Carbon::create(2022, 9, 30), "cdr"=> 2, "cdr_fecha" => Carbon::create(2022, 9, 30),
-                        "nombre_escala" => "escala custom", "escala" => 2, "fecha_escala" => Carbon::create(2022, 10, 30),
-                        "diagnostico" => "Empeora poco a poco", "observaciones" => "Ninguna" ]);
-    Evaluacion::updateOrcreate(["paciente_id"=> 1, "fecha" => Carbon::create(2022, 10, 30), "gds" => 1, "gds_fecha" => Carbon::create(2022, 10, 30),
-                        "mental" => 1, "mental_fecha" => Carbon::create(2022, 10, 30), "cdr"=> 1, "cdr_fecha" => Carbon::create(2022, 10, 30),
-                        "nombre_escala" => "nombre cualquiera", "escala" => 1, "fecha_escala" => Carbon::create(2022, 10, 30),
-                        "diagnostico" => "Ha empeorado gravemente", "observaciones" => "No reconoce a su familia" ]);
-    Evaluacion::updateOrcreate(["paciente_id"=> 2, "fecha" => Carbon::create(2022, 10, 30), "gds" => 5, "gds_fecha" => Carbon::create(2022, 10, 30),
-                        "mental" => 5, "mental_fecha" => Carbon::create(2022, 10, 30), "cdr"=> 5, "cdr_fecha" => Carbon::create(2022, 10, 30),
-                        "nombre_escala" => "escala custom", "escala" => 5, "fecha_escala" => Carbon::create(2022, 10, 30),
-                        "diagnostico" => "Se encuentra en las primeras etapas" ]);
+    DB::table("evaluacions")->insert([
+        ["paciente_id"=> 1, "fecha" => Carbon::create(2022, 9, 30), "gds" => 2, "gds_fecha" => Carbon::create(2022, 9, 30),
+            "mental" => 2, "mental_fecha" => Carbon::create(2022, 9, 30), "cdr"=> 2, "cdr_fecha" => Carbon::create(2022, 9, 30),
+            "nombre_escala" => "escala custom", "escala" => 2, "fecha_escala" => Carbon::create(2022, 10, 30),
+            "diagnostico" => "Empeora poco a poco", "observaciones" => "Ninguna" ],
+        ["paciente_id"=> 1, "fecha" => Carbon::create(2022, 10, 30), "gds" => 1, "gds_fecha" => Carbon::create(2022, 10, 30),
+            "mental" => 1, "mental_fecha" => Carbon::create(2022, 10, 30), "cdr"=> 1, "cdr_fecha" => Carbon::create(2022, 10, 30),
+            "nombre_escala" => "nombre cualquiera", "escala" => 1, "fecha_escala" => Carbon::create(2022, 10, 30),
+            "diagnostico" => "Ha empeorado gravemente", "observaciones" => "No reconoce a su familia" ],
+        ["paciente_id"=> 2, "fecha" => Carbon::create(2022, 10, 30), "gds" => 5, "gds_fecha" => Carbon::create(2022, 10, 30),
+            "mental" => 5, "mental_fecha" => Carbon::create(2022, 10, 30), "cdr"=> 5, "cdr_fecha" => Carbon::create(2022, 10, 30),
+            "nombre_escala" => "escala custom", "escala" => 5, "fecha_escala" => Carbon::create(2022, 10, 30),
+            "diagnostico" => "Se encuentra en las primeras etapas", "observaciones" => null ]
+    ]);
 
 
-    Sesion::updateOrcreate(["fecha" => Carbon::create(2022, 9, 17), "etapa_id" => 1, "objetivo" => "objetivo 1", 
-                        "descripcion" => "descripcion del objetivo", "barreras"=> "muchas", "facilitadores" => "ninguno", 
-                        "fecha_finalizada" => Carbon::create(2022, 9, 19), "paciente_id" => 1, "user_id" => 1, 
-                        "respuesta" => "ninguna respuesta", "observaciones" => "ninguna observacion" ]);
-    Sesion::updateOrcreate(["fecha" => Carbon::create(2022, 9, 22), "etapa_id" => 2, "objetivo" => "objetivo 2",
-                        "descripcion" => "descripcion del objetivo numero 2", "paciente_id" => 1, "user_id" => 1 ]);
-    Sesion::updateOrcreate(["fecha" => Carbon::create(2022, 10, 31), "etapa_id" => 2, "objetivo" => "Pruebas iniciales",
-                        "descripcion" => "Iniciaremos la terapia", "paciente_id" => 2, "user_id" => 4 ]);
+    DB::table("sesions")->insert([
+        ["fecha" => Carbon::create(2022, 9, 17), "etapa_id" => 1, "objetivo" => "objetivo 1", 
+            "descripcion" => "descripcion del objetivo", "barreras"=> "muchas", "facilitadores" => "ninguno", 
+            "fecha_finalizada" => Carbon::create(2022, 9, 19), "paciente_id" => 1, "user_id" => 1, 
+            "respuesta" => "ninguna respuesta", "observaciones" => "ninguna observacion" ],
+        ["fecha" => Carbon::create(2022, 9, 22), "etapa_id" => 2, "objetivo" => "objetivo 2",
+            "descripcion" => "descripcion del objetivo numero 2", "barreras"=> null, "facilitadores" => null, 
+            "fecha_finalizada" => null, "paciente_id" => 1, "user_id" => 1, 
+            "respuesta" => null, "observaciones" => null ],
+        ["fecha" => Carbon::create(2022, 10, 31), "etapa_id" => 2, "objetivo" => "Pruebas iniciales",
+            "descripcion" => "Iniciaremos la terapia", "barreras"=> null, "facilitadores" => null, 
+            "fecha_finalizada" => null, "paciente_id" => 2, "user_id" => 4, 
+            "respuesta" => null, "observaciones" => null ],
+        ]);
 
     
-    Recuerdo::updateOrcreate([ "fecha" => Carbon::create(2019, 9, 10), "nombre" => "Entrada a la universidad",
-                        "descripcion" => "Inició su formación en el grado de Ingeniería del Software",
-                        "localizacion" => "Facultad de informatica UCM", "etapa_id" => 3, "categoria_id" => 6,
-                        "emocion_id" => 3, "estado_id" => 1, "etiqueta_id" => 3, "puntuacion" => 2, "paciente_id" => 1 ]);
-    Recuerdo::updateOrcreate([ "fecha" => Carbon::create(2022, 10, 13), "nombre" => "Cena con amigos",
-                        "descripcion" => "Cenó en Taco Bell con sus amigos Eros, Adri y Pablo, entre otros.",
-                        "localizacion" => "Taco Bell Moncloa", "etapa_id" => 3, "categoria_id" => 3, "emocion_id" => 2,
-                        "estado_id" => 1, "etiqueta_id" => 1, "puntuacion" => 10, "paciente_id" => 1 ]);    
-    Recuerdo::updateOrcreate([ "fecha" => Carbon::create(2022, 10, 13), "nombre" => "Fiesta en La Sierra",
-                        "descripcion" => "Se montó una ``tremenda fiestuqui´´ con sus amigos en una discoteca de La Sierra ",
-                        "localizacion" => "Discoteca Recuer-Dame, La Sierra", "etapa_id" => 3, "categoria_id" => 7, "emocion_id" => 1,
-                        "estado_id" => 2, "etiqueta_id" => 2, "puntuacion" => 7, "paciente_id" => 2 ]);    
+    DB::table("recuerdos")->insert([
+        [ "fecha" => Carbon::create(2019, 9, 10), "nombre" => "Entrada a la universidad",
+            "descripcion" => "Inició su formación en el grado de Ingeniería del Software",
+            "localizacion" => "Facultad de informatica UCM", "etapa_id" => 3, "categoria_id" => 6,
+            "emocion_id" => 3, "estado_id" => 1, "etiqueta_id" => 3, "puntuacion" => 2, "paciente_id" => 1 ],
+        [ "fecha" => Carbon::create(2022, 10, 13), "nombre" => "Cena con amigos",
+            "descripcion" => "Cenó en Taco Bell con sus amigos Eros, Adri y Pablo, entre otros.",
+            "localizacion" => "Taco Bell Moncloa", "etapa_id" => 3, "categoria_id" => 3, "emocion_id" => 2,
+            "estado_id" => 1, "etiqueta_id" => 1, "puntuacion" => 10, "paciente_id" => 1 ],
+        [ "fecha" => Carbon::create(2022, 10, 13), "nombre" => "Fiesta en La Sierra",
+            "descripcion" => "Se montó una ``tremenda fiestuqui´´ con sus amigos en una discoteca de La Sierra ",
+            "localizacion" => "Discoteca Recuer-Dame, La Sierra", "etapa_id" => 3, "categoria_id" => 7, "emocion_id" => 1,
+            "estado_id" => 2, "etiqueta_id" => 2, "puntuacion" => 7, "paciente_id" => 2 ]
+    ]);    
     
     DB::table("multimedia_sesion")->insertOrIgnore([
         ["multimedia_id" => 1, "sesion_id" => 1],
@@ -290,7 +354,6 @@ Route::post('/prueba', function () {
         ["paciente_id" => 1, "user_id" => 4],
         ["paciente_id" => 2, "user_id" => 4]
     ]);
-
 
     return "<h1> Se ha llenado la base de datos </h1>";
 });

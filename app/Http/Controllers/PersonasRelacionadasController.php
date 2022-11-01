@@ -40,7 +40,7 @@ class PersonasRelacionadasController extends Controller
 
     public function createByPaciente(int $idPaciente)
     {
-        $tipos = Tiporelacion::all();
+        $tipos = Tiporelacion::all()->sortBy("id");
         return view("personasrelacionadas.create", compact("idPaciente", "tipos"));
     }
 
@@ -116,7 +116,7 @@ class PersonasRelacionadasController extends Controller
 
     public function edit(int $id)
     {
-        $tipos = Tiporelacion::all();
+        $tipos = Tiporelacion::all()->sortBy("id");
         $persona = Personarelacionada::findOrFail($id);
         return view("personasrelacionadas.edit", compact("persona","tipos"));
     }

@@ -24,7 +24,7 @@ class TipoRelacionController extends Controller
      */
     public function index()
     {
-        return Tiporelacion::all();
+        return Tiporelacion::all()->sortBy("id");
     }
 
    

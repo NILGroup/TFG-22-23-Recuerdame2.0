@@ -39,7 +39,6 @@
                     </tr>
                 @endforeach
             </table>
-            <input type="hidden" name="numT" value="" />
         </div>
         <div class="col-12">
             <button type="submit" class="btn btn-outline-primary">Guardar</button>
