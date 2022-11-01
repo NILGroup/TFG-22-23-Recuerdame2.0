@@ -3,18 +3,19 @@
 @section('content')
 
 <div class="container-fluid">
-    <div class="pt-4 pb-2">
-        <h5 class="text-muted">Crear paciente</h5>
-        <hr class="lineaTitulo">
-    </div>
     <form method="post" action="/pacientes">
-
+        {{csrf_field()}}
+        <div class="pt-4 pb-2">
+            <h5 class="text-muted">Crear paciente</h5>
+            <hr class="lineaTitulo">
+        </div>
+        @include('pacientes.listaItems')
+        <!--
         <div class="row form-group justify-content-between">
             <div class="row col-sm-12 col-md-6 col-lg-5">
                 <label for="nombre" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Nombre<span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
                     <input type="text" name="nombre" class="form-control form-control-sm" id="nombre" placeholder="Nombre..." required>
-                    {{csrf_field()}}
 
                 </div>
             </div>
@@ -131,6 +132,7 @@
             <button type="submit" value="Guardar" class="btn btn-outline-primary">Guardar</button>
             <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a>
         </div>
+        -->
     </form>
 </div>
 @endsection

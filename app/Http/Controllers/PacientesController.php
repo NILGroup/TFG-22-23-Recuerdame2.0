@@ -50,11 +50,13 @@ class PacientesController extends Controller
 
     public function create()
     {
+        $show = false;
+        $paciente = new Paciente();
         $residencias = Residencia::all()->sortBy("id");
         $situaciones = Situacion::all()->sortBy("id");
         $estudios = Estudio::all()->sortBy("id");
         $generos = Genero::all()->sortBy("id");
-        return view("pacientes.create", compact("residencias", "situaciones", "estudios", "generos"));
+        return view("pacientes.create", compact("residencias", "situaciones", "estudios", "generos", "paciente", "show"));
     }
 
     /**
@@ -109,6 +111,7 @@ class PacientesController extends Controller
     public function show($id)
     {
         //Obtenemos al paciente
+        $show = true;
         $paciente = Paciente::findOrFail($id);
         $residencias = Residencia::all()->sortBy("id");
         $situaciones = Situacion::all()->sortBy("id");
@@ -121,7 +124,7 @@ class PacientesController extends Controller
         session()->put('paciente', $paciente->toArray()); 
        
         //Devolvemos al paciente a la vista de mostrar paciente
-        return view("pacientes.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas", "cuidadores"));
+        return view("pacientes.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas", "cuidadores", "show"));
 
     }
 
@@ -132,6 +135,7 @@ class PacientesController extends Controller
     public function edit(int $id)
     {
         //Sacamos al paciente de la bd
+        $show = false;
         $paciente = Paciente::findOrFail($id);
         $residencias = Residencia::all()->sortBy("id");
         $situaciones = Situacion::all()->sortBy("id");
@@ -140,7 +144,7 @@ class PacientesController extends Controller
         session()->put('paciente', $paciente->toArray());
 
         //Devolvemos al paciente a la vista de editar paciente
-        return view("pacientes.edit", compact("paciente", "residencias", "situaciones", "estudios", "generos"));
+        return view("pacientes.edit", compact("paciente", "residencias", "situaciones", "estudios", "generos", "show"));
     }
 
     /**
