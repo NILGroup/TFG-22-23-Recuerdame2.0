@@ -123,14 +123,13 @@
 
 
 
+    <!--DESPLEGABLES-->
 
-
-    <div class="accordion mb-2"> 
+    <div class="accordion"> 
         <div class="accordion-item accordion-header" id="evaluaciones1">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#evaluaciones" aria-expanded="true" aria-controls="evaluaciones">
-                <div class="pt-4 pb-2 w-100">
+                <div class="w-100">
                     <h5 class="text-muted text-start">Listado de informes de seguimiento</h5>
-                    <hr class="lineaTitulo mb-1">
                 </div>
             </button>
             
@@ -140,7 +139,7 @@
                         <a href="/pacientes/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success btn-sm btn-icon mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                     </div>
                 </div>
-                <table id="tabla" class="table table-bordered table-striped table-responsive">
+                <table id="tabla1" class="table table-bordered table-striped table-responsive">
                     <thead>
                         <tr class="bg-primary">
                             <th scope="col">#</th>
@@ -176,12 +175,65 @@
         </div>
     </div>  
 
-    <div class="accordion mb-2"> 
+    <div class="accordion"> 
+        <div class="accordion-item accordion-header" id="cuidadores1">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#cuidadores" aria-expanded="true" aria-controls="cuidadores">
+                <div class="w-100">
+                    <h5 class="text-muted text-start">Listado de cuidadores</h5>
+                </div>
+            </button>
+            
+            <div id="cuidadores" class="accordion-collapse collapse show" aria-labelledby="cuidadores1">
+                <div class="row mb-2">
+                    <div class="col-12 justify-content-end d-flex">
+                        <a href="/cuidadores/crear"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
+                    </div>
+                </div>
+
+                <div>
+                    <table id="tabla2" class="table table-bordered table-striped table-responsive">
+                        <thead>
+                            <tr class="bg-primary">
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellidos</th>
+                                <th scope="col">Correo electrónico</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $i = 1; ?>
+                            @foreach($cuidadores as $cuidador)
+                            <tr>
+                                <th scope="row"><?php echo $i ?></th>
+
+                                <td>{{$cuidador->nombre}}</td>
+                                <td>{{$cuidador->apellidos}}</td>
+                                <td>{{$cuidador->email}}</td>
+
+                                <td class="tableActions">
+                                    <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" style="display:inline!important;">
+                                        {{csrf_field()}}
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <?php $i++; ?>
+
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>  
+
+    <div class="accordion"> 
         <div class="accordion-item accordion-header" id="personasrelacionadas1">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#personasrelacionadas" aria-expanded="true" aria-controls="personasrelacionadas">
-                <div class="pt-4 pb-2 w-100">
+                <div class="w-100">
                     <h5 class="text-muted text-start">Listado de personas relacionadas</h5>
-                    <hr class="lineaTitulo mb-1">
                 </div>
             </button>
             
@@ -193,7 +245,7 @@
                 </div>
 
                 <div>
-                    <table id="tabla" class="table table-bordered table-striped table-responsive">
+                    <table id="tabla3" class="table table-bordered table-striped table-responsive">
                         <thead>
                             <tr class="bg-primary">
                                 <th scope="col">#</th>
@@ -255,7 +307,41 @@
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
 <script>
     $(document).ready(function () {
-        $('#tabla').DataTable({
+        $('#tabla1').DataTable({
+            paging: false,
+            info: false,
+            language: { 
+                search: "_INPUT_",
+                searchPlaceholder: "Buscar...",
+                emptyTable: "No hay datos disponibles"
+            },
+            responsive: {
+                details: {
+                type: 'column',
+                target: 'tr'
+                }
+            },
+            dom : "<'row' <'form-control-sm mr-5' f>>"
+        });
+
+        $('#tabla2').DataTable({
+            paging: false,
+            info: false,
+            language: { 
+                search: "_INPUT_",
+                searchPlaceholder: "Buscar...",
+                emptyTable: "No hay datos disponibles"
+            },
+            responsive: {
+                details: {
+                type: 'column',
+                target: 'tr'
+                }
+            },
+            dom : "<'row' <'form-control-sm mr-5' f>>"
+        });
+
+        $('#tabla3').DataTable({
             paging: false,
             info: false,
             language: { 

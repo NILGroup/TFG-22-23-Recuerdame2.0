@@ -13,7 +13,7 @@
             <div class="row col-sm-12 col-md-6 col-lg-5">
                     <label for="nick" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Nombre<span class="asterisco">*</span></label>
                     <div class="col-sm-12 col-md-12 col-lg-6">
-                        <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" placeholder="Nombre" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
+                        <input id="nombre" type="text" class="form-control form-control-sm @error('nombre') is-invalid @enderror" placeholder="Nombre..." name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
 
                         @error('nombre')
                         <span class="invalid-feedback" role="alert">
@@ -26,7 +26,7 @@
                 <div class="row col-sm-12 col-md-6 col-lg-7">
                     <label for="apellidos" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Apellidos<span class="asterisco">*</span></label>
                     <div class="col-sm-12 col-md-12 col-lg-8">
-                        <input id="apellidos" type="text" class="form-control @error('apellidos') is-invalid @enderror" placeholder="Apellidos" name="apellidos" value="{{ old('apellidos') }}" required autocomplete="apellidos" autofocus>
+                        <input id="apellidos" type="text" class="form-control form-control-sm @error('apellidos') is-invalid @enderror" placeholder="Apellidos..." name="apellidos" value="{{ old('apellidos') }}" required autocomplete="apellidos" autofocus>
                         @error('apellidos')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -39,7 +39,7 @@
                 <div class="row col-sm-12 col-md-6 col-lg-5">
                     <label for="nick" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Nombre de usuario<span class="asterisco">*</span></label>
                     <div class="col-sm-12 col-md-12 col-lg-6">
-                        <input id="usuario" type="text" class="form-control @error('usuario') is-invalid @enderror" placeholder="Nombre de Usuario" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario" autofocus>
+                        <input id="usuario" type="text" class="form-control form-control-sm @error('usuario') is-invalid @enderror" placeholder="Nombre de Usuario..." name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario" autofocus>
 
                         @error('usuario')
                         <span class="invalid-feedback" role="alert">
@@ -53,7 +53,7 @@
                 <div class="row col-sm-12 col-md-6 col-lg-5">
                     <label for="fecha" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Correo<span class="asterisco">*</span></label>
                     <div class="col-sm-12 col-md-12 col-lg-6">
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Correo Electrónico" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <input id="email" type="email" class="form-control form-control-sm @error('email') is-invalid @enderror" placeholder="Correo Electrónico..." name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -65,7 +65,7 @@
                 <div class="row col-sm-12 col-md-6 col-lg-7">
                     <label for="pais" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Contraseña<span class="asterisco">*</span></label>
                     <div class="col-sm-12 col-md-12 col-lg-8">
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Contraseña" name="password" required autocomplete="new-password">
+                        <input id="password" type="password" class="form-control form-control-sm @error('password') is-invalid @enderror" placeholder="Contraseña..." name="password" required autocomplete="new-password">
                         @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

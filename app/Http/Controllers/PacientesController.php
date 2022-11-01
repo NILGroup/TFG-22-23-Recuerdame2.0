@@ -116,10 +116,12 @@ class PacientesController extends Controller
         $generos = Genero::all()->sortBy("id");
         $personas = $paciente->personasrelacionadas;
         $evaluaciones = $paciente->evaluaciones;
+        $cuidadores = $paciente->users->where('rol_id', 2);
+        //throw new \Exception(json_encode($cuidadores));
         session()->put('paciente', $paciente->toArray()); 
        
         //Devolvemos al paciente a la vista de mostrar paciente
-        return view("pacientes.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas"));
+        return view("pacientes.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas", "cuidadores"));
 
     }
 

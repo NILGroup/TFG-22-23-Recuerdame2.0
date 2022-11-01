@@ -9,6 +9,8 @@ use App\Http\Controllers\PersonasRelacionadasController;
 use App\Http\Controllers\InformesSesionController;
 use App\Http\Controllers\EvaluacionController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\CuidadoresController;
+
 use Illuminate\Support\Facades\Route;
 use App\Models\Paciente;
 use App\Models\Actividad;
@@ -64,7 +66,8 @@ Route::resources([
     'personas' => PersonasRelacionadasController::class,
     'calendario' => CalendarioController::class,
     'informesSesion' => InformesSesionController::class,
-    'evaluaciones' => EvaluacionController::class
+    'evaluaciones' => EvaluacionController::class,
+    'cuidadores' => CuidadoresController::class
 ]);
 
 //Registro y login
@@ -241,11 +244,11 @@ Route::post('/prueba', function () {
     DB::table("pacientes")->insert([
         ["nombre" => "Miguel", "apellidos" => "Martinez-Almeida Nistal", "genero_id" => 1,
             "lugar_nacimiento" => "Madrid", "nacionalidad" => "Española", "fecha_nacimiento" => Carbon::create(2001, 7, 30),
-            "residencia_id" => 1, "residencia_actual" => "secreto", "cuidador_id" => 2, "ocupacion" => "Estudiante", 
+            "residencia_id" => 1, "residencia_actual" => "secreto", "ocupacion" => "Estudiante", 
             "situacion_id" => 1, "estudio_id" => 4, "fecha_inscripcion" => Carbon::create(2021, 7, 7)],
         ["nombre" => "Cristina", "apellidos" => "Díez Sobrino", "genero_id" => 2,
             "lugar_nacimiento" => "Madrid", "nacionalidad" => "Española", "fecha_nacimiento" => Carbon::create(1999, 1, 21),
-            "residencia_id" => 2, "residencia_actual" => "secreto","cuidador_id" => 3, "ocupacion" => "Estudiante", 
+            "residencia_id" => 2, "residencia_actual" => "secreto", "ocupacion" => "Estudiante", 
             "situacion_id" => 1, "estudio_id" => 4, "fecha_inscripcion" => Carbon::create(2019, 4, 7)]
     ]);
 
@@ -360,7 +363,9 @@ Route::post('/prueba', function () {
     DB::table("paciente_user")->insertOrIgnore([
         ["paciente_id" => 1, "user_id" => 1],
         ["paciente_id" => 1, "user_id" => 4],
-        ["paciente_id" => 2, "user_id" => 4]
+        ["paciente_id" => 2, "user_id" => 4],
+        ["paciente_id" => 1, "user_id" => 2],
+        ["paciente_id" => 2, "user_id" => 3]
     ]);
 
     return "<h1> Se ha llenado la base de datos </h1>";

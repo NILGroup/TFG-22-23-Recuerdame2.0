@@ -21,7 +21,6 @@ class Paciente extends Model
         "fecha_inscripcion",
         "genero_id",
         "residencia_id",
-        "cuidador_id",
         "estudio_id",
         "situacion_id"
     ];
@@ -46,10 +45,6 @@ class Paciente extends Model
         return $this->hasMany(Personarelacionada::class);
     }
 
-    public function cuidador(){
-        return $this->hasOne(User::class);
-    }
-    
     public function residencia(){
         return $this->belongsTo(Residencia::class);
     }

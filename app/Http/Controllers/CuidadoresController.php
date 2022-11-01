@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 class CuidadoresController extends Controller
 {
     /**
@@ -18,7 +19,7 @@ class CuidadoresController extends Controller
         $this->middleware(['auth', 'role', 'isTerapeuta']);
     }
     public function create(){
-        $pacientes = Paciente::whereNull('cuidador_id')->get();
+        $pacientes = Auth::User()->pacientes;
         return view('cuidadores.create', compact('pacientes'));
     }
 
@@ -35,11 +36,18 @@ class CuidadoresController extends Controller
         ]);
 
         $paciente = Paciente::find($request->paciente);
-        $paciente->cuidador_id = $user->id;
-        $paciente->save();
+        $paciente->users()->attach($user->id);
 
         return redirect("/pacientes");
     }
 
+    public function destroy($id)
+    {
+        //Sacamos al paciente y lo borramos
+        User::findOrFail($id)->delete();
 
+        //Redireccionamos a lista pacientes
+        return back();
+        
+    }
 }
