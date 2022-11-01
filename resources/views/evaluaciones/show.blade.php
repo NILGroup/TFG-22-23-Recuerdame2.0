@@ -9,7 +9,9 @@
     </div>
 
     <form action="/cerrarEvaluacion" method="POST">
-    {{csrf_field()}}
+        {{csrf_field()}}
+        @include('evaluaciones.listaItems')
+        <!--
         <div>
             <input type="hidden" class="form-control form-control-sm" id="fecha" name="paciente_id" value="{{$paciente->id}}" disabled>
             <div class="row">
@@ -86,14 +88,14 @@
                 <label for="observaciones" class="form-label col-form-label-sm">Observaciones</label>
                 <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="1" disabled>{{$evaluacion->observaciones}}</textarea>
             </div>
-
+            -->
             <div>
                 <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$evaluacion->id}}/informe"><button type="button" class="btn btn-outline-primary">Generar PDF</button></a>
                 <a href="/pacientes/{{$paciente->id}}/evaluaciones"><button type="button" class="btn btn-primary">Atrás</button></a>
                 <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$evaluacion->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
             </div>
         </div>
-        </form>
+    </form>
 </div>
 @endsection
 

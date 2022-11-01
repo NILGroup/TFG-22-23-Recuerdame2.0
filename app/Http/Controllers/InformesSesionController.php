@@ -25,7 +25,8 @@ class InformesSesionController extends Controller
     public function generarInforme($idPaciente, $idSesion){
         $sesion = Sesion::find($idSesion);
         $paciente = $sesion->paciente;
-        return view('informesSesion.create', compact('paciente', 'sesion'));
+        $show = false;
+        return view('informesSesion.create', compact('paciente', 'sesion', 'show'));
     }
 
     public function store(Request $request){
@@ -42,7 +43,8 @@ class InformesSesionController extends Controller
     {
         $sesion = Sesion::findOrFail($idS);
         $paciente = $sesion->paciente;
-        return view("informesSesion.show", compact("sesion", "paciente"));
+        $show = true;
+        return view("informesSesion.show", compact("sesion", "paciente", "show"));
     }
 
     public function destroy($id){

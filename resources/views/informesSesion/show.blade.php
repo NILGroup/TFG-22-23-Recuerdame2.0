@@ -3,13 +3,15 @@
 @section('content')
 
 <div class="container-fluid">
-    <div class="pt-4 pb-2">
-        <h5 class="text-muted">Generar informe de sesión</h5>
-        <hr class="lineaTitulo">
-    </div>
 
     <form action="/generarPDFInformeSesion" method="POST">
-    {{csrf_field()}}
+        <div class="pt-4 pb-2">
+            <h5 class="text-muted">Generar informe de sesión</h5>
+            <hr class="lineaTitulo">
+        </div>
+        {{csrf_field()}}
+        @include('informesSesion.listaItems')
+        <!--
         <div>
             <input type="hidden" id="id" name="id" value="{{$sesion->id}}">
             <div class="row">
@@ -36,12 +38,13 @@
                 <textarea disabled class="form-control form-control-sm" id="observaciones" name="observaciones" rows="1">{{$sesion->observaciones}}</textarea>
             </div>
 
-            <div>
-                <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe" ><button type="button" class="btn btn-outline-primary">Generar PDF</button></a>
-                <a href="/pacientes/{{$sesion->paciente->id}}/informesSesion"><button type="button" class="btn btn-primary">Atrás</button></a>
-                <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme"><button type="button" class="btn btn-secondary">Editar</button></a>
-            </div>
-
+        </div>
+        -->
+        
+        <div>
+            <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe" ><button type="button" class="btn btn-outline-primary">Generar PDF</button></a>
+            <a href="/pacientes/{{$sesion->paciente->id}}/informesSesion"><button type="button" class="btn btn-primary">Atrás</button></a>
+            <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme"><button type="button" class="btn btn-secondary">Editar</button></a>
         </div>
     </form>
 </div>

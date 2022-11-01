@@ -10,6 +10,10 @@
             <hr class="lineaTitulo">
         </div>
         @include('pacientes.listaItems')
+        <div class="col-12">
+            <button type="submit" value="Guardar" class="btn btn-outline-primary">Guardar</button>
+            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a>
+        </div>
     </form>
 </div>
 

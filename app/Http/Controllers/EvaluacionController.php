@@ -25,7 +25,9 @@ class EvaluacionController extends Controller
     }
     public function generarInforme($idPaciente){
         $paciente = Paciente::find($idPaciente);
-        return view('evaluaciones.create', compact('paciente'));
+        $evaluacion = new Evaluacion();
+        $show = false;
+        return view('evaluaciones.create', compact('paciente', 'evaluacion', 'show'));
     }
 
     public function store(Request $request){
@@ -51,16 +53,18 @@ class EvaluacionController extends Controller
 
     public function show($id, $idE)
     {
+        $show = true;
         $evaluacion = Evaluacion::findOrFail($idE);
         $paciente = $evaluacion->paciente;
-        return view('evaluaciones.show', compact('evaluacion', 'paciente'));
+        return view('evaluaciones.show', compact('evaluacion', 'paciente', 'show'));
     }
 
     public function showEditable($id, $idE)
     {
+        $show = false;
         $evaluacion = Evaluacion::findOrFail($idE);
         $paciente = $evaluacion->paciente;
-        return view('evaluaciones.edit', compact('evaluacion', 'paciente'));
+        return view('evaluaciones.edit', compact('evaluacion', 'paciente', 'show'));
     }
     
     public function destroy($id){

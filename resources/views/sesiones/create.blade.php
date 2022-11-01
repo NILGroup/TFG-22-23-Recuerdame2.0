@@ -6,12 +6,12 @@
 <form action="/guardarSesion" method="POST">
     {{csrf_field()}}
     @include('sesiones.listaItems')
-    <!--
     <div class="container-fluid">
         <div class="pt-4 pb-2">
             <h5 class="text-muted">Datos de la sesión</h5>
             <hr class="lineaTitulo">
         </div>
+        <!--
         <input hidden id="idPaciente" name="paciente_id" value="{{ $paciente->id }}">
         <input hidden id="idUser" name="user_id" value="{{ $user->id }}">
 
@@ -111,13 +111,13 @@
         </div>
 
         <div id="showMultimedia" class="row pb-2"> </div>
+        -->
 
-        <div>
-            <button type="submit" name="guardarSesion" value="Guardar" class="btn btn-outline-primary">Guardar</button>
-            <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a>
-        </div>
     </div>
-    -->
+    <div>
+        <button type="submit" name="guardarSesion" value="Guardar" class="btn btn-outline-primary">Guardar</button>
+        <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a>
+    </div>
 </form>
 
 @include('sesiones.models')
