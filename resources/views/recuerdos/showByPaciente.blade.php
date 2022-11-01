@@ -49,16 +49,16 @@
                 <td>{{$recuerdo->etiqueta->nombre}}</td>
                 <td class="tableActions">
                     <a href="/recuerdo/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
-                    <?php if (Auth::user()->rol_id == 1) { ?>
+                    @if (Auth::user()->rol_id == 1)
                         <!-- Boton de editar -->
                         <a href="/recuerdo/{{$recuerdo->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-<!-- Boton de eliminar -->
+                        <!-- Boton de eliminar -->
                         <form method="post" action="{{ route('recuerdo.destroy', $recuerdo->id) }}" onclick="confirmar(event)" style="display:inline!important;">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                         </form>
-                    <?php } ?>
+                    @endif
                 </td>
                 <?php $i++; ?>
             </tr>

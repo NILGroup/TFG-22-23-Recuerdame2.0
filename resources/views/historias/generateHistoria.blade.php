@@ -14,14 +14,14 @@
             <div class="row col-sm-6 col-md-6 col-lg-6">
                 <label for="fecha" class="form-label col-form-label-sm col-md-auto">Fecha de inicio</label>
                 <div class="col-sm-9 col-md-6 col-lg-4">
-                    <input type="date" class="form-control form-control-sm" id="fechaInicio" name="fechaInicio" value="<?php echo ($fecha) ?>">
+                    <input type="date" class="form-control form-control-sm" id="fechaInicio" name="fechaInicio" value="{{date("d/m/Y", strtotime($fecha))}}">
                 </div>
             </div>
 
             <div class="row col-sm-6 col-md-6 col-lg-6">
                 <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha de fin</label>
                 <div class="col-sm-9 col-md-6 col-lg-4">
-                    <input type="date" class="form-control form-control-sm" id="fechaFin" name="fechaFin" value="<?php echo (date('Y-m-d')) ?>">
+                    <input type="date" class="form-control form-control-sm" id="fechaFin" name="fechaFin" value="{{date("d/m/Y")}}">
                 </div>
             </div>
         </div>
