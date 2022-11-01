@@ -68,7 +68,7 @@ class PacientesController extends Controller
         $validate = $request->validate([
             "nombre" => "required",
             "apellidos" => "required",
-            "genero" => "required",
+            "genero_id" => "required",
             "lugar_nacimiento" => "required",
             "nacionalidad" => "required",
             "fecha_nacimiento" => "required",
@@ -85,7 +85,7 @@ class PacientesController extends Controller
         Paciente::updateOrcreate([
             "nombre" => $request->nombre,
             "apellidos" => $request->apellidos,
-            "genero" => $request->genero,
+            "genero_id" => $request->genero_id,
             "lugar_nacimiento" => $request->lugar_nacimiento,
             "nacionalidad" => $request->nacionalidad,
             "fecha_nacimiento" => $request->fecha_nacimiento,

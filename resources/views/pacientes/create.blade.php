@@ -30,7 +30,7 @@
             <div class="row col-sm-12 col-md-6 col-lg-5">
                 <label for="genero" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Género<span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
-                    <select id="genero" name="genero" class="form-control form-select form-select-sm" required>
+                    <select id="genero" name="genero_id" class="form-control form-select form-select-sm" required>
                         <option selected disabled></option>
                         @foreach($generos as $genero)
                             <option value="{{$genero->id}}">{{$genero->nombre}}</option>
