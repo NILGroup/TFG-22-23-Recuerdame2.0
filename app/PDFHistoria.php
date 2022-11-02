@@ -5,6 +5,7 @@ namespace App;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use File;
 use DateTime;
+use Symfony\Component\Console\Logger\ConsoleLogger;
 
 global $numInforme;
 
@@ -38,11 +39,14 @@ class PDFHistoria extends FPDF{
             $pdf->MultiCell(0,7,iconv('UTF-8', 'windows-1252', $row->descripcion));
             $pdf->Ln(7);
             $size+= 7*2;
-           
     
             $listaMultimedia = $row->multimedias;
             foreach ($listaMultimedia as $multimedia) {
-                if($size+35+7 > 297)  $pdf->addPage();$size = 0; //297 es el alto de un A4
+                
+                if($size+35+7 > 279) {
+                    $pdf->addPage(); //297 es el alto de un A4, 18 ocupa el footer 287-18=279
+                    $size=0;
+                }
                 $image = "../public/img/" . $multimedia->fichero;
                 $pdf->MultiCell(0,35,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 40));
                 $pdf->Ln(12);
