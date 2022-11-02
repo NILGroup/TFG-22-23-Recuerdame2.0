@@ -39,11 +39,7 @@
                     {{$paciente->genero->nombre}}
                 </td>
                 <td>
-                <?php 
-                        $fecha_nacimiento = new DateTime ($paciente->fecha_nacimiento);
-                        $hoy = new DateTime();
-                        $edad = $hoy->diff($fecha_nacimiento);
-                        echo $edad->y ?>   
+                    {{Carbon\Carbon::parse($paciente['fecha_nacimiento'])->age}} 
                 </td>
                 <td class="tableActions">
                     <div class="d-inline">
