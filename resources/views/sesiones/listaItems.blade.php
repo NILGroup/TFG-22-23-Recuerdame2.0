@@ -5,6 +5,7 @@
     </div>
 
     <div class="row">
+        <input hidden id="idUser" name="user_id" value="{{$user->id}}" required @if($show) disabled @endif>
         <input hidden id="idPaciente" name="paciente_id" value="{{$paciente->id}}" required @if($show) disabled @endif>
         <div class="row">
             <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha<span class="asterisco">*</span></label>
@@ -14,7 +15,7 @@
 
             <label for="etapa" class="form-label col-form-label-sm col-sm-2 col-md-12col-lg-1">Etapa<span class="asterisco">*</span></label>
             <div class="col-sm-3 col-md-3 col-lg-2">
-                <select class="form-select form-select-sm" name="etapa"  required @if($show) disabled @endif>
+                <select class="form-select form-select-sm" name="etapa_id"  required @if($show) disabled @endif>
                     @foreach($etapas as $etapa)
                     <option value="{{$etapa->id}}" @if($sesion->etapa && $sesion->etapa->id == $etapa->id)
                         selected="selected"
@@ -39,18 +40,6 @@
     <div class="mb-3">
         <label for="descripcion" class="form-label col-form-label-sm">Descripción</label>
         <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" rows="3" @if($show) disabled @endif>{{$sesion->descripcion}}</textarea>
-    </div>
-
-    <div>
-        <div class="mb-3">
-            <label for="barreras" class="form-label col-form-label-sm">Barreras</label>
-            <textarea class="form-control form-control-sm" id="barreras" name="barreras" rows="3" @if($show) disabled @endif>{{$sesion->barreras}}</textarea>
-        </div>
-
-        <div class="mb-3">
-            <label for="facilitadores" class="form-label col-form-label-sm">Facilitadores</label>
-            <textarea class="form-control form-control-sm" id="facilitadores" name="facilitadores" rows="3" @if($show) disabled @endif>{{$sesion->facilitadores}}</textarea>
-        </div>
     </div>
 
     <div class="row">
@@ -82,21 +71,21 @@
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="divRecuerdos">
                     <?php $i = 1; ?>
                     @foreach ($sesion->recuerdos as $recuerdo)
                     <tr>
                         <th scope="row"><?php echo $i ?></th>
-                        <td>{{$recuerdo->nombre}}</td>
-                        <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
-                        <td>{{$recuerdo->etapa->nombre}}</td>
-                        <td>{{$recuerdo->categoria->nombre}}</td>
-                        <td>{{$recuerdo->estado->nombre}}</td>
-                        <td>{{$recuerdo->etiqueta->nombre}}</td>
-                        <td class="tableActions">
-                            <a href="{{route('recuerdo.show',$recuerdo->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
-                            <a href="{{route('recuerdo.edit',$recuerdo->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                            <a href="{{route('recuerdo.destroy',$recuerdo->id)}}"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></a>
+                            <td>{{$recuerdo->nombre}}</td>
+                            <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
+                            <td>{{$recuerdo->etapa->nombre}}</td>
+                            <td>{{$recuerdo->categoria->nombre}}</td>
+                            <td>{{$recuerdo->estado->nombre}}</td>
+                            <td>{{$recuerdo->etiqueta->nombre}}</td>
+                            <td class="tableActions">
+                                <a href="{{route('recuerdo.show',$recuerdo->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                                <a href="{{route('recuerdo.edit',$recuerdo->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
+                                <a href="{{route('recuerdo.destroy',$recuerdo->id)}}"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></a>
                         </td>
                     </tr>
                     <?php $i++; ?>

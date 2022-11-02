@@ -70,23 +70,19 @@ class SesionesController extends Controller
      */
     public function store(Request $request)
     {
-        //throw new \Exception(json_encode($request->recuerdos));
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->id],
             ['fecha' => $request->fecha,
              'etapa_id' => $request->etapa_id,
              'objetivo' => $request->objetivo,
              'descripcion' => $request->descripcion,
-             'barreras' => $request->barreras,
-             'facilitadores' => $request->facilitadores,
              'fecha_finalizada' => $request->fecha_finalizada,
              'paciente_id' => $request->paciente_id,
              'user_id' => $request->user_id,
              'respuesta' => $request->respuesta]
         );
-        foreach($request->recuerdos as $recuerdo_id){
-            $sesion->recuerdos()->attach($recuerdo_id);
-        }
+        if(!is_null($request->recuerdos))
+            $sesion->recuerdos()->sync($request->recuerdos);
         return redirect("pacientes/{$sesion->paciente->id}/sesiones");
     }
 

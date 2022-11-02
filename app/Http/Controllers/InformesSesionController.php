@@ -25,6 +25,7 @@ class InformesSesionController extends Controller
     public function generarInforme($idPaciente, $idSesion){
         $sesion = Sesion::find($idSesion);
         $paciente = $sesion->paciente;
+        $sesion->fecha_finalizada = \Carbon\Carbon::now()->format('Y-m-d');
         $show = false;
         return view('informesSesion.create', compact('paciente', 'sesion', 'show'));
     }
@@ -35,6 +36,8 @@ class InformesSesionController extends Controller
         $sesion->fecha_finalizada = $request->fecha_finalizada;
         $sesion->respuesta = $request->respuesta;
         $sesion->observaciones = $request->observaciones;
+        $sesion->barreras = $request->barreras;
+        $sesion->facilitadores = $request->facilitadores;
         $sesion->save();
         return redirect("/pacientes/$sesion->paciente_id/sesiones/$sesion->id/ver");
     }

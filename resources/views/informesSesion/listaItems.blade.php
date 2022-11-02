@@ -16,12 +16,21 @@
 
     <div class="mb-3">
         <label for="respuesta" class="form-label col-form-label-sm">Respuesta del paciente<span class="asterisco">*</span></label>
-        <textarea class="form-control form-control-sm" id="respuesta" name="respuesta" rows="1" required @if($show) disabled @endif>{{$sesion->respuesta}}</textarea>
+        <textarea class="form-control form-control-sm" id="respuesta" name="respuesta" rows="3" required @if($show) disabled @endif>{{$sesion->respuesta}}</textarea>
     </div>
 
     <div class="mb-3">
         <label for="observaciones" class="form-label col-form-label-sm">Observaciones<span class="asterisco">*</span></label>
-        <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="1" required @if($show) disabled @endif>{{$sesion->observaciones}}</textarea>
+        <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3" required @if($show) disabled @endif>{{$sesion->observaciones}}</textarea>
     </div>
 
+    <div class="mb-3">
+        <label for="barreras" class="form-label col-form-label-sm">Barreras</label>
+        <textarea class="form-control form-control-sm" id="barreras" name="barreras" rows="3" @if($show) disabled @endif>{{$sesion->barreras}}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="facilitadores" class="form-label col-form-label-sm">Facilitadores</label>
+        <textarea class="form-control form-control-sm" id="facilitadores" name="facilitadores" rows="3" @if($show) disabled @endif>{{$sesion->facilitadores}}</textarea>
+    </div>
 </div>
