@@ -52,9 +52,9 @@
         <div class="row align-items-center pe-4">
             <div class="col-12">
                 @if( Session::get('paciente')['genero_id'] == 1 || Session::get('paciente')['genero_id'] == 3)
-                    <a href="/pacientes/{{Session::get('paciente')['genero_id']}}"><img src="/img/avatar_hombre.png" alt="Avatar" class="avatar-mini"></a>
+                    <a href="/pacientes/{{Session::get('paciente')['id']}}"><img src="/img/avatar_hombre.png" alt="Avatar" class="avatar-mini"></a>
                 @elseif( Session::get('paciente')['genero_id'] == 2)
-                    <a href="/pacientes/{{Session::get('paciente')['genero_id']}}"><img src="/img/avatar_mujer.png" alt="Avatar" class="avatar-mini"></a>
+                    <a href="/pacientes/{{Session::get('paciente')['id']}}"><img src="/img/avatar_mujer.png" alt="Avatar" class="avatar-mini"></a>
                 @endif
             </div>
         </div>
