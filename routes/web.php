@@ -74,8 +74,10 @@ Route::resources([
 Auth::routes();
 
 //RUTAS CUSTOMIZADAS CUIDADOR
-Route::get('/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
+Route::get('/pacientes/{id}/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
 Route::post('/registroCuidador','App\Http\Controllers\CuidadoresController@registroCuidador');
+Route::get('/pacientes/{id}/cuidadores', 'App\Http\Controllers\CuidadoresController@showByPaciente');
+
 
 //RUTAS CUSTOMIZADAS SESION
 Route::post('/guardarSesion', 'App\Http\Controllers\SesionesController@store');

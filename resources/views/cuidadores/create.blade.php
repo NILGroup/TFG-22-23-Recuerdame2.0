@@ -75,42 +75,21 @@
                 </div>
             </div>
 
-            <!--TODO:: A PARTIR DE AQUÍ-->
             <div class="row form-group justify-content-between">
                 <div class="row col-sm-12 col-md-6 col-lg-5">
                     <label for="terapeuta" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Paciente<span class="asterisco">*</span></label>
                     <div class="col-sm-12 col-md-12 col-lg-6">
                         <select class="form-select form-select-sm" id="paciente" name="paciente" required>
-                            <option value="" selected="selected"></option>
-                           
-                            @foreach($pacientes as $paciente)
-                            <option value="{{$paciente->id}}" >
-                                {{$paciente->nombre}} {{$paciente->apellido}}     
+                            <option value=""></option>
+                            @foreach($pacientes as $p)
+                            <option value="{{$p->id}}" @if(!is_null($paciente) && $paciente->id == $p->id) selected @endif>
+                                {{$p->nombre}} {{$p->apellido}}     
                             </option>
                             @endforeach
-                           
-                          <!-- <!?php
-                                    
-                                    $pacientesCuidador = $pacientesController->getListaPacientesSinCuidador($usuario->getIdUsuario());
-                                     if($pacientesCuidador != null){
-                                        foreach ($pacientesCuidador as $fila) {
-                                           
-                                            $id = $fila['id_paciente'];
-                                            $nombre = $fila['nombre'];
-                                            $apellido = $fila['apellidos'];
-
-                                        ?>
-                                    <option value=" <!?php echo $id; ?>"> <!?php echo $nombre . " " . $apellido; ?></option>
-                            <!?php
-                                }
-                            }
-                            ?>-->
-
                         </select>
                     </div>
                 </div>
             </div>
-<!--------------------------------------->
             <input id="rol" type="hidden" name="rol" value=2 required autocomplete="apellidos" autofocus>
 
             <div class="col-12">

@@ -66,13 +66,6 @@
 
         </table>
     </div>
-    <script>
-        function confirmar(e) {
-            if (!confirm('¿Seguro que desea eliminar este recuerdo?')) {
-                e.preventDefault();
-            }
-        }
-    </script>
     @endsection
 
 @push('scripts')

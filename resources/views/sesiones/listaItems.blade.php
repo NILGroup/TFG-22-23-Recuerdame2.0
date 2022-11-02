@@ -85,7 +85,11 @@
                             <td class="tableActions">
                                 <a href="{{route('recuerdo.show',$recuerdo->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                                 <a href="{{route('recuerdo.edit',$recuerdo->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                                <a href="{{route('recuerdo.destroy',$recuerdo->id)}}"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></a>
+                                <form method="post" action="{{route('recuerdo.destroy',$recuerdo->id)}}" onclick="confirmar(event)" style="display:inline!important;">
+                                    {{csrf_field()}}
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                                </form>
                         </td>
                     </tr>
                     <?php $i++; ?>

@@ -18,9 +18,18 @@ class CuidadoresController extends Controller
     {
         $this->middleware(['auth', 'role', 'isTerapeuta']);
     }
-    public function create(){
+    public function create($idP){
         $pacientes = Auth::User()->pacientes;
-        return view('cuidadores.create', compact('pacientes'));
+        $paciente = Paciente::find($idP);
+        return view('cuidadores.create', compact('pacientes', 'paciente'));
+    }
+
+    public function showByPaciente(int $idPaciente){
+
+        $paciente = Paciente::findOrFail($idPaciente);
+        $cuidadores = $paciente->users->where('rol_id', 2);
+     
+        return view("cuidadores.showByPaciente", compact("paciente", "cuidadores"));
     }
 
     protected function registroCuidador(Request $request)

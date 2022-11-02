@@ -78,11 +78,4 @@
             });
         });
     </script>
-    <script>
-        function confirmar(e) {
-            if (!confirm('¿Seguro que desea eliminar esta sesión?')) {
-                e.preventDefault();
-            }
-        }
-    </script>
 @endpush

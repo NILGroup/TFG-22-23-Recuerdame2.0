@@ -3,6 +3,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
 
 <script>
+  function confirmar(e) {
+      if (!confirm('¿Seguro que desea eliminar?')) {
+          e.preventDefault();
+      }
+  }
+</script>
+
+<script>
   // Get the button
   let mybutton = document.getElementById("scrollBtn");
   mybutton.style.display = "none";
@@ -17,3 +25,4 @@
     }
   }
 </script>
+
