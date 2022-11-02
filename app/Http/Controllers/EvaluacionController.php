@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evaluacion;
 use App\Models\Paciente;
+use App\Models\Sesion;
 use Illuminate\Http\Request;
 
 class EvaluacionController extends Controller
@@ -19,8 +20,16 @@ class EvaluacionController extends Controller
     }
     
     public function showByPaciente($idPaciente){
-        $evaluaciones = Evaluacion::where('paciente_id',$idPaciente)->get();
         $paciente = Paciente::find($idPaciente);
+        $evaluaciones = $paciente->evaluaciones->sortBy("fecha");
+
+        $fechaAnterior = \Carbon\Carbon::parse($paciente->fecha_inscripcion);
+        foreach($evaluaciones as $evaluacion){
+            $fechaActual = \Carbon\Carbon::parse($evaluacion->fecha)->addDays(1);
+            $sesiones = Sesion::whereBetween("fecha_finalizada", [$fechaAnterior, $fechaActual])->get();
+            $evaluacion->numSesiones = count($sesiones);
+            $fechaAnterior=$fechaActual;
+        }
         return view("evaluaciones.showByPaciente", compact('evaluaciones', 'paciente'));
     }
     public function generarInforme($idPaciente){

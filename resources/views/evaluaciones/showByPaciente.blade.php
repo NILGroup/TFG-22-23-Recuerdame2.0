@@ -21,6 +21,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Informe</th>
                     <th scope="col">Fecha</th>
+                    <th scope="col">Sesiones desde el anterior informe</th>
                     <th scope="col">Diagnóstico</th>
                     <th scope="col"></th>
                 </tr>
@@ -32,6 +33,7 @@
                     <th scope="row"><?php echo $i ?></th>
                     <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe">Informe Nº {{$informe->id}}</td>
                     <td>{{$informe->fecha}}</td>
+                    <td>{{$informe->numSesiones}}</td>
                     <td>{{$informe->diagnostico}}</td>
                     <td class="tableActions">
                         <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
