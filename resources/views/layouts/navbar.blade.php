@@ -60,7 +60,7 @@
         </div>
         <div class="row align-items-center pe-4">
             <div class="col-12">
-                <a class="nav-link letra-primary-color" href="/pacientes/{{$paciente->id}}">{{ Session::get('paciente')['nombre'] }}</a>
+                <a class="nav-link letra-primary-color" href="/pacientes/{{Session::get('paciente')['id']}}">{{ Session::get('paciente')['nombre'] }}</a>
             </div>
         </div>
 
