@@ -132,7 +132,7 @@ Route::get('/pacientes/{id}/historias/generarHistoria', 'App\Http\Controllers\Hi
 Route::get('/historias/generarLibro', 'App\Http\Controllers\HistoriaController@generarLibroHistoria');
 Route::get('/generarPDFHistoria', 'App\Http\Controllers\PDFController@generarPDFHistoria');
    
-
+Route::post('/storeTipoNoView', 'App\Http\Controllers\TipoRelacionController@storeNoView');
 
 
 

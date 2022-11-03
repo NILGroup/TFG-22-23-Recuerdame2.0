@@ -46,18 +46,20 @@
     </div>
 </div>
 
-<div class="row form-group justify-content-between">
+<div class="row form-group justify-content-between" >
     <div class="row col-sm-12 col-md-6 col-lg-5">
         <label for="tipo" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Tipo de relación<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6">
-            <select class="form-select form-select-sm form-control" id="tiporelacion_id" name="tiporelacion_id" @if($show) disabled @endif>
-                <option></option>
+            
+            <select onchange="especifique()" style="margin-right: 5px" class="form-select form-select-sm form-control" id="tiporelacion_id" name="tiporelacion_id" @if($show) disabled @endif>
                 @foreach ($tipos as $tipo)
                     <option value="{{$tipo->id}}" @if($tipo->id == $persona->tiporelacion_id) selected @endif>{{$tipo->nombre}}</option>
                 @endforeach
-            </select>
+            </select>   
+            <input  @if($persona->tiporelacion_id != 7) style="display: none;" @endif type="text" name="tipo_custom" value="{{$persona->tipo_custom}}" class="form-control form-control-sm" id = "tipo_custom" @if($show) disabled @endif>
         </div>
     </div>
+   
     <div class="row col-sm-12 col-md-6 col-lg-7">
         <label for="contacto" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Contacto<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-8">
@@ -66,7 +68,30 @@
     </div>
 </div>
 
+
+
 <div class="mb-3 mt-3">
     <label for="observaciones" class="form-label col-form-label-sm">Observaciones</label>
     <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3" @if($show) disabled @endif>{{$persona->observaciones}}</textarea>
 </div>
+
+
+<script>
+
+    function especifique(){
+
+        let select = document.getElementById("tiporelacion_id")
+        if (select.value === "7"){
+            $("#tipo_custom").show()
+        }
+        else{
+            $("#tipo_custom").hide()
+        }
+        
+        
+    }
+
+
+
+
+</script>

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string("contacto");
             $table->text("observaciones")->nullable();
             $table->unsignedBigInteger("tiporelacion_id");
+            $table->string("tipo_custom")->nullable();
             $table->unsignedBigInteger("paciente_id");
 
             $table->foreign("tiporelacion_id")->references("id")->on("tiporelacions")->onDelete("cascade");

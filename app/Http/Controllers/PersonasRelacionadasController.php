@@ -64,6 +64,7 @@ class PersonasRelacionadasController extends Controller
             "contacto" => $request->contacto,
             "observaciones" => $request->observaciones,
             "tiporelacion_id" => $request->tiporelacion_id,
+            "tipo_custom" => $request->tipo_custom,
             "paciente_id" => $request->paciente_id
 
         ]);
@@ -86,6 +87,7 @@ class PersonasRelacionadasController extends Controller
             "contacto" => $request->contacto,
             "observaciones" => $request->observaciones,
             "tiporelacion_id" => $request->tiporelacion_id,
+            "tipo_custom" => $request->tipo_custom,
             "paciente_id" => $request->paciente_id
 
         ]);

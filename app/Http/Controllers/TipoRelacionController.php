@@ -39,6 +39,12 @@ class TipoRelacionController extends Controller
         return Tiporelacion::findOrFail($id);
     }
 
+    public function storeNoView(Request $request){
+
+        Tiporelacion::create(["nombre" => $request->nombre]);
+
+    }
+
    
     
 }

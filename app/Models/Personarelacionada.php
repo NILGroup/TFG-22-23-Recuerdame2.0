@@ -20,6 +20,7 @@ class Personarelacionada extends Model
         "contacto",
         "observaciones",
         "tiporelacion_id",
+        "tipo_custom",
         "paciente_id"
     ];
 
