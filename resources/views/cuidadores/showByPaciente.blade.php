@@ -19,6 +19,9 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellidos</th>
                     <th scope="col">Correo electrónico</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Localidad</th>
+                    <th scope="col">Grado de parentesco</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -31,7 +34,9 @@
                     <td>{{$cuidador->nombre}}</td>
                     <td>{{$cuidador->apellidos}}</td>
                     <td>{{$cuidador->email}}</td>
-
+                    <td>{{$cuidador->telefono}}</td>
+                    <td>{{$cuidador->localidad}}</td>
+                    <td>{{$cuidador->parentesco}}</td>
                     <td class="tableActions">
                         <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" onclick="confirmar(event)" style="display:inline!important;">
                             {{csrf_field()}}

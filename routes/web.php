@@ -237,13 +237,15 @@ Route::post('/prueba', function () {
 
     DB::table("users")->insert([
         ['nombre' => "Terapeuta", 'apellidos' => "Uno", 'email' => "terapeuta@gmail.com", 
-            'usuario' => "Terapeuta", 'rol_id' => 1, 'password' => Hash::make("terapeuta")],
+             'rol_id' => 1,'telefono'=>null,'localidad'=>null,'parentesco'=>null,  'password' => Hash::make("terapeuta")],
         ['nombre' => "Cuidador", 'apellidos' => "Uno", 'email' => "cuidador@gmail.com",
-            'usuario' => "cuidador", 'rol_id' => 2, 'password' => Hash::make("cuidador")],
+             'rol_id' => 2,'telefono' => "684847324", 'localidad' => "Argüelles",
+             'parentesco' => "Primer grado",'password' => Hash::make("cuidador")],
         ['nombre' => "Cuidador", 'apellidos' => "Dos", 'email' => "cuidador2@gmail.com",
-            'usuario' => "cuidador2", 'rol_id' => 2, 'password' => Hash::make("cuidador")],
+             'rol_id' => 2,'telefono' => "656789234", 'localidad' => "Nuevos ministerios",
+             'parentesco' => "Segundo grado",'password' => Hash::make("cuidador")],
         ['nombre' => "Terapeuta", 'apellidos' => "Dos", 'email' => "terapeuta2@gmail.com", 
-            'usuario' => "Terapeuta2", 'rol_id' => 1, 'password' => Hash::make("terapeuta")]
+             'rol_id' => 1,'telefono'=>null,'localidad'=>null,'parentesco'=>null, 'password' => Hash::make("terapeuta")]
     ]);
 
     DB::table("pacientes")->insert([
