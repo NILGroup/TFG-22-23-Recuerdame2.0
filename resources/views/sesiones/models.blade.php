@@ -11,9 +11,7 @@
 
             <div class="modal-body" id="recuerdosCreatorForm">
                 {{csrf_field()}}
-                @include('recuerdos.listaItems')
-                @include('recuerdos.models')
-                <!-- 
+
                 <input type="hidden" name="paciente_id" id="paciente_id" value="{{Session::get('paciente')['id']}}">
 
                 <div class="row form-group justify-content-between">
@@ -114,8 +112,7 @@
                     <textarea maxlength="255" class="form-control form-control-sm" id="localizacion" name="localizacion" rows="3"></textarea>
                 </div>
 
-            </div>
-            -->
+            </div> <!-- Modal body -->
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
