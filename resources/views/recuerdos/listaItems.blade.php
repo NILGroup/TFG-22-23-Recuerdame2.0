@@ -88,7 +88,7 @@
 </div>
 <div class="mb-3">
     <label for="localizacion" class="form-label col-form-label-sm">Localización</label>
-    <textarea maxlength="255" class="form-control form-control-sm" id="localizacion" name="localizacion" rows="3" @if($show) disabled @endif></textarea>
+    <textarea maxlength="255" class="form-control form-control-sm" id="localizacion" name="localizacion" rows="3" @if($show) disabled @endif>{{$recuerdo->localizacion}}</textarea>
 </div>
 <div class="pt-4 pb-2">
     <h5 class="text-muted">Listado de personas relacionadas</h5>
