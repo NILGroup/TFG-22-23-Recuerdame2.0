@@ -177,6 +177,27 @@
 
 @push('scripts')
     @include('layouts.scripts')
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
+    <script>
+        $(document).ready(function () {
+            $('#tabla').DataTable({
+                paging: false,
+                info: false,
+                language: { 
+                    search: "_INPUT_",
+                    searchPlaceholder: " Buscar...",
+                    emptyTable: "No hay datos disponibles"
+                },
+                responsive: {
+                    details: {
+                    type: 'column',
+                    target: 'tr'
+                    }
+                },
+                dom : "<<'form-control-sm mr-5' f>>"
+            });
+        });
+    </script>
     <script>
         const
             range = document.getElementById('puntuacion'),

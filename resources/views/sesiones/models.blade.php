@@ -11,7 +11,9 @@
 
             <div class="modal-body" id="recuerdosCreatorForm">
                 {{csrf_field()}}
-
+                @include('recuerdos.listaItems')
+                @include('recuerdos.models')
+                <!-- 
                 <input type="hidden" name="paciente_id" id="paciente_id" value="{{Session::get('paciente')['id']}}">
 
                 <div class="row form-group justify-content-between">
@@ -27,7 +29,7 @@
                             <select class="form-select form-select-sm" id="idEstado" name="estado_id">
                                 <option></option>
                                 @foreach ($estados as $estado)
-                                <option value="{{$estado->id}}">{{$estado->nombre}}</option>
+                                    <option value="{{$estado->id}}">{{$estado->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -47,7 +49,7 @@
                             <select class="form-select form-select-sm" id="idEtiqueta" name="etiqueta_id">
                                 <option></option>
                                 @foreach ($etiquetas as $etiqueta)
-                                <option value="{{$etiqueta->id}}">{{$etiqueta->nombre}}</option>
+                                    <option value="{{$etiqueta->id}}">{{$etiqueta->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -79,7 +81,7 @@
                         <div class="col-sm-3 col-md-3 col-lg-2">
                             <select class="form-select form-select-sm" id="idEtapa" name="etapa_id" required>
                                 @foreach ($etapas as $etapa)
-                                <option value="{{$etapa->id}}">{{$etapa->nombre}}</option>
+                                    <option value="{{$etapa->id}}">{{$etapa->nombre}}</option>
                                 @endforeach
 
                             </select>
@@ -90,7 +92,7 @@
                             <select class="form-select form-select-sm" id="idEmocion" name="emocion_id">
                                 <option></option>
                                 @foreach ($emociones as $emocion)
-                                <option value="{{$emocion->id}}">{{$emocion->nombre}}</option>
+                                    <option value="{{$emocion->id}}">{{$emocion->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -100,7 +102,7 @@
                             <select class="form-select form-select-sm" id="idCategoria" name="categoria_id">
                                 <option></option>
                                 @foreach ($categorias as $categoria)
-                                <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -112,7 +114,8 @@
                     <textarea maxlength="255" class="form-control form-control-sm" id="localizacion" name="localizacion" rows="3"></textarea>
                 </div>
 
-            </div> <!-- Modal body -->
+            </div>
+            -->
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -161,7 +164,7 @@
                             <td>@if(!is_null($recuerdo->estado_id)) {{$recuerdo->estado->nombre}} @endif </td>
                             <td>@if(!is_null($recuerdo->etiqueta_id)) {{$recuerdo->etiqueta->nombre}} @endif </td>
                             <td id="recuerdosSeleccionados" class="tableActions">
-                                <input class="form-check-input" type="checkbox" value="{{$recuerdo->id}}" name="checkRecuerdo[]" id="checkRecuerdo">
+                                <input class="form-check-input" type="checkbox" value="{{$recuerdo->id}}" name="checkRecuerdo[]" id="checkRecuerdo" @if($sesion->recuerdos->contains($recuerdo)) checked @endif>
                             </td>
                         </tr>
                         <?php $i++ ?>

@@ -302,18 +302,18 @@ Route::post('/prueba', function () {
 
 
     DB::table("sesions")->insert([
-        ["fecha" => Carbon::create(2022, 9, 17), "etapa_id" => 1, "objetivo" => "objetivo 1", 
+        ["fecha" => Carbon::create(2022, 9, 17, 15, 30 ,0), "etapa_id" => 1, "objetivo" => "objetivo 1", 
             "descripcion" => "descripcion del objetivo", "barreras"=> "muchas", "facilitadores" => "ninguno", 
-            "fecha_finalizada" => Carbon::create(2022, 9, 19), "paciente_id" => 1, "user_id" => 1, 
-            "respuesta" => "ninguna respuesta", "observaciones" => "ninguna observacion" ],
-        ["fecha" => Carbon::create(2022, 9, 22), "etapa_id" => 2, "objetivo" => "objetivo 2",
+            "fecha_finalizada" => Carbon::create(2022, 9, 19, 14,0,0), "paciente_id" => 1, "user_id" => 1, 
+            "respuesta" => "ninguna respuesta", "observaciones" => "ninguna observacion", "duracion" => "01:30"],
+        ["fecha" => Carbon::create(2022, 9, 22, 10, 15 ,0), "etapa_id" => 2, "objetivo" => "objetivo 2",
             "descripcion" => "descripcion del objetivo numero 2", "barreras"=> null, "facilitadores" => null, 
             "fecha_finalizada" => null, "paciente_id" => 1, "user_id" => 1, 
-            "respuesta" => null, "observaciones" => null ],
-        ["fecha" => Carbon::create(2022, 10, 31), "etapa_id" => 2, "objetivo" => "Pruebas iniciales",
+            "respuesta" => null, "observaciones" => null, "duracion" => null],
+        ["fecha" => Carbon::create(2022, 10, 31, 10,30,0), "etapa_id" => 2, "objetivo" => "Pruebas iniciales",
             "descripcion" => "Iniciaremos la terapia", "barreras"=> null, "facilitadores" => null, 
             "fecha_finalizada" => null, "paciente_id" => 2, "user_id" => 4, 
-            "respuesta" => null, "observaciones" => null ],
+            "respuesta" => null, "observaciones" => null, "duracion" => null],
         ]);
 
     

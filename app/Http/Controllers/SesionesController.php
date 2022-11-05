@@ -12,6 +12,7 @@ use App\Models\Etiqueta;
 use App\Models\Emocion;
 use App\Models\Categoria;
 use App\Models\PersonaRelacionada;
+use App\Models\Tiporelacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -49,17 +50,20 @@ class SesionesController extends Controller
     {
         $show = false;
         $sesion = new Sesion();
+        $recuerdo = new Recuerdo();
         $user = Auth::user();
         $paciente = Paciente::find(Session::get('paciente')['id']);
+        $personas = $paciente->personasrelacionadas;
         $recuerdos = Recuerdo::where('paciente_id', $paciente->id)->get();
         $estados = Estado::all()->sortBy("id");
         $etiquetas = Etiqueta::all()->sortBy("id");
         $etapas = Etapa::all()->sortBy("id");
         $emociones = Emocion::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
+        $tipos = Tiporelacion::all()->sortBy("id");
         $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
 
-        return view("sesiones.create", compact('etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'sesion', 'show'));
+        return view("sesiones.create", compact('etapas', 'user', 'tipos', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'sesion', 'recuerdo', 'personas', 'show'));
     }
 
     /**

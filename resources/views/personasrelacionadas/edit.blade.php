@@ -23,4 +23,15 @@
 
 @push('scripts')
     @include('layouts.scripts')
+    <script>
+        function especifique(){
+            let select = document.getElementById("tiporelacion_id")
+            if (select.value === "7"){
+                $("#tipo_custom").show()
+            }
+            else{
+                $("#tipo_custom").hide()
+            }
+        }
+    </script>
 @endpush

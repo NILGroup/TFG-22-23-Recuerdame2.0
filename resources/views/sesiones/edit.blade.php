@@ -3,7 +3,7 @@
 @section('content')
 
 
-<form action="/sesion/{{$sesion->id}}" method="POST" class="dropzone">
+<form action="/sesion/{{$sesion->id}}" method="POST">
     {{csrf_field()}}
     @include('sesiones.listaItems')
     <div>

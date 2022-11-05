@@ -110,7 +110,7 @@
 </div> <!-- col 12 -->
 @endif
 <div>
-    <table class="table table-bordered table-striped table-responsive">
+    <table id="tabla" class="table table-bordered table-striped table-responsive">
         <caption>Listado de personas relacionadas</caption>
         <thead>
             <tr class="bg-primary">

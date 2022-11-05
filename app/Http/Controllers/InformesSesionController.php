@@ -38,6 +38,8 @@ class InformesSesionController extends Controller
         $sesion->observaciones = $request->observaciones;
         $sesion->barreras = $request->barreras;
         $sesion->facilitadores = $request->facilitadores;
+        $sesion->apto = $request->apto;
+        $sesion->duracion = $request->duracion;
         $sesion->save();
         return redirect("/pacientes/$sesion->paciente_id/sesiones/$sesion->id/ver");
     }

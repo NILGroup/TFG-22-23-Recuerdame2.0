@@ -15,14 +15,16 @@ return new class extends Migration
     {
         Schema::create('sesions', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
+            $table->timestamp('fecha');
             $table->string('objetivo'); //varchar en laravel
             $table->string('descripcion')->nullable();
-            $table->date('fecha_finalizada')->nullable();
+            $table->timestamp('fecha_finalizada')->nullable();
             $table->string('respuesta')->nullable();
             $table->string('barreras')->nullable();
             $table->string('facilitadores')->nullable();
             $table->string('observaciones')->nullable();
+            $table->boolean('apto')->default(1);
+            $table->string("duracion")->nullable();
             $table->unsignedBigInteger('paciente_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('etapa_id');

@@ -56,7 +56,7 @@
                     <option value="{{$tipo->id}}" @if($tipo->id == $persona->tiporelacion_id) selected @endif>{{$tipo->nombre}}</option>
                 @endforeach
             </select>   
-            <input  @if($persona->tiporelacion_id != 7) style="display: none;" @endif type="text" name="tipo_custom" value="{{$persona->tipo_custom}}" class="form-control form-control-sm" id = "tipo_custom" @if($show) disabled @endif>
+            <input @if($persona->tiporelacion_id != 7) style="display: none;" @endif type="text" name="tipo_custom" value="{{$persona->tipo_custom}}" class="form-control form-control-sm" id = "tipo_custom" @if($show) disabled @endif>
         </div>
     </div>
    
@@ -74,24 +74,3 @@
     <label for="observaciones" class="form-label col-form-label-sm">Observaciones</label>
     <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3" @if($show) disabled @endif>{{$persona->observaciones}}</textarea>
 </div>
-
-
-<script>
-
-    function especifique(){
-
-        let select = document.getElementById("tiporelacion_id")
-        if (select.value === "7"){
-            $("#tipo_custom").show()
-        }
-        else{
-            $("#tipo_custom").hide()
-        }
-        
-        
-    }
-
-
-
-
-</script>

@@ -19,6 +19,7 @@ class Sesion extends Model
         "facilitadores",
         "respuesta",
         "observaciones",
+        "apto",
         "etapa_id",
         "paciente_id",
         "user_id",
