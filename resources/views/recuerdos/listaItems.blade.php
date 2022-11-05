@@ -13,7 +13,7 @@
             <select class="form-select form-select-sm" id="idEstado" name="estado_id" @if($show) disabled @endif>
                 <option></option>
                 @foreach ($estados as $estado)
-                    <option value="{{$estado->id}}" @if($estado->id == $recuerdo->estado_id) selected @endif>{{$estado->nombre}}</option>
+                <option value="{{$estado->id}}" @if($estado->id == $recuerdo->estado_id) selected @endif>{{$estado->nombre}}</option>
                 @endforeach
             </select>
         </div>
@@ -32,7 +32,7 @@
             <select class="form-select form-select-sm" id="idEtiqueta" name="etiqueta_id" @if($show) disabled @endif>
                 <option></option>
                 @foreach ($etiquetas as $etiqueta)
-                    <option value="{{$etiqueta->id}}" @if($etiqueta->id == $recuerdo->etiqueta_id) selected @endif>{{$etiqueta->nombre}}</option>
+                <option value="{{$etiqueta->id}}" @if($etiqueta->id == $recuerdo->etiqueta_id) selected @endif>{{$etiqueta->nombre}}</option>
                 @endforeach
             </select>
         </div>
@@ -61,7 +61,7 @@
         <div class="col-sm-3 col-md-3 col-lg-2">
             <select class="form-select form-select-sm" id="idEtapa" name="etapa_id" required @if($show) disabled @endif>
                 @foreach ($etapas as $etapa)
-                    <option selected="true" value="{{$etiqueta->id}}" @if($etiqueta->id == $recuerdo->etiqueta_id) selected @endif>{{$etapa->nombre}}</option>
+                <option selected="true" value="{{$etiqueta->id}}" @if($etiqueta->id == $recuerdo->etiqueta_id) selected @endif>{{$etapa->nombre}}</option>
                 @endforeach
             </select>
         </div>
@@ -71,7 +71,7 @@
             <select class="form-select form-select-sm" id="idEmocion" name="emocion_id" @if($show) disabled @endif>
                 <option></option>
                 @foreach ($emociones as $emocion)
-                    <option value="{{$emocion->id}}" @if($emocion->id == $recuerdo->emocion_id) selected @endif>{{$emocion->nombre}}</option>
+                <option value="{{$emocion->id}}" @if($emocion->id == $recuerdo->emocion_id) selected @endif>{{$emocion->nombre}}</option>
                 @endforeach
             </select>
         </div>
@@ -80,7 +80,7 @@
             <select class="form-select form-select-sm" id="idCategoria" name="categoria_id" @if($show) disabled @endif>
                 <option></option>
                 @foreach ($categorias as $categoria)
-                        <option value="{{$categoria->id}}" @if($categoria->id == $recuerdo->categoria_id) selected @endif>{{$categoria->nombre}}</option>
+                <option value="{{$categoria->id}}" @if($categoria->id == $recuerdo->categoria_id) selected @endif>{{$categoria->nombre}}</option>
                 @endforeach
             </select>
         </div>
@@ -95,14 +95,14 @@
     <hr class="lineaTitulo">
 </div>
 @if(!$show)
-    <div class="row">
-        <div class="col-12 justify-content-end d-flex p-2">
-            <!-- Nueva persona relacionada -->
-            <button type="button" name="crearPersona" class="btn btn-success btn-sm btn-icon me-2" data-bs-toggle="modal" data-bs-target="#personasCreator"><i class="fa-solid fa-plus"></i></button>
-            <!-- Persona existente -->
-            <button type="button" name="anadiendoPersona" class="btn btn-success btn-sm me-2" data-bs-toggle="modal" data-bs-target="#personasExistentes">Añadir existente</button>
-        </div>
-    </div> <!-- col 12 -->
+<div class="row">
+    <div class="col-12 justify-content-end d-flex p-2">
+        <!-- Nueva persona relacionada -->
+        <button type="button" name="crearPersona" class="btn btn-success btn-sm btn-icon me-2" data-bs-toggle="modal" data-bs-target="#personasCreator"><i class="fa-solid fa-plus"></i></button>
+        <!-- Persona existente -->
+        <button type="button" name="anadiendoPersona" class="btn btn-success btn-sm me-2" data-bs-toggle="modal" data-bs-target="#personasExistentes">Añadir existente</button>
+    </div>
+</div> <!-- col 12 -->
 @endif
 <div>
     <table class="table table-bordered table-striped table-responsive">
@@ -117,15 +117,19 @@
             </tr>
         </thead>
         <tbody id="divPersonas">
-        <?php $n = 1; ?>
-            @foreach ($personas as $persona)
-                <tr>
-                    <th scope="row"><?php echo $n; ?></th>
-                    <td>{{$persona->nombre}}</td>
-                    <td>{{$persona->apellidos}}</td>
-                    <td>{{$persona->tiporelacion_id}}</td>
-                </tr>
-                <?php $n++ ?>
+            <?php $n = 1; ?>
+            @foreach ($recuerdo->personas_relacionadas as $persona)
+            <tr >
+                <th scope="row"><?php echo $n; ?></th>
+                <td><a href="{{route('personas.show', $persona->id)}}">{{$persona->nombre}}</a></td>
+                <td>{{$persona->apellidos}}</td>
+                <td>{{$persona->tiporelacion_id}}</td>
+                <input type="hidden" value={{$persona->id}}>
+                <td class="tableActions">
+                    <a href="{{route('personas.show', $persona->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                </td>
+            </tr>
+            <?php $n++ ?>
             @endforeach
         </tbody>
     </table>
@@ -141,18 +145,18 @@
     </div>
 </div>
 @if(!$show)
-    <div class="dropzone dropzone-previews dropzone-custom" id="my-awesome-dropzone">
-        <div class="dz-message text-muted" data-dz-message>
-            <span>Click aquí o arrastrar y soltar</span>
-        </div>
+<div class="dropzone dropzone-previews dropzone-custom" id="my-awesome-dropzone">
+    <div class="dz-message text-muted" data-dz-message>
+        <span>Click aquí o arrastrar y soltar</span>
     </div>
+</div>
 @endif
 <div id="showMultimedia" class="row pb-2">
     @foreach ($recuerdo->multimedias as $media)
-        <div class="col-sm-4 p-2">
-            <div class="img-wrap">
-                <a href="#" class="visualizarImagen"><img src="/img/{{$media->fichero}}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon"></a>
-            </div>
+    <div class="col-sm-4 p-2">
+        <div class="img-wrap">
+            <a href="#" class="visualizarImagen"><img src="/img/{{$media->fichero}}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon"></a>
         </div>
+    </div>
     @endforeach
 </div>

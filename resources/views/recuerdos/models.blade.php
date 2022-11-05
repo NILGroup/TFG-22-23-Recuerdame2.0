@@ -67,7 +67,7 @@
                             <select class="form-select form-select-sm" id="tiporelacion_id" name="tiporelacion_id" required>
                                 <option></option>
                                 @foreach ($tipos as $tipo)
-                                    <option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
+                                <option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -106,14 +106,14 @@
                     </thead>
                     <tbody id="tablaPersonasExistentes">
                         <?php $i = 1 ?>
-                        @foreach ($prelacionadas as $persona)
+                        @foreach ($personas as $persona)
                         <tr>
                             <th scope="row"><?php echo $i ?></th>
                             <td>{{$persona->nombre}}</td>
                             <td>{{$persona->apellidos}}</td>
                             <td>{{$persona->tiporelacion_id}}</td>
                             <td id="personasSeleccionadas" class="tableActions">
-                                <input class="form-check-input" type="checkbox" value="{{$persona->id}}" name="checkPersonaExistente[]" id="checkPersonaExistente">
+                                <input class="form-check-input" type="checkbox" value="{{$persona->id}}" name="checkPersonaExistente[]" id="checkPersonaExistente" @if($recuerdo->personas_relacionadas->contains($persona)) checked @endif>
                             </td>
                         </tr>
                         <?php $i++ ?>
@@ -147,15 +147,15 @@
         //console.log(rel.value);
         //console.log(rel.options[rel.selectedIndex].text);
 
-
+        //console.log(inputValues)
         var fd = new FormData();
-        fd.append('nombre', inputValues[2].value);
-        fd.append('apellidos', inputValues[3].value);
-        fd.append('telefono', inputValues[4].value);
-        fd.append('ocupacion', inputValues[5].value);
-        fd.append('email', inputValues[6].value);
+        fd.append('nombre', inputValues[1].value);
+        fd.append('apellidos', inputValues[2].value);
+        fd.append('telefono', inputValues[3].value);
+        fd.append('ocupacion', inputValues[4].value);
+        fd.append('email', inputValues[5].value);
         fd.append('tiporelacion_id', rel.value);
-        fd.append('paciente_id', inputValues[1].value);
+        fd.append('paciente_id', inputValues[0].value);
 
         $.ajaxSetup({
             headers: {
@@ -177,7 +177,7 @@
                     '<td>' + data["nombre"] + '</td>' +
                     '<td>' + data["apellidos"] + '</td>' +
                     '<td>' + data["tiporelacion_id"] + '</td>' +
-                    '<input type="hidden" value=' + data["id"]+ ' name="checkPersona[]">' +
+                    '<input type="hidden" value=' + data["id"] + ' name="checkPersona[]">' +
                     '</tr>';
                 reloadPersona(data);
             },
@@ -186,32 +186,28 @@
             }
         });
 
-
-
-
-
     }
 
     function reloadPersona(p) {
-        let selected = Array.from(document.getElementById("divPersonas").getElementsByTagName("input"), function(s){
+        let selected = Array.from(document.getElementById("divPersonas").getElementsByTagName("input"), function(s) {
             console.log(s.value)
             return s.value
         })
 
 
-        document.getElementById("tablaPersonasExistentes").innerHTML += 
-        '<tr>' +
+        document.getElementById("tablaPersonasExistentes").innerHTML +=
+            '<tr>' +
             '<th scope="row">' + p.id + '</th>' +
             '<td>' + p.nombre + '</td>' +
             '<td>' + p.apellidos + '</td>' +
             '<td>' + p.tiporelacion_id + '</td>' +
-                '<td id="personasSeleccionadas" class="tableActions">' +
-                    '<input class="form-check-input" type="checkbox" value=' + p.id + ' name="checkPersonaExistente[]" id="checkPersonaExistente" checked>' +
-                '</td>' +
-        '</tr>';
+            '<td id="personasSeleccionadas" class="tableActions">' +
+            '<input class="form-check-input" type="checkbox" value=' + p.id + ' name="checkPersonaExistente[]" id="checkPersonaExistente" checked>' +
+            '</td>' +
+            '</tr>';
 
         document.getElementById("tablaPersonasExistentes").getElementsByTagName("input").forEach(c => {
-            if(selected.includes(c.value)){
+            if (selected.includes(c.value)) {
                 c.checked = true;
             }
         })
@@ -219,35 +215,31 @@
 </script>
 
 <script type="text/javascript">
-
     function agregarPersonas(p) {
         //console.log(p);
         document.getElementById("divPersonas").innerHTML = "";
         let allPersonas = document.getElementById("tablaPersonasExistentes").getElementsByTagName("tr");
         let n = 1;
 
-        //falla con solo una persona relacioanda.
         for (let i = 0; i < allPersonas.length; i++) {
-            let per =  allPersonas[i].getElementsByTagName("td");
+            let per = allPersonas[i].getElementsByTagName("td");
             per = {
                 "id": allPersonas[i].getElementsByTagName("th")[0].textContent,
                 "nombre": per[0].textContent,
-                "apellidos":per[1].textContent,
-                "tiporelacion_id":per[2].textContent,
+                "apellidos": per[1].textContent,
+                "tiporelacion_id": per[2].textContent,
                 "checked": allPersonas[i].getElementsByTagName("input")[0].checked
             }
 
             if (per.checked) {
                 document.getElementById("divPersonas").innerHTML += '<tr>' +
                     '<th scope="row">' + (n++) + '</th>' +
-                    '<td>' +per.nombre+ '</td>' +
-                    '<td>' +per.apellidos+ '</td>' +
-                    '<td>' +per.tiporelacion_id+ '</td>' +
+                    '<td>' + per.nombre + '</td>' +
+                    '<td>' + per.apellidos + '</td>' +
+                    '<td>' + per.tiporelacion_id + '</td>' +
                     '<input type="hidden" value=' + per.id + ' name="checkPersona[]">' +
                     '</tr>';
             }
         }
     }
 </script>
-
-

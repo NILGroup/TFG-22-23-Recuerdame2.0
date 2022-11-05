@@ -57,10 +57,9 @@ class RecuerdosController extends Controller
         $etapas = Etapa::all()->sortBy("id");
         $emociones = Emocion::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
-        $prelacionadas = $paciente->personasrelacionadas;
+        $personas = $paciente->personasrelacionadas;
         $tipos = Tiporelacion::all()->sortBy("id");
-        $personas = [];
-        return view("recuerdos.create", compact("estados","etiquetas","etapas","emociones","categorias", "prelacionadas","tipos", "recuerdo", "personas", "paciente", "show"));
+        return view("recuerdos.create", compact("estados","etiquetas","etapas","emociones","categorias", "personas","tipos", "recuerdo", "personas", "paciente", "show"));
 
     }
 
@@ -128,8 +127,7 @@ class RecuerdosController extends Controller
         $emociones = Emocion::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
         $tipos = Tiporelacion::all()->sortBy("id");
-        $personas = $recuerdo->personas_relacionadas;
-        return view("recuerdos.show", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "personas", "paciente", "show"));
+        return view("recuerdos.show", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "paciente", "show"));
     }
 
     public function showByPaciente($idPaciente)
@@ -160,6 +158,7 @@ class RecuerdosController extends Controller
     public function edit($idRecuerdo)
     {
         $show = false;
+
         $recuerdo = Recuerdo::find($idRecuerdo);
         $paciente = $recuerdo->paciente;
         $estados = Estado::all()->sortBy("id");
@@ -167,10 +166,9 @@ class RecuerdosController extends Controller
         $etapas = Etapa::all()->sortBy("id");
         $emociones = Emocion::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
-        $personas = $recuerdo->personas_relacionadas;
-        $prelacionadas = $paciente->personasrelacionadas;
+        $personas = $paciente->personasrelacionadas;
         $tipos = Tiporelacion::all()->sortBy("id");
-        return view("recuerdos.edit", compact("paciente", "recuerdo","estados","etiquetas","etapas","emociones","categorias", "personas", "tipos", "prelacionadas", "show"));
+        return view("recuerdos.edit", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "personas", "tipos","paciente", "show"));
     }
 
     /**
