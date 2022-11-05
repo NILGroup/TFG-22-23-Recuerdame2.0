@@ -39,21 +39,26 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row mt-4">
     <div class="row col-sm-12 col-md-12 col-lg-12">
         <label for="puntuacion" class="form-label col-form-label-sm col-sm-2 col-md-2 col-lg-1">Puntuación</label>
 
         <div class="col-md-auto">0</div>
-        <div class="col-sm-5 col-md-5 col-lg-3">
-            <input type="range" class="form-range puntuacion" id="puntuacion" name="puntuacion" min="0" max="10" step="1" value="puntuacion" @if($show) disabled @endif>
+        <div class="col-sm-auto col-md-auto col-lg-auto">
+            <div class="range-wrap">
+                <div class="range-value" id="rangeV"></div>
+                <input type="range" class="form-range puntuacion" id="puntuacion" name="puntuacion" min="0" max="10" step="1" value="puntuacion">
+            </div>
         </div>
-        <div class="col">10</div>
+        <div class="col mx-auto">10</div>
     </div>
 
-    <div class="mb-3">
-        <label for="descripcion" class="form-label col-form-label-sm">Descripción</label>
-        <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" rows="3" @if($show) disabled @endif>{{$recuerdo->descripcion}}</textarea>
-    </div>
+    <label id="valorPuntuacion" class="form-label col-sm-2 col-md-2 col-lg-2"></label>
+</div>
+
+<div class="mb-3">
+    <label for="descripcion" class="form-label col-form-label-sm">Descripción</label>
+    <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" rows="3"></textarea>
 </div>
 <div class="row justify-content-between">
     <div class="row">
@@ -119,7 +124,7 @@
         <tbody id="divPersonas">
             <?php $n = 1; ?>
             @foreach ($recuerdo->personas_relacionadas as $persona)
-            <tr >
+            <tr>
                 <th scope="row"><?php echo $n; ?></th>
                 <td><a href="{{route('personas.show', $persona->id)}}">{{$persona->nombre}}</a></td>
                 <td>{{$persona->apellidos}}</td>
