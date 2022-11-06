@@ -11,7 +11,7 @@
         @include('recuerdos.listaItems')
         <div class="col-12">
             <button type="submit" value="Guardar" class="btn btn-outline-primary btn">Guardar</button>
-            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary btn">Atrás</button></a>
+            <a href="/pacientes/{{$paciente->id}}/recuerdos"><button type="button" class="btn btn-primary btn">Atrás</button></a>
         </div>
     </form>
 </div>

@@ -21,9 +21,9 @@
 </div>
 <div class="row justify-content-between">
     <div class="row col-sm-6 col-md-6 col-lg-6">
-        <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha<span class="asterisco">*</span></label>
+        <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2" >Fecha<span class="asterisco">*</span></label>
         <div class="col-sm-9 col-md-6 col-lg-4">
-            <input type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$recuerdo->fecha}}" @if($show) disabled @endif>
+            <input type="date" class="form-control form-control-sm" id="fecha" required name="fecha" value="{{$recuerdo->fecha}}" @if($show) disabled @endif>
         </div>
     </div>
     <div class="row col-sm-6 col-md-6 col-lg-6">
@@ -58,7 +58,7 @@
 
 <div class="mb-3">
     <label for="descripcion" class="form-label col-form-label-sm">Descripción</label>
-    <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" rows="3"></textarea>
+    <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" rows="3">{{$recuerdo->descripcion}}</textarea>
 </div>
 <div class="row justify-content-between">
     <div class="row">

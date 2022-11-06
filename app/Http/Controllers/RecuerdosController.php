@@ -195,7 +195,7 @@ class RecuerdosController extends Controller
         if(!is_null($recuerdo)){
             $idPaciente = $recuerdo->paciente_id; //accede a la id del paciente
             Recuerdo::destroy($idRecuerdo); //elimina el recuerdo
-            return redirect("/pacientes/{id}/recuerdos/$idPaciente");
+            return redirect("/pacientes/$idPaciente/recuerdos/");
         }else{
             return redirect("/");
         }
