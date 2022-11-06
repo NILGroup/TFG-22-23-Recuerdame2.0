@@ -35,7 +35,7 @@
     <div class="row col-sm-12 col-md-6 col-lg-5">
         <label for="email" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Email<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6">
-            <input type="text" name="email" class="form-control form-control-sm" id="email" value="{{$persona->email}}" required @if($show) disabled @endif>
+            <input type="email" name="email" class="form-control form-control-sm" id="email" value="{{$persona->email}}" required @if($show) disabled @endif>
         </div>
     </div>
     <div class="row col-sm-12 col-md-6 col-lg-7">
