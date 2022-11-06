@@ -26,15 +26,15 @@
             </div>
         </div>
 
-        <input type="hidden" name="paciente_id"  id="paciente_id"  value="{{Session::get('paciente')['id']}}">
+        <input type="hidden" name="paciente_id" id="paciente_id" value="{{Session::get('paciente')['id']}}">
 
         <div class="row">
             <label for="etapa" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Etapa de la vida</label>
             <div class="col-sm-3 col-md-3 col-lg-2">
                 <select class="form-select form-select-sm" id="idEtapa" name="idEtapa">
-                    <option></option>    
+                    <option></option>
                     @foreach ($etapas as $etapa)
-                        <option value="{{$etapa->id}}">{{$etapa->nombre}}</option>
+                    <option value="{{$etapa->id}}">{{$etapa->nombre}}</option>
                     @endforeach
 
                 </select>
@@ -42,28 +42,35 @@
         </div>
 
         <div class="row">
-            <label for="etapa" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Categoría</label>
+            <label for="categoria" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Categoría</label>
             <div class="col-sm-3 col-md-3 col-lg-2">
-                <select class="form-select form-select-sm" id="idCategoria" name="idCategoria">
-                    <option></option>      
+                <select class="form-select form-select-sm" id="idCategoria" name="idCategoria" >
+                    <option ></option>
                     @foreach ($categorias as $categoria)
-                        <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                     @endforeach
                 </select>
             </div>
         </div>
 
         <div class="row">
-            <label for="etapa" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Etiqueta</label>
-            <div class="col-sm-3 col-md-3 col-lg-2">
-                <select class="form-select form-select-sm" id="idEtiqueta" name="idEtiqueta">
-                    <option></option>  
+            <label for="etiqueta" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Etiqueta</label>
+            <div class="  col-sm-3 col-md-3 col-lg-2">
+                <div class="selectBox" onclick="showCheckboxes()">
+                    <select class="form-select form-select-sm" id="idEtiqueta" name="idEtiqueta">
+                        <option id="seleccionado" selected></option>
+                    </select>
+                    <div class="overSelect"></div>
+                </div>
+                <div id="checkboxes">
                     @foreach ($etiquetas as $etiqueta)
-                        <option value="{{$etiqueta->id}}">{{$etiqueta->nombre}}</option>
+                    <label> <input  type="checkbox" onclick="onSelect('{{$etiqueta->nombre}}')" value={{$etiqueta->id}} name="seleccion[]">{{$etiqueta->nombre}}</label>
                     @endforeach
-                </select>
+                </div>
             </div>
+
         </div>
+
 
         <div>
             <button type="submit" name="generarLibro" value="Generar libro" class="btn btn-outline-primary ">Generar libro</button>
@@ -73,9 +80,14 @@
 
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#idEtiqueta').multiselect();
+    });
+</script>
 
 @endsection
 
 @push('scripts')
-    @include('layouts.scripts')
+@include('layouts.scripts')
 @endpush

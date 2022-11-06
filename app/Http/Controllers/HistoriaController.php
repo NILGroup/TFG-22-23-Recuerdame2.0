@@ -38,7 +38,6 @@ class HistoriaController extends Controller
         $paciente = Paciente::find($idPaciente);
         if (is_null($paciente)) return "ID de paciente no encontrada";
 
-
         $listaRecuerdosHistoriaVida = Recuerdo::where('paciente_id', $idPaciente)->get();
         $listafinal=collect();
         if (!empty($idCategoria))
@@ -46,7 +45,15 @@ class HistoriaController extends Controller
         if (!empty($idEtapa))
             $listaRecuerdosHistoriaVida = $listaRecuerdosHistoriaVida->where('etapa_id', $idEtapa);
         if (!empty($idEtiqueta))
-            $listaRecuerdosHistoriaVida = $listaRecuerdosHistoriaVida->where('etiqueta_id', $idEtiqueta);
+            $listaAux = $listaRecuerdosHistoriaVida;
+            $listaAux2 = collect();
+            foreach( $idEtiqueta as $et){
+                $listaAux = $listaRecuerdosHistoriaVida->where('etiqueta_id', $et);
+                foreach($listaAux as $item){
+                    $listaAux2->push($item);
+                }
+            }
+            $listaRecuerdosHistoriaVida=$listaAux2;
         if (!empty($fechaInicio)){
             foreach ($listaRecuerdosHistoriaVida as $recuerdo) {
                 if($recuerdo->fecha  >= $fechaInicio){
@@ -76,7 +83,7 @@ class HistoriaController extends Controller
         $fechaInicio = $request->fechaInicio;
         $fechaFin = $request->fechaFin;
         $idEtapa = $request->idEtapa;
-        $idEtiqueta = $request->idEtiqueta;
+        $idEtiqueta = $request->seleccion;
         $idPaciente = $request->paciente_id;
 
         $etapa = null;
@@ -85,11 +92,14 @@ class HistoriaController extends Controller
         $categoria = null;
         if($idCategoria!=null)$categoria = Categoria::find($idCategoria)->nombre;
         
-        $etiqueta = null;
-        if($idEtiqueta!=null)$etiqueta = Etiqueta::find($idEtiqueta)->nombre;
+        $Nombresetiquetas = collect();
+        if($idEtiqueta!=null){
+            foreach( $idEtiqueta as $et){
+            $Nombresetiquetas->prepend(Etiqueta::find($et)->nombre);
+            }
+        }
 
         $listaRecuerdos = $this->getListaRecuerdosHistoriaVida($idPaciente, $fechaInicio, $fechaFin, $idEtapa, $idCategoria, $idEtiqueta);
-   
-        return view("historias.generarLibro", compact("categoria", "fechaInicio", "fechaFin", "etapa", "etiqueta", "listaRecuerdos"));
+        return view("historias.generarLibro", compact("categoria", "fechaInicio", "fechaFin", "etapa", "Nombresetiquetas", "listaRecuerdos"));
     }
 }

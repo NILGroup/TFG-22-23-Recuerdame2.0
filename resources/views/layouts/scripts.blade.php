@@ -24,5 +24,33 @@
       mybutton.style.display = "none";
     }
   }
+
+  //multiple seleccion con checkbox en generar Historia de vida
+var expanded = false;
+
+function showCheckboxes() {
+  var checkboxes = document.getElementById("checkboxes");
+  if (!expanded) {
+    checkboxes.style.display = "block";
+    expanded = true;
+  } else {
+    checkboxes.style.display = "none";
+    expanded = false;
+  }
+}
+
+const array = [];
+function onSelect(string) {
+  var select = document.getElementById("seleccionado");
+  const index = array.indexOf(string);
+  if (index > -1) { // only splice array when item is found
+  array.splice(index, 1); // 2nd parameter means remove one item only
+  }else  array.push(string);
+  
+  select.textContent= array;
+  //select.textContent= select.textContent+ ' ' + string;
+}
+
+
 </script>
 
