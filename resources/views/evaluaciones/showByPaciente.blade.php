@@ -21,7 +21,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Informe</th>
                     <th scope="col">Fecha</th>
-                    <th scope="col">Sesiones desde el anterior informe</th>
+                    <th scope="col">Sesiones desde el anterior informe de seguimiento</th>
                     <th scope="col">Diagnóstico</th>
                     <th scope="col"></th>
                 </tr>
