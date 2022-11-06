@@ -19,7 +19,7 @@
 
   function scrollHider() {
     if (document.documentElement.scrollTop > 300) {
-      mybutton.style.display = "block";
+      mybutton.style.display = "inline";
     } else {
       mybutton.style.display = "none";
     }
