@@ -32,7 +32,8 @@ class PDFSesion extends FPDF{
         // Arial italic 8
         $this->SetFont('Arial','I',8);
         // Page number
-        $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+        $pagina = utf8_decode("Página ");
+        $this->Cell(0,10,$pagina.$this->PageNo().'/{nb}',0,0,'C');
     }
     
     function writePatient($pdf, $paciente){

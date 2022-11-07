@@ -62,8 +62,9 @@ class PDFHistoria extends FPDF{
         $this->SetY(-15);
         // Arial italic 8
         $this->SetFont('Arial','I',8);
-        // Page number
-        $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+        // Page number   
+        $pagina = utf8_decode("Página ");
+        $this->Cell(0,10,$pagina.$this->PageNo().'/{nb}',0,0,'C');
     }
 
         
