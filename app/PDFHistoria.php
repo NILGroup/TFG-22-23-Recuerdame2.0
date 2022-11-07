@@ -32,7 +32,9 @@ class PDFHistoria extends FPDF{
         foreach($listadoRecuerdos as $row) {
             $pdf->SetFont('Times','B',12);
             $pdf->Cell(160,7,iconv('UTF-8', 'windows-1252',$row->nombre));
-            $pdf->Cell(160,7,$row->fecha);
+            $fechaFormat = $row->fecha;
+            $newDate = date("d/m/Y", strtotime($fechaFormat));
+            $pdf->Cell(160,7,$newDate);
             $pdf->Ln(7);
             $size+= 7*3;
             $pdf->SetFont('Times','',12);
