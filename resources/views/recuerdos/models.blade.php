@@ -58,20 +58,36 @@
 
                         </div>
                     </div>
+                    <div class="row col-sm-12 col-md-6 col-lg-7">
+                        <label for="localidad" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Localidad<span class="asterisco">*</span></label>
+                        <div class="col-sm-12 col-md-12 col-lg-8">
+                            <input type="text" name="localidad" class="form-control form-control-sm" id="localidad" required @if($show) disabled @endif>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row form-group justify-content-between">
                     <div class="row col-sm-12 col-md-6 col-lg-5">
                         <label for="tipo" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Tipo relación</label>
                         <div class="col-sm-12 col-md-12 col-lg-6">
-                            <select class="form-select form-select-sm" id="tiporelacion_id" name="tiporelacion_id" required>
-                                <option></option>
+                            <select onchange="especifique()" class="form-select form-select-sm" id="tiporelacion_id" name="tiporelacion_id" required>
                                 @foreach ($tipos as $tipo)
                                 <option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
                                 @endforeach
                             </select>
+                            <input style="display: none;" placeholder="Especifique" type="text" name="tipo_custom" class="form-control form-control-sm" id = "tipo_custom" @if($show) disabled @endif>
                         </div>
                     </div>
+                    <div class="row col-sm-12 col-md-6 col-lg-7">
+                        <label for="contacto" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Contacto<span class="asterisco">*</span></label>
+                        <div class="col-sm-12 col-md-12 col-lg-8">
+                            <input type="text" name="contacto" class="form-control form-control-sm" id="contacto" required @if($show) disabled @endif>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="observaciones" class="form-label col-form-label-sm">Observaciones</label>
+                    <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3" @if($show) disabled @endif></textarea>
                 </div>
 
             </div> <!-- Modal body -->
@@ -131,6 +147,18 @@
 </div>
 
 <script type="text/javascript">
+
+        function especifique(){
+            let select = document.getElementById("tiporelacion_id")
+            if (select.value === "7"){
+                $("#tipo_custom").show()
+            }
+            else{
+                $("#tipo_custom").hide()
+            }
+        }
+
+
     function CrearPersonas() {
         /*
         0 Token
@@ -144,19 +172,26 @@
 
         const inputValues = document.querySelectorAll('#personasCreatorForm input')
         var rel = document.getElementById("tiporelacion_id");
-        //console.log(rel.value);
-        //console.log(rel.options[rel.selectedIndex].text);
+        
 
         //console.log(inputValues)
+
         var fd = new FormData();
         fd.append('nombre', inputValues[1].value);
         fd.append('apellidos', inputValues[2].value);
         fd.append('telefono', inputValues[3].value);
         fd.append('ocupacion', inputValues[4].value);
         fd.append('email', inputValues[5].value);
+        fd.append('localidad', inputValues[6].value);
+        fd.append('tipo_custom', inputValues[7].value);
+        fd.append('contacto', inputValues[8].value);
+        fd.append('observaciones', document.getElementById("observaciones").value);
         fd.append('tiporelacion_id', rel.value);
         fd.append('paciente_id', inputValues[0].value);
 
+        //console.log([...fd.entries()])
+
+        
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -185,6 +220,8 @@
                 console.log('Error:', data);
             }
         });
+
+        
 
     }
 
