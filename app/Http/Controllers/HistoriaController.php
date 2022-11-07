@@ -33,6 +33,18 @@ class HistoriaController extends Controller
         return view("historias.generateHistoria", compact("paciente", "fecha", "etapas", "etiquetas", "categorias"));
     }
 
+    public function filtrarPorVarias($id, &$listaRecuerdosHistoriaVida , $filtro){
+            $listaAux = $listaRecuerdosHistoriaVida;
+            $listaAux2 = collect();
+            foreach( $id as $et){
+                $listaAux = $listaRecuerdosHistoriaVida->where($filtro, $et);
+                foreach($listaAux as $item){
+                    $listaAux2->push($item);
+                }
+            }
+            return $listaAux2;
+    }
+
     public function getListaRecuerdosHistoriaVida($idPaciente, $fechaInicio, $fechaFin, $idEtapa, $idCategoria, $idEtiqueta)
     {
         $paciente = Paciente::find($idPaciente);
@@ -40,20 +52,17 @@ class HistoriaController extends Controller
 
         $listaRecuerdosHistoriaVida = Recuerdo::where('paciente_id', $idPaciente)->get();
         $listafinal=collect();
-        if (!empty($idCategoria))
-            $listaRecuerdosHistoriaVida = $listaRecuerdosHistoriaVida->where('categoria_id', $idCategoria);
-        if (!empty($idEtapa))
-            $listaRecuerdosHistoriaVida = $listaRecuerdosHistoriaVida->where('etapa_id', $idEtapa);
-        if (!empty($idEtiqueta))
-            $listaAux = $listaRecuerdosHistoriaVida;
-            $listaAux2 = collect();
-            foreach( $idEtiqueta as $et){
-                $listaAux = $listaRecuerdosHistoriaVida->where('etiqueta_id', $et);
-                foreach($listaAux as $item){
-                    $listaAux2->push($item);
-                }
-            }
-            $listaRecuerdosHistoriaVida=$listaAux2;
+        if (!empty($idCategoria)){
+            $listaRecuerdosHistoriaVida= $this->filtrarPorVarias($idCategoria, $listaRecuerdosHistoriaVida, 'categoria_id');
+        }
+        if (!empty($idEtapa)){
+            $listaRecuerdosHistoriaVida= $this->filtrarPorVarias($idEtapa, $listaRecuerdosHistoriaVida, 'etapa_id');
+            
+        }
+        if (!empty($idEtiqueta)){
+            $listaRecuerdosHistoriaVida= $this->filtrarPorVarias($idEtiqueta, $listaRecuerdosHistoriaVida, 'etiqueta_id');
+        }
+
         if (!empty($fechaInicio)){
             foreach ($listaRecuerdosHistoriaVida as $recuerdo) {
                 if($recuerdo->fecha  >= $fechaInicio){
@@ -79,18 +88,27 @@ class HistoriaController extends Controller
     public function generarLibroHistoria(Request $request)
     {
 
-        $idCategoria = $request->idCategoria;
+        $idCategoria = $request->seleccionCat;
         $fechaInicio = $request->fechaInicio;
         $fechaFin = $request->fechaFin;
-        $idEtapa = $request->idEtapa;
-        $idEtiqueta = $request->seleccion;
+        $idEtapa = $request->seleccionEtapa;
+        $idEtiqueta = $request->seleccionEtiq;
         $idPaciente = $request->paciente_id;
+     
+        $Nombresetapas = collect();
+        if($idEtapa!=null){
+            foreach( $idEtapa as $et){
+                $Nombresetapas->prepend(Etapa::find($et)->nombre);
+            }
+        }
 
-        $etapa = null;
-        if($idEtapa!=null)$etapa = Etapa::find($idEtapa)->nombre;
+        $Nombrescat = collect();
+        if($idCategoria!=null){
+            foreach( $idCategoria as $et){
+            $Nombrescat->prepend(Categoria::find($et)->nombre);
+            }
+        }
 
-        $categoria = null;
-        if($idCategoria!=null)$categoria = Categoria::find($idCategoria)->nombre;
         
         $Nombresetiquetas = collect();
         if($idEtiqueta!=null){
@@ -99,7 +117,9 @@ class HistoriaController extends Controller
             }
         }
 
+
         $listaRecuerdos = $this->getListaRecuerdosHistoriaVida($idPaciente, $fechaInicio, $fechaFin, $idEtapa, $idCategoria, $idEtiqueta);
-        return view("historias.generarLibro", compact("categoria", "fechaInicio", "fechaFin", "etapa", "Nombresetiquetas", "listaRecuerdos"));
+        //return $listaRecuerdos ;
+        return view("historias.generarLibro", compact("Nombrescat", "fechaInicio", "fechaFin", "Nombresetapas", "Nombresetiquetas", "listaRecuerdos"));
     }
 }
