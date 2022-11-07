@@ -97,15 +97,25 @@ class PDFHistoria extends FPDF{
         $pdf->Ln(12);
     }
     
+    function fechaHoy($pdf){ 
+        $fecha = utf8_decode('Fecha de generación del documento: ');
+        $hoy = date('d/m/y');
+        $fecha .= $hoy;
+        $pdf->Cell(0,7,$fecha);       
+        $pdf->Ln(7);
+    }
+
     function pdfBody($pdf,$paciente, $listadoRecuerdos){
         //$pdf->Cell(0,10,'Fecha del informe: '.$informeSeguimiento->getFecha(),0,1);
         // Colors, line width and bold font
         $pdf->SetFillColor(220);
-        
+
+        $this->fechaHoy($pdf);
+
         $pdf->SetFont('Times','B',15);
         $pdf->Cell(0,7,'Datos del usuario ');
         $pdf->Ln(9);
-    
+        
         $this->writePatient($pdf, $paciente);
         
         $pdf->SetFont('Times','B',15);
