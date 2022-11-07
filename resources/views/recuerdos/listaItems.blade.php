@@ -71,7 +71,7 @@
             </select>
         </div>
 
-        <label for="emocion" class="form-label col-form-label-sm col-sm-2 col-md-12col-lg-1">Emoción</label>
+        <label for="emocion" class="form-label col-form-label-sm col-sm-2 col-md-12col-lg-1">Emoción producida</label>
         <div class="col-sm-3 col-md-3 col-lg-2">
             <select class="form-select form-select-sm" id="idEmocion" name="emocion_id" @if($show) disabled @endif>
                 <option></option>
