@@ -18,7 +18,6 @@ class InformesSesionController extends Controller
     }
     
     public function showByPaciente($idPaciente){
-        throw new \Exception("a");
         $sesiones = Sesion::where('paciente_id',$idPaciente)->whereNotNull("fecha_finalizada")->get();
         return view("informesSesion.showByPaciente", compact('sesiones'));
     }
@@ -26,17 +25,31 @@ class InformesSesionController extends Controller
     public function generarInforme($idPaciente, $idSesion){
         $sesion = Sesion::find($idSesion);
         $paciente = $sesion->paciente;
-        return view('informesSesion.create', compact('paciente', 'sesion'));
+        $sesion->fecha_finalizada = \Carbon\Carbon::now()->format('Y-m-d');
+        $show = false;
+        return view('informesSesion.create', compact('paciente', 'sesion', 'show'));
     }
 
-    public function cerrarInformeSesion(Request $request){
+    public function store(Request $request){
         $sesion = Sesion::find($request->id);
         $sesion->fecha = $request->fecha;
         $sesion->fecha_finalizada = $request->fecha_finalizada;
         $sesion->respuesta = $request->respuesta;
         $sesion->observaciones = $request->observaciones;
+        $sesion->barreras = $request->barreras;
+        $sesion->facilitadores = $request->facilitadores;
+        $sesion->apto = $request->apto;
+        $sesion->duracion = $request->duracion;
         $sesion->save();
-        return redirect("pacientes/{$sesion->paciente->id}/sesiones");
+        return redirect("/pacientes/$sesion->paciente_id/sesiones/$sesion->id/ver");
+    }
+
+    public function show(int $idP, int $idS)
+    {
+        $sesion = Sesion::findOrFail($idS);
+        $paciente = $sesion->paciente;
+        $show = true;
+        return view("informesSesion.show", compact("sesion", "paciente", "show"));
     }
 
     public function destroy($id){

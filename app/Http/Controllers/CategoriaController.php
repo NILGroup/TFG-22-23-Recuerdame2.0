@@ -22,7 +22,7 @@ class CategoriaController extends Controller
 
     public function showAll()
     {
-        return Categoria::all();
+        return Categoria::all()->sortBy("id");
     }
 
    

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Personarelacionada extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
         "nombre",
@@ -15,7 +16,11 @@ class Personarelacionada extends Model
         "telefono",
         "ocupacion",
         "email",
+        "localidad",
+        "contacto",
+        "observaciones",
         "tiporelacion_id",
+        "tipo_custom",
         "paciente_id"
     ];
 

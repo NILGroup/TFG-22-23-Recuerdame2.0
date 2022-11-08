@@ -8,19 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Sesion extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
         "fecha",
-        "etapa_id",
         "objetivo",
         "descripcion",
+        "fecha_finalizada",
         "barreras",
         "facilitadores",
-        "fecha_finalizada",
+        "respuesta",
+        "observaciones",
+        "apto",
+        "etapa_id",
         "paciente_id",
         "user_id",
-        "respuesta",
-        "observaciones"
     ];
 
     public function etapa(){

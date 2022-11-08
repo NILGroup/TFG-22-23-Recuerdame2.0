@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Recuérdame</title>
+    <link rel="icon" type="image/x-icon" href="/img/logo_recuerdame.png">
     <!-- <title>{{ config('app.name', 'Laravel') }}</title> -->
 
     <!-- CSRF Token -->
@@ -28,6 +29,8 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    @stack('styles')
 </head>
 <body class="lightbluebg">
     <div id="app">

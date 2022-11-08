@@ -59,7 +59,7 @@ class MultimediasController extends Controller
      */
     public function show(Multimedia $multimedia)
     {
-        return Multimedia::all();
+        return Multimedia::all()->sortBy("id");
     }
 
     //Devuelve los archivos multimedia de un recuerdo concreto

@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Residencia;
+use App\Models\Situacion;
+use App\Models\Estudio;
+use App\Models\Genero;
+use App\Models\Evaluacion;
 use Illuminate\Support\Facades\Auth;
 
 use function PHPUnit\Framework\isNull;
@@ -29,11 +34,10 @@ class PacientesController extends Controller
 
     public function index()
     {
-
         //Sacamos a todos los pacientes de la bd
         $idTerapeuta = Auth::id();
         $pacientes = User::find($idTerapeuta)->pacientes;
-
+        session()->forget('paciente');
         //Redireccionamos a la vista devolviendo la lista de pacientes
         return view("pacientes.index", compact("pacientes"));
 
@@ -46,7 +50,13 @@ class PacientesController extends Controller
 
     public function create()
     {
-        return view("pacientes.create");
+        $show = false;
+        $paciente = new Paciente();
+        $residencias = Residencia::all()->sortBy("id");
+        $situaciones = Situacion::all()->sortBy("id");
+        $estudios = Estudio::all()->sortBy("id");
+        $generos = Genero::all()->sortBy("id");
+        return view("pacientes.create", compact("residencias", "situaciones", "estudios", "generos", "paciente", "show"));
     }
 
     /**
@@ -55,36 +65,36 @@ class PacientesController extends Controller
 
     public function store(Request $request)
     {
-
         //Se valida la request
         $validate = $request->validate([
-
             "nombre" => "required",
             "apellidos" => "required",
-            "genero" => "required",
+            "genero_id" => "required",
             "lugar_nacimiento" => "required",
             "nacionalidad" => "required",
             "fecha_nacimiento" => "required",
-            "tipo_residencia" => "required",
-            "residencia_actual" => "required"
-
+            "ocupacion" => "required",
+            "residencia_id" => "required",
+            "fecha_inscripcion" => "required",
+            "estudio_id" => "required",
+            "situacion_id" => "required"
         ]);
 
         //Almacenamos al paciente en la bd
-        $idTerapeuta = Auth::id();
-        $user = User::find($idTerapeuta);
-
-        Paciente::create([
-
+        $user = User::find(Auth::id());
+        Paciente::updateOrcreate([
             "nombre" => $request->nombre,
             "apellidos" => $request->apellidos,
-            "genero" => $request->genero,
+            "genero_id" => $request->genero_id,
             "lugar_nacimiento" => $request->lugar_nacimiento,
             "nacionalidad" => $request->nacionalidad,
             "fecha_nacimiento" => $request->fecha_nacimiento,
-            "tipo_residencia" => $request->tipo_residencia,
-            "residencia_actual" => $request->residencia_actual
-
+            "ocupacion" => $request->ocupacion,
+            "residencia_actual" => $request->residencia_actual,
+            "fecha_inscripcion" => $request->fecha_inscripcion,
+            "residencia_id" => $request->residencia_id,
+            "estudio_id" =>  $request->estudio_id,
+            "situacion_id" =>  $request->situacion_id
         ])->users()->save($user);
 
         //Redireccionamos a la vista de lista pacientes
@@ -99,12 +109,20 @@ class PacientesController extends Controller
     public function show($id)
     {
         //Obtenemos al paciente
+        $show = true;
         $paciente = Paciente::findOrFail($id);
-        $cuidador = User::find($paciente->cuidador_id);
-       
+        $residencias = Residencia::all()->sortBy("id");
+        $situaciones = Situacion::all()->sortBy("id");
+        $estudios = Estudio::all()->sortBy("id");
+        $generos = Genero::all()->sortBy("id");
+        $personas = $paciente->personasrelacionadas;
+        $evaluaciones = $paciente->evaluaciones;
+        $cuidadores = $paciente->users->where('rol_id', 2);
+        //throw new \Exception(json_encode($cuidadores));
         session()->put('paciente', $paciente->toArray()); 
+       
         //Devolvemos al paciente a la vista de mostrar paciente
-        return view("pacientes.show", compact("paciente","cuidador"));
+        return view("pacientes.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas", "cuidadores", "show"));
 
     }
 
@@ -115,28 +133,33 @@ class PacientesController extends Controller
     public function edit(int $id)
     {
         //Sacamos al paciente de la bd
+        $show = false;
         $paciente = Paciente::findOrFail($id);
-
+        $residencias = Residencia::all()->sortBy("id");
+        $situaciones = Situacion::all()->sortBy("id");
+        $estudios = Estudio::all()->sortBy("id");
+        $generos = Genero::all()->sortBy("id");
         session()->put('paciente', $paciente->toArray());
+
         //Devolvemos al paciente a la vista de editar paciente
-        return view("pacientes.edit", compact("paciente"));
+        return view("pacientes.edit", compact("paciente", "residencias", "situaciones", "estudios", "generos", "show"));
     }
 
     /**
      * Actualiza al paciente especificado y redirecciona a la lista de pacientes
      */
 
-    public function update(Request $request, int $id)
+    public function update(Request $request)
     {
         //Sacamos al paciente de la bd
-        $paciente = Paciente::findOrFail($id);
+        $paciente = Paciente::findOrFail($request->id);
 
         //Actualizamos masivamente los datos del paciente
         $paciente->update($request->all());
         session()->put('paciente', $paciente->toArray()); 
 
         //Redireccionamos a lista pacientes
-        return redirect("/pacientes");
+        return redirect("/pacientes/$request->id");
         
     }
 
@@ -157,8 +180,17 @@ class PacientesController extends Controller
 
     public function addPacienteToTerapeuta(int $id) {
         $paciente = Paciente::findOrFail($id);
+        session()->put('paciente', $paciente->toArray());
         $users = User::where("rol_id","=",1)->get();
 
         return view("pacientes.addPacienteToTerapeuta", compact("paciente", "users"));
     }
+
+    public function asignacionTerapeutas(Request $request)
+    {
+        $paciente = Paciente::find($request->paciente_id);
+        $paciente->users()->sync($request->seleccion);
+        return redirect("/pacientes");
+    }
+
 }

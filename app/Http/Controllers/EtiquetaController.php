@@ -23,7 +23,7 @@ class EtiquetaController extends Controller
 
     public function showAll()
     {
-        return Etiqueta::all();
+        return Etiqueta::all()->sortBy("id");
     }
 
 

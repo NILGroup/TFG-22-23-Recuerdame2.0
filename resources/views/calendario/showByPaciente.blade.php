@@ -23,7 +23,9 @@
             headerToolbar: {
                 left: 'prev,next',
                 center: 'title',
-                right: 'add_event,dayGridMonth,timeGridWeek,timeGridDay,listMonth,today',
+                //right: 'add_event,dayGridMonth,timeGridWeek,timeGridDay,listMonth,today',
+                right: 'add_event,dayGridMonth,dayGridWeek,dayGridDay,listMonth,today',
+
 
             },
 
@@ -76,9 +78,7 @@
 
 <!-- Tu contenido aquí -->
 <div class="container">
-    <div class="container">
-        <div id="calendar">
-        </div>
+    <div id="calendar">
     </div>
 
     <div class="modal fade" id="evento" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="evento" aria-hidden="true">
@@ -113,9 +113,9 @@
                             <label for="obs" class="form-label">Observaciones</label>
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-danger btn-sm d-none">
-                            <input type="submit" formaction="/modificarActividad" id="btnModificar" name="btnModificar" value="Modificar actividad" class="btn btn-warning btn-sm d-none">
-                            <input type="submit" id="btnGuardar" name="btnAccion" value="Registrar" class="btn btn-primary btn-sm">
+                            <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-danger btn-md d-none">
+                            <input type="submit" formaction="/modificarActividad" id="btnModificar" name="btnModificar" value="Modificar actividad" class="btn btn-warning btn-md d-none">
+                            <input type="submit" id="btnGuardar" name="btnAccion" value="Registrar" class="btn btn-primary btn-md">
                         </div>
                     </div>
                 </form>
@@ -126,10 +126,6 @@
 @endsection
 
 @push('scripts')
-
-<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
-
+    @include('layouts.scripts')
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 @endpush

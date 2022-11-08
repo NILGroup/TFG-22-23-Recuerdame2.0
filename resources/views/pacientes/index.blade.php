@@ -8,18 +8,16 @@
     </div>
 
     <div class="row mb-2">
-    <div class="col-12 justify-content-end d-flex">
-    
-    <a href="/cuidadores/crear"><button type="button"  id="mybutton" class="btn btn-primary btn-registro mx-3">Registro cuidador</button></a>
-    <a href="{{route('pacientes.create')}}"><button type="button"  class="btn btn-newpaciente btn-info">Nuevo paciente</i></button></a>
+        <div class="col-12 justify-content-end d-flex">
+            <a href="/pacientes/0/cuidadores/crear"><button type="button"  id="mybutton" class="btn btn-primary btn-registro mx-3">Registro cuidador</button></a>
+            <a href="{{route('pacientes.create')}}"><button type="button"  class="btn btn-newpaciente btn-info">Nuevo paciente</i></button></a>
+        </div>
     </div>
-</div>
 
 <div>
     <?php $i = 1;?>
-    <table class="table table-bordered table-striped table-responsive">
-    <caption>Listado de pacientes</caption>
-        <thead >
+    <table id="tabla" class="table table-bordered table-striped table-responsive">
+        <thead>
             <tr class="bg-primary">
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
@@ -38,15 +36,10 @@
                 <td><a href="/pacientes/{{$paciente->id}}/sesiones" class="link-primary"> {{$paciente->nombre}}</a></td>
                 <td>{{$paciente->apellidos}}</td>
                 <td>
-                <?php  if($paciente->genero == 'H') echo 'Hombre';
-                else if($paciente->genero == 'M') echo 'Mujer'; ?>   
+                    {{$paciente->genero->nombre}}
                 </td>
                 <td>
-                <?php 
-                        $fecha_nacimiento = new DateTime ($paciente->fecha_nacimiento);
-                        $hoy = new DateTime();
-                        $edad = $hoy->diff($fecha_nacimiento);
-                        echo $edad->y ?>   
+                    {{Carbon\Carbon::parse($paciente['fecha_nacimiento'])->age}} 
                 </td>
                 <td class="tableActions">
                     <div class="d-inline">
@@ -56,16 +49,16 @@
                         <form method="post" action="{{ route('pacientes.destroy', $paciente->id) }}"  style="display:inline!important;">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
-                            <button  type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                            <button type="submit" onclick="confirmar(event)" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                         </form>
-                        <a href="/pacientes/{{$paciente->id}}/asignar"><i class="fa-solid fa-users-line text-success tableIcon"></i></a>
+                        <a href="/pacientes/{{$paciente->id}}/asignarTerapeutas"><i class="fa-solid fa-users-line text-success tableIcon"></i></a>
                     </div>
                 </td>
                 <?php   $i++; ?>
             </tr>
         @endforeach
-        
 
+        <caption>Listado de pacientes</caption>
     </table>
 </div>
 
@@ -73,10 +66,34 @@
 @endsection
 
 @push('scripts')
+    @include('layouts.scripts')
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
 
-<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
-
+    <script>
+        function confirmar(e) {
+            if (!confirm('¿Seguro que desea eliminar este paciente?')) {
+                e.preventDefault();
+            }
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#tabla').DataTable({
+                paging: false,
+                info: false,
+                language: { 
+                    search: "_INPUT_",
+                    searchPlaceholder: " Buscar...",
+                    emptyTable: "No hay datos disponibles"
+                },
+                responsive: {
+                    details: {
+                    type: 'column',
+                    target: 'tr'
+                    }
+                },
+                dom : "<<'form-control-sm mr-5' f>>"
+            });
+        });
+    </script>
 @endpush

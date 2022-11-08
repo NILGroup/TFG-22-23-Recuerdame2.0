@@ -4,6 +4,7 @@ namespace App;
 
 use Codedge\Fpdf\Fpdf\Fpdf;
 use File;
+use DateTime;
 
 global $numInforme;
 
@@ -12,7 +13,7 @@ class PDFEvaluacion extends FPDF{
     // Page header
     function Header()
     {
-        $this->Image('../public/img/Marca_recuerdame.png',150,8,50);
+        $this->Image('../public/img/Marca_recuerdame-nobg.png',150,8,50);
         // Arial bold 15
         $this->SetFont('Arial','B',18);
         // Move to the right
@@ -32,7 +33,8 @@ class PDFEvaluacion extends FPDF{
         // Arial italic 8
         $this->SetFont('Arial','I',8);
         // Page number
-        $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+        $pagina = utf8_decode("Página ");
+        $this->Cell(0,10,$pagina.$this->PageNo().'/{nb}',0,0,'C');
     }
 
     function writeTest($pdf, $informeSeguimiento){
@@ -77,7 +79,10 @@ class PDFEvaluacion extends FPDF{
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,7,'Edad: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
-        $pdf->Cell(160,7,' 87',1);
+        $fecha_nacimiento = new DateTime ($paciente->fecha_nacimiento);
+        $hoy = new DateTime();
+        $edad = $hoy->diff($fecha_nacimiento);
+        $pdf->Cell(160,7,' '.$edad->y,1);
         $pdf->Ln();
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,7,'Genero: ',1,0,'L',true);

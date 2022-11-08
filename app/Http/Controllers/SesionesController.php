@@ -7,6 +7,12 @@ use App\Models\Recuerdo;
 use App\Models\Multimedia;
 use App\Models\Paciente;
 use App\Models\Etapa;
+use App\Models\Estado;
+use App\Models\Etiqueta;
+use App\Models\Emocion;
+use App\Models\Categoria;
+use App\Models\PersonaRelacionada;
+use App\Models\Tiporelacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -42,10 +48,22 @@ class SesionesController extends Controller
      */
     public function create()
     {
-        $etapas = Etapa::all();
+        $show = false;
+        $sesion = new Sesion();
+        $recuerdo = new Recuerdo();
         $user = Auth::user();
-        $recuerdos = Recuerdo::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
-        return view("sesiones.create", compact('etapas', 'user', 'recuerdos'));
+        $paciente = Paciente::find(Session::get('paciente')['id']);
+        $personas = $paciente->personasrelacionadas;
+        $recuerdos = Recuerdo::where('paciente_id', $paciente->id)->get();
+        $estados = Estado::all()->sortBy("id");
+        $etiquetas = Etiqueta::all()->sortBy("id");
+        $etapas = Etapa::all()->sortBy("id");
+        $emociones = Emocion::all()->sortBy("id");
+        $categorias = Categoria::all()->sortBy("id");
+        $tipos = Tiporelacion::all()->sortBy("id");
+        $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
+
+        return view("sesiones.create", compact('etapas', 'user', 'tipos', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'sesion', 'recuerdo', 'personas', 'show'));
     }
 
     /**
@@ -62,13 +80,13 @@ class SesionesController extends Controller
              'etapa_id' => $request->etapa_id,
              'objetivo' => $request->objetivo,
              'descripcion' => $request->descripcion,
-             'barreras' => $request->barreras,
-             'facilitadores' => $request->facilitadores,
              'fecha_finalizada' => $request->fecha_finalizada,
              'paciente_id' => $request->paciente_id,
              'user_id' => $request->user_id,
              'respuesta' => $request->respuesta]
         );
+        if(!is_null($request->recuerdos))
+            $sesion->recuerdos()->sync($request->recuerdos);
         return redirect("pacientes/{$sesion->paciente->id}/sesiones");
     }
 
@@ -110,25 +128,38 @@ class SesionesController extends Controller
      */
     public function show($id)
     {
+        //https://youtu.be/g-Y9uiAjOE4
         $sesion = Sesion::findOrFail($id);
-        $etapas = Etapa::all();
+        $etapas = Etapa::all()->sortBy("id");
+        $paciente = $sesion->paciente;
+        $user = $sesion->user;
+        $show = true;
         //throw new \Exception($sesion->multimedias);
-        return view('sesiones.show', compact('sesion', 'etapas'));
+        return view('sesiones.show', compact('sesion', 'etapas', 'paciente', 'user', 'show'));
     }
 
     public function showEditable($id)
     {
+        $show = false;
         $sesion = Sesion::findOrFail($id);
-        $etapas = Etapa::all();
+        $user = Auth::user();
+        $paciente = Paciente::find(Session::get('paciente')['id']);
+        $recuerdos = Recuerdo::where('paciente_id', $paciente->id)->get();
+        $estados = Estado::all()->sortBy("id");
+        $etiquetas = Etiqueta::all()->sortBy("id");
+        $etapas = Etapa::all()->sortBy("id");
+        $emociones = Emocion::all()->sortBy("id");
+        $categorias = Categoria::all()->sortBy("id");
+        $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
         //throw new \Exception($sesion->multimedias);
-        return view('sesiones.edit', compact('sesion', 'etapas'));
+        return view('sesiones.edit', compact('sesion', 'etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'show'));
     }
 
     public function showByPaciente($idPaciente)
     {
         //https://www.youtube.com/watch?v=y3p10h_00A8&ab_channel=CodeStepByStep
 
-        $paciente = Paciente::find($idPaciente);
+        $paciente = Paciente::findOrFail($idPaciente);
         session()->put('paciente', $paciente->toArray());
         $sesiones = $paciente->sesiones;
         return view('sesiones.showByPaciente', compact('paciente', 'sesiones'));
@@ -207,10 +238,11 @@ class SesionesController extends Controller
              'respuesta' => $request->respuesta,
              'observaciones' => $request->observaciones
             ]);
-        return redirect("/recuerdos/crearAndVolverEditar");
+        return redirect("/pacientes/{id}/recuerdos/crearAndVolverEditar");
     }
     
     public function updateAndSeleccionarRecuerdos(Request $request){
+        
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->id],
             ['fecha' => $request->fecha,
@@ -225,7 +257,7 @@ class SesionesController extends Controller
              'respuesta' => $request->respuesta,
              'observaciones' => $request->observaciones
             ]);
-        return redirect("/recuerdos/agregarAndVolverEditar");
+        return redirect("/pacientes/{id}/recuerdos/agregarAndVolverEditar");
     }
 
 }

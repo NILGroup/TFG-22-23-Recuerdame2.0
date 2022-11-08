@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('apellidos');
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('usuario');
+            $table->string('telefono')->nullable();
+            $table->string('localidad')->nullable();
+            $table->string('parentesco')->nullable();
             $table->string('password');
             $table->integer('rol_id');
             $table->rememberToken();

@@ -23,12 +23,12 @@ return new class extends Migration
             $table->date("mental_fecha");
             $table->integer("cdr");
             $table->date("cdr_fecha");
-            $table->string("diagnostico");
-            $table->string("observaciones")->nullable();
             $table->string("nombre_escala")->nullable();
             $table->integer("escala")->nullable();
             $table->date("fecha_escala")->nullable();
-            $table->timestamps();
+            $table->string("diagnostico");
+            $table->string("observaciones")->nullable();
+            
             $table->foreign("paciente_id")->references("id")->on("pacientes")->onDelete("cascade");
         });
     }

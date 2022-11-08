@@ -17,12 +17,15 @@ return new class extends Migration
             $table->id();
             $table->string("nombre");
             $table->string("apellidos");
-            $table->string("telefono");
+            $table->string("telefono")->nullable();
             $table->string("ocupacion");
             $table->string("email");
-            $table->unsignedBigInteger("tiporelacion_id")->nullable();
+            $table->string("localidad");
+            $table->string("contacto");
+            $table->text("observaciones")->nullable();
+            $table->unsignedBigInteger("tiporelacion_id");
+            $table->string("tipo_custom")->nullable();
             $table->unsignedBigInteger("paciente_id");
-            $table->timestamps();
 
             $table->foreign("tiporelacion_id")->references("id")->on("tiporelacions")->onDelete("cascade");
             $table->foreign("paciente_id")->references("id")->on("pacientes")->onDelete("cascade");

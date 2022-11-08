@@ -4,6 +4,7 @@ namespace App;
 
 use Codedge\Fpdf\Fpdf\Fpdf;
 use File;
+use DateTime;
 
 global $numInforme;
 
@@ -11,7 +12,7 @@ class PDFSesion extends FPDF{
     // Page header
     function Header()
     {
-        $this->Image('../public/img/Marca_recuerdame.png',150,8,50);
+        $this->Image('../public/img/Marca_recuerdame-nobg.png',150,8,50);
         // Arial bold 15
         $this->SetFont('Arial','B',18);
         // Move to the right
@@ -31,7 +32,8 @@ class PDFSesion extends FPDF{
         // Arial italic 8
         $this->SetFont('Arial','I',8);
         // Page number
-        $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+        $pagina = utf8_decode("Página ");
+        $this->Cell(0,10,$pagina.$this->PageNo().'/{nb}',0,0,'C');
     }
     
     function writePatient($pdf, $paciente){
@@ -44,7 +46,10 @@ class PDFSesion extends FPDF{
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,7,'Edad: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
-        $pdf->Cell(160,7,' 87',1);
+        $fecha_nacimiento = new DateTime ($paciente->fecha_nacimiento);
+        $hoy = new DateTime();
+        $edad = $hoy->diff($fecha_nacimiento);
+        $pdf->Cell(160,7,' '.$edad->y,1);
         $pdf->Ln();
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,7,utf8_decode('Género: '),1,0,'L',true);
@@ -91,24 +96,6 @@ class PDFSesion extends FPDF{
         $pdf->MultiCell(0,7,utf8_decode($sesion->descripcion),1);
         $pdf->Ln();
 
-        if($sesion->facilitadores != null){
-            $pdf->SetFont('Times','B',12);
-            $pdf->Cell(0,7,'Facilitadores',1,0,'L',true);
-            $pdf->Ln();
-            $pdf->SetFont('Times','',12);
-            $pdf->MultiCell(0,7,utf8_decode($sesion->facilitadores),1);
-            $pdf->Ln();
-        }
-
-        if($sesion->barreras != null){
-            $pdf->SetFont('Times','B',12);
-            $pdf->Cell(0,7,'Barreras',1,0,'L',true);
-            $pdf->Ln();
-            $pdf->SetFont('Times','',12);
-            $pdf->MultiCell(0,7,utf8_decode($sesion->barreras),1);
-            $pdf->Ln();
-        }
-
     }
 
     function writeInformeSesion($pdf, $informeSesion){
@@ -125,6 +112,15 @@ class PDFSesion extends FPDF{
         $pdf->SetFont('Times','',12);
         $pdf->MultiCell(0,7,utf8_decode($informeSesion->respuesta),1);
         $pdf->Ln();
+
+        if($informeSesion->Respuesta != null){
+            $pdf->SetFont('Times','B',12);
+            $pdf->Cell(0,7,'Respuesta',1,0,'L',true);
+            $pdf->Ln();
+            $pdf->SetFont('Times','',12);
+            $pdf->MultiCell(0,7,utf8_decode($informeSesion->Respuesta),1);
+            $pdf->Ln();
+        }
         
         if(!empty($informeSesion->observaciones)){
             $pdf->SetFont('Times','B',12);
@@ -135,6 +131,23 @@ class PDFSesion extends FPDF{
             $pdf->Ln();
         }
 
+        if($informeSesion->facilitadores != null){
+            $pdf->SetFont('Times','B',12);
+            $pdf->Cell(0,7,'Facilitadores',1,0,'L',true);
+            $pdf->Ln();
+            $pdf->SetFont('Times','',12);
+            $pdf->MultiCell(0,7,utf8_decode($informeSesion->facilitadores),1);
+            $pdf->Ln();
+        }
+
+        if($informeSesion->barreras != null){
+            $pdf->SetFont('Times','B',12);
+            $pdf->Cell(0,7,'Barreras',1,0,'L',true);
+            $pdf->Ln();
+            $pdf->SetFont('Times','',12);
+            $pdf->MultiCell(0,7,utf8_decode($informeSesion->barreras),1);
+            $pdf->Ln();
+        }
     }
 
     function pdfBody($pdf, $paciente, $sesion, $usuario){

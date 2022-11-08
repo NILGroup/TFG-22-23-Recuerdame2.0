@@ -38,10 +38,12 @@ class PersonasRelacionadasController extends Controller
      * Redirecciona a la vista de crear personarelacionada pasando al paciente concreto al que queremos añadirla
      */
 
-    public function createByPaciente(int $idPaciente)
+    public function create(int $idPaciente)
     {
-        $tipos = Tiporelacion::all();
-        return view("personasrelacionadas.create", compact("idPaciente", "tipos"));
+        $show = false;
+        $tipos = Tiporelacion::all()->sortBy("id");
+        $persona = new Personarelacionada();
+        return view("personasrelacionadas.create", compact("idPaciente", "tipos", "persona", "show"));
     }
 
     /**
@@ -51,19 +53,6 @@ class PersonasRelacionadasController extends Controller
     public function store(Request $request)
     {
 
-        /*
-        $validate = $request->validate([
-
-            "nombre" => "required",
-            "apellidos"  => "required",
-            "telefono"  => "required",
-            "ocupacion" => "required",
-            "email" => "required|unique:personarelacionadas",
-            "tiporelacion_id"  => "required",
-            "paciente_id" => "required"
-
-        ]);*/
-
         Personarelacionada::create([
 
             "nombre" => $request->nombre,
@@ -71,7 +60,11 @@ class PersonasRelacionadasController extends Controller
             "telefono" => $request->telefono,
             "ocupacion" => $request->ocupacion,
             "email" => $request->email,
+            "localidad" => $request->localidad,
+            "contacto" => $request->contacto,
+            "observaciones" => $request->observaciones,
             "tiporelacion_id" => $request->tiporelacion_id,
+            "tipo_custom" => $request->tipo_custom,
             "paciente_id" => $request->paciente_id
 
         ]);
@@ -83,8 +76,6 @@ class PersonasRelacionadasController extends Controller
     /*Como el store pero no devuelve a una vista*/
     public function storeNoView(Request $request)
     {
-
-
         $persona = Personarelacionada::create([
 
             "nombre" => $request->nombre,
@@ -92,15 +83,18 @@ class PersonasRelacionadasController extends Controller
             "telefono" => $request->telefono,
             "ocupacion" => $request->ocupacion,
             "email" => $request->email,
+            "localidad" => $request->localidad,
+            "contacto" => $request->contacto,
+            "observaciones" => $request->observaciones,
             "tiporelacion_id" => $request->tiporelacion_id,
+            "tipo_custom" => $request->tipo_custom,
             "paciente_id" => $request->paciente_id
 
         ]);
         
-        $paciente = Paciente::find($persona->paciente_id);
-        
-        return $paciente->personasrelacionadas; //No es de las personas, es del recuerdo
-        //return $persona; //falta relacionarlo con el recuerdo
+        $persona->tiporelacion_id = Tiporelacion::find($persona->tiporelacion_id)->nombre;
+
+        return $persona; //falta relacionarlo con el recuerdo
     }
     /**
      * Devuelve una personarelacionada concreta
@@ -108,8 +102,11 @@ class PersonasRelacionadasController extends Controller
 
     public function show(int $id)
     {
+        $show = true;
+        $tipos = Tiporelacion::all()->sortBy("id");
         $persona = Personarelacionada::findOrFail($id);
-        return view("personasrelacionadas.show", compact("persona"));
+        $idPaciente = $persona->paciente_id;
+        return view("personasrelacionadas.show", compact("persona", "tipos", "show", "idPaciente"));
     }
 
 
@@ -119,23 +116,22 @@ class PersonasRelacionadasController extends Controller
 
     public function edit(int $id)
     {
-        $tipos = Tiporelacion::all();
+        $show = false;
+        $tipos = Tiporelacion::all()->sortBy("id");
         $persona = Personarelacionada::findOrFail($id);
-        return view("personasrelacionadas.edit", compact("persona","tipos"));
+        $idPaciente = $persona->paciente_id;
+        return view("personasrelacionadas.edit", compact("persona","tipos", "show", "idPaciente"));
     }
 
     /**
      * Actualiza una persona relacionada concreta y redirecciona a la lista de personasrelacionadas
      */
 
-    public function update(Request $request, int $id)
+    public function update(Request $request)
     {
-        
-        $persona = Personarelacionada::findOrFail($id);
+        $persona = Personarelacionada::findOrFail($request->id);
         $persona->update($request->all());
-        return redirect("/pacientes/$persona->paciente_id/personas");
-
-
+        return redirect("/personas/$persona->id");
     }
 
     /**

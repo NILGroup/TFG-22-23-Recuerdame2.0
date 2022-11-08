@@ -1,12 +1,17 @@
-body {
-    font-family: 'Nunito', sans-serif;
+html {
+    scroll-behavior: smooth;
 }
 
+body {
+    overflow-x: hidden;
+    font-family: 'Nunito', sans-serif;
+}
+#app {
+    width: 100%;
+}
 footer {
-    background-color: #fef9e7 !important;
     position:fixed;
     bottom:0;
-    height:50px;
     width: 100%;
 }
 .yellowbg {
@@ -15,6 +20,12 @@ footer {
 .lightbluebg {
     background-color: #e5f1f1 !important;
 }
+
+.scrollUp{    
+    font-size:3em;
+    z-index: 999;
+}
+
 /*Cuerpo del cuadrado*/
 .cuerpo {
 
@@ -238,7 +249,7 @@ footer {
     overflow: hidden;
     width: 150px;
     height: auto;
-    position: relative;
+    /*position: relative;*/
     display: block;
     z-index: 10;
 }
@@ -305,3 +316,31 @@ footer {
     height: 10px !important;
     position: relative !important;
 }
+
+  .selectBox {
+    position: relative;
+  }
+    
+  .overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  .checkboxes {
+    width: 100%;
+    background-color: white;
+    display: none;
+    border: 1px #dadada solid;
+    margin-bottom: 10px;
+  }
+  
+  .checkboxes label {
+    display: block;
+  }
+  
+  .checkboxes label:hover {
+    background-color: #1e90ff;
+  }

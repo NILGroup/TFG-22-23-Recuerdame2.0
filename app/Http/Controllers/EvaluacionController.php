@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evaluacion;
 use App\Models\Paciente;
+use App\Models\Sesion;
 use Illuminate\Http\Request;
 
 class EvaluacionController extends Controller
@@ -19,13 +20,23 @@ class EvaluacionController extends Controller
     }
     
     public function showByPaciente($idPaciente){
-        $evaluaciones = Evaluacion::where('paciente_id',$idPaciente)->get();
         $paciente = Paciente::find($idPaciente);
+        $evaluaciones = $paciente->evaluaciones->sortBy("fecha");
+
+        $fechaAnterior = \Carbon\Carbon::parse($paciente->fecha_inscripcion);
+        foreach($evaluaciones as $evaluacion){
+            $fechaActual = \Carbon\Carbon::parse($evaluacion->fecha)->addDays(1);
+            $sesiones = Sesion::whereBetween("fecha_finalizada", [$fechaAnterior, $fechaActual])->get();
+            $evaluacion->numSesiones = count($sesiones);
+            $fechaAnterior=$fechaActual;
+        }
         return view("evaluaciones.showByPaciente", compact('evaluaciones', 'paciente'));
     }
     public function generarInforme($idPaciente){
         $paciente = Paciente::find($idPaciente);
-        return view('evaluaciones.create', compact('paciente'));
+        $evaluacion = new Evaluacion();
+        $show = false;
+        return view('evaluaciones.create', compact('paciente', 'evaluacion', 'show'));
     }
 
     public function store(Request $request){
@@ -41,22 +52,28 @@ class EvaluacionController extends Controller
              'cdr' => $request->cdr,
              'cdr_fecha' => $request->cdr_fecha,
              'diagnostico' => $request->diagnostico,
-             'observaciones' => $request->observaciones
+             'observaciones' => $request->observaciones,
+             'nombre_escala' => $request->nombre_escala,
+             'escala' => $request->escala,
+             'fecha_escala' => $request->fecha_escala
             ]);
-        if($request->nombre_escala != null){
-            $evaluacion->nombre_escala = $request->nombre_escala;
-            $evaluacion->escala = $request->escala;
-            $evaluacion->fecha_escala = $request->fecha_escala;
-            $evaluacion->save();
-        }
-        return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones");
+        return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones/$evaluacion->id/ver");
+    }
+
+    public function show($id, $idE)
+    {
+        $show = true;
+        $evaluacion = Evaluacion::findOrFail($idE);
+        $paciente = $evaluacion->paciente;
+        return view('evaluaciones.show', compact('evaluacion', 'paciente', 'show'));
     }
 
     public function showEditable($id, $idE)
     {
+        $show = false;
         $evaluacion = Evaluacion::findOrFail($idE);
         $paciente = $evaluacion->paciente;
-        return view('evaluaciones.edit', compact('evaluacion', 'paciente'));
+        return view('evaluaciones.edit', compact('evaluacion', 'paciente', 'show'));
     }
     
     public function destroy($id){

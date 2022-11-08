@@ -23,7 +23,7 @@ class EtapaController extends Controller
 
     public function showAll()
     {     
-        return Etapa::all();
+        return Etapa::all()->sortBy("id");
     }
   
 

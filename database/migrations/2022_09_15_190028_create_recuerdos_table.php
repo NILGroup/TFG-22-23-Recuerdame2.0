@@ -17,25 +17,15 @@ return new class extends Migration
             $table->id();
             $table->date('fecha');
             $table->string('nombre');
-            $table->string('descripcion')->nullable();
+            $table->longText('descripcion')->nullable();
             $table->string('localizacion')->nullable();
-            //id_etapa
-            $table->unsignedBigInteger('etapa_id');
-            //id_categoria
-            $table->unsignedBigInteger('categoria_id')->nullable();
-            //id_emocion
-            $table->unsignedBigInteger('emocion_id')->nullable();
-            //id_estado
-            $table->unsignedBigInteger('estado_id')->nullable();
-            //id_etiqueta
-            $table->unsignedBigInteger('etiqueta_id')->nullable();
-
             $table->integer('puntuacion');
-
-            //id_paciente
             $table->unsignedBigInteger('paciente_id');
-
-            $table->timestamps();
+            $table->unsignedBigInteger('etapa_id');
+            $table->unsignedBigInteger('categoria_id')->nullable();
+            $table->unsignedBigInteger('emocion_id')->nullable();
+            $table->unsignedBigInteger('estado_id')->nullable();
+            $table->unsignedBigInteger('etiqueta_id')->nullable();
 
             $table->foreign('etapa_id')->references('id')->on('etapas')->onDelete("cascade");
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete("cascade");

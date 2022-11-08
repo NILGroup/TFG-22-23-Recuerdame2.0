@@ -8,10 +8,12 @@
         <hr class="lineaTitulo">
     </div>
     <form method="post" action="/personas">
+        {{csrf_field()}}
+        @include('personasrelacionadas.listaItems')
 
+        <!--
         <input type="hidden" name="paciente_id" value="{{$idPaciente}}">
 
-        {{csrf_field()}}
 
         <div class="row form-group justify-content-between">
             <div class="row col-sm-12 col-md-6 col-lg-5">
@@ -33,9 +35,9 @@
 
         <div class="row form-group justify-content-between">
            <div class="row col-sm-12 col-md-6 col-lg-5">
-                <label for="telefono" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Teléfono<span class="asterisco">*</span></label>
+                <label for="telefono" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Teléfono</label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
-                    <input type="text" name="telefono" class="form-control form-control-sm" id="telefono" required>
+                    <input type="text" name="telefono" class="form-control form-control-sm" id="telefono">
                    
                 </div>
             </div>
@@ -53,14 +55,19 @@
                 <label for="email" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Email<span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
                     <input type="text" name="email" class="form-control form-control-sm" id="email" required>
-                   
+                </div>
+            </div>
+            <div class="row col-sm-12 col-md-6 col-lg-7">
+                <label for="localidad" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Localidad<span class="asterisco">*</span></label>
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <input required type="text" name="localidad" class="form-control form-control-sm" id="localidad">   
                 </div>
             </div>
         </div>
 
         <div class="row form-group justify-content-between">
             <div class="row col-sm-12 col-md-6 col-lg-5">
-                <label for="tipo" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Tipo relación</label>
+                <label for="tipo" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Tipo relación<span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
                     <select class="form-select form-select-sm" id="tiporelacion_id" name="tiporelacion_id" required>
                         @foreach ($tipos as $tipo)
@@ -70,11 +77,22 @@
                     </select>
                 </div>
             </div>
+            <div class="row col-sm-12 col-md-6 col-lg-7">
+                <label for="contacto" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Contacto<span class="asterisco">*</span></label>
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <input required type="text" name="contacto" class="form-control form-control-sm" id="contacto">   
+                </div>
+            </div>
         </div>
 
+        <div class="mt-3 mb-3">
+            <label for="observaciones" class="form-label col-form-label-sm">Observaciones</label>
+            <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3"></textarea>
+        </div>
+        -->
         <div class="col-12">
-            <button type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary btn-sm">Guardar</button>
-            <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary btn-sm">Atrás</button></a>
+            <button type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Guardar</button>
+            <a href="/pacientes/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary">Atrás</button></a>
         </div>
     </form>
 </div>
@@ -83,10 +101,16 @@
 @endsection
 
 @push('scripts')
-
-<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
-
+    @include('layouts.scripts')
+    <script>
+        function especifique(){
+            let select = document.getElementById("tiporelacion_id")
+            if (select.value === "7"){
+                $("#tipo_custom").show()
+            }
+            else{
+                $("#tipo_custom").hide()
+            }
+        }
+    </script>
 @endpush

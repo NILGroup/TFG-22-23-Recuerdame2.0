@@ -4,6 +4,8 @@ namespace App;
 
 use Codedge\Fpdf\Fpdf\Fpdf;
 use File;
+use DateTime;
+use Symfony\Component\Console\Logger\ConsoleLogger;
 
 global $numInforme;
 
@@ -12,16 +14,47 @@ class PDFHistoria extends FPDF{
     // Page header
     function Header()
     {
-        $this->Image('../public/img/Marca_recuerdame.png',150,8,50);
+        $this->Image('../public/img/Marca_recuerdame-nobg.png',150,8,50);
         // Arial bold 15
         $this->SetFont('Arial','B',18);
         // Move to the right
         //$this->Cell(80);
         // Title
-        $this->Cell(190,11,'Historia de vida #'.$GLOBALS['numInforme'],0,1);
+        $this->Cell(190,11,'Historia de vida',0,1);
         $this->Line(10,25,200,25);
         // Line break
         $this->Ln(10);
+    }
+
+    function writeRecuerdos($pdf, $listadoRecuerdos){
+        $size = 7*8 +12; //size que ocupa los datos del paciente en primera página
+  
+        foreach($listadoRecuerdos as $row) {
+            $pdf->SetFont('Times','B',12);
+            $pdf->Cell(160,7,iconv('UTF-8', 'windows-1252',$row->nombre));
+            $fechaFormat = $row->fecha;
+            $newDate = date("d/m/Y", strtotime($fechaFormat));
+            $pdf->Cell(160,7,$newDate);
+            $pdf->Ln(7);
+            $size+= 7*3;
+            $pdf->SetFont('Times','',12);
+            $pdf->MultiCell(0,7,iconv('UTF-8', 'windows-1252', $row->descripcion));
+            $pdf->Ln(7);
+            $size+= 7*2;
+    
+            $listaMultimedia = $row->multimedias;
+            foreach ($listaMultimedia as $multimedia) {
+                
+                if($size+35+7 > 279) {
+                    $pdf->addPage(); //297 es el alto de un A4, 18 ocupa el footer 287-18=279
+                    $size=0;
+                }
+                $image = "../public/img/" . $multimedia->fichero;
+                $pdf->MultiCell(0,35,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 40));
+                $pdf->Ln(12);
+                $size+= 35+12;
+            }
+        }
     }
 
     // Page footer
@@ -31,54 +64,27 @@ class PDFHistoria extends FPDF{
         $this->SetY(-15);
         // Arial italic 8
         $this->SetFont('Arial','I',8);
-        // Page number
-        $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+        // Page number   
+        $pagina = utf8_decode("Página ");
+        $this->Cell(0,10,$pagina.$this->PageNo().'/{nb}',0,0,'C');
     }
 
-    function writeTest($pdf, $informeSeguimiento){
-        $pdf->SetFont('Times','B',12);
-        $pdf->SetFillColor(170);
-        $pdf->Cell(0,7,'Test realizados al usuario',1,0,'C',true);
-        $pdf->Ln();
-        $pdf->SetFillColor(220);
-        $pdf->Cell(50,7,'Nombre del test',1,0,'C',true);
-        $pdf->Cell(70,7,'Fecha de test',1,0,'C',true);
-        $pdf->Cell(70,7,'Resutado/valor',1,0,'C',true);
-        $pdf->Ln();
-        $pdf->SetFont('Times','',12);
-        $pdf->Cell(50,7,'GDS ',1);
-        $pdf->Cell(70,7,$informeSeguimiento->gds_fecha,1,0,'C');
-        $pdf->Cell(70,7,$informeSeguimiento->gds,1,0,'C');
-        $pdf->Ln();
-        $pdf->Cell(50,7,'Test de Lobo ',1);
-        $pdf->Cell(70,7,$informeSeguimiento->mental_fecha,1,0,'C');
-        $pdf->Cell(70,7,$informeSeguimiento->mental,1,0,'C');
-        $pdf->Ln();
-        $pdf->Cell(50,7,'CDR ',1);
-        $pdf->Cell(70,7,$informeSeguimiento->cdr_fecha,1,0,'C');
-        $pdf->Cell(70,7,$informeSeguimiento->cdr,1,0,'C');
-        $pdf->Ln();
-        if($informeSeguimiento->nombre_escala != null){
-            $pdf->Cell(50,7,utf8_decode($informeSeguimiento->nombre_escala),1);
-            $pdf->Cell(70,7,$informeSeguimiento->fecha_escala,1,0,'C');
-            $pdf->Cell(70,7,$informeSeguimiento->escala,1,0,'C');
-            $pdf->Ln();
-        }
-        $pdf->Ln(5);
-    }
-    
+        
     function writePatient($pdf, $paciente){
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,7,'Nombre: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
         $s = utf8_decode(' ' . $paciente->nombre . ' ' . $paciente->apellidos);
         $pdf->Cell(160,7, $s ,1);
-        $pdf->Ln();
+        $pdf->Ln(7);
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,7,'Edad: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
-        $pdf->Cell(160,7,' 87',1);
-        $pdf->Ln();
+        $fecha_nacimiento = new DateTime ($paciente->fecha_nacimiento);
+        $hoy = new DateTime();
+        $edad = $hoy->diff($fecha_nacimiento);
+        $pdf->Cell(160,7,' '.$edad->y,1);
+        $pdf->Ln(7);
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,7,'Genero: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
@@ -91,45 +97,32 @@ class PDFHistoria extends FPDF{
         $pdf->Ln(12);
     }
     
-    function pdfBody($pdf, $informeSeguimiento, $paciente){
+    function fechaHoy($pdf){ 
+        $fecha = utf8_decode('Fecha de generación del documento: ');
+        $hoy = date('d/m/y');
+        $fecha .= $hoy;
+        $pdf->Cell(0,7,$fecha);       
+        $pdf->Ln(7);
+    }
+
+    function pdfBody($pdf,$paciente, $listadoRecuerdos){
         //$pdf->Cell(0,10,'Fecha del informe: '.$informeSeguimiento->getFecha(),0,1);
         // Colors, line width and bold font
         $pdf->SetFillColor(220);
-    
+
+        $this->fechaHoy($pdf);
+
         $pdf->SetFont('Times','B',15);
         $pdf->Cell(0,7,'Datos del usuario ');
         $pdf->Ln(9);
-    
+        
         $this->writePatient($pdf, $paciente);
         
         $pdf->SetFont('Times','B',15);
-        $pdf->Cell(0,7,'Datos del Informe ');
+        $pdf->Cell(0,7,'Recuerdos ');
         $pdf->Ln(9);
-    
-        $pdf->SetFont('Times','B',12);
-        $pdf->Cell(50,7,"Fecha del informe:",1,0,'L',true);
-        $pdf->SetFont('Times','',12);
-        $pdf->Cell(140,7,$informeSeguimiento->fecha,1,0,'C');
-        $pdf->Ln(12);
-    
-        $this->writeTest($pdf, $informeSeguimiento);
-    
-        $pdf->SetFillColor(170);
-        $pdf->SetFont('Times','B',12);
-        $pdf->Cell(0,7,'Diagnostico',1,0,'L',true);
-        $pdf->Ln();
-        $pdf->SetFont('Times','',12);
-        $pdf->MultiCell(0,7,utf8_decode($informeSeguimiento->diagnostico),1);
-        $pdf->Ln();
-    
-        if($informeSeguimiento->observaciones != null){
-            $pdf->SetFont('Times','B',12);
-            $pdf->Cell(0,7,'Observaciones',1,0,'L',true);
-            $pdf->Ln();
-            $pdf->SetFont('Times','',12);
-            $pdf->MultiCell(0,7,utf8_decode($informeSeguimiento->observaciones),1);
-            $pdf->Ln();
-        }
+       
+        $this->writeRecuerdos($pdf, $listadoRecuerdos);
         
     }
 }

@@ -17,14 +17,16 @@ return new class extends Migration
             $table->id();
             $table->string("nombre");
             $table->string("apellidos");
-            $table->char("genero");
+            $table->date("fecha_nacimiento");
             $table->string("lugar_nacimiento");
             $table->string("nacionalidad");
-            $table->date("fecha_nacimiento");
-            $table->string("tipo_residencia");
+            $table->string("ocupacion");
             $table->string("residencia_actual");
-            $table->integer("cuidador_id")->nullable();
-            $table->timestamps();
+            $table->date("fecha_inscripcion");
+            $table->integer("residencia_id");
+            $table->integer("situacion_id");
+            $table->integer("estudio_id");
+            $table->integer("genero_id");
         });
     }
 

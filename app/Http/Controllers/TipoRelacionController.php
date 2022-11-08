@@ -24,7 +24,7 @@ class TipoRelacionController extends Controller
      */
     public function index()
     {
-        return Tiporelacion::all();
+        return Tiporelacion::all()->sortBy("id");
     }
 
    
@@ -37,6 +37,12 @@ class TipoRelacionController extends Controller
     public function show(int $id)
     {
         return Tiporelacion::findOrFail($id);
+    }
+
+    public function storeNoView(Request $request){
+
+        Tiporelacion::create(["nombre" => $request->nombre]);
+
     }
 
    

@@ -8,17 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Paciente extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
         "nombre",
         "apellidos",
-        "genero",
         "lugar_nacimiento",
         "nacionalidad",
         "fecha_nacimiento",
-        "tipo_residencia",
+        "ocupacion",
         "residencia_actual",
-        "cuidador_id"
+        "fecha_inscripcion",
+        "genero_id",
+        "residencia_id",
+        "estudio_id",
+        "situacion_id"
     ];
 
     public function actividades(){
@@ -41,8 +45,20 @@ class Paciente extends Model
         return $this->hasMany(Personarelacionada::class);
     }
 
-    public function cuidador(){
-        return $this->hasOne(User::class);
+    public function residencia(){
+        return $this->belongsTo(Residencia::class);
+    }
+    
+    public function situacion(){
+        return $this->belongsTo(Situacion::class);
+    }
+    
+    public function genero(){
+        return $this->belongsTo(Genero::class);
+    }
+    
+    public function estudio(){
+        return $this->belongsTo(Estudio::class);
     }
 
     public function users(){
