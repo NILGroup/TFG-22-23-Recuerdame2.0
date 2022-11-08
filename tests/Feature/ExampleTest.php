@@ -20,15 +20,12 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(302);
     }
+
     /** @test */
     public function pruebaBBDD()
     {
-        $this->assertDatabaseHas('rols', ["id" => 1, "nombre" => "Terapeuta"]);
-    }
-
-    /** @test */
-    public function esteTestFalla()
-    {
-        $this->assertTrue(false);
+        $rol = Rol::create(["nombre" => "rolDePrueba"]);
+        $response = Rol::find(1);
+        $this->assertTrue($response->is($rol));
     }
 }
