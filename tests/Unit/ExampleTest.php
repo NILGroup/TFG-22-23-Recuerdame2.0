@@ -15,4 +15,10 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+    
+    public function pruebaBBDD()
+    {
+        $response = Rol::find(1);
+        assertTrue(!is_null($response));
+    }
 }
