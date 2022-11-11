@@ -47,7 +47,7 @@
         <div class="col-sm-auto col-md-auto col-lg-auto">
             <div class="range-wrap">
                 <div class="range-value" id="rangeV"></div>
-                <input type="range" class="form-range puntuacion" id="puntuacion" name="puntuacion" min="0" max="10" step="1" value="puntuacion">
+                <input type="range" class="form-range puntuacion" id="puntuacion" name="puntuacion" min="0" max="10" step="1" value="puntuacion" @if($show) disabled @endif>
             </div>
         </div>
         <div class="col mx-auto">10</div>
@@ -118,7 +118,9 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
                 <th scope="col">Tipo de relación/parentesco</th>
+                @if($show)
                 <th scope="col"></th>
+                @endif
             </tr>
         </thead>
         <tbody id="divPersonas">
@@ -130,9 +132,11 @@
                 <td>{{$persona->apellidos}}</td>
                 <td>{{$persona->tiporelacion_id}}</td>
                 <input type="hidden" value={{$persona->id}}>
+                @if($show)
                 <td class="tableActions">
                     <a href="{{route('personas.show', $persona->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                 </td>
+                @endif
             </tr>
             <?php $n++ ?>
             @endforeach
@@ -165,3 +169,23 @@
     </div>
     @endforeach
 </div>
+
+@push('styles')
+<link rel="stylesheet" href="/css/slider.css">
+@endpush
+@push('scripts')
+<script>
+        const
+            range = document.getElementById('puntuacion'),
+            rangeV = document.getElementById('rangeV'),
+            setValue = () => {
+                const
+                    newValue = Number((range.value - range.min) * 100 / (range.max - range.min)),
+                    newPosition = 10 - (newValue * 0.2);
+                rangeV.innerHTML = `<span>${range.value}</span>`;
+                rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
+            };
+        document.addEventListener("DOMContentLoaded", setValue);
+        range.addEventListener('input', setValue);
+    </script>
+    @endpush
