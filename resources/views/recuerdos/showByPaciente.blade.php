@@ -44,9 +44,21 @@
                 <td><a href="/recuerdo/{{$recuerdo->id}}">{{$recuerdo->nombre}}</a></td>
                 <td>{{$recuerdo->fecha}}</td>
                 <td>{{$recuerdo->etapa->nombre}}</td>
+                @if(!is_null($recuerdo->categoria))
                 <td>{{$recuerdo->categoria->nombre}}</td>
+                @else
+                <td>Sin categoría</td>
+                @endif
+                @if(!is_null($recuerdo->estado))
                 <td>{{$recuerdo->estado->nombre}}</td>
+                @else
+                <td>Sin estado</td>
+                @endif
+                @if(!is_null($recuerdo->etiqueta))
                 <td>{{$recuerdo->etiqueta->nombre}}</td>
+                @else
+                <td>Sin etiqueta</td>
+                @endif
                 <td class="tableActions">
                     <a href="/recuerdo/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                     @if (Auth::user()->rol_id == 1)
