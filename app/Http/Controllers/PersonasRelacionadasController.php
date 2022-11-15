@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class PersonasRelacionadasController extends Controller
 {
+    
     /**
      * Create a new controller instance.
      *
@@ -16,7 +17,7 @@ class PersonasRelacionadasController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'role', 'asignarPaciente']);
     }
 
     /**

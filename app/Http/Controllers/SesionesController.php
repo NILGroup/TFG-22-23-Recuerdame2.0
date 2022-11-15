@@ -27,7 +27,7 @@ class SesionesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role', 'isTerapeuta']);
+        $this->middleware(['auth', 'role', 'asignarPaciente']);
     }
     
     /**
@@ -160,7 +160,6 @@ class SesionesController extends Controller
         //https://www.youtube.com/watch?v=y3p10h_00A8&ab_channel=CodeStepByStep
 
         $paciente = Paciente::findOrFail($idPaciente);
-        session()->put('paciente', $paciente->toArray());
         $sesiones = $paciente->sesiones;
         return view('sesiones.showByPaciente', compact('paciente', 'sesiones'));
     }

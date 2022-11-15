@@ -23,11 +23,8 @@ class RolMiddleware
     {
         //Asignamos a un cuidador su paciente relacionado si no lo tenía ya
         $user = Auth::user();
-        if($user->rol_id == 2 && !$request->session()->has('paciente')){
-            $paciente = Paciente::where('cuidador_id',$user->id)->get();
-            $request->session()->put('paciente', $paciente->toArray()[0]);
-            $id = $paciente[0]->id;
-            return redirect()->route('pacientes.show', ['paciente'=>$id]);
+        if($user->rol_id == 2){
+            return redirect('/pacientes');
         }
         return $next($request);
     }

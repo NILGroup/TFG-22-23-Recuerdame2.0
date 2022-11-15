@@ -14,7 +14,7 @@ class InformesSesionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role', 'isTerapeuta']);
+        $this->middleware(['auth', 'role', 'asignarPaciente']);
     }
     
     public function showByPaciente($idPaciente){

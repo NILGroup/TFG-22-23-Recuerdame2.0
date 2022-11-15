@@ -23,9 +23,7 @@ class PacientesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role']);
-        $this->middleware('isTerapeuta')->except('show');
-        $this->middleware('esCuidadorDe')->only('show');
+        $this->middleware(['auth', 'asignarPaciente']);
     }
     
     /**
@@ -37,7 +35,6 @@ class PacientesController extends Controller
         //Sacamos a todos los pacientes de la bd
         $idTerapeuta = Auth::id();
         $pacientes = User::find($idTerapeuta)->pacientes;
-        session()->forget('paciente');
         //Redireccionamos a la vista devolviendo la lista de pacientes
         return view("pacientes.index", compact("pacientes"));
 
@@ -118,8 +115,6 @@ class PacientesController extends Controller
         $personas = $paciente->personasrelacionadas;
         $evaluaciones = $paciente->evaluaciones;
         $cuidadores = $paciente->users->where('rol_id', 2);
-        //throw new \Exception(json_encode($cuidadores));
-        session()->put('paciente', $paciente->toArray()); 
        
         //Devolvemos al paciente a la vista de mostrar paciente
         return view("pacientes.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas", "cuidadores", "show"));
@@ -139,7 +134,6 @@ class PacientesController extends Controller
         $situaciones = Situacion::all()->sortBy("id");
         $estudios = Estudio::all()->sortBy("id");
         $generos = Genero::all()->sortBy("id");
-        session()->put('paciente', $paciente->toArray());
 
         //Devolvemos al paciente a la vista de editar paciente
         return view("pacientes.edit", compact("paciente", "residencias", "situaciones", "estudios", "generos", "show"));
@@ -156,7 +150,6 @@ class PacientesController extends Controller
 
         //Actualizamos masivamente los datos del paciente
         $paciente->update($request->all());
-        session()->put('paciente', $paciente->toArray()); 
 
         //Redireccionamos a lista pacientes
         return redirect("/pacientes/$request->id");
@@ -171,7 +164,6 @@ class PacientesController extends Controller
     {
         //Sacamos al paciente y lo borramos
         Paciente::findOrFail($id)->delete();
-        session()->forget('paciente');
 
         //Redireccionamos a lista pacientes
         return redirect("/pacientes");
@@ -180,7 +172,6 @@ class PacientesController extends Controller
 
     public function addPacienteToTerapeuta(int $id) {
         $paciente = Paciente::findOrFail($id);
-        session()->put('paciente', $paciente->toArray());
         $users = User::where("rol_id","=",1)->get();
 
         return view("pacientes.addPacienteToTerapeuta", compact("paciente", "users"));

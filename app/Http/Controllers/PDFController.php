@@ -20,7 +20,7 @@ class PDFController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role', 'isTerapeuta']);
+        $this->middleware(['auth', 'role', 'asignarPaciente']);
     }
     /***********************************************************
      * PDFs INFORME DE SESIÓN
