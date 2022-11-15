@@ -16,7 +16,6 @@ class CalendarioController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'asignarPaciente']);
-        $this->middleware('esCuidadorDe')->only('showByPaciente');
     }
 
     public function showByPaciente(int $idPaciente) {
