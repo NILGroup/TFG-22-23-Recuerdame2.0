@@ -31,7 +31,7 @@
         <div class="row">
             <label for="etapa" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Etapa de la vida</label>
             <div class="col-sm-3 col-md-3 col-lg-2">
-            <div class="selectBox" onclick="showCheckboxes('checkboxes')">
+                <div class="selectBox" onclick="showCheckboxes('checkboxes')">
                     <select class="form-select form-select-sm" id="idEtapa" name="idEtapa">
                         <option id="seleccionadoEtapa" selected></option>
                     </select>
@@ -39,7 +39,7 @@
                 </div>
                 <div id="checkboxes" class="checkboxes">
                     @foreach ($etapas as $etapa)
-                    <label> <input  type="checkbox" onclick="onSelect('{{$etapa->nombre}}', 'seleccionadoEtapa')" value={{$etapa->id}} name="seleccionEtapa[]">{{$etapa->nombre}}</label>
+                    <label> <input type="checkbox" onclick="onSelect('{{$etapa->nombre}}', 'seleccionadoEtapa')" value={{$etapa->id}} name="seleccionEtapa[]">{{$etapa->nombre}}</label>
                     @endforeach
                 </div>
             </div>
@@ -48,7 +48,7 @@
         <div class="row">
             <label for="categoria" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Categoría</label>
             <div class="col-sm-3 col-md-3 col-lg-2">
-            <div class="selectBox" onclick="showCheckboxes('checkboxesCat')">
+                <div class="selectBox" onclick="showCheckboxes('checkboxesCat')">
                     <select class="form-select form-select-sm" id="idCategoria" name="idCategoria">
                         <option id="seleccionadoCat" selected></option>
                     </select>
@@ -56,7 +56,7 @@
                 </div>
                 <div id="checkboxesCat" class="checkboxes">
                     @foreach ($categorias as $categoria)
-                    <label> <input  type="checkbox" onclick="onSelect('{{$categoria->nombre}}', 'seleccionadoCat')" value={{$categoria->id}} name="seleccionCat[]">{{$categoria->nombre}}</label>
+                    <label> <input type="checkbox" onclick="onSelect('{{$categoria->nombre}}', 'seleccionadoCat')" value={{$categoria->id}} name="seleccionCat[]">{{$categoria->nombre}}</label>
                     @endforeach
                 </div>
             </div>
@@ -73,7 +73,7 @@
                 </div>
                 <div id="checkboxesEtiqueta" class="checkboxes">
                     @foreach ($etiquetas as $etiqueta)
-                    <label> <input  type="checkbox" onclick="onSelect('{{$etiqueta->nombre}}','seleccionadoEtiqueta')" value={{$etiqueta->id}} name="seleccionEtiq[]">{{$etiqueta->nombre}}</label>
+                    <label> <input type="checkbox" onclick="onSelect('{{$etiqueta->nombre}}','seleccionadoEtiqueta')" value={{$etiqueta->id}} name="seleccionEtiq[]">{{$etiqueta->nombre}}</label>
                     @endforeach
                 </div>
             </div>
@@ -91,72 +91,60 @@
 </div>
 
 <script type="text/javascript">
+    //multiple seleccion con checkbox en generar Historia de vida
+    var expanded = false;
+    var expandedEtiqueta = false;
+    var expandedEtapa = false;
+    var expandedCat = false;
 
-
-      //multiple seleccion con checkbox en generar Historia de vida
-      var expanded = false;
-      var expandedEtiqueta = false;
-      var expandedEtapa = false;
-      var expandedCat = false;
-
-function showCheckboxes(ide) {
-    
-    if(ide == 'checkboxesEtiqueta'){
-        var checkboxes = document.getElementById("checkboxesEtiqueta");
-        expanded = expandedEtiqueta;
-    }else if(ide == 'checkboxesCat'){
-        var checkboxes = document.getElementById("checkboxesCat");
-        expanded = expandedCat;
-    }
-    else{
-        var checkboxes = document.getElementById("checkboxes");
-        expanded = expandedEtapa;
-    }
-  if (!expanded) {
-    checkboxes.style.display = "block";
-    expanded = true;
-  } else {
-    checkboxes.style.display = "none";
-    expanded = false;
-  }
-
-  if(ide == 'checkboxesEtiqueta'){
-        expandedEtiqueta = expanded;
-    }else if(ide == 'checkboxesCat'){
-       expandedCat = expanded;
-    }
-    else{
-        expandedEtapa = expanded;
+    function expandir(expanded,checkboxes){
+        if (!expanded) {
+            checkboxes.style.display = "block";
+            expanded = true;
+        } else {
+            checkboxes.style.display = "none";
+            expanded = false;
+        }
     }
 
-}
+    function showCheckboxes(ide) {
 
-let array = [];
-let arrayEt = [];
-let arrayCat = [];
-let arrayEtapa = [];
+        if (ide == 'checkboxesEtiqueta') {
+            expandir(expandedEtiqueta, document.getElementById("checkboxesEtiqueta"));
+           
+        } else if (ide == 'checkboxesCat') {
+            expandir(expandedCat, document.getElementById("checkboxesCat"));
+        } else {
+            expandir(expandedEtapa, document.getElementById("checkboxes"));
+        }
 
-function anadirInfo(array,string){
-    const index = array.indexOf(string);
-    if (index > -1) { // only splice array when item is found
-        array.splice(index, 1); // 2nd parameter means remove one item only
     }
-    else  array.push(string);
-    return array;
-}
 
-function onSelect(string, elementoSeleccionado) {
-  var select = document.getElementById(elementoSeleccionado);
+    let array = [];
+    let arrayEt = [];
+    let arrayCat = [];
+    let arrayEtapa = [];
 
-  if(select.getAttribute("id") == 'seleccionadoEtiqueta'){
-    select.textContent = anadirInfo(arrayEt, string);
-    
-  }else if(select.getAttribute("id") == 'seleccionadoCat'){
-    select.textContent = anadirInfo(arrayCat, string);
-  }else{
-    select.textContent = anadirInfo(arrayEtapa, string);
-  }
-}
+    function anadirInfo(array, string) {
+        const index = array.indexOf(string);
+        if (index > -1) { // only splice array when item is found
+            array.splice(index, 1); // 2nd parameter means remove one item only
+        } else array.push(string);
+        return array;
+    }
+
+    function onSelect(string, elementoSeleccionado) {
+        var select = document.getElementById(elementoSeleccionado);
+
+        if (select.getAttribute("id") == 'seleccionadoEtiqueta') {
+            select.textContent = anadirInfo(arrayEt, string);
+
+        } else if (select.getAttribute("id") == 'seleccionadoCat') {
+            select.textContent = anadirInfo(arrayCat, string);
+        } else {
+            select.textContent = anadirInfo(arrayEtapa, string);
+        }
+    }
 </script>
 
 @endsection
