@@ -131,36 +131,31 @@ function showCheckboxes(ide) {
 
 }
 
-const array = [];
-const arrayEt = [];
-const arrayCat = [];
-const arrayEtapa = [];
+let array = [];
+let arrayEt = [];
+let arrayCat = [];
+let arrayEtapa = [];
+
+function anadirInfo(array,string){
+    const index = array.indexOf(string);
+    if (index > -1) { // only splice array when item is found
+        array.splice(index, 1); // 2nd parameter means remove one item only
+    }
+    else  array.push(string);
+    return array;
+}
+
 function onSelect(string, elementoSeleccionado) {
   var select = document.getElementById(elementoSeleccionado);
 
-  if(elementoSeleccionado == 'seleccionadoEtiqueta' ){
-    array = arrayEt;
-  }else if(elementoSeleccionado == 'seleccionadoCat'){
-    array = arrayCat;
+  if(select.getAttribute("id") == 'seleccionadoEtiqueta'){
+    select.textContent = anadirInfo(arrayEt, string);
+    
+  }else if(select.getAttribute("id") == 'seleccionadoCat'){
+    select.textContent = anadirInfo(arrayCat, string);
   }else{
-    array =arrayEtapa;
+    select.textContent = anadirInfo(arrayEtapa, string);
   }
-
-  const index = array.indexOf(string);
-  if (index > -1) { // only splice array when item is found
-  array.splice(index, 1); // 2nd parameter means remove one item only
-  }else  array.push(string);
-  
-  if(elementoSeleccionado == 'seleccionadoEtiqueta' ){
-    arrayEt = array;
-  }else if(elementoSeleccionado == 'seleccionadoCat'){
-    arrayCat = array;
-  }else{
-    arrayEtapa = array;
-  }
-
-  select.textContent= array;
-  //select.textContent= select.textContent+ ' ' + string;
 }
 </script>
 

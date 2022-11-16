@@ -12,10 +12,10 @@ use App\Models\Recuerdo;
 
 class HistoriaController extends Controller
 {
-    public function __construct()
+   /* public function __construct()
     {
         $this->middleware(['auth', 'asignarPaciente']);
-    }
+    }*/
 
     public function oldestMemoryDate($idPaciente)
     {
