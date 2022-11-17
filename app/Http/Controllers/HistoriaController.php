@@ -122,7 +122,8 @@ class HistoriaController extends Controller
         if (is_null($paciente)) return "ID de paciente no encontrada";
         $listaRecuerdos = $paciente->recuerdos()->whereIn('etapa_id', $idEtapa)
                                                             ->whereIn('categoria_id', $idCategoria)
-                                                            ->whereIn('etiqueta_id', $idEtiqueta)->get();
+                                                            ->whereIn('etiqueta_id', $idEtiqueta)
+                                                            ->whereBetween('fecha', [$fechaInicio,$fechaFin])->get();
        // return $listaRecuerdosHistoriaVida;
 
         return view("historias.generarLibro", compact( "fechaInicio", "fechaFin", "listaRecuerdos"));
