@@ -41,7 +41,7 @@ class CalendarioController extends Controller
             "description" => $request->obs
         ]);
 
-        return redirect("/pacientes/$request->idPaciente/calendario");
+        return redirect("/pacientes/$request->idpacientes/calendario");
     }
 
     public function update(Request $request)
@@ -50,7 +50,7 @@ class CalendarioController extends Controller
         $actividad = Actividad::findOrFail($request->id);
         $actividad->update($request->all());
 
-        return redirect("/pacientes/$request->idPaciente/calendario");
+        return redirect("/pacientes/$request->idpacientes/calendario");
 
 
     }
@@ -66,7 +66,7 @@ class CalendarioController extends Controller
         $paciente = $actividad->paciente_id;
         $actividad->delete();
 
-        return redirect("/pacientes/$paciente/calendario");
+        return redirect("/pacientes/$pacientes/calendario");
 
     }
 }

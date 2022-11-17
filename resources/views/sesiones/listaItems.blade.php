@@ -83,8 +83,8 @@
                             <td>{{$recuerdo->estado->nombre}}</td>
                             <td>{{$recuerdo->etiqueta->nombre}}</td>
                             <td class="tableActions">
-                                <a href="{{route('recuerdo.show',$recuerdo->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
-                                <a href="{{route('recuerdo.edit',$recuerdo->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
+                                <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                                <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
                                 <form method="post" action="{{route('recuerdo.destroy',$recuerdo->id)}}" onclick="confirmar(event)" style="display:inline!important;">
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">

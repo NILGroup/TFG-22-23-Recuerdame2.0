@@ -11,7 +11,7 @@
         <div class="col-12 justify-content-end d-flex">
             <div class="row mb-2">
                 <div class="col-12 justify-content-end d-flex">
-                    <a href="/recuerdo/crear"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
+                    <a href="/pacientes/{{$paciente->id}}/recuerdos/crear"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
 
                 <th scope="row"><?php echo $i ?></th>
 
-                <td><a href="/recuerdo/{{$recuerdo->id}}">{{$recuerdo->nombre}}</a></td>
+                <td><a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}">{{$recuerdo->nombre}}</a></td>
                 <td>{{$recuerdo->fecha}}</td>
                 <td>{{$recuerdo->etapa->nombre}}</td>
                 @if(!is_null($recuerdo->categoria))
@@ -60,10 +60,10 @@
                 <td>Sin etiqueta</td>
                 @endif
                 <td class="tableActions">
-                    <a href="/recuerdo/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                    <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                     @if (Auth::user()->rol_id == 1)
                         <!-- Boton de editar -->
-                        <a href="/recuerdo/{{$recuerdo->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
+                        <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
                         <!-- Boton de eliminar -->
                         <form method="post" action="{{ route('recuerdo.destroy', $recuerdo->id) }}" onclick="confirmar(event)" style="display:inline!important;">
                             {{csrf_field()}}

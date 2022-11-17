@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\DB;
 
 class HistoriaController extends Controller
 {
-   /* public function __construct()
+    public function __construct()
     {
-        $this->middleware(['auth', 'asignarPaciente']);
-    }*/
+        $this->middleware(['auth']);
+        $this->middleware(['asignarPaciente'])->except('generarLibroHistoria');
+    }
 
     public function oldestMemoryDate($idPaciente)
     {

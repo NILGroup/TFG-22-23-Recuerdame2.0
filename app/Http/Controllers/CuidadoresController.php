@@ -16,7 +16,7 @@ class CuidadoresController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role', 'asignarPaciente']);
+        $this->middleware(['auth', 'role']);
     }
     public function create($idP){
         $pacientes = Auth::User()->pacientes;

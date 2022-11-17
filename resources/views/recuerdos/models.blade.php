@@ -213,7 +213,7 @@
                     '<td>' + data["apellidos"] + '</td>' +
                     '<td>' + data["tiporelacion_id"] + '</td>' +
                     '<td class="tableActions">'+
-                    '<a href="{{route("personas.show",'+data["id"]+ ')}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>'+
+                    '<a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}/'+data["id"] +'><i class="fa-solid fa-eye text-black tableIcon"></i></a>'+
                     '</td>'+
                     '<input type="hidden" value=' + data["id"] + ' name="checkPersona[]">' +
                     '</tr>';

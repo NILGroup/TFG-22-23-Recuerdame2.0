@@ -101,7 +101,7 @@ class PersonasRelacionadasController extends Controller
      * Devuelve una personarelacionada concreta
      */
 
-    public function show(int $id)
+    public function show($idPaciente, $id)
     {
         $show = true;
         $tipos = Tiporelacion::all()->sortBy("id");
@@ -132,7 +132,7 @@ class PersonasRelacionadasController extends Controller
     {
         $persona = Personarelacionada::findOrFail($request->id);
         $persona->update($request->all());
-        return redirect("/personas/$persona->id");
+        return redirect("/pacientes/$persona->paciente->id/personas/$persona->id");
     }
 
     /**

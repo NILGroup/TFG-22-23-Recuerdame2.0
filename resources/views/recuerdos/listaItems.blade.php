@@ -128,13 +128,13 @@
             @foreach ($recuerdo->personas_relacionadas as $persona)
             <tr>
                 <th scope="row"><?php echo $n; ?></th>
-                <td><a href="{{route('personas.show', $persona->id)}}">{{$persona->nombre}}</a></td>
+                <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}}</a></td>
                 <td>{{$persona->apellidos}}</td>
                 <td>{{$persona->tiporelacion_id}}</td>
                 <input type="hidden" value={{$persona->id}}>
                 @if($show)
                 <td class="tableActions">
-                    <a href="{{route('personas.show', $persona->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                    <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                 </td>
                 @endif
             </tr>

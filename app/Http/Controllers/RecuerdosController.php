@@ -116,7 +116,7 @@ class RecuerdosController extends Controller
      * @param  \App\Models\Recuerdo  $recuerdo
      * @return \Illuminate\Http\Response
      */
-    public function show($idRecuerdo)
+    public function show($idPaciente, $idRecuerdo)
     {
         $show = true;
         $recuerdo = Recuerdo::find($idRecuerdo);
@@ -132,12 +132,12 @@ class RecuerdosController extends Controller
 
     public function showByPaciente($idPaciente)
     {
-        $paciente =Paciente::find($idPaciente);
+        $paciente = Paciente::find($idPaciente);
         if(is_null($paciente)) return "ID de paciente no encontrada"; //ESTUDIAR SI SOBRA
 
         $recuerdos = $paciente->recuerdos;
         //Devolvemos los recuerdos
-        return view("recuerdos.showByPaciente", compact("recuerdos"));
+        return view("recuerdos.showByPaciente", compact("recuerdos", "paciente"));
     }
 
     public function showBySesion($idSesion)
@@ -195,7 +195,7 @@ class RecuerdosController extends Controller
         if(!is_null($recuerdo)){
             $idPaciente = $recuerdo->paciente_id; //accede a la id del paciente
             Recuerdo::destroy($idRecuerdo); //elimina el recuerdo
-            return redirect("/pacientes/$idPaciente/recuerdos/");
+            return redirect("/pacientes/$idpacientes/recuerdos/");
         }else{
             return redirect("/");
         }

@@ -23,7 +23,8 @@ class PacientesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'asignarPaciente']);
+        $this->middleware(['auth']);
+        $this->middleware(['asignarPaciente'])->except(['index', 'create']);
     }
     
     /**

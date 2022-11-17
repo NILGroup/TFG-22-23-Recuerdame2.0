@@ -10,7 +10,7 @@
 
     <div class="row mb-2">
         <div class="col-12 justify-content-end d-flex">
-            <a href="{{route('sesiones.create')}}"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
+            <a href="/pacientes/{{$paciente->id}}/sesiones/crear"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
         </div>
     </div>
 
@@ -32,7 +32,7 @@
                 @foreach($sesiones as $sesion)
                 <tr>
                     <th scope="row"><?php echo $i ?></th>
-                    <td><a href="{{route('sesiones.show',$sesion->id)}}">{{date("d/m/Y", strtotime($sesion->fecha))}}</a></td>
+                    <td><a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}">{{date("d/m/Y", strtotime($sesion->fecha))}}</a></td>
                     <td>{{$sesion->objetivo}}</td>
                     <td>
                         @if($sesion->fecha_finalizada != null)
@@ -52,7 +52,7 @@
                     </td>
              
                     <td class="tableActions">
-                        <a href="{{route('sesiones.show',$sesion->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                        <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                         <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
                         
                         <form method="post" action="{{ route('sesiones.destroy', $sesion->id) }}" onclick="confirmar(event)" style="display:inline!important;">

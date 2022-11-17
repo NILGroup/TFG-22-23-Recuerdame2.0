@@ -33,14 +33,14 @@
                 <tr>
                     <th scope="row"><?php echo $i ?></th>
 
-                    <td><a href="/personas/{{$persona->id}}">{{$persona->nombre}}</a></td>
+                    <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}}</a></td>
                     <td>{{$persona->apellidos}}</td>
                     <td>{{$persona->tiporelacion->nombre}}</td>
 
                     <td class="tableActions">
-                        <a href="{{route('personas.show', $persona->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
-                        <a href="{{route('personas.edit', $persona->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                        <form method="post" onclick="confirmar(event)" action="/personas/{{$persona->id}}" style="display:inline!important;">
+                        <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                        <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
+                        <form method="post" onclick="confirmar(event)" action="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}" style="display:inline!important;">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
