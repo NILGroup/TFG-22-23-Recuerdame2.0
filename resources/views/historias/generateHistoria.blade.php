@@ -86,6 +86,7 @@
             <button type="submit" name="generarLibro" value="Generar libro" class="btn btn-outline-primary ">Generar libro</button>
             <button type="submit" name="generarPdf" formaction="/generarPDFHistoria" value="Generar PDF" class="btn btn-outline-primary ">Generar PDF</button>
         </div>
+
     </form>
 
 </div>
@@ -97,7 +98,7 @@
     var expandedEtapa = false;
     var expandedCat = false;
 
-    function expandir(expanded,checkboxes){
+    function expandir(expanded, checkboxes) {
         if (!expanded) {
             checkboxes.style.display = "block";
             expanded = true;
@@ -105,17 +106,18 @@
             checkboxes.style.display = "none";
             expanded = false;
         }
+        return expanded;
     }
 
     function showCheckboxes(ide) {
 
         if (ide == 'checkboxesEtiqueta') {
-            expandir(expandedEtiqueta, document.getElementById("checkboxesEtiqueta"));
-           
+            expandedEtiqueta = expandir(expandedEtiqueta, document.getElementById("checkboxesEtiqueta"));
+
         } else if (ide == 'checkboxesCat') {
-            expandir(expandedCat, document.getElementById("checkboxesCat"));
+            expandedCat = expandir(expandedCat, document.getElementById("checkboxesCat"));
         } else {
-            expandir(expandedEtapa, document.getElementById("checkboxes"));
+            expandedEtapa = expandir(expandedEtapa, document.getElementById("checkboxes"));
         }
 
     }
