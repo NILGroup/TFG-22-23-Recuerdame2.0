@@ -58,7 +58,7 @@
 
 <div class="mb-3">
     <label for="descripcion" class="form-label col-form-label-sm">Descripción</label>
-    <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" rows="3">{{$recuerdo->descripcion}}</textarea>
+    <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" rows="3" @if($show) disabled @endif>{{$recuerdo->descripcion}}</textarea>
 </div>
 <div class="row justify-content-between">
     <div class="row">
