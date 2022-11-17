@@ -9,6 +9,7 @@ use App\Models\Etapa;
 use App\Models\Categoria;
 use App\Models\Etiqueta;
 use App\Models\Recuerdo;
+use Illuminate\Support\Facades\DB;
 
 class HistoriaController extends Controller
 {
@@ -36,16 +37,19 @@ class HistoriaController extends Controller
 
         return view("historias.generateHistoria", compact("paciente", "fecha", "etapas", "etiquetas", "categorias"));
     }
-
+/*
     public function filtrarPorVarias($id, &$listaRecuerdosHistoriaVida , $filtro){
             $listaAux = $listaRecuerdosHistoriaVida;
             $listaAux2 = collect();
-            foreach( $id as $et){
-                $listaAux = $listaRecuerdosHistoriaVida->where($filtro, $et);
+            //return $id;
+           
+                $listaAux = $listaRecuerdosHistoriaVida->whereIn($filtro, $id); //recorremos todas las etiqetas del multifiltro
+                $listaAux = array_values($listaAux);
+                return $listaAux;
                 foreach($listaAux as $item){
                     $listaAux2->push($item);
                 }
-            }
+            
             return $listaAux2;
     }
 
@@ -54,10 +58,13 @@ class HistoriaController extends Controller
         $paciente = Paciente::find($idPaciente);
         if (is_null($paciente)) return "ID de paciente no encontrada";
 
-        $listaRecuerdosHistoriaVida = Recuerdo::where('paciente_id', $idPaciente)->get();
+
+        $listaRecuerdosHistoriaVida = $paciente->recuerdos;
         $listafinal=collect();
+        
         if (!empty($idCategoria)){
             $listaRecuerdosHistoriaVida= $this->filtrarPorVarias($idCategoria, $listaRecuerdosHistoriaVida, 'categoria_id');
+            return $listaRecuerdosHistoriaVida;
         }
         if (!empty($idEtapa)){
             $listaRecuerdosHistoriaVida= $this->filtrarPorVarias($idEtapa, $listaRecuerdosHistoriaVida, 'etapa_id');
@@ -87,43 +94,36 @@ class HistoriaController extends Controller
         }
       
         return $listaRecuerdosHistoriaVida;
-    }
+    }*/
 
     public function generarLibroHistoria(Request $request)
     {
 
-        $idCategoria = $request->seleccionCat;
+        $idPaciente = $request->paciente_id;
         $fechaInicio = $request->fechaInicio;
         $fechaFin = $request->fechaFin;
         $idEtapa = $request->seleccionEtapa;
         $idEtiqueta = $request->seleccionEtiq;
-        $idPaciente = $request->paciente_id;
-     
-        $Nombresetapas = collect();
-        if($idEtapa!=null){
-            foreach( $idEtapa as $et){
-                $Nombresetapas->prepend(Etapa::find($et)->nombre);
-            }
+        $idCategoria = $request->seleccionCat;
+
+        $paciente = Paciente::find($idPaciente);
+        if(is_null($idEtapa) && is_null($idEtiqueta) && is_null($idCategoria)){
+            $listaRecuerdos = $paciente->recuerdos;
+            return view("historias.generarLibro", compact( "fechaInicio", "fechaFin", "listaRecuerdos"));
+        }else{
+            if(is_null($idEtapa))
+                $idEtapa = Etapa::select('id');
+            if(is_null($idEtiqueta))
+                $idEtiqueta = Etiqueta::select('id');
+            if(is_null($idCategoria))
+                $idCategoria = Categoria::select('id');
         }
+        if (is_null($paciente)) return "ID de paciente no encontrada";
+        $listaRecuerdos = $paciente->recuerdos()->whereIn('etapa_id', $idEtapa)
+                                                            ->whereIn('categoria_id', $idCategoria)
+                                                            ->whereIn('etiqueta_id', $idEtiqueta)->get();
+       // return $listaRecuerdosHistoriaVida;
 
-        $Nombrescat = collect();
-        if($idCategoria!=null){
-            foreach( $idCategoria as $et){
-            $Nombrescat->prepend(Categoria::find($et)->nombre);
-            }
-        }
-
-        
-        $Nombresetiquetas = collect();
-        if($idEtiqueta!=null){
-            foreach( $idEtiqueta as $et){
-            $Nombresetiquetas->prepend(Etiqueta::find($et)->nombre);
-            }
-        }
-
-
-        $listaRecuerdos = $this->getListaRecuerdosHistoriaVida($idPaciente, $fechaInicio, $fechaFin, $idEtapa, $idCategoria, $idEtiqueta);
-        //return $listaRecuerdos ;
-        return view("historias.generarLibro", compact("Nombrescat", "fechaInicio", "fechaFin", "Nombresetapas", "Nombresetiquetas", "listaRecuerdos"));
+        return view("historias.generarLibro", compact( "fechaInicio", "fechaFin", "listaRecuerdos"));
     }
 }
