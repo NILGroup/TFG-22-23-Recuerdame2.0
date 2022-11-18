@@ -4,9 +4,9 @@
 
 <script>
   function confirmar(e) {
-      if (!confirm('¿Seguro que desea eliminar?')) {
-          e.preventDefault();
-      }
+    if (!confirm('¿Seguro que desea eliminar?')) {
+      e.preventDefault();
+    }
   }
 </script>
 
@@ -15,7 +15,9 @@
   let mybutton = document.getElementById("scrollBtn");
   mybutton.style.display = "none";
   // When the user scrolls down 20px from the top of the document, show the button
-  window.onscroll = function() {scrollHider()};
+  window.onscroll = function() {
+    scrollHider()
+  };
 
   function scrollHider() {
     if (document.documentElement.scrollTop > 300) {
@@ -24,9 +26,10 @@
       mybutton.style.display = "none";
     }
   }
-
-
-
-
 </script>
 
+<script>
+  $(document).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+</script>
