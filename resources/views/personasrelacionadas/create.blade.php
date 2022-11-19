@@ -7,7 +7,7 @@
         <h5 class="text-muted">Crear nueva persona relacionada</h5>
         <hr class="lineaTitulo">
     </div>
-    <form method="post" action="/personas">
+    <form method="post" action="/crearPersona">
         {{csrf_field()}}
         @include('personasrelacionadas.listaItems')
 

@@ -3,7 +3,7 @@
 @section('content')
 
 
-<form action="/sesion/{{$sesion->id}}" method="POST">
+<form action="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/update" method="POST">
     {{csrf_field()}}
     @include('sesiones.listaItems')
     <div>

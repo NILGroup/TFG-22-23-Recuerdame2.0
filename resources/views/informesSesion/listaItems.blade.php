@@ -7,9 +7,15 @@
         </div>
     </div>
     <div class="row">
+        <label for="fecha_fin" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha de finalización<span class="asterisco">*</span></label>
+        <div class="col-sm-9 col-md-6 col-lg-2">
+            <input type="datetime-local" class="form-control form-control-sm" id="fecha_fin" name="fecha_finalizada" value="{{$sesion->fecha_finalizada}}" required @if($show) disabled @endif>
+        </div>
+    </div>
+    <div class="row">
         <label for="duracion" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Duración<span class="asterisco">*</span></label>
         <div class="col-sm-9 col-md-6 col-lg-2">
-            <input type="time" class="form-control form-control-sm" id="duracion" name="duracion" value="{{$sesion->duracion}}"  required @if($show) disabled @endif>
+            <input type="time" class="form-control form-control-sm" id="duracion" name="duracion" value= @if(is_null($sesion->duracion)) "00:00" @else "{{$sesion->duracion}}" @endif  required @if($show) disabled @endif>
         </div>
     </div>
     <div class="row">
@@ -21,8 +27,6 @@
         </div>
     </div>
     
-    <input type="hidden" class="form-control form-control-sm" id="fecha_finalizada" name="fecha_finalizada" value="{{$sesion->fecha_finalizada}}" required @if($show) disabled @endif>
-        
     <div class="mb-3">
         <label for="respuesta" class="form-label col-form-label-sm">Respuesta del paciente<span class="asterisco">*</span></label>
         <textarea class="form-control form-control-sm" id="respuesta" name="respuesta" rows="3" required @if($show) disabled @endif>{{$sesion->respuesta}}</textarea>

@@ -17,7 +17,8 @@ class PersonasRelacionadasController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role', 'asignarPaciente']);
+        $this->middleware(['auth', 'role']);
+        $this->middleware(['asignarPaciente'])->except(['destroy']);
     }
 
     /**
@@ -44,7 +45,8 @@ class PersonasRelacionadasController extends Controller
         $show = false;
         $tipos = Tiporelacion::all()->sortBy("id");
         $persona = new Personarelacionada();
-        return view("personasrelacionadas.create", compact("idPaciente", "tipos", "persona", "show"));
+        $paciente = Paciente::find($idPaciente);
+        return view("personasrelacionadas.create", compact("idPaciente", "paciente", "tipos", "persona", "show"));
     }
 
     /**

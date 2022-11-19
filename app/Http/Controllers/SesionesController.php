@@ -28,7 +28,7 @@ class SesionesController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role']);
-        $this->middleware(['asignarPaciente'])->except(['index', 'create']);
+        $this->middleware(['asignarPaciente'])->except(['index', 'create', 'destroy']);
     }
     
     /**
@@ -127,7 +127,7 @@ class SesionesController extends Controller
      * @param  \App\Models\Sesion  $sesion
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idP, $id)
     {
         //https://youtu.be/g-Y9uiAjOE4
         $sesion = Sesion::findOrFail($id);
@@ -139,7 +139,7 @@ class SesionesController extends Controller
         return view('sesiones.show', compact('sesion', 'etapas', 'paciente', 'user', 'show'));
     }
 
-    public function showEditable($id)
+    public function showEditable($idP, $id)
     {
         $show = false;
         $sesion = Sesion::findOrFail($id);

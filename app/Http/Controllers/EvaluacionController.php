@@ -16,20 +16,23 @@ class EvaluacionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role', 'asignarPaciente']);
+        $this->middleware(['auth', 'role']);
+        $this->middleware(['asignarPaciente'])->except('destroy');
     }
     
     public function showByPaciente($idPaciente){
         $paciente = Paciente::find($idPaciente);
         $evaluaciones = $paciente->evaluaciones->sortBy("fecha");
-
-        $fechaAnterior = \Carbon\Carbon::parse($paciente->fecha_inscripcion);
+        //$fechas = collect();
+        $fechaAnterior = \Carbon\Carbon::parse($paciente->fecha_inscripcion)->format("Y-m-d h:i:s");
         foreach($evaluaciones as $evaluacion){
-            $fechaActual = \Carbon\Carbon::parse($evaluacion->fecha)->addDays(1);
+            $fechaActual = \Carbon\Carbon::parse($evaluacion->fecha)->addDays(1)->format("Y-m-d h:i:s");
+            //$fechas->push([$fechaAnterior, $fechaActual]);
             $sesiones = Sesion::whereBetween("fecha_finalizada", [$fechaAnterior, $fechaActual])->get();
             $evaluacion->numSesiones = count($sesiones);
             $fechaAnterior=$fechaActual;
         }
+        //throw new \Exception(json_encode($fechas));
         return view("evaluaciones.showByPaciente", compact('evaluaciones', 'paciente'));
     }
     public function generarInforme($idPaciente){

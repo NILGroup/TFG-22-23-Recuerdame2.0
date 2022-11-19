@@ -87,13 +87,9 @@ class PDFEvaluacion extends FPDF{
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,7,'Genero: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
-        if($paciente->genero == 'H'){
-            $pdf->Cell(160,7,' '. 'Hombre',1);
-        }
-        else{
-            $pdf->Cell(160,7,' '. 'Mujer',1);
-        }
+        $pdf->Cell(160,7,' '. $paciente->genero->nombre,true);
         $pdf->Ln(12);
+        
     }
     
     function pdfBody($pdf, $informeSeguimiento, $paciente){

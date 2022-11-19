@@ -166,6 +166,7 @@ class PacientesController extends Controller
         //Sacamos al paciente y lo borramos
         Paciente::findOrFail($id)->delete();
 
+        session()->forget('paciente');
         //Redireccionamos a lista pacientes
         return redirect("/pacientes");
         

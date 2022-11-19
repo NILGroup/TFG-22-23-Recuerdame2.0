@@ -29,7 +29,8 @@ class RecuerdosController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role', 'asignarPaciente']);
+        $this->middleware(['auth', 'role']);
+        $this->middleware(['asignarPaciente'])->except(['destroy']);
     }
     
     /**
@@ -192,15 +193,9 @@ class RecuerdosController extends Controller
     public function destroy($idRecuerdo)
     {
         $recuerdo = Recuerdo::find($idRecuerdo); //busca el recuerdo en sí
-        if(!is_null($recuerdo)){
-            $idPaciente = $recuerdo->paciente_id; //accede a la id del paciente
-            Recuerdo::destroy($idRecuerdo); //elimina el recuerdo
-            return redirect("/pacientes/$idpacientes/recuerdos/");
-        }else{
-            return redirect("/");
-        }
-
-
+        $paciente = $recuerdo->paciente;
+        $recuerdo->delete();
+        return redirect("/pacientes/$paciente->id/recuerdos/");
     }
 
     //Elimina a la persona relacionada del recuerdo en cuestión (su relación)

@@ -32,7 +32,7 @@
                 <tr>
                     <th scope="row"><?php echo $i ?></th>
                     <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe">Informe Nº {{$informe->id}}</td>
-                    <td>{{$informe->fecha}}</td>
+                    <td>{{Carbon\Carbon::parse($informe->fecha)->format("d/m/Y")}}</td>
                     <td>{{$informe->numSesiones}}</td>
                     <td>{{$informe->diagnostico}}</td>
                     <td class="tableActions">

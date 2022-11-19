@@ -81,10 +81,12 @@ Route::get('/pacientes/{id}/cuidadores', 'App\Http\Controllers\CuidadoresControl
 
 //RUTAS CUSTOMIZADAS SESION
 Route::post('/guardarSesion', 'App\Http\Controllers\SesionesController@store');
+Route::get('/pacientes/{id}/sesiones/crear', 'App\Http\Controllers\SesionesController@create');
 Route::get('/pacientes/{id}/sesiones/{idS}', 'App\Http\Controllers\SesionesController@show');
 Route::get('/pacientes/{id}/sesiones/{idS}/editar', 'App\Http\Controllers\SesionesController@showEditable');
 Route::get('/pacientes/{id}/sesiones', 'App\Http\Controllers\SesionesController@showByPaciente');
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
+Route::post('/pacientes/{id}/sesiones/{idS}/update', 'App\Http\Controllers\SesionesController@store');
 Route::post('/updateAndRecuerdoNuevo','App\Http\Controllers\SesionesController@updateAndRecuerdoNuevo');
 Route::post('/updateAndSeleccionarRecuerdos','App\Http\Controllers\SesionesController@updateAndSeleccionarRecuerdos');
 
@@ -104,6 +106,7 @@ Route::post('/storeRecuerdoNoView', 'App\Http\Controllers\RecuerdosController@st
 //RUTAS CUSTOMIZADAS PERSONA RELACIONADA
 Route::get('/pacientes/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
 Route::get('/pacientes/{id}/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@create');
+Route::post('/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@store');
 Route::get('/pacientes/{id}/personas/{idP}', 'App\Http\Controllers\PersonasRelacionadasController@show');
 Route::get('/pacientes/{id}/personas/{idP}/editar', 'App\Http\Controllers\PersonasRelacionadasController@edit');
 Route::post('/editarPersona', 'App\Http\Controllers\PersonasRelacionadasController@update');
@@ -239,7 +242,7 @@ Route::post('/prueba', function () {
         ["nombre" => "Amigo / Amiga"],
         ["nombre" => "Otro"]
     ]);
-
+/*
     DB::table("users")->insert([
         ['nombre' => "Terapeuta", 'apellidos' => "Uno", 'email' => "terapeuta@gmail.com", 
              'rol_id' => 1,'telefono'=>null,'localidad'=>null,'parentesco'=>null,  'password' => Hash::make("terapeuta")],
@@ -379,6 +382,7 @@ Route::post('/prueba', function () {
         ["paciente_id" => 1, "user_id" => 2],
         ["paciente_id" => 2, "user_id" => 3]
     ]);
+    */
 
     return "<h1> Se ha llenado la base de datos </h1>";
 });
