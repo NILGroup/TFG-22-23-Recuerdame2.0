@@ -21,7 +21,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a class="nav-link letra-primary-color menu" aria-current="page" href="/pacientes/{{Session::get('paciente')['id']}}/evaluaciones">Evaluaciones</a>
+                        <a class="nav-link letra-primary-color menu" aria-current="page" href="/pacientes/{{Session::get('paciente')['id']}}/evaluaciones">Informes de seguimiento</a>
                     </li>
                 @else
                     <li class="nav-item">
