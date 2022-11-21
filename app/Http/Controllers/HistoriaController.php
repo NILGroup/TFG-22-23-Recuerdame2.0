@@ -120,12 +120,19 @@ class HistoriaController extends Controller
                 $idCategoria = Categoria::select('id');
         }
         if (is_null($paciente)) return "ID de paciente no encontrada";
-        $listaRecuerdos = $paciente->recuerdos()->whereIn('etapa_id', $idEtapa)
-                                                            ->whereIn('categoria_id', $idCategoria)
-                                                            ->whereIn('etiqueta_id', $idEtiqueta)
-                                                            ->whereBetween('fecha', [$fechaInicio,$fechaFin])->get();
-       // return $listaRecuerdosHistoriaVida;
+       
+       /* $listaRecuerdos =  $paciente->recuerdos()->whereIn('etapa_id', $idEtapa)->where(function(Request $query){
+            $query->whereIn('etiqueta_id', $query->idEtiqueta)->where(function($query2,$idCategoria){
+                $query2->whereIn('categoria_id', $idCategoria);
+            });
+        })->get();*/
 
+       $listaRecuerdos = $paciente->recuerdos()->whereIn('etapa_id', $idEtapa) ->whereIn('etiqueta_id', $idEtiqueta)->whereIn('categoria_id', $idCategoria)->get();
+       $listaRecuerdos = $listaRecuerdos ->whereBetween('fecha', [$fechaInicio,$fechaFin]);
+                                                           /* ->whereIn('categoria_id', $idCategoria)
+                                                            ->whereIn('etiqueta_id', $idEtiqueta)
+                                                            ->whereBetween('fecha', [$fechaInicio,$fechaFin])->get();*/
+       
         return view("historias.generarLibro", compact( "fechaInicio", "fechaFin", "listaRecuerdos"));
     }
 }
