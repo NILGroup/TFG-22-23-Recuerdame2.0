@@ -148,7 +148,6 @@ Route::post('/storeTipoNoView', 'App\Http\Controllers\TipoRelacionController@sto
     CREA DATOS EN LA BASE DE DATOS
 *********************************************************/
 Route::post('/prueba', function () {
-    
     DB::table("rols")->insert([
         ["nombre" => "Terapeuta"],
         ["nombre" => "Cuidador"]
@@ -242,7 +241,7 @@ Route::post('/prueba', function () {
         ["nombre" => "Amigo / Amiga"],
         ["nombre" => "Otro"]
     ]);
-/*
+    
     DB::table("users")->insert([
         ['nombre' => "Terapeuta", 'apellidos' => "Uno", 'email' => "terapeuta@gmail.com", 
              'rol_id' => 1,'telefono'=>null,'localidad'=>null,'parentesco'=>null,  'password' => Hash::make("terapeuta")],
@@ -382,7 +381,6 @@ Route::post('/prueba', function () {
         ["paciente_id" => 1, "user_id" => 2],
         ["paciente_id" => 2, "user_id" => 3]
     ]);
-    */
 
     return "<h1> Se ha llenado la base de datos </h1>";
 });
