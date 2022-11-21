@@ -22,7 +22,7 @@
 
                             <div class="row mb-3 form-floating mb-3">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Contraseña" required autocomplete="current-password">
-                                <label class="text-muted" for="email">Contraseña</label>
+                                <label class="text-muted" for="password">Contraseña</label>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>Correo electrónico o contraseña incorrectos</strong>
