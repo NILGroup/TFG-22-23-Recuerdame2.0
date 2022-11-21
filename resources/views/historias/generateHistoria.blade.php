@@ -14,6 +14,7 @@
             <div class="row col-sm-6 col-md-6 col-lg-6">
                 <label for="fecha" class="form-label col-form-label-sm col-md-auto">Fecha de inicio</label>
                 <div class="col-sm-9 col-md-6 col-lg-4">
+                    <label value=$fecha></label>
                     <input type="date" class="form-control form-control-sm" id="fechaInicio" name="fechaInicio" value="{{$fecha}}">
                 </div>
             </div>
@@ -21,7 +22,7 @@
             <div class="row col-sm-6 col-md-6 col-lg-6">
                 <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha de fin</label>
                 <div class="col-sm-9 col-md-6 col-lg-4">
-                    <input type="date" class="form-control form-control-sm" id="fechaFin" name="fechaFin" value="{{date("d/m/Y")}}">
+                  <input type="date" class="form-control form-control-sm" id="fechaFin" name="fechaFin" value="{{Carbon\Carbon::now()->format('Y-m-d')}}">
                 </div>
             </div>
         </div>

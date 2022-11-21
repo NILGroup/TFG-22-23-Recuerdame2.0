@@ -10,6 +10,7 @@ use App\Models\Categoria;
 use App\Models\Etiqueta;
 use App\Models\Recuerdo;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Return_;
 
 class HistoriaController extends Controller
 {
@@ -127,11 +128,13 @@ class HistoriaController extends Controller
             });
         })->get();*/
 
-       $listaRecuerdos = $paciente->recuerdos()->whereIn('etapa_id', $idEtapa) ->whereIn('etiqueta_id', $idEtiqueta)->whereIn('categoria_id', $idCategoria)->get();
+       $listaRecuerdos = $paciente->recuerdos()
+                                                ->whereIn('etapa_id', $idEtapa) 
+                                                ->whereIn('etiqueta_id', $idEtiqueta)
+                                                ->whereIn('categoria_id', $idCategoria)->get();
+      
        $listaRecuerdos = $listaRecuerdos ->whereBetween('fecha', [$fechaInicio,$fechaFin]);
-                                                           /* ->whereIn('categoria_id', $idCategoria)
-                                                            ->whereIn('etiqueta_id', $idEtiqueta)
-                                                            ->whereBetween('fecha', [$fechaInicio,$fechaFin])->get();*/
+       //return $listaRecuerdos;
        
         return view("historias.generarLibro", compact( "fechaInicio", "fechaFin", "listaRecuerdos"));
     }
