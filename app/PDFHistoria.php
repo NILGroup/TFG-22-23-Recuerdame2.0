@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use File;
 use DateTime;
@@ -93,9 +94,10 @@ class PDFHistoria extends FPDF{
     }
     
     function fechaHoy($pdf){ 
-        $fecha = utf8_decode('Fecha de generación del documento: ');
-        $hoy = date('d/m/y');
-        $fecha .= $hoy;
+        
+        $fecha_actual = (Carbon::now());
+        $fecha = utf8_decode('Fecha de generación del documento: ' );
+        $fecha .= $fecha_actual;
         $pdf->Cell(0,7,$fecha);       
         $pdf->Ln(7);
     }
