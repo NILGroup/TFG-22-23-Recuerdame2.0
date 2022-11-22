@@ -20,12 +20,19 @@
   };
 
   function scrollHider() {
-    if (document.documentElement.scrollTop > 300) {
+    //console.log("scrollTop= " + document.body.scrollTop + "Element = "+ document.documentElement.scrollTop);
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 300) {
       mybutton.style.display = "inline";
     } else {
       mybutton.style.display = "none";
     }
   }
+
+//Funcion que no sirve de nada?
+  function toTopFunction() {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+}
 </script>
 
 <script>
