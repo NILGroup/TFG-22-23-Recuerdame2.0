@@ -98,7 +98,10 @@ class PDFHistoria extends FPDF{
         $fecha_actual = (Carbon::now());
         $fecha = utf8_decode('Fecha de generación del documento: ' );
         $fecha .= $fecha_actual;
-        $pdf->Cell(0,7,$fecha);       
+        $pdf->Cell(90,7,"");
+        $pdf->SetTextColor( 128 , 128, 128);
+        $pdf->Cell(160,7,$fecha);
+        $pdf->SetTextColor( 0 , 0, 0);       
         $pdf->Ln(7);
     }
 
