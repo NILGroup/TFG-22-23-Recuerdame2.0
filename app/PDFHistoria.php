@@ -10,6 +10,8 @@ use Symfony\Component\Console\Logger\ConsoleLogger;
 
 global $numInforme;
 
+
+
 class PDFHistoria extends FPDF{
 
     // Page header
@@ -40,20 +42,32 @@ class PDFHistoria extends FPDF{
             $size+= 7*3;
             $pdf->SetFont('Times','',12);
             $pdf->MultiCell(0,7,iconv('UTF-8', 'windows-1252', $row->descripcion));
-            $pdf->Ln(7);
-            $size+= 7*2;
+            $pdf->Ln(2);
+            $size+= 2*2;
     
+            //2 IMAGENES POR LÍNEA, SE PUEDE AUMENTAR EL NÚMERO CAMBIANDO EL I Y COPIANDO LA SEPARACIÓN 
+            //TAMBIÉN SE PUEDE APLICAR MÁS TAMAÑO CAMBIANDO EL PRIMER VALOR DEL CELL Y EL MULTICELL
+            //Y EL ULTIMO VALOR DE LAS IMAGENES
             $listaMultimedia = $row->multimedias;
+            $i = 0;
             foreach ($listaMultimedia as $multimedia) {
-                
-                if($size+35+7 > 279) {
-                    $pdf->addPage(); //297 es el alto de un A4, 18 ocupa el footer 287-18=279
-                    $size=0;
-                }
+                $i++;
                 $image = "../public/img/" . $multimedia->fichero;
-                $pdf->MultiCell(0,35,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 40));
-                $pdf->Ln(12);
-                $size+= 35+12;
+                if($i > 2){
+                    if($size+35+7 > 279) {
+                        $pdf->addPage(); //297 es el alto de un A4, 18 ocupa el footer 287-18=279
+                        $size=0;
+                    }
+                    $i==0;
+                }else if($i == 1){
+                    $pdf->Cell(50,35,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50),0,0,'C');
+                    $pdf->Cell(5,35,'',0); //SEPARACIÓN
+                }else{
+                    $pdf->MultiCell(50,35,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50),0,'C');
+                    $pdf->Ln(23);
+                    $size+= 35+23;
+                }
+                
             }
         }
     }
