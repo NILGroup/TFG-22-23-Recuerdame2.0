@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <form action="/guardarSesion" method="POST">
     {{csrf_field()}}
     <div class="container-fluid">
@@ -117,6 +116,7 @@
 </form>
 
 @include('sesiones.models')
+@include('recuerdos.models')
 
 @endsection
 
@@ -252,6 +252,23 @@
                 '<td>' + r.etiqueta.nombre + '</td>' +
                 '<input type="hidden" value=' + r.id + ' name="recuerdos[]">' +
                 '</tr>';
+        }
+    </script>
+
+    <script type="text/javascript">//Modales sobre modales
+        Array.from(document.getElementsByClassName('showmodal')).forEach( (e) => {
+            e.addEventListener('click', function(element) {
+                element.preventDefault();
+                if (e.hasAttribute('data-show-modal')) {
+                    showModal(e.getAttribute('data-show-modal'));
+                }
+            }); 
+        });
+        // Show modal dialog
+        function showModal(modal) {
+            const mid = document.getElementById(modal);
+            let myModal = new bootstrap.Modal(mid);
+            myModal.show();
         }
     </script>
 @endpush

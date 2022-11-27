@@ -13,6 +13,7 @@
 </form>
 
 @include('sesiones.models')
+@include('recuerdos.models')
 
 @endsection
 
