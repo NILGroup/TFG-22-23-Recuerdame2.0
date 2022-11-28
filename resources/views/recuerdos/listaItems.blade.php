@@ -134,7 +134,7 @@
                 <th scope="row"><?php echo $n; ?></th>
                 <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}}</a></td>
                 <td>{{$persona->apellidos}}</td>
-                <td>{{$persona->tiporelacion_id}}</td>
+                <td>{{$tipos[$persona->tiporelacion_id]->nombre}}</td>
                 <input type="hidden" value={{$persona->id}}>
                 @if($show)
                 <td class="tableActions">

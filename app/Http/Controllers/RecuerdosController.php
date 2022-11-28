@@ -128,7 +128,7 @@ class RecuerdosController extends Controller
         $emociones = Emocion::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
         $tipos = Tiporelacion::all()->sortBy("id");
-        return view("recuerdos.show", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "paciente", "show"));
+        return view("recuerdos.show", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "paciente", "show", "tipos"));
     }
 
     public function showByPaciente($idPaciente)
