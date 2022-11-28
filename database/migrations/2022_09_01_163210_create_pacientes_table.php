@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string("ocupacion");
             $table->string("residencia_actual");
             $table->date("fecha_inscripcion");
+            $table->string("residencia_custom")->nullable();
             $table->integer("residencia_id");
             $table->integer("situacion_id");
             $table->integer("estudio_id");

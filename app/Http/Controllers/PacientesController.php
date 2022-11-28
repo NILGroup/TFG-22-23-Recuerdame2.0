@@ -73,7 +73,6 @@ class PacientesController extends Controller
             "fecha_nacimiento" => "required",
             "ocupacion" => "required",
             "residencia_id" => "required",
-            "fecha_inscripcion" => "required",
             "estudio_id" => "required",
             "situacion_id" => "required"
         ]);
@@ -91,6 +90,7 @@ class PacientesController extends Controller
             "residencia_actual" => $request->residencia_actual,
             "fecha_inscripcion" => $request->fecha_inscripcion,
             "residencia_id" => $request->residencia_id,
+            "residencia_custom" => $request->residencia_custom,
             "estudio_id" =>  $request->estudio_id,
             "situacion_id" =>  $request->situacion_id
         ])->users()->save($user);
@@ -114,7 +114,7 @@ class PacientesController extends Controller
         $estudios = Estudio::all()->sortBy("id");
         $generos = Genero::all()->sortBy("id");
         $personas = $paciente->personasrelacionadas;
-        $evaluaciones = $paciente->evaluaciones;
+        $evaluaciones = $paciente->evaluaciones->sortBy("id");
         $cuidadores = $paciente->users->where('rol_id', 2);
        
         //Devolvemos al paciente a la vista de mostrar paciente

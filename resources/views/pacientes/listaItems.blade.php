@@ -1,3 +1,8 @@
+@if($show)
+<div class="text-center mb-3">
+    <img src="/img/avatar_hombre.png" class="img-fluid rounded-circle"> <!-- TODO Corregir multimedia -->
+</div>
+@endif
 <div class="row form-group justify-content-between">
     <input type="hidden" name="id" class="form-control form-control-sm" id="nombre" value="{{$paciente->id}}" required @if($show) disabled @endif>
     <div class="row col-sm-12 col-md-6 col-lg-5">
@@ -75,21 +80,20 @@
 
 <div class="row form-group justify-content-between">
     <div class="row col-sm-12 col-md-6 col-lg-5">
-        <label for="fecha_inscripcion" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Fecha de inscripción<span class="asterisco">*</span></label>
+        <label for="estudios" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Nivel de estudios<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6">
-            <input type="date" name="fecha_inscripcion" class="form-control form-control-sm" id="fecha_inscipcion" value="{{$paciente->fecha_inscripcion}}" required @if($show) disabled @endif>
-        </div>
-    </div>
-
-    <div class="row col-sm-12 col-md-6 col-lg-7">
-        <label for="estudios" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Nivel de estudios<span class="asterisco">*</span></label>
-        <div class="col-sm-12 col-md-12 col-lg-8">
             <select id="estudios" name="estudio_id" class="form-control form-select form-select-sm" required @if($show) disabled @endif>
                 <option selected disabled></option>
             @foreach($estudios as $estudio)
                 <option value="{{$estudio->id}}" @if($estudio->id == $paciente->estudio_id) selected @endif>{{$estudio->nombre}}</option>
             @endforeach
             </select>
+        </div>
+    </div>
+    <div class="row col-sm-12 col-md-6 col-lg-7">
+        <label for="casa" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Dirección del domicilio<span class="asterisco">*</span></label>
+        <div class="col-sm-12 col-md-12 col-lg-8">
+            <input type="text" name="residencia_actual" class="form-control form-control-sm" id="casa" value="{{$paciente->residencia_actual}}" required @if($show) disabled @endif>
         </div>
     </div>
 </div>
@@ -99,19 +103,25 @@
         <label for="residencia" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Tipo de residencia<span class="asterisco">*</span></label>
         
         <div class="col-sm-12 col-md-12 col-lg-6">
-            <select id="residencia" name="residencia_id" class="form-control form-select form-select-sm" required @if($show) disabled @endif>
-                    <option selected disabled></option>
+            <select id="residencia" onchange="especifiqueResidencia()" style="margin-right: 5px" id="residencia" name="residencia_id" class="form-control form-select form-select-sm" required @if($show) disabled @endif>
                 @foreach($residencias as $residencia)
                     <option value="{{$residencia->id}}" @if($residencia->id == $paciente->residencia_id) selected @endif>{{$residencia->nombre}}</option>
                 @endforeach
-            </select>
+            </select>   
+            </div>
+    </div>
+
+    <div id="fecha_inscipcion" @if($paciente->residencia_id != 5) style="display: none;" @endif class="row col-sm-12 col-md-6 col-lg-7">
+        <label for="fecha_inscripcion" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Fecha de inscripción<span class="asterisco">*</span></label>
+        <div class="col-sm-12 col-md-12 col-lg-8">
+            <input type="date" name="fecha_inscripcion" class="form-control form-control-sm" value="{{$paciente->fecha_inscripcion}}" required @if($show) disabled @endif>
         </div>
     </div>
 
-    <div class="row col-sm-12 col-md-6 col-lg-7">
-        <label for="casa" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Dirección del domicilio<span class="asterisco">*</span></label>
+    <div id="residencia_custom" @if($paciente->residencia_id != 6) style="display: none;" @endif class="row col-sm-12 col-md-6 col-lg-7">
+        <label for="residencia_custom" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Especifique<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-8">
-            <input type="text" name="residencia_actual" class="form-control form-control-sm" id="casa" value="{{$paciente->residencia_actual}}" required @if($show) disabled @endif>
+            <input type="text" name="residencia_custom" value="{{$paciente->residencia_custom}}" class="form-control form-control-sm" id ="residencia_custom" @if($show) disabled @endif>
         </div>
     </div>
 </div>

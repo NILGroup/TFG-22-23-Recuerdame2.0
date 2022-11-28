@@ -19,6 +19,7 @@ class Paciente extends Model
         "ocupacion",
         "residencia_actual",
         "fecha_inscripcion",
+        "residencia_custom",
         "genero_id",
         "residencia_id",
         "estudio_id",
