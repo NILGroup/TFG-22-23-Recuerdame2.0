@@ -100,17 +100,17 @@ class HistoriaController extends Controller
 
     public function generarLibroHistoria(Request $request)
     {
-
         $idPaciente = $request->paciente_id;
         $fechaInicio = $request->fechaInicio;
         $fechaFin = $request->fechaFin;
         $idEtapa = $request->seleccionEtapa;
         $idEtiqueta = $request->seleccionEtiq;
         $idCategoria = $request->seleccionCat;
-
+        $apto = $request->apto;
         $paciente = Paciente::find($idPaciente);
+
         if(is_null($idEtapa) && is_null($idEtiqueta) && is_null($idCategoria)){
-            $listaRecuerdos = $paciente->recuerdos;
+            $listaRecuerdos = $paciente->recuerdos()->where("apto",$apto)->get();
             return view("historias.generarLibro", compact( "fechaInicio", "fechaFin", "listaRecuerdos"));
         }else{
             if(is_null($idEtapa))
@@ -121,18 +121,14 @@ class HistoriaController extends Controller
                 $idCategoria = Categoria::select('id');
         }
         if (is_null($paciente)) return "ID de paciente no encontrada";
-       
-       /* $listaRecuerdos =  $paciente->recuerdos()->whereIn('etapa_id', $idEtapa)->where(function(Request $query){
-            $query->whereIn('etiqueta_id', $query->idEtiqueta)->where(function($query2,$idCategoria){
-                $query2->whereIn('categoria_id', $idCategoria);
-            });
-        })->get();*/
-
-       $listaRecuerdos = $paciente->recuerdos()
+        
+       $listaRecuerdos = $paciente->recuerdos()->where("apto",$apto);
+       $listaRecuerdos =  $listaRecuerdos
                                                 ->whereIn('etapa_id', $idEtapa) 
                                                 ->whereIn('etiqueta_id', $idEtiqueta)
-                                                ->whereIn('categoria_id', $idCategoria)->get();
-      
+                                                ->whereIn('categoria_id', $idCategoria)
+                                                ->get();
+
        $listaRecuerdos = $listaRecuerdos ->whereBetween('fecha', [$fechaInicio,$fechaFin]);
        //return $listaRecuerdos;
        

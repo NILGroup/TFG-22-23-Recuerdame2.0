@@ -77,10 +77,19 @@
                     @endforeach
                 </div>
             </div>
-
+            
         </div>
 
-        <label id="prueba"></label>
+        <div class="row">
+        <div class="col-sm-3 col-md-2 col-lg-1">
+                    <input type="radio" name="apto" value="1"  id="apto" checked>
+                    <label  class="form-label col-form-label-sm " for="1">Apto</label><br>
+                    <input type="radio" name="apto" value="0" id="noApto">
+                    <label  class="form-label col-form-label-sm" for="0">No apto</label><br>
+            </div>
+            
+        </div>
+
 
         <div>
             <button type="submit" name="generarLibro" value="Generar libro" class="btn btn-outline-primary ">Generar libro</button>

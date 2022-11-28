@@ -21,7 +21,8 @@ class Recuerdo extends Model
         "estado_id",
         "etiqueta_id",
         "puntuacion",
-        "paciente_id"
+        "paciente_id",
+        "apto"
     ];
 
     public function etapa(){

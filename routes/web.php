@@ -328,15 +328,15 @@ Route::post('/prueba', function () {
         [ "fecha" => Carbon::create(2019, 9, 10), "nombre" => "Entrada a la universidad",
             "descripcion" => "Inició su formación en el grado de Ingeniería del Software",
             "localizacion" => "Facultad de informatica UCM", "etapa_id" => 3, "categoria_id" => 6,
-            "emocion_id" => 3, "estado_id" => 1, "etiqueta_id" => 3, "puntuacion" => 2, "paciente_id" => 1 ],
+            "emocion_id" => 3, "estado_id" => 1, "etiqueta_id" => 3, "puntuacion" => 2, "paciente_id" => 1, "apto"=>0 ],
         [ "fecha" => Carbon::create(2022, 10, 13), "nombre" => "Cena con amigos",
             "descripcion" => "Cenó en Taco Bell con sus amigos Eros, Adri y Pablo, entre otros.",
             "localizacion" => "Taco Bell Moncloa", "etapa_id" => 3, "categoria_id" => 3, "emocion_id" => 2,
-            "estado_id" => 1, "etiqueta_id" => 1, "puntuacion" => 10, "paciente_id" => 1 ],
+            "estado_id" => 1, "etiqueta_id" => 1, "puntuacion" => 10, "paciente_id" => 1 ,"apto"=>1],
         [ "fecha" => Carbon::create(2022, 10, 13), "nombre" => "Fiesta en La Sierra",
             "descripcion" => "Se montó una ``tremenda fiestuqui´´ con sus amigos en una discoteca de La Sierra ",
             "localizacion" => "Discoteca Recuer-Dame, La Sierra", "etapa_id" => 3, "categoria_id" => 7, "emocion_id" => 1,
-            "estado_id" => 2, "etiqueta_id" => 2, "puntuacion" => 7, "paciente_id" => 2 ]
+            "estado_id" => 2, "etiqueta_id" => 2, "puntuacion" => 7, "paciente_id" => 2,"apto"=>1 ]
     ]);    
     
     DB::table("multimedia_sesion")->insertOrIgnore([
