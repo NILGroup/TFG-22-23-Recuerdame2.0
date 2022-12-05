@@ -67,10 +67,11 @@
         </div>
     </div>
 </div>
-
-
-
-<div class="mb-3 mt-3">
-    <label for="observaciones" class="form-label col-form-label-sm">Observaciones</label>
-    <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3" @if($show) disabled @endif>{{$persona->observaciones}}</textarea>
+<div class="row form-group justify-content-between" >
+    <div class="mb-3 mt-3">
+        <label for="observaciones" class="form-label col-form-label-sm">Observaciones</label>
+        <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3" @if($show) disabled @endif>{{$persona->observaciones}}</textarea>
+    </div>
 </div>
+
+
