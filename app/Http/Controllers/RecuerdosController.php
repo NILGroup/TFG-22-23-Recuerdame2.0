@@ -156,7 +156,7 @@ class RecuerdosController extends Controller
      * @param  \App\Models\Recuerdo  $recuerdo
      * @return \Illuminate\Http\Response
      */
-    public function edit($idRecuerdo)
+    public function edit($idP, $idRecuerdo)
     {
         $show = false;
 
