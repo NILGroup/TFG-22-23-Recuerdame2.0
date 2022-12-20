@@ -6,6 +6,7 @@ use App\Models\Personarelacionada;
 use App\Models\Paciente;
 use App\Models\Tiporelacion;
 use Illuminate\Http\Request;
+use App\Models\Multimedia;
 
 class PersonasRelacionadasController extends Controller
 {
@@ -62,16 +63,17 @@ class PersonasRelacionadasController extends Controller
         if ($request->has("file")){
             foreach ($request->file('file') as $key => $value) {
                 $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
-                $destinationPath = public_path().'/images/';
+                $destinationPath = public_path().'/storage/img';
                 $value->move($destinationPath, $image);
                 $name[] = $image;
                 $original_name[] = $value->getClientOriginalName();
+                Multimedia::create([
+                    'nombre' => $image,
+                    'fichero' => '/storage/img/'.$image
+                ]);
             }
         }
         
-
-        
-        /*
 
         Personarelacionada::create([
 
@@ -88,9 +90,8 @@ class PersonasRelacionadasController extends Controller
             "paciente_id" => $request->paciente_id
 
         ]);
-        */
-      
-        //return redirect("/pacientes/$request->paciente_id/personas");
+            
+        return redirect("/pacientes/$request->paciente_id/personas");
 
     }
 

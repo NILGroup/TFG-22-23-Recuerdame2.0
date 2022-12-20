@@ -90,6 +90,17 @@ document.addEventListener("DOMContentLoaded", function() {
                  
                    
             });
+         },
+        success: function (file, response) {
+            //No le manda los archivos al controlador
+            let id = document.getElementById("paciente_id").value;
+            window.location.href = "/pacientes/"+id+"/personas";
+        },
+        error: function (file, xhr, formData) {
+            console.log("Upload Attempt Error - " + formData.status + " " + formData.statusText);
+        },
+        complete: function (file, response) {
+            console.log("Upload Attempt Finished");
         }
         
         
