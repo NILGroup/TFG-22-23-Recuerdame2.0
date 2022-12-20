@@ -29,7 +29,7 @@ class RecuerdosController extends Controller
         $this->middleware(['auth', 'role']);
         $this->middleware(['asignarPaciente'])->except(['destroy']);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -57,8 +57,7 @@ class RecuerdosController extends Controller
         $categorias = Categoria::all()->sortBy("id");
         $personas = $paciente->personasrelacionadas;
         $tipos = Tiporelacion::all()->sortBy("id");
-        return view("recuerdos.create", compact("estados","etiquetas","etapas","emociones","categorias", "personas","tipos", "recuerdo", "personas", "paciente", "show"));
-
+        return view("recuerdos.create", compact("estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "recuerdo", "personas", "paciente", "show"));
     }
 
     /**
@@ -70,36 +69,47 @@ class RecuerdosController extends Controller
     public function store(Request $request)
     {
 
-
-        if(!is_null($request->file)){
-        $imagenes = $request->file('file')->store('public/img');
-
-        $url = Storage::url($imagenes);
-
-        Multimedia::create([
-            'nombre' => $url,
-            'fichero' => $url
-        ]);
-        }
-
         //Ahora que tenemos creado el recuerdo
         $recuerdo = Recuerdo::updateOrCreate(
             ['id' => $request->id],
-            ['fecha' => $request->fecha,
-             'nombre' => $request->nombre,
-             'descripcion' => $request->descripcion,
-             'localizacion' => $request->localizacion,
-             'etapa_id' => $request->etapa_id,
-             'categoria_id' => $request->categoria_id,
-             'emocion_id' => $request->emocion_id,
-             'estado_id' => $request->estado_id,
-             'etiqueta_id' => $request->etiqueta_id,
-             'puntuacion' => $request->puntuacion,
-             'paciente_id' => $request->paciente_id]
+            [
+                'fecha' => $request->fecha,
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion,
+                'localizacion' => $request->localizacion,
+                'etapa_id' => $request->etapa_id,
+                'categoria_id' => $request->categoria_id,
+                'emocion_id' => $request->emocion_id,
+                'estado_id' => $request->estado_id,
+                'etiqueta_id' => $request->etiqueta_id,
+                'puntuacion' => $request->puntuacion,
+                'paciente_id' => $request->paciente_id
+            ]
         );
-        
+
+
+        if ($request->has("file")) { //EN CASO DE MULTIMEDIA
+            $name = [];
+            $original_name = [];
+            foreach ($request->file('file') as $key => $value) {
+                $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
+                $destinationPath = public_path() . '/storage/img';
+                $value->move($destinationPath, $image);
+                $name[] = $image;
+                $original_name[] = $value->getClientOriginalName();
+                $multimedia = Multimedia::create([
+                    'nombre' => $image,
+                    'fichero' => '/storage/img/' . $image
+                ]);
+
+                $recuerdo->multimedias()->attach($multimedia->id);
+            }
+        }
+
+
+
         $personas_relacionar = $request->checkPersona; //Array de ids de las personas
-        if(!is_null($personas_relacionar)){
+        if (!is_null($personas_relacionar)) {
             foreach ($personas_relacionar as $p_id) {
                 $recuerdo->personas_relacionadas()->attach($p_id);
             }
@@ -125,13 +135,13 @@ class RecuerdosController extends Controller
         $emociones = Emocion::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
         $tipos = Tiporelacion::all()->sortBy("id");
-        return view("recuerdos.show", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "paciente", "show", "tipos"));
+        return view("recuerdos.show", compact("recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "paciente", "show", "tipos"));
     }
 
     public function showByPaciente($idPaciente)
     {
         $paciente = Paciente::find($idPaciente);
-        if(is_null($paciente)) return "ID de paciente no encontrada"; //ESTUDIAR SI SOBRA
+        if (is_null($paciente)) return "ID de paciente no encontrada"; //ESTUDIAR SI SOBRA
 
         $recuerdos = $paciente->recuerdos;
         //Devolvemos los recuerdos
@@ -166,7 +176,7 @@ class RecuerdosController extends Controller
         $categorias = Categoria::all()->sortBy("id");
         $personas = $paciente->personasrelacionadas;
         $tipos = Tiporelacion::all()->sortBy("id");
-        return view("recuerdos.edit", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "personas", "tipos","paciente", "show"));
+        return view("recuerdos.edit", compact("recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "paciente", "show"));
     }
 
     /**
@@ -199,56 +209,55 @@ class RecuerdosController extends Controller
     public function destroyPersonaRelacionada($idRecuerdo, $idPersona)
     {
         //¿unsetRelation?
-    //    Recuerdo::find($idRecuerdo)->personas_relacionadas   destroy($idRecuerdo);
+        //    Recuerdo::find($idRecuerdo)->personas_relacionadas   destroy($idRecuerdo);
     }
 
     //Devuelve la fecha del recuerdo más antiguo del paciente
     public function oldestMemoryDate($idPaciente)
     {
         $memory = Paciente::find($idPaciente)->recuerdos
-                                                ->orderBy('fecha')
-                                                ->take(1)
-                                                ->get();
+            ->orderBy('fecha')
+            ->take(1)
+            ->get();
         return $memory->fecha;
     }
-    
+
     /*Como el store pero no devuelve a una vista*/
     public function storeNoView(Request $request)
     {
         $recuerdo = Recuerdo::updateOrCreate(
             ['id' => $request->id],
-            ['fecha' => $request->fecha,
-             'nombre' => $request->nombre,
-             'descripcion' => $request->descripcion,
-             'localizacion' => $request->localizacion,
-             'etapa_id' => $request->etapa_id,
-             'categoria_id' => $request->categoria_id,
-             'emocion_id' => $request->emocion_id,
-             'estado_id' => $request->estado_id,
-             'etiqueta_id' => $request->etiqueta_id,
-             'puntuacion' => $request->puntuacion,
-             'paciente_id' => $request->paciente_id]
+            [
+                'fecha' => $request->fecha,
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion,
+                'localizacion' => $request->localizacion,
+                'etapa_id' => $request->etapa_id,
+                'categoria_id' => $request->categoria_id,
+                'emocion_id' => $request->emocion_id,
+                'estado_id' => $request->estado_id,
+                'etiqueta_id' => $request->etiqueta_id,
+                'puntuacion' => $request->puntuacion,
+                'paciente_id' => $request->paciente_id
+            ]
         );
 
         $recuerdo->etapa = $recuerdo->etapa->nombre;
-        if(is_null($recuerdo->categoria_id)){
+        if (is_null($recuerdo->categoria_id)) {
             $recuerdo->categoria = " ";
-        }
-        else{
+        } else {
             $recuerdo->categoria = $recuerdo->categoria->nombre;
         }
 
-        if(is_null($recuerdo->estado_id)){
+        if (is_null($recuerdo->estado_id)) {
             $recuerdo->estado = " ";
-        }
-        else{
+        } else {
             $recuerdo->estado = $recuerdo->estado->nombre;
         }
 
-        if(is_null($recuerdo->etiqueta_id)){
+        if (is_null($recuerdo->etiqueta_id)) {
             $recuerdo->etiqueta = " ";
-        }
-        else{
+        } else {
             $recuerdo->etiqueta = $recuerdo->etiqueta->nombre;
         }
         return $recuerdo;
