@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		rules: {
 			nombre: { required: true},
             fecha: { required: true},
-            idEtapa: { required: true},
+            idEtapa: { required: true}
 		},
 		errorClass: 'contactFormTextError',
         errorPlacement: function(error, element) {
