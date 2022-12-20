@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Actividad;
 use App\Models\Paciente;
 use App\Models\Sesion;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CalendarioController extends Controller
 {
@@ -56,9 +58,26 @@ class CalendarioController extends Controller
 
     }
 
+    public function downloadJSON(Request $request){
+        
+   }
+
     public function show(int $idPaciente) {
+     
         $actividad = Actividad::where("paciente_id","=",$idPaciente)->get();
-        return response()->json($actividad);
+        $sesion = Sesion::where("paciente_id","=",$idPaciente);
+        $sesionYactividad = $actividad->concat((Sesion::where("paciente_id","=",$idPaciente))->get());
+        $sesionYactividad->all();
+
+        /***** CREA UN FICHERO PRUEBAS.JSON EN PUBLIC PARA VER QUE JSON SE OBTIENE, pruebas*********
+        $filename = "PRUEBAS.json";
+        $handle = fopen($filename, 'w+');
+        fputs($handle, $sesionYactividad->toJson(JSON_PRETTY_PRINT));
+        fclose($handle);
+        $headers = array('Content-type'=> 'application/json');
+        return response()->download($filename,'movies.json',$headers);
+        */ 
+        return response()->json($sesionYactividad);
     }
 
     public function destroy(Request $request)
