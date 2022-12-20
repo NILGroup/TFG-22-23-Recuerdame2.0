@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("description");
             $table->string("color");
             $table->unsignedBigInteger("paciente_id");
+            $table->string('tipo')->default('a');
             
             $table->foreign("paciente_id")->references("id")->on("pacientes")->onDelete("cascade");
         });
