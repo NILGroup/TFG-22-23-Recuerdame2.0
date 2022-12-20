@@ -7,6 +7,10 @@
         let formulario = document.getElementById('formulario');
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
+            dayHeaderFormat: {
+                weekday: 'long'
+            },
+            fixedWeekCount: false,
             customButtons: {
                 add_event: {
                     text: '+',
@@ -19,14 +23,37 @@
                 }
             },
             locales: 'es',
+            firstDay: 1,
             initialView: 'dayGridMonth',
+            customButtons: {
+                todo: {
+                    text: 'Todo',
+                    click: function() {
+                        alert('clicked the todo button!');
+                    }
+                },
+                actividades: {
+                    text: 'Actividades',
+                    click: function() {
+                        alert('clicked the actividades button!');
+                    }
+                },
+                sesiones: {
+                    text: 'Sesiones',
+                    click: function() {
+                        alert('clicked the sesiones button!');
+                    }
+                }
+            },
             headerToolbar: {
                 left: 'prev,next',
                 center: 'title',
-                //right: 'add_event,dayGridMonth,timeGridWeek,timeGridDay,listMonth,today',
                 right: 'add_event,dayGridMonth,dayGridWeek,dayGridDay,listMonth,today',
 
 
+            },
+            footerToolbar: {
+                right: 'todo,actividades,sesiones',
             },
 
             events: "{{route('calendario.show',$idPaciente)}}",
@@ -43,7 +70,8 @@
             eventClick: function(info) {
                 formulario.reset();
                 document.getElementById('id').value = info.event.id;
-                document.getElementById('titulo').textContent = "Modificar actividad";
+                if (document.getElementById('id').value != info.event.id)
+                    document.getElementById('titulo').textContent = "Entra Modificar actividad";
                 document.getElementById('btnGuardar').classList.add('d-none');
                 document.getElementById('btnEliminar').classList.remove('d-none');
                 document.getElementById('btnModificar').classList.remove('d-none');
@@ -51,7 +79,7 @@
                 document.getElementById('start').value = info.event.startStr;
                 document.getElementById('color').value = info.event.backgroundColor;
                 document.getElementById('obs').value = info.event.extendedProps.description;
-                console.log(info);
+                console.log(info.event.extendedProps);
                 $('#evento').modal('show');
             },
 
@@ -78,8 +106,7 @@
 
 <!-- Tu contenido aquí -->
 <div class="container">
-    <div id="calendar">
-    </div>
+    <div id="calendar"></div>
 
     <div class="modal fade" id="evento" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="evento" aria-hidden="true">
         <div class="modal-dialog">
@@ -110,7 +137,7 @@
                         </div>
                         <div class="form-floating mb-3">
                             <textarea maxlength="255" class="form-control form-control-sm" id="obs" name="obs" rows="3" required></textarea>
-                            <label for="obs" class="form-label">Observaciones</label>
+                            <label for="obs" class="form-label">Pautas</label>
                         </div>
                         <div class="modal-footer">
                             <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-danger btn-md d-none">
@@ -126,6 +153,7 @@
 @endsection
 
 @push('scripts')
-    @include('layouts.scripts')
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+@include('layouts.scripts')
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+
 @endpush

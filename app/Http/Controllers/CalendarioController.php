@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Actividad;
 use App\Models\Paciente;
+use App\Models\Sesion;
 use Illuminate\Http\Request;
 
 class CalendarioController extends Controller
@@ -33,7 +34,7 @@ class CalendarioController extends Controller
             "description" => "required"
         ]);
 */
-        Actividad::create([
+        $actividad = Actividad::create([
             "start" => $request->start,
             "title" => $request->title,
             "paciente_id" => $request->idPaciente,
@@ -41,7 +42,7 @@ class CalendarioController extends Controller
             "description" => $request->obs
         ]);
 
-        return redirect("/pacientes/$request->idpacientes/calendario");
+        return redirect("/pacientes/$actividad->paciente_id/calendario");
     }
 
     public function update(Request $request)
@@ -50,7 +51,7 @@ class CalendarioController extends Controller
         $actividad = Actividad::findOrFail($request->id);
         $actividad->update($request->all());
 
-        return redirect("/pacientes/$request->idpacientes/calendario");
+        return redirect("/pacientes/$actividad->paciente_id/calendario");
 
 
     }
@@ -66,7 +67,7 @@ class CalendarioController extends Controller
         $paciente = $actividad->paciente_id;
         $actividad->delete();
 
-        return redirect("/pacientes/$pacientes/calendario");
+        return redirect("/pacientes/$paciente/calendario");
 
     }
 }
