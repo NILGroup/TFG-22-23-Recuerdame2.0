@@ -50,6 +50,10 @@ class Paciente extends Model
         return $this->belongsTo(Residencia::class);
     }
     
+    public function multimedias(){
+        return $this->belongsToMany(Multimedia::class);
+    }
+
     public function situacion(){
         return $this->belongsTo(Situacion::class);
     }

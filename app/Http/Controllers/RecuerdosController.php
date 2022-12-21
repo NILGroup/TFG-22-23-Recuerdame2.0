@@ -11,10 +11,8 @@ use App\Models\Etiqueta;
 use App\Models\Paciente;
 use App\Models\Multimedia;
 use App\Models\Emocion;
-use App\Models\Personarelacionada;
 use App\Models\Tiporelacion;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 
 class RecuerdosController extends Controller

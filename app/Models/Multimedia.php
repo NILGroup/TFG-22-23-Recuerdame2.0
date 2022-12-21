@@ -24,5 +24,9 @@ class Multimedia extends Model
     public function sesiones(){
         return $this->belongsToMany(Sesion::class);
     }
+
+    public function pacientes(){
+        return $this->belongsToMany(Paciente::class);
+    }
 }
 

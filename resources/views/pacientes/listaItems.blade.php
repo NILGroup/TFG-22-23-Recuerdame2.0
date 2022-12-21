@@ -4,7 +4,7 @@
 </div>
 @endif
 <div class="row form-group justify-content-between">
-    <input type="hidden" name="id" class="form-control form-control-sm" id="nombre" value="{{$paciente->id}}" required @if($show) disabled @endif>
+    <input type="hidden" name="id" class="form-control form-control-sm" id="paciente_id" value="{{$paciente->id}}" required @if($show) disabled @endif>
     <div class="row col-sm-12 col-md-6 col-lg-5">
         <label for="nombre" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Nombre<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6">

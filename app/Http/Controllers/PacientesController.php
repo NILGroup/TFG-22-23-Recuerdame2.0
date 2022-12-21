@@ -9,7 +9,7 @@ use App\Models\Residencia;
 use App\Models\Situacion;
 use App\Models\Estudio;
 use App\Models\Genero;
-use App\Models\Evaluacion;
+use App\Models\Multimedia;
 use Illuminate\Support\Facades\Auth;
 
 use function PHPUnit\Framework\isNull;
@@ -79,7 +79,8 @@ class PacientesController extends Controller
 
         //Almacenamos al paciente en la bd
         $user = User::find(Auth::id());
-        Paciente::updateOrcreate([
+
+        $paciente = Paciente::updateOrcreate([
             "nombre" => $request->nombre,
             "apellidos" => $request->apellidos,
             "genero_id" => $request->genero_id,
@@ -88,13 +89,31 @@ class PacientesController extends Controller
             "fecha_nacimiento" => $request->fecha_nacimiento,
             "ocupacion" => $request->ocupacion,
             "residencia_actual" => $request->residencia_actual,
-            "fecha_inscripcion" => $request->fecha_inscripcion,
             "residencia_id" => $request->residencia_id,
             "residencia_custom" => $request->residencia_custom,
             "estudio_id" =>  $request->estudio_id,
             "situacion_id" =>  $request->situacion_id
-        ])->users()->save($user);
+        ]);
 
+
+        if ($request->has("file")) { //EN CASO DE MULTIMEDIA
+            $name = [];
+            $original_name = [];
+            foreach ($request->file('file') as $key => $value) {
+                $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
+                $destinationPath = public_path() . '/storage/img';
+                $value->move($destinationPath, $image);
+                $name[] = $image;
+                $original_name[] = $value->getClientOriginalName();
+                $multimedia = Multimedia::create([
+                    'nombre' => $image,
+                    'fichero' => '/storage/img/' . $image
+                ]);
+                
+                $paciente->multimedias()->attach($multimedia->id);
+            }
+        }
+        $paciente->users()->save($user);
         //Redireccionamos a la vista de lista pacientes
         return redirect("/pacientes");
         
