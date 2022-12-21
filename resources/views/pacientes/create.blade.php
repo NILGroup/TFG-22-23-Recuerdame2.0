@@ -32,8 +32,17 @@
 
         $().ready(function() {
             $("#pacienteForm").validate({
-                rules: {
+                rules: { //No sé si son ID o Nombres TODO
                     nombre: { required: true},
+                    apellidos: { required: true},
+                    genero: { required: true},
+                    lugarNacimiento: { required: true},
+                    pais: { required: true},
+                    fecha: { required: true},
+                    ocupacion: { required: true},
+                    residencia: { required: true},
+                    estudios: { required: true},
+                    estado: { required: true}
                 },
                 errorClass: 'contactFormTextError',
                 errorPlacement: function(error, element) {
