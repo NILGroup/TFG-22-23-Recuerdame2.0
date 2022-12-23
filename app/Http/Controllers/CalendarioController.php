@@ -58,25 +58,28 @@ class CalendarioController extends Controller
 
     }
 
-    public function downloadJSON(Request $request){
-        
-   }
-
     public function show(int $idPaciente) {
      
         $actividad = Actividad::where("paciente_id","=",$idPaciente)->get();
-        $sesion = Sesion::where("paciente_id","=",$idPaciente);
-        $sesionYactividad = $actividad->concat((Sesion::where("paciente_id","=",$idPaciente))->get());
+        $sesion = Sesion::where("paciente_id","=",$idPaciente)->get();
+        foreach($actividad as $a){
+            $a->tipo = "a";
+        }
+        foreach($sesion as $s){
+            $s->tipo = "s";
+            $s->start = $s->fecha;
+        }
+        $sesionYactividad = $actividad->concat($sesion);
         $sesionYactividad->all();
 
-        /***** CREA UN FICHERO PRUEBAS.JSON EN PUBLIC PARA VER QUE JSON SE OBTIENE, pruebas*********
+        /**** CREA UN FICHERO PRUEBAS.JSON EN PUBLIC PARA VER QUE JSON SE OBTIENE, pruebas*********
         $filename = "PRUEBAS.json";
         $handle = fopen($filename, 'w+');
         fputs($handle, $sesionYactividad->toJson(JSON_PRETTY_PRINT));
         fclose($handle);
         $headers = array('Content-type'=> 'application/json');
-        return response()->download($filename,'movies.json',$headers);
-        */ 
+        return response()->download($filename,'PRUEBAS.json',$headers);
+        */
         return response()->json($sesionYactividad);
     }
 
