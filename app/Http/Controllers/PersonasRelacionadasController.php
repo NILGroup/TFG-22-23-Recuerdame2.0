@@ -57,10 +57,9 @@ class PersonasRelacionadasController extends Controller
     public function store(Request $request)
     {
 
-
-        $name = [];
-        $original_name = [];
-        if ($request->has("file")){
+        if ($request->has("file")){ //EN CASO DE MULTIMEDIA
+            $name = [];
+            $original_name = [];
             foreach ($request->file('file') as $key => $value) {
                 $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
                 $destinationPath = public_path().'/storage/img';

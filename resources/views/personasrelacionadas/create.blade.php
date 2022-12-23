@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
             ocupacion: { required: true},
             email: { required: true, email: true},
             localidad: { required: true},
-            contacto: { required: true},
+            contacto: { required: true}
 		},
 		errorClass: 'contactFormTextError',
         errorPlacement: function(error, element) {
