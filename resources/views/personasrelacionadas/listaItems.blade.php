@@ -1,12 +1,15 @@
-@if ($show)
 
 <div class="row mb-4">
     <div class="img-wrap text-center w-25 mx-auto">
+        @if (isset($persona->multimedia))
         <a href="#" class="visualizarImagen"><img src="{{$persona->multimedia->fichero}}" class=" img-responsive-sm img-thumbnail"></a>
+        @else
+        <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="img-responsive-sm img-thumbnail"></a>
+        @endif
     </div>
 </div>
 
-@endif
+
 
 <input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$idPaciente}}" required @if($show) disabled @endif>
 <input type="hidden" name="id" class="form-control form-control-sm" id="id" value="{{$persona->id}}" required @if($show) disabled @endif>
