@@ -57,24 +57,7 @@ class PersonasRelacionadasController extends Controller
     public function store(Request $request)
     {
 
-        if ($request->has("file")){ //EN CASO DE MULTIMEDIA
-            $name = [];
-            $original_name = [];
-            foreach ($request->file('file') as $key => $value) {
-                $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
-                $destinationPath = public_path().'/storage/img';
-                $value->move($destinationPath, $image);
-                $name[] = $image;
-                $original_name[] = $value->getClientOriginalName();
-                Multimedia::create([
-                    'nombre' => $image,
-                    'fichero' => '/storage/img/'.$image
-                ]);
-            }
-        }
-        
-
-        Personarelacionada::create([
+        $persona = Personarelacionada::create([
 
             "nombre" => $request->nombre,
             "apellidos" => $request->apellidos,
@@ -89,8 +72,28 @@ class PersonasRelacionadasController extends Controller
             "paciente_id" => $request->paciente_id
 
         ]);
-            
-        return redirect("/pacientes/$request->paciente_id/personas");
+
+        $name = [];
+        $original_name = [];
+        if ($request->has("file")){
+            foreach ($request->file('file') as $key => $value) {
+                $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
+                $destinationPath = public_path() . '/storage/img';
+                $value->move($destinationPath, $image);
+                $name[] = $image;
+                $original_name[] = $value->getClientOriginalName();
+                $multimedia = new Multimedia([
+                    'nombre' => $image,
+                    'fichero' => '/storage/img/' . $image
+                ]);
+                $persona->multimedia()->save($multimedia);
+            }
+        }
+          
+
+
+      
+        //return redirect("/pacientes/$request->paciente_id/personas");
 
     }
 

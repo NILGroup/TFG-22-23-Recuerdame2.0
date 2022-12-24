@@ -17,6 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('fichero');
+            $table->unsignedBigInteger('personarelacionada_id')->nullable();
+
+            $table->foreign('personarelacionada_id')->references("id")->on("personarelacionadas")->onDelete("cascade");
+
         });
     }
 

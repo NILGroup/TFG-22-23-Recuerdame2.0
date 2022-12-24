@@ -143,7 +143,6 @@ Route::get('/generarPDFHistoria', 'App\Http\Controllers\PDFController@generarPDF
 Route::post('/storeTipoNoView', 'App\Http\Controllers\TipoRelacionController@storeNoView');
 
 
-
 /*********************************************************
     CREA DATOS EN LA BASE DE DATOS
 *********************************************************/

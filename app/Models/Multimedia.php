@@ -13,8 +13,13 @@ class Multimedia extends Model
     protected $table = "multimedias";
     protected $fillable = [
         "nombre",
-        "fichero"
+        "fichero",
+        "personarelacionada_id"
     ];
+
+    public function personas_relacionadas(){
+        return $this->belongsTo(Personarelacionada::class);
+    }
 
     public function recuerdos()
     {
