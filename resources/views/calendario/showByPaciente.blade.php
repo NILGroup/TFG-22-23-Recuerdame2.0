@@ -16,18 +16,18 @@
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Actividad</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Sesión</button>
-                    </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Actividad</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Sesión</button>
+                        </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"> @include('calendario.registroActividad') </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"> @include('calendario.registroSesion') </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -36,109 +36,142 @@
 @endsection
 
 @push('scripts')
-    @include('layouts.scripts')
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+@include('layouts.scripts')
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let formulario = document.getElementById('formulario');
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                dayHeaderFormat: {
-                    weekday: 'long'
-                },
-                fixedWeekCount: false,
-                customButtons: {
-                    add_event: {
-                        text: '+',
-                        hint: 'Nueva actividad',
-                        click: function() {
-                            formulario.reset();
-                            document.getElementById('titulo').textContent = "Añadir";
-                            $('#evento').modal('show');
-                        }
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let formulario = document.getElementById('formulario');
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            dayHeaderFormat: {
+                weekday: 'long'
+            },
+            fixedWeekCount: false,
+            customButtons: {
+                add_event: {
+                    text: '+',
+                    hint: 'Nueva actividad',
+                    click: function() {
+                        formulario.reset();
+                        document.getElementById('titulo').textContent = "Añadir";
+                        $('#evento').modal('show');
+                    }
+                }
+            },
+            locales: 'es',
+            firstDay: 1,
+            initialView: 'dayGridMonth',
+            customButtons: {
+                todo: {
+                    text: 'Todo',
+                    click: function() {
+                        alert('clicked the todo button!');
                     }
                 },
-                locales: 'es',
-                firstDay: 1,
-                initialView: 'dayGridMonth',
-                customButtons: {
-                    todo: {
-                        text: 'Todo',
-                        click: function() {
-                            alert('clicked the todo button!');
-                        }
-                    },
-                    actividades: {
-                        text: 'Actividades',
-                        click: function() {
-                            alert('clicked the actividades button!');
-                        }
-                    },
-                    sesiones: {
-                        text: 'Sesiones',
-                        click: function() {
-                            alert('clicked the sesiones button!');
-                        }
+                actividades: {
+                    text: 'Actividades',
+                    click: function() {
+                        alert('clicked the actividades button!');
                     }
                 },
-                headerToolbar: {
-                    left: 'prev,next',
-                    center: 'title',
-                    right: 'add_event,dayGridMonth,dayGridWeek,dayGridDay,listMonth,today',
+                sesiones: {
+                    text: 'Sesiones',
+                    click: function() {
+                        alert('clicked the sesiones button!');
+                    }
+                }
+            },
+            headerToolbar: {
+                left: 'prev,next',
+                center: 'title',
+                right: 'add_event,dayGridMonth,dayGridWeek,dayGridDay,listMonth,today',
 
 
-                },
-                footerToolbar: {
-                    right: 'todo,actividades,sesiones',
-                },
+            },
+            footerToolbar: {
+                right: 'todo,actividades,sesiones',
+            },
 
-                events: "{{route('calendario.show',$paciente->id)}}",
+            events: "{{route('calendario.show',$paciente->id)}}",
 
-                dateClick: function(info) {
-                    formulario.reset();
-                    document.getElementById('start').value = info.dateStr;
-                    document.getElementById('titulo').textContent = "Añadir";
+            dateClick: function(info) {
+                formulario.reset();
+                document.getElementById('start').value = info.dateStr;
+                document.getElementById('titulo').textContent = "Añadir";
+                //TODO como hacerlo para que se visualicen ambos y se elija primero activdad
+                document.getElementById('profile-tab').removeAttribute("disabled");
+                document.getElementById('profile-tab').classList.remove("active");
+                document.getElementById('profile').classList.remove("show");
+                document.getElementById('profile').classList.remove("active");
+                document.getElementById('home-tab').removeAttribute("disabled");
+                document.getElementById('home-tab').classList.add("active");
+                document.getElementById('home').classList.add("show");
+                document.getElementById('home').classList.add("active");
 
-                    console.log(info);
-                    $('#evento').modal('show');
-                },
+                console.log(info);
+                $('#evento').modal('show');
+            },
 
-                eventClick: function(info) {
-                    formulario.reset();
-                    document.getElementById('id').value = info.event.id;
-                    if (document.getElementById('id').value != info.event.id)
-                        document.getElementById('titulo').textContent = "Entra Modificar actividad";
-                    document.getElementById('btnGuardar').classList.add('d-none');
-                    document.getElementById('btnEliminar').classList.remove('d-none');
-                    document.getElementById('btnModificar').classList.remove('d-none');
+            eventClick: function(info) {
+                formulario.reset();
+                document.getElementById('id').value = info.event.id;
+                //Por el momento, si clickamos en ver una actividad se desactiva el botón sesión y viceversa
+                //En el futuro, tal vez, hacer que directamente la opción contraria no aparezca
+                if (info.event.extendedProps.tipo === 'a') {
+                    document.getElementById('profile-tab').setAttribute("disabled", "");
+                    document.getElementById('profile-tab').classList.remove("active");
+                    document.getElementById('profile').classList.remove("show");
+                    document.getElementById('profile').classList.remove("active");
+                    document.getElementById('home-tab').removeAttribute("disabled");
+                    document.getElementById('home-tab').classList.add("active");
+                    document.getElementById('home').classList.add("show");
+                    document.getElementById('home').classList.add("active");
                     document.getElementById('title').value = info.event.title;
+                    //document.getElementById('title').value = info.event.extendedProps.tipo;
                     document.getElementById('start').value = info.event.startStr;
                     document.getElementById('color').value = info.event.backgroundColor;
                     document.getElementById('obs').value = info.event.extendedProps.description;
-                    console.log(info.event.extendedProps);
-                    $('#evento').modal('show');
-                },
+                } else if (info.event.extendedProps.tipo === 's') {
+                    document.getElementById('profile-tab').removeAttribute("disabled");
+                    document.getElementById('profile-tab').classList.add("active");
+                    document.getElementById('profile').classList.add("show");
+                    document.getElementById('profile').classList.add("active");
+                    document.getElementById('home-tab').setAttribute("disabled", "");
+                    document.getElementById('home-tab').classList.remove("active");
+                    document.getElementById('home').classList.remove("show");
+                    document.getElementById('home').classList.remove("active");
+                    document.getElementById('fecha').value = info.event.extendedProps.fecha;
+                    document.getElementById('objetivo').value = info.event.extendedProps.objetivo;
+                    document.getElementById('descripcion').value = info.event.extendedProps.descripcion;
+                }
+                document.getElementById('btnGuardar').classList.add('d-none');
+                document.getElementById('btnEliminar').classList.remove('d-none');
+                document.getElementById('btnModificar').classList.remove('d-none');
 
-                buttonText: {
-                    today: 'Hoy',
-                    month: 'Mes',
-                    week: 'Semana',
-                    day: 'Día',
-                    list: 'Listado',
+                console.log(info.event.extendedProps);
+                $('#evento').modal('show');
+            },
 
-                },
+            buttonText: {
+                today: 'Hoy',
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                list: 'Listado',
 
-                height: 650,
-                editable: true,
-                displayEventTime: false,
-                selectable: true,
-                selectHelper: true,
-            });
+            },
 
-            calendar.render();
-
+            height: 650,
+            editable: true,
+            displayEventTime: false,
+            selectable: true,
+            selectHelper: true,
         });
-    </script>
+
+        calendar.render();
+
+    });
+</script>
 
 @endpush

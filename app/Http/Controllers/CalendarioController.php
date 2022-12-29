@@ -87,18 +87,18 @@ class CalendarioController extends Controller
         foreach($sesion as $s){
             $s->tipo = "s";
             $s->start = $s->fecha;
+            $s->title = "Sesión";
         }
         $sesionYactividad = $actividad->concat($sesion);
         $sesionYactividad->all();
 
-        /**** CREA UN FICHERO PRUEBAS.JSON EN PUBLIC PARA VER QUE JSON SE OBTIENE, pruebas*********
+        /**** CREA UN FICHERO PRUEBAS.JSON EN PUBLIC PARA VER QUE JSON SE OBTIENE, pruebas********
         $filename = "PRUEBAS.json";
         $handle = fopen($filename, 'w+');
         fputs($handle, $sesionYactividad->toJson(JSON_PRETTY_PRINT));
         fclose($handle);
         $headers = array('Content-type'=> 'application/json');
-        return response()->download($filename,'PRUEBAS.json',$headers);
-        */
+        return response()->download($filename,'PRUEBAS.json',$headers);*/
         return response()->json($sesionYactividad);
     }
 
