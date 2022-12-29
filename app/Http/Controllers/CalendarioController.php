@@ -111,4 +111,23 @@ class CalendarioController extends Controller
         return redirect("/pacientes/$paciente/calendario");
 
     }
+
+    public function registroSesion(Request $request)
+    {
+        $sesion = Sesion::updateOrCreate(
+            ['id' => $request->id],
+            ['fecha' => $request->fecha,
+             'etapa_id' => $request->etapa_id,
+             'objetivo' => $request->objetivo,
+             'descripcion' => $request->descripcion,
+             'fecha_finalizada' => $request->fecha_finalizada,
+             'paciente_id' => $request->paciente_id,
+             'user_id' => $request->user_id,
+             'respuesta' => $request->respuesta]
+        );
+        if(!is_null($request->recuerdos))
+            $sesion->recuerdos()->sync($request->recuerdos);
+        return redirect("pacientes/{$sesion->paciente->id}/calendario");
+
+    }
 }
