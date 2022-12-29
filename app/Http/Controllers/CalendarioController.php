@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Actividad;
 use App\Models\Paciente;
 use App\Models\Sesion;
+use App\Models\Recuerdo;
+use App\Models\Estado;
+use App\Models\Etiqueta;
+use App\Models\Etapa;
+use App\Models\Emocion;
+use App\Models\Categoria;
+use App\Models\Tiporelacion;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class CalendarioController extends Controller
 {
@@ -23,7 +31,18 @@ class CalendarioController extends Controller
 
     public function showByPaciente(int $idPaciente) {
         //$actividades = Actividad::all()->sortBy("id");
-        return view('calendario.showByPaciente', compact("idPaciente"));
+        $user = Auth::user();
+        $show = false;
+        $paciente = Paciente::find($idPaciente);
+        $sesion = new Sesion();
+        $recuerdo = new Recuerdo();
+        $estados = Estado::all()->sortBy("id");
+        $etiquetas = Etiqueta::all()->sortBy("id");
+        $etapas = Etapa::all()->sortBy("id");
+        $emociones = Emocion::all()->sortBy("id");
+        $categorias = Categoria::all()->sortBy("id");
+        $tipos = Tiporelacion::all()->sortBy("id");
+        return view('calendario.showByPaciente', compact("paciente", "user", "show", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos"));
     }
 
     public function store(Request $request) {
