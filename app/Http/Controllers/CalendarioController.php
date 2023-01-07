@@ -29,7 +29,8 @@ class CalendarioController extends Controller
         $this->middleware(['auth', 'asignarPaciente']);
     }
 
-    public function showByPaciente(int $idPaciente) {
+    public function showByPaciente(int $idPaciente)
+    {
         //$actividades = Actividad::all()->sortBy("id");
         $user = Auth::user();
         $show = false;
@@ -45,9 +46,10 @@ class CalendarioController extends Controller
         return view('calendario.showByPaciente', compact("paciente", "user", "show", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos"));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         //throw new \Exception("{$request->start}");
-       /*$validate = $request->validate([
+        /*$validate = $request->validate([
             "start" => "required",
             "title" => "required",
             "paciente_id" => "required",
@@ -68,37 +70,43 @@ class CalendarioController extends Controller
 
     public function update(Request $request)
     {
-        
+
         $actividad = Actividad::findOrFail($request->id);
         $actividad->update($request->all());
 
         return redirect("/pacientes/$actividad->paciente_id/calendario");
-
-
     }
 
-    public function show(int $idPaciente) {
-     
-        $actividad = Actividad::where("paciente_id","=",$idPaciente)->get();
-        $sesion = Sesion::where("paciente_id","=",$idPaciente)->get();
-        foreach($actividad as $a){
-            $a->tipo = "a";
+    public function show(int $idPaciente)
+    {
+
+        $actividad = Actividad::where("paciente_id", "=", $idPaciente)->get();
+        $sesion = Sesion::where("paciente_id", "=", $idPaciente)->get();
+        foreach ($actividad as $a) {
+            $actividad->tipo = "a";
         }
-        foreach($sesion as $s){
+        foreach ($sesion as $s) {
             $s->tipo = "s";
             $s->start = $s->fecha;
             $s->title = "Sesión";
+            $s->recuerdos = $s->recuerdos;
+            foreach ($s->recuerdos as $r) {
+                $r->etapa = Etapa::findOrFail($r->etapa_id);
+                $r->etiqueta = Etiqueta::findOrFail($r->etiqueta_id);
+                $r->categoria = Categoria::findOrFail($r->categoria_id);
+                $r->estado = Estado::findOrFail($r->estado_id);
+            }
         }
         $sesionYactividad = $actividad->concat($sesion);
         $sesionYactividad->all();
 
-        /**** CREA UN FICHERO PRUEBAS.JSON EN PUBLIC PARA VER QUE JSON SE OBTIENE, pruebas********
+        //CREA UN FICHERO PRUEBAS.JSON EN PUBLIC PARA VER QUE JSON SE OBTIENE, pruebas********
         $filename = "PRUEBAS.json";
         $handle = fopen($filename, 'w+');
         fputs($handle, $sesionYactividad->toJson(JSON_PRETTY_PRINT));
         fclose($handle);
-        $headers = array('Content-type'=> 'application/json');
-        return response()->download($filename,'PRUEBAS.json',$headers);*/
+        $headers = array('Content-type' => 'application/json');
+        return response()->download($filename, 'PRUEBAS.json', $headers);
         return response()->json($sesionYactividad);
     }
 
@@ -107,27 +115,33 @@ class CalendarioController extends Controller
         $actividad = Actividad::findOrFail($request->id);
         $paciente = $actividad->paciente_id;
         $actividad->delete();
-
         return redirect("/pacientes/$paciente/calendario");
+    }
 
+    public function destroySesion(Request $request)
+    {
+        $sesion = Sesion::findOrFail($request->id);
+        $paciente = $sesion->paciente_id;
+        $sesion->delete();
     }
 
     public function registroSesion(Request $request)
     {
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->id],
-            ['fecha' => $request->fecha,
-             'etapa_id' => $request->etapa_id,
-             'objetivo' => $request->objetivo,
-             'descripcion' => $request->descripcion,
-             'fecha_finalizada' => $request->fecha_finalizada,
-             'paciente_id' => $request->paciente_id,
-             'user_id' => $request->user_id,
-             'respuesta' => $request->respuesta]
+            [
+                'fecha' => $request->fecha,
+                'etapa_id' => $request->etapa_id,
+                'objetivo' => $request->objetivo,
+                'descripcion' => $request->descripcion,
+                'fecha_finalizada' => $request->fecha_finalizada,
+                'paciente_id' => $request->paciente_id,
+                'user_id' => $request->user_id,
+                'respuesta' => $request->respuesta
+            ]
         );
-        if(!is_null($request->recuerdos))
+        if (!is_null($request->recuerdos))
             $sesion->recuerdos()->sync($request->recuerdos);
-        return redirect("pacientes/{$sesion->paciente->id}/calendario");
-
+        //return redirect("pacientes/{$sesion->paciente->id}/calendario");
     }
 }

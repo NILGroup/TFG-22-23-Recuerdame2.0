@@ -114,9 +114,12 @@ Route::post('/storePersonaNoView', 'App\Http\Controllers\PersonasRelacionadasCon
 
 //RUTAS CUSTOMIZADAS CALENDARIO
 Route::get('/pacientes/{id}/calendario', 'App\Http\Controllers\CalendarioController@showByPaciente');
+Route::post('/eliminarSesion', 'App\Http\Controllers\CalendarioController@destroySesion');
 Route::post('/eliminarActividad', 'App\Http\Controllers\CalendarioController@destroy');
+
 Route::post('/modificarActividad', 'App\Http\Controllers\CalendarioController@update');
 Route::post('/calendarioSesion', 'App\Http\Controllers\CalendarioController@registroSesion');
+Route::post('/modificarSesion', 'App\Http\Controllers\CalendarioController@registroSesion');
 //Route::get('/mostrarActividades/{id}', 'App\Http\Controllers\CalendarioController@show');
 
 //RUTAS CUSTOMIZADAS INFORMES SESION

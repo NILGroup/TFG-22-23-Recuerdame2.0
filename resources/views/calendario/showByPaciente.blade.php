@@ -109,6 +109,14 @@
                 document.getElementById('home').classList.add("show");
                 document.getElementById('home').classList.add("active");
 
+                document.getElementById('btnGuardarSesion').classList.remove('d-none');
+                document.getElementById('btnEliminarSesion').classList.add('d-none');
+                document.getElementById('btnModificarSesion').classList.add('d-none');
+
+                document.getElementById('btnGuardar').classList.remove('d-none');
+                document.getElementById('btnEliminar').classList.add('d-none');
+                document.getElementById('btnModificar').classList.add('d-none');
+
                 console.log(info);
                 $('#evento').modal('show');
             },
@@ -128,10 +136,13 @@
                     document.getElementById('home').classList.add("show");
                     document.getElementById('home').classList.add("active");
                     document.getElementById('title').value = info.event.title;
-                    //document.getElementById('title').value = info.event.extendedProps.tipo;
                     document.getElementById('start').value = info.event.startStr;
                     document.getElementById('color').value = info.event.backgroundColor;
                     document.getElementById('obs').value = info.event.extendedProps.description;
+
+                    document.getElementById('btnGuardar').classList.add('d-none');
+                    document.getElementById('btnEliminar').classList.remove('d-none');
+                    document.getElementById('btnModificar').classList.remove('d-none');
                 } else if (info.event.extendedProps.tipo === 's') {
                     document.getElementById('profile-tab').removeAttribute("disabled");
                     document.getElementById('profile-tab').classList.add("active");
@@ -144,10 +155,45 @@
                     document.getElementById('fecha').value = info.event.extendedProps.fecha;
                     document.getElementById('objetivo').value = info.event.extendedProps.objetivo;
                     document.getElementById('descripcion').value = info.event.extendedProps.descripcion;
+                    
+                    let tableRef = document.getElementById('divRecuerdos');
+                    tableRef.innerHTML = '';
+                    
+                    for (let recuerdo of info.event.extendedProps.recuerdos) {
+                        // Insert a row at the end of the table
+                        let newRow = tableRef.insertRow(0);
+
+                        // Insert a cell in the row at index 0
+                        let newCell0 = newRow.insertCell(0);
+                        let newCell1 = newRow.insertCell(1);
+                        let newCell2 = newRow.insertCell(2);
+                        let newCell3 = newRow.insertCell(3);
+                        let newCell4 = newRow.insertCell(4);
+                        let newCell5 = newRow.insertCell(5);
+                        let newCell6 = newRow.insertCell(6);
+
+                        // Append a text node to the cell
+                        let newText1 = document.createTextNode(recuerdo.nombre);
+                        let newText2 = document.createTextNode(recuerdo.fecha);
+                        let newText3 = document.createTextNode(recuerdo.etapa.nombre);
+                        let newText4 = document.createTextNode(recuerdo.categoria.nombre);
+                        let newText5 = document.createTextNode(recuerdo.estado.nombre);
+                        let newText6 = document.createTextNode(recuerdo.etiqueta.nombre);
+
+                        // Append a text node to the cell
+                        newCell1.appendChild(newText1);
+                        newCell2.appendChild(newText2);
+                        newCell3.appendChild(newText3);
+                        newCell4.appendChild(newText4);
+                        newCell5.appendChild(newText5);
+                        newCell6.appendChild(newText6);
+                    }
+
+                    document.getElementById('btnGuardarSesion').classList.add('d-none');
+                    document.getElementById('btnEliminarSesion').classList.remove('d-none');
+                    document.getElementById('btnModificarSesion').classList.remove('d-none');
                 }
-                document.getElementById('btnGuardar').classList.add('d-none');
-                document.getElementById('btnEliminar').classList.remove('d-none');
-                document.getElementById('btnModificar').classList.remove('d-none');
+
 
                 console.log(info.event.extendedProps);
                 $('#evento').modal('show');
