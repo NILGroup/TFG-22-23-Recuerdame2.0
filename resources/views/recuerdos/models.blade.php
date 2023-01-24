@@ -35,7 +35,7 @@
 
                 <div class="row form-group justify-content-between">
                     <div class="row col-sm-12 col-md-6 col-lg-5">
-                        <label for="telefono" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Teléfono<span class="asterisco">*</span></label>
+                        <label for="telefono" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Teléfono</label>
                         <div class="col-sm-12 col-md-12 col-lg-6">
                             <input type="text" name="telefono" class="form-control form-control-sm" id="telefono" required>
 
@@ -94,7 +94,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="CrearPersonas()">Guardar</button>
+                <button type="button" class="btn btn-primary" onclick="cerrar();">Guardar</button>
             </div>
         </div>
     </div>
@@ -158,6 +158,29 @@
             }
         }
 
+        function cerrar(){
+
+            let validar = $("#personasCreatorForm input").filter((i, e) => {
+                return $(e).prop("required") === true;
+            })
+
+            let correcto = true
+            for (let i = 0; i < validar.length; i++){
+                let valor = $(validar[i]).prop("value")
+                if (!valor){
+                    correcto = false;
+                    $(validar[i]).focus()
+                    break
+                }
+            }
+
+            if (correcto)
+                CrearPersonas()
+            
+            
+            
+        }
+
 
     function CrearPersonas() {
         /*
@@ -191,7 +214,7 @@
 
         //console.log([...fd.entries()])
 
-        
+        $("#personasCreator").modal("hide")
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
