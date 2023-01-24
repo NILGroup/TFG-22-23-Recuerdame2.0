@@ -36,20 +36,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     $().ready(function() {
-	$("#d").validate({
-		rules: {
-			nombre: { required: true},
-            apellidos: { required: true},
-            ocupacion: { required: true},
-            email: { required: true, email: true},
-            localidad: { required: true},
-            contacto: { required: true}
-		},
-		errorClass: 'contactFormTextError',
-        errorPlacement: function(error, element) {
-            // Don't show error
-        },
-	});
+        $("#d").validate({
+            rules: {
+                nombre: { required: true},
+                apellidos: { required: true},
+                ocupacion: { required: true},
+                email: { required: true, email: true},
+                localidad: { required: true},
+                contacto: { required: true}
+            },
+            errorClass: 'contactFormTextError',
+            errorPlacement: function(error, element) {
+                // Don't show error
+            },  
+        });
 });
 
 

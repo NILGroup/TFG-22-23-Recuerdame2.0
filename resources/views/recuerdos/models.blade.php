@@ -54,7 +54,7 @@
                     <div class="row col-sm-12 col-md-6 col-lg-5">
                         <label for="email" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Email<span class="asterisco">*</span></label>
                         <div class="col-sm-12 col-md-12 col-lg-6">
-                            <input type="text" name="email" class="form-control form-control-sm" id="email" required>
+                            <input type="email" name="email" class="form-control form-control-sm" id="email" required>
 
                         </div>
                     </div>
@@ -166,15 +166,15 @@
 
             let correcto = true
             for (let i = 0; i < validar.length; i++){
-                let valor = $(validar[i]).prop("value")
-                if (!valor){
-                    correcto = false;
+
+                if (!validar[i].checkValidity()){
                     $(validar[i]).focus()
+                    correcto = false
                     break
                 }
             }
 
-            if (correcto)
+           if (correcto)
                 CrearPersonas()
             
             
