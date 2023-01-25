@@ -53,3 +53,12 @@ function onSelect(string, elementoSeleccionado) {
         select.textContent = anadirInfo(arrayEtapa, string);
     }
 }
+
+function onCheck(elementoSeleccionado) {
+    var select = document.getElementById(elementoSeleccionado);
+
+    if (select.getAttribute("value") == 0) {
+        select.setAttribute("value", 1);
+
+    } else select.setAttribute("value", 0);
+}

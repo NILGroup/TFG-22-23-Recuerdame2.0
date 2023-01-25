@@ -134,7 +134,7 @@
                 <th scope="row"><?php echo $n; ?></th>
                 <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}}</a></td>
                 <td>{{$persona->apellidos}}</td>
-                <td>{{$tipos[$persona->tiporelacion_id]->nombre}}</td>
+                <td>{{$persona->tiporelacion->nombre}}</td>
                 <input type="hidden" value={{$persona->id}}>
                 @if($show)
                 <td class="tableActions">
@@ -174,18 +174,5 @@
 @endpush
 
 @push('scripts')
-<script>
-    const
-        range = document.getElementById('puntuacion'),
-        rangeV = document.getElementById('rangeV'),
-        setValue = () => {
-            const
-                newValue = Number((range.value - range.min) * 100 / (range.max - range.min)),
-                newPosition = 10 - (newValue * 0.2);
-            rangeV.innerHTML = `<span>${range.value}</span>`;
-            rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
-        };
-    document.addEventListener("DOMContentLoaded", setValue);
-    range.addEventListener('input', setValue);
-</script>
+    <script src="/js/puntuacionRecuerdo.js"></script>
 @endpush

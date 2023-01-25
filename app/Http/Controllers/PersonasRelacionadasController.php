@@ -138,7 +138,7 @@ class PersonasRelacionadasController extends Controller
      * Edita una personarelacionada concreta
      */
 
-    public function edit(int $id)
+    public function edit($idPaciente, $id)
     {
         $show = false;
         $tipos = Tiporelacion::all()->sortBy("id");
@@ -155,7 +155,7 @@ class PersonasRelacionadasController extends Controller
     {
         $persona = Personarelacionada::findOrFail($request->id);
         $persona->update($request->all());
-        return redirect("/pacientes/$persona->paciente->id/personas/$persona->id");
+        return redirect("/pacientes/$persona->paciente_id/personas/$persona->id");
     }
 
     /**

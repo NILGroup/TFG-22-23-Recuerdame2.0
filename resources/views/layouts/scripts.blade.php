@@ -3,42 +3,14 @@
 
 <!--  validation script  -->
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
- 
+
+<script src="/js/general.js"></script>
+
+<!-- Hay que modificarlo -->
 <script>
   function confirmar(e) {
     if (!confirm('¿Seguro que desea eliminar?')) {
       e.preventDefault();
     }
   }
-</script>
-
-<script>
-  // Get the button
-  let mybutton = document.getElementById("scrollBtn");
-  mybutton.style.display = "none";
-  // When the user scrolls down 20px from the top of the document, show the button
-  window.onscroll = function() {
-    scrollHider()
-  };
-
-  function scrollHider() {
-    //console.log("scrollTop= " + document.body.scrollTop + "Element = "+ document.documentElement.scrollTop);
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 300) {
-      mybutton.style.display = "inline";
-    } else {
-      mybutton.style.display = "none";
-    }
-  }
-
-  //Funcion que no sirve de nada?
-  function toTopFunction() {
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }
-</script>
-
-<script>
-  $(document).ready(function() {
-    $('[data-toggle="tooltip"]').tooltip();
-  });
 </script>

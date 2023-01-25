@@ -121,5 +121,5 @@
 @endsection
 
 @push('scripts')
-@include('layouts.scripts')
+    @include('layouts.scripts')
 @endpush

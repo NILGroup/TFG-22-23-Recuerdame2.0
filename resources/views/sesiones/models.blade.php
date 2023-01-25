@@ -76,3 +76,8 @@
         </div>
     </div>
 </div>
+
+@push('scrips')
+    <script src="/js/recuerdo.js"></script>
+    <script src="/js/multiModal.js"></script>
+@endpush

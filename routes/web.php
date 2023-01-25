@@ -281,11 +281,19 @@ Route::post('/prueba', function () {
         ["nombre" => "Eros", "apellidos" => "Guerrero Sosa", "telefono" => "666666666", 
             "ocupacion" => "Estudiante", "email" => "erGuer@gmail.com", "localidad" => "Madrid o Canarias",
             "contacto" => "Se quieren", "observaciones" => "Tiene muchos perros",
-             "tiporelacion_id" => 6, "paciente_id" => 2 ],
+            "tiporelacion_id" => 6, "paciente_id" => 1 ],
         ["nombre" => "Adrián", "apellidos" => "Prieto Campo", "telefono" => "000000000",
             "ocupacion" => "Estudiante", "email" => "adrPri@gmail.com", "localidad" => "Leon o Madrid",
             "contacto" => "Demasiado", "observaciones" => "A menudo discuten sobre rol y apuestas deportivas",
-             "tiporelacion_id" => 7, "paciente_id" => 2 ]
+            "tiporelacion_id" => 6, "paciente_id" => 1 ],
+        ["nombre" => "Eros", "apellidos" => "Guerrero Sosa", "telefono" => "666666666", 
+            "ocupacion" => "Estudiante", "email" => "erGuer@gmail.com", "localidad" => "Madrid o Canarias",
+            "contacto" => "Se quieren", "observaciones" => "Tiene muchos perros",
+            "tiporelacion_id" => 6, "paciente_id" => 2 ],
+        ["nombre" => "Adrián", "apellidos" => "Prieto Campo", "telefono" => "000000000",
+            "ocupacion" => "Estudiante", "email" => "adrPri@gmail.com", "localidad" => "Leon o Madrid",
+            "contacto" => "Demasiado", "observaciones" => "A menudo discuten sobre rol y apuestas deportivas",
+            "tiporelacion_id" => 6, "paciente_id" => 2 ]
     ]);
 
     DB::table("actividads")->insert([
