@@ -1,7 +1,7 @@
 Dropzone.autoDiscover = false
 document.addEventListener("DOMContentLoaded", function () {
 
-
+    
 
 
     $('#d').dropzone({
