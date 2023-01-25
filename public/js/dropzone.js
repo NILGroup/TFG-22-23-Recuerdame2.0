@@ -51,8 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         },
         success: function (file, response) {
-            //No le manda los archivos al controlador
-            let id = document.getElementById("paciente_id").value;
             window.location.href = ruta
         },
         error: function (file, xhr, formData) {
