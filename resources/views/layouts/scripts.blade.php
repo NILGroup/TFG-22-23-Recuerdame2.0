@@ -5,9 +5,6 @@
 <!--  validation script  -->
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
  
- 
-
-
 <script>
   function confirmar(e) {
     if (!confirm('¿Seguro que desea eliminar?')) {
@@ -34,11 +31,11 @@
     }
   }
 
-//Funcion que no sirve de nada?
+  //Funcion que no sirve de nada?
   function toTopFunction() {
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
-}
+  }
 </script>
 
 <script>
