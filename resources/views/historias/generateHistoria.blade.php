@@ -21,7 +21,7 @@
             <div class="row col-sm-6 col-md-6 col-lg-7">
                 <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha de fin</label>
                 <div class="col-sm-9 col-md-6 col-lg-4">
-                  <input type="date" class="form-control form-control-sm" id="fechaFin" name="fechaFin" value="{{Carbon\Carbon::now()->format('Y-m-d')}}">
+                    <input type="date" class="form-control form-control-sm" id="fechaFin" name="fechaFin" value="{{Carbon\Carbon::now()->format('Y-m-d')}}">
                 </div>
             </div>
         </div>
@@ -77,17 +77,20 @@
                     @endforeach
                 </div>
             </div>
-            
-        </div>
 
-        <div class="row">
-        <div class="col-sm-3 col-md-2 col-lg-1">
-                    <input type="radio" name="apto" value="1"  id="apto" checked>
-                    <label  class="form-label col-form-label-sm " for="1">Apto</label><br>
-                    <input type="radio" name="apto" value="0" id="noApto">
-                    <label  class="form-label col-form-label-sm" for="0">No apto</label><br>
-            </div>
+            <br>
+            <br>
+            <label class=" col-form-label-sm "><strong>Tipo de recuerdos</strong></label>
             
+            <div class="form-check">
+                <input type="hidden" name="apto" id="apto" value="1">
+                <input type="checkbox" onclick="onCheck('apto')" checked>
+                <label class=" col-form-label-sm " for="1">Aptos</label><br>
+                <input type="hidden" name="noApto" id="noApto" value="0">
+                <input type="checkbox" onclick="onCheck('noApto')">
+                <label class="form-label col-form-label-sm" for="0">No aptos</label>
+            </div>
+
         </div>
 
 
@@ -156,6 +159,16 @@
             select.textContent = anadirInfo(arrayEtapa, string);
         }
     }
+
+    function onCheck(elementoSeleccionado) {
+        var select = document.getElementById(elementoSeleccionado);
+
+        if (select.getAttribute("value") == 0) {
+            select.setAttribute("value", 1);
+
+        } else select.setAttribute("value", 0);
+    }
+
 </script>
 
 @endsection

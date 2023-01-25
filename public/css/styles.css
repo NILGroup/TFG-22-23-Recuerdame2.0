@@ -349,4 +349,8 @@ footer {
   .checkboxes label:hover {
     background-color: #1e90ff;
   }
+
+  .deslizante{
+    margin-left: 1em;
+  }
   

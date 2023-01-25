@@ -11,6 +11,7 @@ use App\Models\Etiqueta;
 use App\Models\Recuerdo;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\Return_;
+use Psy\Readline\Hoa\Console;
 
 class HistoriaController extends Controller
 {
@@ -39,7 +40,7 @@ class HistoriaController extends Controller
 
         return view("historias.generateHistoria", compact("paciente", "fecha", "etapas", "etiquetas", "categorias"));
     }
-/*
+    /*
     public function filtrarPorVarias($id, &$listaRecuerdosHistoriaVida , $filtro){
             $listaAux = $listaRecuerdosHistoriaVida;
             $listaAux2 = collect();
@@ -107,31 +108,46 @@ class HistoriaController extends Controller
         $idEtiqueta = $request->seleccionEtiq;
         $idCategoria = $request->seleccionCat;
         $apto = $request->apto;
+        $noApto = $request->noApto;
         $paciente = Paciente::find($idPaciente);
-
-        if(is_null($idEtapa) && is_null($idEtiqueta) && is_null($idCategoria)){
-            $listaRecuerdos = $paciente->recuerdos()->where("apto",$apto)->get();
-            return view("historias.generarLibro", compact( "fechaInicio", "fechaFin", "listaRecuerdos"));
-        }else{
-            if(is_null($idEtapa))
+    
+        if (is_null($idEtapa) && is_null($idEtiqueta) && is_null($idCategoria)) {
+            if ($apto == 1 && $noApto == 1) { //si queremos todos los recuerdos
+                $listaRecuerdos = $paciente->recuerdos()->get();
+          
+            /*si solo queremos los recuerdos aptos apto=1, si solo queremos los no aptos
+            apto será = 0 , por tanto siempre que haya uno OOOO lo otro se hace esta consulta */
+            } else { 
+                $listaRecuerdos = $paciente->recuerdos()->where("apto", $apto)->get();
+            }
+            return view("historias.generarLibro", compact("fechaInicio", "fechaFin", "listaRecuerdos"));
+        } else {
+            if (is_null($idEtapa))
                 $idEtapa = Etapa::select('id');
-            if(is_null($idEtiqueta))
+            if (is_null($idEtiqueta))
                 $idEtiqueta = Etiqueta::select('id');
-            if(is_null($idCategoria))
+            if (is_null($idCategoria))
                 $idCategoria = Categoria::select('id');
         }
-        if (is_null($paciente)) return "ID de paciente no encontrada";
         
-       $listaRecuerdos = $paciente->recuerdos()->where("apto",$apto);
-       $listaRecuerdos =  $listaRecuerdos
-                                                ->whereIn('etapa_id', $idEtapa) 
-                                                ->whereIn('etiqueta_id', $idEtiqueta)
-                                                ->whereIn('categoria_id', $idCategoria)
-                                                ->get();
+        if (is_null($paciente)) return "ID de paciente no encontrada";
 
-       $listaRecuerdos = $listaRecuerdos ->whereBetween('fecha', [$fechaInicio,$fechaFin]);
-       //return $listaRecuerdos;
-       
-        return view("historias.generarLibro", compact( "fechaInicio", "fechaFin", "listaRecuerdos"));
+        //apto o/y no apto
+        if ($apto == 1 || $noApto == 1) {
+            $listaRecuerdos = $paciente->recuerdos()->where("apto", $apto)->get();
+        } else { //si queremos todos los recuerdos
+            $listaRecuerdos = $paciente->recuerdos()->get();
+        }
+        
+        $listaRecuerdos =  $listaRecuerdos
+            ->whereIn('etapa_id', $idEtapa)
+            ->whereIn('etiqueta_id', $idEtiqueta)
+            ->whereIn('categoria_id', $idCategoria)
+            ->get();
+
+        $listaRecuerdos = $listaRecuerdos->whereBetween('fecha', [$fechaInicio, $fechaFin]);
+        //return $listaRecuerdos;
+
+        return view("historias.generarLibro", compact("fechaInicio", "fechaFin", "listaRecuerdos"));
     }
 }
