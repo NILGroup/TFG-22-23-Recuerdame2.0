@@ -18,13 +18,18 @@
         <label for="nombre" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Nombre<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6">
             <input type="text" name="nombre" class="form-control form-control-sm" id="nombre" value="{{$persona->nombre}}" required @if($show) disabled @endif>
-            
+            <div class="invalid-feedback">
+                Campo obligatorio
+            </div>
         </div>
     </div>
     <div class="row col-sm-12 col-md-6 col-lg-7">
         <label for="apellidos" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Apellidos<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-8">
             <input type="text" name="apellidos" class="form-control form-control-sm" id="apellidos" value="{{$persona->apellidos}}" required @if($show) disabled @endif>
+            <div class="invalid-feedback">
+                Campo obligatorio
+            </div>
         </div>
     </div>
 </div>
@@ -40,6 +45,9 @@
         <label for="ocupacion" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Ocupación<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-8">
             <input type="text" name="ocupacion" class="form-control form-control-sm" id="ocupacion" value="{{$persona->ocupacion}}" required @if($show) disabled @endif>
+            <div class="invalid-feedback">
+                Campo obligatorio
+            </div>
         </div>
     </div>
 </div>
@@ -49,12 +57,18 @@
         <label for="email" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Email<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6">
             <input type="email" name="email" class="form-control form-control-sm" id="email" value="{{$persona->email}}" required @if($show) disabled @endif>
+            <div class="invalid-feedback">
+                Campo obligatorio
+            </div>
         </div>
     </div>
     <div class="row col-sm-12 col-md-6 col-lg-7">
         <label for="localidad" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Localidad<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-8">
             <input type="text" name="localidad" class="form-control form-control-sm" id="localidad" value="{{$persona->localidad}}" required @if($show) disabled @endif>   
+            <div class="invalid-feedback">
+                Campo obligatorio
+            </div>
         </div>
     </div>
 </div>
@@ -77,6 +91,9 @@
         <label for="contacto" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Contacto<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-8">
             <input type="text" name="contacto" class="form-control form-control-sm" id="contacto" value="{{$persona->contacto}}" required @if($show) disabled @endif>   
+            <div class="invalid-feedback">
+                Campo obligatorio
+            </div>
         </div>
     </div>
 </div>
