@@ -145,6 +145,8 @@ class SesionesController extends Controller
         $sesion = Sesion::findOrFail($id);
         $user = Auth::user();
         $paciente = Paciente::find(Session::get('paciente')['id']);
+        $personas = $paciente->personasrelacionadas;
+        $recuerdo = new Recuerdo();
         $recuerdos = Recuerdo::where('paciente_id', $paciente->id)->get();
         $estados = Estado::all()->sortBy("id");
         $etiquetas = Etiqueta::all()->sortBy("id");
@@ -152,8 +154,9 @@ class SesionesController extends Controller
         $emociones = Emocion::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
         $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
+        $tipos = Tiporelacion::all()->sortBy("id");
         //throw new \Exception($sesion->multimedias);
-        return view('sesiones.edit', compact('sesion', 'etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'show'));
+        return view('sesiones.edit', compact('sesion', 'etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'show', 'personas', 'recuerdo', 'tipos'));
     }
 
     public function showByPaciente($idPaciente)

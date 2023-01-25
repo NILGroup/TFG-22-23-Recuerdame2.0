@@ -16,6 +16,5 @@
 @push('scripts')
     @include('layouts.scripts')
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
-
     <script src="/js/table.js"></script>
 @endpush

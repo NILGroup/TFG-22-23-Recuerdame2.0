@@ -127,7 +127,7 @@
                             <th scope="row"><?php echo $i ?></th>
                             <td>{{$persona->nombre}}</td>
                             <td>{{$persona->apellidos}}</td>
-                            <td>{{$persona->tiporelacion}}</td>
+                            <td>{{$persona->tiporelacion->nombre}}</td>
                             <td id="personasSeleccionadas" class="tableActions">
                                 <input class="form-check-input" type="checkbox" value="{{$persona->id}}" name="checkPersonaExistente[]" id="checkPersonaExistente" @if($recuerdo->personas_relacionadas->contains($persona)) checked @endif>
                             </td>
