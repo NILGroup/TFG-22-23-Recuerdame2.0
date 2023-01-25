@@ -14,12 +14,11 @@
 </div> -->
 @endif
 <div class="row form-group justify-content-between">
-    <input type="hidden" name="id" class="form-control form-control-sm" id="paciente_id" value="{{$paciente->id}}" required @if($show) disabled @endif>
+    <input type="hidden" name="id" class="form-control form-control-sm" id="paciente_id" value="{{$paciente->id}}"  @if($show) disabled @endif>
     <div class="row col-sm-12 col-md-6 col-lg-5">
         <label for="nombre" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Nombre<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6">
             <input type="text" name="nombre" class="form-control form-control-sm" id="nombre" value="{{$paciente->nombre}}" required @if($show) disabled @endif>
-
         </div>
     </div>
     <div class="row col-sm-12 col-md-6 col-lg-7">
@@ -124,7 +123,7 @@
     <div id="fecha_inscipcion" @if($paciente->residencia_id != 5) style="display: none;" @endif class="row col-sm-12 col-md-6 col-lg-7">
         <label for="fecha_inscripcion" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Fecha de inscripción<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-8">
-            <input type="date" name="fecha_inscripcion" class="form-control form-control-sm" value="{{$paciente->fecha_inscripcion}}" required @if($show) disabled @endif>
+            <input type="date" name="fecha_inscripcion" class="form-control form-control-sm" value="{{$paciente->fecha_inscripcion}}" @if($show) disabled @endif>
         </div>
     </div>
 

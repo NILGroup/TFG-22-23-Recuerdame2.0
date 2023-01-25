@@ -1,15 +1,16 @@
 function especifiqueResidencia() {
     let select = document.getElementById("residencia")
-    if (select.value === "5") {
-        //console.log($("#fecha_inscipcion").show())
-    } else {
-        //console.log($("#fecha_inscipcion").hide())
-        //$("#fecha_inscripcion").hide()
-    }
     if (select.value === "6") {
         $("#residencia_custom").show()
     } else {
         $("#residencia_custom").hide()
+    }
+    if (select.value === "5") {
+        $("#fecha_inscipcion").show()
+        $("#fecha_inscipcion input").eq(0).prop("required", true)
+    } else {
+        $("#fecha_inscipcion").hide()
+        $("#fecha_inscipcion input").eq(0).prop("required", false)
     }
 }
 

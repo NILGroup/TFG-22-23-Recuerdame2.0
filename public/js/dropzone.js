@@ -23,13 +23,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
             submitBtn.addEventListener("click", function (e) {
 
+                
                 const form = document.querySelector("#d")
 
                 e.preventDefault()
                 e.stopPropagation()
-
+                console.log(form.checkValidity())
                 if (form.checkValidity()) {
-
+                    
                     if (myDropzone.getQueuedFiles().length > 0) {
                         myDropzone.processQueue();
                     }
@@ -40,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 }
 
+            
 
                 form.classList.add('was-validated')
 
@@ -51,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
         success: function (file, response) {
             //No le manda los archivos al controlador
             let id = document.getElementById("paciente_id").value;
-            window.location.href = "/pacientes/" + id + "/personas";
+            window.location.href = ruta
         },
         error: function (file, xhr, formData) {
             console.log("Upload Attempt Error - " + formData.status + " " + formData.statusText);
