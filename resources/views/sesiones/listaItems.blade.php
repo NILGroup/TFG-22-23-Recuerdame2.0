@@ -50,8 +50,8 @@
 
         <div class="col-12 justify-content-end d-flex p-2">
             @if(!$show)
-                <button type="button" name="crearRecuerdo" class="btn btn-success btn-sm btn-icon me-2" data-bs-toggle="modal" data-bs-target="#recuerdosCreator"><i class="fa-solid fa-plus"></i></button>
-                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#recuerdosExistentes">Añadir existente</button>
+                <button type="button" name="crearRecuerdo" class="btn btn-success btn-sm btn-icon me-2 showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosCreator" @else data-bs-toggle="modal" data-bs-target="#recuerdosCreator" @endif><i class="fa-solid fa-plus"></i></button>
+                <button type="button" class="btn btn-success btn-sm showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosExistentes" @else data-bs-toggle="modal" data-bs-target="#recuerdosExistentes" @endif>Añadir existente</button>
             @endif
         </div>
 

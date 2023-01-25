@@ -124,6 +124,7 @@
     @include('layouts.scripts') 
         
     <script type="text/javascript">
+        /*
         function agregarRecuerdosExistentes(r) {
             //console.log(r.length);
             document.getElementById("divRecuerdos").innerHTML = "";
@@ -158,9 +159,11 @@
                 }
             }
         }
+        */
     </script>
 
     <script type="text/javascript">
+        /*
         function crearRecuerdo() {
 
             const inputValues = document.querySelectorAll('#recuerdosCreatorForm input')
@@ -253,22 +256,9 @@
                 '<input type="hidden" value=' + r.id + ' name="recuerdos[]">' +
                 '</tr>';
         }
+        */
     </script>
 
-    <script type="text/javascript">//Modales sobre modales
-        Array.from(document.getElementsByClassName('showmodal')).forEach( (e) => {
-            e.addEventListener('click', function(element) {
-                element.preventDefault();
-                if (e.hasAttribute('data-show-modal')) {
-                    showModal(e.getAttribute('data-show-modal'));
-                }
-            }); 
-        });
-        // Show modal dialog
-        function showModal(modal) {
-            const mid = document.getElementById(modal);
-            let myModal = new bootstrap.Modal(mid);
-            myModal.show();
-        }
-    </script>
+    <script src="/js/recuerdo.js"></script>
+    <script src="/js/multiModal.js"></script>
 @endpush

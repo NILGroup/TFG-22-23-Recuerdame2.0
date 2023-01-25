@@ -12,6 +12,7 @@ use App\Models\Etapa;
 use App\Models\Emocion;
 use App\Models\Categoria;
 use App\Models\Tiporelacion;
+use App\Models\Personarelacionada;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -37,13 +38,16 @@ class CalendarioController extends Controller
         $paciente = Paciente::find($idPaciente);
         $sesion = new Sesion();
         $recuerdo = new Recuerdo();
+        $persona = new Personarelacionada();
+        $recuerdos = Recuerdo::where('paciente_id', $paciente->id)->get();
+        $personas = Personarelacionada::where('paciente_id', $paciente->id)->get();
         $estados = Estado::all()->sortBy("id");
         $etiquetas = Etiqueta::all()->sortBy("id");
         $etapas = Etapa::all()->sortBy("id");
         $emociones = Emocion::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
         $tipos = Tiporelacion::all()->sortBy("id");
-        return view('calendario.showByPaciente', compact("paciente", "user", "show", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos"));
+        return view('calendario.showByPaciente', compact("paciente", "user", "show", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos", "recuerdos", "personas", "persona"));
     }
 
     public function store(Request $request)

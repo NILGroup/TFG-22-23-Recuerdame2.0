@@ -1,5 +1,5 @@
 <!-- MODALES -->
-<div class="modal fade" id="recuerdosCreator" tabindex="-1" aria-labelledby="personasCreatorLabel" aria-hidden="true">
+<div class="modal fade" id="recuerdosCreator" tabindex="-1" aria-labelledby="personasCreatorLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 
     <div class="modal-dialog modal-xl">
         <div class="modal-content">

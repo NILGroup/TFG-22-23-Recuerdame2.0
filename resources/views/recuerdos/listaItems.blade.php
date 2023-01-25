@@ -107,9 +107,9 @@
 <div class="row">
     <div class="col-12 justify-content-end d-flex p-2">
         <!-- Nueva persona relacionada -->
-        <button type="button" name="crearPersona" class="btn btn-success btn-sm btn-icon me-2 showmodal" @if(str_contains(url()->current(), 'sesiones')) data-show-modal="personasCreator" @else data-bs-toggle="modal" data-bs-target="#personasCreator" @endif><i class="fa-solid fa-plus"></i></button>
+        <button type="button" name="crearPersona" class="btn btn-success btn-sm btn-icon me-2 showmodal" @if(!str_contains(url()->current(), 'recuerdo')) data-show-modal="personasCreator" @else data-bs-toggle="modal" data-bs-target="#personasCreator" @endif><i class="fa-solid fa-plus"></i></button>
         <!-- Persona existente -->
-        <button type="button" name="anadiendoPersona" class="btn btn-success btn-sm me-2 showmodal" @if(str_contains(url()->current(), 'sesiones')) data-show-modal="personasExistentes" @else data-bs-toggle="modal" data-bs-target="#personasExistentes" @endif>Añadir existente</button>
+        <button type="button" name="anadiendoPersona" class="btn btn-success btn-sm me-2 showmodal" @if(!str_contains(url()->current(), 'recuerdo')) data-show-modal="personasExistentes" @else data-bs-toggle="modal" data-bs-target="#personasExistentes" @endif>Añadir existente</button>
     </div>
 </div> <!-- col 12 -->
 @endif

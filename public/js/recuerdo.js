@@ -39,6 +39,41 @@ function crearRecuerdo() {
     });
 }
 
+function agregarRecuerdosExistentes(r) {
+    //console.log(r.length);
+    document.getElementById("divRecuerdos").innerHTML = "";
+    let allRecuerdos = document.getElementById("tablaRecuerdosExistentes").getElementsByTagName("tr");
+    let n = 1;
+    for (let i = 0; i < allRecuerdos.length; i++) {
+
+        let rec = allRecuerdos[i].getElementsByTagName("td")
+        rec = {
+            "id": allRecuerdos[i].getElementsByTagName("th")[0].textContent,
+            "nombre": rec[0].textContent,
+            "fecha": rec[1].textContent,
+            "etapa": rec[2].textContent,
+            "categoria": rec[3].textContent,
+            "estado": rec[4].textContent,
+            "etiqueta": rec[5].textContent,
+            "checked": allRecuerdos[i].getElementsByTagName("input")[0].checked,
+        }
+
+        if (rec.checked) {
+            document.getElementById("divRecuerdos").innerHTML += '<tr>' +
+                '<th scope="row">' + (n++) + '</th>' +
+                '<td>' + rec.nombre + '</td>' +
+                '<td>' + rec.fecha + '</td>' +
+                '<td>' + rec.etapa + '</td>' +
+                '<td>' + rec.categoria + '</td>' +
+                '<td>' + rec.estado + '</td>' +
+                '<td>' + rec.etiqueta + '</td>' +
+                '<input type="hidden" value=' + rec.id + ' name="recuerdos[]">' +
+                '</tr>';
+
+        }
+    }
+}
+
 function reloadRecuerdos(r) {
     let selected = Array.from(document.getElementById("divRecuerdos").getElementsByTagName("input"), function(s) {
         console.log(s.value)
