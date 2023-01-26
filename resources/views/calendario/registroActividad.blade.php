@@ -1,9 +1,9 @@
 <div class="container-fluid">
+    <div class="pt-4 pb-2">
+        <h5 class="text-muted">Datos de la actividad</h5>
+        <hr class="lineaTitulo">
+    </div>
     <form id="formulario" method="post" action="/calendario">
-        <div class="pt-4 pb-2">
-            <h5 class="text-muted">Datos de la actividad</h5>
-            <hr class="lineaTitulo">
-        </div>
         {{csrf_field()}}
         <input type="hidden" class="form-control" id="idPaciente" name="idPaciente" value="{{$paciente->id}}">
         <input type="hidden" class="form-control" id="id" name="id">

@@ -3,7 +3,11 @@
 @section('content')
 
 <div class="container-fluid">
-
+    <div class="pt-4 pb-2">
+        <h5 class="text-muted">Datos de la sesión</h5>
+        <hr class="lineaTitulo">
+    </div>
+    
     @include('sesiones.listaItems')
 
     <div>
