@@ -21,7 +21,6 @@
             <thead>
                 <tr class="bg-primary">
                     <th scope="col">Nombre</th>
-                    <th scope="col">Apellidos</th>
                     <th scope="col">Tipo de Relacion</th>
                     <th scope="col"></th>
                 </tr>
@@ -31,8 +30,7 @@
                 <tr>
                    
 
-                    <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}}</a> @if($persona->contacto)★@endif</td>
-                    <td>{{$persona->apellidos}}</td>
+                    <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}} {{$persona->apellidos}}</a> @if($persona->contacto)★@endif</td>
                     <td>{{$persona->tiporelacion->nombre}}</td>
 
                     <td class="tableActions">

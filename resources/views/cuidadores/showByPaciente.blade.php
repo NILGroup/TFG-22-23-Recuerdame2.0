@@ -18,7 +18,6 @@
             <thead>
                 <tr class="bg-primary">
                     <th scope="col">Nombre</th>
-                    <th scope="col">Apellidos</th>
                     <th scope="col">Correo electrónico</th>
                     <th scope="col">Teléfono</th>
                     <th scope="col">Localidad</th>
@@ -29,8 +28,7 @@
             <tbody>
                 @foreach($cuidadores as $cuidador)
                 <tr>
-                    <td>{{$cuidador->nombre}}</td>
-                    <td>{{$cuidador->apellidos}}</td>
+                    <td>{{$cuidador->nombre}} {{$cuidador->apellidos}}</td>
                     <td>{{$cuidador->email}}</td>
                     <td>{{$cuidador->telefono}}</td>
                     <td>{{$cuidador->localidad}}</td>
