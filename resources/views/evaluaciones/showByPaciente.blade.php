@@ -18,7 +18,6 @@
             <caption>Listado de evaluaciones</caption>
             <thead>
                 <tr class="bg-primary">
-                    <th scope="col">#</th>
                     <th scope="col">Informe</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Sesiones desde el anterior informe de seguimiento</th>
@@ -27,10 +26,8 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $i = 1 ?>
                 @foreach ($evaluaciones as $informe)
                 <tr>
-                    <th scope="row"><?php echo $i ?></th>
                     <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe">Informe Nº {{$informe->id}}</td>
                     <td>{{Carbon\Carbon::parse($informe->fecha)->format("d/m/Y")}}</td>
                     <td>{{$informe->numSesiones}}</td>
@@ -45,7 +42,6 @@
                         </form>
                     </td>
                 </tr>
-                <?php $i++ ?>
                 @endforeach
             </tbody>
         </table>

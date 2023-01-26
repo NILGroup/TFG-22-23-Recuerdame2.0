@@ -13,7 +13,6 @@
             <caption>Listado de informes de sesiones</caption>
             <thead>
                 <tr class="bg-primary">
-                    <th scope="col">#</th>
                     <th scope="col">Informe</th>
                     <th scope="col">Fecha del informe</th>
                     <th scope="col">Apto para continuar</th>
@@ -21,10 +20,8 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $i = 1 ?>
                 @foreach ($sesiones as $sesion)
                     <tr>
-                        <th scope="row"><?php echo $i ?></th>
                         <td><a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe">Informe de la sesión Nº {{$sesion->id}}</td>
                         <td>{{date("d/m/Y H:i", strtotime($sesion->fecha_finalizada))}}</td>
                         <td>
@@ -46,7 +43,6 @@
                             </form>
                         </td>
                     </tr>
-                    <?php $i++ ?>
                 @endforeach
             </tbody>
         </table>

@@ -20,7 +20,6 @@
             <caption>Listado de personas relacionadas</caption>
             <thead>
                 <tr class="bg-primary">
-                    <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellidos</th>
                     <th scope="col">Tipo de Relacion</th>
@@ -28,11 +27,8 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $i = 1; ?>
                 @foreach($personas as $persona)
                 <tr>
-                    <th scope="row"><?php echo $i ?></th>
-
                     <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}}</a></td>
                     <td>{{$persona->apellidos}}</td>
                     <td>{{$persona->tiporelacion->nombre}}</td>
@@ -47,7 +43,6 @@
                         </form>
                     </td>
                 </tr>
-                <?php $i++; ?>
 
                 @endforeach
             </tbody>

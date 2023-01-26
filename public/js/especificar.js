@@ -23,3 +23,12 @@ function especifique(){
         $("#tipo_custom").hide()
     }
 }
+
+function especifiqueCategoria(){
+    let select = document.getElementById("categoria_id")
+    if (select.value === "7"){
+        $("#tipo_custom").show();
+    }else{
+        $("#tipo_custom").hide();
+    }
+}

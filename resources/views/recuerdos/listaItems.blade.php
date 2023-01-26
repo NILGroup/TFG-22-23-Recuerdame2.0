@@ -86,11 +86,13 @@
         </div>
         <label for="categoria" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-1">Categoría</label>
         <div class="col-sm-3 col-md-3 col-lg-2">
-            <select class="form-select form-select-sm" id="idCategoria" name="categoria_id" @if($show) disabled @endif>
+            <select onchange="especifiqueCategoria()" style="margin-right: 5px" class="form-select form-select-sm form-control" id="categoria_id" name="categoria_id" @if($show) disabled @endif>
                 <option></option>
                 @foreach ($categorias as $categoria)
                 <option value="{{$categoria->id}}" @if($categoria->id == $recuerdo->categoria_id) selected @endif>{{$categoria->nombre}}</option>
                 @endforeach
+            </select>
+            <input @if($recuerdo->categoria_id != 7) style="display: none;" @endif type="text" name="tipo_custom" value="{{$recuerdo->tipo_custom}}" class="form-control form-control-sm" id = "tipo_custom" @if($show) disabled @endif>
             </select>
         </div>
     </div>
@@ -176,4 +178,5 @@
 
 @push('scripts')
 <script src="/js/puntuacionRecuerdo.js"></script>
+<script src="/js/especificar.js"></script>
 @endpush

@@ -17,6 +17,7 @@ class Recuerdo extends Model
         "localizacion",
         "etapa_id",
         "categoria_id",
+        "tipo_custom",
         "emocion_id",
         "estado_id",
         "etiqueta_id",
