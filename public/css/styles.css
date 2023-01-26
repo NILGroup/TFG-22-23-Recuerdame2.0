@@ -336,9 +336,7 @@ footer {
   
   .checkboxes {
     width: 100%;
-    background-color: white;
-    display: none;
-    border: 1px #dadada solid;
+    display: block;
     margin-bottom: 10px;
   }
   
@@ -346,11 +344,13 @@ footer {
     display: block;
   }
   
-  .checkboxes label:hover {
-    background-color: #1e90ff;
-  }
 
   .deslizante{
+    margin-left: 1em;
+  }
+
+  .fecha{
+    width: fit-content;
     margin-left: 1em;
   }
   
