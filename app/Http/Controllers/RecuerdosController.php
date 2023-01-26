@@ -13,8 +13,11 @@ use App\Models\Multimedia;
 use App\Models\Emocion;
 use App\Models\Personarelacionada;
 use App\Models\Tiporelacion;
+use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+
+use function PHPUnit\Framework\isNull;
 
 class RecuerdosController extends Controller
 {
@@ -122,7 +125,10 @@ class RecuerdosController extends Controller
         }
 
         //Array de las ID de las imagenes a eliminar del recuerdo
+       if(!$request->media.isNull()) {
         $recuerdo->multimedias()->detach($request->media);
+       }
+       
         
         return self::showByPaciente($recuerdo->paciente_id);
     }
