@@ -37,9 +37,9 @@
         </div>
         <div class="row form-group justify-content-between">
             <div class="row col-sm-12 col-md-6 col-lg-5">
-                <label for="telefono" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Teléfono</label>
+                <label for="telefono" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-6">Teléfono<span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-12 col-lg-6">
-                    <input id="telefono" type="text" class="form-control form-control-sm @error('telefono') is-invalid @enderror" placeholder="Número de teléfono" name="telefono" value="{{ old('telefono') }}" autocomplete="telefono" autofocus>
+                    <input id="telefono" type="text" class="form-control form-control-sm @error('telefono') is-invalid @enderror" placeholder="Número de teléfono" name="telefono" value="{{ old('telefono') }}"required autocomplete="telefono" autofocus>
 
                     @error('telefono')
                     <span class="invalid-feedback" role="alert">
