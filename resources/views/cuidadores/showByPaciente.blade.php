@@ -38,10 +38,10 @@
                     <td>{{$cuidador->localidad}}</td>
                     <td>{{$cuidador->parentesco}}</td>
                     <td class="tableActions">
-                        <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" onclick="confirmar(event)" style="display:inline!important;">
+                        <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" style="display:inline!important;">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                            <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                         </form>
                     </td>
                 </tr>
@@ -58,5 +58,7 @@
 @push('scripts')
     @include('layouts.scripts')
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/table.js"></script>
+    <script src="/js/confirm.js"></script>
 @endpush

@@ -1,4 +1,3 @@
-@ -1,12 +1,13 @@
 @if($show)
 <div id="showMultimedia" class="row pb-2">
     <div class="img-wrap text-center w-25 mx-auto">

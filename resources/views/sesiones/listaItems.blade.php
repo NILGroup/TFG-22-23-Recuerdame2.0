@@ -85,10 +85,10 @@
                             <td class="tableActions">
                                 <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                                 <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                                <form method="post" action="{{route('recuerdo.destroy',$recuerdo->id)}}" onclick="confirmar(event)" style="display:inline!important;">
+                                <form method="post" action="{{route('recuerdo.destroy',$recuerdo->id)}}" style="display:inline!important;">
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                                    <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                                 </form>
                         </td>
                     </tr>
@@ -112,20 +112,20 @@
         </div>
     </div>
 
-    <div class="dropzone dropzone-previews dropzone-custom" id="my-awesome-dropzone">
-        <div class="dz-message text-muted" data-dz-message>
-            <span>Click aquí o arrastrar y soltar</span>
-        </div>
-    </div>
+   
     @endif
     <div id="showMultimedia" class="row pb-2">
-        @foreach ($sesion->multimedias as $multimedia)
+        @foreach ($sesion->multimedias as $media)
         <div class="col-sm-4 p-2">
             <div class="img-wrap">
-                <a href="#" class="clear"><i class="fa-solid fa-circle-xmark text-danger fa-lg"></i></a>
-                <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon"></a>
+                <a href="#" class="visualizarImagen"><img src="{{$media->fichero}}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon"></a>
             </div>
         </div>
         @endforeach
     </div>
 </div>
+
+@push('scripts')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/confirm.js"></script>
+@endpush

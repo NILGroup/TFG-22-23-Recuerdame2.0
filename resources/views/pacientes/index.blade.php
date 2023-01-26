@@ -46,10 +46,10 @@
                     
                         <a href="/pacientes/{{$paciente->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                         <a href="{{route('pacientes.edit',$paciente->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                        <form method="post" action="{{ route('pacientes.destroy', $paciente->id) }}"  style="display:inline!important;">
+                        <form method="post" action="{{ route('pacientes.destroy', $paciente->id) }}" style="display:inline!important;">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" onclick="confirmar(event)" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                            <button type="submit" class="confirm_delete" data-toggle="tooltip" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                         </form>
                         <a href="/pacientes/{{$paciente->id}}/asignarTerapeutas"><i class="fa-solid fa-users-line text-success tableIcon"></i></a>
                     </div>
@@ -68,32 +68,7 @@
 @push('scripts')
     @include('layouts.scripts')
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
-
-    <script>
-        function confirmar(e) {
-            if (!confirm('¿Seguro que desea eliminar este paciente?')) {
-                e.preventDefault();
-            }
-        }
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('#tabla').DataTable({
-                paging: false,
-                info: false,
-                language: { 
-                    search: "_INPUT_",
-                    searchPlaceholder: " Buscar...",
-                    emptyTable: "No hay datos disponibles"
-                },
-                responsive: {
-                    details: {
-                    type: 'column',
-                    target: 'tr'
-                    }
-                },
-                dom : "<<'form-control-sm mr-5' f>>"
-            });
-        });
-    </script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/table.js"></script>
+    <script src="/js/confirm.js"></script>
 @endpush
