@@ -21,6 +21,7 @@ function cerrar(){
             break
         }
     }
+   
     if (correcto) CrearPersonas()
 }
 
@@ -43,14 +44,16 @@ function CrearPersonas() {
     //console.log(inputValues)
 
     var fd = new FormData();
-    fd.append('nombre', inputValues[1].value);
-    fd.append('apellidos', inputValues[2].value);
-    fd.append('telefono', inputValues[3].value);
-    fd.append('ocupacion', inputValues[4].value);
-    fd.append('email', inputValues[5].value);
-    fd.append('localidad', inputValues[6].value);
-    fd.append('tipo_custom', inputValues[7].value);
-    fd.append('contacto', inputValues[8].value);
+    
+
+    fd.append('nombre', inputValues[2].value);
+    fd.append('apellidos', inputValues[3].value);
+    fd.append('telefono', inputValues[4].value);
+    fd.append('ocupacion', inputValues[5].value);
+    fd.append('email', inputValues[6].value);
+    fd.append('localidad', inputValues[7].value);
+    fd.append('tipo_custom', inputValues[8].value);
+    fd.append('contacto', inputValues[9].value);
     fd.append('observaciones', document.getElementById("observaciones").value);
     fd.append('tiporelacion_id', rel.value);
     fd.append('paciente_id', inputValues[0].value);
