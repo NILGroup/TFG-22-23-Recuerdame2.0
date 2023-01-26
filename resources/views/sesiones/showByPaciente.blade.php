@@ -41,7 +41,7 @@
                             @if($sesion->fecha_finalizada == null)
                             <a class="btn btn-success btn-sm" style="width: 50%;" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
                             @else
-                            <a class="btn btn-danger btn-sm" style="width: 50%;" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/informe">Ver PDF</a>
+                            <a class="btn btn-primary btn-sm" style="width: 50%;" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/informe">Ver informe</a>
                             @endif
                         </div>
                         
