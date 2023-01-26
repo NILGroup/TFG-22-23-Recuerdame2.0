@@ -57,6 +57,13 @@ class PersonasRelacionadasController extends Controller
 
     public function store(Request $request)
     {
+        $contacto = false;
+        if (isset($request->contacto)){
+            $contacto = true;
+            Personarelacionada::where('contacto', '=', true)->update(["contacto" => false]);
+        }
+
+        
 
         $persona = Personarelacionada::create([
 
@@ -66,7 +73,7 @@ class PersonasRelacionadasController extends Controller
             "ocupacion" => $request->ocupacion,
             "email" => $request->email,
             "localidad" => $request->localidad,
-            "contacto" => $request->contacto,
+            "contacto" => $contacto,
             "observaciones" => $request->observaciones,
             "tiporelacion_id" => $request->tiporelacion_id,
             "tipo_custom" => $request->tipo_custom,
@@ -101,6 +108,15 @@ class PersonasRelacionadasController extends Controller
     /*Como el store pero no devuelve a una vista*/
     public function storeNoView(Request $request)
     {
+
+        $contacto = false;
+        if (isset($request->contacto)){
+            $contacto = true;
+            Personarelacionada::where('contacto', '=', true)->update(["contacto" => false]);
+        }
+
+        throw new \Exception(json_encode($contacto));
+
         $persona = Personarelacionada::create([
 
             "nombre" => $request->nombre,
@@ -109,7 +125,7 @@ class PersonasRelacionadasController extends Controller
             "ocupacion" => $request->ocupacion,
             "email" => $request->email,
             "localidad" => $request->localidad,
-            "contacto" => $request->contacto,
+            "contacto" => $contacto,
             "observaciones" => $request->observaciones,
             "tiporelacion_id" => $request->tiporelacion_id,
             "tipo_custom" => $request->tipo_custom,
@@ -157,6 +173,12 @@ class PersonasRelacionadasController extends Controller
     public function update(Request $request)
     {
         $persona = Personarelacionada::findOrFail($request->id);
+        $contacto = false;
+        if (isset($request->contacto)){
+            $contacto = true;
+            Personarelacionada::where('contacto', '=', true)->update(["contacto" => false]);
+        }
+        $request->merge(['contacto' => $contacto]);
         $persona->update($request->all());
         return redirect("/pacientes/$persona->paciente_id/personas/$persona->id");
     }

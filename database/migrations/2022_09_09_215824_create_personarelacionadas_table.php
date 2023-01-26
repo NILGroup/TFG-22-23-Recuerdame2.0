@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string("ocupacion");
             $table->string("email");
             $table->string("localidad");
-            $table->string("contacto");
+            $table->boolean("contacto");
             $table->text("observaciones")->nullable();
             $table->unsignedBigInteger("tiporelacion_id");
             $table->string("tipo_custom")->nullable();

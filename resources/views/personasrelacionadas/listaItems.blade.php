@@ -91,10 +91,8 @@
     <div class="row col-sm-12 col-md-6 col-lg-7">
         <label for="contacto" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Contacto<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-8">
-            <input type="text" name="contacto" class="form-control form-control-sm" id="contacto" value="{{$persona->contacto}}" required @if($show) disabled @endif>   
-            <div class="invalid-feedback">
-                Campo obligatorio
-            </div>
+            <input type="checkbox" name="contacto" class="form-check-input" id="contacto" value="x" @if($persona->contacto) checked @endif @if($show) disabled @endif>   
+           
         </div>
     </div>
 </div>

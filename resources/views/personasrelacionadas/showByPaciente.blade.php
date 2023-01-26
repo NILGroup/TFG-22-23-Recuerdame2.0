@@ -29,7 +29,9 @@
             <tbody>
                 @foreach($personas as $persona)
                 <tr>
-                    <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}}</a></td>
+                   
+
+                    <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}}</a> @if($persona->contacto)★@endif</td>
                     <td>{{$persona->apellidos}}</td>
                     <td>{{$persona->tiporelacion->nombre}}</td>
 
