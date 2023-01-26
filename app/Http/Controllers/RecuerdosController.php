@@ -113,6 +113,9 @@ class RecuerdosController extends Controller
             }
         }
 
+        //Array de las ID de las imagenes a eliminar del recuerdo
+        $recuerdo->multimedias()->detach($request->media);
+        
         return self::showByPaciente($recuerdo->paciente_id);
     }
 
