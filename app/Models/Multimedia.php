@@ -14,7 +14,8 @@ class Multimedia extends Model
     protected $fillable = [
         "nombre",
         "fichero",
-        "personarelacionada_id"
+        "personarelacionada_id",
+        "paciente_id"
     ];
 
     public function personas_relacionadas(){
@@ -31,7 +32,7 @@ class Multimedia extends Model
     }
 
     public function pacientes(){
-        return $this->belongsToMany(Paciente::class);
+        return $this->belongsTo(Paciente::class);
     }
 }
 

@@ -1,12 +1,13 @@
+@ -1,12 +1,13 @@
 @if($show)
 <div id="showMultimedia" class="row pb-2">
-    @foreach ($paciente->multimedias as $media)
-    <div class="text-center mb-3 w-25 h-25 mx-auto">
-        <div class="img-wrap">
-            <a href="#" class="visualizarImagen"><img src="{{$media->fichero}}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon"></a>
-        </div>
+    <div class="img-wrap text-center w-25 mx-auto">
+        @if (isset($paciente->multimedia))
+        <a href="#" class="visualizarImagen"><img src="{{$paciente->multimedia->fichero}}" class=" img-responsive-sm img-thumbnail"></a>
+        @else
+        <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="img-responsive-sm img-thumbnail"></a>
+        @endif
     </div>
-    @endforeach
 </div>
 
 <!-- <div class="text-center mb-3">

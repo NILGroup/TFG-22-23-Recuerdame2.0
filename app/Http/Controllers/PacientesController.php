@@ -96,21 +96,20 @@ class PacientesController extends Controller
         ]);
 
 
-        if ($request->has("file")) { //EN CASO DE MULTIMEDIA
-            $name = [];
-            $original_name = [];
+        $name = [];
+        $original_name = [];
+        if ($request->has("file")){
             foreach ($request->file('file') as $key => $value) {
                 $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
                 $destinationPath = public_path() . '/storage/img';
                 $value->move($destinationPath, $image);
                 $name[] = $image;
                 $original_name[] = $value->getClientOriginalName();
-                $multimedia = Multimedia::create([
+                $multimedia = new Multimedia([
                     'nombre' => $image,
                     'fichero' => '/storage/img/' . $image
                 ]);
-                
-                $paciente->multimedias()->attach($multimedia->id);
+                $paciente->multimedia()->save($multimedia);
             }
         }
         $paciente->users()->save($user);
