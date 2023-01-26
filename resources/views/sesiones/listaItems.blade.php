@@ -112,18 +112,13 @@
         </div>
     </div>
 
-    <div class="dropzone dropzone-previews dropzone-custom" id="my-awesome-dropzone">
-        <div class="dz-message text-muted" data-dz-message>
-            <span>Click aquí o arrastrar y soltar</span>
-        </div>
-    </div>
+   
     @endif
     <div id="showMultimedia" class="row pb-2">
-        @foreach ($sesion->multimedias as $multimedia)
+        @foreach ($sesion->multimedias as $media)
         <div class="col-sm-4 p-2">
             <div class="img-wrap">
-                <a href="#" class="clear"><i class="fa-solid fa-circle-xmark text-danger fa-lg"></i></a>
-                <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon"></a>
+                <a href="#" class="visualizarImagen"><img src="{{$media->fichero}}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon"></a>
             </div>
         </div>
         @endforeach

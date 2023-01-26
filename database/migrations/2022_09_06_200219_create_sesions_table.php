@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('sesions', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('fecha');
+            $table->dateTime('fecha');
             $table->string('objetivo'); //varchar en laravel
             $table->string('descripcion')->nullable();
             $table->timestamp('fecha_finalizada')->nullable();
