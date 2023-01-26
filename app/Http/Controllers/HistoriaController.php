@@ -110,7 +110,7 @@ class HistoriaController extends Controller
         $apto = $request->apto;
         $noApto = $request->noApto;
         $paciente = Paciente::find($idPaciente);
-    
+       
         if (is_null($idEtapa) && is_null($idEtiqueta) && is_null($idCategoria)) {
             if ($apto == 1 && $noApto == 1) { //si queremos todos los recuerdos
                 $listaRecuerdos = $paciente->recuerdos()->get();
@@ -126,6 +126,7 @@ class HistoriaController extends Controller
                 $idEtapa = Etapa::select('id');
             if (is_null($idEtiqueta))
                 $idEtiqueta = Etiqueta::select('id');
+          
             if (is_null($idCategoria))
                 $idCategoria = Categoria::select('id');
         }
@@ -144,7 +145,7 @@ class HistoriaController extends Controller
             ->whereIn('etiqueta_id', $idEtiqueta)
             ->whereIn('categoria_id', $idCategoria)
             ->get();
-
+  
         $listaRecuerdos = $listaRecuerdos->whereBetween('fecha', [$fechaInicio, $fechaFin]);
         //return $listaRecuerdos;
 
