@@ -5,12 +5,3 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
 
 <script src="/js/general.js"></script>
-
-<!-- Hay que modificarlo -->
-<script>
-  function confirmar(e) {
-    if (!confirm('¿Seguro que desea eliminar?')) {
-      e.preventDefault();
-    }
-  }
-</script>
