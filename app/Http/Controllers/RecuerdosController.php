@@ -71,6 +71,7 @@ class RecuerdosController extends Controller
     public function store(Request $request)
     {
 
+    
         //Ahora que tenemos creado el recuerdo
         $recuerdo = Recuerdo::updateOrCreate(
             ['id' => $request->id],
@@ -85,10 +86,12 @@ class RecuerdosController extends Controller
                 'estado_id' => $request->estado_id,
                 'etiqueta_id' => $request->etiqueta_id,
                 'puntuacion' => $request->puntuacion,
-                "tipo_custom" => $request->tipo_custom,
+                'tipo_custom' => $request->tipo_custom,
                 'paciente_id' => $request->paciente_id
             ]
         );
+
+        
 
 
         if ($request->has("file")) { //EN CASO DE MULTIMEDIA

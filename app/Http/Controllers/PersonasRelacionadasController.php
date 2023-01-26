@@ -115,8 +115,7 @@ class PersonasRelacionadasController extends Controller
             Personarelacionada::where('contacto', '=', true)->update(["contacto" => false]);
         }
 
-        throw new \Exception(json_encode($contacto));
-
+        
         $persona = Personarelacionada::create([
 
             "nombre" => $request->nombre,
