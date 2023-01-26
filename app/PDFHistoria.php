@@ -109,9 +109,12 @@ class PDFHistoria extends FPDF{
     
     function fechaHoy($pdf){ 
         
+        $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+     
         $fecha_actual = (Carbon::now());
+        $mes = $meses[($fecha_actual->format('n')) - 1];
         $fecha = utf8_decode('Fecha de generación del documento: ' );
-        $fecha .= $fecha_actual;
+        $fecha .= $fecha_actual->format('d') . ' de ' . $mes . ' de ' . $fecha_actual->format('Y');
         $pdf->Cell(90,7,"");
         $pdf->SetTextColor( 128 , 128, 128);
         $pdf->Cell(160,7,$fecha);
