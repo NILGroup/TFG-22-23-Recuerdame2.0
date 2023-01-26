@@ -21,7 +21,7 @@
 </div>
 <div class="row justify-content-between">
     <div class="row col-sm-6 col-md-6 col-lg-6">
-        <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2" >Fecha<span class="asterisco">*</span></label>
+        <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha<span class="asterisco">*</span></label>
         <div class="col-sm-9 col-md-6 col-lg-4">
             <input type="date" class="form-control form-control-sm" id="fecha" required name="fecha" value="{{$recuerdo->fecha}}" @if($show) disabled @endif>
         </div>
@@ -44,8 +44,8 @@
         <label for="puntuacion" class="form-label col-form-label-sm col-sm-2 col-md-2 col-lg-1" data-toggle="tooltip" data-placement="top" title="Grado de positividad de la emoción generada al paciente por el recuerdo">Puntuación</label>
 
         <div class="col-md-auto">0 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-frown-fill" viewBox="0 0 16 16">
-  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm-2.715 5.933a.5.5 0 0 1-.183-.683A4.498 4.498 0 0 1 8 9.5a4.5 4.5 0 0 1 3.898 2.25.5.5 0 0 1-.866.5A3.498 3.498 0 0 0 8 10.5a3.498 3.498 0 0 0-3.032 1.75.5.5 0 0 1-.683.183zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
-</svg></div>
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm-2.715 5.933a.5.5 0 0 1-.183-.683A4.498 4.498 0 0 1 8 9.5a4.5 4.5 0 0 1 3.898 2.25.5.5 0 0 1-.866.5A3.498 3.498 0 0 0 8 10.5a3.498 3.498 0 0 0-3.032 1.75.5.5 0 0 1-.683.183zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z" />
+            </svg></div>
         <div class="col-sm-auto col-md-auto col-lg-auto">
             <div class="range-wrap">
                 <div class="range-value" id="rangeV"></div>
@@ -53,8 +53,8 @@
             </div>
         </div>
         <div class="col mx-auto">10 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-smile-fill" viewBox="0 0 16 16">
-  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
-</svg></div>
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z" />
+            </svg></div>
     </div>
 
     <label id="valorPuntuacion" class="form-label col-sm-2 col-md-2 col-lg-2"></label>
@@ -158,8 +158,18 @@
     </div>
 </div>
 @if(!$show)
-@endif
-<div id="showMultimedia" class="row pb-2">
+<div class="row d-flex">
+    @foreach ($recuerdo->multimedias as $media)
+
+    <div class="mb-5" style="width: fit-content;">
+        <label class="visualizarImagen" for="media"><img src="{{$media->fichero}}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon" style="height:15em; width: 15em;"></label>
+        <input class="form-check-input me-1" name="media[]" type="checkbox" value="{{$media->id}}" style="background-color: #F63F3E">
+    </div>
+    @endforeach
+</div>
+
+@else
+<div id="showMultimedia" class="row pb-2 ">
     @foreach ($recuerdo->multimedias as $media)
     <div class="col-sm-4 p-2">
         <div class="img-wrap">
@@ -168,11 +178,13 @@
     </div>
     @endforeach
 </div>
+@endif
+
 
 @push('styles')
 <link rel="stylesheet" href="/css/slider.css">
 @endpush
 
 @push('scripts')
-    <script src="/js/puntuacionRecuerdo.js"></script>
+<script src="/js/puntuacionRecuerdo.js"></script>
 @endpush
