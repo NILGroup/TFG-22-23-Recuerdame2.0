@@ -11,6 +11,7 @@ use App\Models\Etiqueta;
 use App\Models\Paciente;
 use App\Models\Multimedia;
 use App\Models\Emocion;
+use App\Models\Personarelacionada;
 use App\Models\Tiporelacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -56,7 +57,9 @@ class RecuerdosController extends Controller
         $personas = $paciente->personasrelacionadas;
         $tipos = Tiporelacion::all()->sortBy("id");
         $idPaciente = $paciente->id;
-        return view("recuerdos.create", compact("idPaciente","estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "recuerdo", "personas", "paciente", "show"));
+        $mostrarFoto = false;
+        $persona = new Personarelacionada();
+        return view("recuerdos.create", compact("idPaciente","mostrarFoto", "persona","estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "recuerdo", "personas", "paciente", "show"));
     }
 
     /**
@@ -178,7 +181,10 @@ class RecuerdosController extends Controller
         $categorias = Categoria::all()->sortBy("id");
         $personas = $paciente->personasrelacionadas;
         $tipos = Tiporelacion::all()->sortBy("id");
-        return view("recuerdos.edit", compact("recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "paciente", "show"));
+        $idPaciente = $paciente->id;
+        $mostrarFoto = false;
+        $persona = new Personarelacionada();
+        return view("recuerdos.edit", compact("idPaciente","mostrarFoto", "persona","recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "paciente", "show"));
     }
 
     /**
