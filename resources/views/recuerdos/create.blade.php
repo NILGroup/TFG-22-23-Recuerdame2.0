@@ -29,7 +29,7 @@
     </form>
 </div>
 
-@include('recuerdos.models')
+@include('recuerdos.modals')
 @endsection
 
 @push('styles')

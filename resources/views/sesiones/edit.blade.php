@@ -17,8 +17,8 @@
     </form>
 </div>
 
-@include('sesiones.models')
-@include('recuerdos.models')
+@include('sesiones.modals')
+@include('recuerdos.modals')
 
 @endsection
 
