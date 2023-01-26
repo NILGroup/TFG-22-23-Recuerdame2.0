@@ -55,7 +55,8 @@ class RecuerdosController extends Controller
         $categorias = Categoria::all()->sortBy("id");
         $personas = $paciente->personasrelacionadas;
         $tipos = Tiporelacion::all()->sortBy("id");
-        return view("recuerdos.create", compact("estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "recuerdo", "personas", "paciente", "show"));
+        $idPaciente = $paciente->id;
+        return view("recuerdos.create", compact("idPaciente","estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "recuerdo", "personas", "paciente", "show"));
     }
 
     /**

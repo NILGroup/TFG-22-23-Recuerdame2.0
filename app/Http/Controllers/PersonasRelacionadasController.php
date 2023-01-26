@@ -47,7 +47,8 @@ class PersonasRelacionadasController extends Controller
         $tipos = Tiporelacion::all()->sortBy("id");
         $persona = new Personarelacionada();
         $paciente = Paciente::find($idPaciente);
-        return view("personasrelacionadas.create", compact("idPaciente", "paciente", "tipos", "persona", "show"));
+        $mostrarFoto = true;
+        return view("personasrelacionadas.create", compact('mostrarFoto',"idPaciente", "paciente", "tipos", "persona", "show"));
     }
 
     /**
@@ -130,7 +131,8 @@ class PersonasRelacionadasController extends Controller
         $tipos = Tiporelacion::all()->sortBy("id");
         $persona = Personarelacionada::findOrFail($id);
         $idPaciente = $persona->paciente_id;
-        return view("personasrelacionadas.show", compact("persona", "tipos", "show", "idPaciente"));
+        $mostrarFoto = true;
+        return view("personasrelacionadas.show", compact("mostrarFoto","persona", "tipos", "show", "idPaciente"));
     }
 
 
@@ -144,7 +146,8 @@ class PersonasRelacionadasController extends Controller
         $tipos = Tiporelacion::all()->sortBy("id");
         $persona = Personarelacionada::findOrFail($id);
         $idPaciente = $persona->paciente_id;
-        return view("personasrelacionadas.edit", compact("persona","tipos", "show", "idPaciente"));
+        $mostrarFoto = true;
+        return view("personasrelacionadas.edit", compact("mostrarFoto","persona","tipos", "show", "idPaciente"));
     }
 
     /**

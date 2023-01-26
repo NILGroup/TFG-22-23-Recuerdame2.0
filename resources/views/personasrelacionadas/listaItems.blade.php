@@ -1,4 +1,4 @@
-
+@if($mostrarFoto)
 <div class="row mb-4">
     <div class="img-wrap text-center w-25 mx-auto">
         @if (isset($persona->multimedia))
@@ -8,6 +8,7 @@
         @endif
     </div>
 </div>
+@endif
 
 
 

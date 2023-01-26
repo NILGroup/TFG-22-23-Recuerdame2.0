@@ -50,6 +50,8 @@ class SesionesController extends Controller
     public function create()
     {
         $show = false;
+        $mostrarFoto = false;
+        $persona = new Personarelacionada();
         $sesion = new Sesion();
         $recuerdo = new Recuerdo();
         $user = Auth::user();
@@ -62,9 +64,10 @@ class SesionesController extends Controller
         $emociones = Emocion::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
         $tipos = Tiporelacion::all()->sortBy("id");
+        $idPaciente = $paciente->id;
         $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
 
-        return view("sesiones.create", compact('etapas', 'user', 'tipos', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'sesion', 'recuerdo', 'personas', 'show'));
+        return view("sesiones.create", compact('persona','idPaciente','mostrarFoto','etapas', 'user', 'tipos', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'sesion', 'recuerdo', 'personas', 'show'));
     }
 
     /**
@@ -164,6 +167,7 @@ class SesionesController extends Controller
     public function showEditable($idP, $id)
     {
         $show = false;
+        $mostrarFoto = false;
         $sesion = Sesion::findOrFail($id);
         $user = Auth::user();
         $paciente = Paciente::find(Session::get('paciente')['id']);
@@ -177,8 +181,11 @@ class SesionesController extends Controller
         $categorias = Categoria::all()->sortBy("id");
         $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
         $tipos = Tiporelacion::all()->sortBy("id");
+        $idPaciente = $paciente->id;
+        $persona = new Personarelacionada();
+
         //throw new \Exception($sesion->multimedias);
-        return view('sesiones.edit', compact('sesion', 'etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'show', 'personas', 'recuerdo', 'tipos'));
+        return view('sesiones.edit', compact('persona','idPaciente','mostrarFoto', 'sesion', 'etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'show', 'personas', 'recuerdo', 'tipos'));
     }
 
     public function showByPaciente($idPaciente)
