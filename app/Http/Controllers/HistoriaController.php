@@ -110,45 +110,23 @@ class HistoriaController extends Controller
         $apto = $request->apto;
         $noApto = $request->noApto;
         $paciente = Paciente::find($idPaciente);
-       
-        if (is_null($idEtapa) && is_null($idEtiqueta) && is_null($idCategoria)) {
-            if ($apto == 1 && $noApto == 1) { //si queremos todos los recuerdos
-                $listaRecuerdos = $paciente->recuerdos()->get();
-          
-            /*si solo queremos los recuerdos aptos apto=1, si solo queremos los no aptos
-            apto será = 0 , por tanto siempre que haya uno OOOO lo otro se hace esta consulta */
-            } else { 
-                $listaRecuerdos = $paciente->recuerdos()->where("apto", $apto)->get();
-            }
-            return view("historias.generarLibro", compact("fechaInicio", "fechaFin", "listaRecuerdos"));
-        } else {
-            if (is_null($idEtapa))
-                $idEtapa = Etapa::select('id');
-            if (is_null($idEtiqueta))
-                $idEtiqueta = Etiqueta::select('id');
-          
-            if (is_null($idCategoria))
-                $idCategoria = Categoria::select('id');
-        }
-        
-        if (is_null($paciente)) return "ID de paciente no encontrada";
 
-        //apto o/y no apto
-        if ($apto == 1 || $noApto == 1) {
-            $listaRecuerdos = $paciente->recuerdos()->where("apto", $apto)->get();
-        } else { //si queremos todos los recuerdos
-            $listaRecuerdos = $paciente->recuerdos()->get();
-        }
-        
-        $listaRecuerdos =  $listaRecuerdos
+        if (is_null($idEtapa))
+            $idEtapa = Etapa::select('id');
+        if (is_null($idEtiqueta))
+            $idEtiqueta = Etiqueta::select('id');
+        if (is_null($idCategoria))
+            $idCategoria = Categoria::select('id');
+
+        $listaRecuerdos =  $paciente->recuerdos()
             ->whereIn('etapa_id', $idEtapa)
             ->whereIn('etiqueta_id', $idEtiqueta)
             ->whereIn('categoria_id', $idCategoria)
+            ->whereBetween('fecha', [$fechaInicio, $fechaFin])
             ->get();
-  
-        $listaRecuerdos = $listaRecuerdos->whereBetween('fecha', [$fechaInicio, $fechaFin]);
-        //return $listaRecuerdos;
-
+        if(!($apto == 0 && $noApto == 0) && !($apto == 1 && $noApto == 1))
+            $listaRecuerdos = $listaRecuerdos
+                ->whereIn('apto', $apto);
         return view("historias.generarLibro", compact("fechaInicio", "fechaFin", "listaRecuerdos"));
     }
 }
