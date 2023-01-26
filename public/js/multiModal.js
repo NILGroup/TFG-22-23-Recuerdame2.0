@@ -12,3 +12,8 @@ function showModal(modal) {
     let myModal = new bootstrap.Modal(mid);
     myModal.show();
 }
+
+$(document).on('click','.accept', function(e){
+    $(".modal-fade").modal("hide");
+    $(".modal-backdrop").remove();
+})
