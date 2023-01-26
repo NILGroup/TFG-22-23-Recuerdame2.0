@@ -7,7 +7,7 @@
         <hr class="lineaTitulo">
     </div>
 
-    <form method="POST" action="/registroCuidador">
+    <form method="POST" action="/registroCuidador" id="formulario">
         @csrf
         <div class="row form-group justify-content-between">
             <div class="row col-sm-12 col-md-6 col-lg-5">
@@ -113,7 +113,7 @@
         <input id="rol" type="hidden" name="rol" value=2 required autocomplete="apellidos" autofocus>
 
         <div class="col-12">
-            <button type="submit" value="Guardar" class="btn btn-outline-primary">Guardar</button>
+            <button type="submit" value="Guardar" id="guardar" class="btn btn-outline-primary">Guardar</button>
             <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a>
         </div>
     </form>
@@ -122,4 +122,5 @@
 
 @push('scripts')
     @include('layouts.scripts')
+    <script src="/js/validacion.js"></script>
 @endpush
