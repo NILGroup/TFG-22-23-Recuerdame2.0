@@ -157,18 +157,7 @@
     <div class="col-12 justify-content-end d-flex p-2">
     </div>
 </div>
-@if(!$show)
-<div class="row d-flex">
-    @foreach ($recuerdo->multimedias as $media)
-
-    <div class="mb-5" style="width: fit-content;">
-        <label class="visualizarImagen" for="media"><img src="{{$media->fichero}}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon" style="height:15em; width: 15em;"></label>
-        <input class="form-check-input me-1" name="media[]" type="checkbox" value="{{$media->id}}" style="background-color: #F63F3E">
-    </div>
-    @endforeach
-</div>
-
-@else
+@if($show)
 <div id="showMultimedia" class="row pb-2 ">
     @foreach ($recuerdo->multimedias as $media)
     <div class="col-sm-4 p-2">
