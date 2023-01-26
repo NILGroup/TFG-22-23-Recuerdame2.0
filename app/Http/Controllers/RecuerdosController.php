@@ -116,7 +116,7 @@ class RecuerdosController extends Controller
         }
 
 
-
+        
         $personas_relacionar = $request->checkPersona; //Array de ids de las personas
         if (!is_null($personas_relacionar)) {
             foreach ($personas_relacionar as $p_id) {
@@ -125,9 +125,12 @@ class RecuerdosController extends Controller
         }
 
         //Array de las ID de las imagenes a eliminar del recuerdo
-       if(!$request->media.isNull()) {
+        
+       
+       if(isset($request->media)) {
         $recuerdo->multimedias()->detach($request->media);
        }
+   
        
         
         return self::showByPaciente($recuerdo->paciente_id);
