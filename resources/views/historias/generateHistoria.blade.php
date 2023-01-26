@@ -85,6 +85,6 @@
 @endsection
 
 @push('scripts')
-@include('layouts.scripts')
-<script src="/js/historiaVida.js"></script>
+    @include('layouts.scripts')
+    <script src="/js/historiaVida.js"></script>
 @endpush

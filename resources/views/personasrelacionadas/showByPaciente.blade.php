@@ -16,7 +16,7 @@
     </div>
 
     <div>
-        <table id="tabla" class="table table-bordered table-striped table-responsive">
+        <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de personas relacionadas</caption>
             <thead>
                 <tr class="bg-primary">

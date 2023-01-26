@@ -15,7 +15,7 @@
     </div>
 
 <div>
-    <table id="tabla" class="table table-bordered table-striped table-responsive">
+    <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
         <thead>
             <tr class="bg-primary">
                 <th scope="col">Nombre</th>

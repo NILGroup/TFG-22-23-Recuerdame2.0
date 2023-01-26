@@ -116,7 +116,7 @@
 </div> <!-- col 12 -->
 @endif
 <div>
-    <table id="tabla" class="table table-bordered table-striped table-responsive">
+    <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
         <caption>Listado de personas relacionadas</caption>
         <thead>
             <tr class="bg-primary">
@@ -177,6 +177,6 @@
 @endpush
 
 @push('scripts')
-<script src="/js/puntuacionRecuerdo.js"></script>
-<script src="/js/especificar.js"></script>
+    <script src="/js/especificar.js"></script>
+    <script src="/js/puntuacionRecuerdo.js"></script>
 @endpush

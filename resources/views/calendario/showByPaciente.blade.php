@@ -7,12 +7,12 @@
 <div class="container">
     <div id="calendar"></div>
 
-    <div class="modal fade" id="evento" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="evento" aria-hidden="true">
+    <div class="modal fade" id="evento" data-backdrop="static" data-bs-backdrop="focus" data-keyboard="false" tabindex="-1" aria-labelledby="evento" aria-hidden="false" data-keyboard="false">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header bg-info">
                     <h5 class="modal-title" id="titulo"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" >
                     </button>
                 </div>
                 <div class="modal-body">
@@ -35,14 +35,16 @@
     </div>
 </div>
 
-@include('sesiones.models')
-@include('recuerdos.models')
+@include('sesiones.modals')
+@include('recuerdos.modals')
 
 @endsection
 
 @push('scripts')
-@include('layouts.scripts')
+    @include('layouts.scripts')
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
+    <script src="/js/table.js"></script>
     <script src="/js/calendario.js"></script>
     <script src="/js/recuerdo.js"></script>
     <script src="/js/multiModal.js"></script>

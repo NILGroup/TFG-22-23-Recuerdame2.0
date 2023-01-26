@@ -13,7 +13,8 @@ function showModal(modal) {
     myModal.show();
 }
 
-$(document).on('click','.accept', function(e){
-    $(".modal-fade").modal("hide");
-    $(".modal-backdrop").remove();
-})
+$(document).on('show.bs.modal', '.modal', function () {
+    if ($(".modal-backdrop").length > -1) {
+        $(".modal-backdrop").not(':first').remove();
+    }
+});

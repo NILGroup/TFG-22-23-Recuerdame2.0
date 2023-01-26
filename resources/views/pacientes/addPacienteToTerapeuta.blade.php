@@ -15,7 +15,7 @@
 
         <input type="hidden" value="{{$paciente->id}}" name="paciente_id">
         <div>
-            <table class="table table-bordered recuerdameTable">
+            <table class="table table-bordered recuerdameTable datatable">
                 <thead>
                     <tr>
                         <th scope="col col-1"></th>
@@ -51,4 +51,6 @@
 
 @push('scripts')
     @include('layouts.scripts')
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
+    <script src="/js/table.js"></script>
 @endpush

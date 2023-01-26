@@ -12,7 +12,7 @@
                     <a href="/pacientes/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success btn-sm btn-icon mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
-            <table id="tabla1" class="table table-bordered table-striped table-responsive">
+            <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
                 <thead>
                     <tr class="bg-primary">
                         <th scope="col">#</th>
@@ -64,7 +64,7 @@
             </div>
 
             <div>
-                <table id="tabla2" class="table table-bordered table-striped table-responsive">
+                <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr class="bg-primary">
                             <th scope="col">#</th>
@@ -118,7 +118,7 @@
             </div>
 
             <div>
-                <table id="tabla3" class="table table-bordered table-striped table-responsive">
+                <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr class="bg-primary">
                             <th scope="col">#</th>
@@ -157,8 +157,3 @@
         </div>
     </div>
 </div>
-
-@push('scripts')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/confirm.js"></script>
-@endpush

@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "start": "2023-01-25",
+        "start": "2023-01-26",
         "title": "Primera terapia",
         "description": "Primera terapia de evaluaci\u00f3n al paciente Miguel",
         "color": "#00c7fc",
@@ -40,6 +40,7 @@
                 "estado_id": 1,
                 "etiqueta_id": 3,
                 "apto": 0,
+                "tipo_custom": null,
                 "etapa": {
                     "id": 3,
                     "nombre": "Adulto joven"
@@ -75,6 +76,7 @@
                 "estado_id": 1,
                 "etiqueta_id": 1,
                 "apto": 1,
+                "tipo_custom": null,
                 "etapa": {
                     "id": 3,
                     "nombre": "Adulto joven"
@@ -131,6 +133,7 @@
                 "estado_id": 1,
                 "etiqueta_id": 3,
                 "apto": 0,
+                "tipo_custom": null,
                 "etapa": {
                     "id": 3,
                     "nombre": "Adulto joven"
@@ -166,6 +169,7 @@
                 "estado_id": 1,
                 "etiqueta_id": 1,
                 "apto": 1,
+                "tipo_custom": null,
                 "etapa": {
                     "id": 3,
                     "nombre": "Adulto joven"

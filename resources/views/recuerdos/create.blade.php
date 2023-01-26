@@ -46,5 +46,4 @@
         var ruta = "/pacientes/" + id + "/recuerdos"
     </script>
     <script src="/js/dropzone.js"></script>
-   
 @endpush

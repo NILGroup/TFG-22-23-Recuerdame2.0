@@ -50,7 +50,7 @@
     </div>
 
     <div>
-        <table id="tabla" class="table table-bordered table-striped table-responsive">
+        <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de recuerdos</caption>
             <thead>
                 <tr class="bg-primary">
@@ -117,8 +117,3 @@
     </div>
     @endforeach
 </div>
-
-@push('scripts')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/confirm.js"></script>
-@endpush
