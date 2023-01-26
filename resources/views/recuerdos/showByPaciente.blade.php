@@ -19,12 +19,10 @@
     </div>
 
     <div>
-        <?php $i = 1; ?>
         <table id="tabla" class="table table-bordered table-striped table-responsive">
         <caption>Listado de recuerdos</caption>
         <thead>
         <tr class="bg-primary">
-                    <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Etapa</th>
@@ -38,8 +36,6 @@
 
             @foreach($recuerdos as $recuerdo)
             <tr>
-
-                <th scope="row"><?php echo $i ?></th>
 
                 <td><a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}">{{$recuerdo->nombre}}</a></td>
                 <td>{{$recuerdo->fecha}}</td>
@@ -72,7 +68,6 @@
                         </form>
                     @endif
                 </td>
-                <?php $i++; ?>
             </tr>
             @endforeach
 

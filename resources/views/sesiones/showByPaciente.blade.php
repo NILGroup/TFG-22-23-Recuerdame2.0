@@ -19,7 +19,6 @@
             <caption>Listado de sesiones</caption>
             <thead>
                 <tr class="bg-primary">
-                    <th scope="col">#</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Objetivo</th>
                     <th scope="col">Finalizada/No finalizada</th>
@@ -28,10 +27,8 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $i = 1; ?>
                 @foreach($sesiones as $sesion)
                 <tr>
-                    <th scope="row"><?php echo $i ?></th>
                     <td><a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}">{{date("d/m/Y", strtotime($sesion->fecha))}}</a></td>
                     <td>{{$sesion->objetivo}}</td>
                     <td>
@@ -62,7 +59,6 @@
                         </form>
                     </td>
                 </tr>
-                <?php $i++; ?>
                 @endforeach
             </tbody>
         </table>
