@@ -6,7 +6,7 @@
 
             <div class="modal-header">
                 <h5 class="modal-title" id="personasExistentesLabel">Crear: Recuerdo</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  onclick="$('.modal-backdrop').remove();"></button>
             </div>
 
             <div class="modal-body" id="recuerdosCreatorForm">
@@ -14,7 +14,7 @@
             </div> <!-- Modal body -->
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="$('.modal-backdrop').remove();">Cerrar</button>
                 <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearRecuerdo()">Guardar</button>
             </div>
         </div>
@@ -30,7 +30,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="recuerdosExistentesLabel">Recuerdos existentes</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="$('.modal-backdrop').remove();"></button>
             </div>
 
             <div class="modal-body">
@@ -70,7 +70,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="$('.modal-backdrop').remove();">Cerrar</button>
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="return agregarRecuerdosExistentes(checkRecuerdo);">Guardar</button>
             </div>
         </div>

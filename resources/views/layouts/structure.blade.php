@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     <style type ="text/css">
         .modal{
-            backdrop-filter: url(filters.svg#filter) blur(1px) saturate(120%);
+            backdrop-filter: blur(1px) saturate(120%);
         }
     </style>
     @stack('styles')
