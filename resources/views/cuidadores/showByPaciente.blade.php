@@ -17,7 +17,6 @@
         <table id="tabla" class="table table-bordered table-striped table-responsive">
             <thead>
                 <tr class="bg-primary">
-                    <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellidos</th>
                     <th scope="col">Correo electrónico</th>
@@ -28,11 +27,8 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $i = 1; ?>
                 @foreach($cuidadores as $cuidador)
                 <tr>
-                    <th scope="row"><?php echo $i ?></th>
-
                     <td>{{$cuidador->nombre}}</td>
                     <td>{{$cuidador->apellidos}}</td>
                     <td>{{$cuidador->email}}</td>
@@ -47,7 +43,6 @@
                         </form>
                     </td>
                 </tr>
-                <?php $i++; ?>
 
                 @endforeach
             </tbody>

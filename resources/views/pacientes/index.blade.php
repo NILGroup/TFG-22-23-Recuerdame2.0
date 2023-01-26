@@ -15,11 +15,9 @@
     </div>
 
 <div>
-    <?php $i = 1;?>
     <table id="tabla" class="table table-bordered table-striped table-responsive">
         <thead>
             <tr class="bg-primary">
-                <th scope="col">#</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
                 <th scope="col">Género</th>
@@ -31,7 +29,6 @@
         @foreach($pacientes as $paciente)
             <tr class="">
             
-                <th scope="row" ><?php echo $i ?></th>
                 
                 <td><a href="/pacientes/{{$paciente->id}}/sesiones" class="link-primary"> {{$paciente->nombre}}</a></td>
                 <td>{{$paciente->apellidos}}</td>
@@ -54,7 +51,6 @@
                         <a href="/pacientes/{{$paciente->id}}/asignarTerapeutas"><i class="fa-solid fa-users-line text-success tableIcon"></i></a>
                     </div>
                 </td>
-                <?php   $i++; ?>
             </tr>
         @endforeach
 
