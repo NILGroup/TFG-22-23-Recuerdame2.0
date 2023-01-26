@@ -8,8 +8,10 @@
     </div>
     <div class="row mb-2">
         <div class="col-12 justify-content-end d-flex">
-            <a href="/pacientes/{{$paciente->id}}/cuidadores/crear"><button type="button"  id="mybutton" class="btn btn-primary btn-registro mx-3">Registro cuidador</button></a>
+            <a href="/pacientes/{{$paciente->id}}/cuidadores/crear"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
         </div>
+
+    </div>
     </div>
     <div>
         <table id="tabla" class="table table-bordered table-striped table-responsive">
