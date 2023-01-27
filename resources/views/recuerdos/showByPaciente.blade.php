@@ -21,8 +21,16 @@
     <div>
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
         <caption>Listado de recuerdos</caption>
-        <thead>
-        <tr class="bg-primary">
+            <thead>
+                <tr class="searcher">
+                    <th scope="col">nombre</th>
+                    <th scope="col">fecha</th>
+                    <th scope="col">etapa</th>
+                    <th scope="col">categoría</th>
+                    <th scope="col">estado</th>
+                    <th scope="col">etiqueta</th>
+                </tr>
+                <tr class="bg-primary">
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Etapa</th>
@@ -77,7 +85,7 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/table.js"></script>
     <script src="/js/confirm.js"></script>

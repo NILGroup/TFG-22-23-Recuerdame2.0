@@ -33,10 +33,14 @@
             </div>
 
             <div class="modal-body">
-                <table class="table table-bordered recuerdameTable">
+                <table class="table table-bordered table-striped table-responsive datatable" style="width:100%;">
                     <thead>
-                        <tr>
-                            <th scope="col">#</th>
+                        <tr class="searcher">
+                            <th scope="col">nombre</th>
+                            <th scope="col">apellidos</th>
+                            <th scope="col">tipo de Relacion</th>
+                        </tr>
+                        <tr class="bg-primary">
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellidos</th>
                             <th scope="col">Tipo de Relacion</th>
@@ -44,10 +48,8 @@
                         </tr>
                     </thead>
                     <tbody id="tablaPersonasExistentes">
-                        <?php $i = 1 ?>
                         @foreach ($personas as $persona)
                         <tr>
-                            <th scope="row"><?php echo $i ?></th>
                             <td>{{$persona->nombre}}</td>
                             <td>{{$persona->apellidos}}</td>
                             <td>{{$persona->tiporelacion->nombre}}</td>
@@ -55,7 +57,6 @@
                                 <input class="form-check-input" type="checkbox" value="{{$persona->id}}" name="checkPersonaExistente[]" id="checkPersonaExistente" @if($recuerdo->personas_relacionadas->contains($persona)) checked @endif>
                             </td>
                         </tr>
-                        <?php $i++ ?>
                         @endforeach
                     </tbody>
                 </table>

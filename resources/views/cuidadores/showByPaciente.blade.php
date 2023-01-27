@@ -16,6 +16,14 @@
     <div>
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <thead>
+                <tr class="searcher">
+                    <th scope="col">nombre</th>
+                    <th scope="col">apellidos</th>
+                    <th scope="col">correo electrónico</th>
+                    <th scope="col">teléfono</th>
+                    <th scope="col">localidad</th>
+                    <th scope="col">grado de parentesco</th>
+                </tr>
                 <tr class="bg-primary">
                     <th scope="col">Nombre</th>
                     <th scope="col">Correo electrónico</th>
@@ -52,7 +60,7 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/table.js"></script>
     <script src="/js/confirm.js"></script>

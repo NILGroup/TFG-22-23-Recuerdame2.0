@@ -12,6 +12,11 @@
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de informes de sesiones</caption>
             <thead>
+                <tr class="searcher">
+                    <th scope="col">informe</th>
+                    <th scope="col">fecha del informe</th>
+                    <th scope="col">apto para continuar</th>
+                </tr>
                 <tr class="bg-primary">
                     <th scope="col">Informe</th>
                     <th scope="col">Fecha del informe</th>
@@ -53,7 +58,7 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/table.js"></script>
     <script src="/js/confirm.js"></script>

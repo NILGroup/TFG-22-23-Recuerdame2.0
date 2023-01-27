@@ -34,11 +34,18 @@
             </div>
 
             <div class="modal-body">
-                <table class="table table-bordered table-striped table-responsive">
-                    <caption>Listado de recuerdos</caption>
+                <table class="table table-bordered table-striped table-responsive datatable">
+
                     <thead>
+                        <tr class="searcher">
+                            <th scope="col">nombre</th>
+                            <th scope="col">fecha</th>
+                            <th scope="col">etapa</th>
+                            <th scope="col">categoría</th>
+                            <th scope="col">estado</th>
+                            <th scope="col">etiqueta</th>
+                        </tr>
                         <tr class="bg-primary">
-                            <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Etapa</th>
@@ -49,10 +56,8 @@
                         </tr>
                     </thead>
                     <tbody id="tablaRecuerdosExistentes">
-                        <?php $i = 1 ?>
                         @foreach ($recuerdos as $recuerdo)
                         <tr>
-                            <th scope="row"><?php echo $i ?></th>
                             <td>{{$recuerdo->nombre}}</td>
                             <td>{{$recuerdo->fecha}}</td>
                             <td>{{$recuerdo->etapa->nombre}}</td>
@@ -63,7 +68,6 @@
                                 <input class="form-check-input" type="checkbox" value="{{$recuerdo->id}}" name="checkRecuerdo[]" id="checkRecuerdo" @if($sesion->recuerdos->contains($recuerdo)) checked @endif>
                             </td>
                         </tr>
-                        <?php $i++ ?>
                         @endforeach
                     </tbody>
                 </table>

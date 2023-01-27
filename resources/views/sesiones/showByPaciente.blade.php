@@ -18,11 +18,15 @@
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de sesiones</caption>
             <thead>
+                <tr class="searcher">
+                    <th scope="col">fecha</th>
+                    <th scope="col">objetivo</th>
+                    <th scope="col">informe</th>
+                </tr>
                 <tr class="bg-primary">
                     <th scope="col">Fecha</th>
                     <th scope="col">Objetivo</th>
-                    <th scope="col">Finalizada/No finalizada</th>
-                    <th scope="col"></th>
+                    <th scope="col">Informe</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -31,11 +35,6 @@
                 <tr>
                     <td><a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}">{{date("d/m/Y", strtotime($sesion->fecha))}}</a></td>
                     <td>{{$sesion->objetivo}}</td>
-                    <td>
-                        @if($sesion->fecha_finalizada != null)
-                        <i class="fa-solid fa-check text-success tableIcon"></i>{{date("d/m/Y", strtotime($sesion->fecha_finalizada))}}
-                        @endif 
-                    </td>
                     <td>
                         <div class="d-flex justify-content-center">
                             @if($sesion->fecha_finalizada == null)
@@ -69,7 +68,7 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/table.js"></script>
     <script src="/js/confirm.js"></script>

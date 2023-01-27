@@ -17,11 +17,16 @@
         <div>
             <table class="table table-bordered recuerdameTable datatable">
                 <thead>
-                    <tr>
+                    <tr class="searcher">
+                        <th scope="col col-1"></th>
+                        <th scope="col col-12">nombre</th>
+                        <th scope="col col-12">apellidos</th>
+                    </tr>
+                    <tr class="bg-primary">
                         <th scope="col col-1"></th>
                         <th scope="col col-12">Nombre</th>
                         <th scope="col col-12">Apellidos</th>
-
+                    </tr>
                 </thead>
                 @foreach($users as $user)
                     <tr>
@@ -51,6 +56,6 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
     <script src="/js/table.js"></script>
 @endpush

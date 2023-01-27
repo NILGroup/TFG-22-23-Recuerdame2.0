@@ -116,24 +116,24 @@
 </div> <!-- col 12 -->
 @endif
 <div>
-    <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
+    <table id="tabla" class="table table-bordered table-striped table-responsive datatable" style="width: 100%;">
         <caption>Listado de personas relacionadas</caption>
         <thead>
+            <tr class="searcher">
+                <th scope="col">nombre</th>
+                <th scope="col">apellidos</th>
+                <th scope="col">tipo de relación</th>
+            </tr>
             <tr class="bg-primary">
-                <th scope="col">#</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
-                <th scope="col">Tipo de relación/parentesco</th>
-                @if($show)
+                <th scope="col">Tipo de relación</th>
                 <th scope="col"></th>
-                @endif
             </tr>
         </thead>
         <tbody id="divPersonas">
-            <?php $n = 1; ?>
             @foreach ($recuerdo->personas_relacionadas as $persona)
             <tr>
-                <th scope="row"><?php echo $n; ?></th>
                 <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}}</a></td>
                 <td>{{$persona->apellidos}}</td>
                 <td>{{$persona->tiporelacion->nombre}}</td>
@@ -144,7 +144,6 @@
                 </td>
                 @endif
             </tr>
-            <?php $n++ ?>
             @endforeach
         </tbody>
     </table>
