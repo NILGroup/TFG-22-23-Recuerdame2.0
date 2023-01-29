@@ -82,37 +82,51 @@ class CalendarioController extends Controller
         return redirect("/pacientes/$actividad->paciente_id/calendario");
     }
 
+    public function updateSesion(Request $request)
+    {
+        $sesion = Sesion::findOrFail($request->idSesion);
+        $sesion->update($request->all());
+
+
+        return redirect("/pacientes/$sesion->paciente_id/calendario");
+        //return "<h1>$tipoUsuario</h1>";
+    }
+
     public function show(int $idPaciente)
     {
-
+        $tipoUsuario = Auth::user()->rol_id;
         $actividad = Actividad::where("paciente_id", "=", $idPaciente)->get();
-        $sesion = Sesion::where("paciente_id", "=", $idPaciente)->get();
         foreach ($actividad as $a) {
-            $actividad->tipo = "a";
+            $a->tipo = "a";
         }
-        foreach ($sesion as $s) {
-            $s->tipo = "s";
-            $s->start = $s->fecha;
-            $s->title = "Sesión";
-            $s->recuerdos = $s->recuerdos;
-            foreach ($s->recuerdos as $r) {
-                $r->etapa = Etapa::findOrFail($r->etapa_id);
-                $r->etiqueta = Etiqueta::findOrFail($r->etiqueta_id);
-                $r->categoria = Categoria::findOrFail($r->categoria_id);
-                $r->estado = Estado::findOrFail($r->estado_id);
+        if ($tipoUsuario === 2)
+            return response()->json($actividad);
+        else {
+            $sesion = Sesion::where("paciente_id", "=", $idPaciente)->get();
+            foreach ($sesion as $s) {
+                $s->tipo = "s";
+                $s->start = $s->fecha;
+                $s->title = "Sesión";
+                $s->recuerdos = $s->recuerdos;
+                foreach ($s->recuerdos as $r) {
+                    $r->etapa = Etapa::findOrFail($r->etapa_id);
+                    $r->etiqueta = Etiqueta::findOrFail($r->etiqueta_id);
+                    $r->categoria = Categoria::findOrFail($r->categoria_id);
+                    $r->estado = Estado::findOrFail($r->estado_id);
+                }
             }
-        }
-        $sesionYactividad = $actividad->concat($sesion);
-        $sesionYactividad->all();
+            $sesionYactividad = $actividad->concat($sesion);
+            $sesionYactividad->all();
 
-        //CREA UN FICHERO PRUEBAS.JSON EN PUBLIC PARA VER QUE JSON SE OBTIENE, pruebas********
-        $filename = "PRUEBAS.json";
-        $handle = fopen($filename, 'w+');
-        fputs($handle, $sesionYactividad->toJson(JSON_PRETTY_PRINT));
-        fclose($handle);
-        $headers = array('Content-type' => 'application/json');
-        return response()->download($filename, 'PRUEBAS.json', $headers);
-        return response()->json($sesionYactividad);
+            //CREA UN FICHERO PRUEBAS.JSON EN PUBLIC PARA VER QUE JSON SE OBTIENE, pruebas********
+            $filename = "PRUEBAS.json";
+            $handle = fopen($filename, 'w+');
+            fputs($handle, $sesionYactividad->toJson(JSON_PRETTY_PRINT));
+            fclose($handle);
+            $headers = array('Content-type' => 'application/json');
+            return response()->download($filename, 'PRUEBAS.json', $headers);
+            return response()->json($sesionYactividad);
+        }
     }
 
     public function destroy(Request $request)
@@ -125,15 +139,17 @@ class CalendarioController extends Controller
 
     public function destroySesion(Request $request)
     {
-        $sesion = Sesion::findOrFail($request->id);
+        $sesion = Sesion::findOrFail($request->idSesion);
         $paciente = $sesion->paciente_id;
         $sesion->delete();
+        return redirect("/pacientes/$paciente/calendario");
     }
 
     public function registroSesion(Request $request)
     {
+        // NOTA: el atributo recuerdos es un array con los ids de cada recuerdo
         $sesion = Sesion::updateOrCreate(
-            ['id' => $request->id],
+            ['id' => $request->idSesion],
             [
                 'fecha' => $request->fecha,
                 'etapa_id' => $request->etapa_id,
@@ -147,6 +163,6 @@ class CalendarioController extends Controller
         );
         if (!is_null($request->recuerdos))
             $sesion->recuerdos()->sync($request->recuerdos);
-        //return redirect("pacientes/{$sesion->paciente->id}/calendario");
+        return redirect("pacientes/{$sesion->paciente->id}/calendario");
     }
 }

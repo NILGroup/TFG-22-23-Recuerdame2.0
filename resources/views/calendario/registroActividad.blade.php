@@ -17,12 +17,16 @@
             <label for="start" class="form-label">Fecha</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="color" class="form-control" id="color" name="color" required>
+            <input type="color" class="form-control" id="color" name="color" value="#01a5c6" required>
             <label for="color" class="form-label">Color</label>
         </div>
         <div class="form-floating mb-3">
             <textarea maxlength="255" class="form-control form-control-sm" id="obs" name="obs" rows="3" required></textarea>
             <label for="obs" class="form-label">Pautas</label>
+        </div>
+        <div class="form-floating mb-3">
+            <textarea maxlength="255" class="form-control form-control-sm" id="fin" name="fin" rows="3"></textarea>
+            <label for="fin" class="form-label">Finalizar</label>
         </div>
         <div class="modal-footer">
             <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-danger btn-md d-none">

@@ -1,10 +1,11 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    let filtro = "t";
+    let user = document.getElementById('user_type').value; //tipo de usuario (1 terapeuta, 2 cuidador)
     let formulario = document.getElementById('formulario');
     var calendarEl = document.getElementById('calendar');
 
-    let url_eventos = "/calendario/"+document.getElementById('paciente_id').value;
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    let url_eventos = "/calendario/" + document.getElementById('paciente_id').value;
+    let options = {
         dayHeaderFormat: {
             weekday: 'long'
         },
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             add_event: {
                 text: '+',
                 hint: 'Nueva actividad',
-                click: function() {
+                click: function () {
                     formulario.reset();
                     document.getElementById('titulo').textContent = "Añadir";
                     $('#evento').modal('show');
@@ -21,28 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         locales: 'es',
+        eventColor: '#74e4fb',
         firstDay: 1,
         initialView: 'dayGridMonth',
-        customButtons: {
-            todo: {
-                text: 'Todo',
-                click: function() {
-                    alert('clicked the todo button!');
-                }
-            },
-            actividades: {
-                text: 'Actividades',
-                click: function() {
-                    alert('clicked the actividades button!');
-                }
-            },
-            sesiones: {
-                text: 'Sesiones',
-                click: function() {
-                    alert('clicked the sesiones button!');
-                }
-            }
-        },
         headerToolbar: {
             left: 'prev,next',
             center: 'title',
@@ -50,44 +32,54 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         },
-        footerToolbar: {
-            right: 'todo,actividades,sesiones',
-        },
 
         events: url_eventos,
 
-        dateClick: function(info) {
-            formulario.reset();
-            document.getElementById('start').value = info.dateStr;
-            document.getElementById('titulo').textContent = "Añadir";
-            //TODO como hacerlo para que se visualicen ambos y se elija primero activdad
-            document.getElementById('profile-tab').removeAttribute("disabled");
-            document.getElementById('profile-tab').classList.remove("active");
-            document.getElementById('profile').classList.remove("show");
-            document.getElementById('profile').classList.remove("active");
-            document.getElementById('home-tab').removeAttribute("disabled");
-            document.getElementById('home-tab').classList.add("active");
-            document.getElementById('home').classList.add("show");
-            document.getElementById('home').classList.add("active");
+        dateClick: function (info) {
+            if (user === '1') {
+                formulario.reset();
+                document.getElementById('start').value = info.dateStr;
+                document.getElementById('titulo').textContent = "Añadir";
+                //TODO como hacerlo para que se visualicen ambos y se elija primero activdad
+                document.getElementById('profile-tab').removeAttribute("disabled");
+                document.getElementById('profile-tab').classList.remove("active");
+                document.getElementById('profile').classList.remove("show");
+                document.getElementById('profile').classList.remove("active");
+                document.getElementById('home-tab').removeAttribute("disabled");
+                document.getElementById('home-tab').classList.add("active");
+                document.getElementById('home').classList.add("show");
+                document.getElementById('home').classList.add("active");
 
-            document.getElementById('btnGuardarSesion').classList.remove('d-none');
-            document.getElementById('btnEliminarSesion').classList.add('d-none');
-            document.getElementById('btnModificarSesion').classList.add('d-none');
+                document.getElementById('btnGuardarSesion').classList.remove('d-none');
+                document.getElementById('btnEliminarSesion').classList.add('d-none');
+                document.getElementById('btnModificarSesion').classList.add('d-none');
 
-            document.getElementById('btnGuardar').classList.remove('d-none');
-            document.getElementById('btnEliminar').classList.add('d-none');
-            document.getElementById('btnModificar').classList.add('d-none');
+                document.getElementById('btnGuardar').classList.remove('d-none');
+                document.getElementById('btnEliminar').classList.add('d-none');
+                document.getElementById('btnModificar').classList.add('d-none');
 
-            console.log(info);
-            $('#evento').modal('show');
+                console.log(info);
+                $('#evento').modal('show');
+            }
         },
 
-        eventClick: function(info) {
+        eventClick: function (info) {
             formulario.reset();
             document.getElementById('id').value = info.event.id;
             //Por el momento, si clickamos en ver una actividad se desactiva el botón sesión y viceversa
             //En el futuro, tal vez, hacer que directamente la opción contraria no aparezca
+            if (user === '2') {
+                document.getElementById('title').setAttribute("disabled", "");
+                document.getElementById('start').setAttribute("disabled", "");
+                document.getElementById('color').setAttribute("disabled", "");
+                document.getElementById('obs').setAttribute("disabled", "");
+                document.getElementById('color').setAttribute("disabled", "");
+                document.getElementById("modalesCalendario").children[1].style.display = "none";
+                document.getElementById('btnModificar').value = "Finalizar actividad";
+                document.getElementById('fin').setAttribute("required", "");
+            }
             if (info.event.extendedProps.tipo === 'a') {
+                document.getElementById('id').value = info.event.id;
                 document.getElementById('profile-tab').setAttribute("disabled", "");
                 document.getElementById('profile-tab').classList.remove("active");
                 document.getElementById('profile').classList.remove("show");
@@ -105,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('btnEliminar').classList.remove('d-none');
                 document.getElementById('btnModificar').classList.remove('d-none');
             } else if (info.event.extendedProps.tipo === 's') {
+                document.getElementById('idSesion').value = info.event.id;
                 document.getElementById('profile-tab').removeAttribute("disabled");
                 document.getElementById('profile-tab').classList.add("active");
                 document.getElementById('profile').classList.add("show");
@@ -116,10 +109,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('fecha').value = info.event.extendedProps.fecha;
                 document.getElementById('objetivo').value = info.event.extendedProps.objetivo;
                 document.getElementById('descripcion').value = info.event.extendedProps.descripcion;
-                
+
                 let tableRef = document.getElementById('divRecuerdos');
                 tableRef.innerHTML = '';
-                
+
                 for (let recuerdo of info.event.extendedProps.recuerdos) {
                     // Insert a row at the end of the table
                     let newRow = tableRef.insertRow(0);
@@ -174,8 +167,76 @@ document.addEventListener('DOMContentLoaded', function() {
         displayEventTime: false,
         selectable: true,
         selectHelper: true,
-    });
+        viewRender: function (view, element) {
+            // Drop the second param ('day') if you want to be more specific
+            $('.fc-prev-button').addClass('fc-state-disabled');
+        }
+    }
 
+    if (user === '1') {
+        options.customButtons = {
+            todo: {
+                text: 'Todo',
+                click: function () {
+                    mostrarTodo();
+                    pruebas();
+                }
+            },
+            actividades: {
+                text: 'Actividades',
+                click: function () {
+                    mostrarActividades();
+                }
+            },
+            sesiones: {
+                text: 'Sesiones',
+                click: function () {
+                    mostrarSesiones();
+                }
+            }
+        };
+        options.headerToolbar = {
+            left: 'todo,actividades,sesiones',
+            center: 'title',
+            right: 'add_event,dayGridMonth,dayGridWeek,dayGridDay,listMonth,today',
+        };
+        options.footerToolbar = {
+            right: 'prev,next',
+        }
+    }
+
+    var calendar = new FullCalendar.Calendar(calendarEl, options);
+
+
+    function mostrarTodo() {
+        for (let i = 0; i < calendar.getEvents().length; i++) {
+            calendar.getEvents()[i].setProp('display', 'auto');
+        }
+        calendar.render();
+    }
+
+    function mostrarActividades() {
+        for (let i = 0; i < calendar.getEvents().length; i++) {
+            if (calendar.getEvents()[i].extendedProps.tipo !== 'a')
+                calendar.getEvents()[i].setProp('display', 'none');
+            if (calendar.getEvents()[i].extendedProps.tipo === 'a')
+                calendar.getEvents()[i].setProp('display', 'auto');
+        }
+        calendar.render();
+    }
+
+    function mostrarSesiones() {
+        for (let i = 0; i < calendar.getEvents().length; i++) {
+            if (calendar.getEvents()[i].extendedProps.tipo !== 's')
+                calendar.getEvents()[i].setProp('display', 'none');
+            if (calendar.getEvents()[i].extendedProps.tipo === 's')
+                calendar.getEvents()[i].setProp('display', 'auto');
+        }
+        calendar.render();
+    }
+
+    function pruebas() {
+        console.log(user);
+    }
     calendar.render();
-
 });

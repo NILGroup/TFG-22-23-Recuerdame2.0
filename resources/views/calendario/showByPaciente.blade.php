@@ -3,6 +3,13 @@
 @section('content')
 
 <input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$paciente->id}}" required @if($show) disabled @endif>
+<input type="hidden" name="user_type" class="form-control form-control-sm" id="user_type" value="{{$user->rol_id}}" required @if($show) disabled @endif>
+<!--<select id="typeSelector">
+  <option value="all">Todos</option>
+  <option value="a">Actividades</option>
+  <option value="s">Sesiones</option>
+</select>-->
+
 <!-- Tu contenido aquí -->
 <div class="container">
     <div id="calendar"></div>
@@ -16,7 +23,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <ul class="nav nav-tabs">
+                    <ul class="nav nav-tabs" id="modalesCalendario">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Actividad</button>
                         </li>
