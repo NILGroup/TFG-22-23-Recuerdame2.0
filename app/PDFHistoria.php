@@ -30,7 +30,7 @@ class PDFHistoria extends FPDF{
     }
 
     function writeRecuerdos($pdf, $listadoRecuerdos){
-        $size = 7*8 +12; //size que ocupa los datos del paciente en primera página
+        $size = 7*8 +12 + 50 + 55; //size que ocupa los datos del paciente en primera página
   
         foreach($listadoRecuerdos as $row) {
             $pdf->SetFont('Times','B',12);
@@ -50,22 +50,36 @@ class PDFHistoria extends FPDF{
             //Y EL ULTIMO VALOR DE LAS IMAGENES
             $listaMultimedia = $row->multimedias;
             $i = 0;
+            $countfotos = 0;
             foreach ($listaMultimedia as $multimedia) {
                 $i++;
-                $image = "../public/img/" . $multimedia->fichero;
-                if($i > 2){
-                    if($size+35+7 > 279) {
+                $countfotos++;
+                $image = "../public/" . $multimedia->fichero;
+                if($i == 3){ // 3 imágenes por filas
+                    
+                    if($size > 279) {
                         $pdf->addPage(); //297 es el alto de un A4, 18 ocupa el footer 287-18=279
                         $size=0;
+                    }else{
+                        $pdf->Cell(4,7,"");
+                        $pdf->Cell(50,35,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50,50),0,0,'C');
+                        $pdf->Ln(55);
                     }
-                    $i==0;
-                }else if($i == 1){
-                    $pdf->Cell(50,35,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50),0,0,'C');
+                    $i=0;
+                }else if($i == 1 || $i==2){
+                    $pdf->Cell(4,7,"");
+                    $pdf->Cell(50,35,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50,50),0,0,'C');
                     $pdf->Cell(5,35,'',0); //SEPARACIÓN
                 }else{
-                    $pdf->MultiCell(50,35,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50),0,'C');
-                    $pdf->Ln(23);
+                    $pdf->Cell(4,7,$i);
+                    $pdf->MultiCell(50,35,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50,50),0,'C');
+                    
                     $size+= 35+23;
+                }
+
+                if($countfotos == sizeof($listaMultimedia)){
+                    $pdf->Cell(4,7,"");
+                    $pdf->Ln(55);   
                 }
                 
             }
@@ -85,7 +99,7 @@ class PDFHistoria extends FPDF{
     }
 
         
-    function writePatient($pdf, $paciente){
+    function writePatient($pdf, $paciente,$imagen){
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,7,'Nombre: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
@@ -104,7 +118,15 @@ class PDFHistoria extends FPDF{
         $pdf->Cell(30,7,'Genero: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
         $pdf->Cell(160,7,' '. $paciente->genero->nombre,true);
-        $pdf->Ln(12);
+        
+        $pdf->Ln(7);
+        $pdf->SetFont('Times','B',12);
+        $pdf->Cell(30,50,utf8_decode('Fotografía: '),1,0,'L',true);
+        $image = "../public/" . $imagen;
+        $pdf->Cell(160,50,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50),true);
+        //+7+7+50
+
+        $pdf->Ln(55);
     }
     
     function fechaHoy($pdf){ 
@@ -122,7 +144,7 @@ class PDFHistoria extends FPDF{
         $pdf->Ln(7);
     }
 
-    function pdfBody($pdf,$paciente, $listadoRecuerdos){
+    function pdfBody($pdf,$paciente, $listadoRecuerdos,$imagen){
         //$pdf->Cell(0,10,'Fecha del informe: '.$informeSeguimiento->getFecha(),0,1);
         // Colors, line width and bold font
         $pdf->SetFillColor(220);
@@ -133,7 +155,7 @@ class PDFHistoria extends FPDF{
         $pdf->Cell(0,7,'Datos del usuario ');
         $pdf->Ln(9);
         
-        $this->writePatient($pdf, $paciente);
+        $this->writePatient($pdf, $paciente, $imagen);
         
         $pdf->SetFont('Times','B',15);
         $pdf->Cell(0,7,'Recuerdos ');
