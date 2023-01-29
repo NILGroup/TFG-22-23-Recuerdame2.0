@@ -37,14 +37,6 @@
                 <table class="table table-bordered table-striped table-responsive datatable">
 
                     <thead>
-                        <tr class="searcher">
-                            <th scope="col">nombre</th>
-                            <th scope="col">fecha</th>
-                            <th scope="col">etapa</th>
-                            <th scope="col">categoría</th>
-                            <th scope="col">estado</th>
-                            <th scope="col">etiqueta</th>
-                        </tr>
                         <tr class="bg-primary">
                             <th scope="col">Nombre</th>
                             <th scope="col">Fecha</th>
@@ -52,7 +44,9 @@
                             <th scope="col">Categoría</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Etiqueta</th>
+                            @if($show) 
                             <th scope="col"></th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody id="tablaRecuerdosExistentes">
@@ -64,9 +58,11 @@
                             <td>@if(!is_null($recuerdo->categoria_id)) {{$recuerdo->categoria->nombre}} @endif </td>
                             <td>@if(!is_null($recuerdo->estado_id)) {{$recuerdo->estado->nombre}} @endif </td>
                             <td>@if(!is_null($recuerdo->etiqueta_id)) {{$recuerdo->etiqueta->nombre}} @endif </td>
+                            @if($show) 
                             <td id="recuerdosSeleccionados" class="tableActions">
                                 <input class="form-check-input" type="checkbox" value="{{$recuerdo->id}}" name="checkRecuerdo[]" id="checkRecuerdo" @if($sesion->recuerdos->contains($recuerdo)) checked @endif>
                             </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>

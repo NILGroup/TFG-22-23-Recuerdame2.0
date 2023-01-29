@@ -19,10 +19,6 @@
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de personas relacionadas</caption>
             <thead>
-                <tr class="searcher">
-                    <th scope="col">nombre</th>
-                    <th scope="col">tipo de Relacion</th>
-                </tr>
                 <tr class="bg-primary">
                     <th scope="col">Nombre</th>
                     <th scope="col">Tipo de Relacion</th>
@@ -34,7 +30,6 @@
                 <tr>
                     <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}} {{$persona->apellidos}}</a> @if($persona->contacto)★@endif</td>
                     <td>{{$persona->tiporelacion->nombre}}</td>
-
                     <td class="tableActions">
                         <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                         <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
@@ -45,7 +40,6 @@
                         </form>
                     </td>
                 </tr>
-
                 @endforeach
             </tbody>
         </table>

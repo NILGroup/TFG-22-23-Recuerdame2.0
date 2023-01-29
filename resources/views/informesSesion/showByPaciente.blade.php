@@ -12,15 +12,9 @@
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de informes de sesiones</caption>
             <thead>
-                <tr class="searcher">
-                    <th scope="col">informe</th>
-                    <th scope="col">fecha del informe</th>
-                    <th scope="col">apto para continuar</th>
-                </tr>
                 <tr class="bg-primary">
                     <th scope="col">Informe</th>
                     <th scope="col">Fecha del informe</th>
-                    <th scope="col">Apto para continuar</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -29,15 +23,6 @@
                     <tr>
                         <td><a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe">Informe de la sesión Nº {{$sesion->id}}</td>
                         <td>{{date("d/m/Y H:i", strtotime($sesion->fecha_finalizada))}}</td>
-                        <td>
-                            <div class="d-flex justify-content-center">    
-                                @if($sesion->apto) 
-                                    <i class="fa-solid fa-check text-success"></i> 
-                                @else 
-                                    <i class="fa-solid fa-xmark text-danger"></i> 
-                                @endif
-                            </div>
-                        </td>
                         <td class="tableActions">
                             <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                             <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/generarInforme"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
@@ -47,7 +32,7 @@
                                 <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                             </form>
                         </td>
-                    </tr>
+                    </tr> 
                 @endforeach
             </tbody>
         </table>

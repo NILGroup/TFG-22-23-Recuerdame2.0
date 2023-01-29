@@ -119,11 +119,6 @@
     <table id="tabla" class="table table-bordered table-striped table-responsive datatable" style="width: 100%;">
         <caption>Listado de personas relacionadas</caption>
         <thead>
-            <tr class="searcher">
-                <th scope="col">nombre</th>
-                <th scope="col">apellidos</th>
-                <th scope="col">tipo de relación</th>
-            </tr>
             <tr class="bg-primary">
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
@@ -138,11 +133,9 @@
                 <td>{{$persona->apellidos}}</td>
                 <td>{{$persona->tiporelacion->nombre}}</td>
                 <input type="hidden" value={{$persona->id}}>
-                @if($show)
                 <td class="tableActions">
                     <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
-                </td>
-                @endif
+                </td>¡
             </tr>
             @endforeach
         </tbody>

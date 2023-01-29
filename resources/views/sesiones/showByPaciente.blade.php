@@ -18,11 +18,6 @@
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de sesiones</caption>
             <thead>
-                <tr class="searcher">
-                    <th scope="col">fecha</th>
-                    <th scope="col">objetivo</th>
-                    <th scope="col">informe</th>
-                </tr>
                 <tr class="bg-primary">
                     <th scope="col">Fecha</th>
                     <th scope="col">Objetivo</th>
@@ -46,7 +41,6 @@
                         
                 
                     </td>
-             
                     <td class="tableActions">
                         <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                         <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>

@@ -1,8 +1,21 @@
+/*
 $('table.datatable thead tr.searcher th').each(function () {
-    console.log("init")
     var title = $(this).text();
-    $(this).html('<input type="text" placeholder="Buscar por ' + title + '" />');
+    if(!$(this).html() == "")
+        $(this).html('<input type="text" class="form-control-sm" style="border-style:hidden!important; width: 100%" placeholder="Buscar por ' + title + '" />');
 });
+*/
+$('table.datatable thead').each(function () {
+    var searcher = $(this).clone();
+    $(searcher).children().removeClass();
+    $(searcher).children().children().each(function () {
+        var title = $(this).text().toLocaleLowerCase();
+        if(!$(this).html() == "")
+            $(this).html('<input type="text" class="form-control-sm" style="border-style:hidden!important; width: 100%" placeholder="Buscar por ' + title + '" />');
+    })
+    $(this).prepend(searcher.html());
+});
+
 var tabla = $(document).ready(function () {
     $('table.datatable').DataTable({
         paging: false,
@@ -20,6 +33,7 @@ var tabla = $(document).ready(function () {
             }
         },
         "sDom":"ltipr",
+
         initComplete: function () {
             var api = this.api();
             api.columns().eq(0).each(function (colIdx) { 

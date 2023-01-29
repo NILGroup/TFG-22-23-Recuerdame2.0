@@ -35,16 +35,13 @@
             <div class="modal-body">
                 <table class="table table-bordered table-striped table-responsive datatable" style="width:100%;">
                     <thead>
-                        <tr class="searcher">
-                            <th scope="col">nombre</th>
-                            <th scope="col">apellidos</th>
-                            <th scope="col">tipo de Relacion</th>
-                        </tr>
                         <tr class="bg-primary">
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellidos</th>
                             <th scope="col">Tipo de Relacion</th>
+                            @if($show) 
                             <th scope="col"></th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody id="tablaPersonasExistentes">
@@ -53,9 +50,11 @@
                             <td>{{$persona->nombre}}</td>
                             <td>{{$persona->apellidos}}</td>
                             <td>{{$persona->tiporelacion->nombre}}</td>
+                            @if($show) 
                             <td id="personasSeleccionadas" class="tableActions">
                                 <input class="form-check-input" type="checkbox" value="{{$persona->id}}" name="checkPersonaExistente[]" id="checkPersonaExistente" @if($recuerdo->personas_relacionadas->contains($persona)) checked @endif>
                             </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>

@@ -17,11 +17,6 @@
         <div>
             <table class="table table-bordered recuerdameTable datatable">
                 <thead>
-                    <tr class="searcher">
-                        <th scope="col col-1"></th>
-                        <th scope="col col-12">nombre</th>
-                        <th scope="col col-12">apellidos</th>
-                    </tr>
                     <tr class="bg-primary">
                         <th scope="col col-1"></th>
                         <th scope="col col-12">Nombre</th>

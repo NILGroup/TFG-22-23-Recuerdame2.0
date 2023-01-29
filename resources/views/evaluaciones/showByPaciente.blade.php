@@ -17,12 +17,6 @@
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de evaluaciones</caption>
             <thead>
-                <tr class="searcher">
-                    <th scope="col">informe</th>
-                    <th scope="col">fecha</th>
-                    <th scope="col">sesiones desde el anterior informe de seguimiento</th>
-                    <th scope="col">diagnóstico</th>
-                </tr>
                 <tr class="bg-primary">
                     <th scope="col">Informe</th>
                     <th scope="col">Fecha</th>

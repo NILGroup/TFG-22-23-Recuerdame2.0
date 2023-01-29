@@ -17,12 +17,6 @@
 <div>
     <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
         <thead>
-            <tr class="searcher">
-                <th scope="col">nombre</th>
-                <th scope="col">apellidos</th>
-                <th scope="col">género</th>
-                <th scope="col">edad</th>
-            </tr>
             <tr class="bg-primary">
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>

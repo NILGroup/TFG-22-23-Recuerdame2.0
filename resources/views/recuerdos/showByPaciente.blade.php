@@ -22,14 +22,6 @@
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
         <caption>Listado de recuerdos</caption>
             <thead>
-                <tr class="searcher">
-                    <th scope="col">nombre</th>
-                    <th scope="col">fecha</th>
-                    <th scope="col">etapa</th>
-                    <th scope="col">categoría</th>
-                    <th scope="col">estado</th>
-                    <th scope="col">etiqueta</th>
-                </tr>
                 <tr class="bg-primary">
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>

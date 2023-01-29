@@ -1,10 +1,10 @@
 [
     {
         "id": 1,
-        "start": "2023-01-28",
+        "start": "2023-01-29",
         "title": "Primera terapia",
         "description": "Primera terapia de evaluaci\u00f3n al paciente Miguel",
-        "color": "#01a5c6",
+        "color": "#00c7fc",
         "paciente_id": 1,
         "finished": null,
         "tipo": "a"
