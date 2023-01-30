@@ -34,7 +34,7 @@
         }
     </style>
     @stack('styles')
-    @stack('scripts')
+
 </head>
 <body class="lightbluebg">
     <div id="app">
@@ -46,4 +46,5 @@
     </div>
     @include('layouts.footer')
 </body>
+@stack('scripts')
 </html>
