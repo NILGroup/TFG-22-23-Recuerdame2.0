@@ -12,6 +12,7 @@
         {{csrf_field()}}
         
             <div style="padding: 20px;">
+                @include('personasrelacionadas.foto')
                 @include('personasrelacionadas.listaItems')
                 <div style="border: 1px solid #868e96;" class="dz-default dz-message" id="dzp">
                     <div class="container" style="height: 10em;">

@@ -107,6 +107,7 @@ Route::post('/storeRecuerdoNoView', 'App\Http\Controllers\RecuerdosController@st
 Route::get('/pacientes/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
 Route::get('/pacientes/{id}/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@create');
 Route::post('/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@store');
+Route::post('/borrarFoto', 'App\Http\Controllers\PersonasRelacionadasController@removePhoto');
 Route::get('/pacientes/{id}/personas/{idP}', 'App\Http\Controllers\PersonasRelacionadasController@show');
 Route::get('/pacientes/{id}/personas/{idP}/editar', 'App\Http\Controllers\PersonasRelacionadasController@edit');
 Route::post('/editarPersona', 'App\Http\Controllers\PersonasRelacionadasController@update');

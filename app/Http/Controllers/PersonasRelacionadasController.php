@@ -197,5 +197,14 @@ class PersonasRelacionadasController extends Controller
 
     }
 
+    public function removePhoto(Request $request){
+
+        $persona = Personarelacionada::findOrFail($request->id);
+        $persona->multimedia->delete();
+        
+        return redirect("/pacientes/$persona->paciente_id/personas/$persona->id/editar");
+
+    }
+
    
 }
