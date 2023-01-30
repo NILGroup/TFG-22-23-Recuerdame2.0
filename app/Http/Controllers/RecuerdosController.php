@@ -115,7 +115,6 @@ class RecuerdosController extends Controller
             }
         }
 
-
         
         $personas_relacionar = $request->checkPersona; //Array de ids de las personas
         if (!is_null($personas_relacionar)) {

@@ -6,7 +6,7 @@
         <h5 class="text-muted">Crear recuerdo</h5>
         <hr class="lineaTitulo">
     </div>
-    <form method="post" action="/recuerdo">
+    <form class="dropzone p-0"  style="border:none !important; background-color: #00000000;" id="d" method="post" action="/recuerdo">
         {{csrf_field()}}
         @include('recuerdos.listaItems')
         <div class="row d-flex">
@@ -28,7 +28,7 @@
 
         </div>
         <div class="col-12">
-            <button type="submit" value="Guardar" class="btn btn-outline-primary btn">Guardar</button>
+            <button type="submit" id="guardar" value="Guardar" class="btn btn-outline-primary btn">Guardar</button>
             <a href="/pacientes/{{$paciente->id}}/recuerdos"><button type="button" class="btn btn-primary btn">Atrás</button></a>
         </div>
     </form>
@@ -43,5 +43,9 @@
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
     <script src="/js/table.js"></script>
+    <script>
+        let id = document.getElementById("paciente_id").value;
+        var ruta = "/pacientes/" + id + "/recuerdos"
+    </script>
     <script src="/js/dropzone.js"></script>
 @endpush
