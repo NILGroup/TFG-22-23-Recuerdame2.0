@@ -12,7 +12,7 @@
 
 
 
-<!-- <input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="" required @if($show) disabled @endif> -->
+<input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$idPaciente}}" required @if($show) disabled @endif>
 <input type="hidden" name="id" class="form-control form-control-sm" id="id" value="{{$persona->id}}" required @if($show) disabled @endif>
 <div class="row form-group justify-content-between">
     <div class="row col-sm-12 col-md-6 col-lg-5">

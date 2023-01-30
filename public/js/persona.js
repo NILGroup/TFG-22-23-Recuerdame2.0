@@ -53,7 +53,9 @@ function CrearPersonas() {
     fd.append('email', inputValues[6].value);
     fd.append('localidad', inputValues[7].value);
     fd.append('tipo_custom', inputValues[8].value);
-    fd.append('contacto', inputValues[9].value);
+    if ($(inputValues[9]).prop("checked")){
+        fd.append('contacto', inputValues[9].value);
+    }
     fd.append('observaciones', document.getElementById("observaciones").value);
     fd.append('tiporelacion_id', rel.value);
     fd.append('paciente_id', inputValues[0].value);
