@@ -232,8 +232,8 @@ Route::post('/prueba', function () {
     ]);
 
     DB::table("multimedias")->insert([
-        ["nombre" => "multimedia 1", "fichero" => "avatar_hombre.png"],
-        ["nombre" => "multimedia 2", "fichero" => "avatar_mujer.png"]
+        ["nombre" => "multimedia 1", "fichero" => "/img/avatar_hombre.png"],
+        ["nombre" => "multimedia 2", "fichero" => "/img/avatar_mujer.png"]
     ]);
 
     DB::table("tiporelacions")->insert([
