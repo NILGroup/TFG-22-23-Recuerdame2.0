@@ -12,16 +12,13 @@
                     <a href="/pacientes/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success btn-sm btn-icon mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
-            <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
+            <table id="tabla1" class="table table-bordered table-striped table-responsive datatable">
                 <thead>
                     <tr class="bg-primary">
-                        <th scope="col">#</th>
                         <th scope="col">Informe</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Diagnóstico</th>
-                        @if($show) 
                         <th scope="col"></th>
-                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -30,7 +27,6 @@
                         <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe">Informe Nº {{$informe->id}}</td>
                         <td>{{$informe->fecha}}</td>
                         <td>{{$informe->diagnostico}}</td>
-                        @if($show) 
                         <td class="tableActions">
                             <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                             <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
@@ -40,7 +36,6 @@
                                 <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                             </form>
                         </td>
-                        @endif
                     </tr>
                     @endforeach
                 </tbody>
@@ -65,15 +60,13 @@
             </div>
 
             <div>
-                <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
+                <table id="tabla2" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr class="bg-primary">
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellidos</th>
                             <th scope="col">Correo electrónico</th>
-                            @if($show)  
                             <th scope="col"></th>
-                            @endif  
                         </tr>
                     </thead>
                     <tbody>
@@ -82,7 +75,6 @@
                             <td>{{$cuidador->nombre}}</td>
                             <td>{{$cuidador->apellidos}}</td>
                             <td>{{$cuidador->email}}</td>
-                            @if($show) 
                             <td class="tableActions">
                                 <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" style="display:inline!important;">
                                     {{csrf_field()}}
@@ -90,7 +82,6 @@
                                     <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                                 </form>
                             </td>
-                            @endif
                         </tr>
 
                         @endforeach
@@ -117,15 +108,13 @@
             </div>
 
             <div>
-                <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
+                <table id="tabla3" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr class="bg-primary">
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellidos</th>
                             <th scope="col">Tipo de Relacion</th>
-                            @if($show) 
                             <th scope="col"></th>
-                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -134,7 +123,6 @@
                             <td>{{$persona->nombre}}</td>
                             <td>{{$persona->apellidos}}</td>
                             <td>{{$persona->tiporelacion->nombre}}</td>
-                            @if($show) 
                             <td class="tableActions">
                                 <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                                 <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
@@ -144,7 +132,6 @@
                                     <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                                 </form>
                             </td>
-                            @endif
                         </tr>
                         @endforeach
                     </tbody>

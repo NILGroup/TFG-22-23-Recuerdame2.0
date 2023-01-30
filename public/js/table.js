@@ -1,17 +1,10 @@
-/*
-$('table.datatable thead tr.searcher th').each(function () {
-    var title = $(this).text();
-    if(!$(this).html() == "")
-        $(this).html('<input type="text" class="form-control-sm" style="border-style:hidden!important; width: 100%" placeholder="Buscar por ' + title + '" />');
-});
-*/
 $('table.datatable thead').each(function () {
     var searcher = $(this).clone();
     $(searcher).children().removeClass();
     $(searcher).children().children().each(function () {
         var title = $(this).text().toLocaleLowerCase();
         if(!$(this).html() == "")
-            $(this).html('<input type="text" class="form-control-sm" style="border-style:hidden!important; width: 100%" placeholder="Buscar por ' + title + '" />');
+            $(this).html('<input type="text" class="form-control-sm search" style="border-style:hidden!important; width: 100%" placeholder="Buscar por ' + title + '" />');
     })
     $(this).prepend(searcher.html());
 });
