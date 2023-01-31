@@ -94,6 +94,7 @@ Route::post('/updateAndSeleccionarRecuerdos','App\Http\Controllers\SesionesContr
 Route::get('/pacientes/{id}/asignarTerapeutas', 'App\Http\Controllers\PacientesController@addPacienteToTerapeuta');
 Route::post('/asignacionTerapeutas','App\Http\Controllers\PacientesController@asignacionTerapeutas');
 Route::post('/actualizarPaciente','App\Http\Controllers\PacientesController@update');
+Route::post('/borrar_foto_paciente', 'App\Http\Controllers\PacientesController@removePhoto');
 
 //RUTAS CUSTOMIZADAS RECUERDO
 Route::get('/pacientes/{id}/recuerdos', 'App\Http\Controllers\RecuerdosController@showByPaciente');

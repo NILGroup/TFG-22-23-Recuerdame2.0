@@ -170,6 +170,23 @@ class PacientesController extends Controller
         //Actualizamos masivamente los datos del paciente
         $paciente->update($request->all());
 
+        $name = [];
+        $original_name = [];
+        if ($request->has("file")){
+            foreach ($request->file('file') as $key => $value) {
+                $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
+                $destinationPath = public_path() . '/storage/img';
+                $value->move($destinationPath, $image);
+                $name[] = $image;
+                $original_name[] = $value->getClientOriginalName();
+                $multimedia = new Multimedia([
+                    'nombre' => $image,
+                    'fichero' => '/storage/img/' . $image
+                ]);
+                $paciente->multimedia()->save($multimedia);
+            }
+        }
+
         //Redireccionamos a lista pacientes
         return redirect("/pacientes/$request->id");
         
@@ -202,6 +219,15 @@ class PacientesController extends Controller
         $paciente = Paciente::find($request->paciente_id);
         $paciente->users()->sync($request->seleccion);
         return redirect("/pacientes");
+    }
+
+    public function removePhoto(Request $request){
+
+        $paciente = Paciente::findOrFail($request->id);
+        $paciente->multimedia->delete();
+        
+        return redirect("/pacientes/$paciente->id/editar");
+
     }
 
 }

@@ -1,18 +1,5 @@
-@if($show)
-<div id="showMultimedia" class="row pb-2">
-    <div class="img-wrap text-center w-25 mx-auto">
-        @if (isset($paciente->multimedia))
-        <a href="#" class="visualizarImagen"><img src="{{$paciente->multimedia->fichero}}" class=" img-responsive-sm img-thumbnail" style="width: 10em"></a>
-        @else
-        <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="img-responsive-sm img-thumbnail" style="width: 10em"></a>
-        @endif
-    </div>
-</div>
 
-<!-- <div class="text-center mb-3">
-    <img src="/img/avatar_hombre.png" class="img-fluid rounded-circle"> TODO Corregir multimedia 
-</div> -->
-@endif
+
 <div class="row form-group justify-content-between">
     <input type="hidden" name="id" class="form-control form-control-sm" id="paciente_id" value="{{$paciente->id}}"  @if($show) disabled @endif>
     <div class="row col-sm-12 col-md-6 col-lg-5">
