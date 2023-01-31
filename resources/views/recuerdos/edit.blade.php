@@ -6,7 +6,7 @@
         <h5 class="text-muted">Crear recuerdo</h5>
         <hr class="lineaTitulo">
     </div>
-    <form class="dropzone p-0"  style="border:none !important; background-color: #00000000;" id="d" method="post" action="/recuerdo">
+    <form class="dropzone p-0" id="d" method="post" action="/recuerdo">
         {{csrf_field()}}
         @include('recuerdos.listaItems')
         <div class="row d-flex">
@@ -18,9 +18,10 @@
             </div>
             @endforeach
         </div>
-        <div style="border: 1px solid #868e96;" class="dz-default dz-message" id="dzp">
-            <div class="container" style="height: 10em;">
-                <h2 style="color: #868e96;">Arrastre sus archivos</h1>
+        <div class="dz-default dz-message dropzone-correct" id="dzp">
+            <div class="container dropzone-container">
+                <img src="/img/upload.png" id="dropzone-img" height="25em" alt="">
+                <h2 id="dropzone-title" class="dropzone-title-correct">Arrastre sus archivos</h1>
             </div>
         </div>
         <div class="dropzone-previews">
@@ -46,6 +47,7 @@
     <script>
         let id = document.getElementById("paciente_id").value;
         var ruta = "/pacientes/" + id + "/recuerdos"
+        var max
     </script>
     <script src="/js/dropzone.js"></script>
 @endpush

@@ -21,11 +21,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
             this.on('maxfilesreached', function() {
                 $('.dropzone').removeClass('dz-clickable'); 
+                $("#dzp").removeClass("dropzone-correct").addClass("dropzone-incorrect")
+                $("#dropzone-title").removeClass("dropzone-title-correct").addClass("dropzone-title-incorrect").text("Limite de archivos alcanzado")
+                $("#dropzone-img").hide()
                 this.removeEventListeners();
             });
 
             this.on('removedfile', function(){
                 $('.dropzone').addClass('dz-clickable'); 
+                $("#dzp").addClass("dropzone-correct").removeClass("dropzone-incorrect")
+                $("#dropzone-title").addClass("dropzone-title-correct").removeClass("dropzone-title-incorrect").text("Arrastre sus archivos")
+                $("#dropzone-img").show()
                 this.setupEventListeners()
             })
 

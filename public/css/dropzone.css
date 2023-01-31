@@ -1,0 +1,35 @@
+.dropzone{
+    border:none;
+    background-color: #00000000;
+}
+
+.dropzone-inner{
+    padding: 20px;
+}
+
+
+.dropzone-correct{
+    border: 3px dashed #7db4eb;
+}
+
+.dropzone-incorrect{
+    border: 3px dashed #eb7d7d;
+}
+
+.dropzone-container{
+    height: 10em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropzone-title-correct{
+    color: #868e96;
+}
+
+.dropzone-title-incorrect{
+    color: #eb7d7d;
+}
+
+
