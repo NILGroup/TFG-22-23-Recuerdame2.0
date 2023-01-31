@@ -19,6 +19,16 @@ document.addEventListener("DOMContentLoaded", function () {
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         init: function () {
 
+            this.on('maxfilesreached', function() {
+                $('.dropzone').removeClass('dz-clickable'); 
+                this.removeEventListeners();
+            });
+
+            this.on('removedfile', function(){
+                $('.dropzone').addClass('dz-clickable'); 
+                this.setupEventListeners()
+            })
+
             var submitBtn = document.querySelector("#guardar");
             var myDropzone = this
 
