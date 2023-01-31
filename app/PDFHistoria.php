@@ -123,7 +123,8 @@ class PDFHistoria extends FPDF{
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,50,utf8_decode('Fotografía: '),1,0,'L',true);
         $image = "../public/" . $imagen;
-        $pdf->Cell(160,50,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50),true);
+        $pdf->Cell(160,50,$pdf->Image($image, $pdf->GetX(), $pdf->GetY(),50, 50),true);
+
         //+7+7+50
 
         $pdf->Ln(55);

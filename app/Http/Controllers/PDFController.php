@@ -105,6 +105,15 @@ class PDFController extends Controller
         $fechaFin = $request->fechaFin;
         $imagen = $paciente->multimedia->fichero;
         $listafinal=collect();
+
+        if(empty($imagen)){
+            return $imagen;
+            if($paciente->genero_id==1){ //hombre
+                $imagen = "/img/avatar_hombre.png";
+            }else{
+                $imagen = "/img/avatar_mujer.png";
+            }
+        }
         
         if (!empty($idCategoria))
             $listadoRecuerdos = $listadoRecuerdos->where('categoria_id', $idCategoria);
