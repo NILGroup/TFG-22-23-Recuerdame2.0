@@ -2,12 +2,12 @@
     <input hidden id="idUser" name="user_id" value="{{$user->id}}" required @if($show) disabled @endif>
     <input hidden id="idPaciente" name="paciente_id" value="{{$paciente->id}}" required @if($show) disabled @endif>
     <input type="hidden" name="idSesion" id="idSesion" value="{{$sesion->id}}">
-    <div class="col d-inline-flex">
+    <div class="col d-inline">
         <label for="fecha" class="form-label labelShow">Fecha: <span class="asterisco">*</span></label>
-        <input type="datetime-local"  style="width: fit-content;" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$sesion->fecha}}" required @if($show) disabled @endif>
+        <input type="datetime-local" style="width: fit-content;" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$sesion->fecha}}" required @if($show) disabled @endif>
     </div>
 
-    <div class="col d-inline-flex ">
+    <div class="col d-inline">
         <label for="etapa" class="form-label labelShow ">Etapa:<span class="asterisco">*</span></label>
         <select class="form-select form-select-sm " style="width: fit-content;" name="etapa_id" required @if($show) disabled @endif>
             @foreach($etapas as $etapa)
@@ -19,11 +19,9 @@
         </select>
     </div>
 
-    <div class="col d-inline-flex">
+    <div class="col d-inline">
         <label for="terapeuta" class="form-label labelShow">Terapeuta:</label>
-        <div class="">
-            <label for="terapeuta" class="form-label form-label-sm">{{$user->nombre}} {{$user->apellidos}}</label>
-        </div>
+        <label for="terapeuta" class="form-label form-label-sm">{{$user->nombre}} {{$user->apellidos}}</label>
     </div>
 </div>
 
