@@ -32,6 +32,7 @@
         
             <div style="padding: 20px;">
                 @include('pacientes.listaItems')
+                
                 <div style="border: 1px solid #868e96;" class="dz-default dz-message" id="dzp">
                     <div class="container" style="height: 10em;">
                         <h2 style="color: #868e96;">Arrastre sus archivos</h1>
