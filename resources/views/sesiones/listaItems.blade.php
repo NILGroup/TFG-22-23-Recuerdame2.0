@@ -1,27 +1,30 @@
-<div class="row">
+<div class="d-flex justify-content-start">
     <input hidden id="idUser" name="user_id" value="{{$user->id}}" required @if($show) disabled @endif>
     <input hidden id="idPaciente" name="paciente_id" value="{{$paciente->id}}" required @if($show) disabled @endif>
-    <div class="row">
-        <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha<span class="asterisco">*</span></label>
-        <div class="col-sm-9 col-md-6 col-lg-2">
+
+    <div class="col d-inline-flex">
+        <label for="fecha" class="labelShow ">Fecha:<span class="asterisco">*</span></label>
+        <div class="">
             <input type="datetime-local" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$sesion->fecha}}" required @if($show) disabled @endif>
         </div>
+    </div>
 
-        <label for="etapa" class="form-label col-form-label-sm col-sm-2 col-md-12col-lg-1">Etapa<span class="asterisco">*</span></label>
-        <div class="col-sm-3 col-md-3 col-lg-2">
-            <select class="form-select form-select-sm" name="etapa_id"  required @if($show) disabled @endif>
-                @foreach($etapas as $etapa)
-                <option value="{{$etapa->id}}" @if($sesion->etapa && $sesion->etapa->id == $etapa->id)
-                    selected="selected"
-                    @endif
-                    >{{$etapa->nombre}}</option>
-                @endforeach
-            </select>
-        </div>
+    <div class="col d-inline-flex " >
+        <label for="etapa" class="labelShow ">Etapa:<span class="asterisco">*</span></label>
+        <select class="form-select form-select-sm " style="width: fit-content;" name="etapa_id" required @if($show) disabled @endif>
+            @foreach($etapas as $etapa)
+            <option value="{{$etapa->id}}" @if($sesion->etapa && $sesion->etapa->id == $etapa->id)
+                selected="selected"
+                @endif
+                >{{$etapa->nombre}}</option>
+            @endforeach
+        </select>
+    </div>
 
-        <label for="terapeuta" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-1">Terapeuta:</label>
-        <div class="col-sm-3 col-md-3 col-lg-2">
-            <label for="terapeuta" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-12">{{$user->nombre}} {{$user->apellidos}}</label>
+    <div class="col d-inline-flex">
+        <label for="terapeuta" class="labelShow">Terapeuta:</label>
+        <div class="">
+            <label for="terapeuta" class="form-label form-label-sm">{{$user->nombre}} {{$user->apellidos}}</label>
         </div>
     </div>
 </div>
@@ -44,8 +47,8 @@
 
     <div class="col-12 justify-content-end d-flex p-2">
         @if(!$show)
-            <button type="button" name="crearRecuerdo" class="btn btn-success btn-sm btn-icon me-2 showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosCreator" @else data-bs-toggle="modal" data-bs-target="#recuerdosCreator" @endif><i class="fa-solid fa-plus"></i></button>
-            <button type="button" class="btn btn-success btn-sm showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosExistentes" @else data-bs-toggle="modal" data-bs-target="#recuerdosExistentes" @endif>Añadir existente</button>
+        <button type="button" name="crearRecuerdo" class="btn btn-success btn-sm btn-icon me-2 showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosCreator" @else data-bs-toggle="modal" data-bs-target="#recuerdosCreator" @endif><i class="fa-solid fa-plus"></i></button>
+        <button type="button" class="btn btn-success btn-sm showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosExistentes" @else data-bs-toggle="modal" data-bs-target="#recuerdosExistentes" @endif>Añadir existente</button>
         @endif
     </div>
 
@@ -67,21 +70,21 @@
             <tbody id="divRecuerdos">
                 @foreach ($sesion->recuerdos as $recuerdo)
                 <tr>
-                        <td>{{$recuerdo->nombre}}</td>
-                        <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
-                        <td>{{$recuerdo->etapa->nombre}}</td>
-                        <td>{{$recuerdo->categoria->nombre}}</td>
-                        <td>{{$recuerdo->estado->nombre}}</td>
-                        <td>{{$recuerdo->etiqueta->nombre}}</td>
-                        <td class="tableActions">
-                            <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
-                            <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                            <form method="post" action="{{route('recuerdo.destroy',$recuerdo->id)}}" style="display:inline!important;">
-                                {{csrf_field()}}
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
-                            </form>
-                        </td>
+                    <td>{{$recuerdo->nombre}}</td>
+                    <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
+                    <td>{{$recuerdo->etapa->nombre}}</td>
+                    <td>{{$recuerdo->categoria->nombre}}</td>
+                    <td>{{$recuerdo->estado->nombre}}</td>
+                    <td>{{$recuerdo->etiqueta->nombre}}</td>
+                    <td class="tableActions">
+                        <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                        <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
+                        <form method="post" action="{{route('recuerdo.destroy',$recuerdo->id)}}" style="display:inline!important;">
+                            {{csrf_field()}}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

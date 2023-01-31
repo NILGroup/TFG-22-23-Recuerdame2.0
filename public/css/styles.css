@@ -354,3 +354,12 @@ footer {
     margin-left: 1em;
   }
   
+  .labelShow {
+    font-weight: bold;
+    width: fit-content;
+    margin-right: 1em;
+  }
+
+  .col{
+    margin-right: 1em;
+  }
