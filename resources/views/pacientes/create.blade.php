@@ -35,6 +35,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
     <script>
         var ruta = "/pacientes/"
+        var max = 1
     </script>
     <script src="/js/especificar.js"></script>
     <script src="/js/dropzone.js"></script>

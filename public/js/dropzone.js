@@ -1,7 +1,8 @@
 Dropzone.autoDiscover = false
 document.addEventListener("DOMContentLoaded", function () {
 
-    
+    if (!max)
+        max = 100
 
 
     $('#d').dropzone({
@@ -13,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
         acceptedFiles: '',
         uploadMultiple: true,
         parallelUploads: 100,
-        maxFiles: 100,
+        maxFiles: max,
         paramName: "file",
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         init: function () {
