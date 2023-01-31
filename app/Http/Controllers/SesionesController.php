@@ -78,8 +78,9 @@ class SesionesController extends Controller
      */
     public function store(Request $request)
     {
+        
         $sesion = Sesion::updateOrCreate(
-            ['id' => $request->id],
+            ['id' => $request->idSesion],
             ['fecha' => $request->fecha,
              'etapa_id' => $request->etapa_id,
              'objetivo' => $request->objetivo,
@@ -111,6 +112,10 @@ class SesionesController extends Controller
 
         if(!is_null($request->recuerdos))
             $sesion->recuerdos()->sync($request->recuerdos);
+
+        if(isset($request->media)) {
+            $sesion->multimedias()->detach($request->media);
+        }
 
 
         return redirect("pacientes/{$sesion->paciente->id}/sesiones");

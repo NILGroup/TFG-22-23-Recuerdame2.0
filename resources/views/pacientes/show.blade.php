@@ -15,6 +15,7 @@
                 </div>
             </button>
             <div id="general" class="container-fluid accordion-collapse collapse show" aria-labelledby="general">
+                @include('pacientes.foto')
                 @include('pacientes.listaItems')
             </div>
         </div>
