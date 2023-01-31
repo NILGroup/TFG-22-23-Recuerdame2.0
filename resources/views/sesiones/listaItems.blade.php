@@ -1,14 +1,14 @@
-<div class="d-flex justify-content-start">
+<div class="d-flex justify-content-start mb-3">
     <input hidden id="idUser" name="user_id" value="{{$user->id}}" required @if($show) disabled @endif>
     <input hidden id="idPaciente" name="paciente_id" value="{{$paciente->id}}" required @if($show) disabled @endif>
     <input type="hidden" name="idSesion" id="idSesion" value="{{$sesion->id}}">
     <div class="col d-inline-flex">
-        <label for="fecha" class="labelShow">Fecha<span class="asterisco">*</span></label>
-        <input type="datetime-local" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$sesion->fecha}}" required @if($show) disabled @endif>
+        <label for="fecha" class="form-label labelShow">Fecha: <span class="asterisco">*</span></label>
+        <input type="datetime-local"  style="width: fit-content;" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$sesion->fecha}}" required @if($show) disabled @endif>
     </div>
 
     <div class="col d-inline-flex ">
-        <label for="etapa" class="labelShow ">Etapa:<span class="asterisco">*</span></label>
+        <label for="etapa" class="form-label labelShow ">Etapa:<span class="asterisco">*</span></label>
         <select class="form-select form-select-sm " style="width: fit-content;" name="etapa_id" required @if($show) disabled @endif>
             @foreach($etapas as $etapa)
             <option value="{{$etapa->id}}" @if($sesion->etapa && $sesion->etapa->id == $etapa->id)
@@ -20,7 +20,7 @@
     </div>
 
     <div class="col d-inline-flex">
-        <label for="terapeuta" class="labelShow">Terapeuta:</label>
+        <label for="terapeuta" class="form-label labelShow">Terapeuta:</label>
         <div class="">
             <label for="terapeuta" class="form-label form-label-sm">{{$user->nombre}} {{$user->apellidos}}</label>
         </div>
@@ -28,12 +28,12 @@
 </div>
 
 <div class="mb-3">
-    <label for="objetivo" class="form-label col-form-label-sm">Objetivo<span class="asterisco">*</span></label>
+    <label for="objetivo" class="form-label labelShow">Objetivo:<span class="asterisco">*</span></label>
     <textarea class="form-control form-control-sm" id="objetivo" name="objetivo" rows="3" required @if($show) disabled @endif>{{$sesion->objetivo}}</textarea>
 </div>
 
 <div class="mb-3">
-    <label for="descripcion" class="form-label col-form-label-sm">Descripción</label>
+    <label for="descripcion" class="form-label labelShow">Descripción:</label>
     <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" rows="3" @if($show) disabled @endif>{{$sesion->descripcion}}</textarea>
 </div>
 
