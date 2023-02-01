@@ -38,8 +38,6 @@
                             <a class="btn btn-primary btn-sm" style="width: 100%;" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/informe">Ver informe</a>
                             @endif
                         </div>
-                        
-                
                     </td>
                     <td class="tableActions">
                         <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
