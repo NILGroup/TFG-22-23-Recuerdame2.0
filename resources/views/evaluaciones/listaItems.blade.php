@@ -1,14 +1,16 @@
 <div>
     <input type="hidden" class="form-control form-control-sm" id="fecha" name="id" value="{{$evaluacion->id}}" required @if($show) disabled @endif>
     <input type="hidden" class="form-control form-control-sm" id="fecha" name="paciente_id" value="{{$paciente->id}}" required @if($show) disabled @endif>
-    <div class="row">
-        <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha<span class="asterisco">*</span></label>
+    <div class="row align-items-center">
+        <label for="fecha" class="form-label col-form-label negrita col-sm-3 col-md-2 col-lg-2">Fecha:<span class="asterisco">*</span></label>
         <div class="col-sm-9 col-md-6 col-lg-2">
             <input type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$evaluacion->fecha}}" required @if($show) disabled @endif>
         </div>
     </div>
-    <div class="row">
-        <label for="escalas" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2"><b>Escalas</b></label>
+    <div class="row ">
+        <label for="escalas" class="form-label col-form-label col-sm-3 col-md-2 col-lg-2"><b>Escalas:</b></label>
+        <div><hr class="w-50 mt-0"></div>
+        
     </div>
     <div class="row">
         <label for="escala" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2"><b>Escala</b></label>
@@ -45,10 +47,10 @@
         </div>
     </div>
     @if(!$show || !is_null($evaluacion->nombre_escala))
-        <div class="row">
-            <label for="Otra_escala" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2"><b>Otra escala</b></label>
+        <div class="row d-inline m-0">
+            <hr class="w-50 m-0">
         </div>
-        <div class="row">
+        <div class="row ">
             <label for="escala" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2"><b>Escala</b></label>
             <label for="valor" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2"><b>Valor</b></label>
             <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2"><b>Fecha</b></label>
@@ -67,12 +69,14 @@
             </div>
         </div>
     @endif
+
+    <hr class="w-50 mb-3">
     <div class="mb-3">
-        <label for="diagnostico" class="form-label col-form-label-sm">Diagnostico<span class="asterisco">*</span></label>
+        <label for="diagnostico" class="form-label col-form-label negrita">Diagnostico:<span class="asterisco">*</span></label>
         <textarea class="form-control form-control-sm" id="diagnostico" name="diagnostico" rows="3" required @if($show) disabled @endif>{{$evaluacion->diagnostico}}</textarea>
     </div>
     <div class="mb-3">
-        <label for="observaciones" class="form-label col-form-label-sm">Observaciones</label>
+        <label for="observaciones" class="form-label col-form-label negrita">Observaciones:</label>
         <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3" @if($show) disabled @endif>{{$evaluacion->observaciones}}</textarea>
     </div>
 </div>
