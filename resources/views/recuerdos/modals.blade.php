@@ -39,9 +39,7 @@
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellidos</th>
                             <th class="fit10" scope="col">Tipo de Relacion</th>
-                            @if($show) 
                             <th class="fit5" scope="col"></th>
-                            @endif
                         </tr>
                     </thead>
                     <tbody id="tablaPersonasExistentes">
@@ -50,11 +48,9 @@
                             <td>{{$persona->nombre}}</td>
                             <td>{{$persona->apellidos}}</td>
                             <td>{{$persona->tiporelacion->nombre}}</td>
-                            @if($show) 
                             <td id="personasSeleccionadas" class="tableActions">
                                 <input class="form-check-input" type="checkbox" value="{{$persona->id}}" name="checkPersonaExistente[]" id="checkPersonaExistente" @if($recuerdo->personas_relacionadas->contains($persona)) checked @endif>
                             </td>
-                            @endif
                         </tr>
                         @endforeach
                     </tbody>

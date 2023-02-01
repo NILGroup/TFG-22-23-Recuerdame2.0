@@ -48,7 +48,6 @@ function agregarRecuerdosExistentes(r) {
 
         let rec = allRecuerdos[i].getElementsByTagName("td")
         rec = {
-            "id": allRecuerdos[i].getElementsByTagName("th")[0].textContent,
             "nombre": rec[0].textContent,
             "fecha": rec[1].textContent,
             "etapa": rec[2].textContent,
@@ -60,7 +59,6 @@ function agregarRecuerdosExistentes(r) {
 
         if (rec.checked) {
             document.getElementById("divRecuerdos").innerHTML += '<tr>' +
-                '<th scope="row">' + (n++) + '</th>' +
                 '<td>' + rec.nombre + '</td>' +
                 '<td>' + rec.fecha + '</td>' +
                 '<td>' + rec.etapa + '</td>' +
@@ -95,16 +93,15 @@ function reloadRecuerdos(r) {
 
     document.getElementById("tablaRecuerdosExistentes").innerHTML +=
         '<tr>' +
-        '<th scope="row">' + r.id + '</th>' +
-        '<td>' + r.nombre + '</td>' +
-        '<td>' + r.fecha + '</td>' +
-        '<td>' + r.etapa.nombre + '</td>' +
-        '<td>' + r.categoria.nombre + '</td>' +
-        '<td>' + r.estado.nombre + '</td>' +
-        '<td>' + r.etiqueta.nombre + '</td>' +
-        '<td id="recuerdosSeleccionados" class="tableActions">' +
-        '<input class="form-check-input" type="checkbox" value=' + r.id + ' name="checkRecuerdo[]" id="checkRecuerdo" checked>' +
-        '</td>' +
+            '<td>' + r.nombre + '</td>' +
+            '<td>' + r.fecha + '</td>' +
+            '<td>' + r.etapa.nombre + '</td>' +
+            '<td>' + r.categoria.nombre + '</td>' +
+            '<td>' + r.estado.nombre + '</td>' +
+            '<td>' + r.etiqueta.nombre + '</td>' +
+            '<td id="recuerdosSeleccionados" class="tableActions">' +
+                '<input class="form-check-input" type="checkbox" value=' + r.id + ' name="checkRecuerdo[]" id="checkRecuerdo" checked>' +
+            '</td>' +
         '</tr>';
 
     document.getElementById("tablaRecuerdosExistentes").getElementsByTagName("input").forEach(c => {
@@ -115,7 +112,6 @@ function reloadRecuerdos(r) {
 
     document.getElementById("divRecuerdos").innerHTML +=
         '<tr>' +
-        '<th scope="row">' + (document.getElementById("divRecuerdos").getElementsByTagName("tr").length + 1) + '</th>' +
         '<td>' + r.nombre + '</td>' +
         '<td>' + r.fecha + '</td>' +
         '<td>' + r.etapa.nombre + '</td>' +

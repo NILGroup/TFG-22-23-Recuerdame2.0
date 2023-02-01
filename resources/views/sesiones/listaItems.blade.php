@@ -61,7 +61,9 @@
                     <th scope="col">Categoría</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Etiqueta</th>
+                    @if($show)
                     <th class="fit10" scope="col"></th>
+                    @endif
                 </tr>
             </thead>
 
@@ -74,6 +76,7 @@
                     <td>{{$recuerdo->categoria->nombre}}</td>
                     <td>{{$recuerdo->estado->nombre}}</td>
                     <td>{{$recuerdo->etiqueta->nombre}}</td>
+                    @if($show)
                     <td class="tableActions">
                         <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                         <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
@@ -83,6 +86,7 @@
                             <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                         </form>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>

@@ -47,7 +47,7 @@ class SesionesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         $show = false;
         $mostrarFoto = false;
@@ -55,7 +55,7 @@ class SesionesController extends Controller
         $sesion = new Sesion();
         $recuerdo = new Recuerdo();
         $user = Auth::user();
-        $paciente = Paciente::find(Session::get('paciente')['id']);
+        $paciente = Paciente::find($id);
         $personas = $paciente->personasrelacionadas;
         $recuerdos = Recuerdo::where('paciente_id', $paciente->id)->get();
         $estados = Estado::all()->sortBy("id");
@@ -65,7 +65,7 @@ class SesionesController extends Controller
         $categorias = Categoria::all()->sortBy("id");
         $tipos = Tiporelacion::all()->sortBy("id");
         $idPaciente = $paciente->id;
-        $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
+        $prelacionadas = Personarelacionada::where('paciente_id', $id)->get()->keyBy("id");
 
         return view("sesiones.create", compact('persona','idPaciente','mostrarFoto','etapas', 'user', 'tipos', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'sesion', 'recuerdo', 'personas', 'show'));
     }

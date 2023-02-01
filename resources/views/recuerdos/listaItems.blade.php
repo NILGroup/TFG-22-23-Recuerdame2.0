@@ -113,14 +113,16 @@
         </div>
         @endif  
     </div>
-    <table id="tabla" class="table table-bordered table-striped table-responsive datatable" style="width: 100%;">
+    <table id="tabla" class="table table-bordered table-striped table-responsive datatable tablaPersonaRecuerdo" style="width: 100%;">
         <caption>Listado de personas relacionadas</caption>
         <thead>
             <tr class="bg-primary">
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
                 <th class="fit10" scope="col">Tipo de relación</th>
+                @if($show)
                 <th class="fit5" scope="col"></th>
+                @endif
             </tr>
         </thead>
         <tbody id="divPersonas">
@@ -130,9 +132,11 @@
                 <td>{{$persona->apellidos}}</td>
                 <td>{{$persona->tiporelacion->nombre}}</td>
                 <input type="hidden" value={{$persona->id}}>
+                @if($show)
                 <td class="tableActions">
                     <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                 </td>
+                @endif
             </tr>
             @endforeach
         </tbody>
