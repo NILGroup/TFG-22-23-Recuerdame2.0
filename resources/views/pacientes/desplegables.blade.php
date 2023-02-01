@@ -6,10 +6,11 @@
             </div>
         </button>
         
-        <div id="evaluaciones" class="accordion-collapse collapse show" aria-labelledby="evaluaciones1">
-            <div class="row mb-2">
-                <div class="col-12 justify-content-end d-flex">
-                    <a href="/pacientes/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success btn-sm btn-icon mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
+        <div id="evaluaciones" class="tabla accordion-collapse collapse show" aria-labelledby="evaluaciones1">
+            <div class="d-flex justify-content-between upper">
+                @include('layouts.tableSearcher')
+                <div class="justify-content-end d-flex">
+                    <a href="/pacientes/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
             <table id="tabla1" class="table table-bordered table-striped table-responsive datatable">
@@ -53,9 +54,10 @@
         </button>
         
         <div id="cuidadores" class="accordion-collapse collapse show" aria-labelledby="cuidadores1">
-            <div class="row mb-2">
-                <div class="col-12 justify-content-end d-flex">
-                    <a href="/pacientes/{{$paciente->id}}/cuidadores/crear"><button type="button" class="btn btn-success btn-sm btn-icon mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
+            <div class="d-flex justify-content-between upper">
+                @include('layouts.tableSearcher')
+                <div class="justify-content-end d-flex">
+                    <a href="/pacientes/{{$paciente->id}}/cuidadores/crear"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
 
@@ -101,9 +103,10 @@
         </button>
         
         <div id="personasrelacionadas" class="accordion-collapse collapse show" aria-labelledby="personasrelacionadas1">
-            <div class="row mb-2">
-                <div class="col-12 justify-content-end d-flex">
-                    <a href="/pacientes/{{$paciente->id}}/crearPersona"><button type="button" class="btn btn-success btn-sm btn-icon  mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
+            <div class="d-flex justify-content-between upper">
+                @include('layouts.tableSearcher')
+                <div class="justify-content-end d-flex">
+                    <a href="/pacientes/{{$paciente->id}}/crearPersona"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
 

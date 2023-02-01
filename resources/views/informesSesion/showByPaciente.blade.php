@@ -7,8 +7,10 @@
         <h5 class="text-muted">Listado de informes de sesión</h5>
         <hr class="lineaTitulo">
     </div>
-
-    <div>
+    <div class ="tabla">
+        <div class="d-flex justify-content-between upper">
+            @include('layouts.tableSearcher')
+        </div>
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de informes de sesiones</caption>
             <thead>

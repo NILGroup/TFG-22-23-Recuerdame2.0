@@ -6,21 +6,15 @@
         <h5 class="text-muted">Listado de recuerdos</h5>
         <hr class="lineaTitulo">
     </div>
-
-    <div class="row mb-2">
-        <div class="col-12 justify-content-end d-flex">
-            <div class="row mb-2">
-                <div class="col-12 justify-content-end d-flex">
-                    <a href="/pacientes/{{$paciente->id}}/recuerdos/crear"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
-                </div>
+    <div class="tabla">
+        <div class="d-flex justify-content-between upper">
+            @include('layouts.tableSearcher')
+            <div class="justify-content-end d-flex">
+                <a href="/pacientes/{{$paciente->id}}/recuerdos/crear"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
             </div>
-
         </div>
-    </div>
-
-    <div>
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
-        <caption>Listado de recuerdos</caption>
+            <caption>Listado de recuerdos</caption>
             <thead>
                 <tr class="bg-primary">
                     <th scope="col">Nombre</th>

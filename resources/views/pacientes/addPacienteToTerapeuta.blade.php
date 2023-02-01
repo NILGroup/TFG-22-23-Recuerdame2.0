@@ -14,7 +14,11 @@
         {{csrf_field()}}
 
         <input type="hidden" value="{{$paciente->id}}" name="paciente_id">
-        <div>
+        
+        <div class ="tabla">
+            <div class="d-flex justify-content-between upper">
+                @include('layouts.tableSearcher')
+            </div>
             <table class="table table-bordered recuerdameTable datatable">
                 <thead>
                     <tr class="bg-primary">

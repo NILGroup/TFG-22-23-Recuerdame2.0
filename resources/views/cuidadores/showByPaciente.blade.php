@@ -6,48 +6,46 @@
         <h5 class="text-muted">Lista cuidadores</h5>
         <hr class="lineaTitulo">
     </div>
-    <div class="row mb-2">
-        <div class="col-12 justify-content-end d-flex">
-            <a href="/pacientes/{{$paciente->id}}/cuidadores/crear"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
+    <d  iv class ="tabla">
+        <div class="d-flex justify-content-between upper">
+            @include('layouts.tableSearcher')
+            <div class="justify-content-end align-items-center d-flex">
+                <a href="/pacientes/{{$paciente->id}}/cuidadores/crear"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
+            </div>
         </div>
+        <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
+            <caption>Listado de cuidadores</caption>
+            <thead>
+                <tr class="bg-primary busqueda">
+                    <th class="fit10" scope="col">Nombre</th>
+                    <th class="fit10" scope="col">Correo electrónico</th>
+                    <th class="fit5" scope="col">Teléfono</th>
+                    <th scope="col">Localidad</th>
+                    <th class="fit5" scope="col">Grado de parentesco</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($cuidadores as $cuidador)
+                <tr>
+                    <td>{{$cuidador->nombre}} {{$cuidador->apellidos}}</td>
+                    <td>{{$cuidador->email}}</td>
+                    <td>{{$cuidador->telefono}}</td>
+                    <td>{{$cuidador->localidad}}</td>
+                    <td>{{$cuidador->parentesco}}</td>
+                    <td class="tableActions">
+                        <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" style="display:inline!important;">
+                            {{csrf_field()}}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                        </form>
+                    </td>
+                </tr>
 
+                @endforeach
+            </tbody>
+        </table>
     </div>
-</div>
-<div>
-    <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
-        <caption>Listado de cuidadores</caption>
-        <thead>
-            <tr class="bg-primary busqueda">
-                <th class="fit10" scope="col">Nombre</th>
-                <th class="fit10" scope="col">Correo electrónico</th>
-                <th class="fit5" scope="col">Teléfono</th>
-                <th scope="col">Localidad</th>
-                <th class="fit5" scope="col">Grado de parentesco</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($cuidadores as $cuidador)
-            <tr>
-                <td>{{$cuidador->nombre}} {{$cuidador->apellidos}}</td>
-                <td>{{$cuidador->email}}</td>
-                <td>{{$cuidador->telefono}}</td>
-                <td>{{$cuidador->localidad}}</td>
-                <td>{{$cuidador->parentesco}}</td>
-                <td class="tableActions">
-                    <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" style="display:inline!important;">
-                        {{csrf_field()}}
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
-                    </form>
-                </td>
-            </tr>
-
-            @endforeach
-        </tbody>
-    </table>
-</div>
-
 </div>
 @endsection
 
