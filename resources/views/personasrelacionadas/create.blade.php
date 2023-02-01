@@ -44,6 +44,7 @@
         let id = document.getElementById("paciente_id").value;
         var ruta = "/pacientes/" + id + "/personas"
         var max = 1
+        var limit = true
     </script>
     <script src="/js/dropzone.js"></script>
 @endpush

@@ -76,8 +76,10 @@
     <script src="/js/especificar.js"></script>
     <script>
         let id = document.getElementById("paciente_id").value;
-        var ruta = "/pacientes/" + id + "/personas"
+        let id2 = document.getElementById("id").value
+        var ruta = "/pacientes/" + id + "/personas/" +id2
         var max = 1
+        var limit = true
     </script>
     <script src="/js/dropzone.js"></script>
 @endpush

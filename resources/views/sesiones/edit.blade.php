@@ -50,6 +50,7 @@
         let id2 = document.getElementById("idSesion").value;
         var ruta = "/pacientes/" + id + "/sesiones/" + id2;
         var max
+        var limit = false
     </script>
     <script src="/js/dropzone.js"></script>
 @endpush

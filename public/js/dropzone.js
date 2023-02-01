@@ -11,13 +11,17 @@ document.addEventListener("DOMContentLoaded", function () {
         maxFilesize: 10, //mb
         addRemoveLinks: true,
         autoProcessQueue: false,
-        acceptedFiles: '',
+        acceptedFiles: (limit) ? 'image/*': '',
         uploadMultiple: true,
         parallelUploads: 100,
+        dictInvalidFileType: "Tipo Inválido",
+        dictRemoveFile: "Eliminar archivo",
+        dictFileTooBig: "Archivo demasiado grande",
         maxFiles: max,
         paramName: "file",
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         init: function () {
+
 
             this.on('maxfilesreached', function() {
                 $('.dropzone').removeClass('dz-clickable'); 
@@ -28,11 +32,21 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             this.on('removedfile', function(){
-                $('.dropzone').addClass('dz-clickable'); 
-                $("#dzp").addClass("dropzone-correct").removeClass("dropzone-incorrect")
-                $("#dropzone-title").addClass("dropzone-title-correct").removeClass("dropzone-title-incorrect").text("Arrastre sus archivos")
-                $("#dropzone-img").show()
-                this.setupEventListeners()
+               
+                if (this.files.length < this.options.maxFiles){
+
+                    $('.dropzone').addClass('dz-clickable'); 
+                    $("#dzp").addClass("dropzone-correct").removeClass("dropzone-incorrect")
+                    $("#dropzone-title").addClass("dropzone-title-correct").removeClass("dropzone-title-incorrect").text("Arrastre sus archivos")
+                    $("#dropzone-img").show()
+                    this.setupEventListeners()
+
+                }
+         
+            })
+
+            this.on("error", function(file, msg){
+                console.log(msg)
             })
 
             var submitBtn = document.querySelector("#guardar");
@@ -70,9 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
         success: function (file, response) {
             window.location.href = ruta
         },
-        error: function (file, xhr, formData) {
-            console.log("Upload Attempt Error - " + formData.status + " " + formData.statusText);
-        },
+        
         complete: function (file, response) {
             console.log("Upload Attempt Finished");
         }
