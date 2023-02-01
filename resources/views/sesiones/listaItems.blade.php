@@ -7,7 +7,7 @@
         <input type="datetime-local" style="width: fit-content;" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$sesion->fecha}}" required @if($show) disabled @endif>
     </div>
 
-    <div class="col d-inline">
+    <div class="col d-inline align-items-center">
         <label for="etapa" class="form-label labelShow ">Etapa:<span class="asterisco">*</span></label>
         <select class="form-select form-select-sm " style="width: fit-content;" name="etapa_id" required @if($show) disabled @endif>
             @foreach($etapas as $etapa)
