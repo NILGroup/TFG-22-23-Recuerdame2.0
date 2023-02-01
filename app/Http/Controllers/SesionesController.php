@@ -91,23 +91,7 @@ class SesionesController extends Controller
              'respuesta' => $request->respuesta]
         );
 
-        if ($request->has("file")) { //EN CASO DE MULTIMEDIA
-            $name = [];
-            $original_name = [];
-            foreach ($request->file('file') as $key => $value) {
-                $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
-                $destinationPath = public_path() . '/storage/img';
-                $value->move($destinationPath, $image);
-                $name[] = $image;
-                $original_name[] = $value->getClientOriginalName();
-                $multimedia = Multimedia::create([
-                    'nombre' => $image,
-                    'fichero' => '/storage/img/' . $image
-                ]);
-
-                $sesion->multimedias()->attach($multimedia->id);
-            }
-        }
+        MultimediasController::savePhotos($request, $sesion);
 
 
         if(!is_null($request->recuerdos))

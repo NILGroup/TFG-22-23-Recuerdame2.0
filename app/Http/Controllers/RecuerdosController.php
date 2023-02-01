@@ -94,27 +94,10 @@ class RecuerdosController extends Controller
             ]
         );
 
+
         
-
-
-        if ($request->has("file")) { //EN CASO DE MULTIMEDIA
-            $name = [];
-            $original_name = [];
-            foreach ($request->file('file') as $key => $value) {
-                $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
-                $destinationPath = public_path() . '/storage/img';
-                $value->move($destinationPath, $image);
-                $name[] = $image;
-                $original_name[] = $value->getClientOriginalName();
-                $multimedia = Multimedia::create([
-                    'nombre' => $image,
-                    'fichero' => '/storage/img/' . $image
-                ]);
-
-                $recuerdo->multimedias()->attach($multimedia->id);
-            }
-        }
-
+        MultimediasController::savePhotos($request, $recuerdo);
+      
         
         $personas_relacionar = $request->checkPersona; //Array de ids de las personas
         if (!is_null($personas_relacionar)) {

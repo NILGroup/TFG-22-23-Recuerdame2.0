@@ -81,27 +81,7 @@ class PersonasRelacionadasController extends Controller
 
         ]);
 
-        $name = [];
-        $original_name = [];
-        if ($request->has("file")){
-            foreach ($request->file('file') as $key => $value) {
-                $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
-                $destinationPath = public_path() . '/storage/img';
-                $value->move($destinationPath, $image);
-                $name[] = $image;
-                $original_name[] = $value->getClientOriginalName();
-                $multimedia = new Multimedia([
-                    'nombre' => $image,
-                    'fichero' => '/storage/img/' . $image
-                ]);
-                $persona->multimedia()->save($multimedia);
-            }
-        }
-          
-
-
-      
-        //return redirect("/pacientes/$request->paciente_id/personas");
+        MultimediasController::savePhoto($request, $persona);
 
     }
 
@@ -180,22 +160,8 @@ class PersonasRelacionadasController extends Controller
         $request->merge(['contacto' => $contacto]);
         $persona->update($request->all());
 
-        $name = [];
-        $original_name = [];
-        if ($request->has("file")){
-            foreach ($request->file('file') as $key => $value) {
-                $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
-                $destinationPath = public_path() . '/storage/img';
-                $value->move($destinationPath, $image);
-                $name[] = $image;
-                $original_name[] = $value->getClientOriginalName();
-                $multimedia = new Multimedia([
-                    'nombre' => $image,
-                    'fichero' => '/storage/img/' . $image
-                ]);
-                $persona->multimedia()->save($multimedia);
-            }
-        }
+        MultimediasController::savePhoto($request, $persona);
+
 
         return redirect("/pacientes/$persona->paciente_id/personas/$persona->id");
     }

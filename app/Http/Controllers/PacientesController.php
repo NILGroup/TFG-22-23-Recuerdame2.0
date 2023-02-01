@@ -96,22 +96,8 @@ class PacientesController extends Controller
         ]);
 
 
-        $name = [];
-        $original_name = [];
-        if ($request->has("file")){
-            foreach ($request->file('file') as $key => $value) {
-                $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
-                $destinationPath = public_path() . '/storage/img';
-                $value->move($destinationPath, $image);
-                $name[] = $image;
-                $original_name[] = $value->getClientOriginalName();
-                $multimedia = new Multimedia([
-                    'nombre' => $image,
-                    'fichero' => '/storage/img/' . $image
-                ]);
-                $paciente->multimedia()->save($multimedia);
-            }
-        }
+        MultimediasController::savePhoto($request, $paciente);
+
         $paciente->users()->save($user);
         //Redireccionamos a la vista de lista pacientes
         return redirect("/pacientes");
@@ -170,22 +156,10 @@ class PacientesController extends Controller
         //Actualizamos masivamente los datos del paciente
         $paciente->update($request->all());
 
-        $name = [];
-        $original_name = [];
-        if ($request->has("file")){
-            foreach ($request->file('file') as $key => $value) {
-                $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
-                $destinationPath = public_path() . '/storage/img';
-                $value->move($destinationPath, $image);
-                $name[] = $image;
-                $original_name[] = $value->getClientOriginalName();
-                $multimedia = new Multimedia([
-                    'nombre' => $image,
-                    'fichero' => '/storage/img/' . $image
-                ]);
-                $paciente->multimedia()->save($multimedia);
-            }
-        }
+        MultimediasController::savePhoto($request, $paciente);
+
+
+        
 
         //Redireccionamos a lista pacientes
         return redirect("/pacientes/$request->id");
