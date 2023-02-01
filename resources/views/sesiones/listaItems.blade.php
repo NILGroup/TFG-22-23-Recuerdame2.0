@@ -59,7 +59,7 @@
                     <th scope="col">Categoría</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Etiqueta</th>
-                    <th scope="col"></th>
+                    <th class="fit10" scope="col"></th>
                 </tr>
             </thead>
 

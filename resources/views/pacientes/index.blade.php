@@ -17,12 +17,13 @@
 <div>
     <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
         <thead>
+            <caption>Listado de pacientes</caption>
             <tr class="bg-primary">
-                <th scope="col">Nombre</th>
+                <th class="fit5" scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
-                <th scope="col">Género</th>
-                <th scope="col">Edad</th>
-                <th scope="col"></th>
+                <th class="fit5" scope="col">Género</th>
+                <th class="fit5" scope="col">Edad</th>
+                <th class="fit5" scope="col"></th>
             </tr>
         </thead>
         <!--<tbody>-->
@@ -52,7 +53,6 @@
             </tr>
         @endforeach
 
-        <caption>Listado de pacientes</caption>
     </table>
 </div>
 

@@ -14,8 +14,8 @@
             <thead>
                 <tr class="bg-primary">
                     <th scope="col">Informe</th>
-                    <th scope="col">Fecha del informe</th>
-                    <th scope="col"></th>
+                    <th class="fit10" scope="col">Fecha del informe</th>
+                    <th class="fit5" scope="col"></th>
                 </tr>
             </thead>
             <tbody>

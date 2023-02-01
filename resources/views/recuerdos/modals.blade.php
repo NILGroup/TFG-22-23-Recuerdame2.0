@@ -38,9 +38,9 @@
                         <tr class="bg-primary">
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellidos</th>
-                            <th scope="col">Tipo de Relacion</th>
+                            <th class="fit10" scope="col">Tipo de Relacion</th>
                             @if($show) 
-                            <th scope="col"></th>
+                            <th class="fit5" scope="col"></th>
                             @endif
                         </tr>
                     </thead>

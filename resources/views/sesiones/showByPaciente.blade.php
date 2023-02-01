@@ -19,10 +19,10 @@
             <caption>Listado de sesiones</caption>
             <thead>
                 <tr class="bg-primary">
-                    <th scope="col">Fecha</th>
+                    <th class="fit5" scope="col">Fecha</th>
                     <th scope="col">Objetivo</th>
-                    <th scope="col">Informe</th>
-                    <th scope="col"></th>
+                    <th class="fit5" scope="col">Informe</th>
+                    <th class="fit5" scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,9 +33,9 @@
                     <td>
                         <div class="d-flex justify-content-center">
                             @if($sesion->fecha_finalizada == null)
-                            <a class="btn btn-success btn-sm" style="width: 50%;" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
+                            <a class="btn btn-success btn-sm" style="width: 100%;" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
                             @else
-                            <a class="btn btn-primary btn-sm" style="width: 50%;" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/informe">Ver informe</a>
+                            <a class="btn btn-primary btn-sm" style="width: 100%;" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/informe">Ver informe</a>
                             @endif
                         </div>
                         

@@ -122,8 +122,8 @@
             <tr class="bg-primary">
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
-                <th scope="col">Tipo de relación</th>
-                <th scope="col"></th>
+                <th class="fit10" scope="col">Tipo de relación</th>
+                <th class="fit5" scope="col"></th>
             </tr>
         </thead>
         <tbody id="divPersonas">

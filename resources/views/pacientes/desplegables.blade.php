@@ -16,9 +16,9 @@
                 <thead>
                     <tr class="bg-primary">
                         <th scope="col">Informe</th>
-                        <th scope="col">Fecha</th>
+                        <th class="fit5" scope="col">Fecha</th>
                         <th scope="col">Diagnóstico</th>
-                        <th scope="col"></th>
+                        <th class="fit5" scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,10 +63,10 @@
                 <table id="tabla2" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr class="bg-primary">
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellidos</th>
+                            <th class="fit5" scope="col">Nombre</th>
+                            <th class="fit10" scope="col">Apellidos</th>
                             <th scope="col">Correo electrónico</th>
-                            <th scope="col"></th>
+                            <th class="fit10" scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -111,10 +111,10 @@
                 <table id="tabla3" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr class="bg-primary">
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellidos</th>
+                            <th class="fit5" scope="col">Nombre</th>
+                            <th class="fit10" scope="col">Apellidos</th>
                             <th scope="col">Tipo de Relacion</th>
-                            <th scope="col"></th>
+                            <th class="fit10" scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>

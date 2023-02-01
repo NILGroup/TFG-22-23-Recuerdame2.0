@@ -25,6 +25,23 @@ footer {
     font-size:3em;
     z-index: 999;
 }
+/*TABLAS*/
+.table td.fit, 
+.table th.fit {
+    white-space: nowrap !important; 
+    max-width: 1px !important;
+}
+.table td.fit5, 
+.table th.fit5 {
+    white-space: nowrap !important; 
+    max-width: 5em !important;
+}
+
+.table td.fit10, 
+.table th.fit10 {
+    white-space: nowrap !important; 
+    max-width: 10em !important;
+}
 
 /*Cuerpo del cuadrado*/
 .cuerpo {

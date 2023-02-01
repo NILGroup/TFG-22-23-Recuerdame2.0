@@ -15,12 +15,12 @@
     </div>
     <div>
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
-            <caption>Listado de evaluaciones</caption>
+            <caption>Listado de informes de seguimiento</caption>
             <thead>
                 <tr class="bg-primary">
                     <th scope="col">Informe</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Sesiones desde el anterior informe de seguimiento</th>
+                    <th class="fit" scope="col">Fecha</th>
+                    <th class="" scope="col">Sesiones desde el anterior informe de seguimiento</th>
                     <th scope="col">Diagnóstico</th>
                     <th scope="col"></th>
                 </tr>

@@ -12,48 +12,49 @@
         </div>
 
     </div>
-    </div>
-    <div>
-        <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
-            <thead>
-                <tr class="bg-primary busqueda">
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Correo electrónico</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Localidad</th>
-                    <th scope="col">Grado de parentesco</th>
-                    <th scope="col"></th> 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($cuidadores as $cuidador)
-                <tr>
-                    <td>{{$cuidador->nombre}} {{$cuidador->apellidos}}</td>
-                    <td>{{$cuidador->email}}</td>
-                    <td>{{$cuidador->telefono}}</td>
-                    <td>{{$cuidador->localidad}}</td>
-                    <td>{{$cuidador->parentesco}}</td>
-                    <td class="tableActions">
-                        <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" style="display:inline!important;">
-                            {{csrf_field()}}
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
-                        </form>
-                    </td>
-                </tr>
+</div>
+<div>
+    <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
+        <caption>Listado de cuidadores</caption>
+        <thead>
+            <tr class="bg-primary busqueda">
+                <th class="fit10" scope="col">Nombre</th>
+                <th class="fit10" scope="col">Correo electrónico</th>
+                <th class="fit5" scope="col">Teléfono</th>
+                <th scope="col">Localidad</th>
+                <th class="fit5" scope="col">Grado de parentesco</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($cuidadores as $cuidador)
+            <tr>
+                <td>{{$cuidador->nombre}} {{$cuidador->apellidos}}</td>
+                <td>{{$cuidador->email}}</td>
+                <td>{{$cuidador->telefono}}</td>
+                <td>{{$cuidador->localidad}}</td>
+                <td>{{$cuidador->parentesco}}</td>
+                <td class="tableActions">
+                    <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" style="display:inline!important;">
+                        {{csrf_field()}}
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                    </form>
+                </td>
+            </tr>
 
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 
 </div>
 @endsection
 
 @push('scripts')
-    @include('layouts.scripts')
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/table.js"></script>
-    <script src="/js/confirm.js"></script>
+@include('layouts.scripts')
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/table.js"></script>
+<script src="/js/confirm.js"></script>
 @endpush

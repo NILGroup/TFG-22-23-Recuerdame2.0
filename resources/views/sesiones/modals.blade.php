@@ -45,7 +45,7 @@
                             <th scope="col">Estado</th>
                             <th scope="col">Etiqueta</th>
                             @if($show) 
-                            <th scope="col"></th>
+                            <th class="fit10" scope="col"></th>
                             @endif
                         </tr>
                     </thead>
