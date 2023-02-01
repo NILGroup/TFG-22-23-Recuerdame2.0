@@ -41,14 +41,16 @@
         <hr class="lineaTitulo">
     </div>
 
-    <div class="col-12 justify-content-end d-flex p-2">
-        @if(!$show)
-        <button type="button" name="crearRecuerdo" class="btn btn-success btn-sm btn-icon me-2 showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosCreator" @else data-bs-toggle="modal" data-bs-target="#recuerdosCreator" @endif><i class="fa-solid fa-plus"></i></button>
-        <button type="button" class="btn btn-success btn-sm showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosExistentes" @else data-bs-toggle="modal" data-bs-target="#recuerdosExistentes" @endif>Añadir existente</button>
-        @endif
-    </div>
-
-    <div>
+    <div class="tabla">
+        <div class="d-flex justify-content-between upper">
+            @if(!$show)
+                @include('layouts.tableSearcher')
+                <div class="justify-content-end d-flex p-2">
+                    <button type="button" name="crearRecuerdo" class="btn btn-success me-2 showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosCreator" @else data-bs-toggle="modal" data-bs-target="#recuerdosCreator" @endif><i class="fa-solid fa-plus"></i></button>
+                    <button type="button" class="btn btn-success showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosExistentes" @else data-bs-toggle="modal" data-bs-target="#recuerdosExistentes" @endif>Añadir existente</button>
+                </div>
+            @endif
+        </div>
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de recuerdos</caption>
             <thead>
@@ -97,7 +99,7 @@
 <div class="row">
     <div class="col-12 justify-content-end d-flex p-2">
         <!-- TODO REDIRIGIR A SELECCION DE MULTIMEDIA -->
-        <a href="#" class="btn btn-success btn-sm">Añadir existente</button></a>
+        <a href="#" class="btn btn-success">Añadir existente</button></a>
     </div>
 </div>
 @endif

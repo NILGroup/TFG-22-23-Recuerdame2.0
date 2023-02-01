@@ -6,7 +6,7 @@
         <h5 class="text-muted">Lista cuidadores</h5>
         <hr class="lineaTitulo">
     </div>
-    <d  iv class ="tabla">
+    <div class ="tabla">
         <div class="d-flex justify-content-between upper">
             @include('layouts.tableSearcher')
             <div class="justify-content-end align-items-center d-flex">

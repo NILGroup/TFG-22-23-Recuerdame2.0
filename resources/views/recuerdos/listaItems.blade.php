@@ -101,17 +101,18 @@
     <h5 class="text-muted">Listado de personas relacionadas</h5>
     <hr class="lineaTitulo">
 </div>
-@if(!$show)
-<div class="row">
-    <div class="col-12 justify-content-end d-flex p-2">
-        <!-- Nueva persona relacionada -->
-        <button type="button" name="crearPersona" class="btn btn-success btn-sm btn-icon me-2 showmodal" @if(!str_contains(url()->current(), 'recuerdo')) data-show-modal="personasCreator" @else data-bs-toggle="modal" data-bs-target="#personasCreator" @endif><i class="fa-solid fa-plus"></i></button>
-        <!-- Persona existente -->
-        <button type="button" name="anadiendoPersona" class="btn btn-success btn-sm me-2 showmodal" @if(!str_contains(url()->current(), 'recuerdo')) data-show-modal="personasExistentes" @else data-bs-toggle="modal" data-bs-target="#personasExistentes" @endif>Añadir existente</button>
+<div class="tabla">
+    <div class="d-flex justify-content-between upper">
+        @include('layouts.tableSearcher')
+        @if(!$show)
+        <div class="justify-content-end d-flex p-2">
+            <!-- Nueva persona relacionada -->
+            <button type="button" name="crearPersona" class="btn btn-success me-2 showmodal" @if(!str_contains(url()->current(), 'recuerdo')) data-show-modal="personasCreator" @else data-bs-toggle="modal" data-bs-target="#personasCreator" @endif><i class="fa-solid fa-plus"></i></button>
+            <!-- Persona existente -->
+            <button type="button" name="anadiendoPersona" class="btn btn-success me-2 showmodal" @if(!str_contains(url()->current(), 'recuerdo')) data-show-modal="personasExistentes" @else data-bs-toggle="modal" data-bs-target="#personasExistentes" @endif>Añadir existente</button>
+        </div>
+        @endif  
     </div>
-</div> <!-- col 12 -->
-@endif
-<div>
     <table id="tabla" class="table table-bordered table-striped table-responsive datatable" style="width: 100%;">
         <caption>Listado de personas relacionadas</caption>
         <thead>

@@ -8,14 +8,13 @@
         <hr class="lineaTitulo">
     </div>
 
-    <div class="d-flex justify-content-between upper">
-        @include('layouts.tableSearcher')
-        <div class="justify-content-end d-flex">
-            <a href="/pacientes/{{$paciente->id}}/crearPersona"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
+    <div class ="tabla">
+        <div class="d-flex justify-content-between upper">
+            @include('layouts.tableSearcher')
+            <div class="justify-content-end d-flex">
+                <a href="/pacientes/{{$paciente->id}}/crearPersona"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
+            </div>
         </div>
-    </div>
-
-    <div>
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de personas relacionadas</caption>
             <thead>
