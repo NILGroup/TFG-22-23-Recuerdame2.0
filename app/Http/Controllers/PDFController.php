@@ -103,16 +103,17 @@ class PDFController extends Controller
         $idEtiqueta = $request->idEtiqueta;
         $fechaInicio = $request->fechaInicio;
         $fechaFin = $request->fechaFin;
-        $imagen = $paciente->multimedia->fichero;
+        $imagen = $paciente->multimedia;
         $listafinal=collect();
 
         if(empty($imagen)){
-            return $imagen;
             if($paciente->genero_id==1){ //hombre
                 $imagen = "/img/avatar_hombre.png";
             }else{
                 $imagen = "/img/avatar_mujer.png";
             }
+        }else{
+            $imagen = $paciente->multimedia->fichero;
         }
         
         if (!empty($idCategoria))
