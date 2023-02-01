@@ -12,15 +12,9 @@
         <div class="row d-flex">
             @foreach ($recuerdo->multimedias as $media)
 
-            <div class="mb-5" style="width: fit-content;">
-                @if (pathinfo($media->fichero, PATHINFO_EXTENSION) == 'pdf')
-                <label class="visualizarImagen" for="media">
-                    <a href="{{$media->fichero}}"><img src="/img/pdf.png" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon" style="height:15em; width: 15em;"></a>
-                </label>
-                @else
-                <label class="visualizarImagen" for="media"><img src="{{$media->fichero}}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon" style="height:15em; width: 15em;"></label>
-                @endif
-                <input class="form-check-input me-1" name="media[]" type="checkbox" value="{{$media->id}}" style="background-color: #F63F3E">
+            <div style="width: fit-content;" class="d-flex">
+                @include("layouts.multimedia")
+                <input class="form-check-input mx-2" name="media[]" type="checkbox" value="{{$media->id}}" style="background-color: #F63F3E;">
             </div>
             @endforeach
         </div>

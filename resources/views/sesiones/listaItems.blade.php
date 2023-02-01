@@ -111,11 +111,7 @@
 @if($show)
 <div id="showMultimedia" class="row pb-2">
     @foreach ($sesion->multimedias as $media)
-    <div class="col-sm-4 p-2">
-        <div class="img-wrap">
-            <a href="#" class="visualizarImagen"><img src="{{$media->fichero}}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon"></a>
-        </div>
-    </div>
+        @include("layouts.multimedia")
     @endforeach
 </div>
 @endif
