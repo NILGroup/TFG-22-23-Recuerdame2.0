@@ -28,12 +28,14 @@
             <tbody>
                 @foreach($cuidadores as $cuidador)
                 <tr>
-                    <td>{{$cuidador->nombre}} {{$cuidador->apellidos}}</td>
+                    <td><a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}"> {{$cuidador->nombre}} {{$cuidador->apellidos}} </a></td>
                     <td>{{$cuidador->email}}</td>
                     <td>{{$cuidador->telefono}}</td>
                     <td>{{$cuidador->localidad}}</td>
                     <td>{{$cuidador->parentesco}}</td>
                     <td class="tableActions">
+                        <a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                        <a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
                         <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" style="display:inline!important;">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">

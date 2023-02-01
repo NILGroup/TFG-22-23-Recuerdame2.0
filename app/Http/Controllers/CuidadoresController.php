@@ -24,6 +24,21 @@ class CuidadoresController extends Controller
         return view('cuidadores.create', compact('pacientes', 'paciente'));
     }
 
+    public function show($idP, $id)
+    {
+        $pacientes = Auth::User()->pacientes;
+        $paciente = Paciente::find($idP);
+        $cuidador = User::find($id);
+        return view('cuidadores.show', compact('pacientes', 'paciente', 'cuidador'));
+    }
+
+    public function edit($idP, $id){
+        $pacientes = Auth::User()->pacientes;
+        $paciente = Paciente::find($idP);
+        $cuidador = User::find($id);
+        return view('cuidadores.edit', compact('pacientes', 'paciente', 'cuidador'));
+    }
+
     public function showByPaciente(int $idPaciente){
 
         $paciente = Paciente::findOrFail($idPaciente);
@@ -38,9 +53,10 @@ class CuidadoresController extends Controller
         $request->validate([
             'telefono'=> 'numeric|digits:9'
         ]);
-
-        $user = User::create([
-            'nombre' => $request->nombre,
+        
+        $user = User::updateOrCreate(
+            ['id' => $request->id],
+            ['nombre' => $request->nombre,
             'apellidos' => $request->apellidos,
             'email' => $request->email,
             'rol_id' => intval($request->rol),
@@ -63,6 +79,5 @@ class CuidadoresController extends Controller
 
         //Redireccionamos a lista pacientes
         return back();
-        
     }
 }
