@@ -115,7 +115,7 @@ function reloadPersona(p) {
 
     document.getElementById("tablaPersonasExistentes").innerHTML +=
         '<tr>' +
-        '<td>' + p.id + '</td>' +
+        '<td class="row_id">' + p.id + '</td>' +
         '<td>' + p.nombre + '</td>' +
         '<td>' + p.apellidos + '</td>' +
         '<td>' + p.tiporelacion_id + '</td>' +
@@ -123,6 +123,10 @@ function reloadPersona(p) {
         '<input class="form-check-input" type="checkbox" value=' + p.id + ' name="checkPersonaExistente[]" id="checkPersonaExistente" checked>' +
         '</td>' +
         '</tr>';
+
+    $(".row_id").each(function(i, e){
+        $(e).hide()
+    })
 
     document.getElementById("tablaPersonasExistentes").getElementsByTagName("input").forEach(c => {
         if (selected.includes(c.value)) {

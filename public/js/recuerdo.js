@@ -2,6 +2,15 @@ $("#crearRecuerdo").on("click", function(event){
     let form = $("#recuerdosCreatorForm");
     form.removeClass("was-validated")
     form[0].reset()
+
+    //Borrar la tabla de las personas
+
+    $("#divPersonas tr").each(function(i, e){
+        $(e).detach()
+    })
+   
+
+
 })
 
 $("#modal_recuerdo_guardar").on("click", function(event){
@@ -149,7 +158,7 @@ function reloadRecuerdos(r) {
 
     document.getElementById("tablaRecuerdosExistentes").innerHTML +=
         '<tr>' +
-            '<td>' + r.id + '</td>' +
+            '<td class="id_recuerdo">' + r.id + '</td>' +
             '<td>' + r.nombre + '</td>' +
             '<td>' + r.fecha + '</td>' +
             '<td>' + r.etapa.nombre + '</td>' +
@@ -160,6 +169,10 @@ function reloadRecuerdos(r) {
                 '<input class="form-check-input" type="checkbox" value=' + r.id + ' name="checkRecuerdo[]" id="checkRecuerdo" checked>' +
             '</td>' +
         '</tr>';
+
+    $(".id_recuerdo").each(function(i, e){
+        $(e).hide()
+    })
 
     document.getElementById("tablaRecuerdosExistentes").getElementsByTagName("input").forEach(c => {
         if (selected.includes(c.value)) {
