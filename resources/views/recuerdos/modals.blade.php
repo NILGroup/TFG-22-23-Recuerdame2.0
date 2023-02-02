@@ -36,6 +36,7 @@
                 <table class="table table-bordered table-striped table-responsive datatable" style="width:100%;">
                     <thead>
                         <tr class="bg-primary">
+                            <th style="display: none;">ID</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellidos</th>
                             <th class="fit10" scope="col">Tipo de Relacion</th>
@@ -45,6 +46,7 @@
                     <tbody id="tablaPersonasExistentes">
                         @foreach ($personas as $persona)
                         <tr>
+                            <td style="display: none;">{{$persona->id}}</td>
                             <td>{{$persona->nombre}}</td>
                             <td>{{$persona->apellidos}}</td>
                             <td>{{$persona->tiporelacion->nombre}}</td>

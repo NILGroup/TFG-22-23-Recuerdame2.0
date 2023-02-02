@@ -85,6 +85,7 @@ function CrearPersonas() {
             console.log("ID NUEVA PERSONA:" + data["id"]);
             document.getElementById("divPersonas").innerHTML +=
                 '<tr>' +
+                    '<th scope="row">' + (document.getElementById("divPersonas").getElementsByTagName("tr").length + 1) + '</th>' +
                     '<td>' + data["nombre"] + '</td>' +
                     '<td>' + data["apellidos"] + '</td>' +
                     '<td>' + data["tiporelacion_id"] + '</td>' +
@@ -93,6 +94,7 @@ function CrearPersonas() {
                     '</td>'+
                     '<input type="hidden" value=' + data["id"] + ' name="checkPersona[]">' +
                 '</tr>';
+
                 
             reloadPersona(data);
         },
@@ -114,6 +116,7 @@ function reloadPersona(p) {
 
     document.getElementById("tablaPersonasExistentes").innerHTML +=
         '<tr>' +
+        '<th scope="row">' + p.id + '</th>' +
         '<td>' + p.nombre + '</td>' +
         '<td>' + p.apellidos + '</td>' +
         '<td>' + p.tiporelacion_id + '</td>' +
@@ -137,19 +140,22 @@ function agregarPersonas(p) {
 
     for (let i = 0; i < allPersonas.length; i++) {
         let per = allPersonas[i].getElementsByTagName("td");
+        console.log(per)
         per = {
-            "nombre": per[0].textContent,
-            "apellidos": per[1].textContent,
-            "tiporelacion_id": per[2].textContent,
+            "id": per[0].textContent,
+            "nombre": per[1].textContent,
+            "apellidos": per[2].textContent,
+            "tiporelacion_id": per[3].textContent,
             "checked": allPersonas[i].getElementsByTagName("input")[0].checked
         }
 
         if (per.checked) {
             document.getElementById("divPersonas").innerHTML += '<tr>' +
-                    '<td>' + per.nombre + '</td>' +
-                    '<td>' + per.apellidos + '</td>' +
-                    '<td>' + per.tiporelacion_id + '</td>' +
-                    '<input type="hidden" value=' + per.id + ' name="checkPersona[]">' +
+                '<th scope="row">' + (n++) + '</th>' +
+                '<td>' + per.nombre + '</td>' +
+                '<td>' + per.apellidos + '</td>' +
+                '<td>' + per.tiporelacion_id + '</td>' +
+                '<input type="hidden" value=' + per.id + ' name="checkPersona[]">' +
                 '</tr>';
         }
     }
