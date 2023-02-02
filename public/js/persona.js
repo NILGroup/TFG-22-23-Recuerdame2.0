@@ -85,7 +85,6 @@ function CrearPersonas() {
             console.log("ID NUEVA PERSONA:" + data["id"]);
             document.getElementById("divPersonas").innerHTML +=
                 '<tr>' +
-                    '<th scope="row">' + (document.getElementById("divPersonas").getElementsByTagName("tr").length + 1) + '</th>' +
                     '<td>' + data["nombre"] + '</td>' +
                     '<td>' + data["apellidos"] + '</td>' +
                     '<td>' + data["tiporelacion_id"] + '</td>' +
@@ -116,7 +115,7 @@ function reloadPersona(p) {
 
     document.getElementById("tablaPersonasExistentes").innerHTML +=
         '<tr>' +
-        '<th scope="row">' + p.id + '</th>' +
+        '<td>' + p.id + '</td>' +
         '<td>' + p.nombre + '</td>' +
         '<td>' + p.apellidos + '</td>' +
         '<td>' + p.tiporelacion_id + '</td>' +
@@ -140,8 +139,7 @@ function agregarPersonas(p) {
 
     for (let i = 0; i < allPersonas.length; i++) {
         let per = allPersonas[i].getElementsByTagName("td");
-        
-        per = {
+        let persona = {
             "id": per[0].textContent,
             "nombre": per[1].textContent,
             "apellidos": per[2].textContent,
@@ -149,13 +147,13 @@ function agregarPersonas(p) {
             "checked": allPersonas[i].getElementsByTagName("input")[0].checked
         }
 
-        if (per.checked) {
+        if (persona.checked) {
             document.getElementById("divPersonas").innerHTML += '<tr>' +
-                '<th scope="row">' + (n++) + '</th>' +
-                '<td>' + per.nombre + '</td>' +
-                '<td>' + per.apellidos + '</td>' +
-                '<td>' + per.tiporelacion_id + '</td>' +
-                '<input type="hidden" value=' + per.id + ' name="checkPersona[]">' +
+               
+                '<td>' + persona.nombre + '</td>' +
+                '<td>' + persona.apellidos + '</td>' +
+                '<td>' + persona.tiporelacion_id + '</td>' +
+                '<input type="hidden" value=' + persona.id + ' name="checkPersona[]">' +
                 '</tr>';
         }
     }

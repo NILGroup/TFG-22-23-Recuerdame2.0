@@ -29,23 +29,26 @@ function crearRecuerdo() {
     let allPersonas = document.getElementById("tablaPersonasExistentes").getElementsByTagName("tr");
     let ids = []
 
+
     for (let i = 0; i < allPersonas.length; i++) {
         let per = allPersonas[i].getElementsByTagName("td");
-        
-        per = {
+        console.log(per)
+        let persona = {
             "id": per[0].textContent,
             "nombre": per[1].textContent,
             "apellidos": per[2].textContent,
             "tiporelacion_id": per[3].textContent,
             "checked": allPersonas[i].getElementsByTagName("input")[0].checked
+        }   
+        
+        
+        if (persona["checked"]){
+            console.log(persona)
+            ids.push(persona["id"]) 
         }
-
-        if (per["checked"])
-            ids.push(per["id"]) 
+            
 
     }
-
-    console.log(ids)
 
     var fd = new FormData();
     
@@ -65,10 +68,7 @@ function crearRecuerdo() {
 
     for (var i = 0; i < ids.length; i++) {
         fd.append('ids_personas[]', ids[i]);
-      }
-  
-
-
+    }
 
     $.ajaxSetup({
         headers: {
@@ -102,8 +102,7 @@ function agregarRecuerdosExistentes(r) {
     for (let i = 0; i < allRecuerdos.length; i++) {
 
         let rec = allRecuerdos[i].getElementsByTagName("td")
-        
-        rec = {
+        let recuerdo  = {
             "id": rec[0].textContent,
             "nombre": rec[1].textContent,
             "fecha": rec[2].textContent,
@@ -114,15 +113,15 @@ function agregarRecuerdosExistentes(r) {
             "checked": allRecuerdos[i].getElementsByTagName("input")[0].checked,
         }
 
-        if (rec.checked) {
+        if (recuerdo.checked) {
             document.getElementById("divRecuerdos").innerHTML += '<tr>' +
-                '<td>' + rec.nombre + '</td>' +
-                '<td>' + rec.fecha + '</td>' +
-                '<td>' + rec.etapa + '</td>' +
-                '<td>' + rec.categoria + '</td>' +
-                '<td>' + rec.estado + '</td>' +
-                '<td>' + rec.etiqueta + '</td>' +
-                '<input type="hidden" value=' + rec.id + ' name="recuerdos[]">' +
+                '<td>' + recuerdo.nombre + '</td>' +
+                '<td>' + recuerdo.fecha + '</td>' +
+                '<td>' + recuerdo.etapa + '</td>' +
+                '<td>' + recuerdo.categoria + '</td>' +
+                '<td>' + recuerdo.estado + '</td>' +
+                '<td>' + recuerdo.etiqueta + '</td>' +
+                '<input type="hidden" value=' + recuerdo.id + ' name="recuerdos[]">' +
                 '</tr>';
 
         }
@@ -150,6 +149,7 @@ function reloadRecuerdos(r) {
 
     document.getElementById("tablaRecuerdosExistentes").innerHTML +=
         '<tr>' +
+            '<td>' + r.id + '</td>' +
             '<td>' + r.nombre + '</td>' +
             '<td>' + r.fecha + '</td>' +
             '<td>' + r.etapa.nombre + '</td>' +
