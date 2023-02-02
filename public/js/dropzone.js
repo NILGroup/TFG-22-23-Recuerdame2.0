@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
         maxFilesize: 10, //mb
         addRemoveLinks: true,
         autoProcessQueue: false,
-        acceptedFiles: (limit) ? 'image/*': '',
+        acceptedFiles: (limit) ? '.jpeg,.jpg,.png,.gif': '',
         uploadMultiple: true,
         parallelUploads: 100,
         dictInvalidFileType: "Tipo Inválido",

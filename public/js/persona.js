@@ -9,21 +9,22 @@ function especifique(){
     }
 }
 
-function cerrar(){
-    let validar = $("#personasCreatorForm input").filter((i, e) => {
-        return $(e).prop("required") === true;
-    })
-    let correcto = true
-    for (let i = 0; i < validar.length; i++){
-        if (!validar[i].checkValidity()){
-            $(validar[i]).focus()
-            correcto = false
-            break
-        }
+
+$("#modal_guardar").on("click", function(event){
+
+    let form = $("#personasCreatorForm")[0]
+    console.log(form)
+    if (!form.checkValidity()){
+        event.preventDefault()
+        event.stopPropagation()
     }
-   
-    if (correcto) CrearPersonas()
-}
+    else{
+        CrearPersonas()
+    }
+    form.classList.add('was-validated')
+})
+
+
 
 
 function CrearPersonas() {

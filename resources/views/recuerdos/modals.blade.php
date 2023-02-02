@@ -9,15 +9,15 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body" id="personasCreatorForm">
+            <form class="modal-body" id="personasCreatorForm">
 
                 @include("personasrelacionadas.listaItems")
 
-            </div> <!-- Modal body -->
+            </form> <!-- Modal body -->
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" onclick="cerrar();">Guardar</button>
+                <button type="button" class="btn btn-primary" id="modal_guardar">Guardar</button>
             </div>
         </div>
     </div>
@@ -66,5 +66,6 @@
 </div>
 
 @push('scripts')
+    @include('layouts.scripts')
     <script src="/js/persona.js"></script>
 @endpush
