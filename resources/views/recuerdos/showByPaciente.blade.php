@@ -67,7 +67,10 @@
 
         </table>
     </div>
-    @endsection
+    
+    @include('layouts.deletePopUp')
+    
+@endsection
 
 @push('scripts')
     @include('layouts.scripts')

@@ -56,6 +56,7 @@
     </div>
 </div>
 
+@include('layouts.deletePopUp')
 
 @endsection
 

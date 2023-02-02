@@ -41,6 +41,8 @@
     </div>
 </div>
 
+@include('layouts.deletePopUp')
+
 @endsection
 
 @push('scripts')
