@@ -38,6 +38,7 @@
 
                     <thead>
                         <tr class="bg-primary">
+                            <th scope="col">Id</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Etapa</th>
@@ -50,6 +51,7 @@
                     <tbody id="tablaRecuerdosExistentes">
                         @foreach ($recuerdos as $recuerdo)
                         <tr>
+                            <td>{{$recuerdo->id}}</td>
                             <td>{{$recuerdo->nombre}}</td>
                             <td>{{$recuerdo->fecha}}</td>
                             <td>{{$recuerdo->etapa->nombre}}</td>
@@ -74,6 +76,5 @@
 </div>
 
 @push('scripts')
-    <script src="/js/recuerdo.js"></script>
-    <script src="/js/multiModal.js"></script>
+    
 @endpush

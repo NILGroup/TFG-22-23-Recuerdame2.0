@@ -48,12 +48,13 @@ function agregarRecuerdosExistentes(r) {
 
         let rec = allRecuerdos[i].getElementsByTagName("td")
         rec = {
-            "nombre": rec[0].textContent,
-            "fecha": rec[1].textContent,
-            "etapa": rec[2].textContent,
-            "categoria": rec[3].textContent,
-            "estado": rec[4].textContent,
-            "etiqueta": rec[5].textContent,
+            "id": rec[0].textContent,
+            "nombre": rec[1].textContent,
+            "fecha": rec[2].textContent,
+            "etapa": rec[3].textContent,
+            "categoria": rec[4].textContent,
+            "estado": rec[5].textContent,
+            "etiqueta": rec[6].textContent,
             "checked": allRecuerdos[i].getElementsByTagName("input")[0].checked,
         }
 

@@ -47,4 +47,6 @@
         var limit = false
     </script>
     <script src="/js/dropzone.js"></script>
+    <script src="/js/recuerdo.js"></script>
+    <script src="/js/multiModal.js"></script>
 @endpush

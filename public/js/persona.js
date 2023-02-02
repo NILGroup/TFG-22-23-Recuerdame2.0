@@ -140,7 +140,7 @@ function agregarPersonas(p) {
 
     for (let i = 0; i < allPersonas.length; i++) {
         let per = allPersonas[i].getElementsByTagName("td");
-        console.log(per)
+        
         per = {
             "id": per[0].textContent,
             "nombre": per[1].textContent,
