@@ -9,13 +9,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
             </div>
 
-            <div class="modal-body" id="recuerdosCreatorForm">
+            <!-- 
+                TRANQUILIDAD. SE QUE ES UN FORM DENTRO DE OTRO PERO ESTE NUNCA SE ENVÍA SOLO SE USA
+                PARA LA VALIDACIÓN Y DESPUÉS SE MANDAN LOS DATOS POR AJAX, POR FAVOR QUE NADIE
+                LO QUITE :((
+            -->
+            <form class="modal-body" id="recuerdosCreatorForm">
                 @include("recuerdos.listaItems")
-            </div> <!-- Modal body -->
+            </form> <!-- Modal body -->
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cerrar</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearRecuerdo()">Guardar</button>
+                <button id="modal_recuerdo_guardar" type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>

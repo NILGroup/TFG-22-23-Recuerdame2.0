@@ -1,9 +1,32 @@
+$("#crearRecuerdo").on("click", function(event){
+    let form = $("#recuerdosCreatorForm");
+    form.removeClass("was-validated")
+    form[0].reset()
+})
+
+$("#modal_recuerdo_guardar").on("click", function(event){
+
+    let form = $("#recuerdosCreatorForm")[0]
+
+    if (!form.checkValidity()){
+        event.preventDefault()
+        event.stopPropagation()
+    }
+    else{
+        crearRecuerdo()
+    }
+    form.classList.add('was-validated')
+})
+
+
 function crearRecuerdo() {
 
+    
     const inputValues = document.querySelectorAll('#recuerdosCreatorForm input')
     const selectValues = document.querySelectorAll('#recuerdosCreatorForm select')
     const textValues = document.querySelectorAll('#recuerdosCreatorForm textarea')
     var fd = new FormData();
+    
     fd.append('paciente_id', inputValues[1].value);
     fd.append('nombre', inputValues[2].value);
     fd.append('fecha', inputValues[3].value);
@@ -17,6 +40,10 @@ function crearRecuerdo() {
 
     fd.append('descripcion', textValues[0].value);
     fd.append('localizacion', textValues[1].value);
+
+    for (var pair of fd.entries()) {
+        console.log(pair[0]+ ', ' + pair[1]); 
+    }
 
     $.ajaxSetup({
         headers: {
@@ -37,6 +64,8 @@ function crearRecuerdo() {
             console.log('Error:', data);
         }
     });
+
+    $("#recuerdosCreator").modal("hide")
 }
 
 function agregarRecuerdosExistentes(r) {
@@ -47,6 +76,7 @@ function agregarRecuerdosExistentes(r) {
     for (let i = 0; i < allRecuerdos.length; i++) {
 
         let rec = allRecuerdos[i].getElementsByTagName("td")
+        
         rec = {
             "id": rec[0].textContent,
             "nombre": rec[1].textContent,

@@ -46,7 +46,7 @@
             @if(!$show)
                 @include('layouts.tableSearcher')
                 <div class="justify-content-end d-flex p-2">
-                    <button type="button" name="crearRecuerdo" class="btn btn-success me-2 showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosCreator" @else data-bs-toggle="modal" data-bs-target="#recuerdosCreator" @endif><i class="fa-solid fa-plus"></i></button>
+                    <button type="button" id="crearRecuerdo" name="crearRecuerdo" class="btn btn-success me-2 showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosCreator" @else data-bs-toggle="modal" data-bs-target="#recuerdosCreator" @endif><i class="fa-solid fa-plus"></i></button>
                     <button type="button" class="btn btn-success showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosExistentes" @else data-bs-toggle="modal" data-bs-target="#recuerdosExistentes" @endif>Añadir existente</button>
                 </div>
             @endif

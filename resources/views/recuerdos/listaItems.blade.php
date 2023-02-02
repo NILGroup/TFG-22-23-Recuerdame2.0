@@ -11,7 +11,6 @@
         <label for="estado" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2" data-toggle="tooltip" data-placement="left" title="Valoración del terapeuta del estado recuerdo">Estado <i class="bi bi-question-circle"></i></label>
         <div class="col-sm-9 col-md-6 col-lg-4">
             <select class="form-select form-select-sm" id="idEstado" name="estado_id" @if($show) disabled @endif>
-                <option></option>
                 @foreach ($estados as $estado)
                 <option value="{{$estado->id}}" @if($estado->id == $recuerdo->estado_id) selected @endif>{{$estado->nombre}}</option>
                 @endforeach
@@ -30,7 +29,6 @@
         <label for="etiqueta" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2" data-toggle="tooltip" data-placement="left" title="Valoración del terapeuta del recuerdo">Etiqueta <i class="bi bi-question-circle"></i></label>
         <div class="col-sm-9 col-md-6 col-lg-4">
             <select class="form-select form-select-sm" id="idEtiqueta" name="etiqueta_id" @if($show) disabled @endif>
-                <option></option>
                 @foreach ($etiquetas as $etiqueta)
                 <option value="{{$etiqueta->id}}" @if($etiqueta->id == $recuerdo->etiqueta_id) selected @endif>{{$etiqueta->nombre}}</option>
                 @endforeach
@@ -74,7 +72,6 @@
         <label for="emocion" class="form-label col-form-label-sm col-sm-2 col-md-12col-lg-1" data-toggle="tooltip" data-placement="top" title="Emoción que estima el terapeuta que el recuerdo le ha generado al paciente">Emoción producida <i class="bi bi-question-circle"></i></label>
         <div class="col-sm-3 col-md-3 col-lg-2">
             <select class="form-select form-select-sm" id="idEmocion" name="emocion_id" @if($show) disabled @endif>
-                <option></option>
                 @foreach ($emociones as $emocion)
                 <option value="{{$emocion->id}}" @if($emocion->id == $recuerdo->emocion_id) selected @endif>{{$emocion->nombre}}</option>
                 @endforeach
@@ -83,7 +80,6 @@
         <label for="categoria" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-1">Categoría</label>
         <div class="col-sm-3 col-md-3 col-lg-2">
             <select onchange="especifiqueCategoria()" style="margin-right: 5px" class="form-select form-select-sm form-control" id="categoria_id" name="categoria_id" @if($show) disabled @endif>
-                <option></option>
                 @foreach ($categorias as $categoria)
                 <option value="{{$categoria->id}}" @if($categoria->id == $recuerdo->categoria_id) selected @endif>{{$categoria->nombre}}</option>
                 @endforeach
