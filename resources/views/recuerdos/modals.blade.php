@@ -64,8 +64,3 @@
         </div>
     </div>
 </div>
-
-@push('scripts')
-    @include('layouts.scripts')
-    <script src="/js/persona.js"></script>
-@endpush

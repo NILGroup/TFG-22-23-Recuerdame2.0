@@ -49,4 +49,5 @@
         var limit = false
     </script>
     <script src="/js/dropzone.js"></script>
+    <script src="/js/persona.js"></script>
 @endpush

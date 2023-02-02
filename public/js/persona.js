@@ -9,11 +9,16 @@ function especifique(){
     }
 }
 
+$("#crearPersona").on("click", function(event){
+    let form = $("#personasCreatorForm");
+    form.removeClass("was-validated")
+    form[0].reset()
+})
 
 $("#modal_guardar").on("click", function(event){
 
     let form = $("#personasCreatorForm")[0]
-    console.log(form)
+
     if (!form.checkValidity()){
         event.preventDefault()
         event.stopPropagation()

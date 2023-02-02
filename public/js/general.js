@@ -1,6 +1,6 @@
 // Get the button
-let mybutton = document.getElementById("scrollBtn");
-mybutton.style.display = "none";
+var mybuttonn = document.getElementById("scrollBtn");
+mybuttonn.style.display = "none";
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {
   scrollHider()
@@ -9,9 +9,9 @@ window.onscroll = function() {
 function scrollHider() {
   //console.log("scrollTop= " + document.body.scrollTop + "Element = "+ document.documentElement.scrollTop);
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 300) {
-    mybutton.style.display = "inline";
+    mybuttonn.style.display = "inline";
   } else {
-    mybutton.style.display = "none";
+    mybuttonn.style.display = "none";
   }
 }
 
