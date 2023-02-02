@@ -245,6 +245,16 @@ class RecuerdosController extends Controller
             ]
         );
 
+        
+        
+
+        $personas_relacionar = $request->ids_personas; //Array de ids de las personas
+        if (!is_null($personas_relacionar)) {
+            foreach ($personas_relacionar as $p_id) {
+                $recuerdo->personas_relacionadas()->attach($p_id);
+            }
+        }
+
         $recuerdo->etapa = $recuerdo->etapa->nombre;
         if (is_null($recuerdo->categoria_id)) {
             $recuerdo->categoria = " ";

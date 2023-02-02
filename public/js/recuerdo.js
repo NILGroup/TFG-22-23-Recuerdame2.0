@@ -25,6 +25,28 @@ function crearRecuerdo() {
     const inputValues = document.querySelectorAll('#recuerdosCreatorForm input')
     const selectValues = document.querySelectorAll('#recuerdosCreatorForm select')
     const textValues = document.querySelectorAll('#recuerdosCreatorForm textarea')
+
+    let allPersonas = document.getElementById("tablaPersonasExistentes").getElementsByTagName("tr");
+    let ids = []
+
+    for (let i = 0; i < allPersonas.length; i++) {
+        let per = allPersonas[i].getElementsByTagName("td");
+        
+        per = {
+            "id": per[0].textContent,
+            "nombre": per[1].textContent,
+            "apellidos": per[2].textContent,
+            "tiporelacion_id": per[3].textContent,
+            "checked": allPersonas[i].getElementsByTagName("input")[0].checked
+        }
+
+        if (per["checked"])
+            ids.push(per["id"]) 
+
+    }
+
+    console.log(ids)
+
     var fd = new FormData();
     
     fd.append('paciente_id', inputValues[1].value);
@@ -41,9 +63,12 @@ function crearRecuerdo() {
     fd.append('descripcion', textValues[0].value);
     fd.append('localizacion', textValues[1].value);
 
-    for (var pair of fd.entries()) {
-        console.log(pair[0]+ ', ' + pair[1]); 
-    }
+    for (var i = 0; i < ids.length; i++) {
+        fd.append('ids_personas[]', ids[i]);
+      }
+  
+
+
 
     $.ajaxSetup({
         headers: {
@@ -65,6 +90,7 @@ function crearRecuerdo() {
         }
     });
 
+ 
     $("#recuerdosCreator").modal("hide")
 }
 
