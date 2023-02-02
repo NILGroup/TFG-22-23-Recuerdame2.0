@@ -38,7 +38,7 @@
 
                     <thead>
                         <tr class="bg-primary">
-                            <th scope="col">Id</th>
+                            <th scope="col" style="display: none;">Id</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Etapa</th>
@@ -51,7 +51,7 @@
                     <tbody id="tablaRecuerdosExistentes">
                         @foreach ($recuerdos as $recuerdo)
                         <tr>
-                            <td>{{$recuerdo->id}}</td>
+                            <td style="display: none;">{{$recuerdo->id}}</td>
                             <td>{{$recuerdo->nombre}}</td>
                             <td>{{$recuerdo->fecha}}</td>
                             <td>{{$recuerdo->etapa->nombre}}</td>
