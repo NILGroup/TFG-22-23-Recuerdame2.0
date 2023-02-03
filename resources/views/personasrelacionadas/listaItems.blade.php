@@ -62,7 +62,7 @@
     </div>
    
     <div class="row col-sm-12 col-md-6 col-lg-7 align-items-center">
-        <label for="contacto" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-4">Contacto:<span class="asterisco">*</span></label>
+        <label for="contacto" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-4" data-toggle="tooltip" data-placement="top" title="Marcar si actualmente mantiene el contacto con esta persona"><strong>Contacto</strong> <i class="bi bi-question-circle"></i><span class="asterisco">*</span>:</label>
         <div class="col-sm-12 col-md-12 col-lg-8 align-items-center">
             <input type="checkbox" name="contacto" class="form-check-input" id="contacto" value="x" @if($persona->contacto) checked @endif @if($show) disabled @endif>   
            
