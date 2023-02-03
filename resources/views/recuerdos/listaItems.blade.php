@@ -22,7 +22,7 @@
     <div class="row col-sm-6 col-md-6 col-lg-6">
         <label for="fecha" class="form-label col-form-label-sm col-sm-3 col-md-2 col-lg-2">Fecha<span class="asterisco">*</span></label>
         <div class="col-sm-9 col-md-6 col-lg-4">
-            <input type="date" class="form-control form-control-sm" id="fecha" required name="fecha" value="{{$recuerdo->fecha}}" @if($show) disabled @endif>
+            <input max="4000-12-31" min="1800-01-01" type="date" class="form-control form-control-sm" id="fecha" required name="fecha" value="{{$recuerdo->fecha}}" @if($show) disabled @endif>
         </div>
     </div>
     <div class="row col-sm-6 col-md-6 col-lg-6">

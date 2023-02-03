@@ -4,7 +4,7 @@
     <input type="hidden" name="idSesion" id="idSesion" value="{{$sesion->id}}">
     <div class="col d-inline">
         <label for="fecha" class="form-label labelShow">Fecha: <span class="asterisco">*</span></label>
-        <input type="datetime-local" style="width: fit-content;" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$sesion->fecha}}" required @if($show) disabled @endif>
+        <input max="4000-12-31T23:00:00.0" min="1800-01-01T01:00:00.00" type="datetime-local" style="width: fit-content;" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$sesion->fecha}}" required @if($show) disabled @endif>
     </div>
 
     <div class="col d-inline align-items-center">

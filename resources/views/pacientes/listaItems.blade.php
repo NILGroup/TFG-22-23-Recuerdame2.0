@@ -41,7 +41,7 @@
     <div class="row col-sm-12 col-md-6 col-lg-5">
         <label for="fecha" class="form-label col-form-label col-sm-12 col-md-12 col-lg-6 negrita">Fecha de nacimiento:<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6">
-            <input type="date" name="fecha_nacimiento" class="form-control form-control-sm" id="fecha" value="{{$paciente->fecha_nacimiento}}"required @if($show) disabled @endif>
+            <input max="4000-12-31" min="1800-01-01" type="date" name="fecha_nacimiento" class="form-control form-control-sm" id="fecha" value="{{$paciente->fecha_nacimiento}}"required @if($show) disabled @endif>
         </div>
     </div>
 
