@@ -48,7 +48,7 @@ class CalendarioController extends Controller
         $categorias = Categoria::all()->sortBy("id");
         $tipos = Tiporelacion::all()->sortBy("id");
         $mostrarFoto = false;
-        return view('calendario.showByPaciente', compact("paciente", "user", "show", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos", "recuerdos", "personas", "persona", "mostrarFoto"));
+        return view('calendario.showByPaciente', compact("idPaciente","paciente", "user", "show", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos", "recuerdos", "personas", "persona", "mostrarFoto"));
     }
 
     public function store(Request $request)
