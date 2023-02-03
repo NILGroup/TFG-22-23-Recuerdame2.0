@@ -21,7 +21,8 @@ class CuidadoresController extends Controller
     public function create($idP){
         $pacientes = Auth::User()->pacientes;
         $paciente = Paciente::find($idP);
-        return view('cuidadores.create', compact('pacientes', 'paciente'));
+        $cuidador = new User();
+        return view('cuidadores.create', compact('pacientes', 'paciente', 'cuidador'));
     }
 
     public function show($idP, $id)
