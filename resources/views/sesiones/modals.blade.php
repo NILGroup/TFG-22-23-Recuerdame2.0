@@ -39,8 +39,7 @@
             </div>
 
             <div class="modal-body">
-                <table class="table table-bordered table-striped table-responsive datatable">
-
+                <table id="tablaRecuerdosExistentes" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr class="bg-primary">
                             <th scope="col" style="display: none;">Id</th>
@@ -53,7 +52,7 @@
                             <th class="fit10" scope="col"></th>
                         </tr>
                     </thead>
-                    <tbody id="tablaRecuerdosExistentes">
+                    <tbody>
                         @foreach ($recuerdos as $recuerdo)
                         <tr>
                             <td style="display: none;">{{$recuerdo->id}}</td>
