@@ -62,7 +62,8 @@
             </div>
         </div>
 
-        <label class="form-check-label mt-3"><strong>Tipo de recuerdos</strong></label>
+       <label class="form-check-label mt-3" data-toggle="tooltip" data-placement="top" title="Filtramos aquellos recuerdos que se han categorizado como aptos para continuar en las terapias y/o los que no."><strong>Tipo de recuerdos</strong> <i class="bi bi-question-circle"></i></label>
+
         <div class="form-check ">
             <input type="hidden" name="apto" id="apto" value="1">
             <input type="checkbox" class="form-check-input" onclick="onCheck('apto')" checked>
