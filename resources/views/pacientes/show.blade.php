@@ -38,4 +38,13 @@
     <script src="/js/table.js"></script>
     <script src="/js/confirm.js"></script>
     <script src="/js/showView.js"></script>
+    @if (Session::has('created'))
+        @php 
+            Illuminate\Support\Facades\Session::forget('created');
+        @endphp
+        <script>
+            var action = "Modificado"
+        </script>
+        <script src="/js/successAlert.js"></script>
+    @endif
 @endpush

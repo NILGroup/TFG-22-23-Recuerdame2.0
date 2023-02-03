@@ -69,8 +69,9 @@ class CuidadoresController extends Controller
 
         $paciente = Paciente::find($request->paciente);
         $paciente->users()->attach($user->id);
+        session()->put('created', "true");
 
-        return redirect("/pacientes");
+        return redirect("/pacientes/$paciente->id/cuidadores");
     }
 
     public function destroy($id)

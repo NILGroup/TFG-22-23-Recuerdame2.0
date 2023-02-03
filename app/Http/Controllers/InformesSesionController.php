@@ -40,7 +40,9 @@ class InformesSesionController extends Controller
         $sesion->apto = $request->apto;
         $sesion->duracion = $request->duracion;
         $sesion->save();
-        return redirect("/pacientes/$sesion->paciente_id/sesiones/$sesion->id/ver");
+        
+        session()->put('created', "true");
+        //return redirect("/pacientes/$sesion->paciente_id/sesiones/$sesion->id/ver");
     }
 
     public function show(int $idP, int $idS)

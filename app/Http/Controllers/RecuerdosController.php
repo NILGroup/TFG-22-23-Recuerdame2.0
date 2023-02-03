@@ -115,7 +115,8 @@ class RecuerdosController extends Controller
    
        
         
-        return self::showByPaciente($recuerdo->paciente_id);
+       session()->put('created', "true");
+       //return self::showByPaciente($recuerdo->paciente_id);
     }
 
     /**

@@ -100,8 +100,9 @@ class SesionesController extends Controller
             $sesion->multimedias()->detach($request->media);
         }
 
+        session()->put('created', "true");
 
-        return redirect("pacientes/{$sesion->paciente->id}/sesiones");
+        //return redirect("pacientes/{$sesion->paciente->id}/sesiones");
     }
 
     public function storeRecuerdo($idPaciente, $idSesion, $recuerdo)

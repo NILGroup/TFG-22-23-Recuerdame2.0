@@ -60,7 +60,9 @@ class EvaluacionController extends Controller
              'escala' => $request->escala,
              'fecha_escala' => $request->fecha_escala
             ]);
-        return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones/$evaluacion->id/ver");
+            
+        session()->put('created', "true");
+        //return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones/$evaluacion->id/ver");
     }
 
     public function show($id, $idE)

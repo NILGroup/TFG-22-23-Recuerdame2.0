@@ -99,8 +99,9 @@ class PacientesController extends Controller
         MultimediasController::savePhoto($request, $paciente);
 
         $paciente->users()->save($user);
+        session()->put('created', "true");
         //Redireccionamos a la vista de lista pacientes
-        return redirect("/pacientes");
+        //return redirect("/pacientes");
         
     }
 
@@ -161,8 +162,9 @@ class PacientesController extends Controller
 
         
 
+        session()->put('created', "true");
         //Redireccionamos a lista pacientes
-        return redirect("/pacientes/$request->id");
+        //return redirect("/pacientes/$request->id");
         
     }
 

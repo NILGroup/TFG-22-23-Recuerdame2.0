@@ -83,6 +83,7 @@ class PersonasRelacionadasController extends Controller
 
         MultimediasController::savePhoto($request, $persona);
 
+        session()->put('created', "true");
     }
 
     /*Como el store pero no devuelve a una vista*/
@@ -161,9 +162,10 @@ class PersonasRelacionadasController extends Controller
         $persona->update($request->all());
 
         MultimediasController::savePhoto($request, $persona);
+        session()->put('created', "true");
 
 
-        return redirect("/pacientes/$persona->paciente_id/personas/$persona->id");
+        //return redirect("/pacientes/$persona->paciente_id/personas/$persona->id");
     }
 
     /**

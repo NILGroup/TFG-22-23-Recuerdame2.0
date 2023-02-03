@@ -55,4 +55,14 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/table.js"></script>
     <script src="/js/confirm.js"></script>
+    
+    @if (Session::has('created'))
+        @php 
+            Illuminate\Support\Facades\Session::forget('created');
+        @endphp
+        <script>
+            var action = "Creado"
+        </script>
+        <script src="/js/successAlert.js"></script>
+    @endif
 @endpush
