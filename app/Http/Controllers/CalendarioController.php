@@ -62,34 +62,70 @@ class CalendarioController extends Controller
             "description" => "required"
         ]);
 */
-        $actividad = Actividad::create([
-            "start" => $request->start,
-            "title" => $request->title,
-            "paciente_id" => $request->idPaciente,
-            "color" => $request->color,
-            "description" => $request->obs
-        ]);
+        $actividad = Actividad::updateOrCreate(
+            [
+                "start" => $request->start,
+                "title" => $request->title,
+                "paciente_id" => $request->idPaciente,
+                "color" => $request->color,
+                "description" => $request->obs
+            ]
+        );
 
         return redirect("/pacientes/$actividad->paciente_id/calendario");
     }
 
     public function update(Request $request)
     {
-
-        $actividad = Actividad::findOrFail($request->id);
+        /*$actividad = Actividad::findOrFail($request->id);
         $actividad->update($request->all());
-
+        //$actividad = Actividad::findOrFail($request->id);*/
+        if ($request->finished === "" || $request->finished === null)
+            //return "<h1>Nada</h1>";
+            $actividad = Actividad::updateOrCreate(
+                ["id" => $request->id],
+                [
+                    "start" => $request->start,
+                    "title" => $request->title,
+                    "paciente_id" => $request->idPaciente,
+                    "color" => $request->color,
+                    "description" => $request->obs
+                ]
+            );
+        else
+            //return "<h1>$request->finished</h1>";
+            $actividad = Actividad::updateOrCreate(
+                ["id" => $request->id],
+                [
+                    "start" => $request->start,
+                    "title" => $request->title,
+                    "paciente_id" => $request->idPaciente,
+                    "color" => $request->color,
+                    "description" => $request->obs,
+                    "finished" => $request->finished
+                ]
+            );
         return redirect("/pacientes/$actividad->paciente_id/calendario");
     }
 
     public function updateSesion(Request $request)
     {
-        $sesion = Sesion::findOrFail($request->idSesion);
-        $sesion->update($request->all());
-
-
-        return redirect("/pacientes/$sesion->paciente_id/calendario");
-        //return "<h1>$tipoUsuario</h1>";
+        $sesion = Sesion::updateOrCreate(
+            ['id' => $request->idSesion],
+            [
+                'fecha' => $request->fecha,
+                'etapa_id' => $request->etapa_id,
+                'objetivo' => $request->objetivo,
+                'descripcion' => $request->descripcion,
+                'fecha_finalizada' => $request->fecha_finalizada,
+                'paciente_id' => $request->paciente_id,
+                'user_id' => $request->user_id,
+                'respuesta' => $request->respuesta
+            ]
+        );
+        if (!is_null($request->recuerdos))
+            $sesion->recuerdos()->sync($request->recuerdos);
+        return redirect("pacientes/{$sesion->paciente->id}/calendario");
     }
 
     public function show(int $idPaciente)
@@ -143,6 +179,7 @@ class CalendarioController extends Controller
         $paciente = $sesion->paciente_id;
         $sesion->delete();
         return redirect("/pacientes/$paciente/calendario");
+        //return "<h1>$request</h1>";
     }
 
     public function registroSesion(Request $request)
@@ -164,5 +201,6 @@ class CalendarioController extends Controller
         if (!is_null($request->recuerdos))
             $sesion->recuerdos()->sync($request->recuerdos);
         return redirect("pacientes/{$sesion->paciente->id}/calendario");
+        //return "<h1>$request</h1>";
     }
 }

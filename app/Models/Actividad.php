@@ -15,7 +15,8 @@ class Actividad extends Model
         "title",
         "description",
         "paciente_id",
-        "color"
+        "color",
+        "finished"
     ];
 
     public function paciente(){

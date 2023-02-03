@@ -24,9 +24,9 @@
             <textarea maxlength="255" class="form-control form-control-sm" id="obs" name="obs" rows="3" required></textarea>
             <label for="obs" class="form-label">Pautas</label>
         </div>
-        <div class="form-floating mb-3">
-            <textarea maxlength="255" class="form-control form-control-sm" id="fin" name="fin" rows="3"></textarea>
-            <label for="fin" class="form-label">Finalizar</label>
+        <div class="form-floating mb-3" id="div-fin">
+            <textarea maxlength="255" class="form-control form-control-sm" id="finished" name="finished" rows="3"></textarea>
+            <label for="finished" class="form-label">Finalizar</label>
         </div>
         <div class="modal-footer">
             <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-danger btn-md d-none">
@@ -34,4 +34,17 @@
             <input type="submit" id="btnGuardar" name="btnAccion" value="Guardar" class="btn btn-primary btn-md">
         </div>
     </form>
+   <!-- <form method="post" id="formularioEliminar" action="/eliminarActividad" style="display:inline!important;">
+        {{csrf_field()}}
+        <input type="hidden" class="form-control" id="idEliminar" name="idEliminar">
+        <button type="submit" class="btn btn-danger btn-md confirm_delete" id="btnEliminar" name="btnEliminar">Eliminar actividad</button>
+    </form>-->
 </div>
+
+@push('scripts')
+@include('layouts.scripts')
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/table.js"></script>
+<script src="/js/confirm.js"></script>
+@endpush

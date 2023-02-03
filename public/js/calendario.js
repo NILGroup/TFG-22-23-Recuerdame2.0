@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let filtro = "t";
     let user = document.getElementById('user_type').value; //tipo de usuario (1 terapeuta, 2 cuidador)
     let formulario = document.getElementById('formulario');
+    let formularioEliminar = document.getElementById('formularioEliminar');
     var calendarEl = document.getElementById('calendar');
 
     let url_eventos = "/calendario/" + document.getElementById('paciente_id').value;
@@ -11,15 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         fixedWeekCount: false,
         customButtons: {
-            add_event: {
-                text: '+',
-                hint: 'Nueva actividad',
-                click: function () {
-                    formulario.reset();
-                    document.getElementById('titulo').textContent = "Añadir";
-                    $('#evento').modal('show');
-                }
-            }
+            
         },
         locales: 'es',
         eventColor: '#74e4fb',
@@ -28,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
         headerToolbar: {
             left: 'prev,next',
             center: 'title',
-            right: 'add_event,dayGridMonth,dayGridWeek,dayGridDay,listMonth,today',
+            right: 'dayGridMonth,dayGridWeek,dayGridDay,listMonth,today',
 
 
         },
@@ -36,9 +29,14 @@ document.addEventListener('DOMContentLoaded', function () {
         events: url_eventos,
 
         dateClick: function (info) {
+
+            //Cuidador sólo podrá ver actividades.
+            //Por tanto, cuando un cuidador haga click en un dia, no hará nada
             if (user === '1') {
                 formulario.reset();
+                //formularioEliminar.reset();
                 document.getElementById('start').value = info.dateStr;
+                document.getElementById('fecha').value = info.dateStr + " 09:00:00";
                 document.getElementById('titulo').textContent = "Añadir";
                 //TODO como hacerlo para que se visualicen ambos y se elija primero activdad
                 document.getElementById('profile-tab').removeAttribute("disabled");
@@ -50,6 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('home').classList.add("show");
                 document.getElementById('home').classList.add("active");
 
+                document.getElementById('div-fin').classList.add('d-none');
+
                 document.getElementById('btnGuardarSesion').classList.remove('d-none');
                 document.getElementById('btnEliminarSesion').classList.add('d-none');
                 document.getElementById('btnModificarSesion').classList.add('d-none');
@@ -58,28 +58,39 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('btnEliminar').classList.add('d-none');
                 document.getElementById('btnModificar').classList.add('d-none');
 
-                console.log(info);
+                console.log(info.dateStr + " 09:00:00");
                 $('#evento').modal('show');
             }
         },
 
         eventClick: function (info) {
             formulario.reset();
-            document.getElementById('id').value = info.event.id;
-            //Por el momento, si clickamos en ver una actividad se desactiva el botón sesión y viceversa
-            //En el futuro, tal vez, hacer que directamente la opción contraria no aparezca
-            if (user === '2') {
-                document.getElementById('title').setAttribute("disabled", "");
-                document.getElementById('start').setAttribute("disabled", "");
-                document.getElementById('color').setAttribute("disabled", "");
-                document.getElementById('obs').setAttribute("disabled", "");
-                document.getElementById('color').setAttribute("disabled", "");
+            //formularioEliminar.reset();
+            //document.getElementById('id').value = info.event.id;
+            if(user === '1') { //Se trata de un terapeuta
+                document.getElementById('finished').removeAttribute("required");
+                if(info.event.extendedProps.tipo === 'a' && info.event.extendedProps.finished === null) { //Si se trata de una actividad y no ha sido finalizada...
+                    document.getElementById('div-fin').classList.add('d-none');
+                } else if (info.event.extendedProps.tipo === 'a' && info.event.extendedProps.finished !== null) { //Si se trata de una actividad y ha sido finalizada...
+                    document.getElementById('div-fin').classList.remove('d-none');
+                    
+                    document.getElementById('finished').setAttribute("readonly", "");
+                }
+            } else { //Se trata de un cuidador
+                document.getElementById('title').setAttribute("readonly", "");
+                document.getElementById('start').setAttribute("readonly", "");
+                document.getElementById('color').setAttribute("readonly", "");
+                document.getElementById('obs').setAttribute("readonly", "");
                 document.getElementById("modalesCalendario").children[1].style.display = "none";
                 document.getElementById('btnModificar').value = "Finalizar actividad";
-                document.getElementById('fin').setAttribute("required", "");
+                document.getElementById('finished').setAttribute("required", "");
+                if (info.event.extendedProps.tipo === 'a' && info.event.extendedProps.finished !== null)
+                    document.getElementById('finished').setAttribute("readonly", "");
             }
+
+
             if (info.event.extendedProps.tipo === 'a') {
-                document.getElementById('id').value = info.event.id;
+                //Para que solo aparezca la pestaña de Actividad...
                 document.getElementById('profile-tab').setAttribute("disabled", "");
                 document.getElementById('profile-tab').classList.remove("active");
                 document.getElementById('profile').classList.remove("show");
@@ -88,16 +99,32 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('home-tab').classList.add("active");
                 document.getElementById('home').classList.add("show");
                 document.getElementById('home').classList.add("active");
+
+                //Para dejar los botones necesarios
+                document.getElementById('btnGuardar').classList.add('d-none');
+                if(user === '2') {
+                    document.getElementById('btnEliminar').classList.add('d-none');
+                    if(info.event.extendedProps.finished === null)
+                        document.getElementById('btnModificar').classList.remove('d-none');
+                    else
+                        document.getElementById('btnModificar').classList.add('d-none');
+                } else {
+                    document.getElementById('btnEliminar').classList.remove('d-none');
+                    document.getElementById('btnModificar').classList.remove('d-none');
+                }
+
+                //Para asignar los valores...
+                document.getElementById('id').value = info.event.id;
+                //document.getElementById('idEliminar').value = info.event.id;
                 document.getElementById('title').value = info.event.title;
                 document.getElementById('start').value = info.event.startStr;
                 document.getElementById('color').value = info.event.backgroundColor;
                 document.getElementById('obs').value = info.event.extendedProps.description;
+                if(info.event.extendedProps.finished !== null)
+                    document.getElementById('finished').value = info.event.extendedProps.finished;
 
-                document.getElementById('btnGuardar').classList.add('d-none');
-                document.getElementById('btnEliminar').classList.remove('d-none');
-                document.getElementById('btnModificar').classList.remove('d-none');
             } else if (info.event.extendedProps.tipo === 's') {
-                document.getElementById('idSesion').value = info.event.id;
+                //Para que solo aparezca la pestaña de Sesión...
                 document.getElementById('profile-tab').removeAttribute("disabled");
                 document.getElementById('profile-tab').classList.add("active");
                 document.getElementById('profile').classList.add("show");
@@ -106,6 +133,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('home-tab').classList.remove("active");
                 document.getElementById('home').classList.remove("show");
                 document.getElementById('home').classList.remove("active");
+
+                //Para dejar los botones necesarios...
+                document.getElementById('btnGuardarSesion').classList.add('d-none');
+                document.getElementById('btnEliminarSesion').classList.remove('d-none');
+                document.getElementById('btnModificarSesion').classList.remove('d-none');
+
+                //Para asignar los valores...
+                document.getElementById('idSesion').value = info.event.id;
                 document.getElementById('fecha').value = info.event.extendedProps.fecha;
                 document.getElementById('objetivo').value = info.event.extendedProps.objetivo;
                 document.getElementById('descripcion').value = info.event.extendedProps.descripcion;
@@ -114,42 +149,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 tableRef.innerHTML = '';
 
                 for (let recuerdo of info.event.extendedProps.recuerdos) {
-                    // Insert a row at the end of the table
                     let newRow = tableRef.insertRow(0);
 
-                    // Insert a cell in the row at index 0
                     let newCell0 = newRow.insertCell(0);
                     let newCell1 = newRow.insertCell(1);
                     let newCell2 = newRow.insertCell(2);
                     let newCell3 = newRow.insertCell(3);
                     let newCell4 = newRow.insertCell(4);
                     let newCell5 = newRow.insertCell(5);
-                    let newCell6 = newRow.insertCell(6);
+                    /*let newCell6 = newRow.insertCell(6);*/
 
-                    // Append a text node to the cell
-                    let newText1 = document.createTextNode(recuerdo.nombre);
-                    let newText2 = document.createTextNode(recuerdo.fecha);
-                    let newText3 = document.createTextNode(recuerdo.etapa.nombre);
-                    let newText4 = document.createTextNode(recuerdo.categoria.nombre);
-                    let newText5 = document.createTextNode(recuerdo.estado.nombre);
-                    let newText6 = document.createTextNode(recuerdo.etiqueta.nombre);
+                    let newText0 = document.createTextNode(recuerdo.nombre);
+                    let newText1 = document.createTextNode(recuerdo.fecha);
+                    let newText2 = document.createTextNode(recuerdo.etapa.nombre);
+                    let newText3 = document.createTextNode(recuerdo.categoria.nombre);
+                    let newText4 = document.createTextNode(recuerdo.estado.nombre);
+                    let newText5 = document.createTextNode(recuerdo.etiqueta.nombre);
+                    //let newText6 = document.createTextNode("recuerdo.etiqueta.nombre");
 
-                    // Append a text node to the cell
+                    newCell0.appendChild(newText0);
                     newCell1.appendChild(newText1);
                     newCell2.appendChild(newText2);
                     newCell3.appendChild(newText3);
                     newCell4.appendChild(newText4);
                     newCell5.appendChild(newText5);
-                    newCell6.appendChild(newText6);
                 }
-
-                document.getElementById('btnGuardarSesion').classList.add('d-none');
-                document.getElementById('btnEliminarSesion').classList.remove('d-none');
-                document.getElementById('btnModificarSesion').classList.remove('d-none');
             }
-
-
-            console.log(info.event.extendedProps);
+            console.log(info.event.extendedProps.fecha);
             $('#evento').modal('show');
         },
 
@@ -159,22 +185,30 @@ document.addEventListener('DOMContentLoaded', function () {
             week: 'Semana',
             day: 'Día',
             list: 'Listado',
-
         },
 
         height: 650,
         editable: true,
         displayEventTime: false,
         selectable: true,
+        eventDrop: function(event) {
+            document.getElementById('btnModificar').click();
+        },
         selectHelper: true,
-        viewRender: function (view, element) {
-            // Drop the second param ('day') if you want to be more specific
-            $('.fc-prev-button').addClass('fc-state-disabled');
-        }
     }
 
     if (user === '1') {
         options.customButtons = {
+            add_event: {
+                text: '+',
+                click: function () {
+                    formulario.reset();
+                    //formularioEliminar.reset();
+                    document.getElementById('titulo').textContent = "Añadir";
+                    document.getElementById('div-fin').classList.add('d-none');
+                    $('#evento').modal('show');
+                }
+            },
             todo: {
                 text: 'Todo',
                 click: function () {
