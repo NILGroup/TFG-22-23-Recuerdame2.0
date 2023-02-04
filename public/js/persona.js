@@ -82,18 +82,18 @@ function CrearPersonas() {
         contentType: false, // tell jQuery not to set contentType
         data: fd,
         success: function(data) {
-            console.log("ID NUEVA PERSONA:" + data["id"]);
-            document.getElementById("divPersonas").innerHTML +=
-                '<tr>' +
-                    '<td>' + data["nombre"] + '</td>' +
-                    '<td>' + data["apellidos"] + '</td>' +
-                    '<td>' + data["tiporelacion_id"] + '</td>' +
-                    '<td class="tableActions">'+
-                    '<a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}/'+data["id"] +'><i class="fa-solid fa-eye text-black tableIcon"></i></a>'+
-                    '</td>'+
-                    '<input type="hidden" value=' + data["id"] + ' name="checkPersona[]">' +
-                '</tr>';
 
+            console.log("ID NUEVA PERSONA:" + data["id"]);
+
+            let tabla = $("#tabla_personas").dataTable()
+            let row = $("<tr></tr>")
+
+            row.append($("<td>" + data["nombre"]  + "</td>"))
+            row.append($("<td>" + data["apellidos"] + "</td>"))
+            row.append($("<td>" + data["tiporelacion_id"]  + "</td>"))
+            row.append($('<td class="tableActions"><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}/'+data["id"] +'><i class="fa-solid fa-eye text-black tableIcon"></i></a></td>'))
+            row.append($('<input type="hidden" value=' + data["id"] + ' name="checkPersona[]">'))
+            setRow(tabla, row)
                 
             reloadPersona(data);
         },
@@ -101,64 +101,61 @@ function CrearPersonas() {
             console.log('Error:', data);
         }
     });
-
-    
-
 }
 
 function reloadPersona(p) {
-    let selected = Array.from(document.getElementById("divPersonas").getElementsByTagName("input"), function(s) {
-        console.log(s.value)
-        return s.value
+
+    
+    let selected = []
+    $("#tabla_personas tbody input").each(function(i, e){
+        selected.push($(e).prop("value"))
     })
 
+    let tabla = $("#tablaPersonasExistentes").dataTable()
+    let row = $("<tr></tr>")
+    row.append($('<td class="row_id">' + p.id + '</td>'))
+    row.append($('<td>' + p.nombre + '</td>'))
+    row.append($('<td>' + p.apellidos + '</td>'))
+    row.append($('<td>' + p.tiporelacion_id + '</td>'))
+    row.append($('<td id="personasSeleccionadas" class="tableActions"><input class="form-check-input" type="checkbox" value=' + p.id + ' name="checkPersonaExistente[]" id="checkPersonaExistente" checked>' +
+    '</td></tr>'))
+    
+    setRow(tabla, row)
 
-    document.getElementById("tablaPersonasExistentes").innerHTML +=
-        '<tr>' +
-        '<td class="row_id">' + p.id + '</td>' +
-        '<td>' + p.nombre + '</td>' +
-        '<td>' + p.apellidos + '</td>' +
-        '<td>' + p.tiporelacion_id + '</td>' +
-        '<td id="personasSeleccionadas" class="tableActions">' +
-        '<input class="form-check-input" type="checkbox" value=' + p.id + ' name="checkPersonaExistente[]" id="checkPersonaExistente" checked>' +
-        '</td>' +
-        '</tr>';
-
-    $(".row_id").each(function(i, e){
-        $(e).hide()
-    })
-
-    document.getElementById("tablaPersonasExistentes").getElementsByTagName("input").forEach(c => {
-        if (selected.includes(c.value)) {
-            c.checked = true;
+    $(".row_id").each((i, e) => $(e).hide())
+   
+    $("#tablasPersonasExistentes input").each((i, e) => {
+        if (selected.includes($(e).prop("value"))) {
+            $(e).prop("checked", true)
         }
     })
+
+
 }
 
 function agregarPersonas(p) {
-    //console.log(p);
-    document.getElementById("divPersonas").innerHTML = "";
-    let allPersonas = document.getElementById("tablaPersonasExistentes").getElementsByTagName("tr");
-    let n = 1;
 
-    for (let i = 0; i < allPersonas.length; i++) {
-        let per = allPersonas[i].getElementsByTagName("td");
-        let persona = {
-            "id": per[0].textContent,
-            "nombre": per[1].textContent,
-            "apellidos": per[2].textContent,
-            "tiporelacion_id": per[3].textContent,
-            "checked": allPersonas[i].getElementsByTagName("input")[0].checked
+    let tabla = $("#tabla_personas").dataTable()
+    tabla.api().rows().remove().draw()
+
+    $("#tablaPersonasExistentes tbody tr").each(function(i, elem){
+        let per = $(elem).children()
+        
+        
+        if ($(per[4]).children("input").prop("checked")){
+        
+            let row = $("<tr></tr>")
+            for (let i = 1; i < 4; i++){
+                row.append("<td>" + per[i].textContent + "</td>")
+            }
+            row.append('<input type="hidden" value=' + per[0].textContent + ' name="checkPersona[]">')
+            setRow(tabla, row)
         }
 
-        if (persona.checked) {
-            document.getElementById("divPersonas").innerHTML += '<tr>' +
-               
-                '<td>' + persona.nombre + '</td>' +
-                '<td>' + persona.apellidos + '</td>' +
-                '<td>' + persona.tiporelacion_id + '</td>' +
-                '<input type="hidden" value=' + persona.id + ' name="checkPersona[]">' +
-                '</tr>';
-        }
-    }
+    })
+
+}
+
+function setRow(tabla, r){
+    tabla.api().row.add(r).draw()
 }

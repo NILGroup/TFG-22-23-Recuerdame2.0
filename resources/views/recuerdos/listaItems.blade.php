@@ -117,7 +117,7 @@
         </div>
         @endif
     </div>
-    <table id="tabla" class="table table-bordered table-striped table-responsive datatable tablaPersonaRecuerdo" style="width: 100%;">
+    <table id="tabla_personas" class="table table-bordered table-striped table-responsive datatable tablaPersonaRecuerdo" style="width: 100%;">
         <caption>Listado de personas relacionadas</caption>
         <thead>
             <tr class="bg-primary">
@@ -129,7 +129,7 @@
                 @endif
             </tr>
         </thead>
-        <tbody id="divPersonas">
+        <tbody>
             @foreach ($recuerdo->personas_relacionadas as $persona)
             <tr>
                 <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}}</a></td>
