@@ -1,3 +1,5 @@
+
+
 $("#crearRecuerdo").on("click", function(event){
     let form = $("#recuerdosCreatorForm");
     form.removeClass("was-validated")
@@ -5,7 +7,7 @@ $("#crearRecuerdo").on("click", function(event){
 
     //Borrar la tabla de las personas
 
-    $("#divPersonas tr").each(function(i, e){
+    $("#tabla_personas tbody tr").each(function(i, e){
         $(e).detach()
     })
    
@@ -35,29 +37,18 @@ function crearRecuerdo() {
     const selectValues = document.querySelectorAll('#recuerdosCreatorForm select')
     const textValues = document.querySelectorAll('#recuerdosCreatorForm textarea')
 
-    let allPersonas = document.getElementById("tablaPersonasExistentes").getElementsByTagName("tr");
     let ids = []
 
+    $("#tablaPersonasExistentes tbody tr").each(function(i, e){
 
-    for (let i = 0; i < allPersonas.length; i++) {
-        let per = allPersonas[i].getElementsByTagName("td");
-        console.log(per)
-        let persona = {
-            "id": per[0].textContent,
-            "nombre": per[1].textContent,
-            "apellidos": per[2].textContent,
-            "tiporelacion_id": per[3].textContent,
-            "checked": allPersonas[i].getElementsByTagName("input")[0].checked
-        }   
-        
-        
-        if (persona["checked"]){
-            console.log(persona)
-            ids.push(persona["id"]) 
+        let per = $(e).children()
+
+        if ($(per[4]).children("input").prop("checked")){
+            ids.push(per[0].textContent)
         }
-            
 
-    }
+    })
+
 
     var fd = new FormData();
     
@@ -111,28 +102,17 @@ function agregarRecuerdosExistentes(r) {
 
     $("#tablaRecuerdosExistentes tbody tr").each(function(i, elem){
 
-        let rec = $(elem).children()
-        let recuerdo = {
-            "id": rec[0].textContent,
-            "nombre": rec[1].textContent,
-            "fecha": rec[2].textContent,
-            "etapa": rec[3].textContent,
-            "categoria": rec[4].textContent,
-            "estado": rec[5].textContent,
-            "etiqueta": rec[6].textContent,
-            "checked": $(rec[7]).children("input").prop("checked"),
-        }
+        let rec = $(elem).children()  
 
-        if (recuerdo.checked){
+        if ($(rec[7]).children("input").prop("checked")){
 
             let row = $("<tr></tr>")
-            row.append($('<td>' + recuerdo.nombre + '</td>'))
-            row.append($('<td>' + recuerdo.fecha + '</td>'))
-            row.append($('<td>' + recuerdo.etapa + '</td>'))
-            row.append($('<td>' + recuerdo.categoria + '</td>'))
-            row.append($('<td>' + recuerdo.estado + '</td>'))
-            row.append($('<td>' + recuerdo.etiqueta + '</td>'))
-            row.append($('<input type="hidden" value=' + recuerdo.id + ' name="recuerdos[]">'))
+
+            for (let i = 1; i < 7; i++){
+                row.append($('<td>' + rec[i].textContent + '</td>'))
+            }
+
+            row.append($('<input type="hidden" value=' + rec[0].textContent + ' name="recuerdos[]">'))
 
             table.api().row.add(row).draw()
 
@@ -150,7 +130,7 @@ function reloadRecuerdos(r) {
         selected.push($(elem).prop("value"))
     })
 
-
+    
     if (!r.categoria_id) {
         r.categoria = {};
         r.categoria.nombre = " ";
@@ -163,46 +143,47 @@ function reloadRecuerdos(r) {
         r.etiqueta = {};
         r.etiqueta.nombre = " ";
     }
-
+    console.log(r)
 
     let tabla = $("#tablaRecuerdosExistentes").dataTable()
 
     let row = $("<tr></tr>")
     row.append($('<td class="id_recuerdo">' + r.id + '</td>'))
-    row.append($('<td>' + r.nombre + '</td>'))
-    row.append($('<td>' + r.fecha + '</td>'))
-    row.append($('<td>' + r.etapa.nombre + '</td>' ))
-    row.append($('<td>' + r.categoria.nombre + '</td>'))
-    row.append($('<td>' + r.estado.nombre + '</td>'))
-    row.append($('<td>' + r.etiqueta.nombre + '</td>'))
+
+    addFields(row, r)
+    
     row.append($('<td id="recuerdosSeleccionados" class="tableActions">' +
     '<input class="form-check-input" type="checkbox" value=' + r.id + ' name="checkRecuerdo[]" id="checkRecuerdo" checked>' +
     '</td>'))
 
-    tabla.api().row.add(row).draw()
+    setRow(tabla, row)
 
-    $(".id_recuerdo").each(function(i, e){
-        $(e).hide()
-    })
+    $(".id_recuerdo").each((i, e) => $(e).hide())
 
-    $("#tablaRecuerdosExistentes tbody input").each(function(i, e){
-        let elem = $(e)
-        if (selected.includes(elem.prop("value"))){
-            elem.prop("checked", true)
-        }
-    })
+    $("#tablaRecuerdosExistentes tbody input").filter((i, e) => selected.includes($(e).prop("value")))
+        .each((i, e) => $(e).prop("checked"),true)
+
 
     tabla = $("#tabla_recuerdos").dataTable()
 
     row = $("<tr></tr>")
-    row.append($('<td>' + r.nombre + '</td>'))
-    row.append($('<td>' + r.fecha + '</td>'))
-    row.append($('<td>' + r.etapa.nombre + '</td>' ))
-    row.append($('<td>' + r.categoria.nombre + '</td>'))
-    row.append($('<td>' + r.estado.nombre + '</td>'))
-    row.append($('<td>' + r.etiqueta.nombre + '</td>' ))
+    addFields(row, r)
     row.append($('<input type="hidden" value=' + r.id + ' name="recuerdos[]">'))
 
-    tabla.api().row.add(row).draw()
+    setRow(tabla, row)
     
+}
+
+
+function addFields(row, rec){
+    row.append($('<td>' + rec.nombre + '</td>'))
+    row.append($('<td>' + rec.fecha + '</td>'))
+    row.append($('<td>' + rec.etapa.nombre + '</td>' ))
+    row.append($('<td>' + rec.categoria.nombre + '</td>'))
+    row.append($('<td>' + rec.estado.nombre + '</td>'))
+    row.append($('<td>' + rec.etiqueta.nombre + '</td>' ))
+}
+
+function setRow(tabla, r){
+    tabla.api().row.add(r).draw()
 }
