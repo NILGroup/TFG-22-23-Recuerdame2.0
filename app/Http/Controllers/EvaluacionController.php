@@ -62,7 +62,7 @@ class EvaluacionController extends Controller
             ]);
             
         session()->put('created', "true");
-        //return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones/$evaluacion->id/ver");
+        return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones/$evaluacion->id/ver");
     }
 
     public function show($id, $idE)
