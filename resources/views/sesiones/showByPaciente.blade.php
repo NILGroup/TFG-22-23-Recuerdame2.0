@@ -19,10 +19,9 @@
             <caption>Listado de sesiones</caption>
             <thead>
                 <tr class="bg-primary">
-                    <th class="fit5" scope="col">Fecha</th>
+                    <th class="fit10" scope="col">Fecha</th>
                     <th scope="col">Objetivo</th>
-                    <th class="fit5" scope="col">Informe</th>
-                    <th class="fit5" scope="col"></th>
+                    <th class="fit10" scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,16 +29,8 @@
                 <tr>
                     <td><a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}">{{date("d/m/Y", strtotime($sesion->fecha))}}</a></td>
                     <td>{{$sesion->objetivo}}</td>
-                    <td>
-                        <div class="d-flex justify-content-center">
-                            @if($sesion->fecha_finalizada == null)
-                            <a class="btn btn-success btn-sm" style="width: 100%;" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
-                            @else
-                            <a class="btn btn-primary btn-sm" style="width: 100%;" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/informe">Ver informe</a>
-                            @endif
-                        </div>
-                    </td>
-                    <td class="tableActions">
+                    
+                    <td class="tableActions align-center">
                         <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                         <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
                         
@@ -48,6 +39,16 @@
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                         </form>
+
+                        
+                        
+                            @if($sesion->fecha_finalizada == null)
+                            <a class="btn btn-success btn-sm" style="width: 40%; font-size:small" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
+                            @else
+                            <a class="btn btn-primary btn-sm" style="width: 40%; font-size:small" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/informe">Generar informe</a>
+                            @endif
+                        
+                
                     </td>
                 </tr>
                 @endforeach
