@@ -91,7 +91,6 @@ function CrearPersonas() {
             row.append($("<td>" + data["nombre"]  + "</td>"))
             row.append($("<td>" + data["apellidos"] + "</td>"))
             row.append($("<td>" + data["tiporelacion_id"]  + "</td>"))
-            row.append($('<td class="tableActions"><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}/'+data["id"] +'><i class="fa-solid fa-eye text-black tableIcon"></i></a></td>'))
             row.append($('<input type="hidden" value=' + data["id"] + ' name="checkPersona[]">'))
             setRow(tabla, row)
                 

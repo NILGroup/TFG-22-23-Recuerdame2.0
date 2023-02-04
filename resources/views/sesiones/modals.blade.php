@@ -39,7 +39,7 @@
             </div>
 
             <div class="modal-body">
-                <table id="tablaRecuerdosExistentes" class="table table-bordered table-striped table-responsive datatable">
+                <table id="tablaRecuerdosExistentes" class="table w-100 table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr class="bg-primary">
                             <th scope="col" style="display: none;">Id</th>
