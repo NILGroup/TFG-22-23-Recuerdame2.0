@@ -21,7 +21,7 @@
 <div class="row justify-content-start">
     <div class="row col-sm-6 col-md-5 col-lg-4 align-items-center">
         <label for="fecha" class="form-label col-form-label negrita col-sm-3 col-md-3 col-lg-3">Fecha:<span class="asterisco">*</span></label>
-        <div class="col-sm-9 col-md-6 col-lg-4 align-items-center">
+        <div class="col-sm-9 col-md-6 col-lg-5 align-items-center">
             <input max="4000-12-31" min="1800-01-01" type="date" class="form-control form-control-sm" id="fecha" required name="fecha" value="{{$recuerdo->fecha}}" @if($show) disabled @endif>
         </div>
     </div>
@@ -75,7 +75,7 @@
 
     <div class="row col-sm-4 col-md-4 col-lg-4 align-items-center">
         <label for="emocion" class="form-label col-form-label negrita col-sm-7 col-md-5 col-lg-5" data-toggle="tooltip" data-placement="top" title="Emoción que estima el terapeuta que el recuerdo le ha generado al paciente">Emoción producida: <i class="bi bi-question-circle"></i></label>
-        <div class="col-sm-3 col-md-3 col-lg-4 align-items-center">
+        <div class="col-sm-3 col-md-3 col-lg-5 align-items-center">
             <select class="form-select form-select-sm" id="idEmocion" name="emocion_id" @if($show) disabled @endif>
                 @foreach ($emociones as $emocion)
                 <option value="{{$emocion->id}}" @if($emocion->id == $recuerdo->emocion_id) selected @endif>{{$emocion->nombre}}</option>
@@ -85,7 +85,7 @@
     </div>
     <div class="row col-sm-4 col-md-4 col-lg-4 align-items-center">
         <label for="categoria" class="form-label col-form-label negrita col-sm-6 col-md-5 col-lg-3">Categoría:</label>
-        <div class="col-sm-3 col-md-4 col-lg-3">
+        <div class="col-sm-3 col-md-4 col-lg-5">
             <select onchange="especifiqueCategoria()" style="margin-right: 5px" class="form-select form-select-sm form-control" id="categoria_id" name="categoria_id" @if($show) disabled @endif>
                 @foreach ($categorias as $categoria)
                 <option value="{{$categoria->id}}" @if($categoria->id == $recuerdo->categoria_id) selected @endif>{{$categoria->nombre}}</option>
