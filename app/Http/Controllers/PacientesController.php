@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Sesion;
 use App\Models\Residencia;
 use App\Models\Situacion;
 use App\Models\Estudio;
@@ -121,7 +122,15 @@ class PacientesController extends Controller
         $personas = $paciente->personasrelacionadas;
         $evaluaciones = $paciente->evaluaciones->sortBy("id");
         $cuidadores = $paciente->users->where('rol_id', 2);
-       
+
+        $fechaAnterior = \Carbon\Carbon::parse($paciente->fecha_inscripcion)->format("Y-m-d h:i:s");
+        foreach($evaluaciones as $evaluacion){
+            $fechaActual = \Carbon\Carbon::parse($evaluacion->fecha)->addDays(1)->format("Y-m-d h:i:s");
+            //$fechas->push([$fechaAnterior, $fechaActual]);
+            $sesiones = Sesion::whereBetween("fecha_finalizada", [$fechaAnterior, $fechaActual])->get();
+            $evaluacion->numSesiones = count($sesiones);
+            $fechaAnterior=$fechaActual;
+        }
         //Devolvemos al paciente a la vista de mostrar paciente
         return view("pacientes.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas", "cuidadores", "show"));
 

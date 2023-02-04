@@ -19,9 +19,8 @@
             <caption>Listado de informes de seguimiento</caption>
             <thead>
                 <tr class="bg-primary">
-                    <th scope="col">Informe</th>
-                    <th class="fit" scope="col">Fecha</th>
-                    <th class="" scope="col">Sesiones desde el anterior informe de seguimiento</th>
+                    <th class="fit15" scope="col">Informe</th>
+                    <th class="" scope="col">Sesiones desde la última evaluación</th>
                     <th scope="col">Diagnóstico</th>
                     <th scope="col"></th>
                 </tr>
@@ -29,8 +28,7 @@
             <tbody>
                 @foreach ($evaluaciones as $informe)
                 <tr>
-                    <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe">Informe Nº {{$informe->id}}</td>
-                    <td>{{Carbon\Carbon::parse($informe->fecha)->format("d/m/Y")}}</td>
+                    <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe">Informe {{Carbon\Carbon::parse($informe->fecha)->format("d/m/Y")}}</td>
                     <td>{{$informe->numSesiones}}</td>
                     <td>{{$informe->diagnostico}}</td>
                     <td class="tableActions">

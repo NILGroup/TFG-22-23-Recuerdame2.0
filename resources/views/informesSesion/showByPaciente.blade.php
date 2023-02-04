@@ -15,16 +15,14 @@
             <caption>Listado de informes de sesiones</caption>
             <thead>
                 <tr class="bg-primary">
-                    <th scope="col">Informe</th>
-                    <th class="fit10" scope="col">Fecha del informe</th>
+                    <th class="fit10" scope="col">Informe</th>
                     <th class="fit5" scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($sesiones as $sesion)
                     <tr>
-                        <td><a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe">Informe de la sesión Nº {{$sesion->id}}</td>
-                        <td>{{date("d/m/Y H:i", strtotime($sesion->fecha_finalizada))}}</td>
+                        <td><a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe">Informe {{date("d/m/Y", strtotime($sesion->fecha_finalizada))}}</td>
                         <td class="tableActions">
                             <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                             <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/generarInforme"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>

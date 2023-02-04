@@ -13,20 +13,21 @@
                     <a href="/pacientes/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
-            <table id="tabla1" class="table table-bordered table-striped table-responsive datatable">
+            <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
+                <caption>Listado de informes de seguimiento</caption>
                 <thead>
                     <tr class="bg-primary">
-                        <th scope="col">Informe</th>
-                        <th class="fit5" scope="col">Fecha</th>
+                        <th class="fit15" scope="col">Informe</th>
+                        <th class="" scope="col">Sesiones desde la última evaluación</th>
                         <th scope="col">Diagnóstico</th>
-                        <th class="fit5" scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($evaluaciones as $informe)
                     <tr>
-                        <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe">Informe Nº {{$informe->id}}</td>
-                        <td>{{$informe->fecha}}</td>
+                        <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe">Informe {{Carbon\Carbon::parse($informe->fecha)->format("d/m/Y")}}</td>
+                        <td>{{$informe->numSesiones}}</td>
                         <td>{{$informe->diagnostico}}</td>
                         <td class="tableActions">
                             <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
