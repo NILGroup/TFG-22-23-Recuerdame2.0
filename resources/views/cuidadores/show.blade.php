@@ -11,7 +11,7 @@
         {{csrf_field()}}
         @include('cuidadores.listaItems')
         <div>
-            <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Atrás</button></a>
+            <!-- <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Atrás</button></a> -->
             <a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
         </div>
     </form>

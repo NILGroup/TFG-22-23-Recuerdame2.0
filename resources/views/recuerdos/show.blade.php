@@ -9,7 +9,8 @@
     </div>
     @include('recuerdos.listaItems')
     <div class="col-12">
-        <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary btn">Atrás</button></a>
+        <!-- <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary btn">Atrás</button></a> -->
+        <a href="/pacientes/{{$idPaciente}}/recuerdos/{{$recuerdo->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
     </div>
 </div>
 @endsection

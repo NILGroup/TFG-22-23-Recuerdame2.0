@@ -21,7 +21,7 @@
                     <th class="fit10" scope="col">Correo electrónico</th>
                     <th class="fit5" scope="col">Teléfono</th>
                     <th scope="col">Localidad</th>
-                    <th class="fit5" scope="col">Grado de parentesco</th>
+                    <th class="fit5" scope="col">Parentesco</th>
                     <th scope="col"></th>
                 </tr>
             </thead>

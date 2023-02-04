@@ -25,7 +25,8 @@
     @include('pacientes.desplegables')
 
     <div class="col-12">
-        <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a>
+        <!-- <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a> -->
+        <a href="/pacientes/{{$paciente->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
     </div>
 </div>
 

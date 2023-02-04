@@ -99,7 +99,7 @@
             </span>
         </div>
         <div class="text-center">
-            <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a>
+            <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Cancelar</button></a>
         </div>
     @endif
 </div>

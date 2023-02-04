@@ -12,8 +12,8 @@
         {{csrf_field()}}
         @include('evaluaciones.listaItems')
         <div>
-            <button type="submit" name="guardarInformeSeguimiento" value="Guardar" class="btn btn-outline-primary">Guardar</button>
-            <a href="/pacientes/{{$paciente->id}}/evaluaciones"><button type="button" class="btn btn-primary">Atrás</button></a>
+            <a href="/pacientes/{{$paciente->id}}/evaluaciones"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <button type="submit" name="guardarInformeSeguimiento" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
 </div>

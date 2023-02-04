@@ -11,7 +11,7 @@
     @include('sesiones.listaItems')
 
     <div>
-        <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a>
+        <!-- <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a> -->
         <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
     </div>
 </div>

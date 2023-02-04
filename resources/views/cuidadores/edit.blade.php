@@ -11,8 +11,8 @@
         {{csrf_field()}}
         @include('cuidadores.listaItems')
         <div class="col-12">
-            <button type="submit" value="Guardar" id="guardar" class="btn btn-outline-primary">Guardar</button>
-            <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Atrás</button></a>
+            <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <button type="submit" value="Guardar" id="guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
 </div>

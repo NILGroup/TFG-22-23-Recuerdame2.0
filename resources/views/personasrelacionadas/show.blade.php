@@ -10,7 +10,8 @@
     @include('personasrelacionadas.foto')
     @include('personasrelacionadas.listaItems')
     <div class="col-12">
-        <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a>
+        <!-- <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a> -->
+        <a href="/pacientes/{{$idPaciente}}/personas/{{$persona->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
     </div>
 </div>
   

@@ -13,8 +13,8 @@
         @include('informesSesion.listaItems')
         
         <div>
-            <button type="submit" name="guardarInformeSesion" value="Guardar" class="btn btn-outline-primary">Guardar</button>
-            <a href="/pacientes/{{$sesion->paciente->id}}/sesiones"><button type="button" class="btn btn-primary">Atrás</button></a>
+            <a href="/pacientes/{{$sesion->paciente->id}}/sesiones"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <button type="submit" name="guardarInformeSesion" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
 
     </form>

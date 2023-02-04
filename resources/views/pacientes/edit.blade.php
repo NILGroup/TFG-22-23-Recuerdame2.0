@@ -21,8 +21,8 @@
         {{csrf_field()}}
         @include('pacientes.listaItems')
         <div class="col-12">
-            <button type="submit" value="Guardar" class="btn btn-outline-primary">Guardar</button>
-            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a>
+            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <button type="submit" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
     @else
@@ -45,8 +45,8 @@
             </div>
         
         <div class="form-group">
-            <button id="guardar"  type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Guardar</button>
-            <a href="/pacientes/"><button type="button" class="btn btn-primary">Atrás</button></a>
+            <a href="/pacientes/"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <button id="guardar"  type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
 

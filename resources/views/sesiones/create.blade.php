@@ -24,8 +24,8 @@
             </div>
     
         <div>
-            <button type="submit" id="guardar" name="guardarSesion" value="Guardar" class="btn btn-outline-primary">Guardar</button>
-            <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a>
+            <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <button type="submit" id="guardar" name="guardarSesion" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
 </div>

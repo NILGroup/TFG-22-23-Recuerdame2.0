@@ -45,8 +45,8 @@
             </table>
         </div>
         <div class="col-12">
-            <button type="submit" class="btn btn-outline-primary">Guardar</button>
-            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a>
+            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <button type="submit" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
 </div>

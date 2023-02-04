@@ -25,8 +25,8 @@
             </div>
         
         <div class="form-group">
-            <button id="guardar"  type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Guardar</button>
-            <a href="/pacientes/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary">Atrás</button></a>
+            <a href="/pacientes/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <button id="guardar"  type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
         

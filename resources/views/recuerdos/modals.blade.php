@@ -17,7 +17,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="modal_guardar">Guardar</button>
+                <button type="button" class="btn btn-primary" id="modal_guardar">Finalizar</button>
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="return agregarPersonas(checkPersonaExistente);">Guardar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="return agregarPersonas(checkPersonaExistente);">Finalizar</button>
             </div>
         </div>
     </div>

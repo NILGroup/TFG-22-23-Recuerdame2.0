@@ -24,8 +24,8 @@
         </div>
 
         <div class="col-12 ">
-            <button id="guardar" type="submit" value="Guardar" class="btn btn-outline-primary btn">Guardar</button>
-            <a href="/pacientes/{{$paciente->id}}/recuerdos"><button type="button" class="btn btn-primary btn">Atrás</button></a>
+            <a href="/pacientes/{{$paciente->id}}/recuerdos"><button type="button" class="btn btn-primary btn">Cancelar</button></a>
+            <button id="guardar" type="submit" value="Guardar" class="btn btn-outline-primary btn">Finalizar</button>
         </div>
     </form>
 </div>

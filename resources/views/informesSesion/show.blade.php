@@ -12,7 +12,7 @@
         @include('informesSesion.listaItems')
 
         <div>
-            <a href="/pacientes/{{$sesion->paciente->id}}/informesSesion"><button type="button" class="btn btn-primary">Atrás</button></a>
+            <!-- <a href="/pacientes/{{$sesion->paciente->id}}/informesSesion"><button type="button" class="btn btn-primary">Atrás</button></a> -->
             <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme"><button type="button" class="btn btn-secondary">Editar</button></a>
             <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe" ><button type="button" class="btn btn-outline-primary">Generar PDF</button></a>
         </div>

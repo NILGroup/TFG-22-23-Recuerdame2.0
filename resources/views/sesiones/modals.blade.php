@@ -20,7 +20,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cerrar</button>
-                <button id="modal_recuerdo_guardar" type="button" class="btn btn-primary">Guardar</button>
+                <button id="modal_recuerdo_guardar" type="button" class="btn btn-primary">Finalizar</button>
             </div>
         </div>
     </div>
@@ -73,7 +73,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="return agregarRecuerdosExistentes(checkRecuerdo);">Guardar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="return agregarRecuerdosExistentes(checkRecuerdo);">Finalizar</button>
             </div>
         </div>
     </div>

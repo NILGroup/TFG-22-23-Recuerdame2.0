@@ -23,8 +23,8 @@
         </div>
 
         <div class="col-12">
-            <button id="guardar" type="submit" value="Guardar" class="btn btn-outline-primary">Guardar</button>
-            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a>
+            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <button id="guardar" type="submit" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
 </div>
