@@ -277,6 +277,21 @@ class RecuerdosController extends Controller
         return $recuerdo;
     }
 
-
+    public function getNoView(Request $request){
+        $recuerdo = Recuerdo::find($request->id);
+        $personas = $recuerdo->paciente->personasrelacionadas;
+        //throw new \Exception(json_encode($personas)." ".json_encode($recuerdo->personas_relacionadas));
+        foreach($personas as $p){
+            if($recuerdo->personas_relacionadas->contains($p->id)){
+                $p->related = 1;
+            }
+            else{
+                $p->related = 0;
+            }
+            $p->tiporelacion_id = $p->tiporelacion->nombre;
+        }
+        $recuerdo->personasrelacionadas = $personas;    
+        return json_encode($recuerdo);
+    }
 
 }

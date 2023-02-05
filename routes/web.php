@@ -134,6 +134,8 @@ Route::get('/pacientes/{id}/sesiones/{idS}/informe', 'App\Http\Controllers\PDFCo
 Route::get('/pacientes/{id}/sesiones/{idS}/ver', 'App\Http\Controllers\InformesSesionController@show');
 Route::post('/cerrarInformeSesion', 'App\Http\Controllers\InformesSesionController@store');
 Route::post('/generarPDFInformeSesion', 'App\Http\Controllers\InformesSesionController@generarPDFInformeSesion');
+Route::post('/getRecuerdo', 'App\Http\Controllers\RecuerdosController@getNoView');
+
 
 //RUTAS CUSTOMIZADAS EVALUACION
 Route::get('/pacientes/{id}/evaluaciones', 'App\Http\Controllers\EvaluacionController@showByPaciente');

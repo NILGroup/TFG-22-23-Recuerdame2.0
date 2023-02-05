@@ -1,4 +1,77 @@
+function actualizaModalRecuerdo(idR){
+    
+    var fd = new FormData();
+    $("#tabla_personas tbody tr").each(function(i, e){
+        $(e).detach()
+    })
+    var tablaAsignados = $("#tabla_personas").dataTable();
+    var table = $("#tablaPersonasExistentes").dataTable();
+    tablaAsignados.api().rows().remove();
+    table.api().rows().remove();
+    
+    fd.append('id', idR);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: "post",
+        url: '/getRecuerdo',
+        processData: false, // tell jQuery not to process the data
+        contentType: false, // tell jQuery not to set contentType
+        data: fd,
+        success: function(data) {
+            var data = JSON.parse(data);
+            //console.log(data.personasrelacionadas)
 
+            document.getElementById('id').value = data.id;
+            document.getElementById('nombre').value = data.nombre;
+            document.getElementById('idEstado').getElementsByTagName('option')[data.estado_id].selected = 'selected';
+            document.getElementById('fecha').value = data.fecha;
+            document.getElementById('idEtiqueta').getElementsByTagName('option')[data.etiqueta_id].selected = 'selected';
+            document.getElementById('puntuacion').value = data.puntuacion;
+            document.getElementById('descripcion').value = data.descripcion;
+            document.getElementById('idEtapa').getElementsByTagName('option')[data.etapa_id].selected = 'selected';
+            document.getElementById('idEmocion').getElementsByTagName('option')[data.emocion_id].selected = 'selected';
+            document.getElementById('categoria_id').getElementsByTagName('option')[data.categoria_id].selected = 'selected';
+            document.getElementById('localizacion').value = data.localizacion;
+            if(data.categoria_id == 7)
+                document.getElementById('tipo_custom').value = data.tipo_custom;
+            else
+                document.getElementById('tipo_custom').value = "";
+   
+            setValue();
+
+            data.personasrelacionadas.forEach(p => {
+                //console.log(p)
+                let row = $("<tr></tr>")
+                row.append($('<td style="display: none;" class="row_id">' + p.id + '</td>'))
+                row.append($('<td>' + p.nombre + '</td>'))
+                row.append($('<td>' + p.apellidos + '</td>'))
+                row.append($('<td>' + p.tiporelacion_id + '</td>'))
+                let checked = p.related ? "checked":"";
+                row.append($('<td id="personasSeleccionadas" class="tableActions"><input class="form-check-input" type="checkbox" value=' + p.id + ' name="checkPersonaExistente[]" id="checkPersonaExistente" ' + checked +'>' +
+                '</td></tr>'))
+                setRow(table, row)
+
+                if(checked){
+                    console.log(p)
+                    let row = $("<tr></tr>")
+                    row.append($("<td>" + p.nombre  + "</td>"))
+                    row.append($("<td>" + p.apellidos + "</td>"))
+                    row.append($("<td>" + p.tiporelacion_id  + "</td>"))
+                    row.append($('<input type="hidden" value=' + p.id + ' name="checkPersona[]">'))
+                    setRow(tablaAsignados, row)
+                }
+            });
+
+        },
+        error: function(data) {
+            console.log('Error:', data);
+        }
+    });
+}
 
 $("#crearRecuerdo").on("click", function(event){
     let form = $("#recuerdosCreatorForm");

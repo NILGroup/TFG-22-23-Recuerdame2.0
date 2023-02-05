@@ -1,9 +1,9 @@
 <div>
-    <input type="hidden" id="id" name="id" value="{{$sesion->id}}">
+    <input type="hidden" id="idSesion" name="id" value="{{$sesion->id}}">
     <div class="row align-items-center">
         <label for="fecha" class="form-label col-form-label col-sm-3 col-md-2 col-lg-2 negrita">Fecha sesión:<span class="asterisco">*</span></label>
         <div class="col-sm-9 col-md-6 col-lg-2">
-            <input type="datetime-local" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$sesion->fecha}}"  required @if($show) disabled @endif>
+            <input type="datetime-local" class="form-control form-control-sm" id="fechaInforme" name="fecha" value="{{$sesion->fecha}}"  required @if($show) disabled @endif>
         </div>
     </div>
     <div class="row align-items-center">
@@ -16,14 +16,6 @@
         <label for="duracion" class="form-label col-form-label col-sm-3 col-md-2 col-lg-2 negrita">Duración:<span class="asterisco">*</span></label>
         <div class="col-sm-9 col-md-6 col-lg-2">
             <input type="time" class="form-control form-control-sm" id="duracion" name="duracion" value= @if(is_null($sesion->duracion)) "00:00" @else "{{$sesion->duracion}}" @endif  required @if($show) disabled @endif>
-        </div>
-    </div>
-    <div class="row align-items-center mb-3">
-        <label for="apto" class="form-label col-form-label col-sm-3 col-md-2 col-lg-2 negrita">Apto para continuar este tipo de terapias:<span class="asterisco">*</span></label>
-        <div class="col-sm-9 col-md-6 col-lg-2">
-            <!-- Si el checkbox está desmarcado se utiliza el hidden -->
-            <input type="hidden"id="apto" name="apto" value="0">
-            <input type="checkbox" class="form-check-input" value="1" id="apto" name="apto" @if($show) disabled @endif @if($sesion->apto) checked @endif>
         </div>
     </div>
     

@@ -11,7 +11,9 @@
         
         {{csrf_field()}}
         @include('informesSesion.listaItems')
-        
+
+        @include('informesSesion.desplegable')
+
         <div>
             <a href="/pacientes/{{$sesion->paciente->id}}/sesiones"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button type="submit" name="guardarInformeSesion" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
@@ -19,8 +21,17 @@
 
     </form>
 </div>
+
+@include('recuerdos.modals')
+@include('personasrelacionadas.modals')
+
 @endsection
 
 @push('scripts')
-    @include('layouts.scripts')
+    @include('layouts.scripts') 
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="/js/table.js"></script>
+    <script src="/js/recuerdo.js"></script>
+    <script src="/js/persona.js"></script>
+    <script src="/js/multiModal.js"></script>
 @endpush
