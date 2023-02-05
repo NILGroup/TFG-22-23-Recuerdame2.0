@@ -110,7 +110,7 @@
     <div id="fecha_inscipcion" @if($paciente->residencia_id != 5) style="display: none;" @endif class="row col-sm-12 col-md-6 col-lg-7">
         <label for="fecha_inscripcion" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Fecha de inscripción<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-8">
-            <input type="date" name="fecha_inscripcion" class="form-control form-control-sm" value="{{$paciente->fecha_inscripcion}}" @if($show) disabled @endif>
+            <input max="4000-12-31" min="1800-01-01" type="date" name="fecha_inscripcion" class="form-control form-control-sm" value="{{$paciente->fecha_inscripcion}}" @if($show) disabled @endif>
         </div>
     </div>
 
