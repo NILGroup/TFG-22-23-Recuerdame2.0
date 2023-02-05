@@ -42,8 +42,8 @@
     </div>
 </div>
 
-@include('sesiones.modals')
 @include('recuerdos.modals')
+@include('personasrelacionadas.modals')
 
 @endsection
 

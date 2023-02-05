@@ -35,7 +35,7 @@
     </form>
 </div>
 
-@include('recuerdos.modals')
+@include('personasrelacionadas.modals')
 @endsection
 
 
