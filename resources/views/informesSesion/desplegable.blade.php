@@ -44,7 +44,7 @@
                         <td>Sin etiqueta</td>
                     @endif
                     <td class="tableActions">
-                        <a onclick="actualizaModalRecuerdo({{$recuerdo->id}})" type="button" id="crearRecuerdo" name="crearRecuerdo" class="showmodal" data-bs-toggle="modal" data-bs-target="#recuerdosCreator"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
+                        <a onclick="actualizaModalRecuerdo({{$recuerdo->id}})" type="button" id="updateRecuerdo" name="updateRecuerdo" class="showmodal" data-bs-toggle="modal" data-bs-target="#recuerdosCreator"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
                     </td>
                 </tr>
                 @endforeach

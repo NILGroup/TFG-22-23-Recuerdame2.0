@@ -1,5 +1,6 @@
 <input type="hidden" name="id" id="id" value="{{$recuerdo->id}}">
 <input type="hidden" name="paciente_id" id="paciente_id" value="{{$paciente->id}}">
+<input type="hidden" name="recuerdo_id" id="recuerdo_id" value="">
 <div class="row form-group justify-content-start">
     <div class="row col-sm-6 col-md-5 col-lg-4 align-items-center">
         <label for="nombre" class="form-label col-form-label negrita col-sm-3 col-md-3 col-lg-3">Nombre:<span class="asterisco">*</span></label>

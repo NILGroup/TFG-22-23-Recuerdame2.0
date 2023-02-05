@@ -1,4 +1,8 @@
 function actualizaModalRecuerdo(idR){
+
+    borrarDatos()
+
+    $("#recuerdo_id").prop("value", String(idR))
     
     var fd = new FormData();
     $("#tabla_personas tbody tr").each(function(i, e){
@@ -73,7 +77,7 @@ function actualizaModalRecuerdo(idR){
     });
 }
 
-$("#crearRecuerdo").on("click", function(event){
+function borrarDatos(){
     let form = $("#recuerdosCreatorForm");
     form.removeClass("was-validated")
     form[0].reset()
@@ -83,10 +87,17 @@ $("#crearRecuerdo").on("click", function(event){
     $("#tabla_personas tbody tr").each(function(i, e){
         $(e).detach()
     })
-   
+}
 
+
+$("#crearRecuerdo").on("click", function(event){
+    
+   $("#recuerdo_id").prop("value", "")
+   borrarDatos()
 
 })
+
+
 
 $("#modal_recuerdo_guardar").on("click", function(event){
 
@@ -101,6 +112,7 @@ $("#modal_recuerdo_guardar").on("click", function(event){
     }
     form.classList.add('was-validated')
 })
+
 
 
 function crearRecuerdo() {
@@ -124,11 +136,17 @@ function crearRecuerdo() {
 
 
     var fd = new FormData();
+
+    console.log(inputValues)
+
+    if (inputValues[2] != ""){
+        fd.append('id', inputValues[2].value)
+    }
     
     fd.append('paciente_id', inputValues[1].value);
-    fd.append('nombre', inputValues[2].value);
-    fd.append('fecha', inputValues[3].value);
-    fd.append('puntuacion', inputValues[4].value);
+    fd.append('nombre', inputValues[3].value);
+    fd.append('fecha', inputValues[4].value);
+    fd.append('puntuacion', inputValues[5].value);
 
     fd.append('estado_id', selectValues[0].value);
     fd.append('etiqueta_id', selectValues[1].value);
@@ -197,6 +215,7 @@ function agregarRecuerdosExistentes(r) {
 }
 
 function reloadRecuerdos(r) {
+
 
     let selected = []
     $("#tabla_recuerdos tbody input").each(function(i, elem){

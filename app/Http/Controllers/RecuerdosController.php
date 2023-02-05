@@ -245,14 +245,14 @@ class RecuerdosController extends Controller
                 'paciente_id' => $request->paciente_id
             ]
         );
-
-        
-        
+   
 
         $personas_relacionar = $request->ids_personas; //Array de ids de las personas
+        $recuerdo->personas_relacionadas()->detach();
         if (!is_null($personas_relacionar)) {
-            foreach ($personas_relacionar as $p_id) {
+            foreach ($personas_relacionar as $p_id) {  
                 $recuerdo->personas_relacionadas()->attach($p_id);
+                
             }
         }
 
