@@ -82,4 +82,21 @@ class CuidadoresController extends Controller
         //Redireccionamos a lista pacientes
         return back();
     }
+
+    //sirve para chekear si el cuidador ya ha sido registrado
+    public function repeatedCuidador(Request $request){
+        $encontrado = false;
+        $email = $request->email;
+        if (User::where('email', $email)->exists()) {
+            $encontrado = true;
+         }
+        /*info($email);
+        info("hey");
+        if($encontrado == false){
+            info("false");
+        }else{
+            info("true");
+        }*/
+        return $encontrado;
+    }
 }

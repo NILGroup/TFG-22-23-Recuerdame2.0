@@ -79,6 +79,7 @@ Route::post('/registroCuidador','App\Http\Controllers\CuidadoresController@regis
 Route::get('/pacientes/{id}/cuidadores', 'App\Http\Controllers\CuidadoresController@showByPaciente');
 Route::get('/pacientes/{id}/cuidadores/{idC}', 'App\Http\Controllers\CuidadoresController@show');
 Route::get('/pacientes/{id}/cuidadores/{idC}/editar', 'App\Http\Controllers\CuidadoresController@edit');
+Route::post('/repeatedCuidador', 'App\Http\Controllers\CuidadoresController@repeatedCuidador');
 
 
 //RUTAS CUSTOMIZADAS SESION
