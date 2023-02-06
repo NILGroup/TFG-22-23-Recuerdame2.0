@@ -71,7 +71,7 @@
             <select class="form-select form-select-sm" id="idEtapa" name="etapa_id" required @if($show) disabled @endif>
                 <option></option>
                 @foreach ($etapas as $etapa)
-                <option value="{{$etiqueta->id}}" @if($etiqueta->id == $recuerdo->etiqueta_id) selected @endif>{{$etapa->nombre}}</option>
+                <option value="{{$etiqueta->id}}" @if($etiqueta->id == $recuerdo->etapa_id) selected @endif>{{$etapa->nombre}}</option>
                 @endforeach
             </select>
         </div>
