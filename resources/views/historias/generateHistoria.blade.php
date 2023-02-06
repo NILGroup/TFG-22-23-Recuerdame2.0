@@ -33,7 +33,7 @@
 
         <div class="row mt-3">
             <div class="col-sm-4 col-md-3 col-lg-2 ">
-                <label for="etapa" class="form-check-label"><strong>Etapa de la vida</strong></label>
+                <label for="etapa" class="form-check-label negrita">Etapa de la vida</label>
                 <div id="checkboxes" class="checkboxes">
                     @foreach ($etapas as $etapa)
                     <label> <input class="form-check-input" type="checkbox" onclick="onSelect('{{$etapa->nombre}}', 'seleccionadoEtapa')" value={{$etapa->id}} name="seleccionEtapa[]">{{$etapa->nombre}}</label>
@@ -43,7 +43,7 @@
 
 
             <div class="col-sm-3 col-md-2 col-lg-2">
-                <label for="categoria" class="form-check-label"><strong>Categoría</strong></label>
+                <label for="categoria" class="form-check-label negrita">Categoría</label>
                 <div id="checkboxesCat" class="checkboxes">
                     @foreach ($categorias as $categoria)
                     <label> <input type="checkbox" class="form-check-input" onclick="onSelect('{{$categoria->nombre}}', 'seleccionadoCat')" value={{$categoria->id}} name="seleccionCat[]">{{$categoria->nombre}}</label>
@@ -52,7 +52,7 @@
             </div>
 
             <div class="  col-sm-3 col-md-2 col-lg-2">
-                <label for="etiqueta" class="form-check-label"><strong>Etiqueta</strong></label>
+                <label for="etiqueta" class="form-check-label negrita">Etiqueta</label>
 
                 <div id="checkboxesEtiqueta" class="checkboxes">
                     @foreach ($etiquetas as $etiqueta)
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-       <label class="form-check-label mt-3" data-toggle="tooltip" data-placement="top" title="Filtramos aquellos recuerdos que se han categorizado como aptos para continuar en las terapias y/o los que no."><strong>Tipo de recuerdos</strong> <i class="bi bi-question-circle"></i></label>
+       <label class="form-check-label mt-3 negrita">Tipo de recuerdos<i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Filtramos aquellos recuerdos que se han categorizado como aptos para continuar en las terapias y/o los que no."></i></label>
 
         <div class="form-check ">
             <input type="hidden" name="apto" id="apto" value="1">
