@@ -138,6 +138,7 @@ function crearRecuerdo() {
     var fd = new FormData();
 
     console.log(inputValues)
+  
 
     if (inputValues[2] != ""){
         fd.append('id', inputValues[2].value)
@@ -147,6 +148,9 @@ function crearRecuerdo() {
     fd.append('nombre', inputValues[3].value);
     fd.append('fecha', inputValues[4].value);
     fd.append('puntuacion', inputValues[5].value);
+
+    if (inputValues[6])
+        fd.append("tipo_custom", inputValues[6].value)
 
     fd.append('estado_id', selectValues[0].value);
     fd.append('etiqueta_id', selectValues[1].value);

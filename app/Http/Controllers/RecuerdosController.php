@@ -243,7 +243,8 @@ class RecuerdosController extends Controller
                 'estado_id' => $request->estado_id,
                 'etiqueta_id' => $request->etiqueta_id,
                 'puntuacion' => $request->puntuacion,
-                'paciente_id' => $request->paciente_id
+                'paciente_id' => $request->paciente_id,
+                'tipo_custom' => $request->tipo_custom
             ]
         );
    
