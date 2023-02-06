@@ -76,6 +76,7 @@ Auth::routes();
 //RUTAS CUSTOMIZADAS CUIDADOR
 Route::get('/pacientes/{id}/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
 Route::post('/registroCuidador','App\Http\Controllers\CuidadoresController@registroCuidador');
+Route::post('/actualizarCuidador','App\Http\Controllers\CuidadoresController@update');
 Route::get('/pacientes/{id}/cuidadores', 'App\Http\Controllers\CuidadoresController@showByPaciente');
 Route::get('/pacientes/{id}/cuidadores/{idC}', 'App\Http\Controllers\CuidadoresController@show');
 Route::get('/pacientes/{id}/cuidadores/{idC}/editar', 'App\Http\Controllers\CuidadoresController@edit');

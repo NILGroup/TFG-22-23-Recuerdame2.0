@@ -167,10 +167,7 @@ class PacientesController extends Controller
         $paciente->update($request->all());
 
         MultimediasController::savePhoto($request, $paciente);
-
-
         
-
         session()->put('created', "true");
         //Redireccionamos a lista pacientes
         //return redirect("/pacientes/$request->id");
