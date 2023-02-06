@@ -7,7 +7,7 @@
         <hr class="lineaTitulo">
     </div>
 
-    <form method="POST" action="/registroCuidador" id="formulario">
+    <form method="POST" action="/actualizarCuidador" id="formulario">
         {{csrf_field()}}
         @include('cuidadores.listaItems')
         <div class="col-12">
@@ -20,5 +20,5 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="/js/validacion.js"></script>
+    <!-- <script src="/js/validacion.js"></script> -->
 @endpush

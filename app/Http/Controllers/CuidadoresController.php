@@ -7,6 +7,7 @@ use App\Models\Paciente;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 class CuidadoresController extends Controller
 {
     /**
@@ -72,6 +73,24 @@ class CuidadoresController extends Controller
         session()->put('created', "true");
 
         return redirect("/pacientes/$paciente->id/cuidadores");
+    }
+
+    public function update(Request $request)
+    {
+        //Sacamos al paciente de la bd
+        $cuidador = User::findOrFail($request->id);
+
+        //Actualizamos masivamente los datos del paciente
+        $cuidador->update($request->all());
+
+        //MultimediasController::savePhoto($request, $cuidador);
+        
+        session()->put('created', "true");
+        //Redireccionamos a lista pacientes
+        //return redirect("/pacientes/$request->id");
+        $id = Session::get('paciente')['id'];
+        return redirect("/pacientes/$id/cuidadores/$cuidador->id");
+        
     }
 
     public function destroy($id)
