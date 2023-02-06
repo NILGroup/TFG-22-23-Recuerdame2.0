@@ -85,7 +85,7 @@ class EvaluacionController extends Controller
         $evaluacion = Evaluacion::find($id);
         $paciente_id = $evaluacion->paciente_id;
         $evaluacion->delete();
-        return redirect("/pacientes/$paciente_id/evaluaciones");
+        //return redirect("/pacientes/$paciente_id/evaluaciones");
 
     }
     /*

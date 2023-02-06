@@ -80,7 +80,7 @@ class CuidadoresController extends Controller
         User::findOrFail($id)->delete();
 
         //Redireccionamos a lista pacientes
-        return back();
+        //return back();
     }
 
     //sirve para chekear si el cuidador ya ha sido registrado

@@ -227,7 +227,7 @@ class SesionesController extends Controller
         $sesion = Sesion::find($id);
         $idP = $sesion->paciente_id;
         Sesion::destroy($id);
-        return redirect("/pacientes/$idP/sesiones");
+        //return redirect("/pacientes/$idP/sesiones");
     }
 
     public function destroyRecuerdo($idSesion, $idRecuerdo)

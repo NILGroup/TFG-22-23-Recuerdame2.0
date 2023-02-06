@@ -77,7 +77,7 @@ class InformesSesionController extends Controller
         $sesion->fecha_finalizada = null;
         $sesion->observaciones = null;
         $sesion->save();
-        return redirect("/pacientes/$sesion->paciente_id/informesSesion");
+        //return redirect("/pacientes/$sesion->paciente_id/informesSesion");
 
     }
 

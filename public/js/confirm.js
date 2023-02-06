@@ -1,5 +1,41 @@
 $('.confirm_delete').click(function(event) {
     var form =  $(this).closest("form");
+    var t = $(this).closest("table.datatable").dataTable();
+    var r = $(this).closest("td");
+    event.preventDefault();
+    swal.fire({
+        title: '¿Seguro que desea eliminar?',
+        text: "Si lo elimina, no podrá recuperar los datos",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonColor: '#3085d6',
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar',
+        customClass: {
+            confirmButton: 'btn btn-danger me-3',
+            cancelButton: 'btn btn-outline-dark'
+        },
+        buttonsStyling: false
+    })
+    .then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: '¡Eliminado!',
+                text: 'Se han borrado los datos',
+                icon: 'success',
+                timer: 3500,
+                showConfirmButton: false,
+            })
+            form.submit()
+            t.api().row(r).remove().draw(); 
+
+        }
+    });
+});
+/* TO-DO Revisar para que funcione el deshacer
+$('.confirm_delete').click(function(event) {
+    var form =  $(this).closest("form");
     var el = $(this);
 
     event.preventDefault();
@@ -42,3 +78,4 @@ $('.confirm_delete').click(function(event) {
 function removeFromTable(t, r){
     t.api().row(r).remove().draw(); 
 }
+*/
