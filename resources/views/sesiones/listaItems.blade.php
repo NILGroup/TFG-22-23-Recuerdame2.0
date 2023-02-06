@@ -72,10 +72,18 @@
                 <tr>
                     <td>{{$recuerdo->nombre}}</td>
                     <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
-                    <td>{{$recuerdo->etapa->nombre}}</td>
-                    <td>{{$recuerdo->categoria->nombre}}</td>
-                    <td>{{$recuerdo->estado->nombre}}</td>
-                    <td>{{$recuerdo->etiqueta->nombre}}</td>
+                    <td>
+                        @if(isset($recuerdo->etapa)){{$recuerdo->etapa->nombre}}@endif
+                    </td>
+                    <td>
+                        @if(isset($recuerdo->categoria)){{$recuerdo->categoria->nombre}}@endif   
+                    </td>
+                    <td>
+                        @if(isset($recuerdo->estado)){{$recuerdo->estado->nombre}}@endif
+                    </td>
+                    <td>
+                        @if(isset($recuerdo->etiqueta)){{$recuerdo->etiqueta->nombre}}@endif
+                    </td>
                     @if($show)
                     <td class="tableActions">
                         <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>

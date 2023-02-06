@@ -100,6 +100,7 @@ class RecuerdosController extends Controller
       
         
         $personas_relacionar = $request->checkPersona; //Array de ids de las personas
+        $recuerdo->personas_relacionadas()->detach();
         if (!is_null($personas_relacionar)) {
             foreach ($personas_relacionar as $p_id) {
                 $recuerdo->personas_relacionadas()->attach($p_id);
