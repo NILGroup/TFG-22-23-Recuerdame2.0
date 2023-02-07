@@ -28,7 +28,7 @@
             <tbody>
                 @foreach ($evaluaciones as $informe)
                 <tr>
-                    <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe">Informe {{{{date("d/m/Y", strtotime($informe->fecha))}}}}</td>
+                    <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe">Informe {{date("d/m/Y", strtotime($informe->fecha))}}</td>
                     <td>{{$informe->numSesiones}}</td>
                     <td>{{$informe->diagnostico}}</td>
                     <td class="tableActions">
