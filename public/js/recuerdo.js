@@ -150,7 +150,7 @@ function crearRecuerdo() {
     fd.append('nombre', inputValues[3].value);
     fd.append('fecha', inputValues[4].value);
     fd.append('puntuacion', inputValues[6].value);
-    fd.append('apto', inputValues[5].checked)
+    fd.append('apto', Number(inputValues[5].checked))
 
     if (inputValues[7].value)
         fd.append("tipo_custom", inputValues[7].value)

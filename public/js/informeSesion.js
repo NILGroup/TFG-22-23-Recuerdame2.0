@@ -25,7 +25,7 @@ function actualizaModalRecuerdo(idR){
         data: fd,
         success: function(data) {
             var data = JSON.parse(data);
-            //console.log(data.personasrelacionadas)
+            console.log(data.apto)
 
             document.getElementById('recuerdo_id').value = data.id;
             document.getElementById('nombre').value = data.nombre;
@@ -148,7 +148,7 @@ function crearRecuerdo() {
     fd.append('paciente_id', inputValues[1].value);
     fd.append('nombre', inputValues[3].value);
     fd.append('fecha', inputValues[4].value);
-    fd.append('apto', inputValues[5].checked);
+    fd.append('apto', Number(inputValues[5].checked));
     fd.append('puntuacion', inputValues[6].value);
     
     if (inputValues[7].value)
