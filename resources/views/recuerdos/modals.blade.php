@@ -57,7 +57,7 @@
                         <tr>
                             <td style="display: none;">{{$recuerdo->id}}</td>
                             <td>{{$recuerdo->nombre}}</td>
-                            <td>{{$recuerdo->fecha}}</td>
+                            <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
                             <td>{{$recuerdo->etapa->nombre}}</td>
                             <td>@if(!is_null($recuerdo->categoria_id)) {{$recuerdo->categoria->nombre}} @endif </td>
                             <td>@if(!is_null($recuerdo->estado_id)) {{$recuerdo->estado->nombre}} @endif </td>
