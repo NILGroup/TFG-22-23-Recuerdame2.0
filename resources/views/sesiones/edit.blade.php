@@ -45,6 +45,7 @@
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
     <script src="/js/table.js"></script>
+    <script src="/js/multiModal.js"></script>
     <script>
         let id = document.getElementById("idPaciente").value;
         let id2 = document.getElementById("idSesion").value;
@@ -53,4 +54,6 @@
         var limit = false
     </script>
     <script src="/js/dropzone.js"></script>
+    <script src="/js/persona.js"></script>
+    <script src="/js/recuerdo.js"></script>
 @endpush

@@ -93,6 +93,7 @@ class SesionesController extends Controller
 
         MultimediasController::savePhotos($request, $sesion);
 
+        $sesion->recuerdos()->detach();
         if(!is_null($request->recuerdos))
             $sesion->recuerdos()->attach($request->recuerdos);
 

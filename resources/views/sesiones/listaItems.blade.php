@@ -86,15 +86,10 @@
                     </td>
                     @if($show)
                     <td class="tableActions">
-                        <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
-                        <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                        <form method="post" action="{{route('recuerdo.destroy',$recuerdo->id)}}" style="display:inline!important;">
-                            {{csrf_field()}}
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
-                        </form>
+                        
                     </td>
                     @endif
+                    <input type="hidden" value="{{$recuerdo->id}}" name="recuerdos[]">
                 </tr>
                 @endforeach
             </tbody>
