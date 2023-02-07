@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('barreras')->nullable();
             $table->string('facilitadores')->nullable();
             $table->string('observaciones')->nullable();
-            $table->boolean('apto')->default(1);
             $table->string("duracion")->nullable();
             $table->unsignedBigInteger('paciente_id');
             $table->unsignedBigInteger('user_id');
