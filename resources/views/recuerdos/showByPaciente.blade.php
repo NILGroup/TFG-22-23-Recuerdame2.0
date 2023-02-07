@@ -32,7 +32,7 @@
             <tr>
 
                 <td><a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}">{{$recuerdo->nombre}}</a></td>
-                <td>{{$recuerdo->fecha}}</td>
+                <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
                 <td>{{$recuerdo->etapa->nombre}}</td>
                 @if(!is_null($recuerdo->categoria))
                 <td>{{$recuerdo->categoria->nombre}}</td>
