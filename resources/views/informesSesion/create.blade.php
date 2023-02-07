@@ -7,7 +7,7 @@
         <h5 class="text-muted">Generar informe de sesión</h5>
         <hr class="lineaTitulo">
     </div>
-    <form action="/cerrarInformeSesion" method="POST">
+    <form id="formulario" action="/cerrarInformeSesion" method="POST">
         
         {{csrf_field()}}
         @include('informesSesion.listaItems')
@@ -16,7 +16,7 @@
         <input type="hidden" id="idRecuerdoModal" value=""/>
         <div>
             <a href="/pacientes/{{$sesion->paciente->id}}/sesiones"><button type="button" class="btn btn-primary">Cancelar</button></a>
-            <button type="submit" name="guardarInformeSesion" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
+            <button type="submit" id="guardar" name="guardarInformeSesion" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
 
     </form>
@@ -34,4 +34,5 @@
     <script src="/js/informeSesion.js"></script>
     <script src="/js/persona.js"></script>
     <script src="/js/multiModal.js"></script>
+    <script src="/js/validacion.js"></script>
 @endpush
