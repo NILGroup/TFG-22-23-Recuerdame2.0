@@ -29,6 +29,8 @@ function actualizaModalRecuerdo(idR){
             var data = JSON.parse(data);
             //console.log(data.personasrelacionadas)
 
+            console.log(data)
+
             document.getElementById('id').value = data.id;
             document.getElementById('nombre').value = data.nombre;
             document.getElementById('idEstado').getElementsByTagName('option')[data.estado_id].selected = 'selected';
@@ -140,17 +142,18 @@ function crearRecuerdo() {
     console.log(inputValues)
   
 
-    if (inputValues[2] != ""){
+    if (inputValues[2].value){
         fd.append('id', inputValues[2].value)
     }
     
     fd.append('paciente_id', inputValues[1].value);
     fd.append('nombre', inputValues[3].value);
     fd.append('fecha', inputValues[4].value);
-    fd.append('puntuacion', inputValues[5].value);
+    fd.append('puntuacion', inputValues[6].value);
+    fd.append('apto', inputValues[5].value)
 
-    if (inputValues[6])
-        fd.append("tipo_custom", inputValues[6].value)
+    if (inputValues[7].value)
+        fd.append("tipo_custom", inputValues[7].value)
 
     fd.append('estado_id', selectValues[0].value);
     fd.append('etiqueta_id', selectValues[1].value);
