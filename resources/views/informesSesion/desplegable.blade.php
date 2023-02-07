@@ -6,13 +6,14 @@
             </div>
         </button>
         
-        <div id="recuerdos" class="tabla accordion-collapse collapse show mx-2" aria-labelledby="recuerdos1">
+        <div id="tabla_recuerdos" class="tabla accordion-collapse collapse show mx-2" aria-labelledby="recuerdos1">
             <div class="d-flex justify-content-between upper">
                 @include('layouts.tableSearcher')
             </div>
             <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
                 <thead>
                     <tr class="bg-primary">
+                        <th scope="col" style="display: none;">id</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Etapa</th>
@@ -25,7 +26,8 @@
                 <!--<tbody>-->
                 @foreach($recuerdos as $recuerdo)
                 <tr>
-                    <td><a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}">{{$recuerdo->nombre}}</a></td>
+                    <td style="display: none;">{{$recuerdo->id}}</td>
+                    <td>{{$recuerdo->nombre}}</td>
                     <td>{{$recuerdo->fecha}}</td>
                     <td>{{$recuerdo->etapa->nombre}}</td>
                     @if(!is_null($recuerdo->categoria))

@@ -1,6 +1,6 @@
 <div style="height:100px;">
 </div>
-<footer class="mt-auto text-end">
+<footer class="mt-auto text-end" style="pointer-events: none">
 <a id="scrollBtn" href="#"><i class="fa-solid fa-circle-arrow-up  mb-2 scrollUp"></i></button>   
 <!-- //<button onclick="toTopFunction()" id="scrollBtn" href="#">ARRIBA</button> -->
 <!-- El a de arriba no cierra? No es de tipo boton, y no llama a nadie que ayude a subir ._. -->
