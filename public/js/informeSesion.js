@@ -38,6 +38,7 @@ function actualizaModalRecuerdo(idR){
             document.getElementById('idEmocion').getElementsByTagName('option')[data.emocion_id].selected = 'selected';
             document.getElementById('categoria_id').getElementsByTagName('option')[data.categoria_id].selected = 'selected';
             document.getElementById('localizacion').value = data.localizacion;
+            document.getElementById('apto').checked  = data.apto;
             if(data.categoria_id == 7)
                 document.getElementById('tipo_custom').value = data.tipo_custom;
             else
@@ -133,7 +134,11 @@ function crearRecuerdo() {
 
     var fd = new FormData();
 
-    //console.log(inputValues)
+    if (inputValues[2].value){
+        fd.append('id', inputValues[2].value)
+    }
+
+    console.log(inputValues[5].checked)
   
 
     if (inputValues[2] != ""){
@@ -143,11 +148,12 @@ function crearRecuerdo() {
     fd.append('paciente_id', inputValues[1].value);
     fd.append('nombre', inputValues[3].value);
     fd.append('fecha', inputValues[4].value);
-    fd.append('puntuacion', inputValues[5].value);
-
-    if (inputValues[6])
-        fd.append("tipo_custom", inputValues[6].value)
-
+    fd.append('apto', inputValues[5].checked);
+    fd.append('puntuacion', inputValues[6].value);
+    
+    if (inputValues[7].value)
+        fd.append("tipo_custom", inputValues[7].value)
+        
     fd.append('estado_id', selectValues[0].value);
     fd.append('etiqueta_id', selectValues[1].value);
     fd.append('etapa_id', selectValues[2].value);

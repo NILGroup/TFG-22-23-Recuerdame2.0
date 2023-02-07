@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
             this.on('maxfilesreached', function() {
                 $('.dropzone').removeClass('dz-clickable'); 
                 $("#dzp").removeClass("dropzone-correct").addClass("dropzone-incorrect")
-                $("#dropzone-title").removeClass("dropzone-title-correct").addClass("dropzone-title-incorrect").text("Líííííííímite de archivos alcanzado")
+                $("#dropzone-title").removeClass("dropzone-title-correct").addClass("dropzone-title-incorrect").text("Límite de archivos alcanzado")
                 $("#dropzone-img").hide()
                 this.removeEventListeners();
             });
