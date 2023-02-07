@@ -57,7 +57,7 @@
             <div class="col-sm-auto col-md-auto col-lg-auto">
                 <div class="range-wrap m-1">
                     <div class="range-value" id="rangeV"></div>
-                    <input type="range" class="form-range puntuacion" id="puntuacion" name="puntuacion" min="0" max="10" step="1" value="puntuacion" @if($show) disabled @endif>
+                    <input type="range" class="form-range puntuacion" id="puntuacion" name="puntuacion" min="0" max="10" step="1" value={{$recuerdo->puntuacion}} @if($show) disabled @endif>
                 </div>
             </div>
             <div class="col mx-auto ">10 <i class="bi bi-emoji-smile-fill text-success"></i></div>
