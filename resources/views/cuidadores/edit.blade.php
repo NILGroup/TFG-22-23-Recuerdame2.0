@@ -21,4 +21,5 @@
 @push('scripts')
     @include('layouts.scripts')
     <!-- <script src="/js/cuidador.js"></script> -->
+    <script src="/js/validacion.js"></script>
 @endpush
