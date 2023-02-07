@@ -26,7 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('emocion_id')->nullable();
             $table->unsignedBigInteger('estado_id')->nullable();
             $table->unsignedBigInteger('etiqueta_id')->nullable();
-            $table->integer('apto')->nullable();
+            $table->boolean('apto');
 
             $table->foreign('etapa_id')->references('id')->on('etapas')->onDelete("cascade");
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete("cascade");
