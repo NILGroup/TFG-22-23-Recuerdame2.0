@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    let filtro = "t";
     let user = document.getElementById('user_type').value; //tipo de usuario (1 terapeuta, 2 cuidador)
     let formulario = document.getElementById('formulario');
-    let formularioEliminar = document.getElementById('formularioEliminar');
     var calendarEl = document.getElementById('calendar');
 
     let url_eventos = "/calendario/" + document.getElementById('paciente_id').value;
@@ -29,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         events: url_eventos,
 
         dateClick: function (info) {
+            formulario.reset();
 
             //Cuidador sólo podrá ver actividades.
             //Por tanto, cuando un cuidador haga click en un dia, no hará nada
@@ -37,6 +36,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 //formularioEliminar.reset();
                 document.getElementById('start').value = info.dateStr;
                 document.getElementById('fecha').value = info.dateStr + " 09:00:00";
+                document.getElementById('objetivo').value = "";
+                document.getElementById('descripcion').value = "";
+                
+                var tabla = $("#tabla_recuerdos").dataTable();
+                tabla.api().clear();
                 document.getElementById('titulo').textContent = "Añadir";
                 //TODO como hacerlo para que se visualicen ambos y se elija primero activdad
                 document.getElementById('profile-tab').removeAttribute("disabled");
@@ -145,34 +149,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('objetivo').value = info.event.extendedProps.objetivo;
                 document.getElementById('descripcion').value = info.event.extendedProps.descripcion;
 
-                let tableRef = document.getElementById('divRecuerdos');
-                tableRef.innerHTML = '';
+                var tabla = $("#tabla_recuerdos").dataTable();
+                tabla.api().clear();
 
                 for (let recuerdo of info.event.extendedProps.recuerdos) {
-                    let newRow = tableRef.insertRow(0);
-
-                    let newCell0 = newRow.insertCell(0);
-                    let newCell1 = newRow.insertCell(1);
-                    let newCell2 = newRow.insertCell(2);
-                    let newCell3 = newRow.insertCell(3);
-                    let newCell4 = newRow.insertCell(4);
-                    let newCell5 = newRow.insertCell(5);
-                    /*let newCell6 = newRow.insertCell(6);*/
-
-                    let newText0 = document.createTextNode(recuerdo.nombre);
-                    let newText1 = document.createTextNode(recuerdo.fecha);
-                    let newText2 = document.createTextNode(recuerdo.etapa.nombre);
-                    let newText3 = document.createTextNode(recuerdo.categoria.nombre);
-                    let newText4 = document.createTextNode(recuerdo.estado.nombre);
-                    let newText5 = document.createTextNode(recuerdo.etiqueta.nombre);
-                    //let newText6 = document.createTextNode("recuerdo.etiqueta.nombre");
-
-                    newCell0.appendChild(newText0);
-                    newCell1.appendChild(newText1);
-                    newCell2.appendChild(newText2);
-                    newCell3.appendChild(newText3);
-                    newCell4.appendChild(newText4);
-                    newCell5.appendChild(newText5);
+                    let row = $("<tr></tr>");
+                    row.append($('<td>' + recuerdo.nombre + '</td>'));
+                    row.append($('<td>' + recuerdo.fecha + '</td>'));
+                    row.append($('<td>' + recuerdo.etapa.nombre + '</td>'));
+                    row.append($('<td>' + recuerdo.categoria.nombre + '</td>'));
+                    row.append($('<td>' + recuerdo.estado.nombre + '</td>'));
+                    row.append($('<td>' + recuerdo.etiqueta.nombre + '</td>'));
+                    tabla.api().row.add(row).draw()
                 }
             }
             console.log(info.event.extendedProps.fecha);
@@ -190,11 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
         height: 650,
         editable: true,
         displayEventTime: false,
-        selectable: true,
-        eventDrop: function(event) {
-            document.getElementById('btnModificar').click();
-        },
-        selectHelper: true,
+        selectable: true
     }
 
     if (user === '1') {

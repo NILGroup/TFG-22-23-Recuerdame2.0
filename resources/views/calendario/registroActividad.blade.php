@@ -17,7 +17,7 @@
             <label for="start" class="form-label">Fecha</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="color" class="form-control" id="color" name="color" value="#01a5c6" required>
+            <input type="color" class="form-control" id="color" name="color" value="#20809d" required>
             <label for="color" class="form-label">Color</label>
         </div>
         <div class="form-floating mb-3">
