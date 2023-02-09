@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "start": "2023-02-03",
+        "start": "2023-02-09",
         "title": "Primera terapia",
         "description": "Primera terapia de evaluaci\u00f3n al paciente Miguel",
         "color": "#00c7fc",
@@ -19,7 +19,6 @@
         "barreras": "muchas",
         "facilitadores": "ninguno",
         "observaciones": "ninguna observacion",
-        "apto": 1,
         "duracion": "01:30",
         "paciente_id": 1,
         "user_id": 1,
@@ -112,7 +111,6 @@
         "barreras": null,
         "facilitadores": null,
         "observaciones": null,
-        "apto": 1,
         "duracion": null,
         "paciente_id": 1,
         "user_id": 1,
