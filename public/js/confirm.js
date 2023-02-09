@@ -24,11 +24,19 @@ $('.confirm_delete').click(function(event) {
                 title: '¡Eliminado!',
                 text: 'Se han borrado los datos',
                 icon: 'success',
-                timer: 3500,
+                timer: 2000,
                 showConfirmButton: false,
             })
-            form.submit()
-            t.api().row(r).remove().draw(); 
+            
+            $.ajax({
+                url: form.attr('action'),
+                type: 'delete',
+                data: form.serialize(),
+                success:function(){
+                    t.api().row(r).remove().draw(); 
+                }
+            });
+            
 
         }
     });

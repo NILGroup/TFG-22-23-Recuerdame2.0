@@ -179,7 +179,7 @@ class PersonasRelacionadasController extends Controller
         $paciente = $persona->paciente;
         $persona->delete();
 
-        return redirect("/pacientes/$paciente->id/personas");
+        //return redirect("/pacientes/$paciente->id/personas");
 
     }
 

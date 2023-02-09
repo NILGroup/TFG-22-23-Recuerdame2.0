@@ -184,8 +184,7 @@ class PacientesController extends Controller
         Paciente::findOrFail($id)->delete();
         session()->forget('paciente');
         //Redireccionamos a lista pacientes
-        return redirect("/pacientes");
-        
+        //return redirect("/pacientes");
     }
 
     public function addPacienteToTerapeuta(int $id) {
