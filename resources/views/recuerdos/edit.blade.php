@@ -46,7 +46,8 @@
     <script src="/js/table.js"></script>
     <script>
         let id = document.getElementById("paciente_id").value;
-        var ruta = "/pacientes/" + id + "/recuerdos/";
+        let id2 = document.getElementById("id").value;
+        var ruta = "/pacientes/" + id + "/recuerdos/" + id2;
         var max
         var limit = false
     </script>
