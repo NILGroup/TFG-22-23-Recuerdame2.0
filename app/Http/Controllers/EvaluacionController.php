@@ -62,9 +62,31 @@ class EvaluacionController extends Controller
             ]);
             
         session()->put('created', "true");
-        return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones/$evaluacion->id/ver");
+        return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones");
     }
 
+    public function update(Request $request){
+
+        $evaluacion = Evaluacion::updateOrCreate(
+            ['id' => $request->id],
+            ['paciente_id' => $request->paciente_id,
+             'fecha' => $request->fecha,
+             'gds' => $request->gds,
+             'gds_fecha' => $request->gds_fecha,
+             'mental' => $request->mental,
+             'mental_fecha' => $request->mental_fecha,
+             'cdr' => $request->cdr,
+             'cdr_fecha' => $request->cdr_fecha,
+             'diagnostico' => $request->diagnostico,
+             'observaciones' => $request->observaciones,
+             'nombre_escala' => $request->nombre_escala,
+             'escala' => $request->escala,
+             'fecha_escala' => $request->fecha_escala
+            ]);
+            
+        session()->put('created', "true");
+        return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones/$evaluacion->id/ver");
+    }
     public function show($id, $idE)
     {
         $show = true;

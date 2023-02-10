@@ -8,7 +8,7 @@
         <hr class="lineaTitulo">
     </div>
 
-    <form action="/cerrarEvaluacion" method="POST">
+    <form action="/modificarEvaluacion" method="POST">
         {{csrf_field()}}
         @include('evaluaciones.listaItems')
         <div>

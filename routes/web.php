@@ -146,6 +146,7 @@ Route::get('/pacientes/{id}/evaluaciones/{idE}/informe', 'App\Http\Controllers\P
 Route::get('/pacientes/{id}/evaluaciones/{idE}/editar', 'App\Http\Controllers\EvaluacionController@showEditable');
 Route::get('/pacientes/{id}/evaluaciones/{idE}/ver', 'App\Http\Controllers\EvaluacionController@show');
 Route::post('/cerrarEvaluacion', 'App\Http\Controllers\EvaluacionController@store');
+Route::post('/modificarEvaluacion', 'App\Http\Controllers\EvaluacionController@update');
 Route::post('/generarPDFEvaluacion', 'App\Http\Controllers\EvaluacionController@generarPDFInformeEvaluacion');
 
 //RUTAS CUSTOMIZADAS HISTORIAS DE VIDA

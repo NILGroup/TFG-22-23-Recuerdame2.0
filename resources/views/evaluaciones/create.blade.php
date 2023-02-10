@@ -22,4 +22,13 @@
 @push('scripts')
     @include('layouts.scripts')
     <script src="/js/escalaEvaluacion.js"></script>
+    @if (Session::has('created'))
+        @php 
+            Illuminate\Support\Facades\Session::forget('created');
+        @endphp
+        <script>
+            var action = "Creado"
+        </script>
+        <script src="/js/successAlert.js"></script>
+    @endif
 @endpush
