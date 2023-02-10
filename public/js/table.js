@@ -29,6 +29,15 @@ var table = $(document).ready(function () {
         initComplete: function () {
             var table = this.api();
             var search = $(this).closest('div.tabla').children("div.upper").children("div.search");
+            var sel = $(search).children("select.searchSelector")
+                .on('change', function() {
+                    let val = $(search).children("input.searchInput").val();
+                    let col = $(this).find(":selected").val();
+                    if(col == "")
+                        table.columns().search('').columns().search(this.value).draw(); //Limpiamos la busqueda y rebuscamos. Si no, no funciona
+                    else
+                        table.columns().search('').column(col).search(val).draw();
+                });
             var inp = $(search).children("input.searchInput")
                 .on('keyup', function () {
                     let col = $(this).parent().children("select").find(":selected").val();
