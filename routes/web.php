@@ -308,9 +308,9 @@ Route::post('/prueba', function () {
 
     DB::table("actividads")->insert([
         ["start" => Carbon::now(), "title" => "Primera terapia", "paciente_id" => 1,
-            "description" => "Primera terapia de evaluación al paciente Miguel", "color" => "#00c7fc"],
+            "description" => "Primera terapia de evaluación al paciente Miguel", "color" => "#20809d"],
         ["start" => Carbon::now(), "title" => "Primera terapia", "paciente_id" => 2,
-            "description" => "Primera terapia de evaluación a la paciente Cristina", "color" => "#ff00fb"]
+            "description" => "Primera terapia de evaluación a la paciente Cristina", "color" => "#20809d"]
     ]);
                                 
     DB::table("evaluacions")->insert([
