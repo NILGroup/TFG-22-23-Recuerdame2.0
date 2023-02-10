@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="contenedor">
+<div class="container-fluid">
     <div class="pt-4 pb-2">
         <h5 class="text-muted">Listado de informes de seguimiento</h5>
         <hr class="lineaTitulo">
