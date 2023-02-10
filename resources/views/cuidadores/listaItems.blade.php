@@ -38,9 +38,9 @@
             @enderror
         </div>
     </div>
-    <div class="row col-sm-6 col-md-6 col-lg-7 align-items-center">
+    <div class="row col-sm-12 col-md-6 col-lg-7 align-items-center">
         <label for="localidad" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-4">Localidad:</label>
-        <div class="col-sm-6 col-md-6 col-lg-8 align-items-center">
+        <div class="col-sm-12 col-md-12 col-lg-8 align-items-center">
             <input id="localidad" type="text" class="form-control form-control-sm" placeholder="Localidad de residencia" name="localidad" value="{{ $cuidador->localidad }}" autocomplete="localidad" autofocus>
         </div>
     </div>
@@ -59,7 +59,7 @@
     </div>
     <div class="row col-sm-6 col-md-6 col-lg-7 align-items-center">
         <label for="parentesco" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-4">Parentesco:</label>
-        <div class="col-sm-6 col-md-6 col-lg-8 align-items-center">
+        <div class="col-sm-7 col-md-7 col-lg-8 align-items-center">
             <select class="form-select form-select-sm" id="parentesco" name="parentesco">
                 <option value=""></option>
                 <option value="Primer grado" @if($cuidador->parentesco == "Primer grado") selected @endif >Primer Grado</option>

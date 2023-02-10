@@ -65,7 +65,7 @@ class CuidadoresController extends Controller
             'telefono' => $request->telefono,
             'localidad' => $request->localidad,
             'parentesco' => $request->parentesco,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->password)
         ]);
 
         $paciente = Paciente::find($request->paciente);
@@ -82,6 +82,7 @@ class CuidadoresController extends Controller
 
         //Actualizamos masivamente los datos del paciente
         $cuidador->update($request->all());
+        $cuidador->update(['password' => Hash::make($request->password)]);
 
         //MultimediasController::savePhoto($request, $cuidador);
         
@@ -104,11 +105,8 @@ class CuidadoresController extends Controller
 
     //sirve para chekear si el cuidador ya ha sido registrado
     public function repeatedCuidador(Request $request){
-        $encontrado = false;
         $email = $request->email;
-        if (User::where('email', $email)->exists()) {
-            $encontrado = true;
-         }
+        $encontrado = User::where('email', $email)->first();
         /*info($email);
         info("hey");
         if($encontrado == false){
@@ -116,6 +114,8 @@ class CuidadoresController extends Controller
         }else{
             info("true");
         }*/
-        return $encontrado;
+        return User::where('email', $email)->first();
     }
+
+
 }

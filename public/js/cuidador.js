@@ -14,24 +14,42 @@ $(function () {
         event.preventDefault();
         event.stopImmediatePropagation();
 
-        repetido().then((data) => {
-            if (data == true) { //si está repetido swal
-                duplicatedAlert();
-            } else {
-                form.submit(); //si no está repe lo registramos
+        var fd = new FormData();
+        let email = document.getElementById("email").value;
+        console.log(email)
+        fd.append('email', email);
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-
         });
-
+        $.ajax({
+            type: "post",
+            url: '/repeatedCuidador',
+            processData: false, // tell jQuery not to process the data
+            contentType: false, // tell jQuery not to set contentType
+            data: fd,
+            success: function (data) {
+                console.log(data)
+                if (data) { //si está repetido swal
+                    duplicatedAlert(data);
+                } else {
+                    form.submit(); //si no está repe lo registramos
+                }
+            },
+            error: function (data) {
+                console.log(data)
+            }
+        })
     });
 });
 
-function duplicatedAlert() {
-
+function duplicatedAlert(data) {
     console.log("alerta")
     Swal.fire({
-        title: 'Este correo ya está registrado ¿Desea actualizar los datos del usuario?',
-        showDenyButton: true,
+        title: 'Este correo ya está registrado',
+        text: '¿Desea actualizar los datos del usuario?',
         showCancelButton: true,
         cancelButtonText: "Cancelar",
         confirmButtonText: 'Guardar cambios',
@@ -46,7 +64,7 @@ function duplicatedAlert() {
             let telefono = document.getElementById("telefono").value;
             let parentesco = document.getElementById("parentesco").value;
             let localidad = document.getElementById("localidad").value;
-            let paciente = document.getElementById("paciente").value;
+            let idpaciente = document.getElementById("paciente").value;
             let password = document.getElementById("password").value;
             console.log(email)
             fd.append('email', email);
@@ -55,8 +73,9 @@ function duplicatedAlert() {
             fd.append('telefono', telefono);
             fd.append('parentesco', parentesco);
             fd.append('localidad', localidad);
-            fd.append('paciente', paciente);
+            fd.append('paciente', idpaciente); 
             fd.append('password', password);
+            fd.append('id', data.id);
 
             $.ajaxSetup({
                 headers: {
@@ -72,13 +91,12 @@ function duplicatedAlert() {
                 data: fd,
                 success: function (data) {
                     Swal.fire('Datos actualizados', '', 'success')
+                    //window.location.href= "/pacientes/" + idpaciente + "/cuidadores/" + data.id ;
                 },
                 error: function (data) {
                     Swal.fire('Error', '', 'error')
                 }
             });
-        } else if (result.isDenied) {
-            Swal.fire('Los cambios no se han guardado', '', 'info')
         }
     })
 }
@@ -86,30 +104,5 @@ function duplicatedAlert() {
 function repetido() {
 
     //comprobación de si ya se ha registrado el usuario
-    var fd = new FormData();
-    let email = document.getElementById("email").value;
-    console.log(email)
-    fd.append('email', email);
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            type: "post",
-            url: '/repeatedCuidador',
-            processData: false, // tell jQuery not to process the data
-            contentType: false, // tell jQuery not to set contentType
-            data: fd,
-            success: function (data) {
-                resolve(data);
-            },
-            error: function (data) {
-                reject(error);
-            }
-        });
-    });
 }
