@@ -1,53 +1,109 @@
 "use strict"
-$(function(){
-    $("#guardar").on("click", function(event){
-        event.preventDefault();
-        event.stopPropagation();
+$(function () {
+    $("#guardar").on("click", function (event) {
+
         const form = document.querySelector("#formulario");
 
-        if (!form.checkValidity()){
+        if (!form.checkValidity()) {
             event.preventDefault()
             event.stopPropagation()
         }
 
         form.classList.add('was-validated')
 
-        console.log("LLEGO");
+        event.preventDefault();
+        event.stopImmediatePropagation();
 
-        //comprobación de si ya se ha registrado el usuario
-        var fd = new FormData();
-        let email = document.getElementById("email").value;
-        console.log(email)
-        fd.append('email', email);
-        
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        repetido().then((data) => {
+            if (data == true) { //si está repetido swal
+                duplicatedAlert();
+            } else {
+                form.submit(); //si no está repe lo registramos
             }
+
         });
-    
+
+    });
+});
+
+function duplicatedAlert() {
+
+    console.log("alerta")
+    Swal.fire({
+        title: 'Este correo ya está registrado ¿Desea actualizar los datos del usuario?',
+        showDenyButton: true,
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+        confirmButtonText: 'Guardar cambios',
+
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            var fd = new FormData();
+            let email = document.getElementById("email").value;
+            let nombre = document.getElementById("nombre").value;
+            let apellidos = document.getElementById("apellidos").value;
+            let telefono = document.getElementById("telefono").value;
+            let parentesco = document.getElementById("parentesco").value;
+            let localidad = document.getElementById("localidad").value;
+            let paciente = document.getElementById("paciente").value;
+            let password = document.getElementById("password").value;
+            console.log(email)
+            fd.append('email', email);
+            fd.append('nombre', nombre);
+            fd.append('apellidos', apellidos);
+            fd.append('telefono', telefono);
+            fd.append('parentesco', parentesco);
+            fd.append('localidad', localidad);
+            fd.append('paciente', paciente);
+            fd.append('password', password);
+
+            $.ajax({
+                type: "post",
+                url: '/actualizarCuidador',
+                processData: false, // tell jQuery not to process the data
+                contentType: false, // tell jQuery not to set contentType
+                data: fd,
+                success: function (data) {
+                    Swal.fire('Datos actualizados', '', 'success')
+                },
+                error: function (data) {
+                    Swal.fire('Error', '', 'error')
+                }
+            });
+        } else if (result.isDenied) {
+            Swal.fire('Los cambios no se han guardado', '', 'info')
+        }
+    })
+}
+
+function repetido() {
+
+    //comprobación de si ya se ha registrado el usuario
+    var fd = new FormData();
+    let email = document.getElementById("email").value;
+    console.log(email)
+    fd.append('email', email);
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    return new Promise((resolve, reject) => {
         $.ajax({
             type: "post",
             url: '/repeatedCuidador',
             processData: false, // tell jQuery not to process the data
             contentType: false, // tell jQuery not to set contentType
             data: fd,
-            success: function(data) {
-                console.log("SUCCESS")
-                event.preventDefault();
-                event.stopPropagation();
-                if(data == true) alert("se ha encontrado el correo")
-                if(data == false) alert("el correo es nuevo")
-                event.preventDefault();
-                event.stopPropagation();
+            success: function (data) {
+                resolve(data);
             },
-            error: function(data) {
-                event.preventDefault();
-                event.stopPropagation();
-                console.log('Error:', data);
-                console.log("SALE MAL");
-                
+            error: function (data) {
+                reject(error);
             }
         });
     });
-});
+}

@@ -21,4 +21,5 @@
 @push('scripts')
     @include('layouts.scripts')
     <script src="/js/cuidador.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endpush
