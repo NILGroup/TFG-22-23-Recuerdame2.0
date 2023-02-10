@@ -10,8 +10,11 @@
         <div class="d-flex justify-content-between upper">
             @include('layouts.tableSearcher')
             <div class="justify-content-end d-flex">
+                @if (Auth::user()->rol_id == 1)
                 <a href="/pacientes/0/cuidadores/crear"><button type="button"  id="mybutton" class="btn btn-primary btn-registro mx-3">Registro cuidador</button></a>
+                
                 <a href="{{route('pacientes.create')}}"><button type="button"  class="btn btn-newpaciente btn-info">Nuevo paciente</i></button></a>
+                @endif
             </div>
         </div>
         <table id="tabla" class="table table-striped table-bordered table-condensed table-responsive datatable">
@@ -28,7 +31,11 @@
             <!--<tbody>-->
             @foreach($pacientes as $paciente)
                 <tr class="">
+                    @if (Auth::user()->rol_id == 1)
                     <td><a href="/pacientes/{{$paciente->id}}/sesiones" class="link-primary"> {{$paciente->nombre}}</a></td>
+                    @else
+                    <td><a href="/pacientes/{{$paciente->id}}/calendario" class="link-primary"> {{$paciente->nombre}}</a></td>
+                    @endif
                     <td>{{$paciente->apellidos}}</td>
                     <td>
                         {{$paciente->genero->nombre}}

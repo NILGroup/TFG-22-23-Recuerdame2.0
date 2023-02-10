@@ -8,10 +8,12 @@
         <hr class="lineaTitulo">
     </div>
     @include('recuerdos.listaItems')
+    @if (Auth::user()->rol_id == 1)
     <div class="col-12">
         <!-- <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary btn">Atrás</button></a> -->
         <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
     </div>
+    @endif
 </div>
 @endsection
 

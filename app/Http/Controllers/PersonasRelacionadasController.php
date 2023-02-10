@@ -18,7 +18,7 @@ class PersonasRelacionadasController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role']);
+        $this->middleware(['auth', 'role'])->except(['show']);
         $this->middleware(['asignarPaciente'])->except(['destroy']);
     }
 

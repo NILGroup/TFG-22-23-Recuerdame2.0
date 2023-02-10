@@ -19,10 +19,12 @@
                 <tr class="bg-primary">
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
+                    @if (Auth::user()->rol_id == 1)
                     <th scope="col">Etapa</th>
                     <th scope="col">Categoría</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Etiqueta</th>
+                    @endif
                     <th class="fit10" scope="col"></th>
                 </tr>
             </thead>
@@ -33,6 +35,7 @@
 
                 <td><a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}">{{$recuerdo->nombre}}</a></td>
                 <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
+                @if (Auth::user()->rol_id == 1)
                 <td>{{$recuerdo->etapa->nombre}}</td>
                 @if(!is_null($recuerdo->categoria))
                 <td>{{$recuerdo->categoria->nombre}}</td>
@@ -48,6 +51,7 @@
                 <td>{{$recuerdo->etiqueta->nombre}}</td>
                 @else
                 <td>Sin etiqueta</td>
+                @endif
                 @endif
                 <td class="tableActions">
                     <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>

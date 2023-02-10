@@ -40,7 +40,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('descripcion').value = "";
                 
                 var tabla = $("#tabla_recuerdos").dataTable();
-                tabla.api().clear();
+                console.log(tabla);
+                tabla.api().clear().draw();
+                console.log(tabla);
                 document.getElementById('titulo').textContent = "Añadir";
                 //TODO como hacerlo para que se visualicen ambos y se elija primero activdad
                 document.getElementById('profile-tab').removeAttribute("disabled");
@@ -162,9 +164,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     row.append($('<td>' + recuerdo.etiqueta.nombre + '</td>'));
                     tabla.api().row.add(row).draw()
                 }
+                
             }
             console.log(info.event.extendedProps.fecha);
             $('#evento').modal('show');
+            
         },
 
         buttonText: {

@@ -50,7 +50,7 @@
                     @endforeach
                 </div>
             </div>
-
+            @if (Auth::user()->rol_id == 1)
             <div class="  col-sm-3 col-md-2 col-lg-2">
                 <label for="etiqueta" class="form-check-label negrita">Etiqueta</label>
 
@@ -60,6 +60,7 @@
                     @endforeach
                 </div>
             </div>
+            @endif
         </div>
 
        <label class="form-check-label mt-3 negrita">Tipo de recuerdos<i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Filtramos aquellos recuerdos que se han categorizado como aptos para continuar en las terapias y/o los que no."></i></label>

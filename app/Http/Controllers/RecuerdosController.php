@@ -28,7 +28,7 @@ class RecuerdosController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role']);
+        $this->middleware(['auth', 'role'])->except(['show', 'showByPaciente']);
         $this->middleware(['asignarPaciente'])->except(['destroy']);
     }
 
