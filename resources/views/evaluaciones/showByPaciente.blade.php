@@ -19,10 +19,10 @@
             <caption>Listado de informes de seguimiento</caption>
             <thead>
                 <tr class="bg-primary">
-                    <th class="fit15" scope="col">Informe</th>
-                    <th class="" scope="col">Sesiones desde la última evaluación</th>
+                    <th class="fit5" scope="col">Informe</th>
+                    <th class="fit10" scope="col">Sesiones desde la última evaluación</th>
                     <th scope="col">Diagnóstico</th>
-                    <th scope="col"></th>
+                    <th class="fit5" scope="col"></th>
                 </tr>
             </thead>
             <tbody>
