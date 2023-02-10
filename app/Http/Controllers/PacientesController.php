@@ -90,6 +90,7 @@ class PacientesController extends Controller
             "fecha_nacimiento" => $request->fecha_nacimiento,
             "ocupacion" => $request->ocupacion,
             "residencia_actual" => $request->residencia_actual,
+            "fecha_inscripcion" => $request->fecha_inscripcion,
             "residencia_id" => $request->residencia_id,
             "residencia_custom" => $request->residencia_custom,
             "estudio_id" =>  $request->estudio_id,

@@ -9,6 +9,12 @@ $("input, select").each(function () {
         case "select-one":
             $(this).replaceWith("<label> " + $(this).find("option:selected").text() + "</label>");
             break;
+        case "date":
+            $(this).replaceWith("<label> " + new Date($(this).val()).toLocaleDateString('en-GB')  + "</label>");
+            break;
+        case "datetime-local":
+            $(this).replaceWith("<label> " + new Date($(this).val()).toLocaleDateString('en-GB') + " " + new Date($(this).val()).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })  + "</label>");
+            break;
         default:
             $(this).replaceWith("<label> " + $(this).val() + "</label>");
             break;
