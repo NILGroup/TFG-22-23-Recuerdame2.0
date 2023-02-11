@@ -59,7 +59,7 @@
 </div>
 <form action="/prueba" method="post">
     {{csrf_field()}}
-    <input type="submit" value="Boton oculto para llenar la base de datos y que no se dupliquen los Migueles" style="background-color: cyan;">
+    <!-- <input type="submit" value="Boton oculto para llenar la base de datos y que no se dupliquen los Migueles" style="background-color: cyan;"> -->
 </form>
 @endsection
 
