@@ -256,53 +256,53 @@ Route::post('/prueba', function () {
     ]);
     
     DB::table("users")->insert([
-        ['nombre' => "Terapeuta", 'apellidos' => "Uno", 'email' => "terapeuta@gmail.com", 
+        ['nombre' => "Manuel", 'apellidos' => "López Jordan", 'email' => "terapeuta@gmail.com", 
              'rol_id' => 1,'telefono'=>null,'localidad'=>null,'parentesco'=>null,  'password' => Hash::make("terapeuta")],
-        ['nombre' => "Cuidador", 'apellidos' => "Uno", 'email' => "cuidador@gmail.com",
+        ['nombre' => "Cuidador", 'apellidos' => "Alfredo", 'email' => "cuidador@gmail.com",
              'rol_id' => 2,'telefono' => "684847324", 'localidad' => "Argüelles",
              'parentesco' => "Primer grado",'password' => Hash::make("cuidador")],
-        ['nombre' => "Cuidador", 'apellidos' => "Dos", 'email' => "cuidador2@gmail.com",
+        ['nombre' => "Cuidador", 'apellidos' => "Joya y de Borbón", 'email' => "cuidador2@gmail.com",
              'rol_id' => 2,'telefono' => "656789234", 'localidad' => "Nuevos ministerios",
-             'parentesco' => "Segundo grado",'password' => Hash::make("cuidador")],
-        ['nombre' => "Terapeuta", 'apellidos' => "Dos", 'email' => "terapeuta2@gmail.com", 
+             'parentesco' => "Segundo grado",'password' => Hash::make("cuidador2")],
+        ['nombre' => "Sofía", 'apellidos' => "Méndez Alvaro", 'email' => "terapeuta2@gmail.com", 
              'rol_id' => 1,'telefono'=>null,'localidad'=>null,'parentesco'=>null, 'password' => Hash::make("terapeuta")]
     ]);
 
     DB::table("pacientes")->insert([
-        ["nombre" => "Miguel", "apellidos" => "Martinez-Almeida Nistal", "genero_id" => 1,
-            "lugar_nacimiento" => "Madrid", "nacionalidad" => "Española", "fecha_nacimiento" => Carbon::create(2001, 7, 30),
-            "residencia_id" => 1, "residencia_custom" => null, "residencia_actual" => "secreto", "ocupacion" => "Estudiante", 
+        ["nombre" => "María Concepción", "apellidos" => "Martinez-Almeida García", "genero_id" => 2,
+            "lugar_nacimiento" => "Madrid", "nacionalidad" => "Española", "fecha_nacimiento" => Carbon::create(1950, 7, 30),
+            "residencia_id" => 1, "residencia_custom" => null, "residencia_actual" => "C/Toledo 49, Ático 9E", "ocupacion" => "Confeccionista", 
             "situacion_id" => 1, "estudio_id" => 4, "fecha_inscripcion" => Carbon::create(2021, 7, 7)],
-        ["nombre" => "Cristina", "apellidos" => "Díez Sobrino", "genero_id" => 2,
-            "lugar_nacimiento" => "Madrid", "nacionalidad" => "Española", "fecha_nacimiento" => Carbon::create(1999, 1, 21),
-            "residencia_id" => 2, "residencia_custom" => null, "residencia_actual" => "secreto", "ocupacion" => "Estudiante", 
+        ["nombre" => "Cristina", "apellidos" => "Montserrat Plaza", "genero_id" => 2,
+            "lugar_nacimiento" => "Madrid", "nacionalidad" => "Española", "fecha_nacimiento" => Carbon::create(1969, 1, 21),
+            "residencia_id" => 2, "residencia_custom" => null, "residencia_actual" => "P.º de la Castellana, 261, 28046 Madrid", "ocupacion" => "Enfermera", 
             "situacion_id" => 1, "estudio_id" => 4, "fecha_inscripcion" => Carbon::create(2019, 4, 7)]
     ]);
 
     DB::table("personarelacionadas")->insert([
-        ["nombre" => "Ignacio", "apellidos" => "Martinez-Almeida", "telefono" => "678765456", 
-            "ocupacion" => "Desconocido", "email" => "igMar@gmail.com", "localidad" => "Collado Villalba",
-            "contacto" => false, "observaciones" => "Es literalmente su hermano, vive con el",
+        ["nombre" => "Ignacio", "apellidos" => "Martinez-Almeida García", "telefono" => "678765456", 
+            "ocupacion" => "Desconocido", "email" => "igMar@gmail.com", "localidad" => "C/Toledo 49, Ático 9E",
+            "contacto" => false, "observaciones" => "Ignacio es el hermano menor de Concepción. Actualmente viven juntos y pasan bastante tiempo juntos. Ignacio es enérgetico desde siempre y lleva cuidando de Concepción 15 años. ",
             "tiporelacion_id" => 2, "paciente_id" => 1 ],
         ["nombre" => "Pablo", "apellidos" => "Martinez Gonzalez", "telefono" => "600000000",
-            "ocupacion" => "Estudiante", "email" => "pabMar@gmail.com", "localidad" => "Collado Villalba",
-            "contacto" => false, "observaciones" => "Es su rival pokemon desde hace años",
-            "tiporelacion_id" => 4, "paciente_id" => 1 ],
+            "ocupacion" => "Estudiante", "email" => "pabMar@gmail.com", "localidad" => "C/Toledo 49, Ático 9E",
+            "contacto" => false, "observaciones" => "Es el hijo de Concepción. Tiene 31 años y no tiene hijos. Le gustan los videojuegos y a Concepción le agrada verle jugar.",
+            "tiporelacion_id" => 3, "paciente_id" => 1 ],
         ["nombre" => "Eros", "apellidos" => "Guerrero Sosa", "telefono" => "666666666", 
-            "ocupacion" => "Estudiante", "email" => "erGuer@gmail.com", "localidad" => "Madrid o Canarias",
-            "contacto" => false, "observaciones" => "Tiene muchos perros",
+            "ocupacion" => "Informático", "email" => "erGuer@gmail.com", "localidad" => "C/Toledo 49, Ático 9D",
+            "contacto" => false, "observaciones" => "Es el vecino de Concepción. Tiene 62 años y muchas mascotas. Concepción en ocasiones se queja del ruido, pero le gusta tomar el café en su casa acompañada de los animales.",
             "tiporelacion_id" => 6, "paciente_id" => 1 ],
-        ["nombre" => "Adrián", "apellidos" => "Prieto Campo", "telefono" => "000000000",
-            "ocupacion" => "Estudiante", "email" => "adrPri@gmail.com", "localidad" => "Leon o Madrid",
-            "contacto" => false, "observaciones" => "A menudo discuten sobre rol y apuestas deportivas",
+        ["nombre" => "Adrián", "apellidos" => "Prieto Campo", "telefono" => "600000001",
+            "ocupacion" => "Carpintero", "email" => "adrPri@gmail.com", "localidad" => "Leon o Madrid",
+            "contacto" => false, "observaciones" => "Amigo de la infancia de Concepción. En ocasiones viene a visitarla, se ponen al día y discuten sobre temas políticos.",
             "tiporelacion_id" => 6, "paciente_id" => 1 ],
-        ["nombre" => "Eros", "apellidos" => "Guerrero Sosa", "telefono" => "666666666", 
-            "ocupacion" => "Estudiante", "email" => "erGuer@gmail.com", "localidad" => "Madrid o Canarias",
-            "contacto" => false, "observaciones" => "Tiene muchos perros",
-            "tiporelacion_id" => 6, "paciente_id" => 2 ],
-        ["nombre" => "Adrián", "apellidos" => "Prieto Campo", "telefono" => "000000000",
-            "ocupacion" => "Estudiante", "email" => "adrPri@gmail.com", "localidad" => "Leon o Madrid",
-            "contacto" => false, "observaciones" => "A menudo discuten sobre rol y apuestas deportivas",
+        ["nombre" => "Samuel", "apellidos" => "Rodríguez Romero", "telefono" => "687773283", 
+            "ocupacion" => "Estudiante", "email" => "saRoRo@gmail.com", "localidad" => "P.º de la Castellana, 261, 28046 Madrid",
+            "contacto" => false, "observaciones" => "Es el hijo de Cristina. Estudia cerca de casa y quiere ser matemático.",
+            "tiporelacion_id" => 3, "paciente_id" => 2 ],
+        ["nombre" => "Andrés", "apellidos" => "Alba Izar", "telefono" => "675000000",
+            "ocupacion" => "Profesor", "email" => "adrPri@gmail.com", "localidad" => "Madrid",
+            "contacto" => false, "observaciones" => "Profesor de autoescuela de su hijo y amigo de Cristina. Toman té todas las tardes.",
             "tiporelacion_id" => 6, "paciente_id" => 2 ]
     ]);
 
@@ -317,45 +317,45 @@ Route::post('/prueba', function () {
         ["paciente_id"=> 1, "fecha" => Carbon::create(2022, 9, 30), "gds" => 2, "gds_fecha" => Carbon::create(2022, 9, 30),
             "mental" => 2, "mental_fecha" => Carbon::create(2022, 9, 30), "cdr"=> 2, "cdr_fecha" => Carbon::create(2022, 9, 30),
             "nombre_escala" => "escala custom", "escala" => 2, "fecha_escala" => Carbon::create(2022, 10, 30),
-            "diagnostico" => "Empeora poco a poco", "observaciones" => "Ninguna" ],
+            "diagnostico" => "Empeora poco a poco.", "observaciones" => "Ninguna" ],
         ["paciente_id"=> 1, "fecha" => Carbon::create(2022, 10, 30), "gds" => 1, "gds_fecha" => Carbon::create(2022, 10, 30),
             "mental" => 1, "mental_fecha" => Carbon::create(2022, 10, 30), "cdr"=> 1, "cdr_fecha" => Carbon::create(2022, 10, 30),
             "nombre_escala" => "nombre cualquiera", "escala" => 1, "fecha_escala" => Carbon::create(2022, 10, 30),
-            "diagnostico" => "Ha empeorado gravemente", "observaciones" => "No reconoce a su familia" ],
+            "diagnostico" => "Ha empeorado gravemente.", "observaciones" => "No reconoce a su familia" ],
         ["paciente_id"=> 2, "fecha" => Carbon::create(2022, 10, 30), "gds" => 5, "gds_fecha" => Carbon::create(2022, 10, 30),
             "mental" => 5, "mental_fecha" => Carbon::create(2022, 10, 30), "cdr"=> 5, "cdr_fecha" => Carbon::create(2022, 10, 30),
             "nombre_escala" => "escala custom", "escala" => 5, "fecha_escala" => Carbon::create(2022, 10, 30),
-            "diagnostico" => "Se encuentra en las primeras etapas", "observaciones" => null ]
+            "diagnostico" => "Se encuentra en las primeras etapas.", "observaciones" => null ]
     ]);
 
 
     DB::table("sesions")->insert([
-        ["fecha" => Carbon::create(2022, 9, 17, 15, 30 ,0), "etapa_id" => 1, "objetivo" => "objetivo 1", 
-            "descripcion" => "descripcion del objetivo", "barreras"=> "muchas", "facilitadores" => "ninguno", 
+        ["fecha" => Carbon::create(2022, 9, 17, 15, 30 ,0), "etapa_id" => 1, "objetivo" => "Trabajar los recuerdos en la etapa de la adolescencia con ayuda de imágenes y videos", 
+            "descripcion" => "Etapa importante a nivel de emociones", "barreras"=> "Algunos recuerdos ya no conservados.", "facilitadores" => "El recuerdo con sus amigos", 
             "fecha_finalizada" => Carbon::create(2022, 9, 19, 14,0,0), "paciente_id" => 1, "user_id" => 1, 
-            "respuesta" => "ninguna respuesta", "observaciones" => "ninguna observacion", "duracion" => "01:30"],
-        ["fecha" => Carbon::create(2022, 9, 22, 10, 15 ,0), "etapa_id" => 2, "objetivo" => "objetivo 2",
-            "descripcion" => "descripcion del objetivo numero 2", "barreras"=> null, "facilitadores" => null, 
+            "respuesta" => "Gestiona las emociones correctamente.", "observaciones" => "ninguna observacion", "duracion" => "01:30"],
+        ["fecha" => Carbon::create(2022, 9, 22, 10, 15 ,0), "etapa_id" => 2, "objetivo" => "Trabajar la tristeza que le da al recordar a su marido ",
+            "descripcion" => "Al trabajar los recuerdos relacionados con su marido, genera una tristeza en el paciente que hay que controlar", "barreras"=> "Dificultad para hablar de su marido.", "facilitadores" => null, 
             "fecha_finalizada" => null, "paciente_id" => 1, "user_id" => 1, 
-            "respuesta" => null, "observaciones" => null, "duracion" => null],
+            "respuesta" => "Ninguna", "observaciones" => null, "duracion" => null],
         ["fecha" => Carbon::create(2022, 10, 31, 10,30,0), "etapa_id" => 2, "objetivo" => "Pruebas iniciales",
-            "descripcion" => "Iniciaremos la terapia", "barreras"=> null, "facilitadores" => null, 
+            "descripcion" => "Iniciaremos la terapia como un repaso general", "barreras"=> null, "facilitadores" => "Las fotografías ayudan.", 
             "fecha_finalizada" => null, "paciente_id" => 2, "user_id" => 4, 
             "respuesta" => null, "observaciones" => null, "duracion" => null],
         ]);
 
     
     DB::table("recuerdos")->insert([
-        [ "fecha" => Carbon::create(2019, 9, 10), "nombre" => "Entrada a la universidad",
-            "descripcion" => "Inició su formación en el grado de Ingeniería del Software",
-            "localizacion" => "Facultad de informatica UCM", "etapa_id" => 3, "categoria_id" => 6,
+        [ "fecha" => Carbon::create(2019, 9, 10), "nombre" => "Entrada en el grado",
+            "descripcion" => "Inició su formación en costura y recuerda las técnicas que allí aprendió.",
+            "localizacion" => "Facultad de Costura UCM", "etapa_id" => 3, "categoria_id" => 6,
             "emocion_id" => 3, "estado_id" => 1, "etiqueta_id" => 3, "puntuacion" => 2, "paciente_id" => 1, "apto"=>0 ],
         [ "fecha" => Carbon::create(2022, 10, 13), "nombre" => "Cena con amigos",
-            "descripcion" => "Cenó en Taco Bell con sus amigos Eros, Adri y Pablo, entre otros.",
+            "descripcion" => "Cenó en Taco Bell su hijo Pablo y el vecino Eros, entre otros. Recuerda las risas e historias que allí se contaron. También haber pasado algo de frío.",
             "localizacion" => "Taco Bell Moncloa", "etapa_id" => 3, "categoria_id" => 3, "emocion_id" => 2,
             "estado_id" => 1, "etiqueta_id" => 1, "puntuacion" => 10, "paciente_id" => 1 ,"apto"=>1],
         [ "fecha" => Carbon::create(2022, 10, 13), "nombre" => "Fiesta en La Sierra",
-            "descripcion" => "Se montó una ``tremenda fiestuqui´´ con sus amigos en una discoteca de La Sierra ",
+            "descripcion" => "Asistió a la casa de campo de unos amigos en la Sierra y la recuerda con sentimientos de felicidad y ternura. Cuenta historias del momento y destaca haber ganado dinero en un bingo casero.",
             "localizacion" => "Discoteca Recuer-Dame, La Sierra", "etapa_id" => 3, "categoria_id" => 7, "emocion_id" => 1,
             "estado_id" => 2, "etiqueta_id" => 2, "puntuacion" => 7, "paciente_id" => 2,"apto"=>1 ]
     ]);    
@@ -403,5 +403,5 @@ Route::post('/prueba', function () {
         ["paciente_id" => 2, "user_id" => 3]
     ]);
 
-    return "<h1> Se ha llenado la base de datos </h1>";
+    return "<h1> Se ha llenado la base de datos con éxito</h1>";
 });

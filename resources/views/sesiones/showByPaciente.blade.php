@@ -21,7 +21,7 @@
                 <tr class="bg-primary">
                     <th class="fit10" scope="col">Fecha</th>
                     <th scope="col">Objetivo</th>
-                    <th class="fit10" scope="col">Acciones</th>
+                    <th class="fit15" scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
