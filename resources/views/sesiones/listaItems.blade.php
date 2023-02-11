@@ -106,7 +106,7 @@
 <div class="row">
     <div class="col-12 justify-content-end d-flex p-2">
         <!-- TODO REDIRIGIR A SELECCION DE MULTIMEDIA -->
-        <a href="#" class="btn btn-success">Añadir existente</button></a>
+        <!-- <a href="#" class="btn btn-success">Añadir existente</button></a> -->
     </div>
 </div>
 @endif
