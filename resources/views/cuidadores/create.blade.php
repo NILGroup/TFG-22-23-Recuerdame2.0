@@ -20,6 +20,11 @@
 
 @push('scripts')
     @include('layouts.scripts')
+    <script>
+        let id = document.getElementById("paciente").value;
+        let id2 = document.getElementById("id").value;
+        var ruta = "/pacientes/" + id + "/cuidadores/" + id2;
+    </script>
     <script src="/js/cuidador.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endpush

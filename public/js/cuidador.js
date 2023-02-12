@@ -91,7 +91,8 @@ function duplicatedAlert(data) {
                 data: fd,
                 success: function (data) {
                     Swal.fire('Datos actualizados', '', 'success')
-                    //window.location.href= "/pacientes/" + idpaciente + "/cuidadores/" + data.id ;
+                    console.log(ruta);
+                    window.location.href= ruta ;
                 },
                 error: function (data) {
                     Swal.fire('Error', '', 'error')
