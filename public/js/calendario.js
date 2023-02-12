@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
         customButtons: {
             
         },
-        locales: 'es',
+        locale: 'es',
+        noEventsText: 'No hay eventos disponibles',
         eventColor: '#74e4fb',
         firstDay: 1,
         initialView: 'dayGridMonth',
