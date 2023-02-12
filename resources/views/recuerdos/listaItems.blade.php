@@ -86,7 +86,7 @@
     </div>
 
     <div class="row col-sm-4 col-md-4 col-lg-4 align-items-center">
-        <label for="emocion" class="form-label col-form-label negrita col-sm-7 col-md-5 col-lg-5">Emoción producida: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Emoción que estima el terapeuta que el recuerdo le ha generado al paciente"></i></label>
+        <label for="emocion" class="form-label col-form-label negrita col-sm-7 col-md-5 col-lg-6">Emoción producida: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Emoción que estima el terapeuta que el recuerdo le ha generado al paciente"></i></label>
         <div class="col-sm-3 col-md-3 col-lg-5 align-items-center">
             <select class="form-select form-select-sm" id="idEmocion" name="emocion_id" @if($show) disabled @endif>
                 <option></option>

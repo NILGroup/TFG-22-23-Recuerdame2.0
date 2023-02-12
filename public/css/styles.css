@@ -387,3 +387,8 @@ footer {
   .negrita {
     font-weight:  bold;
   }
+
+
+  div > .row{
+    align-items: center;
+  }
