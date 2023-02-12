@@ -11,9 +11,8 @@
             @include('layouts.tableSearcher')
             <div class="justify-content-end d-flex">
                 @if (Auth::user()->rol_id == 1)
-                <a href="/pacientes/0/cuidadores/crear"><button type="button"  id="mybutton" class="btn btn-primary btn-registro mx-3">Registro cuidador</button></a>
-                
-                <a href="{{route('pacientes.create')}}"><button type="button"  class="btn btn-newpaciente btn-info">Nuevo paciente</i></button></a>
+                <!--<a href="/pacientes/0/cuidadores/crear"><button type="button"  id="mybutton" class="btn btn-primary btn-registro mx-3">Registro cuidador</button></a>-->
+                <a href="{{route('pacientes.create')}}"><button type="button"  class="btn  btn-success"><i class="fa-solid fa-plus"></i></button></a>
                 @endif
             </div>
         </div>
