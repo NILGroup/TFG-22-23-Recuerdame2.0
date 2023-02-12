@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container-fluid" style="height: 75%">
+<div class="container-fluid" style="height: 80% !important">
     @if (is_null($listaRecuerdos)|| empty($listaRecuerdos) || $listaRecuerdos=='[]') 
         <div class="carousel-inner container pt-4 pb-4">
             <div class="hv-box p-4">
@@ -10,7 +10,7 @@
             </div>
         </div>
     @else
-        <div id="carouselPrincipal" style="height: 85%" class="carousel carousel-dark slide">
+        <div id="carouselPrincipal" style="height: 450px !important" class="carousel carousel-dark slide">
 
             <div class="carousel-indicators">
                 <?php $l = 0; ?>
@@ -25,8 +25,8 @@
                 @endforeach
             </div>
 
-            <div class="carousel-inner container pt-4">
-                <div class="hv-box p-4">
+            <div class="carousel-inner container pt-4" style="height: 450px !important">
+                <div class="hv-box p-4 pb-0">
                     <?php
                     $i = 0; ?>
                     @foreach($listaRecuerdos as $recuerdo)
@@ -51,15 +51,16 @@
                                 <div class="row hv-container">
                                     <p class="hv-des">{{$recuerdo->descripcion}}</p>
                                     <div class="testimonial-group justify-content-center">
-                                        <div class="row text-center flex-nowrap">
+                                        <div class="row text-center "> <!--flex-nowrap-->
 
 
 
                                             @foreach($recuerdo->multimedias as $mult)
                                             <div class="col-sm-5 col-md-4 col-lg-3">
-                                                <a href="#" class="visualizarImagen"><img src="{{$mult->fichero}}" class="img-responsive card-img-top img-thumbnail" alt="{{$mult->nombre}}" /></a>
+                                                <a href="#" class="visualizarImagen"><img src="{{$mult->fichero}}" class="img-responsive card-img-top img-thumbnail" style="max-height: 200px; max-width: 300px;" alt="{{$mult->nombre}}" /></a>
                                                 <div>
-                                                    <h6 class="text-muted">{{$mult->nombre}}</h6>
+                                               
+                                                    <h6 class="text-muted" maxlength="10"> <small>{{substr($mult->nombre, 0, 20);}}</small></h6>
                                                 </div>
                                             </div>
                                             @endforeach
