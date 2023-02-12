@@ -13,8 +13,14 @@ class Multimedia extends Model
     protected $table = "multimedias";
     protected $fillable = [
         "nombre",
-        "fichero"
+        "fichero",
+        "personarelacionada_id",
+        "paciente_id"
     ];
+
+    public function personas_relacionadas(){
+        return $this->belongsTo(Personarelacionada::class);
+    }
 
     public function recuerdos()
     {
@@ -23,6 +29,10 @@ class Multimedia extends Model
 
     public function sesiones(){
         return $this->belongsToMany(Sesion::class);
+    }
+
+    public function pacientes(){
+        return $this->belongsTo(Paciente::class);
     }
 }
 

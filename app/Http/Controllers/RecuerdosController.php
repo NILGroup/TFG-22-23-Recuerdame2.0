@@ -13,10 +13,9 @@ use App\Models\Multimedia;
 use App\Models\Emocion;
 use App\Models\Personarelacionada;
 use App\Models\Tiporelacion;
+use Error;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
-
 
 use function PHPUnit\Framework\isNull;
 
@@ -29,9 +28,10 @@ class RecuerdosController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'role'])->except(['show', 'showByPaciente']);
+        $this->middleware(['asignarPaciente'])->except(['destroy']);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -59,8 +59,10 @@ class RecuerdosController extends Controller
         $categorias = Categoria::all()->sortBy("id");
         $personas = $paciente->personasrelacionadas;
         $tipos = Tiporelacion::all()->sortBy("id");
-        return view("recuerdos.create", compact("estados","etiquetas","etapas","emociones","categorias", "personas","tipos", "recuerdo", "personas", "paciente", "show"));
-
+        $idPaciente = $paciente->id;
+        $mostrarFoto = false;
+        $persona = new Personarelacionada();
+        return view("recuerdos.create", compact("idPaciente","mostrarFoto", "persona","estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "recuerdo", "personas", "paciente", "show"));
     }
 
     /**
@@ -72,42 +74,50 @@ class RecuerdosController extends Controller
     public function store(Request $request)
     {
 
-
-        if(!is_null($request->file)){
-        $imagenes = $request->file('file')->store('public/img');
-
-        $url = Storage::url($imagenes);
-
-        Multimedia::create([
-            'nombre' => $url,
-            'fichero' => $url
-        ]);
-        }
-
         //Ahora que tenemos creado el recuerdo
         $recuerdo = Recuerdo::updateOrCreate(
             ['id' => $request->id],
-            ['fecha' => $request->fecha,
-             'nombre' => $request->nombre,
-             'descripcion' => $request->descripcion,
-             'localizacion' => $request->localizacion,
-             'etapa_id' => $request->etapa_id,
-             'categoria_id' => $request->categoria_id,
-             'emocion_id' => $request->emocion_id,
-             'estado_id' => $request->estado_id,
-             'etiqueta_id' => $request->etiqueta_id,
-             'puntuacion' => $request->puntuacion,
-             'paciente_id' => $request->paciente_id]
+            [
+                'fecha' => $request->fecha,
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion,
+                'localizacion' => $request->localizacion,
+                'etapa_id' => $request->etapa_id,
+                'categoria_id' => $request->categoria_id,
+                'emocion_id' => $request->emocion_id,
+                'estado_id' => $request->estado_id,
+                'etiqueta_id' => $request->etiqueta_id,
+                'puntuacion' => $request->puntuacion,
+                'tipo_custom' => $request->tipo_custom,
+                'paciente_id' => $request->paciente_id,
+                'apto' => !is_null($request->apto)
+            ]
         );
+
+
+        
+        MultimediasController::savePhotos($request, $recuerdo);
+      
         
         $personas_relacionar = $request->checkPersona; //Array de ids de las personas
-        if(!is_null($personas_relacionar)){
+        $recuerdo->personas_relacionadas()->detach();
+        if (!is_null($personas_relacionar)) {
             foreach ($personas_relacionar as $p_id) {
                 $recuerdo->personas_relacionadas()->attach($p_id);
             }
         }
 
-        return self::showByPaciente($recuerdo->paciente_id);
+        //Array de las ID de las imagenes a eliminar del recuerdo
+        
+       
+       if(isset($request->media)) {
+        $recuerdo->multimedias()->detach($request->media);
+       }
+   
+       
+        
+       session()->put('created', "true");
+       //return self::showByPaciente($recuerdo->paciente_id);
     }
 
     /**
@@ -116,7 +126,7 @@ class RecuerdosController extends Controller
      * @param  \App\Models\Recuerdo  $recuerdo
      * @return \Illuminate\Http\Response
      */
-    public function show($idRecuerdo)
+    public function show($idPaciente, $idRecuerdo)
     {
         $show = true;
         $recuerdo = Recuerdo::find($idRecuerdo);
@@ -127,17 +137,17 @@ class RecuerdosController extends Controller
         $emociones = Emocion::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
         $tipos = Tiporelacion::all()->sortBy("id");
-        return view("recuerdos.show", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "paciente", "show"));
+        return view("recuerdos.show", compact("recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "paciente", "show", "tipos"));
     }
 
     public function showByPaciente($idPaciente)
     {
-        $paciente =Paciente::find($idPaciente);
-        if(is_null($paciente)) return "ID de paciente no encontrada"; //ESTUDIAR SI SOBRA
+        $paciente = Paciente::find($idPaciente);
+        if (is_null($paciente)) return "ID de paciente no encontrada"; //ESTUDIAR SI SOBRA
 
         $recuerdos = $paciente->recuerdos;
         //Devolvemos los recuerdos
-        return view("recuerdos.showByPaciente", compact("recuerdos"));
+        return view("recuerdos.showByPaciente", compact("recuerdos", "paciente"));
     }
 
     public function showBySesion($idSesion)
@@ -155,7 +165,7 @@ class RecuerdosController extends Controller
      * @param  \App\Models\Recuerdo  $recuerdo
      * @return \Illuminate\Http\Response
      */
-    public function edit($idRecuerdo)
+    public function edit($idP, $idRecuerdo)
     {
         $show = false;
 
@@ -168,7 +178,10 @@ class RecuerdosController extends Controller
         $categorias = Categoria::all()->sortBy("id");
         $personas = $paciente->personasrelacionadas;
         $tipos = Tiporelacion::all()->sortBy("id");
-        return view("recuerdos.edit", compact("recuerdo","estados","etiquetas","etapas","emociones","categorias", "personas", "tipos","paciente", "show"));
+        $idPaciente = $paciente->id;
+        $mostrarFoto = false;
+        $persona = new Personarelacionada();
+        return view("recuerdos.edit", compact("idPaciente","mostrarFoto", "persona","recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "paciente", "show"));
     }
 
     /**
@@ -192,73 +205,96 @@ class RecuerdosController extends Controller
     public function destroy($idRecuerdo)
     {
         $recuerdo = Recuerdo::find($idRecuerdo); //busca el recuerdo en sí
-        if(!is_null($recuerdo)){
-            $idPaciente = $recuerdo->paciente_id; //accede a la id del paciente
-            Recuerdo::destroy($idRecuerdo); //elimina el recuerdo
-            return redirect("/pacientes/$idPaciente/recuerdos/");
-        }else{
-            return redirect("/");
-        }
-
-
+        $paciente = $recuerdo->paciente;
+        $recuerdo->delete();
+        //return redirect("/pacientes/$paciente->id/recuerdos/");
     }
 
     //Elimina a la persona relacionada del recuerdo en cuestión (su relación)
     public function destroyPersonaRelacionada($idRecuerdo, $idPersona)
     {
         //¿unsetRelation?
-    //    Recuerdo::find($idRecuerdo)->personas_relacionadas   destroy($idRecuerdo);
+        //    Recuerdo::find($idRecuerdo)->personas_relacionadas   destroy($idRecuerdo);
     }
 
     //Devuelve la fecha del recuerdo más antiguo del paciente
     public function oldestMemoryDate($idPaciente)
     {
         $memory = Paciente::find($idPaciente)->recuerdos
-                                                ->orderBy('fecha')
-                                                ->take(1)
-                                                ->get();
+            ->orderBy('fecha')
+            ->take(1)
+            ->get();
         return $memory->fecha;
     }
-    
+
     /*Como el store pero no devuelve a una vista*/
     public function storeNoView(Request $request)
     {
         $recuerdo = Recuerdo::updateOrCreate(
             ['id' => $request->id],
-            ['fecha' => $request->fecha,
-             'nombre' => $request->nombre,
-             'descripcion' => $request->descripcion,
-             'localizacion' => $request->localizacion,
-             'etapa_id' => $request->etapa_id,
-             'categoria_id' => $request->categoria_id,
-             'emocion_id' => $request->emocion_id,
-             'estado_id' => $request->estado_id,
-             'etiqueta_id' => $request->etiqueta_id,
-             'puntuacion' => $request->puntuacion,
-             'paciente_id' => $request->paciente_id]
+            [
+                'fecha' => $request->fecha,
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion,
+                'localizacion' => $request->localizacion,
+                'etapa_id' => $request->etapa_id,
+                'categoria_id' => $request->categoria_id,
+                'emocion_id' => $request->emocion_id,
+                'estado_id' => $request->estado_id,
+                'etiqueta_id' => $request->etiqueta_id,
+                'puntuacion' => $request->puntuacion,
+                'paciente_id' => $request->paciente_id,
+                'tipo_custom' => $request->tipo_custom,
+                'apto' => $request->apto
+            ]
         );
+   
+
+        $personas_relacionar = $request->ids_personas; //Array de ids de las personas
+        $recuerdo->personas_relacionadas()->detach();
+        if (!is_null($personas_relacionar)) {
+            foreach ($personas_relacionar as $p_id) {  
+                $recuerdo->personas_relacionadas()->attach($p_id);
+                
+            }
+        }
 
         $recuerdo->etapa = $recuerdo->etapa->nombre;
-        if(is_null($recuerdo->categoria_id)){
+        if (is_null($recuerdo->categoria_id)) {
             $recuerdo->categoria = " ";
-        }
-        else{
+        } else {
             $recuerdo->categoria = $recuerdo->categoria->nombre;
         }
 
-        if(is_null($recuerdo->estado_id)){
+        if (is_null($recuerdo->estado_id)) {
             $recuerdo->estado = " ";
-        }
-        else{
+        } else {
             $recuerdo->estado = $recuerdo->estado->nombre;
         }
 
-        if(is_null($recuerdo->etiqueta_id)){
+        if (is_null($recuerdo->etiqueta_id)) {
             $recuerdo->etiqueta = " ";
-        }
-        else{
+        } else {
             $recuerdo->etiqueta = $recuerdo->etiqueta->nombre;
         }
         return $recuerdo;
     }
+
+    public function getNoView(Request $request){
+        $recuerdo = Recuerdo::find($request->id);
+        $personas = $recuerdo->paciente->personasrelacionadas;
+        //throw new \Exception(json_encode($personas)." ".json_encode($recuerdo->personas_relacionadas));
+        foreach($personas as $p){
+            if($recuerdo->personas_relacionadas->contains($p->id)){
+                $p->related = 1;
+            }
+            else{
+                $p->related = 0;
+            }
+            $p->tiporelacion_id = $p->tiporelacion->nombre;
+        }
+        $recuerdo->personasrelacionadas = $personas;    
+        return json_encode($recuerdo);
+    }
+
 }

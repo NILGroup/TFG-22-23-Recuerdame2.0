@@ -11,6 +11,8 @@ use App\PDFSesion;
 use App\PDFEvaluacion;
 use App\PDFHistoria;
 
+use function PHPUnit\Framework\isNull;
+
 class PDFController extends Controller
 {
     /**
@@ -20,7 +22,7 @@ class PDFController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role', 'isTerapeuta']);
+        $this->middleware(['auth', 'role', 'asignarPaciente']);
     }
     /***********************************************************
      * PDFs INFORME DE SESIÓN
@@ -101,7 +103,18 @@ class PDFController extends Controller
         $idEtiqueta = $request->idEtiqueta;
         $fechaInicio = $request->fechaInicio;
         $fechaFin = $request->fechaFin;
+        $imagen = $paciente->multimedia;
         $listafinal=collect();
+
+        if(empty($imagen)){
+            if($paciente->genero_id==1){ //hombre
+                $imagen = "/img/avatar_hombre.png";
+            }else{
+                $imagen = "/img/avatar_mujer.png";
+            }
+        }else{
+            $imagen = $paciente->multimedia->fichero;
+        }
         
         if (!empty($idCategoria))
             $listadoRecuerdos = $listadoRecuerdos->where('categoria_id', $idCategoria);
@@ -129,17 +142,17 @@ class PDFController extends Controller
         }
 
         //return $listadoRecuerdos;
-        $this->obtenerPDFHistoria($paciente, $listadoRecuerdos);
+        $this->obtenerPDFHistoria($paciente, $listadoRecuerdos,$imagen);
     }
 
-    public function obtenerPDFHistoria($paciente, $listadoRecuerdos){
+    public function obtenerPDFHistoria($paciente, $listadoRecuerdos,$imagen){
         $GLOBALS['numInforme'] = "1";
         $pdf = new PDFHistoria( 'P', 'mm', 'A4' );
         $pdf->AliasNbPages();
         $pdf->AddPage();
         $pdf->SetFont('Times','',12);
     
-        $pdf->pdfBody($pdf, $paciente, $listadoRecuerdos);
+        $pdf->pdfBody($pdf, $paciente, $listadoRecuerdos, $imagen);
     
         $pdf->Output();
     }

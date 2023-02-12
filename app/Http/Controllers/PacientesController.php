@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Sesion;
 use App\Models\Residencia;
 use App\Models\Situacion;
 use App\Models\Estudio;
 use App\Models\Genero;
-use App\Models\Evaluacion;
+use App\Models\Multimedia;
 use Illuminate\Support\Facades\Auth;
 
 use function PHPUnit\Framework\isNull;
@@ -23,9 +24,8 @@ class PacientesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role']);
-        $this->middleware('isTerapeuta')->except('show');
-        $this->middleware('esCuidadorDe')->only('show');
+        $this->middleware(['auth']);
+        $this->middleware(['asignarPaciente'])->except(['index', 'create']);
     }
     
     /**
@@ -37,7 +37,6 @@ class PacientesController extends Controller
         //Sacamos a todos los pacientes de la bd
         $idTerapeuta = Auth::id();
         $pacientes = User::find($idTerapeuta)->pacientes;
-        session()->forget('paciente');
         //Redireccionamos a la vista devolviendo la lista de pacientes
         return view("pacientes.index", compact("pacientes"));
 
@@ -75,14 +74,14 @@ class PacientesController extends Controller
             "fecha_nacimiento" => "required",
             "ocupacion" => "required",
             "residencia_id" => "required",
-            "fecha_inscripcion" => "required",
             "estudio_id" => "required",
             "situacion_id" => "required"
         ]);
 
         //Almacenamos al paciente en la bd
         $user = User::find(Auth::id());
-        Paciente::updateOrcreate([
+
+        $paciente = Paciente::updateOrcreate([
             "nombre" => $request->nombre,
             "apellidos" => $request->apellidos,
             "genero_id" => $request->genero_id,
@@ -93,12 +92,18 @@ class PacientesController extends Controller
             "residencia_actual" => $request->residencia_actual,
             "fecha_inscripcion" => $request->fecha_inscripcion,
             "residencia_id" => $request->residencia_id,
+            "residencia_custom" => $request->residencia_custom,
             "estudio_id" =>  $request->estudio_id,
             "situacion_id" =>  $request->situacion_id
-        ])->users()->save($user);
+        ]);
 
+
+        MultimediasController::savePhoto($request, $paciente);
+
+        $paciente->users()->save($user);
+        session()->put('created', "true");
         //Redireccionamos a la vista de lista pacientes
-        return redirect("/pacientes");
+        //return redirect("/pacientes");
         
     }
 
@@ -116,11 +121,17 @@ class PacientesController extends Controller
         $estudios = Estudio::all()->sortBy("id");
         $generos = Genero::all()->sortBy("id");
         $personas = $paciente->personasrelacionadas;
-        $evaluaciones = $paciente->evaluaciones;
+        $evaluaciones = $paciente->evaluaciones->sortBy("id");
         $cuidadores = $paciente->users->where('rol_id', 2);
-        //throw new \Exception(json_encode($cuidadores));
-        session()->put('paciente', $paciente->toArray()); 
-       
+
+        $fechaAnterior = \Carbon\Carbon::parse($paciente->fecha_inscripcion)->format("Y-m-d h:i:s");
+        foreach($evaluaciones as $evaluacion){
+            $fechaActual = \Carbon\Carbon::parse($evaluacion->fecha)->addDays(1)->format("Y-m-d h:i:s");
+            //$fechas->push([$fechaAnterior, $fechaActual]);
+            $sesiones = Sesion::whereBetween("fecha_finalizada", [$fechaAnterior, $fechaActual])->get();
+            $evaluacion->numSesiones = count($sesiones);
+            $fechaAnterior=$fechaActual;
+        }
         //Devolvemos al paciente a la vista de mostrar paciente
         return view("pacientes.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas", "cuidadores", "show"));
 
@@ -139,7 +150,6 @@ class PacientesController extends Controller
         $situaciones = Situacion::all()->sortBy("id");
         $estudios = Estudio::all()->sortBy("id");
         $generos = Genero::all()->sortBy("id");
-        session()->put('paciente', $paciente->toArray());
 
         //Devolvemos al paciente a la vista de editar paciente
         return view("pacientes.edit", compact("paciente", "residencias", "situaciones", "estudios", "generos", "show"));
@@ -156,10 +166,12 @@ class PacientesController extends Controller
 
         //Actualizamos masivamente los datos del paciente
         $paciente->update($request->all());
-        session()->put('paciente', $paciente->toArray()); 
 
+        MultimediasController::savePhoto($request, $paciente);
+        
+        session()->put('created', "true");
         //Redireccionamos a lista pacientes
-        return redirect("/pacientes/$request->id");
+        //return redirect("/pacientes/$request->id");
         
     }
 
@@ -172,15 +184,12 @@ class PacientesController extends Controller
         //Sacamos al paciente y lo borramos
         Paciente::findOrFail($id)->delete();
         session()->forget('paciente');
-
         //Redireccionamos a lista pacientes
-        return redirect("/pacientes");
-        
+        //return redirect("/pacientes");
     }
 
     public function addPacienteToTerapeuta(int $id) {
         $paciente = Paciente::findOrFail($id);
-        session()->put('paciente', $paciente->toArray());
         $users = User::where("rol_id","=",1)->get();
 
         return view("pacientes.addPacienteToTerapeuta", compact("paciente", "users"));
@@ -191,6 +200,15 @@ class PacientesController extends Controller
         $paciente = Paciente::find($request->paciente_id);
         $paciente->users()->sync($request->seleccion);
         return redirect("/pacientes");
+    }
+
+    public function removePhoto(Request $request){
+
+        $paciente = Paciente::findOrFail($request->id);
+        $paciente->multimedia->delete();
+        
+        return redirect("/pacientes/$paciente->id/editar");
+
     }
 
 }

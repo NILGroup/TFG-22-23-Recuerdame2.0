@@ -14,14 +14,18 @@
         {{csrf_field()}}
 
         <input type="hidden" value="{{$paciente->id}}" name="paciente_id">
-        <div>
-            <table class="table table-bordered recuerdameTable">
+        
+        <div class ="tabla">
+            <div class="d-flex justify-content-between upper">
+                @include('layouts.tableSearcher')
+            </div>
+            <table class="table table-bordered recuerdameTable datatable">
                 <thead>
-                    <tr>
+                    <tr class="bg-primary">
                         <th scope="col col-1"></th>
                         <th scope="col col-12">Nombre</th>
                         <th scope="col col-12">Apellidos</th>
-
+                    </tr>
                 </thead>
                 @foreach($users as $user)
                     <tr>
@@ -41,8 +45,8 @@
             </table>
         </div>
         <div class="col-12">
-            <button type="submit" class="btn btn-outline-primary">Guardar</button>
-            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a>
+            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <button type="submit" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
 </div>
@@ -51,4 +55,6 @@
 
 @push('scripts')
     @include('layouts.scripts')
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
+    <script src="/js/table.js"></script>
 @endpush

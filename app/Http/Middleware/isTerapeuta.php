@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Paciente;
 
 
-class isTerapeuta
+class esTerapeuta
 {
     /**
      * Handle an incoming request.

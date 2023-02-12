@@ -2,130 +2,59 @@
 
 @section('content')
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        let formulario = document.getElementById('formulario');
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            customButtons: {
-                add_event: {
-                    text: '+',
-                    hint: 'Nueva actividad',
-                    click: function() {
-                        formulario.reset();
-                        document.getElementById('titulo').textContent = "Registro de actividad";
-                        $('#evento').modal('show');
-                    }
-                }
-            },
-            locales: 'es',
-            initialView: 'dayGridMonth',
-            headerToolbar: {
-                left: 'prev,next',
-                center: 'title',
-                //right: 'add_event,dayGridMonth,timeGridWeek,timeGridDay,listMonth,today',
-                right: 'add_event,dayGridMonth,dayGridWeek,dayGridDay,listMonth,today',
-
-
-            },
-
-            events: "{{route('calendario.show',$idPaciente)}}",
-
-            dateClick: function(info) {
-                formulario.reset();
-                document.getElementById('start').value = info.dateStr;
-                document.getElementById('titulo').textContent = "Registro de actividad";
-
-                console.log(info);
-                $('#evento').modal('show');
-            },
-
-            eventClick: function(info) {
-                formulario.reset();
-                document.getElementById('id').value = info.event.id;
-                document.getElementById('titulo').textContent = "Modificar actividad";
-                document.getElementById('btnGuardar').classList.add('d-none');
-                document.getElementById('btnEliminar').classList.remove('d-none');
-                document.getElementById('btnModificar').classList.remove('d-none');
-                document.getElementById('title').value = info.event.title;
-                document.getElementById('start').value = info.event.startStr;
-                document.getElementById('color').value = info.event.backgroundColor;
-                document.getElementById('obs').value = info.event.extendedProps.description;
-                console.log(info);
-                $('#evento').modal('show');
-            },
-
-            buttonText: {
-                today: 'Hoy',
-                month: 'Mes',
-                week: 'Semana',
-                day: 'Día',
-                list: 'Listado',
-
-            },
-
-            height: 650,
-            editable: true,
-            displayEventTime: false,
-            selectable: true,
-            selectHelper: true,
-        });
-
-        calendar.render();
-
-    });
-</script>
+<input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$paciente->id}}" required @if($show) disabled @endif>
+<input type="hidden" name="user_type" class="form-control form-control-sm" id="user_type" value="{{$user->rol_id}}" required @if($show) disabled @endif>
+<!--<select id="typeSelector">
+  <option value="all">Todos</option>
+  <option value="a">Actividades</option>
+  <option value="s">Sesiones</option>
+</select>-->
 
 <!-- Tu contenido aquí -->
 <div class="container">
-    <div id="calendar">
-    </div>
+    <div id="calendar"></div>
 
-    <div class="modal fade" id="evento" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="evento" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="evento" data-backdrop="static" data-bs-backdrop="focus" data-keyboard="false" tabindex="-1" aria-labelledby="evento" aria-hidden="false" data-keyboard="false">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header bg-info">
                     <h5 class="modal-title" id="titulo"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" >
                     </button>
                 </div>
-                <form id="formulario" method="post" action="/calendario">
-
-                    {{csrf_field()}}
-                    <input type="hidden" class="form-control" id="idPaciente" name="idPaciente" value="{{$idPaciente}}">
-                    <input type="hidden" class="form-control" id="id" name="id">
-
-                    <div class="modal-body">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="title" name="title" required>
-                            <label for="title" class="form-label">Título</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="date" class="form-control" id="start" name="start" required>
-                            <label for="start" class="form-label">Fecha</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="color" class="form-control" id="color" name="color" required>
-                            <label for="color" class="form-label">Color</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <textarea maxlength="255" class="form-control form-control-sm" id="obs" name="obs" rows="3" required></textarea>
-                            <label for="obs" class="form-label">Observaciones</label>
-                        </div>
-                        <div class="modal-footer">
-                            <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-danger btn-md d-none">
-                            <input type="submit" formaction="/modificarActividad" id="btnModificar" name="btnModificar" value="Modificar actividad" class="btn btn-warning btn-md d-none">
-                            <input type="submit" id="btnGuardar" name="btnAccion" value="Registrar" class="btn btn-primary btn-md">
-                        </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="modalesCalendario">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Actividad</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Sesión</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"> @include('calendario.registroActividad') </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"> @include('calendario.registroSesion') </div>
                     </div>
-                </form>
+
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+@include('recuerdos.modals')
+@include('personasrelacionadas.modals')
+
 @endsection
 
 @push('scripts')
     @include('layouts.scripts')
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/table.js"></script>
+    <script src="/js/calendario.js"></script>
+    <script src="/js/recuerdo.js"></script>
+    <script src="/js/multiModal.js"></script>
+    <script src="/js/confirm.js"></script>
 @endpush

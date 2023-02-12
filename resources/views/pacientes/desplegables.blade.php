@@ -6,41 +6,39 @@
             </div>
         </button>
         
-        <div id="evaluaciones" class="accordion-collapse collapse show" aria-labelledby="evaluaciones1">
-            <div class="row mb-2">
-                <div class="col-12 justify-content-end d-flex">
-                    <a href="/pacientes/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success btn-sm btn-icon mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
+        <div id="evaluaciones" class="tabla accordion-collapse collapse show" aria-labelledby="evaluaciones1">
+            <div class="d-flex justify-content-between upper">
+                @include('layouts.tableSearcher')
+                <div class="justify-content-end d-flex">
+                    <a href="/pacientes/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
-            <table id="tabla1" class="table table-bordered table-striped table-responsive">
+            <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
+                <caption>Listado de informes de seguimiento</caption>
                 <thead>
                     <tr class="bg-primary">
-                        <th scope="col">#</th>
-                        <th scope="col">Informe</th>
-                        <th scope="col">Fecha</th>
+                        <th class="fit15" scope="col">Informe</th>
+                        <th class="" scope="col">Sesiones desde la última evaluación</th>
                         <th scope="col">Diagnóstico</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1 ?>
                     @foreach ($evaluaciones as $informe)
                     <tr>
-                        <th scope="row"><?php echo $i ?></th>
-                        <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe">Informe Nº {{$informe->id}}</td>
-                        <td>{{$informe->fecha}}</td>
+                        <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe">Informe {{date("d/m/Y", strtotime($informe->fecha))}}</td>
+                        <td>{{$informe->numSesiones}}</td>
                         <td>{{$informe->diagnostico}}</td>
                         <td class="tableActions">
                             <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                             <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                            <form method="post" action="{{ route('evaluaciones.destroy', $informe->id) }}" onclick="confirmar(event)" style="display:inline!important;">
+                            <form method="post" action="{{ route('evaluaciones.destroy', $informe->id) }}" style="display:inline!important;">
                                 {{csrf_field()}}
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                                <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                             </form>
                         </td>
                     </tr>
-                    <?php $i++ ?>
                     @endforeach
                 </tbody>
             </table>
@@ -57,42 +55,37 @@
         </button>
         
         <div id="cuidadores" class="accordion-collapse collapse show" aria-labelledby="cuidadores1">
-            <div class="row mb-2">
-                <div class="col-12 justify-content-end d-flex">
-                    <a href="/pacientes/{{$paciente->id}}/cuidadores/crear"><button type="button" class="btn btn-success btn-sm btn-icon mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
+            <div class="d-flex justify-content-between upper">
+                @include('layouts.tableSearcher')
+                <div class="justify-content-end d-flex">
+                    <a href="/pacientes/{{$paciente->id}}/cuidadores/crear"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
 
             <div>
-                <table id="tabla2" class="table table-bordered table-striped table-responsive">
+                <table id="tabla2" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr class="bg-primary">
-                            <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellidos</th>
+                            <th class="fit5" scope="col">Nombre</th>
+                            <th class="fit10" scope="col">Apellidos</th>
                             <th scope="col">Correo electrónico</th>
-                            <th scope="col"></th>
+                            <th class="fit10" scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $i = 1; ?>
                         @foreach($cuidadores as $cuidador)
                         <tr>
-                            <th scope="row"><?php echo $i ?></th>
-
                             <td>{{$cuidador->nombre}}</td>
                             <td>{{$cuidador->apellidos}}</td>
                             <td>{{$cuidador->email}}</td>
-
                             <td class="tableActions">
-                                <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" onclick="confirmar(event)" style="display:inline!important;">
+                                <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" style="display:inline!important;">
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                                    <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                                 </form>
                             </td>
                         </tr>
-                        <?php $i++; ?>
 
                         @endforeach
                     </tbody>
@@ -111,45 +104,39 @@
         </button>
         
         <div id="personasrelacionadas" class="accordion-collapse collapse show" aria-labelledby="personasrelacionadas1">
-            <div class="row mb-2">
-                <div class="col-12 justify-content-end d-flex">
-                    <a href="/pacientes/{{$paciente->id}}/crearPersona"><button type="button" class="btn btn-success btn-sm btn-icon  mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
+            <div class="d-flex justify-content-between upper">
+                @include('layouts.tableSearcher')
+                <div class="justify-content-end d-flex">
+                    <a href="/pacientes/{{$paciente->id}}/crearPersona"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
 
             <div>
-                <table id="tabla3" class="table table-bordered table-striped table-responsive">
+                <table id="tabla3" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr class="bg-primary">
-                            <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellidos</th>
+                            <th class="fit5" scope="col">Nombre</th>
+                            <th class="fit10" scope="col">Apellidos</th>
                             <th scope="col">Tipo de Relacion</th>
-                            <th scope="col"></th>
+                            <th class="fit10" scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $i = 1; ?>
                         @foreach($personas as $persona)
                         <tr>
-                            <th scope="row"><?php echo $i ?></th>
-
                             <td>{{$persona->nombre}}</td>
                             <td>{{$persona->apellidos}}</td>
                             <td>{{$persona->tiporelacion->nombre}}</td>
-
                             <td class="tableActions">
-                                <a href="{{route('personas.show', $persona->id)}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
-                                <a href="{{route('personas.edit', $persona->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                                <form method="post" action="/personas/{{$persona->id}}" onclick="confirmar(event)" style="display:inline!important;">
+                                <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                                <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
+                                <form method="post" action="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}" style="display:inline!important;">
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                                    <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                                 </form>
                             </td>
                         </tr>
-                        <?php $i++; ?>
-
                         @endforeach
                     </tbody>
                 </table>

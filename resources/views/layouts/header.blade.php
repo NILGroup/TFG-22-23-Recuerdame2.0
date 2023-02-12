@@ -1,8 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light shadow-sm bg-info">
     <div class="container-fluid">
         <div class="bg-image hover-zoom"><a class="navbar-brand " href="{{ url('/') }}"><img class="logotipoMarca w-100" src="/img/Marca_recuerdame.png" /></a></div>
-
-
+        
         <div class="d-flex flex-row-reverse">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -49,4 +48,5 @@
                 @endguest
             </div>
         </div>
+    </div>
 </nav>

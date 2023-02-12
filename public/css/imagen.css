@@ -1,0 +1,7 @@
+.imagen:hover{
+    opacity: 0.5;
+}
+
+.imagen{
+    border-radius: 15px;
+}

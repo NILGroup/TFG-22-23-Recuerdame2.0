@@ -4,6 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Sesion;
+use App\Models\Etapa;
+use App\Models\Categoria;
+use App\Models\Estado;
+use App\Models\Etiqueta;
+use App\Models\Emocion;
+use App\Models\Tiporelacion;
+use App\Models\Recuerdo;
+use App\Models\Personarelacionada;
 
 class InformesSesionController extends Controller
 {
@@ -14,7 +22,7 @@ class InformesSesionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role', 'isTerapeuta']);
+        $this->middleware(['auth', 'role', 'asignarPaciente']);
     }
     
     public function showByPaciente($idPaciente){
@@ -25,9 +33,18 @@ class InformesSesionController extends Controller
     public function generarInforme($idPaciente, $idSesion){
         $sesion = Sesion::find($idSesion);
         $paciente = $sesion->paciente;
-        $sesion->fecha_finalizada = \Carbon\Carbon::now()->format('Y-m-d');
+        $recuerdos = $sesion->recuerdos;
+        $estados = Estado::all()->sortBy("id");
+        $etiquetas = Etiqueta::all()->sortBy("id");
+        $etapas = Etapa::all()->sortBy("id");
+        $emociones = Emocion::all()->sortBy("id");
+        $categorias = Categoria::all()->sortBy("id");
+        $tipos = Tiporelacion::all()->sortBy("id");
+        $recuerdo = new Recuerdo();
+        $persona = new Personarelacionada();
+        $personas = Personarelacionada::where('paciente_id', $paciente->id)->get()->keyBy("id");
         $show = false;
-        return view('informesSesion.create', compact('paciente', 'sesion', 'show'));
+        return view('informesSesion.create', compact('paciente', 'sesion', 'show', 'recuerdos', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas'));
     }
 
     public function store(Request $request){
@@ -38,9 +55,10 @@ class InformesSesionController extends Controller
         $sesion->observaciones = $request->observaciones;
         $sesion->barreras = $request->barreras;
         $sesion->facilitadores = $request->facilitadores;
-        $sesion->apto = $request->apto;
         $sesion->duracion = $request->duracion;
         $sesion->save();
+        
+        session()->put('created', "true");
         return redirect("/pacientes/$sesion->paciente_id/sesiones/$sesion->id/ver");
     }
 
@@ -58,8 +76,7 @@ class InformesSesionController extends Controller
         $sesion->fecha_finalizada = null;
         $sesion->observaciones = null;
         $sesion->save();
-        return redirect("/pacientes/$sesion->paciente_id/informesSesion");
-
+        //return redirect("/pacientes/$sesion->paciente_id/informesSesion");
     }
 
     public function verInformeSesion($idPaciente, $idSesion){

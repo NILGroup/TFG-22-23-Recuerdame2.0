@@ -19,6 +19,7 @@ class Paciente extends Model
         "ocupacion",
         "residencia_actual",
         "fecha_inscripcion",
+        "residencia_custom",
         "genero_id",
         "residencia_id",
         "estudio_id",
@@ -49,6 +50,10 @@ class Paciente extends Model
         return $this->belongsTo(Residencia::class);
     }
     
+    public function multimedia(){
+        return $this->hasOne(Multimedia::class);
+    }
+
     public function situacion(){
         return $this->belongsTo(Situacion::class);
     }

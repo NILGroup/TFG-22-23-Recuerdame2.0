@@ -7,6 +7,7 @@ use App\Models\Paciente;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 class CuidadoresController extends Controller
 {
     /**
@@ -16,12 +17,28 @@ class CuidadoresController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role', 'isTerapeuta']);
+        $this->middleware(['auth', 'role']);
     }
     public function create($idP){
         $pacientes = Auth::User()->pacientes;
         $paciente = Paciente::find($idP);
-        return view('cuidadores.create', compact('pacientes', 'paciente'));
+        $cuidador = new User();
+        return view('cuidadores.create', compact('pacientes', 'paciente', 'cuidador'));
+    }
+
+    public function show($idP, $id)
+    {
+        $pacientes = Auth::User()->pacientes;
+        $paciente = Paciente::find($idP);
+        $cuidador = User::find($id);
+        return view('cuidadores.show', compact('pacientes', 'paciente', 'cuidador'));
+    }
+
+    public function edit($idP, $id){
+        $pacientes = Auth::User()->pacientes;
+        $paciente = Paciente::find($idP);
+        $cuidador = User::find($id);
+        return view('cuidadores.edit', compact('pacientes', 'paciente', 'cuidador'));
     }
 
     public function showByPaciente(int $idPaciente){
@@ -37,24 +54,44 @@ class CuidadoresController extends Controller
 
         $request->validate([
             'telefono'=> 'numeric|digits:9'
-            ]);
-
-        $user = User::create([
-            'nombre' => $request->nombre,
+        ]);
+        
+        $user = User::updateOrCreate(
+            ['id' => $request->id],
+            ['nombre' => $request->nombre,
             'apellidos' => $request->apellidos,
             'email' => $request->email,
-            'usuario' => $request->usuario,
             'rol_id' => intval($request->rol),
             'telefono' => $request->telefono,
             'localidad' => $request->localidad,
             'parentesco' => $request->parentesco,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->password)
         ]);
 
         $paciente = Paciente::find($request->paciente);
         $paciente->users()->attach($user->id);
+        session()->put('created', "true");
 
-        return redirect("/pacientes");
+        return redirect("/pacientes/$paciente->id/cuidadores");
+    }
+
+    public function update(Request $request)
+    {
+        //Sacamos al paciente de la bd
+        $cuidador = User::findOrFail($request->id);
+
+        //Actualizamos masivamente los datos del paciente
+        $cuidador->update($request->all());
+        $cuidador->update(['password' => Hash::make($request->password)]);
+
+        //MultimediasController::savePhoto($request, $cuidador);
+        
+        session()->put('created', "true");
+        //Redireccionamos a lista pacientes
+        //return redirect("/pacientes/$request->id");
+        $id = Session::get('paciente')['id'];
+        return redirect("/pacientes/$id/cuidadores/$cuidador->id");
+        
     }
 
     public function destroy($id)
@@ -63,7 +100,22 @@ class CuidadoresController extends Controller
         User::findOrFail($id)->delete();
 
         //Redireccionamos a lista pacientes
-        return back();
-        
+        //return back();
     }
+
+    //sirve para chekear si el cuidador ya ha sido registrado
+    public function repeatedCuidador(Request $request){
+        $email = $request->email;
+        $encontrado = User::where('email', $email)->first();
+        /*info($email);
+        info("hey");
+        if($encontrado == false){
+            info("false");
+        }else{
+            info("true");
+        }*/
+        return User::where('email', $email)->first();
+    }
+
+
 }

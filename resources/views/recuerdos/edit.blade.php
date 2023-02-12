@@ -3,60 +3,54 @@
 @section('content')
 <div class="container-fluid">
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Crear recuerdo</h5>
+        <h5 class="text-muted">Editar recuerdo</h5>
         <hr class="lineaTitulo">
     </div>
-    <form method="post" action="/recuerdo">
+    <form class="dropzone p-0" id="d" method="post" action="/recuerdo">
         {{csrf_field()}}
         @include('recuerdos.listaItems')
+        <div class="row d-flex">
+            @foreach ($recuerdo->multimedias as $media)
+
+            <div style="width: fit-content;" class="d-flex">
+                @include("layouts.multimedia")
+                <input class="form-check-input mx-2" name="media[]" type="checkbox" value="{{$media->id}}" style="background-color: #F63F3E;">
+            </div>
+            @endforeach
+        </div>
+        <div class="dz-default dz-message dropzone-correct" id="dzp">
+            <div class="container dropzone-container">
+                <img src="/img/upload.png" id="dropzone-img" height="25em" alt="">
+                <h2 id="dropzone-title" class="dropzone-title-correct">Arrastre sus archivos</h1>
+            </div>
+        </div>
+        <div class="dropzone-previews">
+
+
+        </div>
         <div class="col-12">
-            <button type="submit" value="Guardar" class="btn btn-outline-primary btn">Guardar</button>
-            <a href="/pacientes/{{$paciente->id}}/recuerdos"><button type="button" class="btn btn-primary btn">Atrás</button></a>
+            <a href="/pacientes/{{$paciente->id}}/recuerdos"><button type="button" class="btn btn-primary btn">Cancelar</button></a>
+            <button type="submit" id="guardar" value="Guardar" class="btn btn-outline-primary btn">Finalizar</button>
         </div>
     </form>
 </div>
 
-@include('recuerdos.models')
+@include('personasrelacionadas.modals')
 @endsection
-@push('styles')
-<link rel="stylesheet" href="/css/slider.css">
-@endpush
+
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+    <script src="/js/table.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#tabla').DataTable({
-                paging: false,
-                info: false,
-                language: { 
-                    search: "_INPUT_",
-                    searchPlaceholder: " Buscar...",
-                    emptyTable: "No hay datos disponibles"
-                },
-                responsive: {
-                    details: {
-                    type: 'column',
-                    target: 'tr'
-                    }
-                },
-                dom : "<<'form-control-sm mr-5' f>>"
-            });
-        });
+        let id = document.getElementById("paciente_id").value;
+        let id2 = document.getElementById("id").value;
+        var ruta = "/pacientes/" + id + "/recuerdos/" + id2;
+        var max
+        var limit = false
     </script>
-    <script>
-        const
-            range = document.getElementById('puntuacion'),
-            rangeV = document.getElementById('rangeV'),
-            setValue = () => {
-                const
-                    newValue = Number((range.value - range.min) * 100 / (range.max - range.min)),
-                    newPosition = 10 - (newValue * 0.2);
-                rangeV.innerHTML = `<span>${range.value}</span>`;
-                rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
-            };
-        document.addEventListener("DOMContentLoaded", setValue);
-        range.addEventListener('input', setValue);
-    </script>
+    <script src="/js/dropzone.js"></script>
+    <script src="/js/persona.js"></script>
 @endpush

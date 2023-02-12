@@ -2,81 +2,61 @@
 
 @section('content')
 
-<div class="contenedor">
+<div class="container-fluid">
     <div class="pt-4 pb-2">
         <h5 class="text-muted">Listado de informes de sesión</h5>
         <hr class="lineaTitulo">
     </div>
-
-    <div>
-        <table id="tabla" class="table table-bordered table-striped table-responsive">
+    <div class ="tabla">
+        <div class="d-flex justify-content-between upper">
+            @include('layouts.tableSearcher')
+        </div>
+        <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de informes de sesiones</caption>
             <thead>
                 <tr class="bg-primary">
-                    <th scope="col">#</th>
-                    <th scope="col">Informe</th>
-                    <th scope="col">Fecha del informe</th>
-                    <th scope="col">Apto para continuar</th>
-                    <th scope="col"></th>
+                    <th class="fit10" scope="col">Informe</th>
+                    <th class="fit5" scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <?php $i = 1 ?>
                 @foreach ($sesiones as $sesion)
                     <tr>
-                        <th scope="row"><?php echo $i ?></th>
-                        <td><a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe">Informe de la sesión Nº {{$sesion->id}}</td>
-                        <td>{{date("d/m/Y H:i", strtotime($sesion->fecha_finalizada))}}</td>
-                        <td>
-                            <div class="d-flex justify-content-center">    
-                                @if($sesion->apto) 
-                                    <i class="fa-solid fa-check text-success"></i> 
-                                @else 
-                                    <i class="fa-solid fa-xmark text-danger"></i> 
-                                @endif
-                            </div>
-                        </td>
+                        <td><a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe">Informe {{date("d/m/Y", strtotime($sesion->fecha_finalizada))}}</td>
                         <td class="tableActions">
                             <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                             <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/generarInforme"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
-                            <form method="post" action="{{ route('informesSesion.destroy', $sesion->id) }}" onclick="confirmar(event)" style="display:inline!important;">
+                            <form method="post" action="{{ route('informesSesion.destroy', $sesion->id) }}" style="display:inline!important;">
                                 {{csrf_field()}}
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                                <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                             </form>
                         </td>
-                    </tr>
-                    <?php $i++ ?>
+                    </tr> 
                 @endforeach
             </tbody>
         </table>
     </div>
 </div>
 
+@include('layouts.deletePopUp')
+
 @endsection
 
 @push('scripts')
-
     @include('layouts.scripts')
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  
-    <script>
-        $(document).ready(function () {
-            $('#tabla').DataTable({
-                paging: false,
-                info: false,
-                language: { 
-                    search: "_INPUT_",
-                    searchPlaceholder: " Buscar...",
-                    emptyTable: "No hay datos disponibles"
-                },
-                responsive: {
-                    details: {
-                    type: 'column',
-                    target: 'tr'
-                    }
-                },
-                dom : "<<'form-control-sm mr-5' f>>"
-            });
-        });
-    </script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/table.js"></script>
+    <script src="/js/confirm.js"></script>
+    
+    @if (Session::has('created'))
+        @php 
+            Illuminate\Support\Facades\Session::forget('created');
+        @endphp
+        <script>
+            var action = "Creado"
+        </script>
+        <script src="/js/successAlert.js"></script>
+    @endif
 @endpush

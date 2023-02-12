@@ -1,0 +1,196 @@
+[
+    {
+        "id": 1,
+        "start": "2023-02-09",
+        "title": "Primera terapia",
+        "description": "Primera terapia de evaluaci\u00f3n al paciente Miguel",
+        "color": "#00c7fc",
+        "paciente_id": 1,
+        "finished": null,
+        "tipo": "a"
+    },
+    {
+        "id": 1,
+        "fecha": "2022-09-17 15:30:00",
+        "objetivo": "objetivo 1",
+        "descripcion": "descripcion del objetivo",
+        "fecha_finalizada": "2022-09-19 14:00:00",
+        "respuesta": "ninguna respuesta",
+        "barreras": "muchas",
+        "facilitadores": "ninguno",
+        "observaciones": "ninguna observacion",
+        "duracion": "01:30",
+        "paciente_id": 1,
+        "user_id": 1,
+        "etapa_id": 1,
+        "tipo": "s",
+        "start": "2022-09-17 15:30:00",
+        "title": "Sesi\u00f3n",
+        "recuerdos": [
+            {
+                "id": 1,
+                "fecha": "2019-09-10",
+                "nombre": "Entrada a la universidad",
+                "descripcion": "Inici\u00f3 su formaci\u00f3n en el grado de Ingenier\u00eda del Software",
+                "localizacion": "Facultad de informatica UCM",
+                "puntuacion": 2,
+                "paciente_id": 1,
+                "etapa_id": 3,
+                "categoria_id": 6,
+                "emocion_id": 3,
+                "estado_id": 1,
+                "etiqueta_id": 3,
+                "apto": 0,
+                "tipo_custom": null,
+                "etapa": {
+                    "id": 3,
+                    "nombre": "Adulto joven"
+                },
+                "etiqueta": {
+                    "id": 3,
+                    "nombre": "Negativo"
+                },
+                "categoria": {
+                    "id": 6,
+                    "nombre": "Estudios"
+                },
+                "estado": {
+                    "id": 1,
+                    "nombre": "Conservado"
+                },
+                "pivot": {
+                    "sesion_id": 1,
+                    "recuerdo_id": 1
+                }
+            },
+            {
+                "id": 2,
+                "fecha": "2022-10-13",
+                "nombre": "Cena con amigos",
+                "descripcion": "Cen\u00f3 en Taco Bell con sus amigos Eros, Adri y Pablo, entre otros.",
+                "localizacion": "Taco Bell Moncloa",
+                "puntuacion": 10,
+                "paciente_id": 1,
+                "etapa_id": 3,
+                "categoria_id": 3,
+                "emocion_id": 2,
+                "estado_id": 1,
+                "etiqueta_id": 1,
+                "apto": 1,
+                "tipo_custom": null,
+                "etapa": {
+                    "id": 3,
+                    "nombre": "Adulto joven"
+                },
+                "etiqueta": {
+                    "id": 1,
+                    "nombre": "Positivo"
+                },
+                "categoria": {
+                    "id": 3,
+                    "nombre": "Hobbies"
+                },
+                "estado": {
+                    "id": 1,
+                    "nombre": "Conservado"
+                },
+                "pivot": {
+                    "sesion_id": 1,
+                    "recuerdo_id": 2
+                }
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "fecha": "2022-09-22 10:15:00",
+        "objetivo": "objetivo 2",
+        "descripcion": "descripcion del objetivo numero 2",
+        "fecha_finalizada": null,
+        "respuesta": null,
+        "barreras": null,
+        "facilitadores": null,
+        "observaciones": null,
+        "duracion": null,
+        "paciente_id": 1,
+        "user_id": 1,
+        "etapa_id": 2,
+        "tipo": "s",
+        "start": "2022-09-22 10:15:00",
+        "title": "Sesi\u00f3n",
+        "recuerdos": [
+            {
+                "id": 1,
+                "fecha": "2019-09-10",
+                "nombre": "Entrada a la universidad",
+                "descripcion": "Inici\u00f3 su formaci\u00f3n en el grado de Ingenier\u00eda del Software",
+                "localizacion": "Facultad de informatica UCM",
+                "puntuacion": 2,
+                "paciente_id": 1,
+                "etapa_id": 3,
+                "categoria_id": 6,
+                "emocion_id": 3,
+                "estado_id": 1,
+                "etiqueta_id": 3,
+                "apto": 0,
+                "tipo_custom": null,
+                "etapa": {
+                    "id": 3,
+                    "nombre": "Adulto joven"
+                },
+                "etiqueta": {
+                    "id": 3,
+                    "nombre": "Negativo"
+                },
+                "categoria": {
+                    "id": 6,
+                    "nombre": "Estudios"
+                },
+                "estado": {
+                    "id": 1,
+                    "nombre": "Conservado"
+                },
+                "pivot": {
+                    "sesion_id": 2,
+                    "recuerdo_id": 1
+                }
+            },
+            {
+                "id": 2,
+                "fecha": "2022-10-13",
+                "nombre": "Cena con amigos",
+                "descripcion": "Cen\u00f3 en Taco Bell con sus amigos Eros, Adri y Pablo, entre otros.",
+                "localizacion": "Taco Bell Moncloa",
+                "puntuacion": 10,
+                "paciente_id": 1,
+                "etapa_id": 3,
+                "categoria_id": 3,
+                "emocion_id": 2,
+                "estado_id": 1,
+                "etiqueta_id": 1,
+                "apto": 1,
+                "tipo_custom": null,
+                "etapa": {
+                    "id": 3,
+                    "nombre": "Adulto joven"
+                },
+                "etiqueta": {
+                    "id": 1,
+                    "nombre": "Positivo"
+                },
+                "categoria": {
+                    "id": 3,
+                    "nombre": "Hobbies"
+                },
+                "estado": {
+                    "id": 1,
+                    "nombre": "Conservado"
+                },
+                "pivot": {
+                    "sesion_id": 2,
+                    "recuerdo_id": 2
+                }
+            }
+        ]
+    }
+]

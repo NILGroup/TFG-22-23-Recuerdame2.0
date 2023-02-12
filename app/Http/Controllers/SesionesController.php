@@ -27,7 +27,8 @@ class SesionesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role', 'isTerapeuta']);
+        $this->middleware(['auth', 'role']);
+        $this->middleware(['asignarPaciente'])->except(['index', 'create', 'destroy']);
     }
     
     /**
@@ -46,13 +47,15 @@ class SesionesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         $show = false;
+        $mostrarFoto = false;
+        $persona = new Personarelacionada();
         $sesion = new Sesion();
         $recuerdo = new Recuerdo();
         $user = Auth::user();
-        $paciente = Paciente::find(Session::get('paciente')['id']);
+        $paciente = Paciente::find($id);
         $personas = $paciente->personasrelacionadas;
         $recuerdos = Recuerdo::where('paciente_id', $paciente->id)->get();
         $estados = Estado::all()->sortBy("id");
@@ -61,9 +64,10 @@ class SesionesController extends Controller
         $emociones = Emocion::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
         $tipos = Tiporelacion::all()->sortBy("id");
-        $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
+        $idPaciente = $paciente->id;
+        $prelacionadas = Personarelacionada::where('paciente_id', $id)->get()->keyBy("id");
 
-        return view("sesiones.create", compact('etapas', 'user', 'tipos', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'sesion', 'recuerdo', 'personas', 'show'));
+        return view("sesiones.create", compact('persona','idPaciente','mostrarFoto','etapas', 'user', 'tipos', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'sesion', 'recuerdo', 'personas', 'show'));
     }
 
     /**
@@ -74,8 +78,9 @@ class SesionesController extends Controller
      */
     public function store(Request $request)
     {
+        
         $sesion = Sesion::updateOrCreate(
-            ['id' => $request->id],
+            ['id' => $request->idSesion],
             ['fecha' => $request->fecha,
              'etapa_id' => $request->etapa_id,
              'objetivo' => $request->objetivo,
@@ -85,9 +90,20 @@ class SesionesController extends Controller
              'user_id' => $request->user_id,
              'respuesta' => $request->respuesta]
         );
+
+        MultimediasController::savePhotos($request, $sesion);
+
+        $sesion->recuerdos()->detach();
         if(!is_null($request->recuerdos))
-            $sesion->recuerdos()->sync($request->recuerdos);
-        return redirect("pacientes/{$sesion->paciente->id}/sesiones");
+            $sesion->recuerdos()->attach($request->recuerdos);
+
+        if(isset($request->media)) {
+            $sesion->multimedias()->detach($request->media);
+        }
+
+        session()->put('created', "true");
+
+        //return redirect("pacientes/{$sesion->paciente->id}/sesiones");
     }
 
     public function storeRecuerdo($idPaciente, $idSesion, $recuerdo)
@@ -126,7 +142,7 @@ class SesionesController extends Controller
      * @param  \App\Models\Sesion  $sesion
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idP, $id)
     {
         //https://youtu.be/g-Y9uiAjOE4
         $sesion = Sesion::findOrFail($id);
@@ -138,12 +154,15 @@ class SesionesController extends Controller
         return view('sesiones.show', compact('sesion', 'etapas', 'paciente', 'user', 'show'));
     }
 
-    public function showEditable($id)
+    public function showEditable($idP, $id)
     {
         $show = false;
+        $mostrarFoto = false;
         $sesion = Sesion::findOrFail($id);
         $user = Auth::user();
         $paciente = Paciente::find(Session::get('paciente')['id']);
+        $personas = $paciente->personasrelacionadas;
+        $recuerdo = new Recuerdo();
         $recuerdos = Recuerdo::where('paciente_id', $paciente->id)->get();
         $estados = Estado::all()->sortBy("id");
         $etiquetas = Etiqueta::all()->sortBy("id");
@@ -151,8 +170,12 @@ class SesionesController extends Controller
         $emociones = Emocion::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
         $prelacionadas = Personarelacionada::where('paciente_id', Session::get('paciente')['id'])->get()->keyBy("id");
+        $tipos = Tiporelacion::all()->sortBy("id");
+        $idPaciente = $paciente->id;
+        $persona = new Personarelacionada();
+
         //throw new \Exception($sesion->multimedias);
-        return view('sesiones.edit', compact('sesion', 'etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'show'));
+        return view('sesiones.edit', compact('persona','idPaciente','mostrarFoto', 'sesion', 'etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'show', 'personas', 'recuerdo', 'tipos'));
     }
 
     public function showByPaciente($idPaciente)
@@ -160,7 +183,6 @@ class SesionesController extends Controller
         //https://www.youtube.com/watch?v=y3p10h_00A8&ab_channel=CodeStepByStep
 
         $paciente = Paciente::findOrFail($idPaciente);
-        session()->put('paciente', $paciente->toArray());
         $sesiones = $paciente->sesiones;
         return view('sesiones.showByPaciente', compact('paciente', 'sesiones'));
     }
@@ -206,7 +228,7 @@ class SesionesController extends Controller
         $sesion = Sesion::find($id);
         $idP = $sesion->paciente_id;
         Sesion::destroy($id);
-        return redirect("/pacientes/$idP/sesiones");
+        //return redirect("/pacientes/$idP/sesiones");
     }
 
     public function destroyRecuerdo($idSesion, $idRecuerdo)

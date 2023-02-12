@@ -14,6 +14,9 @@ footer {
     bottom:0;
     width: 100%;
 }
+.inlinePopUp{
+    display:inline !important;
+}
 .yellowbg {
     background-color: #d2f9f9 !important;
 }
@@ -24,6 +27,23 @@ footer {
 .scrollUp{    
     font-size:3em;
     z-index: 999;
+}
+/*TABLAS*/
+.table td.fit, 
+.table th.fit {
+    white-space: nowrap !important; 
+    max-width: 1px !important;
+}
+.table td.fit5, 
+.table th.fit5 {
+    white-space: nowrap !important; 
+    max-width: 5em !important;
+}
+
+.table td.fit10, 
+.table th.fit10 {
+    white-space: nowrap !important; 
+    max-width: 10em !important;
 }
 
 /*Cuerpo del cuadrado*/
@@ -73,7 +93,12 @@ footer {
     border-top-width: thin;
     border-bottom-width: thin;
 }
-
+.nav-link:hover{
+    color: rgb(0, 145, 255) !important;
+    background-color: #ccfff737;
+    box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
+    border-radius: 1em;
+}
 .letra-primary-color {
     color: #4F7BC5 !important;
 }
@@ -331,9 +356,7 @@ footer {
   
   .checkboxes {
     width: 100%;
-    background-color: white;
-    display: none;
-    border: 1px #dadada solid;
+    display: block;
     margin-bottom: 10px;
   }
   
@@ -341,6 +364,31 @@ footer {
     display: block;
   }
   
-  .checkboxes label:hover {
-    background-color: #1e90ff;
+
+  .deslizante{
+    margin-left: 1em;
+  }
+
+  .fecha{
+    width: fit-content;
+    margin-left: 1em;
+  }
+  
+  .labelShow {
+    font-weight: bold;
+    width: fit-content;
+    margin-right: 1em;
+  }
+
+  .col{
+    margin-right: 1em;
+  }
+
+  .negrita {
+    font-weight:  bold;
+  }
+
+
+  div > .row{
+    align-items: center;
   }

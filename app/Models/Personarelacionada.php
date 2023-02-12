@@ -24,6 +24,10 @@ class Personarelacionada extends Model
         "paciente_id"
     ];
 
+    public function multimedia(){
+        return $this->hasOne(Multimedia::class);
+    }
+
     public function tiporelacion(){
         return $this->belongsTo(Tiporelacion::class);
     }

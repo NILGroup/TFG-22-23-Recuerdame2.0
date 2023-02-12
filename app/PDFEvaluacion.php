@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use File;
 use DateTime;
@@ -49,20 +50,20 @@ class PDFEvaluacion extends FPDF{
         $pdf->Ln();
         $pdf->SetFont('Times','',12);
         $pdf->Cell(50,7,'GDS ',1);
-        $pdf->Cell(70,7,$informeSeguimiento->gds_fecha,1,0,'C');
+        $pdf->Cell(70,7,Carbon::parse($informeSeguimiento->gds_fecha)->format('d-m-Y'),1,0,'C');
         $pdf->Cell(70,7,$informeSeguimiento->gds,1,0,'C');
         $pdf->Ln();
         $pdf->Cell(50,7,'Test de Lobo ',1);
-        $pdf->Cell(70,7,$informeSeguimiento->mental_fecha,1,0,'C');
+        $pdf->Cell(70,7,Carbon::parse($informeSeguimiento->mental_fecha)->format('d-m-Y'),1,0,'C');
         $pdf->Cell(70,7,$informeSeguimiento->mental,1,0,'C');
         $pdf->Ln();
         $pdf->Cell(50,7,'CDR ',1);
-        $pdf->Cell(70,7,$informeSeguimiento->cdr_fecha,1,0,'C');
+        $pdf->Cell(70,7,Carbon::parse($informeSeguimiento->cdr_fecha)->format('d-m-Y'),1,0,'C');
         $pdf->Cell(70,7,$informeSeguimiento->cdr,1,0,'C');
         $pdf->Ln();
         if($informeSeguimiento->nombre_escala != null){
             $pdf->Cell(50,7,utf8_decode($informeSeguimiento->nombre_escala),1);
-            $pdf->Cell(70,7,$informeSeguimiento->fecha_escala,1,0,'C');
+            $pdf->Cell(70,7,Carbon::parse($informeSeguimiento->fecha_escala)->format('d-m-Y'),1,0,'C');
             $pdf->Cell(70,7,$informeSeguimiento->escala,1,0,'C');
             $pdf->Ln();
         }
@@ -87,13 +88,9 @@ class PDFEvaluacion extends FPDF{
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(30,7,'Genero: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
-        if($paciente->genero == 'H'){
-            $pdf->Cell(160,7,' '. 'Hombre',1);
-        }
-        else{
-            $pdf->Cell(160,7,' '. 'Mujer',1);
-        }
+        $pdf->Cell(160,7,' '. $paciente->genero->nombre,true);
         $pdf->Ln(12);
+        
     }
     
     function pdfBody($pdf, $informeSeguimiento, $paciente){
@@ -114,7 +111,13 @@ class PDFEvaluacion extends FPDF{
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(50,7,"Fecha del informe:",1,0,'L',true);
         $pdf->SetFont('Times','',12);
-        $pdf->Cell(140,7,$informeSeguimiento->fecha,1,0,'C');
+
+        $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+        $fecha_actual = Carbon::parse($informeSeguimiento->fecha);
+        $mes = $meses[($fecha_actual->format('n')) - 1];
+        $fecha = $fecha_actual->format('d') . ' de ' . $mes . ' de ' . $fecha_actual->format('Y');
+
+        $pdf->Cell(140,7,$fecha,1,0,'C');
         $pdf->Ln(12);
     
         $this->writeTest($pdf, $informeSeguimiento);
