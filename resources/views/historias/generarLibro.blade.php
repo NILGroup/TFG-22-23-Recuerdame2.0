@@ -53,12 +53,8 @@
                                 <div class="testimonial-group justify-content-center">
                                     <div class="row text-center flex-nowrap" style="padding-bottom: 30px;"> <!--flex-nowrap-->
 
-
-
                                         @foreach ($recuerdo->multimedias as $media)
                                         @include("layouts.multimedia")
-
-
                                         @endforeach
 
                                     </div>

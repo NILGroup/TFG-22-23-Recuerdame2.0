@@ -6,43 +6,50 @@ body {
     overflow-x: hidden;
     font-family: 'Nunito', sans-serif;
 }
+
 #app {
     width: 100%;
 }
+
 footer {
-    position:fixed;
-    bottom:0;
+    position: fixed;
+    bottom: 0;
     width: 100%;
 }
-.inlinePopUp{
-    display:inline !important;
+
+.inlinePopUp {
+    display: inline !important;
 }
+
 .yellowbg {
     background-color: #d2f9f9 !important;
 }
+
 .lightbluebg {
     background-color: #e5f1f1 !important;
 }
 
-.scrollUp{    
-    font-size:3em;
+.scrollUp {
+    font-size: 3em;
     z-index: 999;
 }
+
 /*TABLAS*/
-.table td.fit, 
+.table td.fit,
 .table th.fit {
-    white-space: nowrap !important; 
+    white-space: nowrap !important;
     max-width: 1px !important;
 }
-.table td.fit5, 
+
+.table td.fit5,
 .table th.fit5 {
-    white-space: nowrap !important; 
+    white-space: nowrap !important;
     max-width: 5em !important;
 }
 
-.table td.fit10, 
+.table td.fit10,
 .table th.fit10 {
-    white-space: nowrap !important; 
+    white-space: nowrap !important;
     max-width: 10em !important;
 }
 
@@ -93,12 +100,14 @@ footer {
     border-top-width: thin;
     border-bottom-width: thin;
 }
-.nav-link:hover{
+
+.nav-link:hover {
     color: rgb(0, 145, 255) !important;
     background-color: #ccfff737;
     box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
     border-radius: 1em;
 }
+
 .letra-primary-color {
     color: #4F7BC5 !important;
 }
@@ -184,7 +193,7 @@ footer {
     width: 2px;
 }
 
-.hv-container{
+.hv-container {
     height: 8rem;
     margin-left: 10%;
     margin-right: 10%;
@@ -199,6 +208,7 @@ footer {
 .hv-title {
     color: #4F7BC5;
 }
+
 /*
 .hv-box::-webkit-scrollbar-thumb {
     border-radius: 4px;
@@ -306,7 +316,7 @@ footer {
     color: white;
 }
 
-.error{
+.error {
     width: 100%;
     margin-top: 0.25rem;
     font-size: 0.875em;
@@ -337,58 +347,65 @@ footer {
     height: 10px;
 }
 
-.puntuacion{
+.puntuacion {
     height: 10px !important;
     position: relative !important;
 }
 
-  .selectBox {
+.selectBox {
     position: relative;
-  }
-    
-  .overSelect {
+}
+
+.overSelect {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-  }
-  
-  .checkboxes {
+}
+
+.checkboxes {
     width: 100%;
     display: block;
     margin-bottom: 10px;
-  }
-  
-  .checkboxes label {
+}
+
+.checkboxes label {
     display: block;
-  }
-  
+}
 
-  .deslizante{
+
+.deslizante {
     margin-left: 1em;
-  }
+}
 
-  .fecha{
+.fecha {
     width: fit-content;
     margin-left: 1em;
-  }
-  
-  .labelShow {
+}
+
+.labelShow {
     font-weight: bold;
     width: fit-content;
     margin-right: 1em;
-  }
+}
 
-  .col{
+.col {
     margin-right: 1em;
-  }
+}
 
-  .negrita {
-    font-weight:  bold;
-  }
+.negrita {
+    font-weight: bold;
+}
 
 
-  div > .row{
+div>.row {
     align-items: center;
-  }
+}
+
+/* On smaller resolutions, hide the text for Large screens */
+@media only screen and (max-width: 560px) {
+    .largeScreen {
+        display: none;
+    }
+}
