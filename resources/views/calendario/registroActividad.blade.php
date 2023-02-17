@@ -29,8 +29,8 @@
             <label for="finished" class="form-label">Finalizar</label>
         </div>
         <div class="modal-footer">
-            <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-danger btn-md d-none">
-            <input type="submit" formaction="/modificarActividad" id="btnModificar" name="btnModificar" value="Modificar actividad" class="btn btn-warning btn-md d-none">
+            <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-outline-secondary btn-md d-none">
+            <input type="submit" formaction="/modificarActividad" id="btnModificar" name="btnModificar" value="Modificar actividad" class="btn btn-primary btn-md d-none">
             <input type="submit" id="btnGuardar" name="btnAccion" value="Guardar" class="btn btn-primary btn-md">
         </div>
     </form>
