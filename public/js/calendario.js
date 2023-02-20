@@ -16,13 +16,21 @@ document.addEventListener('DOMContentLoaded', function () {
         noEventsText: 'No hay eventos disponibles',
         eventColor: '#74e4fb',
         firstDay: 1,
+        themeSystem: 'bootstrap5',
         initialView: 'dayGridMonth',
+        buttonIcons: {
+            add_event: 'calendar-plus',
+            prev: 'arrow-left',
+            next: 'arrow-right',
+        },
         headerToolbar: {
-            left: 'prev,next',
             center: 'title',
             right: 'dayGridMonth,dayGridWeek,dayGridDay,listMonth,today',
 
 
+        },
+        footerToolbar: {
+            center: 'prev,next',
         },
 
         events: url_eventos,
@@ -199,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             },
             todo: {
-                text: 'Todo',
+                text: 'Todas',
                 click: function () {
                     mostrarTodo();
                     pruebas();
@@ -223,9 +231,6 @@ document.addEventListener('DOMContentLoaded', function () {
             center: 'title',
             right: 'add_event,dayGridMonth,dayGridWeek,dayGridDay,listMonth,today',
         };
-        options.footerToolbar = {
-            right: 'prev,next',
-        }
     }
 
     var calendar = new FullCalendar.Calendar(calendarEl, options);
