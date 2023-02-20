@@ -34,5 +34,9 @@ class Multimedia extends Model
     public function pacientes(){
         return $this->belongsTo(Paciente::class);
     }
+
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
 }
 

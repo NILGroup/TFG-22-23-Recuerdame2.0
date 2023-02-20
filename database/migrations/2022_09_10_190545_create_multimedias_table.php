@@ -19,9 +19,11 @@ return new class extends Migration
             $table->string('fichero');
             $table->unsignedBigInteger('personarelacionada_id')->nullable();
             $table->unsignedBigInteger('paciente_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
 
             $table->foreign('paciente_id')->references("id")->on("pacientes")->onDelete("cascade");
             $table->foreign('personarelacionada_id')->references("id")->on("personarelacionadas")->onDelete("cascade");
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
         });
     }

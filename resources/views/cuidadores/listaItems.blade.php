@@ -1,3 +1,4 @@
+
 <input id="id" type="hidden" class="form-control form-control-sm @error('nombre') is-invalid @enderror" placeholder="Nombre" name="id" value="{{ $cuidador->id }}" required autocomplete="nombre" autofocus>
 <div class="row form-group justify-content-between">
     <div class="row col-sm-12 col-md-6 col-lg-5 align-items-center">

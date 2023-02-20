@@ -63,4 +63,8 @@ class User extends Authenticatable
     public function pacientes(){
         return $this->belongsToMany(Paciente::class);
     }
+
+    public function multimedia(){
+        return $this->hasOne(Multimedia::class);
+    }
 }

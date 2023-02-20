@@ -23,7 +23,8 @@ class CuidadoresController extends Controller
         $pacientes = Auth::User()->pacientes;
         $paciente = Paciente::find($idP);
         $cuidador = new User();
-        return view('cuidadores.create', compact('pacientes', 'paciente', 'cuidador'));
+        $mostrarFoto = false;
+        return view('cuidadores.create', compact('mostrarFoto','pacientes', 'paciente', 'cuidador'));
     }
 
     public function show($idP, $id)
@@ -31,14 +32,16 @@ class CuidadoresController extends Controller
         $pacientes = Auth::User()->pacientes;
         $paciente = Paciente::find($idP);
         $cuidador = User::find($id);
-        return view('cuidadores.show', compact('pacientes', 'paciente', 'cuidador'));
+        $mostrarFoto = true;
+        return view('cuidadores.show', compact('mostrarFoto','pacientes', 'paciente', 'cuidador'));
     }
 
     public function edit($idP, $id){
         $pacientes = Auth::User()->pacientes;
         $paciente = Paciente::find($idP);
         $cuidador = User::find($id);
-        return view('cuidadores.edit', compact('pacientes', 'paciente', 'cuidador'));
+        $mostrarFoto = true;
+        return view('cuidadores.edit', compact('mostrarFoto','pacientes', 'paciente', 'cuidador'));
     }
 
     public function showByPaciente(int $idPaciente){
@@ -69,7 +72,16 @@ class CuidadoresController extends Controller
         ]);
 
         $paciente = Paciente::find($request->paciente);
-        $paciente->users()->attach($user->id);
+
+        if (!$paciente->users->contains($user->id))
+            $paciente->users()->attach($user->id);
+
+       
+        if ($request->has("file")) {
+            $user->multimedia()->delete();
+        }
+        MultimediasController::savePhoto($request, $user);
+
         session()->put('created', "true");
 
         return redirect("/pacientes/$paciente->id/cuidadores");

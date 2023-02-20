@@ -9,6 +9,7 @@
 
     <form method="POST" action="/registroCuidador" id="formulario">
         {{csrf_field()}}
+        @include('cuidadores.foto')
         @include('cuidadores.listaItems')
         <div>
             <!-- <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Atrás</button></a> -->

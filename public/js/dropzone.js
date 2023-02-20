@@ -51,33 +51,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
             var submitBtn = document.querySelector("#guardar");
             var myDropzone = this
+ 
+          
+            if (typeof silenceMode === "undefined") silenceMode = false
+            if (!silenceMode){
+              
+                    submitBtn.addEventListener("click", function (e) {
 
-            submitBtn.addEventListener("click", function (e) {
 
                 
-                const form = document.querySelector("#d")
-
-                e.preventDefault()
-                e.stopPropagation()
-                console.log(form.checkValidity())
-                if (form.checkValidity()) {
-                    
-                    if (myDropzone.getQueuedFiles().length > 0) {
-                        myDropzone.processQueue();
-                    }
-                    else {
+                        const form = document.querySelector("#d")
+        
+                        e.preventDefault()
+                        e.stopPropagation()
+    
                         console.log("hola")
-                        myDropzone._uploadData([{upload: {filename: ''}}],[{filename: '', name: '', data: new Blob()}]);
-                    }
-
-                }
+                     
+                        if (form.checkValidity()) {
+        
+                            if (myDropzone.getQueuedFiles().length > 0) {
+                                myDropzone.processQueue();
+                            }
+                            else {
+                                console.log("hola")
+                                myDropzone._uploadData([{upload: {filename: ''}}],[{filename: '', name: '', data: new Blob()}]);
+                            }
+        
+        
+                        }
+        
+                    
+                        form.classList.add('was-validated')
+        
+        
+                    });
+                
+                
+            }
 
             
-
-                form.classList.add('was-validated')
-
-
-            });
 
 
         },
