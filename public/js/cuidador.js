@@ -4,44 +4,45 @@ $(function () {
 
         const form = document.querySelector("#formulario");
 
-        if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+    
+        if (form.checkValidity()){
+
+            var fd = new FormData();
+            let email = document.getElementById("email").value;
+            console.log(email)
+            fd.append('email', email);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "post",
+                url: '/repeatedCuidador',
+                processData: false, // tell jQuery not to process the data
+                contentType: false, // tell jQuery not to set contentType
+                data: fd,
+                success: function (data) {
+                    console.log(data)
+                    if (data) { //si está repetido swal
+                        duplicatedAlert(data);
+                    } else {
+                        form.submit(); //si no está repe lo registramos
+                    }
+                },
+                error: function (data) {
+                    console.log(data)
+                }
+            })
         }
 
         form.classList.add('was-validated')
 
-        event.preventDefault();
-        event.stopImmediatePropagation();
-
-        var fd = new FormData();
-        let email = document.getElementById("email").value;
-        console.log(email)
-        fd.append('email', email);
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: "post",
-            url: '/repeatedCuidador',
-            processData: false, // tell jQuery not to process the data
-            contentType: false, // tell jQuery not to set contentType
-            data: fd,
-            success: function (data) {
-                console.log(data)
-                if (data) { //si está repetido swal
-                    duplicatedAlert(data);
-                } else {
-                    form.submit(); //si no está repe lo registramos
-                }
-            },
-            error: function (data) {
-                console.log(data)
-            }
-        })
+        
     });
 });
 

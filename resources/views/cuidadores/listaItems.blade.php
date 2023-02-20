@@ -4,12 +4,6 @@
         <label for="nick" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-6">Nombre:<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6 align-items-center">
             <input id="nombre" type="text" class="form-control form-control-sm @error('nombre') is-invalid @enderror" placeholder="Nombre" name="nombre" value="{{ $cuidador->nombre }}" required autocomplete="nombre" autofocus>
-
-            @error('nombre')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
         </div>
     </div>
 
@@ -17,11 +11,6 @@
         <label for="apellidos" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-4">Apellidos:<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-8 align-items-center">
             <input id="apellidos" type="text" class="form-control form-control-sm @error('apellidos') is-invalid @enderror" placeholder="Apellidos" name="apellidos" value="{{ $cuidador->apellidos }}" required autocomplete="apellidos" autofocus>
-            @error('apellidos')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
         </div>
     </div>
 </div>
@@ -31,11 +20,7 @@
         <div class="col-sm-12 col-md-12 col-lg-6 align-items-center">
             <input id="telefono" type="text" class="form-control form-control-sm @error('telefono') is-invalid @enderror" placeholder="Número de teléfono" name="telefono" value="{{ $cuidador->telefono }}"required autocomplete="telefono" autofocus>
 
-            @error('telefono')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
+         
         </div>
     </div>
     <div class="row col-sm-12 col-md-6 col-lg-7 align-items-center">
@@ -50,11 +35,6 @@
         <label for="fecha" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-6">Correo:<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6 align-items-center">
             <input id="email" type="email" class="form-control form-control-sm @error('email') is-invalid @enderror" placeholder="Correo Electrónico" name="email" value="{{ $cuidador->email }}" required autocomplete="email" autofocus>
-            @error('email')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
         </div>
     </div>
     <div class="row col-sm-6 col-md-6 col-lg-7 align-items-center">
@@ -93,11 +73,6 @@
         <label for="pais" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-4">Contraseña:<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-8 align-items-center">
             <input id="password" type="password" class="form-control form-control-sm @error('password') is-invalid @enderror" placeholder="Contraseña" name="password" required autocomplete="new-password">
-            @error('password')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
         </div>
     </div>
     @endif
