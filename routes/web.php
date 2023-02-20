@@ -81,7 +81,8 @@ Route::get('/pacientes/{id}/cuidadores', 'App\Http\Controllers\CuidadoresControl
 Route::get('/pacientes/{id}/cuidadores/{idC}', 'App\Http\Controllers\CuidadoresController@show');
 Route::get('/pacientes/{id}/cuidadores/{idC}/editar', 'App\Http\Controllers\CuidadoresController@edit');
 Route::post('/repeatedCuidador', 'App\Http\Controllers\CuidadoresController@repeatedCuidador');
-
+Route::post('/borrar_foto_cuidador', 'App\Http\Controllers\CuidadoresController@removePhoto');
+Route::post('/borrar_cuidador', 'App\Http\Controllers\CuidadoresController@destroy_no_view');
 
 //RUTAS CUSTOMIZADAS SESION
 Route::post('/guardarSesion', 'App\Http\Controllers\SesionesController@store');

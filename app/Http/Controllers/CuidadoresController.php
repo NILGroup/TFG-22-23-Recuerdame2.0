@@ -115,6 +115,10 @@ class CuidadoresController extends Controller
         //return back();
     }
 
+    public function destroy_no_view(Request $request){
+        return User::findOrFail($request->id)->delete();
+    }
+
     //sirve para chekear si el cuidador ya ha sido registrado
     public function repeatedCuidador(Request $request){
         $email = $request->email;
@@ -127,6 +131,14 @@ class CuidadoresController extends Controller
             info("true");
         }*/
         return User::where('email', $email)->first();
+    }
+
+    public function removePhoto(Request $request){
+        $cuidador = User::findOrFail($request->id);
+        $cuidador->multimedia->delete();
+        $id = Session::get('paciente')['id'];
+
+        return redirect("/pacientes/$id/cuidadores/$cuidador->id/editar");
     }
 
 

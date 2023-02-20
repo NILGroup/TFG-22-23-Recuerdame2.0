@@ -7,20 +7,87 @@
         <hr class="lineaTitulo">
     </div>
 
-    <form method="POST" action="/actualizarCuidador" id="formulario">
+
+    @include('cuidadores.foto')
+
+    @if (isset($cuidador->multimedia))
+
+    <!-- 
+
+        Solo se muestra el borrar foto cuando el usuario tiene una foto que no es la predeterminada
+        Además no habrá dropzone mientras haya ya una foto subida
+
+    -->
+
+    <form class="text-center" action="/borrar_foto_cuidador" method="post">
         {{csrf_field()}}
-        
+        <input type="hidden" name="id" value="{{$cuidador->id}}">
+        <button type="submit" class="btn btn-danger mb-3" id="borrar_foto">Eliminar Foto</button>
+    </form> 
+    <form id="d" method="post" action="/actualizarCuidador">
+        {{csrf_field()}}
         @include('cuidadores.listaItems')
+        
         <div class="col-12">
             <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button type="submit" value="Guardar" id="guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
+   
+    @else
+    <form class="dropzone p-0" id="d" method="post" action="/registroCuidador">
+        {{csrf_field()}}
+        
+            <div class="dropzone-inner">
+                @include('cuidadores.listaItems')
+                <div class="dz-default dz-message dropzone-correct" id="dzp">
+                    <div class="container dropzone-container" style="height: 10em;">
+                        <img src="/img/upload.png" id="dropzone-img" height="25em" alt="">
+                        <h2 id="dropzone-title" class="dropzone-title-correct">Arrastre sus archivos</h1>
+                    </div>
+                </div>
+                <div class="dropzone-previews">
+                    
+                </div>
+            </div>
+        
+        <div class="form-group">
+            <a href="/pacientes/{{$cuidador->paciente}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <button id="guardar"  type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
+        </div>
+    </form>
+
+
+    
+    @endif
 </div>
 @endsection
 
 @push('scripts')
     @include('layouts.scripts')
-    <!-- <script src="/js/cuidador.js"></script> -->
-    <script src="/js/validacion.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+
+    <script>
+        let id = document.getElementById("paciente").value;
+        let id2 = document.getElementById("id").value
+   
+        var ruta = "/pacientes/" + id + "/cuidadores/" + id2;
+        var max = 1
+        var limit = true
+        var silenceMode = true
+        let send_dropzone = null
+    </script>
+
+    @if (!isset($cuidador->multimedia))
+    <script src="/js/dropzone.js"></script>
+    <script>
+        send_dropzone = true
+    </script>
+    @endif
+    
+    <script src="/js/cuidador.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @endpush

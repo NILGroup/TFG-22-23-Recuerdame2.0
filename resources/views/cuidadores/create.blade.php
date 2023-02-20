@@ -44,6 +44,7 @@
         var max = 1
         var limit = true
         var silenceMode = true
+        let send_dropzone = true
     </script>
     <script src="/js/cuidador.js"></script>
     <script src="/js/dropzone.js"></script>
