@@ -116,7 +116,30 @@ class CuidadoresController extends Controller
     }
 
     public function destroy_no_view(Request $request){
+
+     
+
+        
+        $borrar = User::findOrFail($request->id);
+        $permanece = User::findOrFail($request->idCurrent);
+
+        $permanece->multimedia()->delete();
+        
+
+        $multimedia = $borrar->multimedia;
+
+        if (isset($multimedia)){
+            $multimedia->user_id = $request->idCurrent;
+            $multimedia->save();
+        }
+       
+        
+        
+
+        
+
         return User::findOrFail($request->id)->delete();
+
     }
 
     //sirve para chekear si el cuidador ya ha sido registrado

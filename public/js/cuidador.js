@@ -91,6 +91,7 @@ function duplicatedAlert(data) {
                 var fdn = new FormData();
                 console.log(idOriginal)
                 fdn.append('id', idOriginal)
+                fdn.append('idCurrent', data.id)
 
                 $.ajaxSetup({
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
