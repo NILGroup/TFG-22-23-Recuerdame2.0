@@ -7,9 +7,9 @@
         <input max="4000-12-31T23:00:00.0" min="1800-01-01T01:00:00.00" type="datetime-local" style="width: fit-content;" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$sesion->fecha}}" required @if($show) disabled @endif>
     </div>
 
-    <div class="col d-inline align-items-center">
+    <div class="col d-inline align-items-center" id="divEtapa">
         <label for="etapa" class="form-label labelShow ">Etapa:<span class="asterisco">*</span></label>
-        <select class="form-select form-select-sm " style="width: fit-content;" name="etapa_id" required @if($show) disabled @endif>
+        <select class="form-select " style="width: fit-content;" name="etapa_id" required @if($show) disabled @endif>
             @foreach($etapas as $etapa)
             <option value="{{$etapa->id}}" @if($sesion->etapa && $sesion->etapa->id == $etapa->id)
                 selected="selected"

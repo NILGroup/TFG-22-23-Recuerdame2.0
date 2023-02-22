@@ -398,6 +398,9 @@ footer {
     font-weight: bold;
 }
 
+.form-group > .row{
+    margin-bottom: 6px;
+}
 
 div>.row {
     align-items: center;
