@@ -20,7 +20,7 @@
     font-weight: bold;
 }
 .fc .fc-add_event-button:hover,
-.fc .fc-dayGridWeek-button:active,
+.fc .fc-dayGridWeek-button:focus,
 .fc .fc-dayGridWeek-button:hover,
 .fc .fc-dayGridDay-button:hover,
 .fc .fc-listMonth-button:hover,
@@ -36,4 +36,12 @@
 }
 .fc td,  .fc th{
     background-color: white;
+}
+
+.fc .fc-daygrid-event {
+    cursor:pointer;
+}
+
+.fc .fc-day-today {
+    background-color:aliceblue !important;
 }

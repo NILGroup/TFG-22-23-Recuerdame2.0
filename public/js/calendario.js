@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let user = document.getElementById('user_type').value; //tipo de usuario (1 terapeuta, 2 cuidador)
     let formulario = document.getElementById('formulario');
     var calendarEl = document.getElementById('calendar');
+    
+    var addEventBtn =  document.getElementsByClassName('fc-add_event-button');
 
     let url_eventos = "/calendario/" + document.getElementById('paciente_id').value;
     let options = {
@@ -189,7 +191,9 @@ document.addEventListener('DOMContentLoaded', function () {
         },
 
         height: 650,
-        editable: true,
+        editable: false,
+        resizable: true,
+        draggable: false,
         displayEventTime: false,
         selectable: true
     }
@@ -235,6 +239,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var calendar = new FullCalendar.Calendar(calendarEl, options);
 
+    $("addEventBtn").on("click", function () {
+        alert("PRueba");
+    })
 
     function mostrarTodo() {
         for (let i = 0; i < calendar.getEvents().length; i++) {
@@ -266,5 +273,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function pruebas() {
         console.log(user);
     }
+
     calendar.render();
 });
