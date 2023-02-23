@@ -162,6 +162,8 @@ Route::post('/storeTipoNoView', 'App\Http\Controllers\TipoRelacionController@sto
     CREA DATOS EN LA BASE DE DATOS
 *********************************************************/
 Route::post('/prueba', function () {
+    $now = Carbon::now();
+
     DB::table("rols")->insert([
         ["nombre" => "Terapeuta"],
         ["nombre" => "Cuidador"]
@@ -308,38 +310,38 @@ Route::post('/prueba', function () {
     ]);
 
     DB::table("actividads")->insert([
-        ["start" => Carbon::now(), "title" => "Primera terapia", "paciente_id" => 1,
-            "description" => "Primera terapia de evaluación a la paciente María Concepción", "color" => "#20809d"],
-        ["start" => Carbon::now(), "title" => "Primera terapia", "paciente_id" => 2,
-            "description" => "Primera terapia de evaluación a la paciente Cristina", "color" => "#20809d"]
+        ["start" => Carbon::now(), "title" => "Primera actividad", "paciente_id" => 1,
+            "description" => "Primera actividad a la paciente María Concepción", "color" => "#20809d"],
+        ["start" => Carbon::now(), "title" => "Primera actividad", "paciente_id" => 2,
+            "description" => "Primera actividad a la paciente Cristina", "color" => "#20809d"]
     ]);
                                 
     DB::table("evaluacions")->insert([
-        ["paciente_id"=> 1, "fecha" => Carbon::create(2022, 9, 30), "gds" => 2, "gds_fecha" => Carbon::create(2022, 9, 30),
-            "mental" => 2, "mental_fecha" => Carbon::create(2022, 9, 30), "cdr"=> 2, "cdr_fecha" => Carbon::create(2022, 9, 30),
-            "nombre_escala" => "escala custom", "escala" => 2, "fecha_escala" => Carbon::create(2022, 10, 30),
+        ["paciente_id"=> 1, "fecha" => Carbon::create($now->year, $now->month, 1), "gds" => 2, "gds_fecha" => Carbon::create($now->year, $now->month, 1),
+            "mental" => 2, "mental_fecha" => Carbon::create($now->year, $now->month, 1), "cdr"=> 2, "cdr_fecha" => Carbon::create($now->year, $now->month, 1),
+            "nombre_escala" => "escala custom", "escala" => 2, "fecha_escala" => Carbon::create($now->year, 10, 30),
             "diagnostico" => "Empeora poco a poco.", "observaciones" => "Ninguna" ],
-        ["paciente_id"=> 1, "fecha" => Carbon::create(2022, 10, 30), "gds" => 1, "gds_fecha" => Carbon::create(2022, 10, 30),
-            "mental" => 1, "mental_fecha" => Carbon::create(2022, 10, 30), "cdr"=> 1, "cdr_fecha" => Carbon::create(2022, 10, 30),
-            "nombre_escala" => "nombre cualquiera", "escala" => 1, "fecha_escala" => Carbon::create(2022, 10, 30),
+        ["paciente_id"=> 1, "fecha" => Carbon::create($now->year, $now->month, 2), "gds" => 1, "gds_fecha" => Carbon::create($now->year, $now->month, 2),
+            "mental" => 1, "mental_fecha" => Carbon::create($now->year, $now->month, 2), "cdr"=> 1, "cdr_fecha" => Carbon::create($now->year, $now->month, 2),
+            "nombre_escala" => "nombre cualquiera", "escala" => 1, "fecha_escala" => Carbon::create($now->year, 10, 30),
             "diagnostico" => "Ha empeorado gravemente.", "observaciones" => "No reconoce a su familia" ],
-        ["paciente_id"=> 2, "fecha" => Carbon::create(2022, 10, 30), "gds" => 5, "gds_fecha" => Carbon::create(2022, 10, 30),
-            "mental" => 5, "mental_fecha" => Carbon::create(2022, 10, 30), "cdr"=> 5, "cdr_fecha" => Carbon::create(2022, 10, 30),
-            "nombre_escala" => "escala custom", "escala" => 5, "fecha_escala" => Carbon::create(2022, 10, 30),
+        ["paciente_id"=> 2, "fecha" => Carbon::create($now->year, $now->month, 2), "gds" => 5, "gds_fecha" => Carbon::create($now->year, $now->month, 2),
+            "mental" => 5, "mental_fecha" => Carbon::create($now->year, $now->month, 2), "cdr"=> 5, "cdr_fecha" => Carbon::create($now->year, $now->month, 2),
+            "nombre_escala" => "escala custom", "escala" => 5, "fecha_escala" => Carbon::create($now->year, $now->month, 2),
             "diagnostico" => "Se encuentra en las primeras etapas.", "observaciones" => null ]
     ]);
 
 
     DB::table("sesions")->insert([
-        ["fecha" => Carbon::create(2022, 9, 17, 15, 30 ,0), "etapa_id" => 1, "objetivo" => "Trabajar los recuerdos en la etapa de la adolescencia con ayuda de imágenes y videos", 
+        ["fecha" => Carbon::create($now->year, $now->month, 2, 15, 30 ,0), "etapa_id" => 1, "objetivo" => "Trabajar los recuerdos en la etapa de la adolescencia con ayuda de imágenes y videos", 
             "descripcion" => "Etapa importante a nivel de emociones", "barreras"=> "Algunos recuerdos ya no conservados.", "facilitadores" => "El recuerdo con sus amigos", 
-            "fecha_finalizada" => Carbon::create(2022, 9, 19, 14,0,0), "paciente_id" => 1, "user_id" => 1, 
+            "fecha_finalizada" => Carbon::create($now->year, $now->month, 5, 14,0,0), "paciente_id" => 1, "user_id" => 1, 
             "respuesta" => "Gestiona las emociones correctamente.", "observaciones" => "ninguna observacion", "duracion" => "01:30"],
-        ["fecha" => Carbon::create(2022, 9, 22, 10, 15 ,0), "etapa_id" => 2, "objetivo" => "Trabajar la tristeza que le da al recordar a su marido ",
+        ["fecha" => Carbon::create($now->year, $now->month, 10, 10, 15 ,0), "etapa_id" => 2, "objetivo" => "Trabajar la tristeza que le da al recordar a su marido ",
             "descripcion" => "Al trabajar los recuerdos relacionados con su marido, genera una tristeza en el paciente que hay que controlar", "barreras"=> "Dificultad para hablar de su marido.", "facilitadores" => null, 
             "fecha_finalizada" => null, "paciente_id" => 1, "user_id" => 1, 
             "respuesta" => "Ninguna", "observaciones" => null, "duracion" => null],
-        ["fecha" => Carbon::create(2022, 10, 31, 10,30,0), "etapa_id" => 2, "objetivo" => "Pruebas iniciales",
+        ["fecha" => Carbon::create($now->year, $now->month, 4, 10,30,0), "etapa_id" => 2, "objetivo" => "Pruebas iniciales",
             "descripcion" => "Iniciaremos la terapia como un repaso general", "barreras"=> null, "facilitadores" => "Las fotografías ayudan.", 
             "fecha_finalizada" => null, "paciente_id" => 2, "user_id" => 4, 
             "respuesta" => null, "observaciones" => null, "duracion" => null],
@@ -355,7 +357,7 @@ Route::post('/prueba', function () {
             "descripcion" => "Cenó en Taco Bell su hijo Pablo y el vecino Eros, entre otros. Recuerda las risas e historias que allí se contaron. También haber pasado algo de frío.",
             "localizacion" => "Taco Bell Moncloa", "etapa_id" => 3, "categoria_id" => 3, "emocion_id" => 2,
             "estado_id" => 1, "etiqueta_id" => 1, "puntuacion" => 10, "paciente_id" => 1 ,"apto"=>1],
-        [ "fecha" => Carbon::create(2022, 10, 13), "nombre" => "Fiesta en La Sierra",
+        [ "fecha" => Carbon::create(2022, 10, 15), "nombre" => "Fiesta en La Sierra",
             "descripcion" => "Asistió a la casa de campo de unos amigos en la Sierra y la recuerda con sentimientos de felicidad y ternura. Cuenta historias del momento y destaca haber ganado dinero en un bingo casero.",
             "localizacion" => "Discoteca Recuer-Dame, La Sierra", "etapa_id" => 3, "categoria_id" => 7, "emocion_id" => 1,
             "estado_id" => 2, "etiqueta_id" => 2, "puntuacion" => 7, "paciente_id" => 2,"apto"=>1 ]
