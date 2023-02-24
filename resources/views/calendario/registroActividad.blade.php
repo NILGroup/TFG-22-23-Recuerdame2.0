@@ -28,7 +28,7 @@
         </div>
         <div class="form-floating mb-3" id="div-fin">
             <textarea maxlength="255" class="form-control form-control-sm" id="finished" name="finished" rows="3"></textarea>
-            <label for="finished" class="form-label">Finalizar</label>
+            <label for="finished" class="form-label">Anotaciones sobre el desarrollo de la actividad</label>
         </div>
         <div class="modal-footer">
             <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-outline-secondary btn-md d-none">
