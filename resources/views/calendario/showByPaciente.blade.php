@@ -84,6 +84,7 @@
                 $('#calendar .fc-listMonth-button').attr("disabled", "");
             });
             $('#calendar .fc-dayGridMonth-button').click();
+            $('#calendar .fc-todo-button').click();
         }) 
     </script>
 @endpush
