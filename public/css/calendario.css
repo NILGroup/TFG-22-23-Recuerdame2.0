@@ -14,6 +14,21 @@
     border: none;
     
 }
+
+.fc .fc-add_event-button:active,
+.fc .fc-dayGridWeek-button:active,
+.fc .fc-dayGridDay-button:active,
+.fc .fc-listMonth-button:active,
+.fc .fc-today-button:active,
+.fc .fc-dayGridMonth-button:active,
+.fc .fc-prev-button:active,
+.fc .fc-next-button:active,
+.fc .fc-todo-button:active,
+.fc .fc-actividades-button:active,
+.fc .fc-sesiones-button:active {
+    background-color: #14a2b8;
+}
+
 .fc .fc-prev-button,
 .fc .fc-next-button{
     font-size: 25px;

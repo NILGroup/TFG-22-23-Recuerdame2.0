@@ -280,10 +280,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var calendar = new FullCalendar.Calendar(calendarEl, options);
 
-    var addEventBtn = document.getElementsByClassName('fc-dayGridMonth-button');
-
-    console.log(addEventBtn.length);
-
     function mostrarTodo() {
         for (let i = 0; i < calendar.getEvents().length; i++) {
             calendar.getEvents()[i].setProp('display', 'auto');
