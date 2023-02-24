@@ -57,4 +57,33 @@
     <script src="/js/recuerdo.js"></script>
     <script src="/js/multiModal.js"></script>
     <script src="/js/confirm.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#calendar .fc-dayGridMonth-button').on("click", function() {
+                $('#calendar .fc-dayGridMonth-button').attr("disabled", "");
+                $('#calendar .fc-dayGridWeek-button').removeAttr("disabled");
+                $('#calendar .fc-dayGridDay-button').removeAttr("disabled");
+                $('#calendar .fc-listMonth-button').removeAttr("disabled");
+            });
+            $('#calendar .fc-dayGridWeek-button').on("click", function() {
+                $('#calendar .fc-dayGridMonth-button').removeAttr("disabled");
+                $('#calendar .fc-dayGridWeek-button').attr("disabled", "");
+                $('#calendar .fc-dayGridDay-button').removeAttr("disabled");
+                $('#calendar .fc-listMonth-button').removeAttr("disabled");
+            });
+            $('#calendar .fc-dayGridDay-button').on("click", function() {
+                $('#calendar .fc-dayGridMonth-button').removeAttr("disabled");
+                $('#calendar .fc-dayGridWeek-button').removeAttr("disabled");
+                $('#calendar .fc-dayGridDay-button').attr("disabled", "");
+                $('#calendar .fc-listMonth-button').removeAttr("disabled");
+            });
+            $('#calendar .fc-listMonth-button').on("click", function() {
+                $('#calendar .fc-dayGridMonth-button').removeAttr("disabled");
+                $('#calendar .fc-dayGridWeek-button').removeAttr("disabled");
+                $('#calendar .fc-dayGridDay-button').removeAttr("disabled");
+                $('#calendar .fc-listMonth-button').attr("disabled", "");
+            });
+            $('#calendar .fc-dayGridMonth-button').click();
+        }) 
+    </script>
 @endpush

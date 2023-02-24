@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let user = document.getElementById('user_type').value; //tipo de usuario (1 terapeuta, 2 cuidador)
     let formulario = document.getElementById('formulario');
     var calendarEl = document.getElementById('calendar');
-    
-    var addEventBtn =  document.getElementsByClassName('fc-add_event-button');
 
     let url_eventos = "/calendario/" + document.getElementById('paciente_id').value;
     let options = {
@@ -12,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         fixedWeekCount: false,
         customButtons: {
-            
+
         },
         locale: 'es',
         noEventsText: 'No hay eventos disponibles',
@@ -20,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
         firstDay: 1,
         themeSystem: 'bootstrap5',
         initialView: 'dayGridMonth',
+        buttonClass: {
+            dayGridMonth: 'fc-dayGridMonth-button'
+        },
         buttonIcons: {
             add_event: 'calendar-plus',
             prev: 'arrow-left',
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('fecha').value = info.dateStr + " 09:00:00";
                 document.getElementById('objetivo').value = "";
                 document.getElementById('descripcion').value = "";
-                
+
                 var tabla = $("#tabla_recuerdos").dataTable();
                 console.log(tabla);
                 tabla.api().clear().draw();
@@ -84,13 +85,17 @@ document.addEventListener('DOMContentLoaded', function () {
             formulario.reset();
             //formularioEliminar.reset();
             //document.getElementById('id').value = info.event.id;
-            if(user === '1') { //Se trata de un terapeuta
+            if (user === '1') { //Se trata de un terapeuta
                 document.getElementById('finished').removeAttribute("required");
-                if(info.event.extendedProps.tipo === 'a' && info.event.extendedProps.finished === null) { //Si se trata de una actividad y no ha sido finalizada...
+                if (info.event.extendedProps.tipo === 'a' && info.event.extendedProps.finished === null) { //Si se trata de una actividad y no ha sido finalizada...
                     document.getElementById('div-fin').classList.add('d-none');
+                    document.getElementById('color').classList.remove('d-none');
                 } else if (info.event.extendedProps.tipo === 'a' && info.event.extendedProps.finished !== null) { //Si se trata de una actividad y ha sido finalizada...
                     document.getElementById('div-fin').classList.remove('d-none');
-                    
+                    document.getElementById('title').setAttribute("readonly", "");
+                    document.getElementById('start').setAttribute("readonly", "");
+                    document.getElementById('obs').setAttribute("readonly", "");
+                    document.getElementById('color').classList.add('d-none');
                     document.getElementById('finished').setAttribute("readonly", "");
                 }
             } else { //Se trata de un cuidador
@@ -98,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('start').setAttribute("readonly", "");
                 document.getElementById('color').setAttribute("readonly", "");
                 document.getElementById('obs').setAttribute("readonly", "");
+                document.getElementById('color').classList.add('d-none');
                 document.getElementById("modalesCalendario").children[1].style.display = "none";
                 document.getElementById('btnModificar').value = "Finalizar actividad";
                 document.getElementById('finished').setAttribute("required", "");
@@ -119,9 +125,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 //Para dejar los botones necesarios
                 document.getElementById('btnGuardar').classList.add('d-none');
-                if(user === '2') {
+                if (user === '2') {
                     document.getElementById('btnEliminar').classList.add('d-none');
-                    if(info.event.extendedProps.finished === null)
+                    if (info.event.extendedProps.finished === null)
                         document.getElementById('btnModificar').classList.remove('d-none');
                     else
                         document.getElementById('btnModificar').classList.add('d-none');
@@ -137,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('start').value = info.event.startStr;
                 document.getElementById('color').value = info.event.backgroundColor;
                 document.getElementById('obs').value = info.event.extendedProps.description;
-                if(info.event.extendedProps.finished !== null)
+                if (info.event.extendedProps.finished !== null)
                     document.getElementById('finished').value = info.event.extendedProps.finished;
 
             } else if (info.event.extendedProps.tipo === 's') {
@@ -175,11 +181,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     row.append($('<td>' + recuerdo.etiqueta.nombre + '</td>'));
                     tabla.api().row.add(row).draw()
                 }
-                
+
             }
             console.log(info.event.extendedProps.fecha);
             $('#evento').modal('show');
-            
+
         },
 
         buttonText: {
@@ -214,19 +220,54 @@ document.addEventListener('DOMContentLoaded', function () {
                 text: 'Todas',
                 click: function () {
                     mostrarTodo();
-                    pruebas();
+                    var list = document.getElementsByClassName('fc-todo-button');
+                    for (index = 0; index < list.length; ++index) {
+                        list[index].setAttribute("disabled", "");
+                    }
+                    list = document.getElementsByClassName('fc-sesiones-button');
+                    for (index = 0; index < list.length; ++index) {
+                        list[index].removeAttribute("disabled");
+                    }
+                    list = document.getElementsByClassName('fc-actividades-button');
+                    for (index = 0; index < list.length; ++index) {
+                        list[index].removeAttribute("disabled");
+                    }
                 }
             },
             actividades: {
                 text: 'Actividades',
                 click: function () {
                     mostrarActividades();
+                    var list = document.getElementsByClassName('fc-todo-button');
+                    for (index = 0; index < list.length; ++index) {
+                        list[index].removeAttribute("disabled");
+                    }
+                    list = document.getElementsByClassName('fc-actividades-button');
+                    for (index = 0; index < list.length; ++index) {
+                        list[index].setAttribute("disabled", "");
+                    }
+                    list = document.getElementsByClassName('fc-sesiones-button');
+                    for (index = 0; index < list.length; ++index) {
+                        list[index].removeAttribute("disabled");
+                    }
                 }
             },
             sesiones: {
                 text: 'Sesiones',
                 click: function () {
                     mostrarSesiones();
+                    var list = document.getElementsByClassName('fc-todo-button');
+                    for (index = 0; index < list.length; ++index) {
+                        list[index].removeAttribute("disabled");
+                    }
+                    list = document.getElementsByClassName('fc-actividades-button');
+                    for (index = 0; index < list.length; ++index) {
+                        list[index].removeAttribute("disabled");
+                    }
+                    list = document.getElementsByClassName('fc-sesiones-button');
+                    for (index = 0; index < list.length; ++index) {
+                        list[index].setAttribute("disabled", "");
+                    }
                 }
             }
         };
@@ -239,9 +280,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var calendar = new FullCalendar.Calendar(calendarEl, options);
 
-    $("addEventBtn").on("click", function () {
-        alert("PRueba");
-    })
+    var addEventBtn = document.getElementsByClassName('fc-dayGridMonth-button');
+
+    console.log(addEventBtn.length);
 
     function mostrarTodo() {
         for (let i = 0; i < calendar.getEvents().length; i++) {
@@ -268,10 +309,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 calendar.getEvents()[i].setProp('display', 'auto');
         }
         calendar.render();
-    }
-
-    function pruebas() {
-        console.log(user);
     }
 
     calendar.render();

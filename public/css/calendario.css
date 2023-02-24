@@ -19,20 +19,7 @@
     font-size: 25px;
     font-weight: bold;
 }
-.fc .fc-add_event-button:hover,
-.fc .fc-dayGridWeek-button:hover,
-.fc .fc-dayGridDay-button:hover,
-.fc .fc-listMonth-button:hover,
-.fc .fc-today-button:hover,
-.fc .fc-dayGridMonth-button:hover,
-.fc .fc-prev-button:hover,
-.fc .fc-next-button:hover,
-.fc .fc-todo-button:hover,
-.fc .fc-actividades-button:hover,
-.fc .fc-sesiones-button:hover {
-    
-    color: white;
-}
+
 .fc td,  .fc th{
     background-color: white;
 }
