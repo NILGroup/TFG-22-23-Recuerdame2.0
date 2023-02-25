@@ -37,7 +37,15 @@
                             <h4 class="text-center hv-title">{{$recuerdo->nombre}}</h4>
                             <div class="row hv-container ">
                                 <p class="hv-des">{{$recuerdo->descripcion}}</p>
+                                <div class="testimonial-group justify-content-center">
+                                    <div class="row text-center flex-nowrap" style="padding-bottom: 30px;"> <!--flex-nowrap-->
 
+                                        @foreach ($recuerdo->multimedias as $media)
+                                            @include("layouts.multimedia")
+                                        @endforeach
+
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
@@ -54,7 +62,7 @@
                                     <div class="row text-center flex-nowrap" style="padding-bottom: 30px;"> <!--flex-nowrap-->
 
                                         @foreach ($recuerdo->multimedias as $media)
-                                        @include("layouts.multimedia")
+                                            @include("layouts.multimedia")
                                         @endforeach
 
                                     </div>
