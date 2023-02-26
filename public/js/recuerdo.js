@@ -140,29 +140,35 @@ function crearRecuerdo() {
     var fd = new FormData();
 
     console.log(inputValues)
+    console.log(selectValues)
+    console.log(textValues)
   
+    let recuerdo_id = $("#recuerdo_id").prop("value")
 
-    if (inputValues[2].value){
-        fd.append('id', inputValues[2].value)
+    //recuerdosCreatorForm
+
+    if (recuerdo_id){
+        fd.append('id', recuerdo_id)
     }
     
-    fd.append('paciente_id', inputValues[1].value);
-    fd.append('nombre', inputValues[3].value);
-    fd.append('fecha', inputValues[4].value);
-    fd.append('puntuacion', inputValues[6].value);
-    fd.append('apto', Number(inputValues[5].checked))
+    fd.append('paciente_id', $("#paciente_id").prop("value"));
+    fd.append('nombre', $("#nombre").prop("value"));
+    fd.append('fecha', $("#recuerdosCreatorForm #fecha").prop("value"));
+    fd.append('puntuacion', $("#puntuacion").prop("value"));
+    fd.append('apto', Number($("#apto").prop("checked")))
 
-    if (inputValues[7].value)
-        fd.append("tipo_custom", inputValues[7].value)
+    let tipo_custom = $("#tipo_custom").prop("value")
+    if (tipo_custom)
+        fd.append("tipo_custom", tipo_custom)
 
-    fd.append('estado_id', selectValues[0].value);
-    fd.append('etiqueta_id', selectValues[1].value);
-    fd.append('etapa_id', selectValues[2].value);
-    fd.append('emocion_id', selectValues[3].value);
-    fd.append('categoria_id', selectValues[4].value);
 
-    fd.append('descripcion', textValues[0].value);
-    fd.append('localizacion', textValues[1].value);
+    fd.append('estado_id', $("#recuerdosCreatorForm #idEstado").prop("value"));
+    fd.append('etapa_id', $("#recuerdosCreatorForm #idEtapa").prop("value"));
+    fd.append('emocion_id', $("#recuerdosCreatorForm #idEmocion").prop("value"));
+    fd.append('categoria_id', $("#recuerdosCreatorForm #categoria_id").prop("value"));
+
+    fd.append('descripcion', $("#recuerdosCreatorForm #descripcion").prop("value"));
+    fd.append('localizacion', $("#recuerdosCreatorForm #localizacion").prop("value"));
 
     for (var i = 0; i < ids.length; i++) {
         fd.append('ids_personas[]', ids[i]);
@@ -202,11 +208,11 @@ function agregarRecuerdosExistentes(r) {
 
         let rec = $(elem).children()  
 
-        if ($(rec[7]).children("input").prop("checked")){
+        if ($(rec[6]).children("input").prop("checked")){
 
             let row = $("<tr></tr>")
 
-            for (let i = 1; i < 7; i++){
+            for (let i = 1; i < 6; i++){
                 row.append($('<td>' + rec[i].textContent + '</td>'))
             }
 
@@ -280,7 +286,6 @@ function addFields(row, rec){
     row.append($('<td>' + rec.etapa.nombre + '</td>' ))
     row.append($('<td>' + rec.categoria.nombre + '</td>'))
     row.append($('<td>' + rec.estado.nombre + '</td>'))
-    row.append($('<td>' + rec.etiqueta.nombre + '</td>' ))
 }
 
 function setRow(tabla, r){

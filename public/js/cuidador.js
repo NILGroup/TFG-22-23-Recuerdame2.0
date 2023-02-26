@@ -30,7 +30,16 @@ $("#guardar").on("click", function(event){
             success: function (data) {
                 console.log(data)
                 if (data && $("#id").prop("value") != data.id) { 
-                    duplicatedAlert(data);
+                    
+                    //Es terapeuta
+                    if (data.rol_id == 1){
+                        repeatedEmail()
+                    }  
+                    //Es cuidador
+                    else{
+                        duplicatedAlert(data)
+                    }
+                    
                 }
                 else{
                     submitDropzone()
@@ -64,6 +73,13 @@ function submitDropzone(){
     }
 
     
+}
+
+function repeatedEmail(){
+    $("#email").prop("value", "")
+    Swal.fire({
+        title: 'Este correo ya está registrado',
+    })
 }
 
 

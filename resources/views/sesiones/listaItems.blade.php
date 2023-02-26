@@ -60,7 +60,6 @@
                     <th scope="col">Etapa</th>
                     <th scope="col">Categoría</th>
                     <th scope="col">Estado</th>
-                    <th scope="col">Etiqueta</th>
                     @if($show)
                     <th class="fit10" scope="col"></th>
                     @endif
@@ -80,9 +79,6 @@
                     </td>
                     <td>
                         @if(isset($recuerdo->estado)){{$recuerdo->estado->nombre}}@endif
-                    </td>
-                    <td>
-                        @if(isset($recuerdo->etiqueta)){{$recuerdo->etiqueta->nombre}}@endif
                     </td>
                     @if($show)
                     <td class="tableActions">
