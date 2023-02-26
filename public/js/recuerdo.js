@@ -183,8 +183,8 @@ function crearRecuerdo() {
     $.ajax({
         type: "post",
         url: '/storeRecuerdoNoView',
-        processData: false, // tell jQuery not to process the data
-        contentType: false, // tell jQuery not to set contentType
+        processData: false, 
+        contentType: false,
         data: fd,
         success: function(data) {
             reloadRecuerdos(data);
@@ -248,37 +248,56 @@ function reloadRecuerdos(r) {
         r.etiqueta = {};
         r.etiqueta.nombre = " ";
     }
-    console.log(r)
 
-    let tabla = $("#tablaRecuerdosExistentes").dataTable()
-
-    let row = $("<tr></tr>")
-    row.append($('<td class="id_recuerdo">' + r.id + '</td>'))
-
-    addFields(row, r)
+    addRowToExistent(r)
     
-    row.append($('<td id="recuerdosSeleccionados" class="tableActions">' +
-    '<input class="form-check-input" type="checkbox" value=' + r.id + ' name="checkRecuerdo[]" id="checkRecuerdo" checked>' +
-    '</td>'))
-
-    setRow(tabla, row)
-
     $(".id_recuerdo").each((i, e) => $(e).hide())
 
     $("#tablaRecuerdosExistentes tbody input").filter((i, e) => selected.includes($(e).prop("value")))
         .each((i, e) => $(e).prop("checked"),true)
 
 
-    tabla = $("#tabla_recuerdos").dataTable()
-
-    row = $("<tr></tr>")
-    addFields(row, r)
-    row.append($('<input type="hidden" value=' + r.id + ' name="recuerdos[]">'))
-
-    setRow(tabla, row)
+    addRowToTable(r)
     
 }
 
+
+/**
+ * Dado un recuerdo añade una fila a la tabla de existente. 
+ * Introduce un campo al principio con el id (que posteriormente se ocultara)
+ * Introduce un campo al final que es el checkbox que muestra si está seleccionado o no
+ */
+
+function addRowToExistent(r){
+   
+    let row = $("<tr></tr>")
+
+    row.append($('<td class="id_recuerdo">' + r.id + '</td>'))
+    addFields(row, r)
+    row.append($('<td id="recuerdosSeleccionados" class="tableActions">' + '<input class="form-check-input" type="checkbox" value=' + r.id + ' name="checkRecuerdo[]" id="checkRecuerdo" checked>' +'</td>'))
+
+    setRow($("#tablaRecuerdosExistentes").dataTable(), row)
+}
+
+
+/*
+Dado un recuerdo añade una fila a la tabla de recuerdos asociados a la sesion
+Tiene un input extra con la id del recuerdo que se enviará al back para linkear dicho recuerdo con la sesión
+*/
+function addRowToTable(r){
+
+    let row = $("<tr></tr>")
+    addFields(row, r)
+    row.append($('<input type="hidden" value=' + r.id + ' name="recuerdos[]">'))
+
+    setRow($("#tabla_recuerdos").dataTable(), row)
+}
+
+
+
+/**
+ * Dada una fila y un recuerdo añade los campos principales a la fila
+ */
 
 function addFields(row, rec){
     row.append($('<td>' + rec.nombre + '</td>'))
@@ -287,6 +306,9 @@ function addFields(row, rec){
     row.append($('<td>' + rec.categoria.nombre + '</td>'))
     row.append($('<td>' + rec.estado.nombre + '</td>'))
 }
+
+
+
 
 function setRow(tabla, r){
     tabla.api().row.add(r).draw()
