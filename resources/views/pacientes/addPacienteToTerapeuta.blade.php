@@ -22,23 +22,17 @@
             <table class="table table-bordered recuerdameTable datatable">
                 <thead>
                     <tr class="bg-primary">
-                        <th scope="col col-1"></th>
-                        <th scope="col col-12">Nombre</th>
-                        <th scope="col col-12">Apellidos</th>
+                        <th class="fit5 text-center" scope="col col-12">Asignar</th>
+                        <th class="text-center" scope="col col-12">Nombre</th>
                     </tr>
                 </thead>
                 @foreach($users as $user)
                     <tr>
-                        <th scope="row">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value={{$user->id}} name="seleccion[]" @if($user->pacientes->contains($paciente)) checked @endif>
-                            </div>
-                        </th>
-                        <td>
-                            {{$user->nombre}}
+                        <td class="text-center" scope="row">
+                            <input class="form-check-input" type="checkbox" value={{$user->id}} name="seleccion[]" @if($user->pacientes->contains($paciente)) checked @endif>
                         </td>
                         <td>
-                            {{$user->apellidos}}
+                            {{$user->nombre}} {{$user->apellidos}}
                         </td>
                     </tr>
                 @endforeach

@@ -19,9 +19,9 @@
             <caption>Listado de sesiones</caption>
             <thead>
                 <tr class="bg-primary">
-                    <th class="fit10" scope="col">Fecha</th>
-                    <th scope="col">Objetivo</th>
-                    <th class="fit15" scope="col">Acciones</th>
+                    <th class="fit10 text-center" scope="col">Fecha</th>
+                    <th scope="col" class="text-center">Objetivo</th>
+                    <th class="fit15 text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>

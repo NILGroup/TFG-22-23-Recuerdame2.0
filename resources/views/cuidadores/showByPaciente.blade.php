@@ -16,13 +16,13 @@
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de cuidadores</caption>
             <thead>
-                <tr class="bg-primary busqueda">
-                    <th class="fit10" scope="col">Nombre</th>
-                    <th class="fit10" scope="col">Correo electrónico</th>
-                    <th class="fit5" scope="col">Teléfono</th>
-                    <th scope="col">Localidad</th>
-                    <th class="fit5" scope="col">Grado de parentesco</th>
-                    <th class="fit5" scope="col"></th>
+                <tr class="bg-primary busqueda ">
+                    <th class="fit10 text-center" scope="col">Nombre</th>
+                    <th class="fit10 text-center" scope="col">Correo electrónico</th>
+                    <th class="fit5 text-center" scope="col">Teléfono</th>
+                    <th class="text-center" scope="col">Localidad</th>
+                    <th class="fit5 text-center" scope="col">Parentesco</th>
+                    <th class="fit5 text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>

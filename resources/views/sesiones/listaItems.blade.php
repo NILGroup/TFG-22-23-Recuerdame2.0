@@ -55,13 +55,13 @@
             <caption>Listado de recuerdos</caption>
             <thead>
                 <tr class="bg-primary">
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Etapa</th>
-                    <th scope="col">Categoría</th>
-                    <th scope="col">Estado</th>
+                    <th scope="col" class="text-center">Nombre</th>
+                    <th scope="col" class="text-center">Fecha</th>
+                    <th scope="col" class="text-center">Etapa</th>
+                    <th scope="col" class="text-center">Categoría</th>
+                    <th scope="col" class="text-center">Estado</th>
                     @if($show)
-                    <th class="fit10" scope="col"></th>
+                    <th class="fit10 text-center" scope="col">Acciones</th>
                     @endif
                 </tr>
             </thead>

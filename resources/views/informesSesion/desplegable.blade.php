@@ -13,14 +13,14 @@
             <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
                 <thead>
                     <tr class="bg-primary">
-                        <th scope="col" style="display: none;">id</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Etapa</th>
-                        <th scope="col">Categoría</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Etiqueta</th>
-                        <th class="fit10" scope="col"></th>
+                        <th class="text-center" scope="col" style="display: none;">id</th>
+                        <th class="text-center" scope="col">Nombre</th>
+                        <th class="text-center" scope="col">Fecha</th>
+                        <th class="text-center" scope="col">Etapa</th>
+                        <th class="text-center" scope="col">Categoría</th>
+                        <th class="text-center" scope="col">Estado</th>
+                        <th class="text-center" scope="col">Etiqueta</th>
+                        <th class="text-center" class="fit10" scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <!--<tbody>-->

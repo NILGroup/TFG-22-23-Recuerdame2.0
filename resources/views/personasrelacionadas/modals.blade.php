@@ -36,11 +36,11 @@
                 <table id="tablaPersonasExistentes" class="table table-bordered table-striped table-responsive datatable" style="width:100%;">
                     <thead>
                         <tr class="bg-primary">
-                            <th style="display: none;">ID</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellidos</th>
-                            <th class="fit10" scope="col">Tipo de Relacion</th>
-                            <th class="fit5" scope="col"></th>
+                            <th style="display: none;" class="text-center">ID</th>
+                            <th scope="col" class="text-center">Nombre</th>
+                            <th scope="col" class="text-center">Apellidos</th>
+                            <th class="fit10 text-center" scope="col">Tipo de Relacion</th>
+                            <th class="fit5 text-center" scope="col">Seleccionar</th>
                         </tr>
                     </thead>
                     <tbody>

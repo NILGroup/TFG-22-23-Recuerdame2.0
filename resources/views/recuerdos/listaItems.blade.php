@@ -140,11 +140,11 @@
         <caption>Listado de personas relacionadas</caption>
         <thead>
             <tr class="bg-primary">
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellidos</th>
-                <th class="fit10" scope="col">Tipo de relación</th>
+                <th scope="col" class="text-center">Nombre</th>
+                <th scope="col" class="text-center">Apellidos</th>
+                <th class="fit10 text-center" scope="col">Tipo de relación</th>
                 @if($show)
-                <th class="fit5" scope="col"></th>
+                    <th class="fit5 text-center" scope="col">Acciones</th>
                 @endif
             </tr>
         </thead>

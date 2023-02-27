@@ -17,15 +17,15 @@
             <caption>Listado de recuerdos</caption>
             <thead>
                 <tr class="bg-primary">
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Fecha</th>
+                    <th scope="col" class="text-center">Nombre</th>
+                    <th scope="col" class="text-center">Fecha</th>
                     @if (Auth::user()->rol_id == 1)
-                    <th scope="col">Etapa</th>
-                    <th scope="col">Categoría</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Etiqueta</th>
+                        <th scope="col" class="text-center">Etapa</th>
+                        <th scope="col" class="text-center">Categoría</th>
+                        <th scope="col" class="text-center">Estado</th>
+                        <th scope="col" class="text-center">Etiqueta</th>
                     @endif
-                    <th class="fit10" scope="col"></th>
+                    <th class="fit10 text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
             <!--<tbody>-->

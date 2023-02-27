@@ -17,10 +17,10 @@
                 <caption>Listado de informes de seguimiento</caption>
                 <thead>
                     <tr class="bg-primary">
-                        <th class="fit15" scope="col">Informe</th>
-                        <th class="" scope="col">Sesiones desde la última evaluación</th>
-                        <th scope="col">Diagnóstico</th>
-                        <th scope="col"></th>
+                        <th class="fit15 text-center" scope="col">Informe</th>
+                        <th class=" text-center" scope="col">Sesiones desde la última evaluación</th>
+                        <th scope="col" class=" text-center">Diagnóstico</th>
+                        <th scope="col" class=" text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,10 +66,10 @@
                 <table id="tabla2" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr class="bg-primary">
-                            <th class="fit5" scope="col">Nombre</th>
-                            <th class="fit10" scope="col">Apellidos</th>
-                            <th scope="col">Correo electrónico</th>
-                            <th class="fit10" scope="col"></th>
+                            <th class="fit5 text-center" scope="col">Nombre</th>
+                            <th class="fit10 text-center" scope="col">Apellidos</th>
+                            <th scope="col" class=" text-center">Correo electrónico</th>
+                            <th class="fit10 text-center" scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,6 +79,8 @@
                             <td>{{$cuidador->apellidos}}</td>
                             <td>{{$cuidador->email}}</td>
                             <td class="tableActions">
+                                <a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                                <a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
                                 <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" style="display:inline!important;">
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
@@ -115,10 +117,10 @@
                 <table id="tabla3" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr class="bg-primary">
-                            <th class="fit5" scope="col">Nombre</th>
-                            <th class="fit10" scope="col">Apellidos</th>
-                            <th scope="col">Tipo de Relacion</th>
-                            <th class="fit10" scope="col"></th>
+                            <th class="fit5 text-center" scope="col">Nombre</th>
+                            <th class="fit10 text-center" scope="col">Apellidos</th>
+                            <th class=" text-center" scope="col">Tipo de Relacion</th>
+                            <th class="fit10 text-center" scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>

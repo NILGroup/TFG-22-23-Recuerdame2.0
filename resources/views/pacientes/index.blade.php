@@ -20,22 +20,20 @@
             <caption>Listado de pacientes</caption>
             <thead>
                 <tr class="bg-primary">
-                    <th class="fit5" scope="col">Nombre</th>
-                    <th scope="col">Apellidos</th>
-                    <th class="fit5" scope="col">Género</th>
-                    <th class="fit5" scope="col">Edad</th>
-                    <th class="fit5" scope="col"></th>
+                    <th class="fit5 text-center" scope="col">Nombre</th>
+                    <th class="fit5 text-center" scope="col">Género</th>
+                    <th class="fit5 text-center" scope="col">Edad</th>
+                    <th class="fit5 text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
             <!--<tbody>-->
             @foreach($pacientes as $paciente)
                 <tr class="">
-                    @if (Auth::user()->rol_id == 1)
-                    <td><a href="/pacientes/{{$paciente->id}}/sesiones" class="link-primary"> {{$paciente->nombre}}</a></td>
-                    @else
-                    <td><a href="/pacientes/{{$paciente->id}}/calendario" class="link-primary"> {{$paciente->nombre}}</a></td>
-                    @endif
-                    <td>{{$paciente->apellidos}}</td>
+                    <td>
+                        <a href=" @if (Auth::user()->rol_id == 1) /pacientes/{{$paciente->id}}/sesiones @else /pacientes/{{$paciente->id}}/calendario @endif" class="link-primary">
+                            {{$paciente->nombre}} {{$paciente->apellidos}}
+                        </a>
+                    </td>
                     <td>
                         {{$paciente->genero->nombre}}
                     </td>
