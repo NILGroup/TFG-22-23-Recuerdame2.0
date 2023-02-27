@@ -88,8 +88,8 @@ function CrearPersonas() {
             let tabla = $("#tabla_personas").dataTable()
             let row = $("<tr></tr>")
 
-            row.append($("<td>" + data["nombre"]  + "</td>"))
-            row.append($("<td>" + data["apellidos"] + "</td>"))
+            row.append($("<td>" + data["nombre"] + " " + data["apellidos"] + "</td>"))
+            //row.append($("<td>" + data["apellidos"] + "</td>"))
             row.append($("<td>" + data["tiporelacion_id"]  + "</td>"))
             row.append($('<input type="hidden" value=' + data["id"] + ' name="checkPersona[]">'))
             setRow(tabla, row)
@@ -113,8 +113,7 @@ function reloadPersona(p) {
     let tabla = $("#tablaPersonasExistentes").dataTable()
     let row = $("<tr></tr>")
     row.append($('<td class="row_id">' + p.id + '</td>'))
-    row.append($('<td>' + p.nombre + '</td>'))
-    row.append($('<td>' + p.apellidos + '</td>'))
+    row.append($('<td>' + p.nombre + " " + p.apellidos + '</td>'))
     row.append($('<td>' + p.tiporelacion_id + '</td>'))
     row.append($('<td id="personasSeleccionadas" class="tableActions"><input class="form-check-input" type="checkbox" value=' + p.id + ' name="checkPersonaExistente[]" id="checkPersonaExistente" checked>' +
     '</td></tr>'))
@@ -139,14 +138,12 @@ function agregarPersonas(p) {
 
     $("#tablaPersonasExistentes tbody tr").each(function(i, elem){
         let per = $(elem).children()
-        
-        
-        if ($(per[4]).children("input").prop("checked")){
+        console.log("id:" + per[0].textContent + " N:" + per[1].textContent +" R:" + per[2].textContent + " Check:" + per[3].textContent)
+        if ($(per[3]).children("input").prop("checked")){
         
             let row = $("<tr></tr>")
-            for (let i = 1; i < 4; i++){
-                row.append("<td>" + per[i].textContent + "</td>")
-            }
+            row.append("<td>" + per[1].textContent + "</td>")
+            row.append("<td>" + per[2].textContent + "</td>")
             row.append('<input type="hidden" value=' + per[0].textContent + ' name="checkPersona[]">')
             setRow(tabla, row)
         }

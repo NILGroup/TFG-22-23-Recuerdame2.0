@@ -141,7 +141,6 @@
         <thead>
             <tr class="bg-primary">
                 <th scope="col" class="text-center">Nombre</th>
-                <th scope="col" class="text-center">Apellidos</th>
                 <th class="fit10 text-center" scope="col">Tipo de relación</th>
                 @if($show)
                     <th class="fit5 text-center" scope="col">Acciones</th>
@@ -151,10 +150,8 @@
         <tbody>
             @foreach ($recuerdo->personas_relacionadas as $persona)
             <tr>
-                <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}}</a></td>
-                <td>{{$persona->apellidos}}</td>
+                <td>{{$persona->nombre}} {{$persona->apellidos}}</td>
                 <td>{{$persona->tiporelacion->nombre}}</td>
-                <input type="hidden" value={{$persona->id}}>
                 @if($show)
                 <td class="tableActions">
                     <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>

@@ -67,7 +67,6 @@
                     <thead>
                         <tr class="bg-primary">
                             <th class="fit5 text-center" scope="col">Nombre</th>
-                            <th class="fit10 text-center" scope="col">Apellidos</th>
                             <th scope="col" class=" text-center">Correo electrónico</th>
                             <th class="fit10 text-center" scope="col">Acciones</th>
                         </tr>
@@ -75,8 +74,7 @@
                     <tbody>
                         @foreach($cuidadores as $cuidador)
                         <tr>
-                            <td>{{$cuidador->nombre}}</td>
-                            <td>{{$cuidador->apellidos}}</td>
+                            <td><a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}/ver">{{$cuidador->nombre}} {{$cuidador->apellidos}}</a></td>
                             <td>{{$cuidador->email}}</td>
                             <td class="tableActions">
                                 <a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
@@ -117,17 +115,15 @@
                 <table id="tabla3" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr class="bg-primary">
-                            <th class="fit5 text-center" scope="col">Nombre</th>
-                            <th class="fit10 text-center" scope="col">Apellidos</th>
-                            <th class=" text-center" scope="col">Tipo de Relacion</th>
+                            <th class=" text-center" scope="col">Nombre</th>
+                            <th class="text-center" scope="col">Tipo de Relacion</th>
                             <th class="fit10 text-center" scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($personas as $persona)
                         <tr>
-                            <td>{{$persona->nombre}}</td>
-                            <td>{{$persona->apellidos}}</td>
+                            <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}} {{$persona->apellidos}}</a></td>
                             <td>{{$persona->tiporelacion->nombre}}</td>
                             <td class="tableActions">
                                 <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
