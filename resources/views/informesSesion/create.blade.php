@@ -16,7 +16,7 @@
         <input type="hidden" id="idRecuerdoModal" value=""/>
         <div>
             <a href="/pacientes/{{$sesion->paciente->id}}/sesiones"><button type="button" class="btn btn-primary">Cancelar</button></a>
-            <button type="submit" id="guardar" name="guardarInformeSesion" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
+            <button type="submit" id="guardar" name="guardarInformeSesion" value="Guardar" class="btn btn-outline-primary guardar">Finalizar</button>
         </div>
 
     </form>
