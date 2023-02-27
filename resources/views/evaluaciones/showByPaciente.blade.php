@@ -28,7 +28,7 @@
             <tbody>
                 @foreach ($evaluaciones as $informe)
                 <tr>
-                    <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe">Informe {{date("d/m/Y", strtotime($informe->fecha))}}</td>
+                    <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver">Informe {{date("d/m/Y", strtotime($informe->fecha))}}</td>
                     <td>{{$informe->numSesiones}}</td>
                     <td>{{$informe->diagnostico}}</td>
                     <td class="tableActions">
@@ -39,6 +39,7 @@
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                         </form>
+                        <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe"><i class="fa-solid fa-print text-success tableIcon"></i></a>
                     </td>
                 </tr>
                 @endforeach
