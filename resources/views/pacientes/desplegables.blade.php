@@ -1,4 +1,4 @@
-<div class="accordion mb-2"> 
+<div class="accordion mb-2 shadow-sm"> 
     <div class="accordion-item accordion-header" id="evaluaciones1">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#evaluaciones" aria-expanded="true" aria-controls="evaluaciones">
             <div class="w-100">
@@ -16,14 +16,14 @@
             <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
                 <caption>Listado de informes de seguimiento</caption>
                 <thead>
-                    <tr class="bg-primary">
+                    <tr >
                         <th class="fit15 text-center" scope="col">Informe</th>
                         <th class=" text-center" scope="col">Sesiones desde la última evaluación</th>
                         <th scope="col" class=" text-center">Diagnóstico</th>
                         <th scope="col" class=" text-center">Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     @foreach ($evaluaciones as $informe)
                     <tr>
                         <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver">Informe {{date("d/m/Y", strtotime($informe->fecha))}}</td>
@@ -47,7 +47,7 @@
     </div>
 </div>  
 
-<div class="accordion mb-2"> 
+<div class="accordion mb-2 shadow-sm"> 
     <div class="accordion-item accordion-header" id="cuidadores1">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#cuidadores" aria-expanded="true" aria-controls="cuidadores">
             <div class="w-100">
@@ -66,10 +66,10 @@
             <div>
                 <table id="tabla2" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
-                        <tr class="bg-primary">
-                            <th class="fit5 text-center" scope="col">Nombre</th>
-                            <th scope="col" class=" text-center">Correo electrónico</th>
-                            <th class="fit10 text-center" scope="col">Acciones</th>
+                        <tr >
+                            <th class="fit5 " scope="col">Nombre</th>
+                            <th scope="col" class=" ">Correo electrónico</th>
+                            <th class="fit10 " scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,7 +96,7 @@
     </div>
 </div>  
 
-<div class="accordion mb-2"> 
+<div class="accordion mb-2 shadow-sm"> 
     <div class="accordion-item accordion-header" id="personasrelacionadas1">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#personasrelacionadas" aria-expanded="true" aria-controls="personasrelacionadas">
             <div class="w-100">
@@ -115,7 +115,7 @@
             <div>
                 <table id="tabla3" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
-                        <tr class="bg-primary">
+                        <tr >
                             <th class=" text-center" scope="col">Nombre</th>
                             <th class="text-center" scope="col">Tipo de Relacion</th>
                             <th class="fit10 text-center" scope="col">Acciones</th>

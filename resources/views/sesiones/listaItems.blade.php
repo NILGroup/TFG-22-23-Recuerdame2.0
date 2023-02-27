@@ -1,14 +1,15 @@
-<div class="d-flex justify-content-start mb-3">
+<div class="row justify-content-start mb-3">
     <input hidden id="idUser" name="user_id" value="{{$user->id}}" required @if($show) disabled @endif>
     <input hidden id="idPaciente" name="paciente_id" value="{{$paciente->id}}" required @if($show) disabled @endif>
     <input type="hidden" name="idSesion" id="idSesion" value="{{$sesion->id}}">
-    <div class="col d-inline">
-        <label for="fecha" class="form-label labelShow">Fecha: <span class="asterisco">*</span></label>
+
+    <div class=" d-flex col-lg-4 col-md-4 col-sm-12 mb-2 align-items-center">
+        <label for="fecha" style="min-width: 65px" class=" labelShow">Fecha: <span class="asterisco">*</span></label>
         <input max="4000-12-31T23:00:00.0" min="1800-01-01T01:00:00.00" type="datetime-local" style="width: fit-content;" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$sesion->fecha}}" required @if($show) disabled @endif>
     </div>
 
-    <div class="col d-inline align-items-center" id="divEtapa">
-        <label for="etapa" class="form-label labelShow ">Etapa:<span class="asterisco">*</span></label>
+    <div class=" d-flex col-lg-4 col-md-4 col-sm-12 mb-2 align-items-center" id="divEtapa">
+        <label for="etapa" style="min-width: 65px" class=" labelShow">Etapa: <span class="asterisco">*</span></label>
         <select class="form-select " style="width: fit-content;" name="etapa_id" required @if($show) disabled @endif>
             @foreach($etapas as $etapa)
             <option value="{{$etapa->id}}" @if($sesion->etapa && $sesion->etapa->id == $etapa->id)
@@ -19,7 +20,7 @@
         </select>
     </div>
 
-    <div class="col d-inline">
+    <div class=" d-flex col-lg-4 col-md-6 col-sm-12 align-items-center" >
         <label for="terapeuta" class="form-label labelShow">Terapeuta:</label>
         <label for="terapeuta" class="form-label form-label-sm">{{$user->nombre}} {{$user->apellidos}}</label>
     </div>

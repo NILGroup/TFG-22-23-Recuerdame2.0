@@ -14,12 +14,12 @@
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de informes de sesiones</caption>
             <thead>
-                <tr class="bg-primary">
+                <tr >
                     <th class="fit10 text-center" scope="col">Informe</th>
                     <th class="fit5 text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="shadow-sm">
                 @foreach ($sesiones as $sesion)
                     <tr>
                         <td><a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/ver">Informe {{date("d/m/Y", strtotime($sesion->fecha_finalizada))}}</td>

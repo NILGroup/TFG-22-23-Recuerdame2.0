@@ -15,17 +15,17 @@
             </div>
         </div>
 
-        <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
+        <table id="tabla" class=" overflow-hidden table table-bordered  table-striped table-responsive datatable">
             <caption>Listado de sesiones</caption>
             <thead>
-                <tr class="bg-primary">
+                <tr class="">
                     <th class="fit10 text-center" scope="col">Fecha</th>
                     <th scope="col" class="text-center">Objetivo</th>
-                    <th class="fit15 text-center" scope="col">Acciones</th>
+                    <th class="fit15 text-center tableActions" scope="col">Acciones</th>
                     <th class="fit15 text-center" scope="col">Estado</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="shadow-sm">
                 @foreach($sesiones as $sesion)
                 <tr>
                     <td><a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}">{{date("d/m/Y", strtotime($sesion->fecha))}}</a></td>
@@ -43,15 +43,16 @@
                     </td>
                     <td class="tableActions align-center">
                         @if($sesion->fecha_finalizada == null)
-                            <a class="btn btn-success btn-sm" style="width:100%; font-size:small" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
+                            <a class="btn btn-success btn-sm botonAccionTablas"  role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
                         @else
-                            <a class="btn btn-primary btn-sm" style="width:100%; font-size:small" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/ver">Ver informe</a>
+                            <a class="btn btn-primary btn-sm botonAccionTablas"  role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/ver">Ver informe</a>
                         @endif
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+
     </div>
 </div>
 

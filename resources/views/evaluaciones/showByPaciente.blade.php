@@ -18,14 +18,14 @@
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de informes de seguimiento</caption>
             <thead>
-                <tr class="bg-primary">
-                    <th class="fit5 text-center" scope="col">Informe</th>
-                    <th class="fit10 text-center" scope="col">Sesiones desde la última evaluación</th>
-                    <th class=" text-center" scope="col">Diagnóstico</th>
-                    <th class="fit5 text-center" scope="col">Acciones</th>
+                <tr >
+                    <th class="fit5" scope="col">Informe</th>
+                    <th class="fit10" scope="col">Sesiones desde la última evaluación</th>
+                    <th scope="col">Diagnóstico</th>
+                    <th class="fit5" scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="shadow-sm">
                 @foreach ($evaluaciones as $informe)
                 <tr>
                     <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver">Informe {{date("d/m/Y", strtotime($informe->fecha))}}</td>
