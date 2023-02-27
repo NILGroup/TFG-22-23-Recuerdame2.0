@@ -21,6 +21,9 @@
 
 
                     </div>
+                    <div id="showMultimedia" class="row pb-2">
+                       
+                    </div>
             </div>
     
         <div>
@@ -50,4 +53,5 @@
     <script src="/js/recuerdo.js"></script>
     <script src="/js/persona.js"></script>
     <script src="/js/multiModal.js"></script>
+    <script src="/js/multimediaModal.js"></script>
 @endpush

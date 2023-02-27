@@ -100,17 +100,18 @@
 
 @if(!$show)
 <div class="row">
-    <div class="col-12 justify-content-end d-flex p-2">
-        <!-- TODO REDIRIGIR A SELECCION DE MULTIMEDIA -->
-        <!-- <a href="#" class="btn btn-success">Añadir existente</button></a> -->
+    <div class="justify-content-end d-flex p-2">
+        <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#modalMultimedia">
+            Añadir existente
+        </button>
     </div>
 </div>
+@include('sesiones.modals')
 @endif
 
-@if($show)
-<div id="showMultimedia" class="row pb-2">
-    @foreach ($sesion->multimedias as $media)
-        @include("layouts.multimedia")
-    @endforeach
-</div>
-@endif
+
+
+
+
+
+

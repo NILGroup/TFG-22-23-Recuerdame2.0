@@ -9,6 +9,11 @@
     </div>
     
     @include('sesiones.listaItems')
+    <div id="showMultimedia" class="row pb-2">
+        @foreach ($sesion->multimedias as $media)
+            @include("layouts.multimedia")
+        @endforeach
+    </div>
 
     <div>
         <!-- <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a> -->

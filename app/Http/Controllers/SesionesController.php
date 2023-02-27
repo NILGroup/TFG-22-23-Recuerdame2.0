@@ -13,6 +13,7 @@ use App\Models\Emocion;
 use App\Models\Categoria;
 use App\Models\PersonaRelacionada;
 use App\Models\Tiporelacion;
+use ErrorException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -67,7 +68,32 @@ class SesionesController extends Controller
         $idPaciente = $paciente->id;
         $prelacionadas = Personarelacionada::where('paciente_id', $id)->get()->keyBy("id");
 
-        return view("sesiones.create", compact('persona','idPaciente','mostrarFoto','etapas', 'user', 'tipos', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'sesion', 'recuerdo', 'personas', 'show'));
+        $multimedias = [];
+
+        $sesiones = $paciente->sesiones;
+
+        foreach($sesiones as $s){
+            foreach($s->multimedias as $multimedia){
+
+                $existent = true;
+                foreach ($multimedias as $mult){
+                    if ($mult->id == $multimedia->id){
+                        $existent = false;
+                    }
+                }
+
+                if ($existent){
+                    array_push($multimedias, $multimedia);
+                }
+                
+            }
+        }
+
+        foreach($multimedias as $m){
+            error_log($m);
+        }
+
+        return view("sesiones.create", compact('multimedias','persona','idPaciente','mostrarFoto','etapas', 'user', 'tipos', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'sesion', 'recuerdo', 'personas', 'show'));
     }
 
     /**
@@ -79,6 +105,7 @@ class SesionesController extends Controller
     public function store(Request $request)
     {
         
+
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->idSesion],
             ['fecha' => $request->fecha,
@@ -91,17 +118,22 @@ class SesionesController extends Controller
              'respuesta' => $request->respuesta]
         );
 
+        $sesion->multimedias()->detach();
+        if (isset($request->mult)) {
+            $sesion->multimedias()->attach($request->mult);
+        }
+
         MultimediasController::savePhotos($request, $sesion);
 
         $sesion->recuerdos()->detach();
         if(!is_null($request->recuerdos))
             $sesion->recuerdos()->attach($request->recuerdos);
 
-        if(isset($request->media)) {
-            $sesion->multimedias()->detach($request->media);
-        }
+       
 
         session()->put('created', "true");
+
+      
 
         //return redirect("pacientes/{$sesion->paciente->id}/sesiones");
     }
@@ -174,8 +206,29 @@ class SesionesController extends Controller
         $idPaciente = $paciente->id;
         $persona = new Personarelacionada();
 
+        $multimedias = [];
+
+        $sesiones = $paciente->sesiones;
+
+        foreach($sesiones as $s){
+            foreach($s->multimedias as $multimedia){
+
+                $existent = true;
+                foreach ($multimedias as $mult){
+                    if ($mult->id == $multimedia->id){
+                        $existent = false;
+                    }
+                }
+
+                if ($existent){
+                    array_push($multimedias, $multimedia);
+                }
+                
+            }
+        }
+
         //throw new \Exception($sesion->multimedias);
-        return view('sesiones.edit', compact('persona','idPaciente','mostrarFoto', 'sesion', 'etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'show', 'personas', 'recuerdo', 'tipos'));
+        return view('sesiones.edit', compact('multimedias','persona','idPaciente','mostrarFoto', 'sesion', 'etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'show', 'personas', 'recuerdo', 'tipos'));
     }
 
     public function showByPaciente($idPaciente)
