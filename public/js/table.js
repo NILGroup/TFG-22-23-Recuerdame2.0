@@ -15,7 +15,7 @@ var table = $(document).ready(function () {
         info: false,
         language: { 
             search: "_INPUT_",
-            searchPlaceholder: " Buscar...",
+            searchPlaceholder: "Buscar...",
             emptyTable: " ",
             zeroRecords: "No se han encontrado coincidencias",
         },

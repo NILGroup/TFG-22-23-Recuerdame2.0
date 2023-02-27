@@ -22,6 +22,7 @@
                     <th class="fit10 text-center" scope="col">Fecha</th>
                     <th scope="col" class="text-center">Objetivo</th>
                     <th class="fit15 text-center" scope="col">Acciones</th>
+                    <th class="fit15 text-center" scope="col">Estado</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,16 +40,13 @@
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
                         </form>
-
-                        
-                        
-                            @if($sesion->fecha_finalizada == null)
-                            <a class="btn btn-success btn-sm" style="width: 40%; font-size:small" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
-                            @else
-                            <a class="btn btn-primary btn-sm" style="width: 40%; font-size:small" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/informe">Generar informe</a>
-                            @endif
-                        
-                
+                    </td>
+                    <td class="tableActions align-center">
+                        @if($sesion->fecha_finalizada == null)
+                            <a class="btn btn-success btn-sm" style="width:100%; font-size:small" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
+                        @else
+                            <a class="btn btn-primary btn-sm" style="width:100%; font-size:small" role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/informe">Ver informe</a>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
