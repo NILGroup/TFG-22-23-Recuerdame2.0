@@ -101,7 +101,8 @@
 @if(!$show)
 <div class="row">
     <div class="justify-content-end d-flex p-2">
-        <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#modalMultimedia">
+        <button type="button" class="btn btn-success me-2 showmodal" 
+        @if(str_contains(url()->current(), 'calendario')) data-show-modal="modalMultimedia" @else data-bs-toggle="modal" data-bs-target="#modalMultimedia" @endif>
             Añadir existente
         </button>
     </div>

@@ -48,7 +48,30 @@ class CalendarioController extends Controller
         $categorias = Categoria::all()->sortBy("id");
         $tipos = Tiporelacion::all()->sortBy("id");
         $mostrarFoto = false;
-        return view('calendario.showByPaciente', compact("idPaciente","paciente", "user", "show", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos", "recuerdos", "personas", "persona", "mostrarFoto"));
+
+        $multimedias = [];
+
+        $sesiones = $paciente->sesiones;
+
+        foreach($sesiones as $s){
+            foreach($s->multimedias as $multimedia){
+
+                $existent = true;
+                foreach ($multimedias as $mult){
+                    if ($mult->id == $multimedia->id){
+                        $existent = false;
+                    }
+                }
+
+                if ($existent){
+                    array_push($multimedias, $multimedia);
+                }
+                
+            }
+        }
+
+
+        return view('calendario.showByPaciente', compact("multimedias","idPaciente","paciente", "user", "show", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos", "recuerdos", "personas", "persona", "mostrarFoto"));
     }
 
     public function store(Request $request)
