@@ -10,14 +10,6 @@
     <form class="dropzone p-0" id="d"  action="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/update" method="POST">
         {{csrf_field()}}
         @include('sesiones.listaItems')
-        <div class="row d-flex">
-            @foreach ($sesion->multimedias as $media)
-            <div style="width: fit-content;" class="d-flex">
-                @include("layouts.multimedia")
-                <input class="form-check-input mx-2" name="media[]" type="checkbox" value="{{$media->id}}" style="background-color: #F63F3E;">
-            </div>
-            @endforeach
-        </div>
         <div class="dz-default dz-message dropzone-correct" id="dzp">
             <div class="container dropzone-container">
                 <img src="/img/upload.png" id="dropzone-img" height="25em" alt="">
@@ -27,6 +19,12 @@
         <div class="dropzone-previews">
 
 
+        </div>
+
+        <div id="showMultimedia" class="row pb-2">
+            @foreach ($sesion->multimedias as $media)
+                @include("layouts.multimedia")
+            @endforeach
         </div>
         <div>
             <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Cancelar</button></a>
@@ -56,4 +54,5 @@
     <script src="/js/dropzone.js"></script>
     <script src="/js/persona.js"></script>
     <script src="/js/recuerdo.js"></script>
+    <script src="/js/multimediaModal.js"></script>
 @endpush
