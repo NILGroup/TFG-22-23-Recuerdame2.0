@@ -5,20 +5,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card-body">
-                <form method="POST" action="{{ route('login') }}">
-                    {{csrf_field()}}
-                    <div class="card form-login">
-                        <input id="rellenaBBDD" type="image" src="/img/Marca_recuerdame-nobg.png" formaction="/prueba">
+                <div class="card form-login">
+                    <input id="rellenaBBDD" type="image" src="/img/Marca_recuerdame-nobg.png" formaction="/prueba">
+                    <form method="POST" action="{{ route('login') }}">
+                        {{csrf_field()}}
                         <!-- <img src="/img/Marca_recuerdame-nobg.png" class="card-img-top"> -->
                         <div class="card-body">
                             <div class="row mb-3 form-floating mb-3">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Correo electrónico" autofocus>
-                            <label class="text-muted" for="email">Correo electrónico</label>
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong> Correo electrónico o contraseña incorrectos</strong>
-                                </span>
-                            @enderror
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Correo electrónico" autofocus>
+                                <label class="text-muted" for="email">Correo electrónico</label>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong> Correo electrónico o contraseña incorrectos</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="row mb-3 form-floating mb-3">
@@ -51,9 +51,8 @@
                                 </a>
                             @endif
                         </div>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
