@@ -9,13 +9,13 @@
                 
             <table id="tabla-multimedias-existentes" class="table w-100 table-bordered table-striped table-responsive datatable">
                     <thead>
-                        <tr class="bg-primary">
+                        <tr >
                             <th scope="col" style="display: none;">Id</th>
                             <th scope="col text-center">Nombre</th>
                             <th class="fit10" scope="col"></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="shadow-sm">
                         @foreach ($multimedias as $multimedia)
                         <tr>
                             <td style="display: none;">{{$recuerdo->id}}</td>

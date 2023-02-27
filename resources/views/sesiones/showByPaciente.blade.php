@@ -10,8 +10,8 @@
     <div class="tabla">
         <div class="d-flex justify-content-between upper">
             @include('layouts.tableSearcher')
-            <div class="justify-content-end d-flex">
-                <a href="/pacientes/{{$paciente->id}}/sesiones/crear"><button type="button" class="btn btn-success btn-sm btn-icon"><i class="fa-solid fa-plus"></i></button></a>
+            <div class="justify-content-end align-items-center  d-flex">
+                <a href="/pacientes/{{$paciente->id}}/sesiones/crear"><button type="button" class="btn btn-success "><i class="fa-solid fa-plus"></i></button></a>
             </div>
         </div>
 

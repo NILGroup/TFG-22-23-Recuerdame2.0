@@ -19,7 +19,7 @@
         <table id="tabla" class="table table-striped table-bordered table-condensed table-responsive datatable">
             <caption>Listado de pacientes</caption>
             <thead>
-                <tr class="bg-primary">
+                <tr >
                     <th class="fit5 text-center" scope="col">Nombre</th>
                     <th class="fit5 text-center" scope="col">Género</th>
                     <th class="fit5 text-center" scope="col">Edad</th>

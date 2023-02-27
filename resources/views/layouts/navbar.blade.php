@@ -10,7 +10,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse justify-content-left" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse justify-content-left " id="navbarSupportedContent">
             <ul class="navbar-nav">
                 @if (Auth::user()->rol_id == 1)
                 <li class="nav-item dropdown">

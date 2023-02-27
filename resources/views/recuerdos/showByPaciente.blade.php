@@ -16,7 +16,7 @@
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de recuerdos</caption>
             <thead>
-                <tr class="bg-primary">
+                <tr >
                     <th scope="col" class="text-center">Nombre</th>
                     <th scope="col" class="text-center">Fecha</th>
                     @if (Auth::user()->rol_id == 1)
@@ -28,7 +28,7 @@
                     <th class="fit10 text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
-            <!--<tbody>-->
+            <tbody class="shadow-sm">
 
             @foreach($recuerdos as $recuerdo)
             <tr>
@@ -68,7 +68,7 @@
                 </td>
             </tr>
             @endforeach
-
+            </tbody>
         </table>
     </div>
     

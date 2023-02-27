@@ -21,7 +21,7 @@
             </div>
             <table class="table table-bordered recuerdameTable datatable">
                 <thead>
-                    <tr class="bg-primary">
+                    <tr >
                         <th class="fit5 text-center" scope="col col-12">Asignar</th>
                         <th class="text-center" scope="col col-12">Nombre</th>
                     </tr>

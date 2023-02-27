@@ -35,7 +35,7 @@
             <div class="modal-body">
                 <table id="tablaPersonasExistentes" class="table table-bordered table-striped table-responsive datatable" style="width:100%;">
                     <thead>
-                        <tr class="bg-primary">
+                        <tr >
                             <th style="display: none;" class="text-center">ID</th>
                             <th scope="col" class="text-center">Nombre</th>
                             <th class="fit10 text-center" scope="col">Tipo de Relacion</th>

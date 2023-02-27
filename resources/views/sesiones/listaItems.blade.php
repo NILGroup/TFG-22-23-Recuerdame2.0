@@ -55,7 +55,7 @@
         <table id="tabla_recuerdos" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de recuerdos</caption>
             <thead>
-                <tr class="bg-primary">
+                <tr >
                     <th scope="col" class="text-center">Nombre</th>
                     <th scope="col" class="text-center">Fecha</th>
                     <th scope="col" class="text-center">Etapa</th>
@@ -67,7 +67,7 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="shadow-sm">
                 @foreach ($sesion->recuerdos as $recuerdo)
                 <tr>
                     <td>{{$recuerdo->nombre}}</td>

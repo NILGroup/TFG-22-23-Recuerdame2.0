@@ -5,6 +5,7 @@
     --whiteSuave: #ffffff7b;
     --tamLetra: 18px;
     --tamLetraBotones: 16px;
+    --captionSize: 16px;
 }
 
 html {
@@ -55,6 +56,12 @@ footer {
     right: 1%;
 }
 
+/*DESPLEGABLES -----------------------------------------------------------------------*/
+
+.accordion-collapse {
+    padding: 10px!important;
+}
+
 /*TABLAS ----------------------------------------------------------------------*/
 tbody{
     background-color: var(--whiteSuave)!important;
@@ -62,6 +69,28 @@ tbody{
 thead {
     color: var(--white) !important;
     background-color: var(--turquesa) !important;
+}
+
+.tableActions {
+    text-align: center!important    ;
+}
+
+.tableIcon {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.table {
+    font-size: var(--tamLetra)!important;
+    padding: 0.2rem 0.3rem !important;
+}
+
+.table-bordered> :not(caption)>*>* {
+    /*padding: 0.2rem 0.3rem !important;*/
+}
+
+caption{
+    font-size: var(--captionSize);
 }
 
 .table td.fit,
@@ -83,7 +112,7 @@ thead {
 }
 
 .botonAccionTablas{
-    width: 40%;
+    width: 70%;
     min-width: fit-content; 
     font-size: var(--tamLetraBotones)!important;
 }
@@ -157,27 +186,11 @@ thead {
     background-color: #4F7BC5;
 }
 
-.tableActions {
-    text-align: center!important    ;
-}
-
-.tableIcon {
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
 .contenedor {
     padding: 20px;
 }
 
-.table {
-    font-size: var(--tamLetra)!important;
-    padding: 0.2rem 0.3rem !important;
-}
 
-.table-bordered> :not(caption)>*>* {
-    /*padding: 0.2rem 0.3rem !important;*/
-}
 
 .lineaTitulo {
     padding: 0;

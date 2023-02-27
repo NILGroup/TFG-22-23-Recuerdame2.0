@@ -23,7 +23,7 @@
                         <th scope="col" class=" text-center">Acciones</th>
                     </tr>
                 </thead>
-                <tbody >
+                <tbody class="shadow-sm" >
                     @foreach ($evaluaciones as $informe)
                     <tr>
                         <td><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver">Informe {{date("d/m/Y", strtotime($informe->fecha))}}</td>

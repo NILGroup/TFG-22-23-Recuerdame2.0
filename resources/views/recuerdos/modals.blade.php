@@ -41,7 +41,7 @@
             <div class="modal-body">
                 <table id="tablaRecuerdosExistentes" class="table w-100 table-bordered table-striped table-responsive datatable">
                     <thead>
-                        <tr class="bg-primary">
+                        <tr >
                             <th scope="col" style="display: none;" class="text-center">Id</th>
                             <th scope="col" class="text-center">Nombre</th>
                             <th scope="col" class="text-center">Fecha</th>
@@ -51,7 +51,7 @@
                             <th class="fit10 text-center" scope="col">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="shadow-sm">
                         @foreach ($recuerdos as $recuerdo)
                         <tr>
                             <td style="display: none;">{{$recuerdo->id}}</td>

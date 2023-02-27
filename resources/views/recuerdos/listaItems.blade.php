@@ -139,7 +139,7 @@
     <table id="tabla_personas" class="table table-bordered table-striped table-responsive datatable tablaPersonaRecuerdo" style="width: 100%;">
         <caption>Listado de personas relacionadas</caption>
         <thead>
-            <tr class="bg-primary">
+            <tr >
                 <th scope="col" class="text-center">Nombre</th>
                 <th class="fit10 text-center" scope="col">Tipo de relación</th>
                 @if($show)
@@ -147,7 +147,7 @@
                 @endif
             </tr>
         </thead>
-        <tbody>
+        <tbody class="shadow-sm">
             @foreach ($recuerdo->personas_relacionadas as $persona)
             <tr>
                 <td>{{$persona->nombre}} {{$persona->apellidos}}</td>

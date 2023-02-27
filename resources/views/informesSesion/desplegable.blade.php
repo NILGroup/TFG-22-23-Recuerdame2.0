@@ -23,7 +23,7 @@
                         <th class="text-center" class="fit10" scope="col">Acciones</th>
                     </tr>
                 </thead>
-                <!--<tbody>-->
+                <tbody class="shadow-sm">
                 @foreach($recuerdos as $recuerdo)
                 <tr>
                     <td style="display: none;">{{$recuerdo->id}}</td>
@@ -50,6 +50,7 @@
                     </td>
                 </tr>
                 @endforeach
+                </tbody>
             </table>
         </div>
     </div>
