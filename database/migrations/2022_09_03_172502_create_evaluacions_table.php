@@ -17,16 +17,16 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("paciente_id");
             $table->date("fecha");
-            $table->integer("gds");
-            $table->date("gds_fecha");
-            $table->integer("mental");
-            $table->date("mental_fecha");
-            $table->integer("cdr");
-            $table->date("cdr_fecha");
+            $table->string("diagnostico");
+            $table->integer("gds")->nullable();
+            $table->date("gds_fecha")->nullable();
+            $table->integer("mental")->nullable();
+            $table->date("mental_fecha")->nullable();
+            $table->integer("cdr")->nullable();
+            $table->date("cdr_fecha")->nullable();
             $table->string("nombre_escala")->nullable();
             $table->integer("escala")->nullable();
             $table->date("fecha_escala")->nullable();
-            $table->string("diagnostico");
             $table->string("observaciones")->nullable();
             
             $table->foreign("paciente_id")->references("id")->on("pacientes")->onDelete("cascade");

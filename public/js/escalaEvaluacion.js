@@ -12,3 +12,38 @@ $('.escalaPersonalizada').change(function (){
         fechaEscala = document.getElementById('fecha_escala').required = true;
     }
 });
+$('.gds').change(function (){
+    var nombreEscala = document.getElementById('gds').value
+    if(nombreEscala == null || nombreEscala == ""){
+        escala = document.getElementById('gds').required = false;
+        fechaEscala = document.getElementById('gds_fecha').required = false;
+    }
+    else{
+        escala = document.getElementById('gds').required = true;
+        fechaEscala = document.getElementById('gds_fecha').required = true;
+    }
+});
+
+$('.mental').change(function (){
+    var nombreEscala = document.getElementById('mental').value
+    if(nombreEscala == null || nombreEscala == ""){
+        escala = document.getElementById('mental').required = false;
+        fechaEscala = document.getElementById('mental_fecha').required = false;
+    }
+    else{
+        escala = document.getElementById('mental').required = true;
+        fechaEscala = document.getElementById('mental_fecha').required = true;
+    }
+});
+
+$('.cdr').change(function (){
+    var nombreEscala = document.getElementById('mental').value
+    if(nombreEscala == null || nombreEscala == ""){
+        escala = document.getElementById('cdr').required = false;
+        fechaEscala = document.getElementById('cdr_fecha').required = false;
+    }
+    else{
+        escala = document.getElementById('cdr').required = true;
+        fechaEscala = document.getElementById('cdr_fecha').required = true;
+    }
+});
