@@ -43,9 +43,9 @@
                     </td>
                     <td class="tableActions align-center">
                         @if($sesion->fecha_finalizada == null)
-                            <a class="btn btn-success btn-sm botonAccionTablas"  role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
+                            <a class="btn btn-success btn-sm w-100 botonAccionTablas"  role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
                         @else
-                            <a class="btn btn-primary btn-sm botonAccionTablas"  role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/ver">Ver informe</a>
+                            <a class="btn btn-primary btn-sm w-100 botonAccionTablas"  role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/ver">Ver informe</a>
                         @endif
                     </td>
                 </tr>
