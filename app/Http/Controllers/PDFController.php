@@ -80,7 +80,7 @@ class PDFController extends Controller
     }
 
     public function obtenerPDFEvaluacion($paciente, $evaluacion){
-        $GLOBALS['numInforme'] = $evaluacion->id;
+        $GLOBALS['fecha'] = $evaluacion->fecha;
         $pdf = new PDFEvaluacion( 'P', 'mm', 'A4' );
         $pdf->AliasNbPages();
         $pdf->AddPage();

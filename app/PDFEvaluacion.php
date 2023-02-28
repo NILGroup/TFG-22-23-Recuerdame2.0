@@ -7,7 +7,7 @@ use Codedge\Fpdf\Fpdf\Fpdf;
 use File;
 use DateTime;
 
-global $numInforme;
+global $fecha;
 
 class PDFEvaluacion extends FPDF{
 
@@ -20,7 +20,8 @@ class PDFEvaluacion extends FPDF{
         // Move to the right
         //$this->Cell(80);
         // Title
-        $this->Cell(190,11,'Informe de Seguimiento #'.$GLOBALS['numInforme'],0,1);
+        $f = Carbon::create($GLOBALS['fecha']);
+        $this->Cell(190,11,'Informe de Seguimiento '.$f->format("d-m-Y"),0,1);
         $this->Line(10,25,200,25);
         // Line break
         $this->Ln(10);
@@ -139,6 +140,8 @@ class PDFEvaluacion extends FPDF{
             $pdf->Ln();
         }
         
+        $fecha = Carbon::now();
+        $pdf->Output( 'I', "Seguimiento ".$paciente->nombre." ".$fecha->format("d-m-Y").".pdf", true );
     }
 }
 
