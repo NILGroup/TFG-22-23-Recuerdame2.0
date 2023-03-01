@@ -2,7 +2,9 @@
 
 $(function(){
 
-    $("#guardar-multimedia").on("click", all)
+    $(".guardar-multimedia").each(function(i, e){
+        $(e).on("click", all)
+    })
 
 
 })

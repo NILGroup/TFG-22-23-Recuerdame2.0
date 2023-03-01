@@ -37,7 +37,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" id="guardar-multimedia" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-primary guardar-multimedia">Guardar</button>
             </div>
         </div>
     </div>
