@@ -62,7 +62,31 @@ class RecuerdosController extends Controller
         $idPaciente = $paciente->id;
         $mostrarFoto = false;
         $persona = new Personarelacionada();
-        return view("recuerdos.create", compact("idPaciente","mostrarFoto", "persona","estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "recuerdo", "personas", "paciente", "show"));
+
+        $multimedias = [];
+
+        $sesiones = $paciente->sesiones;
+
+        foreach($sesiones as $s){
+            foreach($s->multimedias as $multimedia){
+
+                $existent = true;
+                foreach ($multimedias as $mult){
+                    if ($mult->id == $multimedia->id){
+                        $existent = false;
+                    }
+                }
+
+                if ($existent){
+                    array_push($multimedias, $multimedia);
+                }
+                
+            }
+        }
+
+
+
+        return view("recuerdos.create", compact("multimedias", "idPaciente","mostrarFoto", "persona","estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "recuerdo", "personas", "paciente", "show"));
     }
 
     /**
@@ -94,7 +118,10 @@ class RecuerdosController extends Controller
             ]
         );
 
-
+        $recuerdo->multimedias()->detach();
+        if (isset($request->mult)) {
+            $recuerdo->multimedias()->attach($request->mult);
+        }
         
         MultimediasController::savePhotos($request, $recuerdo);
       
@@ -106,14 +133,6 @@ class RecuerdosController extends Controller
                 $recuerdo->personas_relacionadas()->attach($p_id);
             }
         }
-
-        //Array de las ID de las imagenes a eliminar del recuerdo
-        
-       
-       if(isset($request->media)) {
-        $recuerdo->multimedias()->detach($request->media);
-       }
-   
        
         
        session()->put('created', "true");
@@ -181,7 +200,31 @@ class RecuerdosController extends Controller
         $idPaciente = $paciente->id;
         $mostrarFoto = false;
         $persona = new Personarelacionada();
-        return view("recuerdos.edit", compact("idPaciente","mostrarFoto", "persona","recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "paciente", "show"));
+
+        $multimedias = [];
+
+        $sesiones = $paciente->sesiones;
+
+        foreach($sesiones as $s){
+            foreach($s->multimedias as $multimedia){
+
+                $existent = true;
+                foreach ($multimedias as $mult){
+                    if ($mult->id == $multimedia->id){
+                        $existent = false;
+                    }
+                }
+
+                if ($existent){
+                    array_push($multimedias, $multimedia);
+                }
+                
+            }
+        }
+
+
+
+        return view("recuerdos.edit", compact("multimedias", "idPaciente","mostrarFoto", "persona","recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "paciente", "show"));
     }
 
     /**

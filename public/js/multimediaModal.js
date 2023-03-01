@@ -22,7 +22,7 @@ function getSelected(){
 
     let selected = []
 
-    $("#tabla-multimedias-existentes tbody input").each((i, e) =>{
+    $(".tabla-multimedias-existentes tbody input").each((i, e) =>{
         let elem = $(e)
         if(elem.prop("checked")){
             selected.push({

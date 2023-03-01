@@ -173,14 +173,16 @@
     <div class="col-12 justify-content-end d-flex p-2">
     </div>
 </div>
-@if($show)
-<div id="showMultimedia" class="row pb-2">
-    @foreach ($recuerdo->multimedias as $media)
-    @include("layouts.multimedia")
 
-
-    @endforeach
+@if(!$show)
+<div id="add-multimedia" class="row">
+    <div class="justify-content-end d-flex p-2">
+        <button type="button" class="btn btn-success me-2"  data-bs-toggle="modal" data-bs-target="#modalMultimedia">
+            Añadir existente
+        </button>
+    </div>
 </div>
+@include('recuerdos.mediaModal')
 @endif
 
 

@@ -48,6 +48,7 @@
     <script src="/js/table.js"></script>
     <script src="/js/multiModal.js"></script>
     <script>
+        $("#add-multimedia").hide()
         let id = document.getElementById("idPaciente").value;
         let id2 = document.getElementById("idSesion").value;
         var ruta = "/pacientes/" + id + "/sesiones/" + id2;

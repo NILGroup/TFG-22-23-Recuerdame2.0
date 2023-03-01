@@ -9,15 +9,7 @@
     <form class="dropzone p-0" id="d" method="post" action="/recuerdo">
         {{csrf_field()}}
         @include('recuerdos.listaItems')
-        <div class="row d-flex">
-            @foreach ($recuerdo->multimedias as $media)
-
-            <div style="width: fit-content;" class="d-flex">
-                @include("layouts.multimedia")
-                <input class="form-check-input mx-2" name="media[]" type="checkbox" value="{{$media->id}}" style="background-color: #F63F3E;">
-            </div>
-            @endforeach
-        </div>
+    
         <div class="dz-default dz-message dropzone-correct" id="dzp">
             <div class="container dropzone-container">
                 <img src="/img/upload.png" id="dropzone-img" height="25em" alt="">
@@ -28,6 +20,16 @@
 
 
         </div>
+        <div class="pt-4 pb-2">
+            <h5 class="text-muted">Material Existente</h5>
+        </div>
+
+        <div id="showMultimedia" class="row pb-2">
+            @foreach ($recuerdo->multimedias as $media)
+                @include("layouts.multimedia")
+            @endforeach
+        </div>
+
         <div class="col-12">
             <a href="/pacientes/{{$paciente->id}}/recuerdos"><button type="button" class="btn btn-primary btn">Cancelar</button></a>
             <button type="submit" id="guardar" value="Guardar" class="btn btn-outline-primary btn">Finalizar</button>
@@ -53,4 +55,5 @@
     </script>
     <script src="/js/dropzone.js"></script>
     <script src="/js/persona.js"></script>
+    <script src="/js/multimediaModal.js"></script>
 @endpush

@@ -47,6 +47,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
     <script src="/js/table.js"></script>
     <script>
+        $("#add-multimedia").hide()
         let id = document.getElementById("paciente_id").value;
         var ruta = "/pacientes/" + id + "/sesiones"
         var max

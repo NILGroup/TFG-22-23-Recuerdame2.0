@@ -19,7 +19,12 @@
                 </div>
                 <div class="dropzone-previews">
 
-
+                </div>
+                <div class="pt-4 pb-2">
+                    <h5 class="text-muted">Material Existente</h5>
+                </div>
+                <div id="showMultimedia" class="row pb-2">
+                    
                 </div>
         </div>
 
@@ -50,4 +55,5 @@
     </script>
     <script src="/js/dropzone.js"></script>
     <script src="/js/persona.js"></script>
+    <script src="/js/multimediaModal.js"></script>
 @endpush
