@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light shadow-sm bg-info">
+<nav class="navbar navbar-expand-md navbar-light shadow-sm ">
     <div class="container-fluid">
         <div class="bg-image hover-zoom"><a class="navbar-brand " href="{{ url('/') }}"><img class="logotipoMarca w-100" src="/img/Marca_recuerdame.png" /></a></div>
 
