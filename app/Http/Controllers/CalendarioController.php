@@ -95,6 +95,7 @@ class CalendarioController extends Controller
             ]
         );
 
+        session()->put('created', "Creado");
         return redirect("/pacientes/$actividad->paciente_id/calendario");
     }
 
@@ -128,6 +129,7 @@ class CalendarioController extends Controller
                     "finished" => $request->finished
                 ]
             );
+            session()->put('created', "Actualizado");
         return redirect("/pacientes/$actividad->paciente_id/calendario");
     }
 
@@ -148,6 +150,8 @@ class CalendarioController extends Controller
         );
         if (!is_null($request->recuerdos))
             $sesion->recuerdos()->sync($request->recuerdos);
+            
+        session()->put('created', "Actualizado");
         return redirect("pacientes/{$sesion->paciente->id}/calendario");
     }
 
@@ -198,6 +202,8 @@ class CalendarioController extends Controller
         $actividad = Actividad::findOrFail($request->id);
         $paciente = $actividad->paciente_id;
         $actividad->delete();
+
+        session()->put('created', "Eliminado");
         return redirect("/pacientes/$paciente/calendario");
     }
 
@@ -206,6 +212,8 @@ class CalendarioController extends Controller
         $sesion = Sesion::findOrFail($request->idSesion);
         $paciente = $sesion->paciente_id;
         $sesion->delete();
+        
+        session()->put('created', "Eliminado");
         return redirect("/pacientes/$paciente/calendario");
         //return "<h1>$request</h1>";
     }
@@ -228,6 +236,8 @@ class CalendarioController extends Controller
         );
         if (!is_null($request->recuerdos))
             $sesion->recuerdos()->sync($request->recuerdos);
+        
+        session()->put('created', "Creado");
         return redirect("pacientes/{$sesion->paciente->id}/calendario");
         //return "<h1>$request</h1>";
     }

@@ -2,8 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let user = document.getElementById('user_type').value; //tipo de usuario (1 terapeuta, 2 cuidador)
     let formulario = document.getElementById('formulario');
     var calendarEl = document.getElementById('calendar');
-
-    let url_eventos = "/calendario/" + document.getElementById('paciente_id').value;
+    let idPaciente = document.getElementById('paciente_id').value;
+    console.log(idPaciente)
+    let url_eventos = "/calendario/" + idPaciente;
     let options = {
         dayHeaderFormat: {
             weekday: 'long'
