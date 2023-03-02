@@ -152,6 +152,8 @@ function crearRecuerdo() {
     if (recuerdo_id){
         fd.append('id', recuerdo_id)
     }
+
+    console.log($("#apto").parents())
     
     fd.append('paciente_id', $("#paciente_id").prop("value"));
     fd.append('nombre', $("#nombre").prop("value"));
@@ -175,6 +177,8 @@ function crearRecuerdo() {
     for (var i = 0; i < ids.length; i++) {
         fd.append('ids_personas[]', ids[i]);
     }
+
+    console.log($("#apto"))
 
     $.ajaxSetup({
         headers: {
@@ -218,9 +222,9 @@ function agregarRecuerdosExistentes(r) {
             }
 
             if($(rec[5]).children("input").prop("checked"))
-                row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" checked disabled> </td>'))
+                row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox" checked disabled> </td>'))
             else
-                row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" disabled> </td>'))
+                row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox" disabled> </td>'))
             
             row.append($('<input type="hidden" value=' + rec[0].textContent + ' name="recuerdos[]">'))
 
@@ -313,9 +317,9 @@ function addFields(row, rec){
     row.append($('<td>' + rec.estado.nombre + '</td>'))
     console.log(rec.apto)
     if(rec.apto == 1)
-        row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" checked disabled> </td>'))
+        row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox" checked disabled> </td>'))
     else
-        row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" disabled> </td>'))
+        row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox"  disabled> </td>'))
             
 }
 

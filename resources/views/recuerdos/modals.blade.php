@@ -60,7 +60,7 @@
                             <td>@if(!is_null($recuerdo->categoria_id)) {{$recuerdo->categoria->nombre}} @endif </td>
                             <td>@if(!is_null($recuerdo->estado_id)) {{$recuerdo->estado->nombre}} @endif </td>
                             <td class=" text-center">
-                                <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif disabled>
+                                <input class="form-check-input" type="checkbox" @if($recuerdo->apto) checked @endif disabled>
                             </td>
                             <td id="recuerdosSeleccionados" class="tableActions">
                                 <input class="form-check-input" type="checkbox" value="{{$recuerdo->id}}" name="checkRecuerdo[]" id="checkRecuerdo" @if($sesion->recuerdos->contains($recuerdo)) checked @endif>

@@ -82,7 +82,7 @@
                     </td>
                     
                     <td class=" text-center">
-                        <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif disabled>
+                        <input class="form-check-input" type="checkbox" @if($recuerdo->apto) checked @endif disabled>
                     </td>
                     @if($show)
                     <td class="tableActions">
