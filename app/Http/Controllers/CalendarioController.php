@@ -157,6 +157,11 @@ class CalendarioController extends Controller
         $actividad = Actividad::where("paciente_id", "=", $idPaciente)->get();
         foreach ($actividad as $a) {
             $a->tipo = "a";
+            if ($a->finished !== "" && $a->finished !== null) {
+                $variable = $a->title;
+                $variable = "(✓) " . $variable;
+                $a->title = $variable;
+            }
         }
         if ($tipoUsuario === 2)
             return response()->json($actividad);

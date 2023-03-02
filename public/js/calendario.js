@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
             next: 'arrow-right',
         },
         headerToolbar: {
-            center: 'title',
+            left: 'title',
             right: 'dayGridMonth,dayGridWeek,dayGridDay,listMonth,today',
 
 
@@ -66,6 +66,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('home').classList.add("show");
                 document.getElementById('home').classList.add("active");
 
+                document.getElementById('title').removeAttribute("readonly");
+                document.getElementById('start').removeAttribute("readonly");
+                document.getElementById('obs').removeAttribute("readonly");
+                document.getElementById('color').classList.remove('d-none');
+
                 document.getElementById('div-fin').classList.add('d-none');
 
                 document.getElementById('btnGuardarSesion').classList.remove('d-none');
@@ -90,6 +95,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (info.event.extendedProps.tipo === 'a' && info.event.extendedProps.finished === null) { //Si se trata de una actividad y no ha sido finalizada...
                     document.getElementById('div-fin').classList.add('d-none');
                     document.getElementById('color').classList.remove('d-none');
+                    // document.getElementById('btnModificar').value = "Finalizar actividad";
+                    //document.getElementById('btnModificar').classList.add("confirm_finish");
                 } else if (info.event.extendedProps.tipo === 'a' && info.event.extendedProps.finished !== null) { //Si se trata de una actividad y ha sido finalizada...
                     document.getElementById('div-fin').classList.remove('d-none');
                     document.getElementById('title').setAttribute("readonly", "");
@@ -106,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('color').classList.add('d-none');
                 document.getElementById("modalesCalendario").children[1].style.display = "none";
                 document.getElementById('btnModificar').value = "Finalizar actividad";
+                document.getElementById('btnModificar').classList.add("confirm_finish")
                 document.getElementById('finished').setAttribute("required", "");
                 if (info.event.extendedProps.tipo === 'a' && info.event.extendedProps.finished !== null)
                     document.getElementById('finished').setAttribute("readonly", "");

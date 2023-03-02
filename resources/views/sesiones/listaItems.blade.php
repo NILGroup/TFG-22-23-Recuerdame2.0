@@ -100,7 +100,7 @@
 </div>
 
 @if(!$show)
-<div class="row">
+<div class="row " id="add-multi-sesion">
     <div class="justify-content-end d-flex p-2">
         <button type="button" class="btn btn-success me-2 showmodal" 
         @if(str_contains(url()->current(), 'calendario')) data-show-modal="modalMultimedia" @else data-bs-toggle="modal" data-bs-target="#modalMultimedia" @endif>
