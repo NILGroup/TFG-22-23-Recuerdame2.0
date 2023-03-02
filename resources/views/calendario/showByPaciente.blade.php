@@ -57,6 +57,16 @@
     <script src="/js/recuerdo.js"></script>
     <script src="/js/multiModal.js"></script>
     <script src="/js/confirm.js"></script>
+    @if (Session::has('created'))
+        <script>
+            var action = "{{Session::get('created')}}"
+        </script>
+        @php 
+            Illuminate\Support\Facades\Session::forget('created');
+        @endphp
+        <script src="/js/successAlert.js"></script>
+    @endif
+
     <script>
         $(document).ready(function() {
             $("#add-multi-sesion").hide()
