@@ -20,8 +20,8 @@
             <thead>
                 <tr >
                     <th scope="col" class="text-center">Nombre</th>
-                    <th class="fit10 text-center" scope="col">Tipo de Relacion</th>
-                    <th class="fit5 text-center" scope="col">Acciuones</th>
+                    <th class="fit10 text-center" scope="col">Tipo de Relación</th>
+                    <th class="fit5 text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody class="shadow-sm">

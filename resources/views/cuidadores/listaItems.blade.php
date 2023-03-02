@@ -57,7 +57,7 @@
 
 <div class="row form-group justify-content-between">
     <div class="row col-sm-12 col-md-6 col-lg-5 align-items-center">
-        <label for="terapeuta" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-6">Paciente:<span class="asterisco">*</span></label>
+        <label for="terapeuta" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-6">Usuario:<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6 align-items-center">
             <select class="form-select form-select-sm" id="paciente" name="paciente" required>
                 <option value=""></option>

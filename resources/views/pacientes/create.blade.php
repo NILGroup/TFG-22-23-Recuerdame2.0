@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Crear paciente</h5>
+        <h5 class="text-muted">Crear usuario</h5>
         <hr class="lineaTitulo">
     </div>
     <form class="dropzone p-0" id="d" method="post" action="/pacientes">

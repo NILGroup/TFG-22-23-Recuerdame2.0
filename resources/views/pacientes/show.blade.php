@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Datos paciente</h5>
+        <h5 class="text-muted">Datos usuario</h5>
         <hr class="lineaTitulo">
     </div>
     <div class="accordion mb-2">

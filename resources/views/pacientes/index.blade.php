@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Listado de pacientes</h5>
+        <h5 class="text-muted">Listado de usuarios</h5>
         <hr class="lineaTitulo">
     </div>
     <div class ="tabla">
@@ -17,7 +17,7 @@
             </div>
         </div>
         <table id="tabla" class="table table-striped table-bordered table-condensed table-responsive datatable">
-            <caption>Listado de pacientes</caption>
+            <caption>Listado de usuarios</caption>
             <thead>
                 <tr >
                     <th class="fit5 text-center" scope="col">Nombre</th>

@@ -20,7 +20,7 @@
     </div>
     
     <div class="mb-3">
-        <label for="respuesta" class="form-label col-form-label negrita">Respuesta del paciente:<span class="asterisco">*</span></label>
+        <label for="respuesta" class="form-label col-form-label negrita">Respuesta del usuario:<span class="asterisco">*</span></label>
         <textarea class="form-control form-control-sm" id="respuesta" name="respuesta" rows="3" required @if($show) disabled @endif>{{$sesion->respuesta}}</textarea>
     </div>
 
