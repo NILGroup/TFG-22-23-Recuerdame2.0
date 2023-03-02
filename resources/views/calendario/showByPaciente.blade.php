@@ -59,6 +59,8 @@
     <script src="/js/confirm.js"></script>
     <script>
         $(document).ready(function() {
+            $("#add-multi-sesion").hide()
+            $("#add-multimedia").hide()
             $('#calendar .fc-dayGridMonth-button').on("click", function() {
                 $('#calendar .fc-dayGridMonth-button').attr("disabled", "");
                 $('#calendar .fc-dayGridWeek-button').removeAttr("disabled");
