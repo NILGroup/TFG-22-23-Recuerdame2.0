@@ -79,6 +79,7 @@ function repeatedEmail(){
     $("#email").prop("value", "")
     Swal.fire({
         title: 'Este correo ya está registrado',
+        icon: "error",
     })
 }
 
@@ -88,6 +89,7 @@ function duplicatedAlert(data) {
     Swal.fire({
         title: 'Este correo ya está registrado',
         text: '¿Desea actualizar los datos del usuario?',
+        icon: "warning",
         showCancelButton: true,
         cancelButtonText: "Cancelar",
         confirmButtonText: 'Guardar cambios',

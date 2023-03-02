@@ -36,6 +36,7 @@
 }
 
 .fc td,  .fc th{
+    color: black;
     background-color: white;
 }
 
