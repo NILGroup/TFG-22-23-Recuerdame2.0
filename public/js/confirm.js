@@ -70,7 +70,7 @@ $('.confirm_delete_calendario').click(function (event) {
                     timer: 2000,
                     showConfirmButton: false,
                 })
-                if (t == 'home') {
+                if (t == 'actividad-modal') {
                     console.log("Actividad");
                     $.ajax({
                         url: '/eliminarActividad',
@@ -84,7 +84,7 @@ $('.confirm_delete_calendario').click(function (event) {
                             console.log(e);
                         }
                     });
-                } else if (t == 'profile') {
+                } else if (t == 'sesion-modal') {
                     console.log("Sesion");
                     $.ajax({
                         url: '/eliminarSesion',

@@ -25,15 +25,15 @@
                 <div class="modal-body">
                     <ul class="nav nav-tabs" id="modalesCalendario">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Actividad</button>
+                            <button class="nav-link active" id="actividad-modal-tab" data-bs-toggle="tab" data-bs-target="#actividad-modal" type="button" role="tab" aria-controls="actividad-modal" aria-selected="true">Actividad</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Sesión</button>
+                            <button class="nav-link" id="sesion-modal-tab" data-bs-toggle="tab" data-bs-target="#sesion-modal" type="button" role="tab" aria-controls="sesion-modal" aria-selected="false">Sesión</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"> @include('calendario.registroActividad') </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"> @include('calendario.registroSesion') </div>
+                        <div class="tab-pane fade show active" id="actividad-modal" role="tabpanel" aria-labelledby="actividad-modal-tab"> @include('calendario.registroActividad') </div>
+                        <div class="tab-pane fade" id="sesion-modal" role="tabpanel" aria-labelledby="sesion-modal-tab"> @include('calendario.registroSesion') </div>
                     </div>
 
                 </div>

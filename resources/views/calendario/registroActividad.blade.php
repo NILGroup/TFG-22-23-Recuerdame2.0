@@ -31,9 +31,10 @@
             <label for="finished" class="form-label">Anotaciones sobre el desarrollo de la actividad</label>
         </div>
         <div class="modal-footer">
-            <input type="submit" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-outline-primary btn-md d-none confirm_delete_calendario">
+            <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-outline-primary btn-md d-none confirm_delete_calendario">
             <input type="submit" formaction="/modificarActividad" id="btnModificar" name="btnModificar" value="Modificar actividad" class="btn btn-primary btn-md d-none">
-            <input type="submit" id="btnGuardar" name="btnAccion" value="Guardar" class="btn btn-primary btn-md guardar">
+            <input type="submit" formaction="/modificarActividad" id="btnFinalizar" name="btnFinalizar" value="Finalizar actividad" class="btn btn-primary btn-md d-none confirm_finish">
+            <input type="submit" id="btnGuardar" name="btnAccion" value="Guardar actividad" class="btn btn-primary btn-md guardar">
         </div>
     </form>
    <!-- <form method="post" id="formularioEliminar" action="/eliminarActividad" style="display:inline!important;">
