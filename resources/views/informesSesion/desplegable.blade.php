@@ -15,11 +15,11 @@
                     <tr>
                         <th class="text-center" scope="col" style="display: none;">id</th>
                         <th class="text-center" scope="col">Nombre</th>
-                        <th class="text-center" scope="col">Fecha</th>
                         <th class="text-center" scope="col">Etapa</th>
                         <th class="text-center" scope="col">Categoría</th>
                         <th class="text-center" scope="col">Estado</th>
                         <th class="text-center" scope="col">Etiqueta</th>
+                        <th class="text-center" scope="col">Apto</th>
                         <th class="text-center" class="fit10" scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -28,23 +28,25 @@
                 <tr>
                     <td style="display: none;">{{$recuerdo->id}}</td>
                     <td>{{$recuerdo->nombre}}</td>
-                    <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
                     <td>{{$recuerdo->etapa->nombre}}</td>
                     @if(!is_null($recuerdo->categoria))
-                    <td>{{$recuerdo->categoria->nombre}}</td>
+                        <td>{{$recuerdo->categoria->nombre}}</td>
                     @else
-                    <td>Sin categoría</td>
+                        <td>Sin categoría</td>
                     @endif
                     @if(!is_null($recuerdo->estado))
-                    <td>{{$recuerdo->estado->nombre}}</td>
+                        <td>{{$recuerdo->estado->nombre}}</td>
                     @else
-                    <td>Sin estado</td>
+                        <td>Sin estado</td>
                     @endif
                     @if(!is_null($recuerdo->etiqueta))
-                    <td>{{$recuerdo->etiqueta->nombre}}</td>
+                        <td>{{$recuerdo->etiqueta->nombre}}</td>
                     @else
-                    <td>Sin etiqueta</td>
+                        <td>Sin etiqueta</td>
                     @endif
+                    <td class=" text-center">
+                        <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif disabled>
+                    </td>
                     <td class="tableActions">
                         <a onclick="actualizaModalRecuerdo({{$recuerdo->id}})" type="button" id="updateRecuerdo" name="updateRecuerdo" class="showmodal" data-bs-toggle="modal" data-bs-target="#recuerdosCreator"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
                     </td>

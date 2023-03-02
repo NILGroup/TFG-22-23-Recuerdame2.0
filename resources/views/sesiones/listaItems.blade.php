@@ -57,10 +57,10 @@
             <thead>
                 <tr >
                     <th scope="col" class="text-center">Nombre</th>
-                    <th scope="col" class="text-center">Fecha</th>
                     <th scope="col" class="text-center">Etapa</th>
                     <th scope="col" class="text-center">Categoría</th>
                     <th scope="col" class="text-center">Estado</th>
+                    <th scope="col" class="text-center">Apto</th>
                     @if($show)
                     <th class="fit10 text-center" scope="col">Acciones</th>
                     @endif
@@ -71,7 +71,6 @@
                 @foreach ($sesion->recuerdos as $recuerdo)
                 <tr>
                     <td>{{$recuerdo->nombre}}</td>
-                    <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
                     <td>
                         @if(isset($recuerdo->etapa)){{$recuerdo->etapa->nombre}}@endif
                     </td>
@@ -81,9 +80,13 @@
                     <td>
                         @if(isset($recuerdo->estado)){{$recuerdo->estado->nombre}}@endif
                     </td>
+                    
+                    <td class=" text-center">
+                        <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif disabled>
+                    </td>
                     @if($show)
                     <td class="tableActions">
-                    <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                        <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                     </td>
                     @endif
                     <input type="hidden" value="{{$recuerdo->id}}" name="recuerdos[]">

@@ -18,12 +18,12 @@
             <thead>
                 <tr >
                     <th scope="col" class="text-center">Nombre</th>
-                    <th scope="col" class="text-center">Fecha</th>
                     @if (Auth::user()->rol_id == 1)
                         <th scope="col" class="text-center">Etapa</th>
                         <th scope="col" class="text-center">Categoría</th>
                         <th scope="col" class="text-center">Estado</th>
                         <th scope="col" class="text-center">Etiqueta</th>
+                        <th scope="col" class="text-center">Apto</th>
                     @endif
                     <th class="fit10 text-center" scope="col">Acciones</th>
                 </tr>
@@ -34,24 +34,26 @@
             <tr>
 
                 <td><a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}">{{$recuerdo->nombre}}</a></td>
-                <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
                 @if (Auth::user()->rol_id == 1)
-                <td>{{$recuerdo->etapa->nombre}}</td>
-                @if(!is_null($recuerdo->categoria))
-                <td>{{$recuerdo->categoria->nombre}}</td>
-                @else
-                <td>Sin categoría</td>
-                @endif
-                @if(!is_null($recuerdo->estado))
-                <td>{{$recuerdo->estado->nombre}}</td>
-                @else
-                <td>Sin estado</td>
-                @endif
-                @if(!is_null($recuerdo->etiqueta))
-                <td>{{$recuerdo->etiqueta->nombre}}</td>
-                @else
-                <td>Sin etiqueta</td>
-                @endif
+                    <td>{{$recuerdo->etapa->nombre}}</td>
+                    @if(!is_null($recuerdo->categoria))
+                        <td>{{$recuerdo->categoria->nombre}}</td>
+                    @else
+                        <td>Sin categoría</td>
+                    @endif
+                    @if(!is_null($recuerdo->estado))
+                        <td>{{$recuerdo->estado->nombre}}</td>
+                    @else
+                        <td>Sin estado</td>
+                    @endif
+                    @if(!is_null($recuerdo->etiqueta))
+                        <td>{{$recuerdo->etiqueta->nombre}}</td>
+                    @else
+                        <td>Sin etiqueta</td>
+                    @endif
+                    <td class=" text-center">
+                        <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif disabled>
+                    </td>
                 @endif
                 <td class="tableActions">
                     <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>

@@ -52,27 +52,27 @@
                             </thead>
                             <tbody class="shadow-sm">
                                 @foreach ($recuerdo->multimedias as $multimedia)
-                                @php
-                                $existe = false;
-                                foreach($multimedias as $m){
-                                if ($m->id === $multimedia->id){
-                                $existe = true;
-                                }
-                                }
-                                @endphp
+                                    @php
+                                        $existe = false;
+                                        foreach($multimedias as $m){
+                                            if ($m->id === $multimedia->id){
+                                                $existe = true;
+                                            }
+                                        }
+                                    @endphp
 
-                                @if (!$existe)
+                                    @if (!$existe)
 
-                                <tr>
-                                    <td style="display: none;">{{$recuerdo->id}}</td>
-                                    <td>
-                                        <a href="{{$multimedia->fichero}}">{{$multimedia->nombre}}</a>
-                                    </td>
-                                    <td class="tableActions seleccionar">
-                                        <input class="form-check-input check-multimedia" data-id="{{$multimedia->id}}" data-nombre="{{$multimedia->nombre}}" data-fichero="{{$multimedia->fichero}}" type="checkbox" value="{{$multimedia->id}}" name="mult[]" @if($recuerdo->multimedias->contains($multimedia)) checked @endif>
-                                    </td>
-                                </tr>
-                                @endif
+                                    <tr>
+                                        <td style="display: none;">{{$recuerdo->id}}</td>
+                                        <td>
+                                            <a href="{{$multimedia->fichero}}">{{$multimedia->nombre}}</a>
+                                        </td>
+                                        <td class="tableActions seleccionar">
+                                            <input class="form-check-input check-multimedia" data-id="{{$multimedia->id}}" data-nombre="{{$multimedia->nombre}}" data-fichero="{{$multimedia->fichero}}" type="checkbox" value="{{$multimedia->id}}" name="mult[]" @if($recuerdo->multimedias->contains($multimedia)) checked @endif>
+                                        </td>
+                                    </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

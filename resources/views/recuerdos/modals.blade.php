@@ -44,10 +44,10 @@
                         <tr >
                             <th scope="col" style="display: none;" class="text-center">Id</th>
                             <th scope="col" class="text-center">Nombre</th>
-                            <th scope="col" class="text-center">Fecha</th>
                             <th scope="col" class="text-center">Etapa</th>
                             <th scope="col" class="text-center">Categoría</th>
                             <th scope="col" class="text-center">Estado</th>
+                            <th scope="col" class="text-center">Apto</th>
                             <th class="fit10 text-center" scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -56,10 +56,12 @@
                         <tr>
                             <td style="display: none;">{{$recuerdo->id}}</td>
                             <td>{{$recuerdo->nombre}}</td>
-                            <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
                             <td>{{$recuerdo->etapa->nombre}}</td>
                             <td>@if(!is_null($recuerdo->categoria_id)) {{$recuerdo->categoria->nombre}} @endif </td>
                             <td>@if(!is_null($recuerdo->estado_id)) {{$recuerdo->estado->nombre}} @endif </td>
+                            <td class=" text-center">
+                                <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif disabled>
+                            </td>
                             <td id="recuerdosSeleccionados" class="tableActions">
                                 <input class="form-check-input" type="checkbox" value="{{$recuerdo->id}}" name="checkRecuerdo[]" id="checkRecuerdo" @if($sesion->recuerdos->contains($recuerdo)) checked @endif>
                             </td>
