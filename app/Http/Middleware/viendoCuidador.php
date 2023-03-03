@@ -4,12 +4,11 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Paciente;
+use App\Models\User;
 
-
-class esTerapeuta
+class viendoCuidador
 {
     /**
      * Handle an incoming request.
@@ -20,14 +19,13 @@ class esTerapeuta
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = Auth::user();
-        if($user->rol_id != 1){
-            $paciente = Paciente::where('cuidador_id',$user->id)->get();
-            //https://youtu.be/g-Y9uiAjOE4
-            $id = $paciente[0]->id;
-            return redirect()->route('pacientes.show', ['paciente'=>$id]);
+        $url = explode("/", url()->current());
+        $paciente = Paciente::find($url[4]);
+        if(sizeof($url) > 6 && $url[5] == "cuidadores"){
+            $u = User::find($url[6]);
+            if(is_null($u) || $u->rol_id == 1)
+                return redirect("/pacientes/$paciente->id/cuidadores");
         }
-        else
-            return $next($request);
+        return $next($request);
     }
 }

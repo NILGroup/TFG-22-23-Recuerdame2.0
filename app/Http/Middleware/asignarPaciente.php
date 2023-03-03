@@ -19,14 +19,46 @@ class asignarPaciente
     public function handle(Request $request, Closure $next)
     {
         $url = explode("/", url()->current());
+        //throw new \Exception(json_encode($url));
+        
         if(sizeof($url) <= 4){
-            session()->forget('paciente');
             return $next($request);
         }
+
+        $paciente = Paciente::find($url[4]);
         if(!Auth::User()->pacientes->contains($url[4])){
             return redirect("/pacientes");
         }
-        $paciente = Paciente::find($url[4]);
+
+        $valido = true;
+        if(sizeof($url) > 6)
+            switch ($url[5]):
+                case "sesiones":
+                    if(!$paciente->sesiones->contains($url[6]))
+                        return redirect("/pacientes/$paciente->id/sesiones");
+                    break;
+                case "evaluaciones":
+                    if(!$paciente->evaluaciones->contains($url[6]))
+                        return redirect("/pacientes/$paciente->id/evaluaciones");
+                    break;
+                case "recuerdos":
+                    if(!$paciente->recuerdos->contains($url[6]))
+                        return redirect("/pacientes/$paciente->id/recuerdos");
+                    break;
+                case "personas":
+                    if(!$paciente->personasrelacionadas->contains($url[6]))
+                        return redirect("/pacientes/$paciente->id/personas");
+                    break;
+                case "cuidadores":
+                    if(!$paciente->users->contains($url[6]))
+                        return redirect("/pacientes/$paciente->id/cuidadores");
+                    break;
+                default:
+                    break;
+            endswitch;
+        if(!$valido)
+            return redirect("/pacientes");
+
         session()->put('paciente', $paciente->toArray());
         return $next($request);
     }
