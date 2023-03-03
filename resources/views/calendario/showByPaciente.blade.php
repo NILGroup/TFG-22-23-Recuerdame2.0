@@ -2,8 +2,8 @@
 
 @section('content')
 
-<input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$paciente->id}}" required @if($show) disabled @endif>
-<input type="hidden" name="user_type" class="form-control form-control-sm" id="user_type" value="{{$user->rol_id}}" required @if($show) disabled @endif>
+<input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$paciente->id}}" required >
+<input type="hidden" name="user_type" class="form-control form-control-sm" id="user_type" value="{{$user->rol_id}}" required >
 <!--<select id="typeSelector">
   <option value="all">Todos</option>
   <option value="a">Actividades</option>

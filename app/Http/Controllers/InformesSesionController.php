@@ -43,8 +43,7 @@ class InformesSesionController extends Controller
         $recuerdo = new Recuerdo();
         $persona = new Personarelacionada();
         $personas = Personarelacionada::where('paciente_id', $paciente->id)->get()->keyBy("id");
-        $show = false;
-        return view('informesSesion.create', compact('paciente', 'sesion', 'show', 'recuerdos', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas'));
+        return view('informesSesion.create', compact('paciente', 'sesion', 'recuerdos', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas'));
     }
 
     public function store(Request $request){
@@ -66,8 +65,7 @@ class InformesSesionController extends Controller
     {
         $sesion = Sesion::findOrFail($idS);
         $paciente = $sesion->paciente;
-        $show = true;
-        return view("informesSesion.show", compact("sesion", "paciente", "show"));
+        return view("informesSesion.show", compact("sesion", "paciente"));
     }
 
     public function destroy($id){

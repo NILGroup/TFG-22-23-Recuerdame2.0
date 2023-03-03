@@ -1,10 +1,10 @@
 $("input, select").each(function () {
-    //console.log($(this).prop("type"))
+    console.log($(this).prop("type"))
     if(!$(this).is(":hidden") && !$(this).hasClass("search"))
     switch ($(this).prop("type")) {
         case "checkbox":
-            break;
         case "range":
+            $(this).prop("disabled", true)
             break;
         case "select-one":
             $(this).replaceWith("<label> " + $(this).find("option:selected").text() + "</label>");
@@ -21,6 +21,9 @@ $("input, select").each(function () {
     }
 });
 
+$("textarea").each(function () {
+    $(this).prop("disabled", true)
+})
 $(".asterisco").each(function () {
     $(this).remove();
 })

@@ -8,15 +8,14 @@
         </div>
     </div>
     
-    <hr class="w-50 mb-3">
     <div class="mb-3">
         <label for="diagnostico" class="form-label col-form-label negrita">Diagnostico:<span class="asterisco">*</span></label>
-        <textarea class="form-control form-control-sm" id="diagnostico" name="diagnostico" rows="3" required @if($show) disabled @endif>{{$evaluacion->diagnostico}}</textarea>
+        <textarea class="form-control form-control-sm" id="diagnostico" name="diagnostico" rows="3" required >{{$evaluacion->diagnostico}}</textarea>
     </div>
 
     <div class="mb-3">
         <label for="observaciones" class="form-label col-form-label negrita">Observaciones:</label>
-        <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3" @if($show) disabled @endif>{{$evaluacion->observaciones}}</textarea>
+        <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3" >{{$evaluacion->observaciones}}</textarea>
     </div>
 
     <div class="row ">
