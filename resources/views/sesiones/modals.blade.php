@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 
-            <table id="tabla-multimedias-existentes" class="table w-100 table-bordered table-striped table-responsive datatable">
+            <table class="tabla-multimedias-existentes table w-100 table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr >
                             <th scope="col" style="display: none;">Id</th>
