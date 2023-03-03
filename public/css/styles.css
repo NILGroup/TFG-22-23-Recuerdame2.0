@@ -196,14 +196,20 @@ nav {
 }
 
 #demo-puntuacion{
+    width: 20px;
     font-size: larger;
     margin-bottom: 0px!important;
     margin-top: 0px!important;
     margin-left: 10px!important;
 }
 
+
+.slider:disabled:hover {
+    background-image: linear-gradient(to right, rgba(255, 0, 0, 0.7),rgba(219, 194, 5, 0.7), #02b875);
+}
+
 .slider:hover {
-    background-image: linear-gradient(to right, rgba(255, 0, 0, 1), rgba(0, 128, 0, 1));
+    background-image: linear-gradient(to right, rgb(134, 4, 4),rgba(163, 144, 3, 0.7), rgb(2, 128, 2));
 }
 
 .slider::-webkit-slider-thumb {
