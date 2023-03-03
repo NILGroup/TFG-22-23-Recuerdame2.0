@@ -46,6 +46,7 @@
     </div>
 
     <div class="row form-group justify-content-between">
+        @if(Auth::user()->rol_id == 1)
         <div class="row col-sm-6 col-md-6 col-lg-5 align-items-center">
 
             <label for="estado" class="form-label col-form-label negrita col-sm-6 col-md-3 col-lg-3">Estado: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="left" title="Valoración del terapeuta del estado recuerdo"></i></label>
@@ -70,7 +71,7 @@
             </div>
 
         </div>
-        
+        @endif
         <!--
     <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
         <label for="idEtiqueta" class="form-label col-form-label negrita col-sm-3 col-md-4 col-lg-2">Etiqueta: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="left" title="Valoración del terapeuta del recuerdo"></i></label>
@@ -113,6 +114,7 @@
             </div>
         </div>
         -->
+        @if(Auth::user()->rol_id == 1)
         <div class="slidecontainer">
             <div class="row col-sm-6 col-md-6 col-lg-6 justify-content-start ">
                 <label for="puntuacion" class="form-label col-form-label negrita col-sm-2 col-md-2 col-lg-2">Nivel: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Grado de positividad de la emoción generada al paciente por el recuerdo"></i></label>
@@ -129,6 +131,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <label id="valorPuntuacion" class="form-label col-sm-2 col-md-2 col-lg-2"></label>
     </div>
