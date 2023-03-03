@@ -119,7 +119,13 @@
             <div class="row col-sm-9 col-md-7 col-lg-6 justify-content-start ">
                 <label for="puntuacion" class="form-label col-form-label negrita col-sm-2 col-md-3 col-lg-2">Nivel: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Grado de positividad de la emoción generada al paciente por el recuerdo"></i></label>
 
+               
                 <div class="col-sm-10 col-md-9 col-lg-10 align-items-center">
+                <div class="d-flex justify-content-between carita-feliz">
+                        <span > positivo</span>
+                        <span > neutral</span>
+                        <span > negativo</span>
+                    </div>
                     <div class="d-flex align-items-center">
                         <input type="range" id="puntuacion" name="puntuacion" min="0" max="10" step="1" class="slider" value={{$recuerdo->puntuacion}} @if($show) disabled @endif>
                         <span id="demo-puntuacion" class="m-3"></span>

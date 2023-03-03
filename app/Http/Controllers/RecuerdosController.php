@@ -62,6 +62,7 @@ class RecuerdosController extends Controller
         $idPaciente = $paciente->id;
         $mostrarFoto = false;
         $persona = new Personarelacionada();
+        $recuerdo->apto=true;
 
         $multimedias = [];
 
