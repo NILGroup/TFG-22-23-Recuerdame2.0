@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let formulario = document.getElementById('formulario');
     var calendarEl = document.getElementById('calendar');
     let idPaciente = document.getElementById('paciente_id').value;
-    console.log(idPaciente)
+
     let url_eventos = "/calendario/" + idPaciente;
     let options = {
         dayHeaderFormat: {
@@ -41,158 +41,170 @@ document.addEventListener('DOMContentLoaded', function () {
 
         dateClick: function (info) {
             formulario.reset();
-
-            //Cuidador sólo podrá ver actividades.
-            //Por tanto, cuando un cuidador haga click en un dia, no hará nada
+            /*TERAPEUTA****************************************************************/
             if (user === '1') {
                 formulario.reset();
-                //formularioEliminar.reset();
-                document.getElementById('start').value = info.dateStr;
-                document.getElementById('fecha').value = info.dateStr + " 09:00:00";
-                document.getElementById('objetivo').value = "";
-                document.getElementById('descripcion').value = "";
-
-                var tabla = $("#tabla_recuerdos").dataTable();
-                console.log(tabla);
-                tabla.api().clear().draw();
-                console.log(tabla);
+                /*ACTIVIDAD Y SESION***************************************************/
                 document.getElementById('titulo').textContent = "Añadir";
-                //TODO como hacerlo para que se visualicen ambos y se elija primero activdad
-                document.getElementById('profile-tab').removeAttribute("disabled");
-                document.getElementById('profile-tab').classList.remove("active");
-                document.getElementById('profile').classList.remove("show");
-                document.getElementById('profile').classList.remove("active");
-                document.getElementById('home-tab').removeAttribute("disabled");
-                document.getElementById('home-tab').classList.add("active");
-                document.getElementById('home').classList.add("show");
-                document.getElementById('home').classList.add("active");
-
                 document.getElementById('title').removeAttribute("readonly");
+                /**********************************************************************/
+                /*ACTIVIDAD**********************************************************+*/
+                document.getElementById('start').value = info.dateStr;
                 document.getElementById('start').removeAttribute("readonly");
                 document.getElementById('obs').removeAttribute("readonly");
                 document.getElementById('color').classList.remove('d-none');
-
                 document.getElementById('div-fin').classList.add('d-none');
-
-                document.getElementById('btnGuardarSesion').classList.remove('d-none');
-                document.getElementById('btnEliminarSesion').classList.add('d-none');
-                document.getElementById('btnModificarSesion').classList.add('d-none');
-
+                document.getElementById('finished').removeAttribute("required");
                 document.getElementById('btnGuardar').classList.remove('d-none');
                 document.getElementById('btnEliminar').classList.add('d-none');
                 document.getElementById('btnModificar').classList.add('d-none');
-
-                console.log(info.dateStr + " 09:00:00");
+                document.getElementById('btnFinalizar').classList.add('d-none');
+                /**********************************************************************/
+                /*SESIÓN*************************************************************+*/
+                document.getElementById('sesion-modal-tab').removeAttribute("disabled");
+                document.getElementById('sesion-modal-tab').classList.remove("active");
+                document.getElementById('sesion-modal').classList.remove("show");
+                document.getElementById('sesion-modal').classList.remove("active");
+                document.getElementById('actividad-modal-tab').removeAttribute("disabled");
+                document.getElementById('actividad-modal-tab').classList.add("active");
+                document.getElementById('actividad-modal').classList.add("show");
+                document.getElementById('actividad-modal').classList.add("active");
+                document.getElementById('fecha').value = info.dateStr + " 09:00:00";
+                document.getElementById('objetivo').value = "";
+                document.getElementById('descripcion').value = "";
+                var tabla = $("#tabla_recuerdos").dataTable();
+                tabla.api().clear().draw();
+                document.getElementById('btnGuardarSesion').classList.remove('d-none');
+                document.getElementById('btnEliminarSesion').classList.add('d-none');
+                document.getElementById('btnModificarSesion').classList.add('d-none');
+                /**********************************************************************/
                 $('#evento').modal('show');
             }
+            /**************************************************************************/
+            /*CUIDADOR*****************************************************************/
+            /*Un cuidador no puede usar el dateClick***********************************/
+            /**************************************************************************/
         },
 
         eventClick: function (info) {
             formulario.reset();
-            //formularioEliminar.reset();
-            //document.getElementById('id').value = info.event.id;
-            if (user === '1') { //Se trata de un terapeuta
-                document.getElementById('finished').removeAttribute("required");
-                if (info.event.extendedProps.tipo === 'a' && info.event.extendedProps.finished === null) { //Si se trata de una actividad y no ha sido finalizada...
-                    document.getElementById('div-fin').classList.add('d-none');
-                    document.getElementById('color').classList.remove('d-none');
-                    // document.getElementById('btnModificar').value = "Finalizar actividad";
-                    //document.getElementById('btnModificar').classList.add("confirm_finish");
-                } else if (info.event.extendedProps.tipo === 'a' && info.event.extendedProps.finished !== null) { //Si se trata de una actividad y ha sido finalizada...
-                    document.getElementById('div-fin').classList.remove('d-none');
-                    document.getElementById('title').setAttribute("readonly", "");
-                    document.getElementById('start').setAttribute("readonly", "");
-                    document.getElementById('obs').setAttribute("readonly", "");
-                    document.getElementById('color').classList.add('d-none');
+            /*TERAPEUTA****************************************************************/
+            if (user === '1') {
+                /*ACTIVIDAD**********************************************************+*/
+                if (info.event.extendedProps.tipo === 'a') {
+                    document.getElementById("modalesCalendario").children[0].style.display = "block";
+                    document.getElementById("modalesCalendario").children[1].style.display = "none";
+
+                    document.getElementById('id').value = info.event.id;
+                    document.getElementById('title').value = info.event.title;
+                    document.getElementById('start').value = info.event.startStr;
+                    document.getElementById('color').value = info.event.backgroundColor;
+                    document.getElementById('obs').value = info.event.extendedProps.description;
+
+                    document.getElementById('finished').removeAttribute("required");
                     document.getElementById('finished').setAttribute("readonly", "");
+                    document.getElementById('btnGuardar').classList.add('d-none');
+                    document.getElementById('btnFinalizar').classList.add('d-none');
+                    /*ACTIVIDAD NO FINALIZADA******************************************/
+                    if (info.event.extendedProps.finished === null) {
+                        document.getElementById('title').removeAttribute("readonly");
+                        document.getElementById('start').removeAttribute("readonly");
+                        document.getElementById('obs').removeAttribute("readonly");
+                        document.getElementById('color').classList.remove('d-none');
+
+                        document.getElementById('div-fin').classList.add('d-none');
+
+                        document.getElementById('btnEliminar').classList.remove('d-none');
+                        document.getElementById('btnModificar').classList.remove('d-none');
+                    }
+                    /*******************************************************************/
+                    /*ACTIVIDAD FINALIZADA**********************************************/
+                    else {
+                        document.getElementById('finished').value = info.event.extendedProps.finished;
+
+                        document.getElementById('title').setAttribute("readonly", "");
+                        document.getElementById('start').setAttribute("readonly", "");
+                        document.getElementById('obs').setAttribute("readonly", "");
+                        document.getElementById('color').classList.add('d-none');
+
+                        document.getElementById('div-fin').classList.remove('d-none');
+
+                        document.getElementById('btnEliminar').classList.add('d-none');
+                        document.getElementById('btnModificar').classList.add('d-none');
+                    }
+                    /********************************************************************/
                 }
-            } else { //Se trata de un cuidador
+                /************************************************************************/
+                /*SESIÓN***************************************************************+*/
+                else {
+                    document.getElementById("modalesCalendario").children[0].style.display = "none";
+                    document.getElementById("modalesCalendario").children[1].style.display = "block";
+
+                    document.getElementById('idSesion').value = info.event.id;
+                    document.getElementById('fecha').value = info.event.extendedProps.fecha;
+                    document.getElementById('objetivo').value = info.event.extendedProps.objetivo;
+                    document.getElementById('descripcion').value = info.event.extendedProps.descripcion;
+                    var tabla = $("#tabla_recuerdos").dataTable();
+                    tabla.api().clear();
+                    for (let recuerdo of info.event.extendedProps.recuerdos) {
+                        let row = $("<tr></tr>");
+                        row.append($('<td>' + recuerdo.nombre + '</td>'));
+                        row.append($('<td>' + recuerdo.fecha + '</td>'));
+                        row.append($('<td>' + recuerdo.etapa.nombre + '</td>'));
+                        row.append($('<td>' + recuerdo.categoria.nombre + '</td>'));
+                        row.append($('<td>' + recuerdo.estado.nombre + '</td>'));
+                        tabla.api().row.add(row).draw()
+                    }
+
+                    document.getElementById('btnGuardarSesion').classList.add('d-none');
+                    document.getElementById('btnEliminarSesion').classList.remove('d-none');
+                    document.getElementById('btnModificarSesion').classList.remove('d-none');
+                }
+                /************************************************************************/
+            }
+            /**************************************************************************/
+            /*CUIDADOR*****************************************************************/
+            else {
                 document.getElementById('title').setAttribute("readonly", "");
                 document.getElementById('start').setAttribute("readonly", "");
                 document.getElementById('color').setAttribute("readonly", "");
                 document.getElementById('obs').setAttribute("readonly", "");
                 document.getElementById('color').classList.add('d-none');
                 document.getElementById("modalesCalendario").children[1].style.display = "none";
-                document.getElementById('btnModificar').value = "Finalizar actividad";
-                document.getElementById('btnModificar').classList.add("confirm_finish")
                 document.getElementById('finished').setAttribute("required", "");
                 if (info.event.extendedProps.tipo === 'a' && info.event.extendedProps.finished !== null)
                     document.getElementById('finished').setAttribute("readonly", "");
+                else
+                    document.getElementById('finished').removeAttribute("readonly");
+
+
             }
-
-
+            /**************************************************************************/
+            /*PARA EL SELECTOR DEL MODAL***********************************************/
+            /*ACTIVIDAD****************************************************************/
             if (info.event.extendedProps.tipo === 'a') {
-                //Para que solo aparezca la pestaña de Actividad...
-                document.getElementById('profile-tab').setAttribute("disabled", "");
-                document.getElementById('profile-tab').classList.remove("active");
-                document.getElementById('profile').classList.remove("show");
-                document.getElementById('profile').classList.remove("active");
-                document.getElementById('home-tab').removeAttribute("disabled");
-                document.getElementById('home-tab').classList.add("active");
-                document.getElementById('home').classList.add("show");
-                document.getElementById('home').classList.add("active");
-
-                //Para dejar los botones necesarios
-                document.getElementById('btnGuardar').classList.add('d-none');
-                if (user === '2') {
-                    document.getElementById('btnEliminar').classList.add('d-none');
-                    if (info.event.extendedProps.finished === null)
-                        document.getElementById('btnModificar').classList.remove('d-none');
-                    else
-                        document.getElementById('btnModificar').classList.add('d-none');
-                } else {
-                    document.getElementById('btnEliminar').classList.remove('d-none');
-                    document.getElementById('btnModificar').classList.remove('d-none');
-                }
-
-                //Para asignar los valores...
-                document.getElementById('id').value = info.event.id;
-                //document.getElementById('idEliminar').value = info.event.id;
-                document.getElementById('title').value = info.event.title;
-                document.getElementById('start').value = info.event.startStr;
-                document.getElementById('color').value = info.event.backgroundColor;
-                document.getElementById('obs').value = info.event.extendedProps.description;
-                if (info.event.extendedProps.finished !== null)
-                    document.getElementById('finished').value = info.event.extendedProps.finished;
-
-            } else if (info.event.extendedProps.tipo === 's') {
-                //Para que solo aparezca la pestaña de Sesión...
-                document.getElementById('profile-tab').removeAttribute("disabled");
-                document.getElementById('profile-tab').classList.add("active");
-                document.getElementById('profile').classList.add("show");
-                document.getElementById('profile').classList.add("active");
-                document.getElementById('home-tab').setAttribute("disabled", "");
-                document.getElementById('home-tab').classList.remove("active");
-                document.getElementById('home').classList.remove("show");
-                document.getElementById('home').classList.remove("active");
-
-                //Para dejar los botones necesarios...
-                document.getElementById('btnGuardarSesion').classList.add('d-none');
-                document.getElementById('btnEliminarSesion').classList.remove('d-none');
-                document.getElementById('btnModificarSesion').classList.remove('d-none');
-
-                //Para asignar los valores...
-                document.getElementById('idSesion').value = info.event.id;
-                document.getElementById('fecha').value = info.event.extendedProps.fecha;
-                document.getElementById('objetivo').value = info.event.extendedProps.objetivo;
-                document.getElementById('descripcion').value = info.event.extendedProps.descripcion;
-
-                var tabla = $("#tabla_recuerdos").dataTable();
-                tabla.api().clear();
-
-                for (let recuerdo of info.event.extendedProps.recuerdos) {
-                    let row = $("<tr></tr>");
-                    row.append($('<td>' + recuerdo.nombre + '</td>'));
-                    row.append($('<td>' + recuerdo.fecha + '</td>'));
-                    row.append($('<td>' + recuerdo.etapa.nombre + '</td>'));
-                    row.append($('<td>' + recuerdo.categoria.nombre + '</td>'));
-                    row.append($('<td>' + recuerdo.estado.nombre + '</td>'));
-                    row.append($('<td>' + recuerdo.etiqueta.nombre + '</td>'));
-                    tabla.api().row.add(row).draw()
-                }
-
+                document.getElementById('sesion-modal-tab').setAttribute("disabled", "");
+                document.getElementById('sesion-modal-tab').classList.remove("active");
+                document.getElementById('sesion-modal').classList.remove("show");
+                document.getElementById('sesion-modal').classList.remove("active");
+                document.getElementById('actividad-modal-tab').removeAttribute("disabled");
+                document.getElementById('actividad-modal-tab').classList.add("active");
+                document.getElementById('actividad-modal').classList.add("show");
+                document.getElementById('actividad-modal').classList.add("active");
             }
-            console.log(info.event.extendedProps.fecha);
+            /**************************************************************************/
+            /*SESION********************************************************************/ 
+            else if (info.event.extendedProps.tipo === 's') {
+                document.getElementById('sesion-modal-tab').removeAttribute("disabled");
+                document.getElementById('sesion-modal-tab').classList.add("active");
+                document.getElementById('sesion-modal').classList.add("show");
+                document.getElementById('sesion-modal').classList.add("active");
+                document.getElementById('actividad-modal-tab').setAttribute("disabled", "");
+                document.getElementById('actividad-modal-tab').classList.remove("active");
+                document.getElementById('actividad-modal').classList.remove("show");
+                document.getElementById('actividad-modal').classList.remove("active");
+            }
+            /**************************************************************************/
             $('#evento').modal('show');
 
         },
