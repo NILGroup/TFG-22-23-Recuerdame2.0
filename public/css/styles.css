@@ -16,20 +16,20 @@ html {
     box-sizing: border-box;
 }
 
-label{
-    font-size: var(--tamLetra)!important;
+label {
+    font-size: var(--tamLetra) !important;
 }
 
-select{
-    font-size: var(--tamLetra)!important;
+select {
+    font-size: var(--tamLetra) !important;
 }
 
-input{
-    font-size: var(--tamLetra)!important;
+input {
+    font-size: var(--tamLetra) !important;
 }
 
-textarea{
-    font-size: var(--tamLetra)!important;
+textarea {
+    font-size: var(--tamLetra) !important;
 }
 
 body {
@@ -76,20 +76,21 @@ footer {
 /*DESPLEGABLES -----------------------------------------------------------------------*/
 
 .accordion-collapse {
-    padding: 10px!important;
+    padding: 10px !important;
 }
 
 /*TABLAS ----------------------------------------------------------------------*/
-tbody{
-    background-color: var(--whiteSuave)!important;
+tbody {
+    background-color: var(--whiteSuave) !important;
 }
+
 thead {
     color: var(--white) !important;
     background-color: var(--turquesa) !important;
 }
 
 .tableActions {
-    text-align: center!important    ;
+    text-align: center !important;
 }
 
 .tableIcon {
@@ -98,7 +99,7 @@ thead {
 }
 
 .table {
-    font-size: var(--tamLetra)!important;
+    font-size: var(--tamLetra) !important;
     padding: 0.2rem 0.3rem !important;
 }
 
@@ -106,7 +107,7 @@ thead {
     /*padding: 0.2rem 0.3rem !important;*/
 }
 
-caption{
+caption {
     font-size: var(--captionSize);
 }
 
@@ -128,10 +129,10 @@ caption{
     max-width: 10em !important;
 }
 
-.botonAccionTablas{
+.botonAccionTablas {
     width: 70%;
-    min-width: fit-content; 
-    font-size: var(--tamLetraBotones)!important;
+    min-width: fit-content;
+    font-size: var(--tamLetraBotones) !important;
 }
 
 /*HEADER -------------------------------------------------------------*/
@@ -145,7 +146,7 @@ caption{
 
 /*NAVBAR -------------------------------------------------------------*/
 
-nav{
+nav {
     background-color: var(--turquesa);
 }
 
@@ -158,9 +159,9 @@ nav{
     border-bottom-width: thin;
 }
 
-.nav-link{
-    font-size: 17px!important;
-    padding: 12px 20px 12px 20px!important;
+.nav-link {
+    font-size: 17px !important;
+    padding: 12px 20px 12px 20px !important;
 }
 
 .nav-link:hover {
@@ -171,11 +172,61 @@ nav{
 }
 
 /*FOTO PACIENTE----------------------------------------*/
-.imagenPaciente{
-    max-width: 250px!important;
+.imagenPaciente {
+    max-width: 250px !important;
 }
 
-/*SLIDER PUNTUACIÓN ---------------------------------------*/
+/*NUEVO SLIDER PUNTUACIÓN----*/
+.slidecontainer {
+    width: 100% !important;
+}
+
+.slider {
+    width: 70%;
+    height: 10px;
+    border-radius: 5px;
+    border-width: 10px;
+    background-image: linear-gradient(to right, rgba(255, 0, 0, 0.7),rgba(219, 194, 5, 0.7), #02b875);
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+    -webkit-appearance: none;
+    margin-bottom: 0px!important;
+    margin-top: 0px!important;
+}
+
+#demo-puntuacion{
+    font-size: larger;
+    margin-bottom: 0px!important;
+    margin-top: 0px!important;
+    margin-left: 10px!important;
+}
+
+.slider:hover {
+    background-image: linear-gradient(to right, rgba(255, 0, 0, 1), rgba(0, 128, 0, 1));
+}
+
+.slider::-webkit-slider-thumb {
+    width: 23px;
+    height: 24px;
+    border: 0;
+    background: url('contrasticon.png');
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 23px;
+    height: 24px;
+    border: 0;
+    background: url('contrasticon.png');
+    cursor: pointer;
+}
+
+.carita-feliz{
+    margin-right: 50px;
+}
+
+/*SLIDER PUNTUACIÓN ANTIGUO---------------------------------------*/
 .rangeslider__fill {
     background: #EAECEE;
     position: absolute;
@@ -485,7 +536,7 @@ nav{
     margin-bottom: 6px;
 }
 
-.badge{
+.badge {
     background-color: #dc3545;
     margin-left: 0.25rem;
 }
