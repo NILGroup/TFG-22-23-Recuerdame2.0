@@ -3,34 +3,35 @@
 <input type="hidden" name="recuerdo_id" id="recuerdo_id" value="">
 <div class="row form-group justify-content-between">
     <div class="row col-sm-6 col-md-6 col-lg-5 align-items-center">
-        <label for="nombre" class="form-label col-form-label negrita col-sm-4 col-md-3 col-lg-4">Nombre:<span class="asterisco">*</span></label>
-        <div class="col-sm-9 col-md-9 col-lg-6 align-items-center">
+        <label for="nombre" class="form-label col-form-label negrita col-sm-4 col-md-3 col-lg-3">Nombre:<span class="asterisco">*</span></label>
+        <div class="col-sm-11 col-md-9 col-lg-7 align-items-center">
             <input type="text" name="nombre" value="{{$recuerdo->nombre}}" class="form-control form-control-sm" id="nombre" maxlength="50" required @if($show) disabled @endif>
         </div>
     </div>
     <div class="row col-sm-6 col-md-6 col-lg-7 align-items-center">
-        <label for="estado" class="form-label col-form-label negrita col-sm-5 col-md-5 col-lg-3">Estado: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="left" title="Valoración del terapeuta del estado recuerdo"></i></label>
-        <div class="col-sm-9 col-md-6 col-lg-4 align-items-center">
-            <select class="form-select form-select-sm" id="idEstado" name="estado_id" @if($show) disabled @endif>
+    <label for="emocion" class="form-label col-form-label negrita col-sm-8 col-md-4 col-lg-3">Polaridad: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Emoción que estima el terapeuta que el recuerdo le ha generado al paciente"></i></label>
+        <div class="col-sm-9 col-md-7 col-lg-5 align-items-center">
+            <select class="form-select form-select-sm" id="idEmocion" name="emocion_id" @if($show) disabled @endif>
                 <option></option>
-                @foreach ($estados as $estado)
-                <option value="{{$estado->id}}" @if($estado->id == $recuerdo->estado_id) selected @endif>{{$estado->nombre}}</option>
+                @foreach ($emociones as $emocion)
+                <option value="{{$emocion->id}}" @if($emocion->id == $recuerdo->emocion_id) selected @endif>{{$emocion->nombre}}</option>
                 @endforeach
             </select>
         </div>
+        
     </div>
 </div>
 
 <div class="row form-group justify-content-between">
     <div class="row col-sm-6 col-md-6 col-lg-5 align-items-center">
-        <label for="fecha" class="form-label col-form-label negrita col-sm-5 col-md-5 col-lg-5">Fecha:<span class="asterisco">*</span></label>
-        <div class="col-sm-9 col-md-6 col-lg-5 align-items-center">
+        <label for="fecha" class="form-label col-form-label negrita col-sm-4 col-md-3 col-lg-3">Fecha:<span class="asterisco">*</span></label>
+        <div class="col-sm-11 col-md-9 col-lg-7 align-items-center">
             <input max="4000-12-31" min="1800-01-01" type="date" class="form-control form-control-sm" id="fecha" required name="fecha" value="{{$recuerdo->fecha}}" @if($show) disabled @endif>
         </div>
     </div>
     <div class="row col-sm-6 col-md-6 col-lg-7 align-items-center ">
-        <label for="etapa" class="form-label col-form-label negrita col-sm-8 col-md-6 col-lg-3">Etapa de la vida:<span class="asterisco">*</span></label>
-        <div class="col-sm-6 col-md-5 col-lg-4 align-items-center">
+        <label for="etapa" class="form-label col-form-label negrita col-sm-8 col-md-4 col-lg-3">Etapa de la vida:<span class="asterisco">*</span></label>
+        <div class="col-sm-9 col-md-7 col-lg-5 align-items-center">
             <select class="form-select form-select-sm" id="idEtapa" name="etapa_id" required @if($show) disabled @endif>
                 <option></option>
                 @foreach ($etapas as $etapa)
@@ -43,19 +44,20 @@
 
 <div class="row form-group justify-content-between">
     <div class="row col-sm-6 col-md-6 col-lg-5 align-items-center">
-        <label for="emocion" class="form-label col-form-label negrita col-sm-5 col-md-5 col-lg-5">Polaridad: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Emoción que estima el terapeuta que el recuerdo le ha generado al paciente"></i></label>
-        <div class="col-sm-9 col-md-6 col-lg-5 align-items-center">
-            <select class="form-select form-select-sm" id="idEmocion" name="emocion_id" @if($show) disabled @endif>
+        
+    <label for="estado" class="form-label col-form-label negrita col-sm-6 col-md-3 col-lg-3">Estado: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="left" title="Valoración del terapeuta del estado recuerdo"></i></label>
+        <div class="col-sm-11 col-md-9 col-lg-7 align-items-center">
+            <select class="form-select form-select-sm" id="idEstado" name="estado_id" @if($show) disabled @endif>
                 <option></option>
-                @foreach ($emociones as $emocion)
-                <option value="{{$emocion->id}}" @if($emocion->id == $recuerdo->emocion_id) selected @endif>{{$emocion->nombre}}</option>
+                @foreach ($estados as $estado)
+                <option value="{{$estado->id}}" @if($estado->id == $recuerdo->estado_id) selected @endif>{{$estado->nombre}}</option>
                 @endforeach
             </select>
         </div>
     </div>
     <div class="row col-sm-6 col-md-6 col-lg-7 align-items-center">
-        <label for="categoria" class="form-label col-form-label negrita col-sm-8 col-md-6 col-lg-3">Categoría:</label>
-        <div class="col-sm-6 col-md-5 col-lg-4">
+        <label for="categoria" class="form-label col-form-label negrita col-sm-8 col-md-4 col-lg-3">Categoría:</label>
+        <div class="col-sm-9 col-md-7 col-lg-5">
             <select onchange="especifiqueCategoria()" style="margin-right: 5px" class="form-select form-select-sm form-control" id="categoria_id" name="categoria_id" @if($show) disabled @endif>
                 <option></option>
                 @foreach ($categorias as $categoria)
