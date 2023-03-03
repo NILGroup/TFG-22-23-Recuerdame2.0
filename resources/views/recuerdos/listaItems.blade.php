@@ -2,16 +2,16 @@
 <input type="hidden" name="paciente_id" id="paciente_id" value="{{$paciente->id}}">
 <input type="hidden" name="recuerdo_id" id="recuerdo_id" value="">
 <div class="form-group">
-    <div class="row form-group justify-content-between">
-        <div class="row col-sm-6 col-md-6 col-lg-5 align-items-center">
-            <label for="nombre" class="form-label col-form-label negrita col-sm-4 col-md-3 col-lg-3">Nombre:<span class="asterisco">*</span></label>
-            <div class="col-sm-11 col-md-9 col-lg-7 align-items-center">
+    <div class="row form-group justify-content-start">
+        <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
+            <label for="nombre" class="form-label col-form-label negrita col-sm-4 col-md-4 col-lg-3">Nombre:<span class="asterisco">*</span></label>
+            <div class="col-sm-12 col-md-12 col-lg-7 align-items-center">
                 <input type="text" name="nombre" value="{{$recuerdo->nombre}}" class="form-control form-control-sm" id="nombre" maxlength="50" required @if($show) disabled @endif>
             </div>
         </div>
-        <div class="row col-sm-6 col-md-6 col-lg-7 align-items-center">
-            <label for="categoria" class="form-label col-form-label negrita col-sm-8 col-md-4 col-lg-3">Categoría:</label>
-            <div class="col-sm-9 col-md-7 col-lg-5">
+        <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
+            <label for="categoria" class="form-label col-form-label negrita col-sm-4 col-md-6 col-lg-3">Categoría:</label>
+            <div class="col-sm-12 col-md-12 col-lg-7">
                 <select onchange="especifiqueCategoria()" style="margin-right: 5px" class="form-select form-select-sm form-control" id="categoria_id" name="categoria_id" @if($show) disabled @endif>
                     <option></option>
                     @foreach ($categorias as $categoria)
@@ -25,16 +25,16 @@
         
     </div>
 
-    <div class="row form-group justify-content-between">
-        <div class="row col-sm-6 col-md-6 col-lg-5 align-items-center">
-            <label for="fecha" class="form-label col-form-label negrita col-sm-4 col-md-3 col-lg-3">Fecha:<span class="asterisco">*</span></label>
-            <div class="col-sm-11 col-md-9 col-lg-7 align-items-center">
+    <div class="row form-group justify-content-start">
+        <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
+            <label for="fecha" class="form-label col-form-label negrita col-sm-4 col-md-4 col-lg-3">Fecha:<span class="asterisco">*</span></label>
+            <div class="col-sm-12 col-md-12 col-lg-7 align-items-center">
                 <input max="4000-12-31" min="1800-01-01" type="date" class="form-control form-control-sm" id="fecha" required name="fecha" value="{{$recuerdo->fecha}}" @if($show) disabled @endif>
             </div>
         </div>
-        <div class="row col-sm-6 col-md-6 col-lg-7 align-items-center ">
-            <label for="etapa" class="form-label col-form-label negrita col-sm-8 col-md-4 col-lg-3">Etapa de la vida:<span class="asterisco">*</span></label>
-            <div class="col-sm-9 col-md-7 col-lg-5 align-items-center">
+        <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center ">
+            <label for="etapa" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-3">Etapa de la vida:<span class="asterisco">*</span></label>
+            <div class="col-sm-12 col-md-12 col-lg-7 align-items-center">
                 <select class="form-select form-select-sm" id="idEtapa" name="etapa_id" required @if($show) disabled @endif>
                     <option></option>
                     @foreach ($etapas as $etapa)
@@ -45,11 +45,11 @@
         </div>
     </div>
 
-    <div class="row form-group justify-content-between">
-        <div class="row col-sm-6 col-md-6 col-lg-5 align-items-center">
+    <div class="row form-group justify-content-start">
+        <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
 
-            <label for="estado" class="form-label col-form-label negrita col-sm-6 col-md-3 col-lg-3">Estado: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="left" title="Valoración del terapeuta del estado recuerdo"></i></label>
-            <div class="col-sm-11 col-md-9 col-lg-7 align-items-center">
+            <label for="estado" class="form-label col-form-label negrita col-sm-6 col-md-12 col-lg-3">Estado: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="left" title="Valoración del terapeuta del estado recuerdo"></i></label>
+            <div class="col-sm-12 col-md-12 col-lg-7 align-items-center">
                 <select class="form-select form-select-sm" id="idEstado" name="estado_id" @if($show) disabled @endif>
                     <option></option>
                     @foreach ($estados as $estado)
@@ -58,9 +58,9 @@
                 </select>
             </div>
         </div>
-        <div class="row col-sm-6 col-md-6 col-lg-7 align-items-center">
-            <label for="emocion" class="form-label col-form-label negrita col-sm-8 col-md-4 col-lg-3">Polaridad: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Emoción que estima el terapeuta que el recuerdo le ha generado al paciente"></i></label>
-            <div class="col-sm-9 col-md-7 col-lg-5 align-items-center">
+        <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
+            <label for="emocion" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-3">Polaridad: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Emoción que estima el terapeuta que el recuerdo le ha generado al paciente"></i></label>
+            <div class="col-sm-12 col-md-12 col-lg-7 align-items-center">
                 <select class="form-select form-select-sm" id="idEmocion" name="emocion_id" @if($show) disabled @endif>
                     <option></option>
                     @foreach ($emociones as $emocion)
@@ -85,9 +85,9 @@
     </div>
 -->
         <div class="row justify-content-start">
-            <div class="row col-sm-6 col-md-6 col-lg-5 align-items-center">
+            <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
                 <label for="apto" class="form-label col-form-label negrita col-sm-3 col-md-3 col-lg-3">Apto: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="right" title="Marca esta opción si el recuerdo sigue siendo apto para trabajar con él."></i></label>
-                <div class="col-sm-2 col-md-7 col-lg-6 align-items-center">
+                <div class="col-sm-2 col-md-7 col-lg-7 align-items-center">
                     <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif @if($show) disabled @endif>
                 </div>
             </div>
