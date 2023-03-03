@@ -175,6 +175,36 @@ nav{
     max-width: 250px!important;
 }
 
+/*SLIDER PUNTUACIÓN ---------------------------------------*/
+.rangeslider__fill {
+    background: #EAECEE;
+    position: absolute;
+}
+
+.rangeslider {
+    background: #EAECEE;
+}
+
+.rangeslider__handle {
+    border: none;
+    background: #0d6efd;
+    width: 20px;
+    height: 20px;
+}
+
+.rangeslider--horizontal .rangeslider__handle {
+    top: -4px;
+}
+
+.rangeslider--horizontal {
+    height: 10px;
+}
+
+.puntuacion {
+    height: 10px !important;
+    position: relative !important;
+}
+
 /*OTROS.-------------------------------------------- */
 
 /*Cuerpo del cuadrado*/
@@ -403,35 +433,6 @@ nav{
     margin-top: 0.25rem;
     font-size: 0.875em;
     color: #dc3545;
-}
-
-.rangeslider__fill {
-    background: #EAECEE;
-    position: absolute;
-}
-
-.rangeslider {
-    background: #EAECEE;
-}
-
-.rangeslider__handle {
-    border: none;
-    background: #0d6efd;
-    width: 20px;
-    height: 20px;
-}
-
-.rangeslider--horizontal .rangeslider__handle {
-    top: -4px;
-}
-
-.rangeslider--horizontal {
-    height: 10px;
-}
-
-.puntuacion {
-    height: 10px !important;
-    position: relative !important;
 }
 
 .selectBox {
