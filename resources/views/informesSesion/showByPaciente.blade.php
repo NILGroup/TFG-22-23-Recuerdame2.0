@@ -22,7 +22,7 @@
             <tbody class="shadow-sm">
                 @foreach ($sesiones as $sesion)
                     <tr>
-                        <td><a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/ver">Informe {{date("d/m/Y", strtotime($sesion->fecha_finalizada))}}</td>
+                        <td data-sort="{{ strtotime($sesion->fecha_finalizada) }}"><a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/ver">Informe {{date("d/m/Y", strtotime($sesion->fecha_finalizada))}}</td>
                         <td class="tableActions">
                             <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
                             <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/generarInforme"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>

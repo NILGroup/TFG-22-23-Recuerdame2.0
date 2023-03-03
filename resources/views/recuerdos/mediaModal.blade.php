@@ -22,7 +22,7 @@
                                 <tr>
                                     <th scope="col" style="display: none;">Id</th>
                                     <th scope="col text-center">Nombre</th>
-                                    <th class="fit10" scope="col"></th>
+                                    <th class="fit10" scope="col">Seleccionar</th>
                                 </tr>
                             </thead>
                             <tbody class="shadow-sm">
@@ -47,7 +47,7 @@
                                 <tr>
                                     <th scope="col" style="display: none;">Id</th>
                                     <th scope="col text-center">Nombre</th>
-                                    <th class="fit10" scope="col"></th>
+                                    <th class="fit10" scope="col">Seleccionar</th>
                                 </tr>
                             </thead>
                             <tbody class="shadow-sm">

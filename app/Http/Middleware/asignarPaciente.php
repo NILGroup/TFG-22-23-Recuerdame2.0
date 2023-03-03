@@ -19,7 +19,7 @@ class asignarPaciente
     public function handle(Request $request, Closure $next)
     {
         $url = explode("/", url()->current());
-        //throw new \Exception(json_encode($url));
+        //throw new \Exception(json_encode($url[6]));
         
         if(sizeof($url) <= 4){
             return $next($request);
@@ -31,7 +31,7 @@ class asignarPaciente
         }
 
         $valido = true;
-        if(sizeof($url) > 6)
+        if(sizeof($url) > 6 && is_numeric($url[6]))
             switch ($url[5]):
                 case "sesiones":
                     if(!$paciente->sesiones->contains($url[6]))

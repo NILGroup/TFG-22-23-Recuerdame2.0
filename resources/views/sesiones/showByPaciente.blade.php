@@ -28,7 +28,7 @@
             <tbody class="shadow-sm">
                 @foreach($sesiones as $sesion)
                 <tr>
-                    <td><a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}">{{date("d/m/Y", strtotime($sesion->fecha))}}</a></td>
+                    <td data-sort="{{ strtotime($sesion->fecha) }}"><a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}">{{date("d/m/Y", strtotime($sesion->fecha))}}</a></td>
                     <td>{{$sesion->objetivo}}</td>
                     
                     <td class="tableActions align-center">
