@@ -203,11 +203,6 @@ nav {
     margin-left: 10px!important;
 }
 
-
-.slider:disabled:hover {
-    background-image: linear-gradient(to right, rgba(255, 0, 0, 0.7),rgba(219, 194, 5, 0.7), #02b875);
-}
-
 .slider:hover {
     background-image: linear-gradient(to right, rgb(134, 4, 4),rgba(163, 144, 3, 0.7), rgb(2, 128, 2));
 }
@@ -231,8 +226,25 @@ nav {
 .carita-feliz{
     margin-right: 50px;
 }
+/*if disabled*/
+.slider:disabled::-webkit-slider-thumb {
+    width: 23px;
+    height: 23px;
+    border: 0;
+    color: #aeb7bf;
+    background: #aeb7bf;
+    cursor: pointer;
+}
 
-/*SLIDER PUNTUACIÓN ANTIGUO---------------------------------------*/
+.slider:disabled {
+    background-image: linear-gradient(to right, rgba(87, 7, 7, 0.7),rgba(163, 150, 65, 0.7), #24b593);
+}
+
+.slider:disabled:hover {
+    background-image: linear-gradient(to right, rgba(87, 7, 7, 0.7),rgba(163, 150, 65, 0.7), #24b593);
+}
+
+/*SLIDER PUNTUACIÓN ANTIGUO---------------------------------------
 .rangeslider__fill {
     background: #EAECEE;
     position: absolute;
@@ -260,7 +272,7 @@ nav {
 .puntuacion {
     height: 10px !important;
     position: relative !important;
-}
+}*/
 
 /*OTROS.-------------------------------------------- */
 
