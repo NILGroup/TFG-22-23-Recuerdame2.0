@@ -165,6 +165,12 @@ document.addEventListener('DOMContentLoaded', function () {
             /**************************************************************************/
             /*CUIDADOR*****************************************************************/
             else {
+                document.getElementById('id').value = info.event.id;
+                document.getElementById('title').value = info.event.title;
+                document.getElementById('start').value = info.event.startStr;
+                document.getElementById('color').value = info.event.backgroundColor;
+                document.getElementById('obs').value = info.event.extendedProps.description;
+
                 document.getElementById('title').setAttribute("readonly", "");
                 document.getElementById('start').setAttribute("readonly", "");
                 document.getElementById('color').setAttribute("readonly", "");
@@ -172,12 +178,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('color').classList.add('d-none');
                 document.getElementById("modalesCalendario").children[1].style.display = "none";
                 document.getElementById('finished').setAttribute("required", "");
-                if (info.event.extendedProps.tipo === 'a' && info.event.extendedProps.finished !== null)
+                if (info.event.extendedProps.finished !== null) {
                     document.getElementById('finished').setAttribute("readonly", "");
-                else
+                    document.getElementById('btnFinalizar').classList.add('d-none');
+                }else{
                     document.getElementById('finished').removeAttribute("readonly");
-
-
+                    document.getElementById('btnFinalizar').classList.remove('d-none');
+                }
+                document.getElementById('btnGuardar').classList.add('d-none');
+                document.getElementById('btnEliminar').classList.add('d-none');
+                document.getElementById('btnModificar').classList.add('d-none');
+                
             }
             /**************************************************************************/
             /*PARA EL SELECTOR DEL MODAL***********************************************/
@@ -193,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('actividad-modal').classList.add("active");
             }
             /**************************************************************************/
-            /*SESION********************************************************************/ 
+            /*SESION********************************************************************/
             else if (info.event.extendedProps.tipo === 's') {
                 document.getElementById('sesion-modal-tab').removeAttribute("disabled");
                 document.getElementById('sesion-modal-tab').classList.add("active");

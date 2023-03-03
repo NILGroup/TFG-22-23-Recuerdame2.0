@@ -39,7 +39,14 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link letra-primary-color menu" href="/pacientes/{{Session::get('paciente')['id']}}/calendario">Calendario</a>
+                    <!--<span class="badge bg-danger rounded-pill" style="float:right;margin-bottom:-15px;">1</span>-->
+                    <a class="nav-link letra-primary-color menu" href="/pacientes/{{Session::get('paciente')['id']}}/calendario">Calendario
+                        <!--Hacer que solo se muestre si hay sin finalizar-->
+                        @if (Auth::user()->rol_id == 2)
+                        <span class="badge badge-pill rounded-pill badge-danger"> {{ App\Http\Controllers\CalendarioController::getNotDone($paciente->id) }}
+                        </span>
+                        @endif
+                    </a>
                 </li>
                 @if (Auth::user()->rol_id == 1)
                 <li class="nav-item">
@@ -55,13 +62,13 @@
                 <a href="/pacientes/{{Session::get('paciente')['id']}}"><img src="{{$paciente->multimedia->fichero}}" alt="Avatar" class="avatar-mini"></a>
                 @else
 
-                    @if( Session::get('paciente')['genero_id'] == 1 || Session::get('paciente')['genero_id'] == 3)
+                @if( Session::get('paciente')['genero_id'] == 1 || Session::get('paciente')['genero_id'] == 3)
 
-                      <a href="/pacientes/{{Session::get('paciente')['id']}}"><img src="/img/avatar_hombre.png" alt="Avatar" class="avatar-mini"></a>
+                <a href="/pacientes/{{Session::get('paciente')['id']}}"><img src="/img/avatar_hombre.png" alt="Avatar" class="avatar-mini"></a>
 
-                    @elseif( Session::get('paciente')['genero_id'] == 2)
-                     <a href="/pacientes/{{Session::get('paciente')['id']}}"><img src="/img/avatar_mujer.png" alt="Avatar" class="avatar-mini"></a>
-                    @endif
+                @elseif( Session::get('paciente')['genero_id'] == 2)
+                <a href="/pacientes/{{Session::get('paciente')['id']}}"><img src="/img/avatar_mujer.png" alt="Avatar" class="avatar-mini"></a>
+                @endif
                 @endif
             </div>
         </div>

@@ -484,6 +484,11 @@ nav{
     margin-bottom: 6px;
 }
 
+.badge{
+    background-color: #dc3545;
+    margin-left: 0.25rem;
+}
+
 div>.row {
     align-items: center;
 }

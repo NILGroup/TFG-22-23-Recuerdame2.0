@@ -241,4 +241,19 @@ class CalendarioController extends Controller
         return redirect("pacientes/{$sesion->paciente->id}/calendario");
         //return "<h1>$request</h1>";
     }
+
+    public static function getNotDone(int $idPaciente) {
+        $tipoUsuario = Auth::user()->rol_id;
+        $actividad = Actividad::where("paciente_id", "=", $idPaciente)->get();
+        $contador = 0;
+        foreach ($actividad as $a) {
+            if ($a->finished === "" || $a->finished === null) {
+                $contador = $contador + 1;
+            }
+        }
+        if ($tipoUsuario === 2)
+            return $contador;
+        else 
+            return 0;
+    }
 }
