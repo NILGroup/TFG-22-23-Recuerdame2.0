@@ -32,6 +32,7 @@ class CalendarioController extends Controller
 
     public function showByPaciente(int $idPaciente)
     {
+        $show = false;
         //$actividades = Actividad::all()->sortBy("id");
         $user = Auth::user();
         $paciente = Paciente::find($idPaciente);
@@ -70,7 +71,7 @@ class CalendarioController extends Controller
         }
 
 
-        return view('calendario.showByPaciente', compact("multimedias","idPaciente","paciente", "user", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos", "recuerdos", "personas", "persona", "mostrarFoto"));
+        return view('calendario.showByPaciente', compact("multimedias","idPaciente","paciente", "user", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos", "recuerdos", "personas", "persona", "mostrarFoto", "show"));
     }
 
     public function store(Request $request)
