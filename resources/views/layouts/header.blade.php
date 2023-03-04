@@ -22,7 +22,7 @@
                     @if (Auth::user()->rol_id == 1)
                     <li class="nav-item" style="margin-right: 10px;">
                         <div >
-                            <a class="nav-link p-2" href="{{ route('pacientes.index') }}"><i class="fa-solid fa-users"></i></a>
+                            <a class="nav-link p-2" href="{{ route('pacientes.index') }}"><i class="fa-solid fa-users" data-toggle="tooltip" data-placement="top" title="Volver al listado de usuarios."></i></a>
                         </div>
                     </li>
                     @endif

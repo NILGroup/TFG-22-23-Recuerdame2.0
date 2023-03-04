@@ -187,7 +187,7 @@
                     <td>{{$persona->tiporelacion->nombre}}</td>
                     @if($show)
                         <td class="tableActions">
-                            <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
+                            <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona."></i></a>
                         </td>
                     @endif
                     <input type="hidden" value="{{$persona->id}}" name="checkPersona[]">

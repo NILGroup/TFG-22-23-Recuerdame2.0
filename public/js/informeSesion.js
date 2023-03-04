@@ -237,7 +237,7 @@ function addFields(row, rec){
     row.append($('<td>' + rec.estado.nombre + '</td>'))
     row.append($('<td>' + rec.etiqueta.nombre + '</td>' ))
     row.append($('<td class="tableActions">'+
-        '<a onclick="actualizaModalRecuerdo('+ rec.id +')" type="button" id="updateRecuerdo" name="updateRecuerdo" class="showmodal" data-bs-toggle="modal" data-bs-target="#recuerdosCreator"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>' +
+        '<a onclick="actualizaModalRecuerdo('+ rec.id +')" type="button" id="updateRecuerdo" name="updateRecuerdo" class="showmodal" data-bs-toggle="modal" data-bs-target="#recuerdosCreator"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar este recuerdo."></i></a>' +
     '</td>' ));
 }
 
