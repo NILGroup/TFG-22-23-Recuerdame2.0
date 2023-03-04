@@ -163,9 +163,9 @@ class PDFHistoria extends FPDF{
         $pdf->Ln(9);
        
         $this->writeRecuerdos($pdf, $listadoRecuerdos);
-        
+
         $fecha = Carbon::now();
-        $nombreArchivo = str_replace(" ", "_", $paciente->nombre."_".$fecha->format("d-m-Y").".pdf");
+        $nombreArchivo = str_replace(" ", "_", $paciente->nombre."_".$fecha->format("d/m/Y").".pdf");
         $pdf->Output( 'I', $nombreArchivo, true );
         
     }

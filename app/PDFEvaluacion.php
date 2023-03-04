@@ -141,8 +141,8 @@ class PDFEvaluacion extends FPDF{
         }
         
         $fecha = Carbon::now();
-        $nombreArchivo = str_replace(" ", "_", "Seguimiento ".$paciente->nombre." ".$fecha->format("d-m-Y").".pdf");
-        $pdf->Output( 'I', "Seguimiento ".$paciente->nombre." ".$fecha->format("d-m-Y").".pdf", true );
+        $nombreArchivo = str_replace(" ", "_", "Seguimiento ".$paciente->nombre." ".$fecha->format("d/m/Y").".pdf");
+        $pdf->Output( 'I', $nombreArchivo, true );
     }
 }
 
