@@ -109,6 +109,7 @@ class SesionesController extends Controller
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->idSesion],
             ['fecha' => $request->fecha,
+             'titulo' => $request->titulo,
              'etapa_id' => $request->etapa_id,
              'objetivo' => $request->objetivo,
              'descripcion' => $request->descripcion,
@@ -138,6 +139,7 @@ class SesionesController extends Controller
         //return redirect("pacientes/{$sesion->paciente->id}/sesiones");
     }
 
+/*
     public function storeRecuerdo($idPaciente, $idSesion, $recuerdo)
     {
         $recuerdo = Recuerdo::updateOrCreate(
@@ -158,16 +160,8 @@ class SesionesController extends Controller
         
         return $recuerdo->id;
     }
+*/
 
-    public function storeRecuerdos($idSesion, $listaRecuerdos)
-    {
-        return "TO DO";
-    }
-
-    public function storeMultimedia($idSesion, $listaFicheros)
-    {
-        return "TO DO";
-    }
     /**
      * Display the specified resource.
      *
@@ -302,6 +296,7 @@ class SesionesController extends Controller
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->id],
             ['fecha' => $request->fecha,
+             'titulo' => $request->titulo,
              'etapa_id' => $request->etapa_id,
              'objetivo' => $request->objetivo,
              'descripcion' => $request->descripcion,
@@ -321,6 +316,7 @@ class SesionesController extends Controller
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->id],
             ['fecha' => $request->fecha,
+             'titulo' => $request->titulo,
              'etapa_id' => $request->etapa_id,
              'objetivo' => $request->objetivo,
              'descripcion' => $request->descripcion,

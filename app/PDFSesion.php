@@ -6,7 +6,7 @@ use Codedge\Fpdf\Fpdf\Fpdf;
 use File;
 use DateTime;
 
-global $numInforme;
+global $fecha;
 
 class PDFSesion extends FPDF{
     // Page header
@@ -18,7 +18,7 @@ class PDFSesion extends FPDF{
         // Move to the right
         //$this->Cell(80);
         // Title
-        $this->Cell(190,11,utf8_decode('Informe de Sesión #'.$GLOBALS['numInforme']),0,1);
+        $this->Cell(190,11,utf8_decode('Informe de Sesión'),0,1);
         $this->Line(10,25,200,25);
         // Line break
         $this->Ln(10);
@@ -79,6 +79,14 @@ class PDFSesion extends FPDF{
         $pdf->SetFont('Times','',12);
         $pdf->Cell(140,7, \Carbon\Carbon::parse($sesion->duracion)->format("h:i"),1,0,'C');
         $pdf->Ln(12);
+
+        $pdf->SetFillColor(170);
+        $pdf->SetFont('Times','B',12);
+        $pdf->Cell(0,7,'Titulo',1,0,'L',true);
+        $pdf->Ln();
+        $pdf->SetFont('Times','',12);
+        $pdf->MultiCell(0,7,utf8_decode($sesion->titulo),1);
+        $pdf->Ln();
 
         $pdf->SetFillColor(170);
         $pdf->SetFont('Times','B',12);
@@ -171,6 +179,8 @@ class PDFSesion extends FPDF{
         $pdf->Ln(9);
 
         $this->writeInformeSesion($pdf,$sesion);
+        $nombreArchivo = str_replace(" ", "_",  "Sesion_".$paciente->nombre."_".$sesion->titulo.".pdf");
+        $pdf->Output( 'I', $nombreArchivo, true );
     }
 
 }

@@ -12,6 +12,7 @@ class Sesion extends Model
 
     protected $fillable = [
         "fecha",
+        "titulo",
         "objetivo",
         "descripcion",
         "fecha_finalizada",

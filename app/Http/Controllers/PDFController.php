@@ -49,7 +49,7 @@ class PDFController extends Controller
     }
 
     public function obtenerPDFSesion($paciente, $sesion, $usuario){
-        $GLOBALS['numInforme'] = $sesion->id;
+        $GLOBALS['titulo'] = $sesion->titulo;
         $pdf = new PDFSesion( 'P', 'mm', 'A4' );
         $pdf->AliasNbPages();
         $pdf->AddPage();

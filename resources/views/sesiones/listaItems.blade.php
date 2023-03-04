@@ -2,6 +2,8 @@
     <input hidden id="idUser" name="user_id" value="{{$user->id}}" required >
     <input hidden id="idPaciente" name="paciente_id" value="{{$paciente->id}}" required >
     <input type="hidden" name="idSesion" id="idSesion" value="{{$sesion->id}}">
+    <input type="hidden" name="respuesta" id="idSesion" value="{{$sesion->respuesta}}">
+    <input type="hidden" name="fecha_finalizada" id="idSesion" value="{{$sesion->fecha_finalizada}}">
 
     <div class=" d-flex col-lg-4 col-md-4 col-sm-12 mb-2 align-items-center">
         <label for="fecha" style="min-width: 65px" class=" labelShow">Fecha: <span class="asterisco">*</span></label>
@@ -24,6 +26,11 @@
         <label for="terapeuta" class="form-label labelShow">Terapeuta:</label>
         <label for="terapeuta" class="form-label form-label-sm">{{$user->nombre}} {{$user->apellidos}}</label>
     </div>
+</div>
+
+<div class="mb-3">
+    <label for="titulo" class="form-label labelShow">Título:<span class="asterisco">*</span></label>
+    <input type="text" maxlength="100" class="form-control form-control-sm" id="titulo" name="titulo" value="{{$sesion->titulo}}" required >
 </div>
 
 <div class="mb-3">
