@@ -129,7 +129,9 @@
                     <div class="d-flex align-items-center">
                         <style data="test" type="text/css"></style>
                         <!--<span id="demo-puntuacion" class="m-3"></span>-->
+                        <span class="puntuacion-limites">0</span>
                         <input type="range" id="puntuacion" name="puntuacion" min="0" max="10" step="1" class="slider" value={{$recuerdo->puntuacion}}>
+                        <span class="puntuacion-limites">10</span>
                     </div>
                     <div class="d-flex justify-content-between carita-feliz">
                         <i class="bi bi-emoji-frown-fill text-danger"></i>

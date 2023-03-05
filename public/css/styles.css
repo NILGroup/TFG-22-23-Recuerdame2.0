@@ -1,4 +1,4 @@
-/*NO TOCAR NI PONER NADA ENCIMAAA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **/
+/*NO TOCAR NI PONER NADA ENCIMAAA, es info del slider!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **/
 #pruebaa{
     background: transparent !important;
 }
@@ -200,8 +200,8 @@ nav {
     opacity: 0.7;
     transition: opacity .2s;
     -webkit-appearance: none;
-    margin-bottom: 0px!important;
-    margin-top: 0px!important;
+    margin-bottom: 10px!important;
+    margin-top: 8px!important;
 }
 
 #demo-puntuacion{
@@ -211,8 +211,6 @@ nav {
     margin-top: 0px!important;
     margin-left: 10px!important;
 }
-
-
 
 .slider:hover {
     background-image: linear-gradient(to right, rgb(134, 4, 4),rgba(163, 144, 3, 0.7), rgb(2, 128, 2));
@@ -235,11 +233,15 @@ nav {
     background: url(../img/1.png)!important;
 }*/
 
+.puntuacion-limites{
+    margin-left: 1rem!important;
+    margin-right: 1rem!important;
+}
 
-  
-  .base, .contenido {
-    grid-area: 1 / 1;
-  }
+.carita-feliz{
+margin-right: 50px;
+margin-left: 40px;
+}
 
 .slider::-moz-range-thumb {
     width: 23px;
