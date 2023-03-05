@@ -1,3 +1,12 @@
+/*NO TOCAR NI PONER NADA ENCIMAAA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **/
+#pruebaa{
+    background: transparent !important;
+}
+
+#puntuacion {
+    --webkit-slider-thumb-background:  white;
+  }
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 /*GENERALES----------------------------------------- */
 :root {
     --turquesa: #14a2b8;
@@ -203,17 +212,34 @@ nav {
     margin-left: 10px!important;
 }
 
+
+
 .slider:hover {
     background-image: linear-gradient(to right, rgb(134, 4, 4),rgba(163, 144, 3, 0.7), rgb(2, 128, 2));
 }
+  
+#puntuacion::-webkit-slider-thumb {
+    width: 23px;
+    height: 24px;
+    border: 0;
+    cursor: pointer;
+    background:  var(--webkit-slider-thumb-background)!important;
+  }
 
+  /*
 .slider::-webkit-slider-thumb {
     width: 23px;
     height: 24px;
     border: 0;
-    background: url('contrasticon.png');
     cursor: pointer;
-}
+    background: url(../img/1.png)!important;
+}*/
+
+
+  
+  .base, .contenido {
+    grid-area: 1 / 1;
+  }
 
 .slider::-moz-range-thumb {
     width: 23px;
@@ -223,9 +249,7 @@ nav {
     cursor: pointer;
 }
 
-.carita-feliz{
-    margin-right: 50px;
-}
+
 /*if disabled*/
 .slider:disabled::-webkit-slider-thumb {
     width: 23px;
