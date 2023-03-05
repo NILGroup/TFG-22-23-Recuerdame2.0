@@ -178,7 +178,7 @@ class CalendarioController extends Controller
                 $s->recuerdos = $s->recuerdos;
                 foreach ($s->recuerdos as $r) {
                     $r->etapa = Etapa::findOrFail($r->etapa_id);
-                    $r->etiqueta = Etiqueta::findOrFail($r->etiqueta_id);
+                    //$r->etiqueta = Etiqueta::findOrFail($r->etiqueta_id);
                     $r->categoria = Categoria::findOrFail($r->categoria_id);
                     $r->estado = Estado::findOrFail($r->estado_id);
                 }

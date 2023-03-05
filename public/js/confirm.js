@@ -114,7 +114,7 @@ $('.confirm_finish').click(function (event) {
     swal.fire({
         title: '¿Seguro que desea finalizar la actividad?',
         text: "Si la finaliza, lo hará de forma permanente",
-        icon: "warning",
+        icon: "info",
         showCancelButton: true,
         cancelButtonColor: '#3085d6',
         confirmButtonColor: '#d33',
