@@ -50,11 +50,11 @@ $('.confirm_delete').click(function (event) {
                     },
                 })
                 .then((result) => {
-                    if (!result.isDenied) {
-                        form.submit()
+                    if (result.isDenied) {
+                        t.api().row.add(dr).draw()
                     }
                     else{
-                        t.api().row.add(dr).draw()
+                        form.submit()
                     }
                 });
             })
