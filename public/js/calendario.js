@@ -43,9 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
             formulario.reset();
             /*TERAPEUTA****************************************************************/
             if (user === '1') {
+                document.getElementById("modalesCalendario").children[0].style.display = "block";
+                document.getElementById("modalesCalendario").children[1].style.display = "block";
                 formulario.reset();
                 /*ACTIVIDAD Y SESION***************************************************/
-                document.getElementById('titulo').textContent = "Añadir";
+                document.getElementById('tituloModal').textContent = "Añadir";
                 document.getElementById('title').removeAttribute("readonly");
                 /**********************************************************************/
                 /*ACTIVIDAD**********************************************************+*/
@@ -69,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('actividad-modal-tab').classList.add("active");
                 document.getElementById('actividad-modal').classList.add("show");
                 document.getElementById('actividad-modal').classList.add("active");
+                document.getElementById('titulo').value = "";
                 document.getElementById('fecha').value = info.dateStr + " 09:00:00";
                 document.getElementById('objetivo').value = "";
                 document.getElementById('descripcion').value = "";
@@ -142,6 +145,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     document.getElementById('idSesion').value = info.event.id;
                     document.getElementById('fecha').value = info.event.extendedProps.fecha;
+                    document.getElementById('titulo').value = info.event.title;
+                    console.log(document.getElementById('titulo'));
                     document.getElementById('objetivo').value = info.event.extendedProps.objetivo;
                     document.getElementById('descripcion').value = info.event.extendedProps.descripcion;
                     var tabla = $("#tabla_recuerdos").dataTable();
@@ -181,14 +186,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (info.event.extendedProps.finished !== null) {
                     document.getElementById('finished').setAttribute("readonly", "");
                     document.getElementById('btnFinalizar').classList.add('d-none');
-                }else{
+                } else {
                     document.getElementById('finished').removeAttribute("readonly");
                     document.getElementById('btnFinalizar').classList.remove('d-none');
                 }
                 document.getElementById('btnGuardar').classList.add('d-none');
                 document.getElementById('btnEliminar').classList.add('d-none');
                 document.getElementById('btnModificar').classList.add('d-none');
-                
+
             }
             /**************************************************************************/
             /*PARA EL SELECTOR DEL MODAL***********************************************/
@@ -243,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 click: function () {
                     formulario.reset();
                     //formularioEliminar.reset();
-                    document.getElementById('titulo').textContent = "Añadir";
+                    document.getElementById('tituloModal').textContent = "Añadir";
                     document.getElementById('div-fin').classList.add('d-none');
                     $('#evento').modal('show');
                 }

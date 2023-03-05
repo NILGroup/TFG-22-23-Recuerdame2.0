@@ -145,7 +145,8 @@ class CalendarioController extends Controller
                 'fecha_finalizada' => $request->fecha_finalizada,
                 'paciente_id' => $request->paciente_id,
                 'user_id' => $request->user_id,
-                'respuesta' => $request->respuesta
+                'respuesta' => $request->respuesta,
+                'titulo' => $request->titulo
             ]
         );
         if (!is_null($request->recuerdos))
@@ -174,7 +175,7 @@ class CalendarioController extends Controller
             foreach ($sesion as $s) {
                 $s->tipo = "s";
                 $s->start = $s->fecha;
-                $s->title = "Sesión";
+                $s->title = $s->titulo;
                 $s->recuerdos = $s->recuerdos;
                 foreach ($s->recuerdos as $r) {
                     $r->etapa = Etapa::findOrFail($r->etapa_id);
@@ -231,7 +232,8 @@ class CalendarioController extends Controller
                 'fecha_finalizada' => $request->fecha_finalizada,
                 'paciente_id' => $request->paciente_id,
                 'user_id' => $request->user_id,
-                'respuesta' => $request->respuesta
+                'respuesta' => $request->respuesta,
+                'titulo' => $request->titulo
             ]
         );
         if (!is_null($request->recuerdos))
