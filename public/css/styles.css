@@ -593,6 +593,17 @@ div>.row {
     font-size: var(--tamLetra) !important;
 }
 
+.formBar{
+    bottom:5em;
+    height:2em;
+    z-index: 0;
+    background-color: white;
+}
+
+.formBar svg{
+    border-radius: 23px;
+}
+
 /* On smaller resolutions, hide the text for Large screens */
 @media only screen and (max-width: 560px) {
     .largeScreen {

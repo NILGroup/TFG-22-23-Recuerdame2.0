@@ -100,6 +100,7 @@
         
         <div class="col-sm-12 col-md-12 col-lg-6">
             <select id="residencia" onchange="especifiqueResidencia()" style="margin-right: 5px" id="residencia" name="residencia_id" class="form-control form-select form-select-sm" required >
+                <option selected disabled></option>
                 @foreach($residencias as $residencia)
                     <option value="{{$residencia->id}}" @if($residencia->id == $paciente->residencia_id) selected @endif>{{$residencia->nombre}}</option>
                 @endforeach

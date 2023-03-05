@@ -31,6 +31,7 @@
 
 @endsection
 
+
 @push('scripts')
     @include('layouts.scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
@@ -41,4 +42,6 @@
     </script>
     <script src="/js/especificar.js"></script>
     <script src="/js/dropzone.js"></script>
+    <script src="/js/progressBar.js"></script>
+    <script src="/js/formBar.js"></script>
 @endpush
