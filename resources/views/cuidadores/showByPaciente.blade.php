@@ -20,9 +20,9 @@
                     <th class="fit10 text-center" scope="col">Nombre</th>
                     <th class="fit10 text-center" scope="col">Correo electrónico</th>
                     <th class="fit5 text-center" scope="col">Teléfono</th>
-                    <th class="text-center" scope="col">Localidad</th>
+                    <th class="fit5 text-center" scope="col">Localidad</th>
                     <th class="fit5 text-center" scope="col">Parentesco</th>
-                    <th class="fit5 text-center" scope="col">Acciones</th>
+                    <th class="fit5 actions text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody class="shadow-sm">

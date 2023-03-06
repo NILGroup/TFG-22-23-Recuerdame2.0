@@ -20,7 +20,7 @@
                         <th class="fit15 text-center" scope="col">Informe</th>
                         <th class=" text-center" scope="col">Sesiones desde la última evaluación</th>
                         <th scope="col" class=" text-center">Diagnóstico</th>
-                        <th scope="col" class="fit5 text-center">Acciones</th>
+                        <th class="fit10 text-center actions" scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="shadow-sm" >
@@ -67,9 +67,9 @@
                 <table id="tabla2" class="table table-bordered table-striped table-responsive datatable">
                     <thead>
                         <tr >
-                            <th class="fit5 " scope="col">Nombre</th>
-                            <th scope="col" class=" ">Correo electrónico</th>
-                            <th class="fit5 " scope="col">Acciones</th>
+                            <th class="text-center" scope="col">Nombre</th>
+                            <th scope="col" class="text-center">Correo electrónico</th>
+                            <th class="fit10 actions text-center" scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -118,7 +118,7 @@
                         <tr >
                             <th class=" text-center" scope="col">Nombre</th>
                             <th class="text-center" scope="col">Tipo de Relacion</th>
-                            <th class="fit5 text-center" scope="col">Acciones</th>
+                            <th class="fit10 text-center actions" scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>

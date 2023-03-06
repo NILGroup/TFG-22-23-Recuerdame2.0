@@ -16,13 +16,17 @@
             <thead>
                 <tr >
                     <th class="fit10 text-center" scope="col">Informe</th>
-                    <th class="fit5 text-center" scope="col">Acciones</th>
+                    <th class="fit10 text-center" scope="col">Titulo</th>
+                    <th class="fit15 text-center" scope="col">Objetivo</th>
+                    <th class="fit10 actions text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody class="shadow-sm">
                 @foreach ($sesiones as $sesion)
                     <tr>
                         <td data-sort="{{ strtotime($sesion->fecha_finalizada) }}"><a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/ver">Informe {{date("d/m/Y", strtotime($sesion->fecha_finalizada))}}</td>
+                        <td> {{$sesion->titulo}}</td>
+                        <td> {{$sesion->objetivo}}</td>
                         <td class="tableActions">
                             <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver los datos del informe."></i></a>
                             <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/generarInforme"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar informe."></i></a>

@@ -20,10 +20,10 @@
             <caption>Listado de usuarios</caption>
             <thead>
                 <tr >
-                    <th class="fit10 text-center" scope="col">Nombre</th>
+                    <th class="fit15 text-center" scope="col">Nombre</th>
                     <th class="fit5 text-center" scope="col">Género</th>
                     <th class="fit5 text-center" scope="col">Edad</th>
-                    <th class="fit5 text-center" scope="col">Acciones</th>
+                    <th class="fit10 actions text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
             <!--<tbody>-->
