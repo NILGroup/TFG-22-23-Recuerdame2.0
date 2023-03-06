@@ -69,7 +69,7 @@
                     <th scope="col" class="text-center">Estado</th>
                     <th scope="col" class="text-center">Apto</th>
                     @if($show)
-                        <th class="fit10 text-center" scope="col">Acciones</th>
+                        <th class="fit5 text-center" scope="col">Acciones</th>
                     @endif
                 </tr>
             </thead>

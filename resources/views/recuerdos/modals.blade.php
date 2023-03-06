@@ -48,7 +48,7 @@
                             <th scope="col" class="text-center">Categoría</th>
                             <th scope="col" class="text-center">Estado</th>
                             <th scope="col" class="text-center">Apto</th>
-                            <th class="fit10 text-center" scope="col">Acciones</th>
+                            <th class="fit5 text-center" scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="shadow-sm">

@@ -25,7 +25,7 @@
                         <th scope="col" class="text-center">Etiqueta</th>
                         <th scope="col" class="text-center">Apto</th>
                     @endif
-                    <th class="fit10 text-center" scope="col">Acciones</th>
+                    <th class="fit5 text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody class="shadow-sm">

@@ -154,7 +154,6 @@ Route::post('/generarPDFEvaluacion', 'App\Http\Controllers\EvaluacionController@
 Route::get('/pacientes/{id}/historias/generarHistoria', 'App\Http\Controllers\HistoriaController@generarHistoria');
 Route::get('/historias/generarLibro', 'App\Http\Controllers\HistoriaController@generarLibroHistoria');
 Route::get('/generarPDFHistoria', 'App\Http\Controllers\PDFController@generarPDFHistoria');
-   
 Route::post('/storeTipoNoView', 'App\Http\Controllers\TipoRelacionController@storeNoView');
 
 
@@ -354,8 +353,8 @@ Route::post('/prueba', function () {
             "localizacion" => "Facultad de Costura UCM", "etapa_id" => 3, "categoria_id" => 6,
             "emocion_id" => 3, "estado_id" => 1, "etiqueta_id" => 3, "puntuacion" => 2, "paciente_id" => 1, "apto"=>0 ],
         [ "fecha" => Carbon::create(2022, 10, 13), "nombre" => "Cena con amigos",
-            "descripcion" => "Cenó en Taco Bell su hijo Pablo y el vecino Eros, entre otros. Recuerda las risas e historias que allí se contaron. También haber pasado algo de frío.",
-            "localizacion" => "Taco Bell Moncloa", "etapa_id" => 3, "categoria_id" => 3, "emocion_id" => 2,
+            "descripcion" => "Cenó en Bell Mondo Italia con su hijo Pablo y su vecino Eros, entre otros. Recuerda las risas e historias que allí se contaron. También haber pasado algo de frío en la terraza, y disfrutar bastante de la comida.",
+            "localizacion" => "Bell Mondo, Moncloa", "etapa_id" => 3, "categoria_id" => 3, "emocion_id" => 2,
             "estado_id" => 1, "etiqueta_id" => 1, "puntuacion" => 10, "paciente_id" => 1 ,"apto"=>1],
         [ "fecha" => Carbon::create(2022, 10, 15), "nombre" => "Fiesta en La Sierra",
             "descripcion" => "Asistió a la casa de campo de unos amigos en la Sierra y la recuerda con sentimientos de felicidad y ternura. Cuenta historias del momento y destaca haber ganado dinero en un bingo casero.",

@@ -20,7 +20,7 @@
                         <th class="text-center" scope="col">Estado</th>
                         <th class="text-center" scope="col">Etiqueta</th>
                         <th class="text-center" scope="col">Apto</th>
-                        <th class="text-center" class="fit10" scope="col">Acciones</th>
+                        <th class="fit5 text-center" class="fit10" scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="shadow-sm">
