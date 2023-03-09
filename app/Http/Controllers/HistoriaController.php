@@ -12,6 +12,10 @@ use App\Models\Recuerdo;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\Return_;
 use Psy\Readline\Hoa\Console;
+use FFMpeg\Filters\AdvancedMedia\ComplexFilters;
+use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
+use ProtoneMedia\LaravelFFMpeg\Exporters\EncodingException;
+use Illuminate\Support\Facades\Storage;
 
 class HistoriaController extends Controller
 {
@@ -40,6 +44,30 @@ class HistoriaController extends Controller
 
         return view("historias.generateHistoria", compact("paciente", "fecha", "etapas", "etiquetas", "categorias"));
     }
+
+    public function generarVideoHistoria(Request $request){
+        $path = 'public\img\HistoriaVidaCache\\'.$request->paciente_id.'.mp4'; 
+        if(Storage::exists($path)){
+            Storage::delete($path);
+        }
+
+        try {
+            FFMpeg::fromDisk('local')
+            ->open(['public\img\1.mp4', 'public\img\2.mp4'])
+            ->export()
+            ->concatWithoutTranscoding()
+            ->save($path);
+            FFMpeg::cleanupTemporaryFiles();
+            $path = storage_path().'\\app\\'.$path;
+            return view("historias.videoPlayer", compact("path"));
+        } catch (EncodingException $exception) {
+            $command = $exception->getCommand();
+            $errorLog = $exception->getErrorOutput();
+            return "La generación del vídeo ha fallado. Póngase en contacto con soporte.";
+        }
+   
+    }
+
     /*
     public function filtrarPorVarias($id, &$listaRecuerdosHistoriaVida , $filtro){
             $listaAux = $listaRecuerdosHistoriaVida;
