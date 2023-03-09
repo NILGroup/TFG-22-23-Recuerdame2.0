@@ -105,7 +105,6 @@
     </div>
     <div class="text-center">
         <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Cancelar</button></a>
-        <button id="GenerarVideoHistoriaBoton" type="button" class="btn btn-primary">Generar vídeo</button>
     </div>
     @endif
 </div>
@@ -117,23 +116,6 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script>
-        $(document).ready(function() {
-            var selectedRemember = 0;
-            $('#carouselPrincipal').on('slide.bs.carousel', function (e) {
-                //var active = $(e.target).find('.carousel-inner > .item.active'); var from = active.index();
-            var next = $(e.relatedTarget);
-            var to = next.index();
-            selectedRemember = to;
-            });
-            
-            $('#GenerarVideoHistoriaBoton').on('click', function(e){
-                console.log("Generando Vídeo del slide: "+selectedRemember);
-            });
-
-        });
-    
-    </script>
     <!--<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
