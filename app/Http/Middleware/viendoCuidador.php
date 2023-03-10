@@ -22,11 +22,9 @@ class viendoCuidador
         $url = explode("/", url()->current());
         $paciente = Paciente::find($url[4]);
         if(sizeof($url) > 6 && $url[5] == "cuidadores"){
-            if($url[6] != "crear"){
-                $u = User::find($url[6]);
-                if(is_null($u) || $u->rol_id == 1)
-                    return redirect("/pacientes/$paciente->id/cuidadores");
-            }
+            $u = User::find($url[6]);
+            if(is_null($u) || $u->rol_id == 1)
+                return redirect("/pacientes/$paciente->id/cuidadores");
         }
         return $next($request);
     }

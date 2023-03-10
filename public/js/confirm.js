@@ -1,5 +1,5 @@
 $('.confirm_delete').click(function (event) {
-    var form = $(this).closest("form");
+    var form = $(this).closest("form").clone();
     var t = $(this).closest("table.datatable").dataTable();
     var e = $(this).closest("tr");
     var dr = e.clone(true, true)
@@ -35,7 +35,7 @@ $('.confirm_delete').click(function (event) {
                     width:"25em",
                     showConfirmButton: false,
                     buttonsStyling:false,
-                    timer: 5000,
+                    timer: 1000,
                     showCancelButton: false,
                     timerProgressBar: true,
                     showClass: {
@@ -54,7 +54,18 @@ $('.confirm_delete').click(function (event) {
                         t.api().row.add(dr).draw()
                     }
                     else{
-                        form.submit()
+                        //$(document.body).append(form).hide();
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            type: 'DELETE',
+                            url: form.attr('action'),
+                            processData: false,
+                            contentType: false,
+                        });
                     }
                 });
             })

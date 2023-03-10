@@ -17,8 +17,9 @@ class CuidadoresController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role', 'asignarPaciente']);
-        $this->middleware(['viendoCuidador'])->except(['repeatedCuidador', 'registroCuidador']);
+        $this->middleware(['auth', 'role']);
+        $this->middleware(['asignarPaciente'])->except(['destroy']);
+        $this->middleware(['viendoCuidador'])->only(['show', 'edit']);
     }
 
     public function create($idP){
@@ -110,11 +111,9 @@ class CuidadoresController extends Controller
 
     public function destroy($id)
     {
-        //Sacamos al paciente y lo borramos
-        User::findOrFail($id)->delete();
-
-        //Redireccionamos a lista pacientes
-        //return back();
+        $cuidador = User::find($id);
+        $paciente = Paciente::find(session()->get('paciente')['id']);
+        $paciente->users()->detach($cuidador);
     }
 
     public function destroy_no_view(Request $request){
