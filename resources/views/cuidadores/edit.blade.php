@@ -52,7 +52,7 @@
             </div>
         
         <div class="form-group">
-            <a href="/pacientes/{{$cuidador->paciente}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button id="guardar"  type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
