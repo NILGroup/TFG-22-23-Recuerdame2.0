@@ -17,7 +17,8 @@ class CuidadoresController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role', 'asignarPaciente', 'viendoCuidador']);
+        $this->middleware(['auth', 'role', 'asignarPaciente']);
+        $this->middleware(['viendoCuidador'])->except(['repeatedCuidador', 'registroCuidador']);
     }
 
     public function create($idP){

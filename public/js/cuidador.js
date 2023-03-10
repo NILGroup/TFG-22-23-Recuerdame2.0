@@ -6,7 +6,7 @@ $("#guardar").on("click", function(event){
     event.preventDefault()
 
 
-    const form = document.getElementById("d")
+    var form = document.getElementById("d")
 
     if (form.checkValidity()){
 
@@ -30,19 +30,14 @@ $("#guardar").on("click", function(event){
             success: function (data) {
                 console.log(data)
                 if (data && $("#id").prop("value") != data.id) { 
-                    
-                    //Es terapeuta
-                    if (data.rol_id == 1){
-                        repeatedEmail()
-                    }  
-                    //Es cuidador
-                    else{
-                        duplicatedAlert(data)
-                    }
-                    
+                    Swal.fire({
+                        title: 'Este correo ya está registrado',
+                        icon: "error",
+                    })
                 }
                 else{
                     submitDropzone()
+                    form.submit();
                 }
             },
             error: function (data) {
@@ -71,18 +66,7 @@ function submitDropzone(){
     else{
         document.getElementById("d").submit()
     }
-
-    
 }
-
-function repeatedEmail(){
-    $("#email").prop("value", "")
-    Swal.fire({
-        title: 'Este correo ya está registrado',
-        icon: "error",
-    })
-}
-
 
 function duplicatedAlert(data) {
     console.log("alerta")
