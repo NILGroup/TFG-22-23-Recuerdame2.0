@@ -180,7 +180,7 @@ return [
         Illuminate\Session\SessionServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
-        ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
+        //ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
         /*
@@ -211,7 +211,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class
+        // 'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class
     ])->toArray(),
 
 ];
