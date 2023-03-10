@@ -10,13 +10,14 @@
         <div class="d-flex justify-content-between upper">
             @include('layouts.tableSearcher')
             <div class="justify-content-end align-items-center d-flex">
+                <button type="button" class="btn btn-success showmodal mx-1" data-bs-toggle="modal" data-bs-target="#modalCuidador">Añadir existente</button>
                 <a href="/pacientes/{{$paciente->id}}/cuidadores/crear"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
             </div>
         </div>
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de cuidadores</caption>
             <thead>
-            <tr class="busqueda ">
+                <tr class="busqueda">
                     <th class="fit10 text-center" scope="col">Nombre</th>
                     <th class="fit10 text-center" scope="col">Correo electrónico</th>
                     <th class="fit5 text-center" scope="col">Teléfono</th>
@@ -51,6 +52,7 @@
 </div>
 
 @include('layouts.deletePopUp')
+@include('cuidadores.existente')
 
 @endsection
 

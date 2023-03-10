@@ -37,7 +37,6 @@ $("#guardar").on("click", function(event){
                 }
                 else{
                     submitDropzone()
-                    form.submit();
                 }
             },
             error: function (data) {

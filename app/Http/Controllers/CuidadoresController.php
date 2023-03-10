@@ -51,8 +51,14 @@ class CuidadoresController extends Controller
 
         $paciente = Paciente::findOrFail($idPaciente);
         $cuidadores = $paciente->users->where('rol_id', 2);
-     
-        return view("cuidadores.showByPaciente", compact("paciente", "cuidadores"));
+        $tID = Auth::user()->id;
+        $terapeuta = User::find(Auth::user()->id);
+        $cuidadoresTerapeuta = User::whereHas('pacientes', function($query) use ($tID) {
+            $query->whereHas('users', function($query) use ($tID) {
+                $query->where('users.id', $tID);
+            });
+        })->where('rol_id', "2")->get();
+        return view("cuidadores.showByPaciente", compact("paciente", "cuidadores", "cuidadoresTerapeuta"));
     }
 
     protected function registroCuidador(Request $request)
