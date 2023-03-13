@@ -70,28 +70,25 @@ class SesionesController extends Controller
 
         $multimedias = [];
 
-        $sesiones = $paciente->sesiones;
+        $pacientes_terapeuta = $user->pacientes;
 
-        foreach($sesiones as $s){
-            foreach($s->multimedias as $multimedia){
+        foreach($pacientes_terapeuta as $p){
+            foreach($p->sesiones as $s){
+                foreach($s->multimedias as $m){
 
-                $existent = true;
-                foreach ($multimedias as $mult){
-                    if ($mult->id == $multimedia->id){
-                        $existent = false;
+                    $existent = true;
+                    foreach($multimedias as $mult){
+                        if ($mult->id == $m->id){
+                            $existent = false;
+                        }
                     }
-                }
 
-                if ($existent){
-                    array_push($multimedias, $multimedia);
+                    if ($existent) array_push($multimedias, $m);
+
                 }
-                
             }
         }
 
-        foreach($multimedias as $m){
-            error_log($m);
-        }
 
         return view("sesiones.create", compact('multimedias','persona','idPaciente','mostrarFoto','etapas', 'user', 'tipos', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'sesion', 'recuerdo', 'personas', 'show'));
     }
@@ -202,22 +199,22 @@ class SesionesController extends Controller
 
         $multimedias = [];
 
-        $sesiones = $paciente->sesiones;
+        $pacientes_terapeuta = $user->pacientes;
 
-        foreach($sesiones as $s){
-            foreach($s->multimedias as $multimedia){
+        foreach($pacientes_terapeuta as $p){
+            foreach($p->sesiones as $s){
+                foreach($s->multimedias as $m){
 
-                $existent = true;
-                foreach ($multimedias as $mult){
-                    if ($mult->id == $multimedia->id){
-                        $existent = false;
+                    $existent = true;
+                    foreach($multimedias as $mult){
+                        if ($mult->id == $m->id){
+                            $existent = false;
+                        }
                     }
-                }
 
-                if ($existent){
-                    array_push($multimedias, $multimedia);
+                    if ($existent) array_push($multimedias, $m);
+
                 }
-                
             }
         }
 
