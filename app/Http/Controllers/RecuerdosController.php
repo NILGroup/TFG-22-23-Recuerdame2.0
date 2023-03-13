@@ -64,30 +64,9 @@ class RecuerdosController extends Controller
         $persona = new Personarelacionada();
         $recuerdo->apto=true;
 
-        $multimedias = [];
+      
 
-        $sesiones = $paciente->sesiones;
-
-        foreach($sesiones as $s){
-            foreach($s->multimedias as $multimedia){
-
-                $existent = true;
-                foreach ($multimedias as $mult){
-                    if ($mult->id == $multimedia->id){
-                        $existent = false;
-                    }
-                }
-
-                if ($existent){
-                    array_push($multimedias, $multimedia);
-                }
-                
-            }
-        }
-
-
-
-        return view("recuerdos.create", compact("multimedias", "idPaciente","mostrarFoto", "persona","estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "recuerdo", "personas", "paciente", "show"));
+        return view("recuerdos.create", compact("idPaciente","mostrarFoto", "persona","estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "recuerdo", "personas", "paciente", "show"));
     }
 
     /**
