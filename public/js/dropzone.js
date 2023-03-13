@@ -24,23 +24,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             this.on('maxfilesreached', function() {
-                $('.dropzone').removeClass('dz-clickable'); 
-                $("#dzp").removeClass("dropzone-correct").addClass("dropzone-incorrect")
-                $("#dropzone-title").removeClass("dropzone-title-correct").addClass("dropzone-title-incorrect").text("Límite de archivos alcanzado")
-                $("#dropzone-img").hide()
+                $("#dzp").hide()
                 this.removeEventListeners();
             });
 
             this.on('removedfile', function(){
                
                 if (this.files.length < this.options.maxFiles){
-
-                    $('.dropzone').addClass('dz-clickable'); 
-                    $("#dzp").addClass("dropzone-correct").removeClass("dropzone-incorrect")
-                    $("#dropzone-title").addClass("dropzone-title-correct").removeClass("dropzone-title-incorrect").text("Arrastre sus archivos")
-                    $("#dropzone-img").show()
+                    $("#dzp").show()
                     this.setupEventListeners()
-
                 }
          
             })

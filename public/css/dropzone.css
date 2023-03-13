@@ -12,9 +12,6 @@
     border: 3px dashed #7db4eb;
 }
 
-.dropzone-incorrect{
-    border: 3px dashed #eb7d7d;
-}
 
 .dropzone-container{
     height: 10em;
@@ -28,8 +25,6 @@
     color: #868e96;
 }
 
-.dropzone-title-incorrect{
-    color: #eb7d7d;
-}
+
 
 
