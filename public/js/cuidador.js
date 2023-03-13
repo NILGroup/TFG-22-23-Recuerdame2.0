@@ -1,5 +1,3 @@
-"use strict"
-
 $("#guardar").on("click", function(event){
 
     event.stopPropagation()
@@ -111,17 +109,42 @@ function duplicatedAlert(data) {
                         console.log(data)
                     }
                 })
-
             }
-
-            
-
-
-
         }
-            
-
     })
 }
 
+function agregarCuidador() {
 
+    let tabla = $("#tabla-cuidadores").dataTable()
+    tabla.api().rows().remove().draw()
+
+    $("#tabla-cuidadores-existentes tbody tr").each(function(i, elem){
+        let per = $(elem).children()
+        console.log(per)
+        if ($(per[6]).children("input").prop("checked")){
+            let row = $("<tr></tr>")
+            row.append("<td><a href='/pacientes/"+$('#paciente_id').prop("value")+"/cuidadores/"+ per[0].textContent +"'> "+ per[1].textContent +" </a></td>")
+            row.append("<td>" + per[2].textContent + "</td>")
+            row.append("<td>" + per[3].textContent + "</td>")
+            row.append("<td>" + per[4].textContent + "</td>")
+            row.append("<td>" + per[5].textContent + "</td>")
+            row.append('<td class="tableActions"> '+
+                '<a href="/pacientes/'+$('#paciente_id').prop("value")+'/cuidadores/'+per[0].textContent+'"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver los datos del cuidador."></i></a>' +
+                '<a href="/pacientes/'+$('#paciente_id').prop("value")+'/cuidadores/'+per[0].textContent+'/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar cuidador."></i></a>'+
+                '<form method="post" action="/cuidadores/' + per[0].textContent + '" style="display:inline!important;">'+
+                    '<input name="_token" value="'+csrf_js_var+'" type="hidden">' +
+                    '<input type="hidden" name="_method" value="DELETE">'+
+                    '<button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon" data-toggle="tooltip" data-placement="top" title="Eliminar cuidador."></i></button>'+
+                '</form>'+
+            '</td>')
+            setRow(tabla, row)
+        }
+
+    })
+
+}
+
+function setRow(tabla, r){
+    tabla.api().row.add(r).draw()
+}

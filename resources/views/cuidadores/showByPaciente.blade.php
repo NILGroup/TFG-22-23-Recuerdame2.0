@@ -1,6 +1,7 @@
 @extends('layouts.structure')
 
 @section('content')
+<input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$paciente->id}}" required >
 <div class="container-fluid">
     <div class="pt-4 pb-2">
         <h5 class="text-muted">Lista cuidadores</h5>
@@ -10,11 +11,11 @@
         <div class="d-flex justify-content-between upper">
             @include('layouts.tableSearcher')
             <div class="justify-content-end align-items-center d-flex">
-                <button type="button" class="btn btn-success showmodal mx-1" data-bs-toggle="modal" data-bs-target="#modalCuidador">Añadir existente</button>
+                <button type="button" class="btn btn-success showmodal mx-1" data-bs-toggle="modal" data-bs-target="#cuidadorExistente">Añadir existente</button>
                 <a href="/pacientes/{{$paciente->id}}/cuidadores/crear"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
             </div>
         </div>
-        <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
+        <table id="tabla-cuidadores" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de cuidadores</caption>
             <thead>
                 <tr class="busqueda">
@@ -72,4 +73,9 @@
         </script>
         <script src="/js/successAlert.js"></script>
     @endif
+    
+<script>
+    var csrf_js_var = "{{ csrf_token() }}"
+</script>
+<script src="/js/cuidador.js"></script>
 @endpush

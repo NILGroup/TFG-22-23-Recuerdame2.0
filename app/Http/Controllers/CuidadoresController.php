@@ -53,11 +53,14 @@ class CuidadoresController extends Controller
         $cuidadores = $paciente->users->where('rol_id', 2);
         $tID = Auth::user()->id;
         $terapeuta = User::find(Auth::user()->id);
+        //Obtiene todos los cuidadores relacionados a ese terapeuta
+        //Incluyendo los de pacientes que él no ha creado pero le han sido asignados.
         $cuidadoresTerapeuta = User::whereHas('pacientes', function($query) use ($tID) {
             $query->whereHas('users', function($query) use ($tID) {
                 $query->where('users.id', $tID);
             });
         })->where('rol_id', "2")->get();
+
         return view("cuidadores.showByPaciente", compact("paciente", "cuidadores", "cuidadoresTerapeuta"));
     }
 
@@ -120,6 +123,7 @@ class CuidadoresController extends Controller
         $cuidador = User::find($id);
         $paciente = Paciente::find(session()->get('paciente')['id']);
         $paciente->users()->detach($cuidador);
+        return redirect("/pacientes/$paciente->id/cuidadores/");
     }
 
     public function destroy_no_view(Request $request){
