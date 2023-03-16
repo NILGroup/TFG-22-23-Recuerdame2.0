@@ -8,15 +8,12 @@ use App\Models\Paciente;
 use App\Models\Etapa;
 use App\Models\Categoria;
 use App\Models\Etiqueta;
-use App\Models\Recuerdo;
-use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Stmt\Return_;
-use Psy\Readline\Hoa\Console;
-use FFMpeg\Filters\AdvancedMedia\ComplexFilters;
-use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use ProtoneMedia\LaravelFFMpeg\Exporters\EncodingException;
 use Illuminate\Support\Facades\Storage;
-
+use FFMpeg\Filters\AdvancedMedia\ComplexFilters;
+use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
+use FFMpeg\Filters\Video\VideoFilters;
+use FFMpeg\Format\Video\X264;
 class HistoriaController extends Controller
 {
     public function __construct()
@@ -86,33 +83,45 @@ class HistoriaController extends Controller
         }
         
         $array = collect();
+        $trashCache = collect();
         foreach ($listaRecuerdos as $rc) { //¿Vacio?
             foreach($rc->multimedias as $media){
                 $extension = pathinfo($media->fichero, PATHINFO_EXTENSION);
                 $rememberpath = str_replace('/storage/', '/public/', $media->fichero);
-                if($extension == 'mp4')
-                $array->push($rememberpath);
+                
+                    if($extension == 'jpg'){
+                        //$uniqueName = uniqid() . time() .'.mp4';
+                        //FFMpeg::open($rememberpath)
+                        //->export()
+                        //->asTimelapseWithFramerate(0.3)
+                        //->inFormat(new \FFMpeg\Format\Video\X264())
+                        //->save('public\img\HistoriaVidaCache\imgToMp4\\'.$uniqueName);
+                        //$trashCache->push('public\img\HistoriaVidaCache\imgToMp4\\'.$uniqueName);
+                        //$array->push('\public\img\HistoriaVidaCache\imgToMp4\\'.$uniqueName);
+                    }
+
+                if($extension == 'mp4'){
+                    $array->push($rememberpath);
+                }
             }
         }
         
         //print_r($array);
 
-        try {
+
             FFMpeg::fromDisk('local')
             ->open($array->toArray())
             ->export()
             ->concatWithoutTranscoding()
             ->save($path);
+
             FFMpeg::cleanupTemporaryFiles();
+
 
             //Url to final Video
             $path = \Illuminate\Support\Facades\URL::to('storage/img/HistoriaVidaCache/'.$idPaciente.'.mp4');
             return view("historias.videoPlayer", compact("path"));
-        } catch (EncodingException $exception) {
-            $command = $exception->getCommand();
-            $errorLog = $exception->getErrorOutput();
-            return "La generación del vídeo ha fallado. Póngase en contacto con soporte. ERROR: ".$errorLog;
-        }
+
     
     }
 
