@@ -45,7 +45,7 @@
             <input type="date" class="form-control form-control-sm mental" id="mental_fecha" name="mental_fecha" value="{{$evaluacion->mental_fecha}}">
         </div>
     </div>
-    <div class="row">
+    <div class="row mb-3">
         <label for="CDR" class="col form-label col-form-label-sm col-sm-2 col-md-2 col-lg-2" style="min-width: 100px;">CDR</span></label>
         <div class="col col-sm-2 col-md-2 col-lg-2">
             <input type="number" min="0" max="3" class="form-control form-control-sm nombre_escala" id="cdr" name="cdr" value="{{$evaluacion->cdr}}">
@@ -58,7 +58,7 @@
         <div class="row d-inline m-0">
             <hr class="w-50 m-0">
         </div>
-        <div class="row ">
+        <div class="row mt-3">
             <label for="escala" class="form-label col col-form-label-sm col-sm-2 col-md-2 col-lg-2"><b>Escala personalizada</b></label>
             <label for="valor" class="form-label col col-form-label-sm col-sm-2 col-md-2 col-lg-2"><b>Valor</b></label>
             <label for="fecha" class="form-label col col-form-label-sm col-sm-2 col-md-2 col-lg-2"><b>Fecha</b></label>

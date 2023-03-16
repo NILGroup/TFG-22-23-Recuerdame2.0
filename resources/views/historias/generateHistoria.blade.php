@@ -10,18 +10,18 @@
     </div>
 
     <form action="/historias/generarLibro" method="GET">
-        <div class="d-flex justify-content-start">
-            <div class="">
-                <label for="fecha" class="form-label col-form-label-sm " style="width: 110px;">Fecha de inicio</label>
+        <div class="mb-2 d-flex justify-content-start align-items-center">
+            <div class="d-flex">
+                <label for="fecha" class= col-form-label-sm align-self-center" style="width: 120px;">Fecha de inicio</label>
             </div>
             <div class="fecha" style="width: fit-content;">
                 <input type="date" class="form-control form-control-sm" id="fechaInicio" name="fechaInicio" value="{{$fecha}}">
             </div>
         </div>
 
-        <div class="d-flex justify-content-start">
+        <div class="mb-4 d-flex justify-content-start">
             <div class="">
-                <label for="fecha" class="form-label col-form-label-sm " style="width: 110px;">Fecha de fin</label>
+                <label for="fecha" class="col-form-label-sm " style="width: 120px;">Fecha de fin</label>
             </div>
             <div class="fecha">
                 <input type="date" class="form-control form-control-sm" id="fechaFin" name="fechaFin" value="{{Carbon\Carbon::now()->format('Y-m-d')}}">
@@ -36,7 +36,7 @@
                 <label for="etapa" class="form-check-label negrita">Etapa de la vida</label>
                 <div id="checkboxes" class="checkboxes">
                     @foreach ($etapas as $etapa)
-                    <label> <input class="form-check-input" type="checkbox" onclick="onSelect('{{$etapa->nombre}}', 'seleccionadoEtapa')" value={{$etapa->id}} name="seleccionEtapa[]">{{$etapa->nombre}}</label>
+                    <label class="mt-1"> <input style="margin-right: 5px;" class="form-check-input" type="checkbox" onclick="onSelect('{{$etapa->nombre}}', 'seleccionadoEtapa')" value={{$etapa->id}} name="seleccionEtapa[]">{{$etapa->nombre}}</label>
                     @endforeach
                 </div>
             </div>
@@ -46,17 +46,17 @@
                 <label for="categoria" class="form-check-label negrita">Categoría</label>
                 <div id="checkboxesCat" class="checkboxes">
                     @foreach ($categorias as $categoria)
-                    <label> <input type="checkbox" class="form-check-input" onclick="onSelect('{{$categoria->nombre}}', 'seleccionadoCat')" value={{$categoria->id}} name="seleccionCat[]">{{$categoria->nombre}}</label>
+                    <label class="mt-1"> <input type="checkbox" style="margin-right: 5px;" class="form-check-input" onclick="onSelect('{{$categoria->nombre}}', 'seleccionadoCat')" value={{$categoria->id}} name="seleccionCat[]">{{$categoria->nombre}}</label>
                     @endforeach
                 </div>
             </div>
             @if (Auth::user()->rol_id == 1)
-            <div class="  col-sm-3 col-md-2 col-lg-2">
+            <div class="col-sm-3 col-md-2 col-lg-2">
                 <label for="etiqueta" class="form-check-label negrita">Etiqueta</label>
 
                 <div id="checkboxesEtiqueta" class="checkboxes">
                     @foreach ($etiquetas as $etiqueta)
-                    <label> <input type="checkbox" class="form-check-input" onclick="onSelect('{{$etiqueta->nombre}}','seleccionadoEtiqueta')" value={{$etiqueta->id}} name="seleccionEtiq[]">{{$etiqueta->nombre}}</label>
+                    <label class="mt-1"> <input type="checkbox" style="margin-right: 5px;" class="form-check-input" onclick="onSelect('{{$etiqueta->nombre}}','seleccionadoEtiqueta')" value={{$etiqueta->id}} name="seleccionEtiq[]">{{$etiqueta->nombre}}</label>
                     @endforeach
                 </div>
             </div>
