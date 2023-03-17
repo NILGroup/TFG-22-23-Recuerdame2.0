@@ -7,9 +7,7 @@
         <h5 class="text-muted">Datos persona relacionada</h5>
         <hr class="lineaTitulo">
     </div>
-    <div class="row text-align-center">
-        
-            
+    <div class="row text-align-center">            
         
             @include('personasrelacionadas.listaItems')
             @if (Auth::user()->rol_id == 1)
