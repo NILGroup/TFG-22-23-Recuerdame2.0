@@ -67,23 +67,19 @@
                             <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Contraseña" name="password" required autocomplete="new-password">
                             @error('password')
-                    </div>
+                        </div>
                         <span role="alert" class=" msgErrorRegister">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
-                        
-                    </div>
 
-
-                    <div class="d-block-inline align-items-center ">
-                    <div class="d-flex flex-row align-items-center ">
-                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                        <input id="password-confirm" type="password" class=" form-control" name="password_confirmation" placeholder="Confirmar Contraseña" required autocomplete="new-password">
-                        
                     </div>
-                        
-                    </div>
+                
+                        <div class="d-flex flex-row align-items-center ">
+                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                            <input id="password-confirm" type="password" class=" form-control" name="password_confirmation" placeholder="Confirmar Contraseña" required autocomplete="new-password">
+                        </div>
+               
 
                     <input id="rol" class=mt-4" type="hidden" name="rol" value=1 required autocomplete="apellidos" autofocus>
 
