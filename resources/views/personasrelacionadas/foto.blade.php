@@ -1,10 +1,12 @@
 @if($mostrarFoto)
-<div class="row mb-4">
-    <div class="img-wrap text-center w-25 mx-auto">
+<div class="row pb-2">
+    <div class="img-wrap text-center mx-auto">
         @if (isset($persona->multimedia))
-        <a href="#" class="visualizarImagen"><img src="{{$persona->multimedia->fichero}}" class="w-25 img-responsive-sm img-thumbnail" style="width: 10em;"></a>
-        @else
-        <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="img-responsive-sm img-thumbnail" style="width: 10em;"></a>
+        <a href="#" class="visualizarImagen"><img src="{{$persona->multimedia->fichero}}" class="imagenPaciente img-responsive-sm img-thumbnail" style="width: 10em;"></a>
+        @elseif ($paciente->genero_id == '2')
+        <a href="#" class="visualizarImagen"><img src="/img/avatar_mujer.png" class="imagenPaciente img-responsive-sm img-thumbnail" ></a>
+        @else 
+        <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="imagenPaciente img-responsive-sm img-thumbnail" ></a>
         @endif
     </div>
 </div>

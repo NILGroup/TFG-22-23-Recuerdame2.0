@@ -1,5 +1,10 @@
 
 
+<div class="col-lg-3 align-items-center">
+@include('personasrelacionadas.foto')
+</div>
+<div class="col-lg-9">
+
 <input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$idPaciente}}" required >
 <input type="hidden" name="id" class="form-control form-control-sm" id="id" value="{{$persona->id}}" required >
 <div class="row form-group justify-content-between">
@@ -74,6 +79,7 @@
         <label for="observaciones" class="form-label col-form-label negrita">Observaciones:</label>
         <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3" >{{$persona->observaciones}}</textarea>
     </div>
+</div>
 </div>
 
 

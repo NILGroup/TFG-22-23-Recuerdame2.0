@@ -8,9 +8,9 @@
         <hr class="lineaTitulo">
     </div>
     <div class="row text-align-center">
-        <div class="col-lg-3 align-items-center">
-            @include('personasrelacionadas.foto')
-        </div>
+        
+            
+        
             @include('personasrelacionadas.listaItems')
             @if (Auth::user()->rol_id == 1)
             <div class="col-12">
