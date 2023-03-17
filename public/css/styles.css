@@ -185,6 +185,13 @@ nav {
     border-radius: 1em;
 }
 
+/* REGISTER --------------------------------------- */
+.msgErrorRegister{
+    float: right;
+    font-size: .875em;
+    color: #d9534f;
+}
+
 /*FOTO PACIENTE----------------------------------------*/
 .imagenPaciente {
     max-height: 14em!important;
