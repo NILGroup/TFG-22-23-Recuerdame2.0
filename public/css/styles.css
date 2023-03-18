@@ -111,6 +111,7 @@ thead {
 }
 
 .table {
+    width:100%!important;
     font-size: var(--tamLetra) !important;
     padding: 0.2rem 0.3rem !important;
 }

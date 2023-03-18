@@ -13,6 +13,11 @@ var table = $(document).ready(function () {
     $('table.datatable').DataTable({
         paging: false,
         info: false,
+        scrollY: '50vh',
+        scrollCollapse: true,
+        scrollResize: true,
+        autoWidth: true,
+        scrollX: "100%",
         language: { 
             search: "_INPUT_",
             searchPlaceholder: "Buscar...",

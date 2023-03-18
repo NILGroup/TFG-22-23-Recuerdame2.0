@@ -15,7 +15,7 @@
                 <a href="/pacientes/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
             </div>
         </div>
-        <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
+        <table id="tabla" class="table table-bordered table-striped datatable">
             <caption>Listado de informes de seguimiento</caption>
             <thead>
                 <tr >
