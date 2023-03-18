@@ -42,6 +42,4 @@
     </script>
     <script src="/js/especificar.js"></script>
     <script src="/js/dropzone.js"></script>
-    <script src="/js/progressBar.js"></script>
-    <script src="/js/formBar.js"></script>
 @endpush
