@@ -12,6 +12,8 @@
     --turquesa: #14a2b8;
     --turquesaOscuro: #017e91;
     --turquesaSuave: #a1dfea3f;
+    --destacadoOscuro: #e1ffff;
+    --turquesaClaroNavBar: #d2f9f9; 
     --white: rgb(255, 255, 255);
     --whiteSuave: #ffffff7b;
     --tamLetra: 18px;
@@ -67,7 +69,7 @@ footer {
 }
 
 .yellowbg {
-    background-color: #d2f9f9 !important;
+    background-color: var(--turquesaClaroNavBar) !important;
 }
 
 .lightbluebg {
@@ -174,6 +176,10 @@ nav {
     border-bottom-width: thin;
 }
 
+.text-light:hover{
+    color: dimgray!important;
+}
+
 .navbar .btn{
     --bs-btn-border-width: 0px!important;
     text-align: center;
@@ -182,10 +188,11 @@ nav {
 .nav-link {
     font-size: 17px !important;
     padding: 12px 20px 12px 20px !important;
+    border-radius: 1em;
 }
 
 .nav-link:hover {
-    background-color: var(--turquesaSuave);
+    background-color: var(--destacadoOscuro);
     box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
     border-radius: 1em;
 }
