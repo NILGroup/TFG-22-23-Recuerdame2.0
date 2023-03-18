@@ -10,6 +10,7 @@
 /*GENERALES----------------------------------------- */
 :root {
     --turquesa: #14a2b8;
+    --turquesaOscuro: #017e91;
     --turquesaSuave: #a1dfea3f;
     --white: rgb(255, 255, 255);
     --whiteSuave: #ffffff7b;
@@ -173,14 +174,18 @@ nav {
     border-bottom-width: thin;
 }
 
+.navbar .btn{
+    --bs-btn-border-width: 0px!important;
+    text-align: center;
+}
+
 .nav-link {
     font-size: 17px !important;
     padding: 12px 20px 12px 20px !important;
 }
 
 .nav-link:hover {
-    color: rgb(0, 145, 255) !important;
-    background-color: #ccfff737;
+    background-color: var(--turquesaSuave);
     box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
     border-radius: 1em;
 }

@@ -14,10 +14,10 @@
                 <form method="POST" action="{{ route('password.email') }}">
                     @csrf
                     <div class="card form-login">
-                        <img src="/img/Marca_recuerdame.png" class="card-img-top">
+                        <img src="/img/Marca_recuerdame-nobg.png" class="card-img-top">
                         <div class="card-body">
                             
-                            <p style="color:blue";> Indique el correo con el que se registró para recuperar contraseña:</p>
+                            <p> Indique el correo con el que se registró para recuperar contraseña:</p>
                         
                             <div class="row mb-3">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Correo Electrónico" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
