@@ -44,7 +44,8 @@ class InformesSesionController extends Controller
         $persona = new Personarelacionada();
         $personas = Personarelacionada::where('paciente_id', $paciente->id)->get()->keyBy("id");
         $show = false;
-        return view('informesSesion.create', compact('paciente', 'sesion', 'show', 'recuerdos', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas'));
+        $mostrarFoto = false;
+        return view('informesSesion.create', compact('paciente', 'sesion', 'show', 'recuerdos', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas', 'mostrarFoto'));
     }
 
     public function store(Request $request){
