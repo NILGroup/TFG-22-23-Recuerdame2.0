@@ -185,6 +185,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('finished').setAttribute("required", "");
                 if (info.event.extendedProps.finished !== null) {
                     document.getElementById('finished').setAttribute("readonly", "");
+                    document.getElementById('finished').value = info.event.extendedProps.finished;
                     document.getElementById('btnFinalizar').classList.add('d-none');
                 } else {
                     document.getElementById('finished').removeAttribute("readonly");

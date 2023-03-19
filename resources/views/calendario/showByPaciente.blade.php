@@ -57,6 +57,7 @@
     <script src="/js/recuerdo.js"></script>
     <script src="/js/multiModal.js"></script>
     <script src="/js/confirm.js"></script>
+    <script src="/js/validacion.js"></script>
     @if (Session::has('created'))
         <script>
             var action = "{{Session::get('created')}}"
