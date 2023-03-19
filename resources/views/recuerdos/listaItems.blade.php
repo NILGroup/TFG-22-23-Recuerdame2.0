@@ -27,9 +27,16 @@
 
     <div class="row form-group justify-content-start">
         <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
-            <label for="fecha" class="form-label col-form-label negrita col-sm-4 col-md-4 col-lg-3">Fecha:<span class="asterisco">*</span></label>
+            <label for="fecha" class="form-label col-form-label negrita col-sm-4 col-md-4 col-lg-3">Fecha:</label>
             <div class="col-sm-12 col-md-12 col-lg-7 align-items-center">
-                <input max="4000-12-31" min="1800-01-01" type="date" class="form-control form-control-sm" id="fecha" required name="fecha" value="{{$recuerdo->fecha}}">
+                @if($show)
+                <!-- si es null, que no se muestre nada (si no pone invalid date)-->  
+                    @if ($recuerdo->fecha != null)
+                    <input max="4000-12-31" min="1800-01-01" type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$recuerdo->fecha}}">
+                    @endif
+                @else
+                <input max="4000-12-31" min="1800-01-01" type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$recuerdo->fecha}}">
+                @endif
             </div>
         </div>
         <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center ">

@@ -13,9 +13,13 @@ use App\Models\Multimedia;
 use App\Models\Emocion;
 use App\Models\Personarelacionada;
 use App\Models\Tiporelacion;
+use Carbon\Carbon;
+use DateTime;
 use Error;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Psy\Readline\Hoa\Console;
 
 use function PHPUnit\Framework\isNull;
 
@@ -78,6 +82,7 @@ class RecuerdosController extends Controller
     public function store(Request $request)
     {
 
+      
         //Ahora que tenemos creado el recuerdo
         $recuerdo = Recuerdo::updateOrCreate(
             ['id' => $request->id],
@@ -97,6 +102,7 @@ class RecuerdosController extends Controller
                 'apto' => !is_null($request->apto)
             ]
         );
+
 
         $recuerdo->multimedias()->detach();
         if (isset($request->mult)) {
@@ -130,6 +136,8 @@ class RecuerdosController extends Controller
         $show = true;
         $recuerdo = Recuerdo::find($idRecuerdo);
         $paciente = $recuerdo->paciente;
+        Log::info("el problema es del show?");
+        Log::info($recuerdo->fecha);
         $estados = Estado::all()->sortBy("id");
         $etiquetas = Etiqueta::all()->sortBy("id");
         $etapas = Etapa::all()->sortBy("id");
