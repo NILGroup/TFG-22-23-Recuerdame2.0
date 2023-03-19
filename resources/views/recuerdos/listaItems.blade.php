@@ -30,10 +30,10 @@
             <label for="fecha" class="form-label col-form-label negrita col-sm-4 col-md-4 col-lg-3">Fecha:</label>
             <div class="col-sm-12 col-md-12 col-lg-7 align-items-center">
                 @if($show)
-                <!-- si es null, que no se muestre nada (si no pone invalid date)-->  
-                    @if ($recuerdo->fecha != null)
-                    <input max="4000-12-31" min="1800-01-01" type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$recuerdo->fecha}}">
-                    @endif
+                <!-- si es null, que no se muestre nada (si no pone invalid date)-->
+                @if ($recuerdo->fecha != null)
+                <input max="4000-12-31" min="1800-01-01" type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$recuerdo->fecha}}">
+                @endif
                 @else
                 <input max="4000-12-31" min="1800-01-01" type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$recuerdo->fecha}}">
                 @endif
@@ -67,7 +67,18 @@
             </div>
         </div>
         <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
-            <label for="emocion" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-3">Polaridad: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Emoción que estima el terapeuta que el recuerdo le ha generado al paciente"></i></label>
+            <label for="apto" class="form-label col-form-label negrita col-sm-4 col-md-4 col-lg-3">Apto: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="right" title="Marca esta opción si el recuerdo sigue siendo apto para trabajar con él."></i></label>
+            <div class="col-sm-6 col-md-6 col-lg-7 align-items-center">
+                <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif >
+            </div>
+        </div>
+        @endif
+    </div>
+
+    <hr style="color: lightgray;">
+    <div class="mt-3 row form-group justify-content-start" style="align-items: stretch!important;">
+        <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
+            <label for="emocion" class="form-label col-form-label negrita col-sm-6 col-md-12 col-lg-3">Emoción: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Emoción que estima el terapeuta que el recuerdo le ha generado al paciente"></i></label>
             <div class="col-sm-12 col-md-12 col-lg-7 align-items-center">
                 <select class="form-select form-select-sm" id="idEmocion" name="emocion_id">
                     <option></option>
@@ -76,83 +87,53 @@
                     @endforeach
                 </select>
             </div>
-
         </div>
-        @endif
-        <!--
-    <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
-        <label for="idEtiqueta" class="form-label col-form-label negrita col-sm-3 col-md-4 col-lg-2">Etiqueta: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="left" title="Valoración del terapeuta del recuerdo"></i></label>
-        <div class="col-sm-9 col-md-6 col-lg-4 align-items-center">
-            <select class="form-select form-select-sm" id="idEtiqueta" name="etiqueta_id" >
-                <option></option>
-                @foreach ($etiquetas as $etiqueta)
-                <option value="{{$etiqueta->id}}" @if($etiqueta->id == $recuerdo->etiqueta_id) selected @endif>{{$etiqueta->nombre}}</option>
-                @endforeach
-            </select>
-        </div>
-    </div>
--->
-        <div class="row justify-content-start">
-            <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
-                <label for="apto" class="form-label col-form-label negrita col-sm-3 col-md-3 col-lg-3">Apto: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="right" title="Marca esta opción si el recuerdo sigue siendo apto para trabajar con él."></i></label>
-                <div class="col-sm-2 col-md-7 col-lg-7 align-items-center">
-                    <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif >
-                </div>
-            </div>
-        </div>
-    </div>
+        <div class="row col-sm-12 col-md-6 col-lg-6 align-items-center">
+            @if(Auth::user()->rol_id == 1)
+            <div class="slidecontainer" id="pruebaa">
+                <div class="row col-sm-12 col-md-12 col-lg-12 justify-content-start " >
+                    <label for="puntuacion" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-2">Nivel: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Grado de positividad de la emoción generada al paciente por el recuerdo"></i></label>
 
 
-    <div class="row mt-3">
-
-
-
-        <!--
-        <div class="row col-sm-12 col-md-12 col-lg-12 align-items-center ">
-            <div class="d-flex align-items-center">
-                <div class="col-md-auto ">0     </div>
-                <div class="col-sm-auto col-md-auto col-lg-2">
-                    <div class="range-wrap m-1 col-lg-2 ">
-                        <div class="range-value col-lg-2" id="rangeV"></div>
-                        <input type="range" class="col-lg-4 form-range puntuacion " id="puntuacion" name="puntuacion" min="0" max="10" step="1" value={{$recuerdo->puntuacion}} >
-                    </div>
-                </div>
-                <div class="col mx-auto ">10 <i class="bi bi-emoji-smile-fill text-success"></i></div>
-            </div>
-        </div>
-        -->
-        @if(Auth::user()->rol_id == 1)
-        <div class="slidecontainer" id="pruebaa">
-            <div class="row col-sm-9 col-md-7 col-lg-6 justify-content-start ">
-                <label for="puntuacion" class="form-label col-form-label negrita col-sm-2 col-md-3 col-lg-2">Nivel: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Grado de positividad de la emoción generada al paciente por el recuerdo"></i></label>
-
-
-                <div class="col-sm-10 col-md-9 col-lg-10 align-items-center">
-                    <div class="d-flex justify-content-between carita-feliz">
-                        <span> negativo</span>
-                        <span> neutro</span>
-                        <span> positivo</span>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <style data="test" type="text/css"></style>
-                        <!--<span id="demo-puntuacion" class="m-3"></span>-->
-                        <span class="puntuacion-limites">0</span>
-                        <input type="range" id="puntuacion" name="puntuacion" min="0" max="10" step="1" class="slider" value={{$recuerdo->puntuacion}}>
-                        <span class="puntuacion-limites">10</span>
-                    </div>
-                    <div class="d-flex justify-content-between carita-feliz">
-                        <i class="bi bi-emoji-frown-fill text-danger"></i>
-                        <i class="bi bi-emoji-smile-fill text-success"></i>
+                    <div class="col-sm-12 col-md-12 col-lg-9 align-items-center">
+                        <div class="d-flex justify-content-between carita-feliz">
+                            <!--
+                            <svg viewBox="0 0 56 18" style="width: 30%;">
+                                <text x="0" y="15">negativo</text>
+                            </svg>
+                            <svg viewBox="0 0 56 18" style="width: 30%;">
+                                <text x="0" y="15">neutro</text>
+                            </svg>
+                            <svg viewBox="0 0 56 18" style="width: 30%;">
+                                <text x="0" y="15">positivo</text>
+                            </svg>
+                            -->
+                            <span> negativo</span>
+                            <span> neutro</span>
+                            <span> positivo</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <style data="test" type="text/css"></style>
+                            <!--<span id="demo-puntuacion" class="m-3"></span>-->
+                            <span class="puntuacion-limites">0</span>
+                            <input type="range" id="puntuacion" name="puntuacion" min="0" max="10" step="1" class="slider" value={{$recuerdo->puntuacion}}>
+                            <span class="puntuacion-limites">10</span>
+                        </div>
+                        <div class="d-flex justify-content-between carita-feliz">
+                            <i class="bi bi-emoji-frown-fill text-danger"></i>
+                            <i class="bi bi-emoji-neutral-fill text-warning"></i>
+                            <i class="bi bi-emoji-smile-fill text-success"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        @endif
+            @endif
 
-        <label id="valorPuntuacion" class="form-label col-sm-2 col-md-2 col-lg-2"></label>
+            <label id="valorPuntuacion" class="form-label col-sm-2 col-md-2 col-lg-2"></label>
+        </div>
     </div>
 
-
+    <hr style="color: lightgray;">
 
     <div class="mb-3">
         <label for="descripcion" class="form-label col-form-label negrita">Descripción:</label>

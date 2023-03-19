@@ -136,8 +136,6 @@ class RecuerdosController extends Controller
         $show = true;
         $recuerdo = Recuerdo::find($idRecuerdo);
         $paciente = $recuerdo->paciente;
-        Log::info("el problema es del show?");
-        Log::info($recuerdo->fecha);
         $estados = Estado::all()->sortBy("id");
         $etiquetas = Etiqueta::all()->sortBy("id");
         $etapas = Etapa::all()->sortBy("id");
