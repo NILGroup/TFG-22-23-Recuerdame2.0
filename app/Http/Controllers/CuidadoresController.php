@@ -69,7 +69,6 @@ class CuidadoresController extends Controller
 
     protected function registroCuidador(Request $request)
     {
-
         $request->validate([
             'telefono'=> 'numeric|digits:9'
         ]);
@@ -128,13 +127,6 @@ class CuidadoresController extends Controller
         $paciente->users()->detach($cuidador);
     }
 
-    public function restore($idP, $id) 
-    {
-        $paciente = Paciente::find($idP);
-        $cuidador = User::find($id);
-        $paciente->users()->attach($cuidador);
-    }
-
     public function destroy_no_view(Request $request){
         $borrar = User::findOrFail($request->id);
         $permanece = User::findOrFail($request->idCurrent);
@@ -145,6 +137,13 @@ class CuidadoresController extends Controller
             $multimedia->save();
         }
         return User::findOrFail($request->id)->delete();
+    }
+
+    public function restore($idP, $id) 
+    {
+        $paciente = Paciente::find($idP);
+        $cuidador = User::find($id);
+        $paciente->users()->attach($cuidador);
     }
 
     //sirve para chekear si el cuidador ya ha sido registrado
@@ -169,5 +168,13 @@ class CuidadoresController extends Controller
         return redirect("/pacientes/$id/cuidadores/$cuidador->id/editar");
     }
 
-
+    public function reasignarCuidadores(Request $request){
+        $paciente = Paciente::find($request->id);
+        $cuidadoresPaciente = $paciente->users()->where('rol_id', 2)->get();
+        info($cuidadoresPaciente);
+        $paciente->users()->detach($cuidadoresPaciente);
+        $cuidadores = $request->checkCuidador;
+        $paciente->users()->attach($cuidadores);
+    }
+    
 }

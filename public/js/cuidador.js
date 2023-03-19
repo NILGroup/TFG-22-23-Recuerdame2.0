@@ -114,14 +114,16 @@ function duplicatedAlert(data) {
     })
 }
 
-function agregarCuidador() {
+$("#agregarCuidador").on("click", function(event){
+
+    event.stopPropagation()
+    event.preventDefault()
 
     let tabla = $("#tabla-cuidadores").dataTable()
     tabla.api().rows().remove().draw()
 
     $("#tabla-cuidadores-existentes tbody tr").each(function(i, elem){
         let per = $(elem).children()
-        console.log(per)
         if ($(per[6]).children("input").prop("checked")){
             let row = $("<tr></tr>")
             row.append("<td><a href='/pacientes/"+$('#paciente_id').prop("value")+"/cuidadores/"+ per[0].textContent +"'> "+ per[1].textContent +" </a></td>")
@@ -140,10 +142,23 @@ function agregarCuidador() {
             '</td>')
             setRow(tabla, row)
         }
-
     })
-
-}
+    var form = $(this).closest("form");
+    console.log(form.serializeArray())
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: "POST",
+        url: "/reasignarCuidadores",
+        data: form.serialize(),
+        error: function (data) {
+            console.log(data)
+        }
+    })
+})
 
 function setRow(tabla, r){
     tabla.api().row.add(r).draw()

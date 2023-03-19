@@ -27,7 +27,6 @@ $('.confirm_delete').click(function (event) {
                 timer: 2000,
                 showConfirmButton: false,
             }).then(function(){
-                console.log(form.attr('action'))
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
