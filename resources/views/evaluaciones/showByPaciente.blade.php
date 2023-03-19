@@ -20,7 +20,7 @@
             <thead>
                 <tr >
                     <th class="fit5 text-center" scope="col">Informe</th>
-                    <th class="fit10 text-center" scope="col">Sesiones desde la última evaluación</th>
+                    <th class="fit10 text-center" scope="col">Sesiones desde el anterior</th>
                     <th class=" text-center" scope="col">Diagnóstico</th>
                     <th class="fit5 text-center" scope="col">Acciones</th>
                 </tr>
