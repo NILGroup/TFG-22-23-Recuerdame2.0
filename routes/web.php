@@ -83,6 +83,8 @@ Route::get('/pacientes/{id}/cuidadores/{idC}/editar', 'App\Http\Controllers\Cuid
 Route::post('/repeatedCuidador', 'App\Http\Controllers\CuidadoresController@repeatedCuidador');
 Route::post('/borrar_foto_cuidador', 'App\Http\Controllers\CuidadoresController@removePhoto');
 Route::post('/borrar_cuidador', 'App\Http\Controllers\CuidadoresController@destroy_no_view');
+Route::delete('cuidadores/{id}', 'App\Http\Controllers\CuidadoresController@destroy');
+Route::post('/pacientes/{idP}/cuidadores/{id}/restore', 'App\Http\Controllers\CuidadoresController@restore');
 
 //RUTAS CUSTOMIZADAS SESION
 Route::post('/guardarSesion', 'App\Http\Controllers\SesionesController@store');
@@ -94,12 +96,14 @@ Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll')
 Route::post('/pacientes/{id}/sesiones/{idS}/update', 'App\Http\Controllers\SesionesController@store');
 Route::post('/updateAndRecuerdoNuevo','App\Http\Controllers\SesionesController@updateAndRecuerdoNuevo');
 Route::post('/updateAndSeleccionarRecuerdos','App\Http\Controllers\SesionesController@updateAndSeleccionarRecuerdos');
+Route::post('/pacientes/{idP}/sesiones/{id}/restore', 'App\Http\Controllers\SesionesController@restore');
 
 //RUTAS CUSTOMIZADAS PACIENTE
 Route::get('/pacientes/{id}/asignarTerapeutas', 'App\Http\Controllers\PacientesController@addPacienteToTerapeuta');
 Route::post('/asignacionTerapeutas','App\Http\Controllers\PacientesController@asignacionTerapeutas');
 Route::post('/actualizarPaciente','App\Http\Controllers\PacientesController@update');
 Route::post('/borrar_foto_paciente', 'App\Http\Controllers\PacientesController@removePhoto');
+Route::post('/pacientes/{id}/restore', 'App\Http\Controllers\PacientesController@restore');
 
 //RUTAS CUSTOMIZADAS RECUERDO
 Route::get('/pacientes/{id}/recuerdos', 'App\Http\Controllers\RecuerdosController@showByPaciente');
@@ -108,6 +112,8 @@ Route::get('/pacientes/{id}/recuerdos/{idR}', 'App\Http\Controllers\RecuerdosCon
 Route::get('/pacientes/{id}/recuerdos/{idR}/editar', 'App\Http\Controllers\RecuerdosController@edit');
 Route::delete('/eliminarRecuerdo/{id}', 'App\Http\Controllers\RecuerdosController@destroy');
 Route::post('/storeRecuerdoNoView', 'App\Http\Controllers\RecuerdosController@storeNoView');
+Route::post('/pacientes/{idP}/recuerdos/{id}/restore', 'App\Http\Controllers\RecuerdosController@restore');
+
 
 //RUTAS CUSTOMIZADAS PERSONA RELACIONADA
 Route::get('/pacientes/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
@@ -118,17 +124,18 @@ Route::get('/pacientes/{id}/personas/{idP}', 'App\Http\Controllers\PersonasRelac
 Route::get('/pacientes/{id}/personas/{idP}/editar', 'App\Http\Controllers\PersonasRelacionadasController@edit');
 Route::post('/editarPersona', 'App\Http\Controllers\PersonasRelacionadasController@update');
 Route::post('/storePersonaNoView', 'App\Http\Controllers\PersonasRelacionadasController@storeNoView');
+Route::post('/pacientes/{idP}/personas/{id}/restore', 'App\Http\Controllers\PersonasRelacionadasController@restore');
+
 
 //RUTAS CUSTOMIZADAS CALENDARIO
 Route::get('/pacientes/{id}/calendario', 'App\Http\Controllers\CalendarioController@showByPaciente');
 Route::post('/eliminarActividad', 'App\Http\Controllers\CalendarioController@destroy');
-
 Route::post('/modificarActividad', 'App\Http\Controllers\CalendarioController@update');
 Route::post('/calendarioSesion', 'App\Http\Controllers\CalendarioController@registroSesion');
-
 Route::post('/modificarSesion', 'App\Http\Controllers\CalendarioController@updateSesion');
 Route::post('/eliminarSesion', 'App\Http\Controllers\CalendarioController@destroySesion');
 //Route::get('/mostrarActividades/{id}', 'App\Http\Controllers\CalendarioController@show');
+
 
 //RUTAS CUSTOMIZADAS INFORMES SESION
 Route::get('/pacientes/{id}/informesSesion', 'App\Http\Controllers\InformesSesionController@showByPaciente');
@@ -138,6 +145,7 @@ Route::get('/pacientes/{id}/sesiones/{idS}/ver', 'App\Http\Controllers\InformesS
 Route::post('/cerrarInformeSesion', 'App\Http\Controllers\InformesSesionController@store');
 Route::post('/generarPDFInformeSesion', 'App\Http\Controllers\InformesSesionController@generarPDFInformeSesion');
 Route::post('/getRecuerdo', 'App\Http\Controllers\RecuerdosController@getNoView');
+Route::post('/pacientes/{idP}/informesSesion/{id}/restore', 'App\Http\Controllers\InformesSesionController@restore');
 
 
 //RUTAS CUSTOMIZADAS EVALUACION
@@ -149,6 +157,8 @@ Route::get('/pacientes/{id}/evaluaciones/{idE}/ver', 'App\Http\Controllers\Evalu
 Route::post('/cerrarEvaluacion', 'App\Http\Controllers\EvaluacionController@store');
 Route::post('/modificarEvaluacion', 'App\Http\Controllers\EvaluacionController@update');
 Route::post('/generarPDFEvaluacion', 'App\Http\Controllers\EvaluacionController@generarPDFInformeEvaluacion');
+Route::post('/pacientes/{idP}/evaluaciones/{id}/restore', 'App\Http\Controllers\EvaluacionController@restore');
+
 
 //RUTAS CUSTOMIZADAS HISTORIAS DE VIDA
 Route::get('/pacientes/{id}/historias/generarHistoria', 'App\Http\Controllers\HistoriaController@generarHistoria');

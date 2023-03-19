@@ -29,7 +29,7 @@ class SesionesController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role']);
-        $this->middleware(['asignarPaciente'])->except(['index', 'create', 'destroy']);
+        $this->middleware(['asignarPaciente'])->except(['index', 'create', 'destroy', 'restore']);
     }
     
     /**
@@ -273,6 +273,10 @@ class SesionesController extends Controller
         $idP = $sesion->paciente_id;
         Sesion::destroy($id);
         //return redirect("/pacientes/$idP/sesiones");
+    }
+    public function restore($idP, $id) 
+    {
+        Sesion::where('id', $id)->withTrashed()->restore();
     }
 
     public function destroyRecuerdo($idSesion, $idRecuerdo)

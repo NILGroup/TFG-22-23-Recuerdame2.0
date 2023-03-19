@@ -33,7 +33,7 @@ class RecuerdosController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role'])->except(['show', 'showByPaciente']);
-        $this->middleware(['asignarPaciente'])->except(['destroy']);
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
     }
 
     /**
@@ -237,6 +237,10 @@ class RecuerdosController extends Controller
         $paciente = $recuerdo->paciente;
         $recuerdo->delete();
         //return redirect("/pacientes/$paciente->id/recuerdos/");
+    }
+    public function restore($idP, $id) 
+    {
+        Recuerdo::where('id', $id)->withTrashed()->restore();
     }
 
     //Elimina a la persona relacionada del recuerdo en cuestión (su relación)

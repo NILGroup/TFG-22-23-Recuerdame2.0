@@ -19,7 +19,7 @@ class PersonasRelacionadasController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role'])->except(['show']);
-        $this->middleware(['asignarPaciente'])->except(['destroy']);
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
     }
 
     /**
@@ -171,13 +171,13 @@ class PersonasRelacionadasController extends Controller
 
     public function destroy(int $id)
     {
-        
         $persona = Personarelacionada::findOrFail($id);
-        $paciente = $persona->paciente;
         $persona->delete();
-
         //return redirect("/pacientes/$paciente->id/personas");
-
+    }
+    public function restore($idP, $id) 
+    {
+        Personarelacionada::where('id', $id)->withTrashed()->restore();
     }
 
     public function removePhoto(Request $request){

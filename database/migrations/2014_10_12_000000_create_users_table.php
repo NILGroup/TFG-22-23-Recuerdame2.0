@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('rol_id');
             $table->rememberToken();
             $table->timestamps();
-
+            $table->softDeletes();
         });
     }
 

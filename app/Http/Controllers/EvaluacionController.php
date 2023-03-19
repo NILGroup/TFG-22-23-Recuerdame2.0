@@ -17,7 +17,7 @@ class EvaluacionController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role']);
-        $this->middleware(['asignarPaciente'])->except('destroy');
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
     }
     
     public function showByPaciente($idPaciente){
@@ -109,6 +109,10 @@ class EvaluacionController extends Controller
         $evaluacion->delete();
         //return redirect("/pacientes/$paciente_id/evaluaciones");
 
+    }
+    public function restore($idP, $id) 
+    {
+        Evaluacion::where('id', $id)->withTrashed()->restore();
     }
     /*
 

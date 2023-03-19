@@ -22,7 +22,8 @@ class InformesSesionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role', 'asignarPaciente']);
+        $this->middleware(['auth', 'role']);
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
     }
     
     public function showByPaciente($idPaciente){
@@ -78,6 +79,10 @@ class InformesSesionController extends Controller
         $sesion->observaciones = null;
         $sesion->save();
         //return redirect("/pacientes/$sesion->paciente_id/informesSesion");
+    }
+    public function restore($idP, $id) 
+    {
+        
     }
 
     public function verInformeSesion($idPaciente, $idSesion){

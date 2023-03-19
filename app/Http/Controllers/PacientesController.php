@@ -25,7 +25,7 @@ class PacientesController extends Controller
     public function __construct()
     {
         $this->middleware(['auth']);
-        $this->middleware(['asignarPaciente'])->except(['index', 'create']);
+        $this->middleware(['asignarPaciente'])->except(['index', 'create','destroy', 'restore']);
     }
     
     /**
@@ -183,6 +183,10 @@ class PacientesController extends Controller
         session()->forget('paciente');
         //Redireccionamos a lista pacientes
         //return redirect("/pacientes");
+    }
+    public function restore($id) 
+    {
+        Paciente::where('id', $id)->withTrashed()->restore();
     }
 
     public function addPacienteToTerapeuta(int $id) {

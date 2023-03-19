@@ -17,9 +17,11 @@ class CuidadoresController extends Controller
      */
     public function __construct()
     {
+        /*
         $this->middleware(['auth', 'role']);
-        $this->middleware(['asignarPaciente'])->except(['destroy']);
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
         $this->middleware(['viendoCuidador'])->only(['show', 'edit']);
+        */
     }
 
     public function create($idP){
@@ -126,34 +128,25 @@ class CuidadoresController extends Controller
         $cuidador = User::find($id);
         $paciente = Paciente::find(session()->get('paciente')['id']);
         $paciente->users()->detach($cuidador);
-        return redirect("/pacientes/$paciente->id/cuidadores/");
+    }
+
+    public function restore($idP, $id) 
+    {
+        $paciente = Paciente::find($idP);
+        $cuidador = User::find($id);
+        $paciente->users()->attach($cuidador);
     }
 
     public function destroy_no_view(Request $request){
-
-     
-
-        
         $borrar = User::findOrFail($request->id);
         $permanece = User::findOrFail($request->idCurrent);
-
         $permanece->multimedia()->delete();
-        
-
         $multimedia = $borrar->multimedia;
-
         if (isset($multimedia)){
             $multimedia->user_id = $request->idCurrent;
             $multimedia->save();
         }
-       
-        
-        
-
-        
-
         return User::findOrFail($request->id)->delete();
-
     }
 
     //sirve para chekear si el cuidador ya ha sido registrado

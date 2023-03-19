@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string("observaciones")->nullable();
             
             $table->foreign("paciente_id")->references("id")->on("pacientes")->onDelete("cascade");
+            $table->softDeletes();
         });
     }
 

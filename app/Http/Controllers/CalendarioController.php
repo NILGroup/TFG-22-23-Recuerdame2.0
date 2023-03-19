@@ -207,6 +207,10 @@ class CalendarioController extends Controller
         session()->put('created', "Eliminado");
         return redirect("/pacientes/$paciente/calendario");
     }
+    public function restore($idP, $id) 
+    {
+        Actividad::where('id', $id)->withTrashed()->restore();
+    }
 
     public function destroySesion(Request $request)
     {
