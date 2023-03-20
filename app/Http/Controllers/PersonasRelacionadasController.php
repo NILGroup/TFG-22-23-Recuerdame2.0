@@ -46,7 +46,7 @@ class PersonasRelacionadasController extends Controller
         $tipos = Tiporelacion::all()->sortBy("id");
         $persona = new Personarelacionada();
         $paciente = Paciente::find($idPaciente);
-        $mostrarFoto = true;
+        $mostrarFoto = false;
         return view("personasrelacionadas.create", compact('mostrarFoto',"idPaciente", "paciente", "tipos", "persona"));
     }
 

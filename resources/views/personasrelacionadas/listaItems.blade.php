@@ -1,8 +1,10 @@
 <div id="esta" class="row text-align-center">
+    @if($mostrarFoto)
     <div class="col-lg-3 align-items-center" style="padding-right: 50px!important;">
         @include('personasrelacionadas.foto')
     </div>
-    <div class="col-lg-9">
+    @endif
+    <div class= @if($mostrarFoto) "col-lg-9" @endif "col-lg-12">
 
         <input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$idPaciente}}" required>
         <input type="hidden" name="id" class="form-control form-control-sm" id="id" value="{{$persona->id}}" required>

@@ -11,7 +11,7 @@
     <form class="dropzone p-0" id="d" method="post" action="/crearPersona">
         {{csrf_field()}}
             <div class="dropzone-inner">
-                @include('personasrelacionadas.foto')
+               
                 @include('personasrelacionadas.listaItems')
                 <div class="dz-default dz-message dropzone-correct" id="dzp">
                     <div class="container dropzone-container">
