@@ -14,7 +14,7 @@
             <ul class="navbar-nav">
                 @if (Auth::user()->rol_id == 1)
                 <li class="nav-item dropdownClaro dropdown">
-                    <a class="nav-linkClaro nav-link dropdown-toggle menu" href="#" role="button" aria-expanded="false">Sesiones</a>
+                    <a class="nav-linkClaro nav-link dropdown-toggle menu"  data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Sesiones</a>
                     <ul class="dropdownClaro-menu dropdown-menu">
                         <li><a class="dropdownClaro-item dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/sesiones">Lista de sesiones</a></li>
                         <li><a class="dropdownClaro-item dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/informesSesion">Informes de las sesiones</a></li>

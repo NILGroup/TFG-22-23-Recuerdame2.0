@@ -215,16 +215,11 @@ nav {
 
 /**-------- desplegables*/
 
-.dropdownClaro-menu{
-    border: none!important;
-    box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
-    color: var(--white)!important;
-}
 
 .navbar-nav .dropdownClaro:hover {
     background: var(--white)!important;
     color: white!important;
-    border-radius: 1rem 1rem 0 0 ;
+    border-radius: 1rem 1rem 1rem 1rem ;
     box-shadow: 0 0 6px rgba(59, 58, 58, 0.253);
   }
 
@@ -235,15 +230,16 @@ nav {
     border-radius: 1rem;
 }
   
-.navbar-nav .dropdownClaro:hover > .dropdownClaro-menu {
-    display: block;
+.dropdownClaro-menu {
+    border: none!important;
+    box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
+    color: var(--white)!important;
     opacity: 1;
     padding: 7px 0;
     -webkit-box-shadow: 0 3px 4px rgba(0,0,0,.18)!important;
     box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
-    margin-top: -12px;
-  }
-
+    margin-top: -12px !important;
+}
 
 /* REGISTER --------------------------------------- */
 .msgErrorRegister{
