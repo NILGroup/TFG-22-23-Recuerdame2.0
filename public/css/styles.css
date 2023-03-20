@@ -193,7 +193,7 @@ nav {
     background-color: var(--white);
     color: var(--azulBootstrap)!important;
     box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
-    font-weight: bold;
+    
 }
 
 .nav-linkOscuro:hover {
@@ -224,7 +224,6 @@ nav {
 .navbar-nav .dropdownClaro:hover {
     background: var(--white)!important;
     color: white!important;
-    font-weight: bold;
     border-radius: 1rem 1rem 0 0 ;
     box-shadow: 0 0 6px rgba(59, 58, 58, 0.253);
   }
