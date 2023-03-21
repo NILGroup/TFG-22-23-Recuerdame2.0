@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Historia;
 use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\Etapa;
 use App\Models\Categoria;
 use App\Models\Etiqueta;
-use ProtoneMedia\LaravelFFMpeg\Exporters\EncodingException;
 use Illuminate\Support\Facades\Storage;
-use FFMpeg\Filters\AdvancedMedia\ComplexFilters;
-use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
-use FFMpeg\Filters\Video\VideoFilters;
-use FFMpeg\Format\Video\X264;
+use Illuminate\Support\Facades\File;
+use App\VideoHistoriaVida;
 class HistoriaController extends Controller
 {
     public function __construct()
@@ -83,44 +79,26 @@ class HistoriaController extends Controller
         }
         
         $array = collect();
-        $trashCache = collect();
         foreach ($listaRecuerdos as $rc) { //¿Vacio?
             foreach($rc->multimedias as $media){
                 $extension = pathinfo($media->fichero, PATHINFO_EXTENSION);
-                $rememberpath = str_replace('/storage/', '/public/', $media->fichero);
+                $rememberpath = "https://d58e-2a0c-5a81-e301-6b00-ddf-8a34-b8b7-bf45.eu.ngrok.io/TFG-22-23-Recuerdame2.0/public".$media->fichero;//str_replace('/storage/', '/public/', $media->fichero);
                 
-                    if($extension == 'jpg'){
-                        //$uniqueName = uniqid() . time() .'.mp4';
-                        //FFMpeg::open($rememberpath)
-                        //->export()
-                        //->asTimelapseWithFramerate(0.3)
-                        //->inFormat(new \FFMpeg\Format\Video\X264())
-                        //->save('public\img\HistoriaVidaCache\imgToMp4\\'.$uniqueName);
-                        //$trashCache->push('public\img\HistoriaVidaCache\imgToMp4\\'.$uniqueName);
-                        //$array->push('\public\img\HistoriaVidaCache\imgToMp4\\'.$uniqueName);
-                    }
+
 
                 if($extension == 'mp4'){
                     $array->push($rememberpath);
                 }
             }
         }
-        
-        //print_r($array);
+
+            $VideoGenerator = new VideoHistoriaVida();
+            $url = $VideoGenerator->generateVideo($array->toArray());
+
+            if($url = "Error") redirect("/pacientes//".$idPaciente."/historias/generarHistoria");
 
 
-            FFMpeg::fromDisk('local')
-            ->open($array->toArray())
-            ->export()
-            ->concatWithoutTranscoding()
-            ->save($path);
-
-            FFMpeg::cleanupTemporaryFiles();
-
-
-            //Url to final Video
-            $path = \Illuminate\Support\Facades\URL::to('storage/img/HistoriaVidaCache/'.$idPaciente.'.mp4');
-            return view("historias.videoPlayer", compact("path"));
+            return view("historias.videoPlayer", compact("url"));
 
     
     }
