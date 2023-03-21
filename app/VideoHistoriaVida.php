@@ -14,10 +14,14 @@ use Google\Cloud\Video\Transcoder\V1\VideoStream;
 use Google\Protobuf\Duration;
 
     class VideoHistoriaVida{
-        private static $location = 'europe-southwest1';
-        private static $projectId = 'inspiring-being-381308';
+
         function generateVideo($array){
-            
+            $location = 'europe-west2';
+            $projectId = 'inspiring-being-381308';
+            $startTimeInput1=0;;
+            $startTimeInput2=0;
+            $endTimeInput1=0;
+            $endTimeInput2=0;
             $startTimeInput1Sec = (int) floor(abs($startTimeInput1));
             $startTimeInput1Nanos = (int) (1000000000 * bcsub(abs($startTimeInput1), floor(abs($startTimeInput1)), 4));
             $endTimeInput1Sec = (int) floor(abs($endTimeInput1));
@@ -28,9 +32,9 @@ use Google\Protobuf\Duration;
             $endTimeInput2Sec = (int) floor(abs($endTimeInput2));
             $endTimeInput2Nanos = (int) (1000000000 * bcsub(abs($endTimeInput2), floor(abs($endTimeInput2)), 4));
 
-            $input1Uri= $array[0];
-            $input2Uri=$array[1];
-            $outputUri="gs://Recuerdame/Output/";
+            $input1Uri="gs://recuerdame2input/ForBiggerEscapes.mp4";// $array[0];
+            $input2Uri="gs://recuerdame2input/ForBiggerJoyrides.mp4";// $array[1];
+            $outputUri="gs://recuerdame2output/test/";
 
             $startTimeInput1Sec = (int) floor(abs($startTimeInput1));
             $startTimeInput1Nanos = (int) (1000000000 * bcsub(abs($startTimeInput1), floor(abs($startTimeInput1)), 4));
