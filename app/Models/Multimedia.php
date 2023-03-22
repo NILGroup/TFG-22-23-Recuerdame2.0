@@ -18,6 +18,37 @@ class Multimedia extends Model
         "paciente_id"
     ];
 
+    public function evaluacion(){
+        
+        $gds = $this->evaluacion_gds();
+        $mec = $this->evaluacion_mec();
+        $cdr = $this->evaluacion_cdr();
+        $cus = $this->evaluacion_custom();
+
+        if (isset($gds)) return $gds;
+        if (isset($mec)) return $mec;
+        if (isset($cdr)) return $cdr;
+        if (isset($cus)) return $cus;
+
+
+    }
+
+    public function evaluacion_gds(){
+        return $this->hasOne(Evaluacion::class, "multimedia_gds_id");
+    }
+
+    public function evaluacion_mec(){
+        return $this->hasOne(Evaluacion::class, "multimedia_mec_id");
+    }
+
+    public function evaluacion_cdr(){
+        return $this->hasOne(Evaluacion::class, "multimedia_cdr_id");
+    }
+
+    public function evaluacion_custom(){
+        return $this->hasOne(Evaluacion::class, "multimedia_custom_id");
+    }
+
     public function personas_relacionadas(){
         return $this->belongsTo(Personarelacionada::class);
     }

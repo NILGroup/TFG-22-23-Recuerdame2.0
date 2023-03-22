@@ -28,8 +28,19 @@ return new class extends Migration
             $table->integer("escala")->nullable();
             $table->date("fecha_escala")->nullable();
             $table->string("observaciones")->nullable();
+
+            $table->unsignedBigInteger("multimedia_gds_id")->nullable();
+            $table->unsignedBigInteger("multimedia_mec_id")->nullable();
+            $table->unsignedBigInteger("multimedia_cdr_id")->nullable();
+            $table->unsignedBigInteger("multimedia_custom_id")->nullable();
+
+            $table->foreign("multimedia_gds_id")->references("id")->on("multimedias")->onDelete("cascade");
+            $table->foreign("multimedia_mec_id")->references("id")->on("multimedias")->onDelete("cascade");
+            $table->foreign("multimedia_cdr_id")->references("id")->on("multimedias")->onDelete("cascade");
+            $table->foreign("multimedia_custom_id")->references("id")->on("multimedias")->onDelete("cascade");
             
             $table->foreign("paciente_id")->references("id")->on("pacientes")->onDelete("cascade");
+            
             $table->softDeletes();
         });
     }
