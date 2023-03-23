@@ -42,7 +42,7 @@
                         </form>
                     </td>
                     <td class="tableActions align-center">
-                        @if($sesion->fecha_finalizada == null)
+                        @if(!$sesion->finalizada)
                             <a class="btn btn-success btn-sm w-100 botonAccionTablas"  role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
                         @else
                             <a class="btn btn-primary btn-sm w-100 botonAccionTablas"  role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/ver">Ver informe</a>

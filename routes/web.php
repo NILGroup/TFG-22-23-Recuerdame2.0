@@ -347,7 +347,7 @@ Route::post('/prueba', function () {
         ["fecha" => Carbon::create($now->year, $now->month, 2, 15, 30 ,0), "titulo" => "Trabajar adolescencia", "etapa_id" => 1, "objetivo" => "Trabajar los recuerdos en la etapa de la adolescencia con ayuda de imágenes y videos", 
             "descripcion" => "Etapa importante a nivel de emociones", "barreras"=> "Algunos recuerdos ya no conservados.", "facilitadores" => "El recuerdo con sus amigos", 
             "fecha_finalizada" => Carbon::create($now->year, $now->month, 5, 14,0,0), "paciente_id" => 1, "user_id" => 1, 
-            "respuesta" => "Gestiona las emociones correctamente.", "observaciones" => "ninguna observacion", "duracion" => "01:30"],
+            "respuesta" => "Gestiona las emociones correctamente.", "observaciones" => "ninguna observacion", "duracion" => "01:30", "finalizada" => true],
         ["fecha" => Carbon::create($now->year, $now->month, 10, 10, 15 ,0), "titulo" => "Trabajar matrimonio", "etapa_id" => 2, "objetivo" => "Trabajar la tristeza que le da al recordar a su marido ",
             "descripcion" => "Al trabajar los recuerdos relacionados con su marido, genera una tristeza en el paciente que hay que controlar", "barreras"=> "Dificultad para hablar de su marido.", "facilitadores" => null, 
             "fecha_finalizada" => null, "paciente_id" => 1, "user_id" => 1, 

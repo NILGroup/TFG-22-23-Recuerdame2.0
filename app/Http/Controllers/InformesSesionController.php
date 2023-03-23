@@ -27,7 +27,7 @@ class InformesSesionController extends Controller
     }
     
     public function showByPaciente($idPaciente){
-        $sesiones = Sesion::where('paciente_id',$idPaciente)->whereNotNull("fecha_finalizada")->get();
+        $sesiones = Sesion::where('paciente_id',$idPaciente)->where("finalizada", true)->get();
         return view("informesSesion.showByPaciente", compact('sesiones'));
     }
 
@@ -58,6 +58,8 @@ class InformesSesionController extends Controller
         $sesion->barreras = $request->barreras;
         $sesion->facilitadores = $request->facilitadores;
         $sesion->duracion = $request->duracion;
+
+        $sesion->finalizada = true;
         $sesion->save();
         
         session()->put('created', "true");
@@ -74,15 +76,19 @@ class InformesSesionController extends Controller
 
     public function destroy($id){
         $sesion = Sesion::find($id);
+        /*
         $sesion->respuesta = null;
         $sesion->fecha_finalizada = null;
         $sesion->observaciones = null;
+        */
+        $sesion->finalizada = false;
         $sesion->save();
         //return redirect("/pacientes/$sesion->paciente_id/informesSesion");
     }
-    public function restore($idP, $id) 
-    {
-        
+    public function restore($idP, $id){
+        $sesion = Sesion::find($id);
+        $sesion->finalizada = true;
+        $sesion->save();
     }
 
     public function verInformeSesion($idPaciente, $idSesion){
