@@ -43,13 +43,13 @@
                     <td class="tableActions">
                         <div class="d-inline">
                         
-                            <a href="/pacientes/{{$paciente->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos del usuario."></i></a>
-                            <a href="{{route('pacientes.edit',$paciente->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar usuario."></i></a>
-                            <a href="/pacientes/{{$paciente->id}}/asignarTerapeutas"><i class="fa-solid fa-users-line text-success tableIcon" data-toggle="tooltip" data-placement="top" title="Asignar más terapeutas."></i></a>
+                            <a href="/pacientes/{{$paciente->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos del usuario"></i></a>
+                            <a href="{{route('pacientes.edit',$paciente->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar usuario"></i></a>
+                            <a href="/pacientes/{{$paciente->id}}/asignarTerapeutas"><i class="fa-solid fa-users-line text-success tableIcon" data-toggle="tooltip" data-placement="top" title="Asignar más terapeutas"></i></a>
                             <form method="post" action="{{ route('pacientes.destroy', $paciente->id) }}" style="display:inline!important;">
                                 {{csrf_field()}}
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="confirm_delete" data-toggle="tooltip" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon" data-toggle="tooltip" data-placement="top" title="Eliminar usuario."></i></button>
+                                <button type="submit" class="confirm_delete" data-toggle="tooltip" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon" data-toggle="tooltip" data-placement="top" title="Eliminar usuario"></i></button>
                             </form>
                         </div>
                     </td>

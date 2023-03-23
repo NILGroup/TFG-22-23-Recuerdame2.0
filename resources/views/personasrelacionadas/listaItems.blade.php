@@ -68,7 +68,7 @@
             </div>
 
             <div class="row col-sm-12 col-md-6 col-lg-6 align-items-center">
-                <label for="contacto" class="form-label col-form-label negrita col-sm-12 col-md-5 col-lg-4">Contacto: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Indicar si se trata del contacto preferente para este usuario."></i><span class="asterisco">*</span></label>
+                <label for="contacto" class="form-label col-form-label negrita col-sm-12 col-md-5 col-lg-4">Contacto: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Indicar si se trata del contacto preferente para este usuario"></i><span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-6 col-lg-5">
                     <input type="checkbox" name="contacto" class="form-check-input" id="contacto" value="x" @if($persona->contacto) checked @endif >
 

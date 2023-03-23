@@ -67,7 +67,7 @@
             </div>
         </div>
         <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
-            <label for="apto" class="form-label col-form-label negrita col-sm-4 col-md-4 col-lg-3">Apto: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="right" title="Marca esta opción si el recuerdo sigue siendo apto para trabajar con él."></i></label>
+            <label for="apto" class="form-label col-form-label negrita col-sm-4 col-md-4 col-lg-3">Apto: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="right" title="Marca esta opción si el recuerdo sigue siendo apto para trabajar con él"></i></label>
             <div class="col-sm-6 col-md-6 col-lg-7 align-items-center">
                 <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif >
             </div>
@@ -178,7 +178,7 @@
                     <td>{{$persona->tiporelacion->nombre}}</td>
                     @if($show)
                     <td class="tableActions">
-                        <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona."></i></a>
+                        <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona"></i></a>
                     </td>
                     @endif
                     <input type="hidden" value="{{$persona->id}}" name="checkPersona[]">
