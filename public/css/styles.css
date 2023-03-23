@@ -665,6 +665,10 @@ div>.row {
     border-radius: 23px;
 }
 
+.hidden{
+    display:none;
+}
+
 /* On smaller resolutions, hide the text for Large screens */
 @media only screen and (max-width: 560px) {
     .largeScreen {

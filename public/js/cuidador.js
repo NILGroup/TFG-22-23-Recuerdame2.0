@@ -132,12 +132,12 @@ $("#agregarCuidador").on("click", function(event){
             row.append("<td>" + per[4].textContent + "</td>")
             row.append("<td>" + per[5].textContent + "</td>")
             row.append('<td class="tableActions"> '+
-                '<a href="/pacientes/'+$('#paciente_id').prop("value")+'/cuidadores/'+per[0].textContent+'"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver los datos del cuidador."></i></a>' +
-                '<a href="/pacientes/'+$('#paciente_id').prop("value")+'/cuidadores/'+per[0].textContent+'/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar cuidador."></i></a>'+
+                '<a href="/pacientes/'+$('#paciente_id').prop("value")+'/cuidadores/'+per[0].textContent+'"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver los datos del cuidador"></i></a>' +
+                '<a href="/pacientes/'+$('#paciente_id').prop("value")+'/cuidadores/'+per[0].textContent+'/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar cuidador"></i></a>'+
                 '<form method="post" action="/cuidadores/' + per[0].textContent + '" style="display:inline!important;">'+
                     '<input name="_token" value="'+csrf_js_var+'" type="hidden">' +
                     '<input type="hidden" name="_method" value="DELETE">'+
-                    '<button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon" data-toggle="tooltip" data-placement="top" title="Eliminar cuidador."></i></button>'+
+                    '<button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon" data-toggle="tooltip" data-placement="top" title="Eliminar cuidador"></i></button>'+
                 '</form>'+
             '</td>')
             setRow(tabla, row)

@@ -31,11 +31,11 @@
             <div class="col-sm-12 col-md-12 col-lg-7 align-items-center">
                 @if($show)
                 <!-- si es null, que no se muestre nada (si no pone invalid date)-->
-                @if ($recuerdo->fecha != null)
-                <input max="4000-12-31" min="1800-01-01" type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$recuerdo->fecha}}">
-                @endif
+                    @if ($recuerdo->fecha != null)
+                        <input max="4000-12-31" min="1800-01-01" type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$recuerdo->fecha}}">
+                    @endif
                 @else
-                <input max="4000-12-31" min="1800-01-01" type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$recuerdo->fecha}}">
+                    <input max="4000-12-31" min="1800-01-01" type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$recuerdo->fecha}}">
                 @endif
             </div>
         </div>
