@@ -51,7 +51,7 @@
     <div class="accordion-item accordion-header" id="cuidadores1">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#cuidadores" aria-expanded="true" aria-controls="cuidadores">
             <div class="w-100">
-                <h5 class="text-muted text-start">Listado de cuidadores</h5>
+                <h5 class="text-muted text-start">Listado de personas cuidadoras</h5>
             </div>
         </button>
         

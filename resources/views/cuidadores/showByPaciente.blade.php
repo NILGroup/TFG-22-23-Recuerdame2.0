@@ -4,7 +4,7 @@
 <input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$paciente->id}}" required >
 <div class="container-fluid">
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Lista cuidadores</h5>
+        <h5 class="text-muted">Lista de personas cuidadoras</h5>
         <hr class="lineaTitulo">
     </div>
     <div class ="tabla">
@@ -16,7 +16,7 @@
             </div>
         </div>
         <table id="tabla-cuidadores" class="table table-bordered table-striped table-responsive datatable">
-            <caption>Listado de cuidadores</caption>
+            <caption>Listado de personas cuidadoras</caption>
             <thead>
                 <tr class="busqueda">
                     <th class="fit10 text-center" scope="col">Nombre</th>

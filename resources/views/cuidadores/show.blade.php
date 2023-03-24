@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Ver cuidador</h5>
+        <h5 class="text-muted">Ver persona cuidadora</h5>
         <hr class="lineaTitulo">
     </div>
 

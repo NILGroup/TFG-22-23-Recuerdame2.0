@@ -76,6 +76,26 @@
             <input id="password" type="password" class="form-control form-control-sm @error('password') is-invalid @enderror" placeholder="Contraseña" name="password" required autocomplete="new-password">
         </div>
     </div>
+    @else
+    <div class="row col-sm-12 col-md-6 col-lg-7 align-items-center">
+        <label for="Ocupacion" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-4">Ocupación:<span class="asterisco">*</span></label>
+        <div class="col-sm-12 col-md-12 col-lg-8 align-items-center">
+            <input id="ocupacion" type="text" class="form-control form-control-sm @error('ocupacion') is-invalid @enderror" placeholder="Ocupación" name="ocupacion" value="{{ $cuidador->ocupacion }}" required autocomplete="ocupacion" autofocus>
+        </div>
+    </div>
     @endif
 </div>
-<input id="rol" type="hidden" name="rol" value=2 required autocomplete="apellidos" autofocus>
+
+@if(str_contains(url()->current(), 'crear'))
+
+<div class="row form-group justify-content-between">
+    <div class="row col-sm-12 col-md-6 col-lg-5 align-items-center">
+        <label for="Ocupacion" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-4">Ocupación:<span class="asterisco">*</span></label>
+        <div class="col-sm-12 col-md-12 col-lg-6 align-items-center">
+            <input id="ocupacion" type="text" class="form-control form-control-sm @error('ocupacion') is-invalid @enderror" placeholder="Ocupación" name="ocupacion" value="{{ $cuidador->ocupacion }}" required autocomplete="ocupacion" autofocus>
+        </div>
+    </div>
+</div>
+
+@endif
+<input id="rol" type="hidden" name="rol" value=2 required>

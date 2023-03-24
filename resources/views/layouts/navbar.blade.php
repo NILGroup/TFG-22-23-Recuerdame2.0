@@ -50,7 +50,7 @@
                 </li>
                 @if (Auth::user()->rol_id == 1)
                 <li class="nav-item">
-                    <a class="nav-linkClaro nav-link letra-primary-color menu" href="/pacientes/{{Session::get('paciente')['id']}}/cuidadores">Cuidadores</a>
+                    <a class="nav-linkClaro nav-link letra-primary-color menu" href="/pacientes/{{Session::get('paciente')['id']}}/cuidadores">Personas cuidadoras</a>
                 </li>
                 @endif
             </ul>
