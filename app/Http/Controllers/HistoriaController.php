@@ -78,26 +78,24 @@ class HistoriaController extends Controller
             Storage::delete($path);
         }
         
-        $array = collect();
+        $videosArray = collect();         $imagesArray = collect();
         foreach ($listaRecuerdos as $rc) { //¿Vacio?
             foreach($rc->multimedias as $media){
                 $extension = pathinfo($media->fichero, PATHINFO_EXTENSION);
-                $rememberpath = "https://d58e-2a0c-5a81-e301-6b00-ddf-8a34-b8b7-bf45.eu.ngrok.io/TFG-22-23-Recuerdame2.0/public".$media->fichero;//str_replace('/storage/', '/public/', $media->fichero);
+                $rememberpath = "https://0b79-2a0c-5a81-e301-6b00-5db9-8048-f12e-3c99.eu.ngrok.io/TFG-22-23-Recuerdame2.0/public".$media->fichero;//str_replace('/storage/', '/public/', $media->fichero);
                 
+                if($extension == 'png' || $extension == 'jpg'){
+                    $imagesArray->push($rememberpath);
+                }
 
-
-                if($extension == 'mp4'){
-                    $array->push($rememberpath);
+                if($extension == 'mp4' || $extension == 'avi'){
+                    $videosArray->push($rememberpath);
                 }
             }
         }
 
             $VideoGenerator = new VideoHistoriaVida();
-            $url = $VideoGenerator->generateVideo($array->toArray());
-
-            if($url = "Error") redirect("/pacientes//".$idPaciente."/historias/generarHistoria");
-
-
+            $url = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray());
             return view("historias.videoPlayer", compact("url"));
 
     

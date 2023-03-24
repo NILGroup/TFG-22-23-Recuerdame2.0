@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.0.2",
         "codedge/laravel-fpdf": "^1.9",
+        "creatomate/creatomate": "^1.0",
         "google/cloud": "^0.195.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",

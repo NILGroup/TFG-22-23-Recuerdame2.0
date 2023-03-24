@@ -2,107 +2,45 @@
     namespace App;
     require __DIR__.'/../vendor/autoload.php';
 
-    use Google\Cloud\Video\Transcoder\V1\AudioStream;
-use Google\Cloud\Video\Transcoder\V1\EditAtom;
-use Google\Cloud\Video\Transcoder\V1\ElementaryStream;
-use Google\Cloud\Video\Transcoder\V1\Input;
-use Google\Cloud\Video\Transcoder\V1\Job;
-use Google\Cloud\Video\Transcoder\V1\JobConfig;
-use Google\Cloud\Video\Transcoder\V1\MuxStream;
-use Google\Cloud\Video\Transcoder\V1\TranscoderServiceClient;
-use Google\Cloud\Video\Transcoder\V1\VideoStream;
-use Google\Protobuf\Duration;
+    use Creatomate\Client;
+    use Creatomate;
 
     class VideoHistoriaVida{
 
-        function generateVideo($array){
-            $location = 'europe-west2';
-            $projectId = 'inspiring-being-381308';
-            $startTimeInput1=0;;
-            $startTimeInput2=0;
-            $endTimeInput1=0;
-            $endTimeInput2=0;
-            $startTimeInput1Sec = (int) floor(abs($startTimeInput1));
-            $startTimeInput1Nanos = (int) (1000000000 * bcsub(abs($startTimeInput1), floor(abs($startTimeInput1)), 4));
-            $endTimeInput1Sec = (int) floor(abs($endTimeInput1));
-            $endTimeInput1Nanos = (int) (1000000000 * bcsub(abs($endTimeInput1), floor(abs($endTimeInput1)), 4));
+        function generateVideo($videosArray, $imagesArray){
+            $client = new Client('2929242c49d5422dbf642461869bfcc60dab1cee9ffdd795a88b6cd8e6ea6e797b2adeaf73ce472dab9c93a3a6ad7e95');
+            $resultArray = collect();
+            foreach ($videosArray as $ficheroURL) {
+                    $resultArray->push(new Creatomate\Elements\Video([
+                        'track' => 1,
+                        'source' => $ficheroURL,
+                    ]));
+            } 
+            foreach ($imagesArray as $ficheroURL) {
+                $resultArray->push(new Creatomate\Elements\Image([
+                    'source' => $ficheroURL,
+                    "track"=> 1,
+                    "duration"=> 5,
+                    'animations' => [
+                        new Creatomate\Animations\PanCenter([
+                            'start_scale' => '100%',
+                            'end_scale' => '120%',
+                            'easing' => 'linear',
+                        ]),
+                    ],
+                ]));
+        } 
+            $source = new Creatomate\Source([
+                'output_format' => 'mp4',
+                'width' => 1280,
+                'height' => 720,
+                'elements' => $resultArray->toArray(),
+            ]);
 
-            $startTimeInput2Sec = (int) floor(abs($startTimeInput2));
-            $startTimeInput2Nanos = (int) (1000000000 * bcsub(abs($startTimeInput2), floor(abs($startTimeInput2)), 4));
-            $endTimeInput2Sec = (int) floor(abs($endTimeInput2));
-            $endTimeInput2Nanos = (int) (1000000000 * bcsub(abs($endTimeInput2), floor(abs($endTimeInput2)), 4));
-
-            $input1Uri="gs://recuerdame2input/ForBiggerEscapes.mp4";// $array[0];
-            $input2Uri="gs://recuerdame2input/ForBiggerJoyrides.mp4";// $array[1];
-            $outputUri="gs://recuerdame2output/test/";
-
-            $startTimeInput1Sec = (int) floor(abs($startTimeInput1));
-            $startTimeInput1Nanos = (int) (1000000000 * bcsub(abs($startTimeInput1), floor(abs($startTimeInput1)), 4));
-            $endTimeInput1Sec = (int) floor(abs($endTimeInput1));
-            $endTimeInput1Nanos = (int) (1000000000 * bcsub(abs($endTimeInput1), floor(abs($endTimeInput1)), 4));
-        
-            $startTimeInput2Sec = (int) floor(abs($startTimeInput2));
-            $startTimeInput2Nanos = (int) (1000000000 * bcsub(abs($startTimeInput2), floor(abs($startTimeInput2)), 4));
-            $endTimeInput2Sec = (int) floor(abs($endTimeInput2));
-            $endTimeInput2Nanos = (int) (1000000000 * bcsub(abs($endTimeInput2), floor(abs($endTimeInput2)), 4));
-        
-            // Instantiate a client.
-            $transcoderServiceClient = new TranscoderServiceClient();
-        
-            $formattedParent = $transcoderServiceClient->locationName($projectId, $location);
-            $jobConfig =
-                (new JobConfig())->setInputs([
-                    (new Input())
-                        ->setKey('input1')
-                        ->setUri($input1Uri),
-                    (new Input())
-                        ->setKey('input2')
-                        ->setUri($input2Uri)
-                ])->setEditList([
-                    (new EditAtom())
-                        ->setKey('atom1')
-                        ->setInputs(['input1'])
-                        ->setStartTimeOffset(new Duration(['seconds' => $startTimeInput1Sec, 'nanos' => $startTimeInput1Nanos]))
-                        ->setEndTimeOffset(new Duration(['seconds' => $endTimeInput1Sec, 'nanos' => $endTimeInput1Nanos])),
-                    (new EditAtom())
-                        ->setKey('atom2')
-                        ->setInputs(['input2'])
-                        ->setStartTimeOffset(new Duration(['seconds' => $startTimeInput2Sec, 'nanos' => $startTimeInput2Nanos]))
-                        ->setEndTimeOffset(new Duration(['seconds' => $endTimeInput2Sec, 'nanos' => $endTimeInput2Nanos])),
-                ])->setElementaryStreams([
-                    (new ElementaryStream())
-                        ->setKey('video-stream0')
-                        ->setVideoStream(
-                            (new VideoStream())->setH264(
-                                (new VideoStream\H264CodecSettings())
-                                    ->setBitrateBps(550000)
-                                    ->setFrameRate(60)
-                                    ->setHeightPixels(360)
-                                    ->setWidthPixels(640)
-                            )
-                        ),
-                    (new ElementaryStream())
-                        ->setKey('audio-stream0')
-                        ->setAudioStream(
-                            (new AudioStream())
-                                ->setCodec('aac')
-                                ->setBitrateBps(64000)
-                        )
-                ])->setMuxStreams([
-                    (new MuxStream())
-                        ->setKey('sd')
-                        ->setContainer('mp4')
-                        ->setElementaryStreams(['video-stream0', 'audio-stream0'])
-                ]);
-        
-            $job = (new Job())
-                ->setOutputUri($outputUri)
-                ->setConfig($jobConfig);
-        
-            $response = $transcoderServiceClient->createJob($formattedParent, $job);
-        
-            // Print job name.
-            printf('Job: %s' . PHP_EOL, $response->getName());
+            $renders = $client->render(['source' => $source]);
+            //print_r($renders[0]['url']);
+            return $renders[0]['url'];
+            //return response()->json($renders, 200, [], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
         }
 
 

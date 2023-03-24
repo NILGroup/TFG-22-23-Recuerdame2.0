@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6286619480d3c94d57d7f09fb1d37d04",
+    "content-hash": "e402635a08bdf5f9a3c4836f3d801fae",
     "packages": [
         {
             "name": "brick/math",
@@ -127,6 +127,47 @@
                 }
             ],
             "time": "2022-09-14T07:28:26+00:00"
+        },
+        {
+            "name": "creatomate/creatomate",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Creatomate/creatomate-php.git",
+                "reference": "f9bc1872a14e8ab40bc85500a456df0c49c78b74"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Creatomate/creatomate-php/zipball/f9bc1872a14e8ab40bc85500a456df0c49c78b74",
+                "reference": "f9bc1872a14e8ab40bc85500a456df0c49c78b74",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Creatomate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Casper Kloppenburg",
+                    "email": "casper@creatomate.com"
+                }
+            ],
+            "description": "Official PHP SDK for the Creatomate video rendering API",
+            "support": {
+                "issues": "https://github.com/Creatomate/creatomate-php/issues",
+                "source": "https://github.com/Creatomate/creatomate-php/tree/1.0.0"
+            },
+            "time": "2022-11-06T11:26:37+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
