@@ -68,7 +68,7 @@
     @include('layouts.scripts')
     <!-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>   -->
     <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-    <script src="/js/libs/dropzone.js"></script>
+    <script src="/js/libs/dataTables.js"></script>
     <script src="/js/libs/sweetAlert2.js"></script>
     
     <script src="/js/table.js"></script>

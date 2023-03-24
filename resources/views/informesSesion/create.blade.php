@@ -33,8 +33,8 @@
     <script src="/js/libs/dataTables.js"></script>
     
     <script src="/js/table.js"></script>
-    <script src="/js/informeSesion.js"></script>
     <script src="/js/persona.js"></script>
     <script src="/js/multiModal.js"></script>
     <script src="/js/validacion.js"></script>
+    <script src="/js/informeSesion.js"></script>
 @endpush
