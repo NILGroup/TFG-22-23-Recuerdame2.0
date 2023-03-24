@@ -212,11 +212,11 @@
 
 
 @push('styles')
-<link rel="stylesheet" href="/css/slider.css">
-<link rel="stylesheet" href="/css/imagen.css">
+    <link rel="stylesheet" href="/css/slider.css">
+    <link rel="stylesheet" href="/css/imagen.css">
 @endpush
 
 @push('scripts')
-<script src="/js/especificar.js"></script>
-<script src="/js/puntuacionRecuerdo.js"></script>
+    <script src="/js/especificar.js"></script>
+    <script src="/js/puntuacionRecuerdo.js"></script>
 @endpush

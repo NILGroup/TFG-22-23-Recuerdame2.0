@@ -21,7 +21,8 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="/js/libs/sweetAlert2.js"></script>
     <script src="/js/showView.js"></script>
     
     @if (Session::has('created'))

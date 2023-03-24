@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="/css/calendario.css">
-
 <div class="container-fluid">
     <div class="pt-4 pb-2">
         <h5 class="text-muted">Datos de la actividad</h5>

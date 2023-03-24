@@ -52,7 +52,7 @@
             </div>
         
         <div class="form-group">
-            <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button id="guardar"  type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
@@ -65,7 +65,10 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> -->
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="/js/libs/dropzone.js"></script>
+    <script src="/js/libs/sweetAlert2.js"></script>
 
     <script>
         let id = document.getElementById("paciente").value;
@@ -88,6 +91,5 @@
     <script src="/js/cuidador.js"></script>
 
     
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @endpush

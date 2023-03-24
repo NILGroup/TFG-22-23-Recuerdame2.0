@@ -15,6 +15,13 @@ $("input, select").each(function () {
         case "datetime-local":
             $(this).replaceWith("<label> " + new Date($(this).val()).toLocaleDateString('en-GB') + " " + new Date($(this).val()).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })  + "</label>");
             break;
+        case "number":
+            if($(this).attr('max'))
+                $(this).replaceWith("<label> " + $(this).val() + " / " + $(this).attr('max') + "</label>");
+            else
+                $(this).replaceWith("<label> " + $(this).val()  + "</label>");
+
+            break;
         default:
             $(this).replaceWith("<label> " + $(this).val() + "</label>");
             break;

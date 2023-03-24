@@ -24,16 +24,18 @@
 
 @push('scripts')
 @include('layouts.scripts')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="/js/showView.js"></script>
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="/js/libs/sweetAlert2.js"></script>
+    
+    <script src="/js/showView.js"></script>
 
-@if (Session::has('created'))
-@php
-Illuminate\Support\Facades\Session::forget('created');
-@endphp
-<script>
-    var action = "Modificado"
-</script>
-<script src="/js/successAlert.js"></script>
-@endif
+    @if (Session::has('created'))
+        @php
+            Illuminate\Support\Facades\Session::forget('created');
+        @endphp
+        <script>
+            var action = "Modificado"
+        </script>
+        <script src="/js/successAlert.js"></script>
+    @endif
 @endpush

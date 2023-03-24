@@ -72,15 +72,18 @@
 
 @push('scripts')
 @include('layouts.scripts')
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
-<script src="/js/especificar.js"></script>
-<script>
-    let id = document.getElementById("paciente_id").value;
-    let id2 = document.getElementById("id").value
-    var ruta = "/pacientes/" + id + "/personas/" + id2
-    var max = 1
-    var limit = true
-</script>
-<script src="/js/dropzone.js"></script>
+    <!-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> -->
+    <script src="/js/libs/dataTables.js"></script>
+    <script src="/js/libs/dropzone.js"></script>
+
+    <script src="/js/especificar.js"></script>
+    <script>
+        let id = document.getElementById("paciente_id").value;
+        let id2 = document.getElementById("id").value
+        var ruta = "/pacientes/" + id + "/personas/" + id2
+        var max = 1
+        var limit = true
+    </script>
+    <script src="/js/dropzone.js"></script>
 @endpush

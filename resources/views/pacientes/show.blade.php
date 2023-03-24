@@ -40,18 +40,21 @@
 
 @push('scripts')
 @include('layouts.scripts')
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="/js/table.js"></script>
-<script src="/js/confirm.js"></script>
-<script src="/js/showView.js"></script>
-@if (Session::has('created'))
-@php
-Illuminate\Support\Facades\Session::forget('created');
-@endphp
-<script>
-    var action = "Modificado"
-</script>
-<script src="/js/successAlert.js"></script>
-@endif
+    <!-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> -->
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="/js/libs/dataTables.js"></script>
+    <script src="/js/libs/sweetAlert2.js"></script>
+
+    <script src="/js/table.js"></script>
+    <script src="/js/confirm.js"></script>
+    <script src="/js/showView.js"></script>
+    @if (Session::has('created'))
+        @php
+            Illuminate\Support\Facades\Session::forget('created');
+        @endphp
+        <script>
+            var action = "Modificado"
+        </script>
+        <script src="/js/successAlert.js"></script>
+    @endif
 @endpush

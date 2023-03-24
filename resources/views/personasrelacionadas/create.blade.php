@@ -38,7 +38,9 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> -->
+    <script src="/js/libs/dropzone.js"></script>
+    
     <script src="/js/especificar.js"></script>
     <script>
         let id = document.getElementById("paciente_id").value;

@@ -669,6 +669,10 @@ div>.row {
     display:none;
 }
 
+.modal{
+    backdrop-filter: blur(1px) saturate(120%);
+}
+
 /* On smaller resolutions, hide the text for Large screens */
 @media only screen and (max-width: 560px) {
     .largeScreen {

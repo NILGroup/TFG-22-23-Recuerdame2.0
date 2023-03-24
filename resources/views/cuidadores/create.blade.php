@@ -37,8 +37,11 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> -->
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="/js/libs/dropzone.js"></script>
+    <script src="/js/libs/sweetAlert2.js"></script>
+
     <script>
         let id = document.getElementById("paciente").value;
         var ruta = "/pacientes/" + id + "/cuidadores"
