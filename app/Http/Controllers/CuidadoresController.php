@@ -82,6 +82,7 @@ class CuidadoresController extends Controller
             'telefono' => $request->telefono,
             'localidad' => $request->localidad,
             'parentesco' => $request->parentesco,
+            'ocupacion' => $request->ocupacion,
             'password' => Hash::make($request->password)
         ]);
 

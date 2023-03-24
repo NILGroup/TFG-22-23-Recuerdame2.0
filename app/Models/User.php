@@ -26,7 +26,8 @@ class User extends Authenticatable
         "rol_id",
         "telefono",
         "localidad",
-        "parentesco"
+        "parentesco",
+        "ocupacion"
     ];
 
     /**

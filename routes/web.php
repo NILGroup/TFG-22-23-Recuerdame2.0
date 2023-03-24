@@ -271,15 +271,17 @@ Route::post('/prueba', function () {
     
     DB::table("users")->insertOrIgnore([
         ['nombre' => "Manuel", 'apellidos' => "López Jordan", 'email' => "terapeuta@gmail.com", 
-             'rol_id' => 1,'telefono'=>null,'localidad'=>null,'parentesco'=>null,  'password' => Hash::make("terapeuta")],
-        ['nombre' => "Cuidador", 'apellidos' => "Alfredo", 'email' => "cuidador@gmail.com",
+             'rol_id' => 1, 'telefono'=>null, 'localidad'=>null, 
+             'parentesco'=>null, "ocupacion" => null, 'password' => Hash::make("terapeuta")],
+        ['nombre' => "Alfredo", 'apellidos' => "Martinez-Almeida Pérez",  'email' => "cuidador@gmail.com",
              'rol_id' => 2,'telefono' => "684847324", 'localidad' => "Argüelles",
-             'parentesco' => "Primer grado",'password' => Hash::make("cuidador")],
-        ['nombre' => "Cuidador", 'apellidos' => "Joya y de Borbón", 'email' => "cuidador2@gmail.com",
+             'parentesco' => "Primer grado", "ocupacion" => "Diseñador",'password' => Hash::make("cuidador")],
+        ['nombre' => "María", 'apellidos' => "Montserrat Plaza", 'email' => "cuidador2@gmail.com",
              'rol_id' => 2,'telefono' => "656789234", 'localidad' => "Nuevos ministerios",
-             'parentesco' => "Segundo grado",'password' => Hash::make("cuidador2")],
+             'parentesco' => "Segundo grado", "ocupacion" => "Profesora", 'password' => Hash::make("cuidador2")],
         ['nombre' => "Sofía", 'apellidos' => "Méndez Alvaro", 'email' => "terapeuta2@gmail.com", 
-             'rol_id' => 1,'telefono'=>null,'localidad'=>null,'parentesco'=>null, 'password' => Hash::make("terapeuta")]
+             'rol_id' => 1,'telefono'=>null,'localidad'=>null,
+             'parentesco'=>null, "ocupacion" => null, 'password' => Hash::make("terapeuta2")]
     ]);
 
     DB::table("pacientes")->insertOrIgnore([
@@ -344,18 +346,24 @@ Route::post('/prueba', function () {
 
 
     DB::table("sesions")->insertOrIgnore([
-        ["fecha" => Carbon::create($now->year, $now->month, 2, 15, 30 ,0), "titulo" => "Trabajar adolescencia", "etapa_id" => 1, "objetivo" => "Trabajar los recuerdos en la etapa de la adolescencia con ayuda de imágenes y videos", 
-            "descripcion" => "Etapa importante a nivel de emociones", "barreras"=> "Algunos recuerdos ya no conservados.", "facilitadores" => "El recuerdo con sus amigos", 
-            "fecha_finalizada" => Carbon::create($now->year, $now->month, 5, 14,0,0), "paciente_id" => 1, "user_id" => 1, 
-            "respuesta" => "Gestiona las emociones correctamente.", "observaciones" => "ninguna observacion", "duracion" => "01:30", "finalizada" => true],
-        ["fecha" => Carbon::create($now->year, $now->month, 10, 10, 15 ,0), "titulo" => "Trabajar matrimonio", "etapa_id" => 2, "objetivo" => "Trabajar la tristeza que le da al recordar a su marido ",
-            "descripcion" => "Al trabajar los recuerdos relacionados con su marido, genera una tristeza en el paciente que hay que controlar", "barreras"=> "Dificultad para hablar de su marido.", "facilitadores" => null, 
-            "fecha_finalizada" => null, "paciente_id" => 1, "user_id" => 1, 
-            "respuesta" => "Ninguna", "observaciones" => null, "duracion" => null],
-        ["fecha" => Carbon::create($now->year, $now->month, 4, 10,30,0), "titulo" => "Inicio terapia", "etapa_id" => 2, "objetivo" => "Pruebas iniciales",
-            "descripcion" => "Iniciaremos la terapia como un repaso general", "barreras"=> null, "facilitadores" => "Las fotografías ayudan.", 
-            "fecha_finalizada" => null, "paciente_id" => 2, "user_id" => 4, 
-            "respuesta" => null, "observaciones" => null, "duracion" => null],
+        ["fecha" => Carbon::create($now->year, $now->month, 2, 15, 30 ,0), "titulo" => "Trabajar adolescencia", 
+            "etapa_id" => 1, "objetivo" => "Trabajar los recuerdos en la etapa de la adolescencia con ayuda de imágenes y videos", 
+            "descripcion" => "Etapa importante a nivel de emociones", "barreras"=> "Algunos recuerdos ya no conservados.", 
+            "facilitadores" => "El recuerdo con sus amigos", "fecha_finalizada" => Carbon::create($now->year, $now->month, 5, 14,0,0), 
+            "paciente_id" => 1, "user_id" => 1, "respuesta" => "Gestiona las emociones correctamente.", 
+            "observaciones" => "ninguna observacion", "duracion" => "01:30", "finalizada" => true],
+        ["fecha" => Carbon::create($now->year, $now->month, 10, 10, 15 ,0), "titulo" => "Trabajar matrimonio", 
+            "etapa_id" => 2, "objetivo" => "Trabajar la tristeza que le da al recordar a su marido ",
+            "descripcion" => "Al trabajar los recuerdos relacionados con su marido, genera una tristeza en el paciente que hay que controlar", "barreras"=> "Dificultad para hablar de su marido.", 
+            "facilitadores" => null, "fecha_finalizada" => null, 
+            "paciente_id" => 1, "user_id" => 1, "respuesta" => "Ninguna", 
+            "observaciones" => null, "duracion" => null, "finalizada" => false],
+        ["fecha" => Carbon::create($now->year, $now->month, 4, 10,30,0), "titulo" => "Inicio terapia", 
+            "etapa_id" => 2, "objetivo" => "Pruebas iniciales",
+            "descripcion" => "Iniciaremos la terapia como un repaso general", "barreras"=> null, 
+            "facilitadores" => "Las fotografías ayudan.", "fecha_finalizada" => null, 
+            "paciente_id" => 2, "user_id" => 4, "respuesta" => null, 
+            "observaciones" => null, "duracion" => null, "finalizada" => false],
         ]);
 
     
