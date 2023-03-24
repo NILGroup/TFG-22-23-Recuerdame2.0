@@ -194,6 +194,22 @@ Route::post('/prueba', function () {
         ["nombre" => "Adulto Mayor"]
     ]);
 
+    DB::table("participacions")->insertOrIgnore([
+        ["nombre" => "Muy bueno"],
+        ["nombre" => "Bueno"],
+        ["nombre" => "Normal"],
+        ["nombre" => "Malo"],
+        ["nombre" => "Muy malo"]
+    ]);
+
+    DB::table("complejidads")->insertOrIgnore([
+        ["nombre" => "Muy adecuada"],
+        ["nombre" => "Bastante decuada"],
+        ["nombre" => "Adecuada"],
+        ["nombre" => "Poco adecuada"],
+        ["nombre" => "Nada adecuada"]
+    ]);
+
     DB::table("estados")->insertOrIgnore([
         ["nombre" => "Conservado"],
         ["nombre" => "En riesgo"],
@@ -347,19 +363,19 @@ Route::post('/prueba', function () {
 
     DB::table("sesions")->insertOrIgnore([
         ["fecha" => Carbon::create($now->year, $now->month, 2, 15, 30 ,0), "titulo" => "Trabajar adolescencia", 
-            "etapa_id" => 1, "objetivo" => "Trabajar los recuerdos en la etapa de la adolescencia con ayuda de imágenes y videos", 
+            "etapa_id" => 1,"participacion_id" => 1,"complejidad_id" => 1, "objetivo" => "Trabajar los recuerdos en la etapa de la adolescencia con ayuda de imágenes y videos", 
             "descripcion" => "Etapa importante a nivel de emociones", "barreras"=> "Algunos recuerdos ya no conservados.", 
             "facilitadores" => "El recuerdo con sus amigos", "fecha_finalizada" => Carbon::create($now->year, $now->month, 5, 14,0,0), 
             "paciente_id" => 1, "user_id" => 1, "respuesta" => "Gestiona las emociones correctamente.", 
             "observaciones" => "ninguna observacion", "duracion" => "01:30", "finalizada" => true],
         ["fecha" => Carbon::create($now->year, $now->month, 10, 10, 15 ,0), "titulo" => "Trabajar matrimonio", 
-            "etapa_id" => 2, "objetivo" => "Trabajar la tristeza que le da al recordar a su marido ",
+            "etapa_id" => 2,"participacion_id" => null,"complejidad_id" => null, "objetivo" => "Trabajar la tristeza que le da al recordar a su marido ",
             "descripcion" => "Al trabajar los recuerdos relacionados con su marido, genera una tristeza en el paciente que hay que controlar", "barreras"=> "Dificultad para hablar de su marido.", 
             "facilitadores" => null, "fecha_finalizada" => null, 
             "paciente_id" => 1, "user_id" => 1, "respuesta" => "Ninguna", 
             "observaciones" => null, "duracion" => null, "finalizada" => false],
         ["fecha" => Carbon::create($now->year, $now->month, 4, 10,30,0), "titulo" => "Inicio terapia", 
-            "etapa_id" => 2, "objetivo" => "Pruebas iniciales",
+            "etapa_id" => 2,"participacion_id" => null,"complejidad_id" => null, "objetivo" => "Pruebas iniciales",
             "descripcion" => "Iniciaremos la terapia como un repaso general", "barreras"=> null, 
             "facilitadores" => "Las fotografías ayudan.", "fecha_finalizada" => null, 
             "paciente_id" => 2, "user_id" => 4, "respuesta" => null, 

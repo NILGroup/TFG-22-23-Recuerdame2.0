@@ -22,6 +22,8 @@ class Sesion extends Model
         "respuesta",
         "observaciones",
         "etapa_id",
+        "participacion_id",
+        "complejidad_id",
         "paciente_id",
         "user_id",
         "finalizada"
@@ -29,6 +31,14 @@ class Sesion extends Model
 
     public function etapa(){
         return $this->belongsTo(Etapa::class);
+    }
+
+    public function participacion(){
+        return $this->belongsTo(Participacion::class);
+    }
+
+    public function complejidad(){
+        return $this->belongsTo(Complejidad::class);
     }
 
     public function paciente(){
