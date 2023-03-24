@@ -38,23 +38,23 @@ class PDFSesion extends FPDF{
     
     function writePatient($pdf, $paciente){
         $pdf->SetFont('Times','B',12);
-        $pdf->Cell(30,7,'Nombre: ',1,0,'L',true);
+        $pdf->Cell(50,7,'Nombre: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
         $s = utf8_decode(' ' . $paciente->nombre . ' ' . $paciente->apellidos);
-        $pdf->Cell(160,7, $s ,1);
+        $pdf->Cell(140,7, $s,1,0,'C');
         $pdf->Ln();
         $pdf->SetFont('Times','B',12);
-        $pdf->Cell(30,7,'Edad: ',1,0,'L',true);
+        $pdf->Cell(50,7,'Edad: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
         $fecha_nacimiento = new DateTime ($paciente->fecha_nacimiento);
         $hoy = new DateTime();
         $edad = $hoy->diff($fecha_nacimiento);
-        $pdf->Cell(160,7,' '.$edad->y,1);
+        $pdf->Cell(140,7, $edad->y,1,0,'C');
         $pdf->Ln();
         $pdf->SetFont('Times','B',12);
-        $pdf->Cell(30,7,utf8_decode('Género: '),1,0,'L',true);
+        $pdf->Cell(50,7,utf8_decode('Género: '),1,0,'L',true);
         $pdf->SetFont('Times','',12);
-        $pdf->Cell(160,7,' '. $paciente->genero->nombre,true);
+        $pdf->Cell(140,7, $paciente->genero->nombre,1,0,'C');
         $pdf->Ln(12);
     }
 
@@ -158,6 +158,12 @@ class PDFSesion extends FPDF{
         }
     }
 
+    function writeSign($pdf){
+        $pdf->Cell(4,7,"");
+        $pdf->Cell(50,35,$pdf->Image("img/FDOWhite.png", $pdf->GetX(), $pdf->GetY(), 75,50),0,0,'C');
+        $pdf->Ln(55);
+    }
+
     function pdfBody($pdf, $paciente, $sesion, $usuario){
         $pdf->SetFillColor(220);
 
@@ -179,6 +185,9 @@ class PDFSesion extends FPDF{
         $pdf->Ln(9);
 
         $this->writeInformeSesion($pdf,$sesion);
+        $pdf->Ln(9);
+
+        $this->writeSign($pdf);
         $nombreArchivo = str_replace(" ", "_",  "Sesion_".$paciente->nombre."_".$sesion->titulo.".pdf");
         $pdf->Output( 'I', $nombreArchivo, true );
     }
