@@ -168,6 +168,7 @@ caption {
 
 nav {
     background-color: var(--turquesa);
+    align-items: center!important;
 }
 
 .nav-menu {
@@ -210,18 +211,18 @@ nav {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-top: 10px;
+    margin: 10px;
 }
 
 /**-------- desplegables*/
 
-
+/*
 .navbar-nav .dropdownClaro:hover {
     background: var(--white)!important;
     color: white!important;
     border-radius: 1rem 1rem 1rem 1rem ;
     box-shadow: 0 0 6px rgba(59, 58, 58, 0.253);
-  }
+  }*/
 
 .nav-linkClaro {
     font-size: 17px !important;
@@ -677,5 +678,17 @@ div>.row {
 @media only screen and (max-width: 560px) {
     .largeScreen {
         display: none;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .smallMediaLeft{
+        align-items: center!important;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .menuLittlemargin{
+       margin-top: 10px;
     }
 }

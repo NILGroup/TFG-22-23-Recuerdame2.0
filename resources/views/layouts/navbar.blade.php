@@ -4,17 +4,17 @@
 <!-- Navbar  para usuarios registrados -->
 @if(Session::has('paciente'))
 <!-- Navbar para terapeutas -->
-<nav class="navbar navbar-expand-lg justify-content-left nav-menu yellowbg" >
+<nav class="navbar navbar-expand-lg justify-content-left nav-menu yellowbg "  >
     <div class="container-fluid">
-        <button style="margin-bottom:10px" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse justify-content-left " id="navbarSupportedContent">
-            <ul class="navbar-nav">
+        <div class="collapse navbar-collapse justify-content-left" id="navbarSupportedContent">
+            <ul class="navbar-nav smallMediaLeft d-flex">
                 @if (Auth::user()->rol_id == 1)
                 <li class="nav-item dropdownClaro dropdown">
-                    <a class="nav-linkClaro nav-link dropdown-toggle menu"  data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Sesiones</a>
+                    <a class="nav-linkClaro nav-link dropdown-toggle menu menuLittlemargin"  data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Sesiones</a>
                     <ul class="dropdownClaro-menu dropdown-menu">
                         <li><a class="dropdownClaro-item dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/sesiones">Lista de sesiones</a></li>
                         <li><a class="dropdownClaro-item dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/informesSesion">Informes de las sesiones</a></li>
@@ -64,10 +64,10 @@
 
                 @if( Session::get('paciente')['genero_id'] == 1 || Session::get('paciente')['genero_id'] == 3)
 
-                <a href="/pacientes/{{Session::get('paciente')['id']}}"><img src="/img/avatar_hombre.png" alt="Avatar" class="avatar-mini"></a>
+                <a  href="/pacientes/{{Session::get('paciente')['id']}}"><img src="/img/avatar_hombre.png" alt="Avatar" class="avatar-mini"></a>
 
                 @elseif( Session::get('paciente')['genero_id'] == 2)
-                <a href="/pacientes/{{Session::get('paciente')['id']}}"><img src="/img/avatar_mujer.png" alt="Avatar" class="avatar-mini"></a>
+                <a  href="/pacientes/{{Session::get('paciente')['id']}}"><img src="/img/avatar_mujer.png" alt="Avatar" class="avatar-mini"></a>
                 @endif
                 @endif
             </div>
