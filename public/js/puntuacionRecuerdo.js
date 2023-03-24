@@ -32,7 +32,7 @@ function setData(x) {
 
     /*!!!!NO TOCAAAAAAAAAAAAAAAAAAAAAAAAAAR!!!!!!!!!!!!!!!!!!!!!!!!!
     stylesheet=6 (si cambia structure cambiará) */
-    var declaration = document.styleSheets[6].cssRules[1].style;
+    var declaration = document.styleSheets[5].cssRules[1].style;
     if(x==0){
         var setprop = declaration.setProperty("--webkit-slider-thumb-background", "url(../img/0.png)", "important");
     }else if(x==1){
