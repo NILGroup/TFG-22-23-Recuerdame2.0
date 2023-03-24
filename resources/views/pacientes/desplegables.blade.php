@@ -13,17 +13,17 @@
                     <a href="/pacientes/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
-            <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
+            <table id="tabla" class="table table-bordered table-striped datatable">
                 <caption>Listado de informes de seguimiento</caption>
                 <thead>
                     <tr >
-                        <th class="fit15 text-center" scope="col">Informe</th>
-                        <th class=" text-center" scope="col">Sesiones desde la última evaluación</th>
-                        <th scope="col" class=" text-center">Diagnóstico</th>
-                        <th class="fit10 text-center actions" scope="col">Acciones</th>
+                        <th class="fit10 text-center" scope="col">Informe</th>
+                        <th class="fit10 text-center" scope="col">Sesiones desde el anterior</th>
+                        <th class=" text-center" scope="col">Diagnóstico</th>
+                        <th class="fit10 text-center" scope="col">Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="shadow-sm" >
+                <tbody class="shadow-sm">
                     @foreach ($evaluaciones as $informe)
                     <tr>
                         <td data-sort="{{ strtotime($informe->fecha) }}"><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver">Informe {{date("d/m/Y", strtotime($informe->fecha))}}</td>
@@ -32,7 +32,7 @@
                         <td class="tableActions">
                             <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver informe"></i></a>
                             <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar informe"></i></a>
-                        <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe"><i class="fa-solid fa-print text-success tableIcon" data-toggle="tooltip" data-placement="top" title="Vista de impresión del informe"></i></a>
+                            <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe"><i class="fa-solid fa-print text-success tableIcon" data-toggle="tooltip" data-placement="top" title="Vista de impresión del informe"></i></a>
                             <form method="post" action="{{ route('evaluaciones.destroy', $informe->id) }}" style="display:inline!important;">
                                 {{csrf_field()}}
                                 <input type="hidden" name="_method" value="DELETE">
@@ -62,36 +62,40 @@
                     <a href="/pacientes/{{$paciente->id}}/cuidadores/crear"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
+            <table id="tabla-cuidadores" class="table table-bordered table-striped table-responsive datatable">
+                <caption>Listado de personas cuidadoras</caption>
+                <thead>
+                    <tr class="busqueda">
+                        <th class="fit10 text-center" scope="col">Nombre</th>
+                        <th class="fit10 text-center" scope="col">Correo electrónico</th>
+                        <th class="fit5 text-center" scope="col">Teléfono</th>
+                        <th class="fit5 text-center" scope="col">Localidad</th>
+                        <th class="fit5 text-center" scope="col">Parentesco</th>
+                        <th class="fit10 actions text-center" scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="shadow-sm">
+                    @foreach($cuidadores as $cuidador)
+                    <tr>
+                        <td><a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}"> {{$cuidador->nombre}} {{$cuidador->apellidos}} </a></td>
+                        <td>{{$cuidador->email}}</td>
+                        <td>{{$cuidador->telefono}}</td>
+                        <td>{{$cuidador->localidad}}</td>
+                        <td>{{$cuidador->parentesco}}</td>
+                        <td class="tableActions">
+                            <a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver los datos del cuidador"></i></a>
+                            <a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar cuidador"></i></a>
+                            <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" style="display:inline!important;">
+                                {{csrf_field()}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon" data-toggle="tooltip" data-placement="top" title="Eliminar cuidador"></i></button>
+                            </form>
+                        </td>
+                    </tr>
 
-            <div>
-                <table id="tabla2" class="table table-bordered table-striped table-responsive datatable">
-                    <thead>
-                        <tr >
-                            <th class="text-center" scope="col">Nombre</th>
-                            <th scope="col" class="text-center">Correo electrónico</th>
-                            <th class="fit10 actions text-center" scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($cuidadores as $cuidador)
-                        <tr>
-                            <td><a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}/ver">{{$cuidador->nombre}} {{$cuidador->apellidos}}</a></td>
-                            <td>{{$cuidador->email}}</td>
-                            <td class="tableActions">
-                                <a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos del cuidador"></i></a>
-                                <a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar cuidador"></i></a>
-                                <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" style="display:inline!important;">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon" data-toggle="tooltip" data-placement="top" title="Eliminar cuidador"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>  
@@ -111,35 +115,35 @@
                     <a href="/pacientes/{{$paciente->id}}/crearPersona"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
-
-            <div>
-                <table id="tabla3" class="table table-bordered table-striped table-responsive datatable">
-                    <thead>
-                        <tr >
-                            <th class=" text-center" scope="col">Nombre</th>
-                            <th class="text-center" scope="col">Tipo de Relacion</th>
-                            <th class="fit10 text-center actions" scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($personas as $persona)
-                        <tr>
-                            <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}} {{$persona->apellidos}}</a></td>
-                            <td>{{$persona->tiporelacion->nombre}}</td>
-                            <td class="tableActions">
-                                <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona"></i></a>
-                                <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar datos de la persona"></i></a>
-                                <form method="post" action="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}" style="display:inline!important;">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon" data-toggle="tooltip" data-placement="top" title="Eliminar persona"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+            <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
+                <caption>Listado de personas relacionadas</caption>
+                <thead>
+                    <tr >
+                        <th class="fit15 text-center" scope="col">Nombre</th>
+                        <th class="fit10 text-center" scope="col">Localidad</th>
+                        <th class="fit10 text-center" scope="col">Tipo de relación</th>
+                        <th class="fit10 actions text-center" scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="shadow-sm">
+                    @foreach($personas as $persona)
+                    <tr>
+                        <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}} {{$persona->apellidos}}</a> @if($persona->contacto)★@endif</td>
+                        <td>{{$persona->localidad}}</td>
+                        <td>{{$persona->tiporelacion->nombre}}</td>
+                        <td class="tableActions">
+                            <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona"></i></a>
+                            <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar persona"></i></a>
+                            <form method="post" action="{{ route('personas.destroy', $persona->id) }}" style="display:inline!important;">
+                                {{csrf_field()}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon" data-toggle="tooltip" data-placement="top" title="Eliminar persona"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
