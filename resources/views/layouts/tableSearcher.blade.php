@@ -2,5 +2,5 @@
     <select class="form-select form-select-sm w-25 search searchSelector">
         <option value="">Todos</option>
     </select>
-    <input class="form-control form-control-md search searchInput" placeholder="Buscar..."/>
+    <input class="searchBar form-control form-control-md search searchInput" placeholder="Buscar..."/>
 </div>
