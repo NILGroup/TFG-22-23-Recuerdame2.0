@@ -251,7 +251,7 @@ nav {
 
 /*FOTO PACIENTE----------------------------------------*/
 .imagenPaciente {
-    max-height: 14em!important;
+    height: 14em!important;
 }
 
 /*NUEVO SLIDER PUNTUACIÓN----*/
