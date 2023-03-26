@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="pt-4 pb-2">
+    <div class="pt-4 pb-2 mb-3">
         <h5 class="text-muted">Editar persona cuidadora</h5>
         <hr class="lineaTitulo">
     </div>
@@ -16,6 +16,11 @@
         Además no habrá dropzone mientras haya ya una foto subida
 
     -->
+    <form class="text-left" action="/borrar_foto_cuidador" method="post" style="margin-left:130px;">
+        {{csrf_field()}}
+        <input type="hidden" name="id" value="{{$cuidador->id}}">
+        <button type="submit" class="align-center btn btn-danger mb-1" id="borrar_foto">Eliminar Foto</button>
+    </form>
 
     <form id="d" method="post" action="/actualizarCuidador">
         {{csrf_field()}}
@@ -23,11 +28,7 @@
             <div class="row text-align-center">
                 <div class="text-center col-lg-3 align-items-center">
                     @include('cuidadores.foto')
-                    <form class="text-center" action="/borrar_foto_cuidador" method="post">
-                        {{csrf_field()}}
-                        <input type="hidden" name="id" value="{{$cuidador->id}}">
-                        <button type="submit" class="align-center btn btn-danger mb-3" id="borrar_foto">Eliminar Foto</button>
-                    </form>
+
                 </div>
                 <div class="col-lg-9" style="margin-top: -50px;">
                     @include('cuidadores.listaItems')
@@ -35,7 +36,7 @@
             </div>
         </div>
 
-        <div class="col-12">
+        <div class="col-12 mt-3">
             <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button type="submit" value="Guardar" id="guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
