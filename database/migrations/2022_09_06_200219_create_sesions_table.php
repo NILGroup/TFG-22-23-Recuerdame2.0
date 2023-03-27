@@ -22,6 +22,7 @@ return new class extends Migration
             $table->timestamp('fecha_finalizada')->nullable();
             $table->string('respuesta')->nullable();
             $table->string('barreras')->nullable();
+            $table->string('acciones')->nullable();
             $table->string('facilitadores')->nullable();
             $table->string('observaciones')->nullable();
             $table->string("duracion")->nullable();

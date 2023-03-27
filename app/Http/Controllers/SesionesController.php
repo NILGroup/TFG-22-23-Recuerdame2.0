@@ -110,6 +110,7 @@ class SesionesController extends Controller
              'etapa_id' => $request->etapa_id,
              'objetivo' => $request->objetivo,
              'descripcion' => $request->descripcion,
+             'acciones' => $request->acciones,
              'fecha_finalizada' => $request->fecha_finalizada,
              'paciente_id' => $request->paciente_id,
              'user_id' => $request->user_id,

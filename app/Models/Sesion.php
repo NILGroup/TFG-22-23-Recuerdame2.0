@@ -15,6 +15,7 @@ class Sesion extends Model
         "fecha",
         "titulo",
         "objetivo",
+        "acciones",
         "descripcion",
         "fecha_finalizada",
         "barreras",

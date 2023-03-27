@@ -43,6 +43,11 @@
     <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" rows="3" >{{$sesion->descripcion}}</textarea>
 </div>
 
+<div class="mb-3">
+    <label for="acciones" class="form-label labelShow">Secuencia de acciones:</label>
+    <textarea class="form-control form-control-sm" id="acciones" name="acciones" rows="3" >{{$sesion->acciones}}</textarea>
+</div>
+
 <div class="row">
     <div class="pt-4 pb-2">
         <h5 class="text-muted">Recuerdos</h5>
