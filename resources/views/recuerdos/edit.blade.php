@@ -52,9 +52,11 @@
     <script>
         let id = document.getElementById("paciente_id").value;
         let id2 = document.getElementById("id").value;
-        var ruta = "/pacientes/" + id + "/recuerdos/" + id2;
-        var max
-        var limit = false
+
+        let dropzone_config = {
+            ruta: "/pacientes/" + id + "/recuerdos/" + id2
+        }
+
     </script>
     <script src="/js/dropzone.js"></script>
     <script src="/js/persona.js"></script>

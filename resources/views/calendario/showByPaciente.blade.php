@@ -59,6 +59,7 @@
     <script src="/js/libs/dataTables.js"></script>
     <script src="/js/libs/fullcalendar.js"></script>
     <script src="/js/libs/sweetAlert2.js"></script>
+    <script src="/js/libs/dropzone.js"></script>
 
     <script src="/js/table.js"></script>
     <script src="/js/calendario.js"></script>
@@ -66,6 +67,7 @@
     <script src="/js/multiModal.js"></script>
     <script src="/js/confirm.js"></script>
     <script src="/js/validacion.js"></script>
+    
     @if (Session::has('created'))
         <script>
             var action = "{{Session::get('created')}}"
@@ -107,5 +109,15 @@
             $('#calendar .fc-dayGridMonth-button').click();
             $('#calendar .fc-todo-button').click();
         }) 
+
+        let max = null
+        let limit = false
+
+        let dropzone_config = {
+            form_id : "#sesion-modal #formulario",
+            submit_id: "#btnGuardarSesion"
+        }
+     
     </script>
+    <script src="/js/dropzone.js"></script>
 @endpush

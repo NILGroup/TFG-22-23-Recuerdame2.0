@@ -37,9 +37,13 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> -->
     <script src="/js/libs/dropzone.js"></script>
     <script>
-        var ruta = "/pacientes/"
-        var max = 1
-        var limit = true
+
+        let dropzone_config = {
+            limit: true,
+            max: 1,
+            ruta: "/pacientes/"
+        }
+        
     </script>
     <script src="/js/especificar.js"></script>
     <script src="/js/dropzone.js"></script>

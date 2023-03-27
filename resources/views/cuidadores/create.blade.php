@@ -44,11 +44,15 @@
 
     <script>
         let id = document.getElementById("paciente").value;
-        var ruta = "/pacientes/" + id + "/cuidadores"
-        var max = 1
-        var limit = true
-        var silenceMode = true
         let send_dropzone = true
+
+        let dropzone_config = {
+            limit: true,
+            max: 1,
+            silenceMode: true,
+            ruta: "/pacientes/" + id + "/cuidadores"
+        }
+        
     </script>
     <script src="/js/cuidador.js"></script>
     <script src="/js/dropzone.js"></script>

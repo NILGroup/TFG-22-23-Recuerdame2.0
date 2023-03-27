@@ -91,10 +91,15 @@
     let id = document.getElementById("paciente").value;
     let id2 = document.getElementById("id").value
 
-    var ruta = "/pacientes/" + id + "/cuidadores/" + id2;
-    var max = 1
-    var limit = true
-    var silenceMode = true
+    let dropzone_config = {
+            limit: true,
+            max: 1,
+            silenceMode: true,
+            ruta:  "/pacientes/" + id + "/cuidadores/" + id2
+        }
+ 
+
+
     let send_dropzone = null
 </script>
 

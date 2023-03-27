@@ -53,9 +53,11 @@
     <script>
         $("#add-multimedia").hide()
         let id = document.getElementById("paciente_id").value;
-        var ruta = "/pacientes/" + id + "/recuerdos"
-        var max // no borrar
-        var limit = false
+
+        let dropzone_config = {
+            ruta : "/pacientes/" + id + "/recuerdos"
+        }
+
     </script>
     <script src="/js/dropzone.js"></script>
     <script src="/js/persona.js"></script>

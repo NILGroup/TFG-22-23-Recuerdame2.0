@@ -1,11 +1,29 @@
+
+
 Dropzone.autoDiscover = false
 document.addEventListener("DOMContentLoaded", function () {
 
-    if (!max)
-        max = 100
 
+    let customId = "#d"
+    let customSubmit = "#guardar"
+    let max = 100
+    let limit = false
+    let ruta = null
+    let silenceMode = false
 
-    $('#d').dropzone({
+    
+    let config = dropzone_config
+    
+    if (config.form_id) customId = config.form_id
+    if (config.submit_id) customSubmit = config.submit_id
+    if (config.max) max = config.max
+    if (config.limit) limit = config.limit
+    if (config.silenceMode) silenceMode = config.silenceMode
+    ruta = config.ruta
+
+    console.log(customId)
+
+    $(customId).dropzone({
 
         previewsContainer: ".dropzone-previews",
         maxFilesize: 10, //mb
@@ -41,18 +59,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log(msg)
             })
 
-            var submitBtn = document.querySelector("#guardar");
+            console.log(customSubmit)
+            var submitBtn = document.querySelector(customSubmit);
             var myDropzone = this
  
-          
-            if (typeof silenceMode === "undefined") silenceMode = false
             if (!silenceMode){
               
                     submitBtn.addEventListener("click", function (e) {
 
 
                 
-                        const form = document.querySelector("#d")
+                        const form = document.querySelector(customId)
         
                         e.preventDefault()
                         e.stopPropagation()

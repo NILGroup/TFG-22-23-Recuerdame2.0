@@ -66,9 +66,13 @@
     <script src="/js/libs/dropzone.js"></script>
     <script>
         var id = document.getElementById("paciente_id").value
-        var ruta = "/pacientes/" + id
-        var max = 1
-        var limit = true
+
+        let dropzone_config = {
+            limit: true,
+            max: 1,
+            ruta: "/pacientes/" + id
+        }
+        
     </script>
     <script src="/js/especificar.js"></script>
     <script src="/js/dropzone.js"></script>
