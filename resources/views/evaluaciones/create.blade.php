@@ -8,7 +8,7 @@
         <hr class="lineaTitulo">
     </div>
 
-    <form action="/cerrarEvaluacion" method="POST">
+    <form action="/cerrarEvaluacion" method="POST" enctype="multipart/form-data">
         {{csrf_field()}}
         @include('evaluaciones.listaItems')
         <div>
@@ -21,7 +21,10 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="/js/escalaEvaluacion.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-touchspin/4.2.5/jquery.bootstrap-touchspin.min.js"></script> -->
+    <script src="/js/libs/touchSpin.js"></script>
+
+    <script src="/js/evaluacion.js"></script>
     @if (Session::has('created'))
         @php 
             Illuminate\Support\Facades\Session::forget('created');

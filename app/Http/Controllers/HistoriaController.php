@@ -8,11 +8,12 @@ use App\Models\Paciente;
 use App\Models\Etapa;
 use App\Models\Categoria;
 use App\Models\Etiqueta;
-use App\Models\Recuerdo;
-use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Stmt\Return_;
-use Psy\Readline\Hoa\Console;
-
+use ProtoneMedia\LaravelFFMpeg\Exporters\EncodingException;
+use Illuminate\Support\Facades\Storage;
+use FFMpeg\Filters\AdvancedMedia\ComplexFilters;
+use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
+use FFMpeg\Filters\Video\VideoFilters;
+use FFMpeg\Format\Video\X264;
 class HistoriaController extends Controller
 {
     public function __construct()
@@ -40,67 +41,11 @@ class HistoriaController extends Controller
 
         return view("historias.generateHistoria", compact("paciente", "fecha", "etapas", "etiquetas", "categorias"));
     }
-    /*
-    public function filtrarPorVarias($id, &$listaRecuerdosHistoriaVida , $filtro){
-            $listaAux = $listaRecuerdosHistoriaVida;
-            $listaAux2 = collect();
-            //return $id;
-           
-                $listaAux = $listaRecuerdosHistoriaVida->whereIn($filtro, $id); //recorremos todas las etiqetas del multifiltro
-                $listaAux = array_values($listaAux);
-                return $listaAux;
-                foreach($listaAux as $item){
-                    $listaAux2->push($item);
-                }
-            
-            return $listaAux2;
-    }
 
-    public function getListaRecuerdosHistoriaVida($idPaciente, $fechaInicio, $fechaFin, $idEtapa, $idCategoria, $idEtiqueta)
-    {
-        $paciente = Paciente::find($idPaciente);
-        if (is_null($paciente)) return "ID de paciente no encontrada";
+    public function generarVideoHistoria(Request $request){
 
 
-        $listaRecuerdosHistoriaVida = $paciente->recuerdos;
-        $listafinal=collect();
-        
-        if (!empty($idCategoria)){
-            $listaRecuerdosHistoriaVida= $this->filtrarPorVarias($idCategoria, $listaRecuerdosHistoriaVida, 'categoria_id');
-            return $listaRecuerdosHistoriaVida;
-        }
-        if (!empty($idEtapa)){
-            $listaRecuerdosHistoriaVida= $this->filtrarPorVarias($idEtapa, $listaRecuerdosHistoriaVida, 'etapa_id');
-            
-        }
-        if (!empty($idEtiqueta)){
-            $listaRecuerdosHistoriaVida= $this->filtrarPorVarias($idEtiqueta, $listaRecuerdosHistoriaVida, 'etiqueta_id');
-        }
-
-        if (!empty($fechaInicio)){
-            foreach ($listaRecuerdosHistoriaVida as $recuerdo) {
-                if($recuerdo->fecha  >= $fechaInicio){
-                    $listafinal= $listafinal->prepend($recuerdo);
-                }
-            }
-            $listaRecuerdosHistoriaVida=  $listafinal->reverse();
-            $listafinal=collect();
-        }
-        if (!empty($fechaFin)){
-            foreach ($listaRecuerdosHistoriaVida as $recuerdo) {
-                if($recuerdo->fecha  <= $fechaFin){
-                    $listafinal= $listafinal->prepend($recuerdo);
-                }
-            }
-            $listaRecuerdosHistoriaVida=  $listafinal->reverse();
-            $listafinal=collect();
-        }
-      
-        return $listaRecuerdosHistoriaVida;
-    }*/
-
-    public function generarLibroHistoria(Request $request)
-    {
+        //OBTENER LOS RECUERDOS BUSCADOS///////////////////////////////////////////////////
         $idPaciente = $request->paciente_id;
         $fechaInicio = $request->fechaInicio;
         $fechaFin = $request->fechaFin;
@@ -119,11 +64,94 @@ class HistoriaController extends Controller
             $idCategoria = Categoria::select('id');
 
         $listaRecuerdos =  $paciente->recuerdos()
-            ->whereIn('etapa_id', $idEtapa)
-            ->whereIn('etiqueta_id', $idEtiqueta)
-            ->whereIn('categoria_id', $idCategoria)
+            ->whereIn('etapa_id', $idEtapa)->orWhereNull('etapa_id')
+            ->whereIn('etiqueta_id', $idEtiqueta)->orWhereNull('etiqueta_id')
+            ->whereIn('categoria_id', $idCategoria)->orWhereNull('categoria_id')
             ->whereBetween('fecha', [$fechaInicio, $fechaFin])
             ->get();
+        
+        if(!($apto == 0 && $noApto == 0) && !($apto == 1 && $noApto == 1))
+            $listaRecuerdos = $listaRecuerdos
+                ->whereIn('apto', $apto);
+        //FIN. RECUERDOS YA OBTENIDOS///////////////////////////////////////////////////
+
+        //PATH
+        $path = 'public\img\HistoriaVidaCache\\'.$idPaciente.'.mp4';
+
+        if(Storage::exists($path)){
+            Storage::delete($path);
+        }
+        
+        $array = collect();
+        $trashCache = collect();
+        foreach ($listaRecuerdos as $rc) { //¿Vacio?
+            foreach($rc->multimedias as $media){
+                $extension = pathinfo($media->fichero, PATHINFO_EXTENSION);
+                $rememberpath = str_replace('/storage/', '/public/', $media->fichero);
+                
+                    if($extension == 'jpg'){
+                        //$uniqueName = uniqid() . time() .'.mp4';
+                        //FFMpeg::open($rememberpath)
+                        //->export()
+                        //->asTimelapseWithFramerate(0.3)
+                        //->inFormat(new \FFMpeg\Format\Video\X264())
+                        //->save('public\img\HistoriaVidaCache\imgToMp4\\'.$uniqueName);
+                        //$trashCache->push('public\img\HistoriaVidaCache\imgToMp4\\'.$uniqueName);
+                        //$array->push('\public\img\HistoriaVidaCache\imgToMp4\\'.$uniqueName);
+                    }
+
+                if($extension == 'mp4'){
+                    $array->push($rememberpath);
+                }
+            }
+        }
+        
+        //print_r($array);
+
+
+            FFMpeg::fromDisk('local')
+            ->open($array->toArray())
+            ->export()
+            ->concatWithoutTranscoding()
+            ->save($path);
+
+            FFMpeg::cleanupTemporaryFiles();
+
+
+            //Url to final Video
+            $path = \Illuminate\Support\Facades\URL::to('storage/img/HistoriaVidaCache/'.$idPaciente.'.mp4');
+            return view("historias.videoPlayer", compact("path"));
+
+    
+    }
+
+
+    public function generarLibroHistoria(Request $request)
+    {
+        $idPaciente = $request->paciente_id;
+        $fechaInicio = $request->fechaInicio;
+        $fechaFin = $request->fechaFin;
+        $idEtapa = $request->seleccionEtapa;
+        $idEtiqueta = $request->seleccionEtiq;
+        $idCategoria = $request->seleccionCat;
+        $apto = $request->apto;
+        $noApto = $request->noApto;
+        $paciente = Paciente::find($idPaciente);
+        
+        if (is_null($idEtapa))
+            $idEtapa = Etapa::select('id');
+        if (is_null($idEtiqueta))
+            $idEtiqueta = Etiqueta::select('id');
+        if (is_null($idCategoria))
+            $idCategoria = Categoria::select('id');
+
+        $listaRecuerdos =  $paciente->recuerdos()
+            ->whereIn('etapa_id', $idEtapa)->orWhereNull('etapa_id')
+            ->whereIn('etiqueta_id', $idEtiqueta)->orWhereNull('etiqueta_id')
+            ->whereIn('categoria_id', $idCategoria)->orWhereNull('categoria_id')
+            ->whereBetween('fecha', [$fechaInicio, $fechaFin])
+            ->get();
+        
         if(!($apto == 0 && $noApto == 0) && !($apto == 1 && $noApto == 1))
             $listaRecuerdos = $listaRecuerdos
                 ->whereIn('apto', $apto);

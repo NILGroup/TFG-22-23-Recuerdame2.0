@@ -7,8 +7,10 @@
         <h5 class="text-muted">Datos persona relacionada</h5>
         <hr class="lineaTitulo">
     </div>
-    @include('personasrelacionadas.foto')
-    @include('personasrelacionadas.listaItems')
+    <div style="margin-right: 50px;">
+        @include('personasrelacionadas.listaItems')
+    </div>
+
     @if (Auth::user()->rol_id == 1)
     <div class="col-12">
         <!-- <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a> -->
@@ -16,17 +18,19 @@
     </div>
     @endif
 </div>
-  
+
 
 @endsection
 
 @push('scripts')
-    @include('layouts.scripts')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/showView.js"></script>
+@include('layouts.scripts')
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="/js/libs/sweetAlert2.js"></script>
     
+    <script src="/js/showView.js"></script>
+
     @if (Session::has('created'))
-        @php 
+        @php
             Illuminate\Support\Facades\Session::forget('created');
         @endphp
         <script>

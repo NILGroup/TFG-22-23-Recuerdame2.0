@@ -1,0 +1,49 @@
+.fc .fc-add_event-button,
+.fc .fc-dayGridWeek-button,
+.fc .fc-dayGridDay-button,
+.fc .fc-listMonth-button,
+.fc .fc-today-button,
+.fc .fc-dayGridMonth-button,
+.fc .fc-prev-button,
+.fc .fc-next-button,
+.fc .fc-todo-button,
+.fc .fc-actividades-button,
+.fc .fc-sesiones-button {
+    font-size: 18px;
+    background-color: #14a2b8;
+    border: none;
+    
+}
+
+.fc .fc-add_event-button:active,
+.fc .fc-dayGridWeek-button:active,
+.fc .fc-dayGridDay-button:active,
+.fc .fc-listMonth-button:active,
+.fc .fc-today-button:active,
+.fc .fc-dayGridMonth-button:active,
+.fc .fc-prev-button:active,
+.fc .fc-next-button:active,
+.fc .fc-todo-button:active,
+.fc .fc-actividades-button:active,
+.fc .fc-sesiones-button:active {
+    background-color: #14a2b8;
+}
+
+.fc .fc-prev-button,
+.fc .fc-next-button{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.fc td,  .fc th{
+    color: black;
+    background-color: white;
+}
+
+.fc .fc-daygrid-event {
+    cursor:pointer;
+}
+
+.fc .fc-day-today {
+    background-color:aliceblue !important;
+}

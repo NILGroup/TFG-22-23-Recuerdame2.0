@@ -29,6 +29,7 @@ return new class extends Migration
 
             $table->foreign("tiporelacion_id")->references("id")->on("tiporelacions")->onDelete("cascade");
             $table->foreign("paciente_id")->references("id")->on("pacientes")->onDelete("cascade");
+            $table->softDeletes();
         });
     }
 

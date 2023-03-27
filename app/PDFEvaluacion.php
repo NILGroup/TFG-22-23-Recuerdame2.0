@@ -7,7 +7,7 @@ use Codedge\Fpdf\Fpdf\Fpdf;
 use File;
 use DateTime;
 
-global $numInforme;
+global $fecha;
 
 class PDFEvaluacion extends FPDF{
 
@@ -20,7 +20,8 @@ class PDFEvaluacion extends FPDF{
         // Move to the right
         //$this->Cell(80);
         // Title
-        $this->Cell(190,11,'Informe de Seguimiento #'.$GLOBALS['numInforme'],0,1);
+        $f = Carbon::create($GLOBALS['fecha']);
+        $this->Cell(190,11,'Informe de Seguimiento '.$f->format("d-m-Y"),0,1);
         $this->Line(10,25,200,25);
         // Line break
         $this->Ln(10);
@@ -92,6 +93,12 @@ class PDFEvaluacion extends FPDF{
         $pdf->Ln(12);
         
     }
+
+    function writeSign($pdf){
+        $pdf->Cell(4,7,"");
+        $pdf->Cell(50,35,$pdf->Image("img/FDOWhite.png", $pdf->GetX(), $pdf->GetY(), 75,50),0,0,'C');
+        $pdf->Ln(55);
+    }
     
     function pdfBody($pdf, $informeSeguimiento, $paciente){
         //$pdf->Cell(0,10,'Fecha del informe: '.$informeSeguimiento->getFecha(),0,1);
@@ -138,7 +145,13 @@ class PDFEvaluacion extends FPDF{
             $pdf->MultiCell(0,7,utf8_decode($informeSeguimiento->observaciones),1);
             $pdf->Ln();
         }
-        
+        $pdf->Ln(9);
+
+        $this->writeSign($pdf);
+
+        $fecha = Carbon::now();
+        $nombreArchivo = str_replace(" ", "_", "Seguimiento ".$paciente->nombre." ".$fecha->format("d/m/Y").".pdf");
+        $pdf->Output( 'I', $nombreArchivo, true );
     }
 }
 

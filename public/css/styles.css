@@ -1,50 +1,388 @@
+/*NO TOCAR NI PONER NADA ENCIMAAA, es info del slider!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **/
+#pruebaa{
+    background: transparent !important;
+}
+
+#puntuacion {
+    --webkit-slider-thumb-background:  white;
+  }
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+/*GENERALES----------------------------------------- */
+:root {
+    --turquesa: #14a2b8;
+    --turquesaOscuro: #017e91;
+    --turquesaSuave: #a1dfea3f;
+    --destacadoOscuro: #e1ffff;
+    --turquesaClaroNavBar: #d2f9f9; 
+    --white: rgb(255, 255, 255);
+    --whiteSuave: #ffffff7b;
+    --tamLetra: 18px;
+    --tamLetraBotones: 16px;
+    --captionSize: 16px;
+    --azulBootstrap: #4582ec;
+    --azulTextoNavBar: #4F7BC5;
+}
+
 html {
     scroll-behavior: smooth;
+
+    height: 100%;
+    box-sizing: border-box;
+}
+
+label {
+    font-size: var(--tamLetra) !important;
+}
+
+select {
+    font-size: var(--tamLetra) !important;
+}
+
+input {
+    font-size: var(--tamLetra) !important;
+}
+
+textarea {
+    font-size: var(--tamLetra) !important;
 }
 
 body {
     overflow-x: hidden;
     font-family: 'Nunito', sans-serif;
+    position: relative;
+    margin: 0;
+    min-height: 100%;
+    padding-bottom: 2em;
+    box-sizing: inherit;
 }
+
 #app {
     width: 100%;
 }
+
 footer {
-    position:fixed;
-    bottom:0;
+    position: absolute;
+    bottom: 0;
     width: 100%;
 }
-.inlinePopUp{
-    display:inline !important;
+
+.inlinePopUp {
+    display: inline !important;
 }
+
 .yellowbg {
-    background-color: #d2f9f9 !important;
+    background-color: var(--turquesaClaroNavBar) !important;
 }
+
 .lightbluebg {
     background-color: #e5f1f1 !important;
 }
 
-.scrollUp{    
-    font-size:3em;
+.scrollUp {
+    font-size: 3em;
     z-index: 999;
+
+    position: fixed;
+    bottom: 0.77em;
+    right: 1%;
 }
-/*TABLAS*/
-.table td.fit, 
+
+/*DESPLEGABLES -----------------------------------------------------------------------*/
+
+.accordion-collapse {
+    padding: 10px !important;
+}
+
+/*TABLAS ----------------------------------------------------------------------*/
+tbody {
+    background-color: var(--whiteSuave) !important;
+}
+
+thead {
+    color: var(--white) !important;
+    background-color: var(--turquesa) !important;
+}
+
+.tableActions {
+    text-align: center !important;
+}
+
+.tableIcon {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.table {
+    width:100%!important;
+    font-size: var(--tamLetra) !important;
+    padding: 0.2rem 0.3rem !important;
+}
+
+.table-bordered> :not(caption)>*>* {
+    /*padding: 0.2rem 0.3rem !important;*/
+}
+
+caption {
+    font-size: var(--captionSize);
+}
+
+.table td.fit,
 .table th.fit {
-    white-space: nowrap !important; 
+    white-space: nowrap !important;
     max-width: 1px !important;
 }
-.table td.fit5, 
+
+.table td.fit5,
 .table th.fit5 {
-    white-space: nowrap !important; 
+    white-space: nowrap !important;
     max-width: 5em !important;
 }
 
-.table td.fit10, 
+.table td.fit10,
 .table th.fit10 {
-    white-space: nowrap !important; 
+    white-space: nowrap !important;
     max-width: 10em !important;
 }
+
+.table td.actions,
+.table th.actions {
+    min-width: 10em !important;
+    width: 10em !important;
+}
+.botonAccionTablas {
+    width: 70%;
+    min-width: fit-content;
+    font-size: var(--tamLetraBotones) !important;
+}
+
+/*HEADER -------------------------------------------------------------*/
+.header {
+    background-color: #fef9e7 !important;
+}
+
+.logotipoMarca {
+    height: 50px;
+}
+
+/*NAVBAR -------------------------------------------------------------*/
+
+nav {
+    background-color: var(--turquesa);
+    align-items: center!important;
+}
+
+.nav-menu {
+    border-top: solid;
+    border-bottom: solid;
+    border-color: var(--azulTextoNavBar);
+    padding: 0;
+    border-top-width: thin;
+    border-bottom-width: thin;
+}
+
+.text-light:hover{
+    color: dimgray!important;
+}
+
+.navbar .btn{
+    --bs-btn-border-width: 0px!important;
+    text-align: center;
+}
+
+.nav-linkClaro:hover {
+    /*background-color: var(--destacadoOscuro);*/
+    background-color: var(--white);
+    color: var(--azulBootstrap)!important;
+    box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
+    
+}
+
+.nav-linkOscuro:hover {
+    /*background-color: var(--destacadoOscuro);*/
+    background-color: var(--turquesaOscuro);
+    color: var(--white)!important;
+    box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
+    font-weight: bold;
+    border-radius: 1rem;
+}
+
+.avatar-mini {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+/**-------- desplegables*/
+
+/*
+.navbar-nav .dropdownClaro:hover {
+    background: var(--white)!important;
+    color: white!important;
+    border-radius: 1rem 1rem 1rem 1rem ;
+    box-shadow: 0 0 6px rgba(59, 58, 58, 0.253);
+  }*/
+
+.nav-linkClaro {
+    font-size: 17px !important;
+    padding: 12px 20px 12px 20px !important;
+    color:var(--azulTextoNavBar)!important;
+    border-radius: 1rem;
+}
+  
+.dropdownClaro-menu {
+    border: none!important;
+    box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
+    color: var(--white)!important;
+    opacity: 1;
+    padding: 7px 0;
+    -webkit-box-shadow: 0 3px 4px rgba(0,0,0,.18)!important;
+    box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
+    margin-top: -12px !important;
+}
+
+/* SEARCHBAR -------------------------------------------- */
+
+.searchBar{
+    border-radius: 20px!important;
+    margin-left: 5px;
+    box-shadow: inset -2px -2px 2px rgba(255,255,255,0.15), inset 2px 2px 6px rgba(94,104,121,0.2);
+
+}
+
+.searchBar:focus {
+    outline-width: 0px;
+  }
+
+/* REGISTER --------------------------------------- */
+.msgErrorRegister{
+    float: right;
+    font-size: .875em;
+    color: #d9534f;
+}
+
+/*FOTO PACIENTE----------------------------------------*/
+.imagenPaciente {
+    height: 14em!important;
+}
+
+/*NUEVO SLIDER PUNTUACIÓN----*/
+.slidecontainer {
+    width: 100% !important;
+}
+
+.slider {
+    width: 70%;
+    height: 10px;
+    border-radius: 5px;
+    border-width: 10px;
+    background-image: linear-gradient(to right, rgba(255, 0, 0, 0.7),rgba(219, 194, 5, 0.7), #02b875);
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+    -webkit-appearance: none;
+    margin-bottom: 10px!important;
+    margin-top: 8px!important;
+}
+
+#demo-puntuacion{
+    width: 20px;
+    font-size: larger;
+    margin-bottom: 0px!important;
+    margin-top: 0px!important;
+    margin-left: 10px!important;
+}
+
+.slider:hover {
+    background-image: linear-gradient(to right, rgb(134, 4, 4),rgba(163, 144, 3, 0.7), rgb(2, 128, 2));
+}
+  
+#puntuacion::-webkit-slider-thumb {
+    width: 23px;
+    height: 24px;
+    border: 0;
+    cursor: pointer;
+    background:  var(--webkit-slider-thumb-background)!important;
+  }
+
+  /*
+.slider::-webkit-slider-thumb {
+    width: 23px;
+    height: 24px;
+    border: 0;
+    cursor: pointer;
+    background: url(../img/1.png)!important;
+}*/
+
+.puntuacion-limites{
+    margin-left: 1rem!important;
+    margin-right: 1rem!important;
+}
+
+.carita-feliz{
+margin-right: 50px;
+margin-left: 40px;
+}
+
+.slider::-moz-range-thumb {
+    width: 23px;
+    height: 24px;
+    border: 0;
+    background: url('contrasticon.png');
+    cursor: pointer;
+}
+
+
+/*if disabled*/
+.slider:disabled::-webkit-slider-thumb {
+    width: 23px;
+    height: 23px;
+    border: 0;
+    color: #aeb7bf;
+    background: #aeb7bf;
+    cursor: pointer;
+}
+
+.slider:disabled {
+    background-image: linear-gradient(to right, rgba(87, 7, 7, 0.7),rgba(163, 150, 65, 0.7), #24b593);
+}
+
+.slider:disabled:hover {
+    background-image: linear-gradient(to right, rgba(87, 7, 7, 0.7),rgba(163, 150, 65, 0.7), #24b593);
+}
+
+/*SLIDER PUNTUACIÓN ANTIGUO---------------------------------------
+.rangeslider__fill {
+    background: #EAECEE;
+    position: absolute;
+}
+
+.rangeslider {
+    background: #EAECEE;
+}
+
+.rangeslider__handle {
+    border: none;
+    background: #0d6efd;
+    width: 20px;
+    height: 20px;
+}
+
+.rangeslider--horizontal .rangeslider__handle {
+    top: -4px;
+}
+
+.rangeslider--horizontal {
+    height: 10px;
+}
+
+.puntuacion {
+    height: 10px !important;
+    position: relative !important;
+}*/
+
+/*OTROS.-------------------------------------------- */
 
 /*Cuerpo del cuadrado*/
 .cuerpo {
@@ -60,11 +398,9 @@ footer {
     width: 90%;
     margin-left: 5%;
     padding: 12px;
-    background-color: #50C6BF;
     line-height: 1.4;
     margin-top: 3%;
     border-radius: 10px;
-    border-color: #4F7BC5;
     text-align: justify;
 }
 
@@ -77,57 +413,19 @@ footer {
     margin-bottom: 3%;
 }
 
-.header {
-    background-color: #fef9e7 !important;
-}
-
-.logotipoMarca {
-    height: 50px;
-}
-
-.nav-menu {
-    border-top: solid;
-    border-bottom: solid;
-    border-color: #4F7BC5;
-    padding: 0;
-    border-top-width: thin;
-    border-bottom-width: thin;
-}
-.nav-link:hover{
-    color: rgb(0, 145, 255) !important;
-    background-color: #ccfff737;
-    box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
-    border-radius: 1em;
-}
 .letra-primary-color {
-    color: #4F7BC5 !important;
+    color: var(--azulTextoNavBar) !important;
 }
 
 .button-primary-color {
-    background-color: #4F7BC5;
-}
-
-.tableActions {
-    text-align: center;
-}
-
-.tableIcon {
-    padding-left: 5px;
-    padding-right: 5px;
+    background-color: var(--azulTextoNavBar);
 }
 
 .contenedor {
     padding: 20px;
 }
 
-.table {
-    font-size: 14px !important;
-    padding: 0.2rem 0.3rem !important;
-}
 
-.table-bordered> :not(caption)>*>* {
-    padding: 0.2rem 0.3rem !important;
-}
 
 .lineaTitulo {
     padding: 0;
@@ -184,7 +482,7 @@ footer {
     width: 2px;
 }
 
-.hv-container{
+.hv-container {
     height: 8rem;
     margin-left: 10%;
     margin-right: 10%;
@@ -193,12 +491,13 @@ footer {
 .hv-des {
     font-family: monospace;
     font-family: "Times New Roman", Times, serif;
-    font-size: 17px;
+    font-size: 20px;
 }
 
 .hv-title {
-    color: #4F7BC5;
+    color: var(--azulTextoNavBar);
 }
+
 /*
 .hv-box::-webkit-scrollbar-thumb {
     border-radius: 4px;
@@ -226,13 +525,6 @@ footer {
 .hv-control {
     padding: 0 !important;
     width: auto !important
-}
-
-.avatar-mini {
-    vertical-align: middle;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
 }
 
 .avatar {
@@ -300,95 +592,116 @@ footer {
     line-height: 2.5em;
     text-align: center;
     border-radius: 50%;
-    background: #4F7BC5;
+    background: var(--azulTextoNavBar);
     vertical-align: middle;
     margin-right: 1em;
     color: white;
 }
 
-.error{
+.error {
     width: 100%;
     margin-top: 0.25rem;
     font-size: 0.875em;
     color: #dc3545;
 }
 
-.rangeslider__fill {
-    background: #EAECEE;
-    position: absolute;
-}
-
-.rangeslider {
-    background: #EAECEE;
-}
-
-.rangeslider__handle {
-    border: none;
-    background: #0d6efd;
-    width: 20px;
-    height: 20px;
-}
-
-.rangeslider--horizontal .rangeslider__handle {
-    top: -4px;
-}
-
-.rangeslider--horizontal {
-    height: 10px;
-}
-
-.puntuacion{
-    height: 10px !important;
-    position: relative !important;
-}
-
-  .selectBox {
+.selectBox {
     position: relative;
-  }
-    
-  .overSelect {
+}
+
+.overSelect {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-  }
-  
-  .checkboxes {
+}
+
+.checkboxes {
     width: 100%;
     display: block;
     margin-bottom: 10px;
-  }
-  
-  .checkboxes label {
+}
+
+.checkboxes label {
     display: block;
-  }
-  
+}
 
-  .deslizante{
+
+.deslizante {
     margin-left: 1em;
-  }
+}
 
-  .fecha{
+.fecha {
     width: fit-content;
     margin-left: 1em;
-  }
-  
-  .labelShow {
+}
+
+.labelShow {
     font-weight: bold;
     width: fit-content;
     margin-right: 1em;
-  }
+}
 
-  .col{
+.col {
     margin-right: 1em;
-  }
+}
 
-  .negrita {
-    font-weight:  bold;
-  }
+.negrita {
+    font-weight: bold;
+}
 
+.form-group>.row {
+    margin-bottom: 6px;
+}
 
-  div > .row{
+.badge {
+    background-color: #dc3545;
+    margin-left: 0.25rem;
+}
+
+div>.row {
     align-items: center;
-  }
+}
+
+.tooltip{
+    font-size: var(--tamLetra) !important;
+}
+
+.formBar{
+    bottom:5em;
+    height:2em;
+    z-index: 0;
+    background-color: white;
+}
+
+.formBar svg{
+    border-radius: 23px;
+}
+
+.hidden{
+    display:none;
+}
+
+.modal{
+    backdrop-filter: blur(1px) saturate(120%);
+}
+
+/* On smaller resolutions, hide the text for Large screens */
+@media only screen and (max-width: 560px) {
+    .largeScreen {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .smallMediaLeft{
+        align-items: center!important;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .menuLittlemargin{
+       margin-top: 10px;
+    }
+}

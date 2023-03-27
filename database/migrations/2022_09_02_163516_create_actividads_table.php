@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string("finished")->nullable();;
             
             $table->foreign("paciente_id")->references("id")->on("pacientes")->onDelete("cascade");
+            $table->softDeletes();
         });
     }
 

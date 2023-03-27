@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('recuerdos', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
+            $table->date('fecha')->nullable();
             $table->string('nombre');
             $table->longText('descripcion')->nullable();
             $table->string('localizacion')->nullable();
@@ -35,7 +35,7 @@ return new class extends Migration
             $table->foreign('estado_id')->references('id')->on('estados')->onDelete("cascade");
             $table->foreign('etiqueta_id')->references('id')->on('etiquetas')->onDelete("cascade");
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete("cascade");
-
+            $table->softDeletes();
         });
     }
 

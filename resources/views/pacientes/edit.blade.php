@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Datos paciente</h5>
+        <h5 class="text-muted">Datos usuario</h5>
         <hr class="lineaTitulo">
     </div>
 
@@ -62,7 +62,8 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> -->
+    <script src="/js/libs/dropzone.js"></script>
     <script>
         var id = document.getElementById("paciente_id").value
         var ruta = "/pacientes/" + id

@@ -18,24 +18,26 @@
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de personas relacionadas</caption>
             <thead>
-                <tr class="bg-primary">
-                    <th scope="col">Nombre</th>
-                    <th class="fit10" scope="col">Tipo de Relacion</th>
-                    <th class="fit5" scope="col"></th>
+                <tr >
+                    <th class="fit15 text-center" scope="col">Nombre</th>
+                    <th class="fit10 text-center" scope="col">Localidad</th>
+                    <th class="fit10 text-center" scope="col">Tipo de relación</th>
+                    <th class="fit10 actions text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="shadow-sm">
                 @foreach($personas as $persona)
                 <tr>
                     <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}} {{$persona->apellidos}}</a> @if($persona->contacto)★@endif</td>
+                    <td>{{$persona->localidad}}</td>
                     <td>{{$persona->tiporelacion->nombre}}</td>
                     <td class="tableActions">
-                        <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon"></i></a>
-                        <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon"></i></a>
+                        <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona"></i></a>
+                        <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar persona"></i></a>
                         <form method="post" action="{{ route('personas.destroy', $persona->id) }}" style="display:inline!important;">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"></i></button>
+                            <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon" data-toggle="tooltip" data-placement="top" title="Eliminar persona"></i></button>
                         </form>
                     </td>
                 </tr>
@@ -51,8 +53,11 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>   -->
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="/js/libs/dataTables.js"></script>
+    <script src="/js/libs/sweetAlert2.js"></script>
+
     <script src="/js/table.js"></script>
     <script src="/js/confirm.js"></script>
     

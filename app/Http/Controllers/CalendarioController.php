@@ -32,9 +32,9 @@ class CalendarioController extends Controller
 
     public function showByPaciente(int $idPaciente)
     {
+        $show = false;
         //$actividades = Actividad::all()->sortBy("id");
         $user = Auth::user();
-        $show = false;
         $paciente = Paciente::find($idPaciente);
         $sesion = new Sesion();
         $recuerdo = new Recuerdo();
@@ -48,7 +48,30 @@ class CalendarioController extends Controller
         $categorias = Categoria::all()->sortBy("id");
         $tipos = Tiporelacion::all()->sortBy("id");
         $mostrarFoto = false;
-        return view('calendario.showByPaciente', compact("idPaciente","paciente", "user", "show", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos", "recuerdos", "personas", "persona", "mostrarFoto"));
+
+        $multimedias = [];
+
+        $sesiones = $paciente->sesiones;
+
+        foreach($sesiones as $s){
+            foreach($s->multimedias as $multimedia){
+
+                $existent = true;
+                foreach ($multimedias as $mult){
+                    if ($mult->id == $multimedia->id){
+                        $existent = false;
+                    }
+                }
+
+                if ($existent){
+                    array_push($multimedias, $multimedia);
+                }
+                
+            }
+        }
+
+
+        return view('calendario.showByPaciente', compact("multimedias","idPaciente","paciente", "user", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos", "recuerdos", "personas", "persona", "mostrarFoto", "show"));
     }
 
     public function store(Request $request)
@@ -72,6 +95,7 @@ class CalendarioController extends Controller
             ]
         );
 
+        session()->put('created', "Creado");
         return redirect("/pacientes/$actividad->paciente_id/calendario");
     }
 
@@ -105,6 +129,7 @@ class CalendarioController extends Controller
                     "finished" => $request->finished
                 ]
             );
+            session()->put('created', "Actualizado");
         return redirect("/pacientes/$actividad->paciente_id/calendario");
     }
 
@@ -120,11 +145,14 @@ class CalendarioController extends Controller
                 'fecha_finalizada' => $request->fecha_finalizada,
                 'paciente_id' => $request->paciente_id,
                 'user_id' => $request->user_id,
-                'respuesta' => $request->respuesta
+                'respuesta' => $request->respuesta,
+                'titulo' => $request->titulo
             ]
         );
         if (!is_null($request->recuerdos))
             $sesion->recuerdos()->sync($request->recuerdos);
+            
+        session()->put('created', "Actualizado");
         return redirect("pacientes/{$sesion->paciente->id}/calendario");
     }
 
@@ -134,6 +162,11 @@ class CalendarioController extends Controller
         $actividad = Actividad::where("paciente_id", "=", $idPaciente)->get();
         foreach ($actividad as $a) {
             $a->tipo = "a";
+            if ($a->finished !== "" && $a->finished !== null) {
+                $variable = $a->title;
+                $variable = "(✓) " . $variable;
+                $a->title = $variable;
+            }
         }
         if ($tipoUsuario === 2)
             return response()->json($actividad);
@@ -142,11 +175,11 @@ class CalendarioController extends Controller
             foreach ($sesion as $s) {
                 $s->tipo = "s";
                 $s->start = $s->fecha;
-                $s->title = "Sesión";
+                $s->title = $s->titulo;
                 $s->recuerdos = $s->recuerdos;
                 foreach ($s->recuerdos as $r) {
                     $r->etapa = Etapa::findOrFail($r->etapa_id);
-                    $r->etiqueta = Etiqueta::findOrFail($r->etiqueta_id);
+                    //$r->etiqueta = Etiqueta::findOrFail($r->etiqueta_id);
                     $r->categoria = Categoria::findOrFail($r->categoria_id);
                     $r->estado = Estado::findOrFail($r->estado_id);
                 }
@@ -170,7 +203,13 @@ class CalendarioController extends Controller
         $actividad = Actividad::findOrFail($request->id);
         $paciente = $actividad->paciente_id;
         $actividad->delete();
+
+        session()->put('created', "Eliminado");
         return redirect("/pacientes/$paciente/calendario");
+    }
+    public function restore($idP, $id) 
+    {
+        Actividad::where('id', $id)->withTrashed()->restore();
     }
 
     public function destroySesion(Request $request)
@@ -178,6 +217,8 @@ class CalendarioController extends Controller
         $sesion = Sesion::findOrFail($request->idSesion);
         $paciente = $sesion->paciente_id;
         $sesion->delete();
+        
+        session()->put('created', "Eliminado");
         return redirect("/pacientes/$paciente/calendario");
         //return "<h1>$request</h1>";
     }
@@ -195,12 +236,30 @@ class CalendarioController extends Controller
                 'fecha_finalizada' => $request->fecha_finalizada,
                 'paciente_id' => $request->paciente_id,
                 'user_id' => $request->user_id,
-                'respuesta' => $request->respuesta
+                'respuesta' => $request->respuesta,
+                'titulo' => $request->titulo
             ]
         );
         if (!is_null($request->recuerdos))
             $sesion->recuerdos()->sync($request->recuerdos);
+        
+        session()->put('created', "Creado");
         return redirect("pacientes/{$sesion->paciente->id}/calendario");
         //return "<h1>$request</h1>";
+    }
+
+    public static function getNotDone(int $idPaciente) {
+        $tipoUsuario = Auth::user()->rol_id;
+        $actividad = Actividad::where("paciente_id", "=", $idPaciente)->get();
+        $contador = 0;
+        foreach ($actividad as $a) {
+            if ($a->finished === "" || $a->finished === null) {
+                $contador = $contador + 1;
+            }
+        }
+        if ($tipoUsuario === 2)
+            return $contador;
+        else 
+            return 0;
     }
 }

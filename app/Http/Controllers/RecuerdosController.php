@@ -13,9 +13,13 @@ use App\Models\Multimedia;
 use App\Models\Emocion;
 use App\Models\Personarelacionada;
 use App\Models\Tiporelacion;
+use Carbon\Carbon;
+use DateTime;
 use Error;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Psy\Readline\Hoa\Console;
 
 use function PHPUnit\Framework\isNull;
 
@@ -29,7 +33,7 @@ class RecuerdosController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role'])->except(['show', 'showByPaciente']);
-        $this->middleware(['asignarPaciente'])->except(['destroy']);
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
     }
 
     /**
@@ -62,6 +66,10 @@ class RecuerdosController extends Controller
         $idPaciente = $paciente->id;
         $mostrarFoto = false;
         $persona = new Personarelacionada();
+        $recuerdo->apto=true;
+
+      
+
         return view("recuerdos.create", compact("idPaciente","mostrarFoto", "persona","estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "recuerdo", "personas", "paciente", "show"));
     }
 
@@ -74,6 +82,7 @@ class RecuerdosController extends Controller
     public function store(Request $request)
     {
 
+      
         //Ahora que tenemos creado el recuerdo
         $recuerdo = Recuerdo::updateOrCreate(
             ['id' => $request->id],
@@ -95,6 +104,10 @@ class RecuerdosController extends Controller
         );
 
 
+        $recuerdo->multimedias()->detach();
+        if (isset($request->mult)) {
+            $recuerdo->multimedias()->attach($request->mult);
+        }
         
         MultimediasController::savePhotos($request, $recuerdo);
       
@@ -106,14 +119,6 @@ class RecuerdosController extends Controller
                 $recuerdo->personas_relacionadas()->attach($p_id);
             }
         }
-
-        //Array de las ID de las imagenes a eliminar del recuerdo
-        
-       
-       if(isset($request->media)) {
-        $recuerdo->multimedias()->detach($request->media);
-       }
-   
        
         
        session()->put('created', "true");
@@ -181,7 +186,31 @@ class RecuerdosController extends Controller
         $idPaciente = $paciente->id;
         $mostrarFoto = false;
         $persona = new Personarelacionada();
-        return view("recuerdos.edit", compact("idPaciente","mostrarFoto", "persona","recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "paciente", "show"));
+
+        $multimedias = [];
+
+        $sesiones = $paciente->sesiones;
+
+        foreach($sesiones as $s){
+            foreach($s->multimedias as $multimedia){
+
+                $existent = true;
+                foreach ($multimedias as $mult){
+                    if ($mult->id == $multimedia->id){
+                        $existent = false;
+                    }
+                }
+
+                if ($existent){
+                    array_push($multimedias, $multimedia);
+                }
+                
+            }
+        }
+
+
+
+        return view("recuerdos.edit", compact("multimedias", "idPaciente","mostrarFoto", "persona","recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "paciente", "show"));
     }
 
     /**
@@ -208,6 +237,10 @@ class RecuerdosController extends Controller
         $paciente = $recuerdo->paciente;
         $recuerdo->delete();
         //return redirect("/pacientes/$paciente->id/recuerdos/");
+    }
+    public function restore($idP, $id) 
+    {
+        Recuerdo::where('id', $id)->withTrashed()->restore();
     }
 
     //Elimina a la persona relacionada del recuerdo en cuestión (su relación)

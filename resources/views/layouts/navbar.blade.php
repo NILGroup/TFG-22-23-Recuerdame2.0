@@ -4,46 +4,53 @@
 <!-- Navbar  para usuarios registrados -->
 @if(Session::has('paciente'))
 <!-- Navbar para terapeutas -->
-<nav class="navbar navbar-expand-lg justify-content-left nav-menu yellowbg">
+<nav class="navbar navbar-expand-lg justify-content-left nav-menu yellowbg "  >
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse justify-content-left" id="navbarSupportedContent">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav smallMediaLeft d-flex">
                 @if (Auth::user()->rol_id == 1)
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Sesiones</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/sesiones">Lista de sesiones</a></li>
-                        <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/informesSesion">Informes de las sesiones</a></li>
+                <li class="nav-item dropdownClaro dropdown">
+                    <a class="nav-linkClaro nav-link dropdown-toggle menu menuLittlemargin"  data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Sesiones</a>
+                    <ul class="dropdownClaro-menu dropdown-menu">
+                        <li><a class="dropdownClaro-item dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/sesiones">Lista de sesiones</a></li>
+                        <li><a class="dropdownClaro-item dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/informesSesion">Informes de las sesiones</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a class="nav-link letra-primary-color menu" aria-current="page" href="/pacientes/{{Session::get('paciente')['id']}}/evaluaciones">Informes de seguimiento</a>
+                    <a class=" nav-linkClaro nav-link  menu" aria-current="page" href="/pacientes/{{Session::get('paciente')['id']}}/evaluaciones">Informes de seguimiento</a>
                 </li>
                 @else
                 <li class="nav-item">
-                    <a class="nav-link letra-primary-color menu" aria-current="page" href="/pacientes/{{ Session::get('paciente')['id'] }}">Paciente</a>
+                    <a class="nav-linkClaro nav-link letra-primary-color menu" aria-current="page" href="/pacientes/{{ Session::get('paciente')['id'] }}">Paciente</a>
                 </li>
                 @endif
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Historias de Vida</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/historias/generarHistoria">Generar Historia de Vida</a></li>
-                        <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/recuerdos/">Ver recuerdos</a></li>
+                <li class="nav-item dropdownClaro dropdown">
+                    <a class="nav-linkClaro nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Historias de Vida</a>
+                    <ul class="dropdownClaro-menu dropdown-menu">
+                        <li><a class="dropdownClaro-item dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/historias/generarHistoria">Generar Historia de Vida</a></li>
+                        <li><a class="dropdownClaro-item dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/recuerdos">Ver recuerdos</a></li>
                         @if (Auth::user()->rol_id == 1)
-                        <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/personas">Personas relacionadas</a></li>
+                        <li><a class="dropdownClaro-item dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/personas">Personas relacionadas</a></li>
                         @endif
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link letra-primary-color menu" href="/pacientes/{{Session::get('paciente')['id']}}/calendario">Calendario</a>
+                    <!--<span class="badge bg-danger rounded-pill" style="float:right;margin-bottom:-15px;">1</span>-->
+                    <a class="nav-linkClaro nav-link letra-primary-color menu" href="/pacientes/{{Session::get('paciente')['id']}}/calendario">Calendario
+                        <!--Hacer que solo se muestre si hay sin finalizar-->
+                        @if (Auth::user()->rol_id == 2)
+                        <span class="badge badge-pill rounded-pill badge-danger"> {{ App\Http\Controllers\CalendarioController::getNotDone($paciente->id) }}
+                        </span>
+                        @endif
+                    </a>
                 </li>
                 @if (Auth::user()->rol_id == 1)
                 <li class="nav-item">
-                    <a class="nav-link letra-primary-color menu" href="/pacientes/{{Session::get('paciente')['id']}}/cuidadores">Cuidadores</a>
+                    <a class="nav-linkClaro nav-link letra-primary-color menu" href="/pacientes/{{Session::get('paciente')['id']}}/cuidadores">Personas cuidadoras</a>
                 </li>
                 @endif
             </ul>
@@ -52,22 +59,22 @@
         <div class="row align-items-center pe-4">
             <div class="col-12">
                 @if (isset($paciente->multimedia))
-                <a href="/pacientes/{{Session::get('paciente')['id']}}"><img src="{{$paciente->multimedia->fichero}}" alt="Avatar" class="avatar-mini"></a>
+                <a href="/pacientes/{{Session::get('paciente')['id']}}"><img src="{{$paciente->multimedia->fichero}}"  alt="Avatar" class="avatar-mini"></a>
                 @else
 
-                    @if( Session::get('paciente')['genero_id'] == 1 || Session::get('paciente')['genero_id'] == 3)
+                @if( Session::get('paciente')['genero_id'] == 1 || Session::get('paciente')['genero_id'] == 3)
 
-                      <a href="/pacientes/{{Session::get('paciente')['id']}}"><img src="/img/avatar_hombre.png" alt="Avatar" class="avatar-mini"></a>
+                <a  href="/pacientes/{{Session::get('paciente')['id']}}"><img src="/img/avatar_hombre.png" alt="Avatar" class="avatar-mini"></a>
 
-                    @elseif( Session::get('paciente')['genero_id'] == 2)
-                     <a href="/pacientes/{{Session::get('paciente')['id']}}"><img src="/img/avatar_mujer.png" alt="Avatar" class="avatar-mini"></a>
-                    @endif
+                @elseif( Session::get('paciente')['genero_id'] == 2)
+                <a  href="/pacientes/{{Session::get('paciente')['id']}}"><img src="/img/avatar_mujer.png" alt="Avatar" class="avatar-mini"></a>
+                @endif
                 @endif
             </div>
         </div>
         <div class="row align-items-center pe-4">
             <div class="col-12">
-                <a class="nav-link letra-primary-color" href="/pacientes/{{Session::get('paciente')['id']}}">{{ Session::get('paciente')['nombre'] }}</a>
+                <a class="nav-linkClaro nav-link letra-primary-color" href="/pacientes/{{Session::get('paciente')['id']}}">{{ Session::get('paciente')['nombre'] }}</a>
             </div>
         </div>
 

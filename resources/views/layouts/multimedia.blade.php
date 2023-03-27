@@ -22,6 +22,12 @@
             elseif (in_array($ext, array('rar', 'zip', '7zip'))){
                 $ruta = '/img/rar.jpg';
             }
+            else if (in_array($ext, array('mp4', 'mkv', 'avi'))){
+                $ruta = '/img/video.png';
+            }
+            else if (in_array($ext, array('mp3', 'ogg', 'wav', 'aac'))){
+                $ruta = '/img/audio.png';
+            }
             else{
                 $ruta = '/img/undefined.jpg';
             }

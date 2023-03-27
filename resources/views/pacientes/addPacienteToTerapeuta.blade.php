@@ -7,7 +7,7 @@
 <div class="container-fluid">
 
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Asignar paciente a otros terapeutas</h5>
+        <h5 class="text-muted">Asignar usuario a otros terapeutas</h5>
         <hr class="lineaTitulo">
     </div>
     <form action="/asignacionTerapeutas" method="post">
@@ -21,24 +21,18 @@
             </div>
             <table class="table table-bordered recuerdameTable datatable">
                 <thead>
-                    <tr class="bg-primary">
-                        <th scope="col col-1"></th>
-                        <th scope="col col-12">Nombre</th>
-                        <th scope="col col-12">Apellidos</th>
+                    <tr >
+                        <th class="fit5 text-center" scope="col col-12">Asignar</th>
+                        <th class="text-center" scope="col col-12">Nombre</th>
                     </tr>
                 </thead>
                 @foreach($users as $user)
                     <tr>
-                        <th scope="row">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value={{$user->id}} name="seleccion[]" @if($user->pacientes->contains($paciente)) checked @endif>
-                            </div>
-                        </th>
-                        <td>
-                            {{$user->nombre}}
+                        <td class="text-center" scope="row">
+                            <input class="form-check-input" type="checkbox" value={{$user->id}} name="seleccion[]" @if($user->pacientes->contains($paciente)) checked @endif>
                         </td>
                         <td>
-                            {{$user->apellidos}}
+                            {{$user->nombre}} {{$user->apellidos}}
                         </td>
                     </tr>
                 @endforeach
@@ -55,6 +49,7 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
+    <!-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>   -->
+    <script src="/js/libs/dataTables.js"></script>
     <script src="/js/table.js"></script>
 @endpush

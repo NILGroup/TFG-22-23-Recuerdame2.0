@@ -81,7 +81,11 @@ Route::get('/pacientes/{id}/cuidadores', 'App\Http\Controllers\CuidadoresControl
 Route::get('/pacientes/{id}/cuidadores/{idC}', 'App\Http\Controllers\CuidadoresController@show');
 Route::get('/pacientes/{id}/cuidadores/{idC}/editar', 'App\Http\Controllers\CuidadoresController@edit');
 Route::post('/repeatedCuidador', 'App\Http\Controllers\CuidadoresController@repeatedCuidador');
-
+Route::post('/borrar_foto_cuidador', 'App\Http\Controllers\CuidadoresController@removePhoto');
+Route::post('/borrar_cuidador', 'App\Http\Controllers\CuidadoresController@destroy_no_view');
+Route::delete('cuidadores/{id}', 'App\Http\Controllers\CuidadoresController@destroy');
+Route::post('/pacientes/{idP}/cuidadores/{id}/restore', 'App\Http\Controllers\CuidadoresController@restore');
+Route::post('/reasignarCuidadores', 'App\Http\Controllers\CuidadoresController@reasignarCuidadores');
 
 //RUTAS CUSTOMIZADAS SESION
 Route::post('/guardarSesion', 'App\Http\Controllers\SesionesController@store');
@@ -93,12 +97,14 @@ Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll')
 Route::post('/pacientes/{id}/sesiones/{idS}/update', 'App\Http\Controllers\SesionesController@store');
 Route::post('/updateAndRecuerdoNuevo','App\Http\Controllers\SesionesController@updateAndRecuerdoNuevo');
 Route::post('/updateAndSeleccionarRecuerdos','App\Http\Controllers\SesionesController@updateAndSeleccionarRecuerdos');
+Route::post('/pacientes/{idP}/sesiones/{id}/restore', 'App\Http\Controllers\SesionesController@restore');
 
 //RUTAS CUSTOMIZADAS PACIENTE
 Route::get('/pacientes/{id}/asignarTerapeutas', 'App\Http\Controllers\PacientesController@addPacienteToTerapeuta');
 Route::post('/asignacionTerapeutas','App\Http\Controllers\PacientesController@asignacionTerapeutas');
 Route::post('/actualizarPaciente','App\Http\Controllers\PacientesController@update');
 Route::post('/borrar_foto_paciente', 'App\Http\Controllers\PacientesController@removePhoto');
+Route::post('/pacientes/{id}/restore', 'App\Http\Controllers\PacientesController@restore');
 
 //RUTAS CUSTOMIZADAS RECUERDO
 Route::get('/pacientes/{id}/recuerdos', 'App\Http\Controllers\RecuerdosController@showByPaciente');
@@ -107,6 +113,8 @@ Route::get('/pacientes/{id}/recuerdos/{idR}', 'App\Http\Controllers\RecuerdosCon
 Route::get('/pacientes/{id}/recuerdos/{idR}/editar', 'App\Http\Controllers\RecuerdosController@edit');
 Route::delete('/eliminarRecuerdo/{id}', 'App\Http\Controllers\RecuerdosController@destroy');
 Route::post('/storeRecuerdoNoView', 'App\Http\Controllers\RecuerdosController@storeNoView');
+Route::post('/pacientes/{idP}/recuerdos/{id}/restore', 'App\Http\Controllers\RecuerdosController@restore');
+
 
 //RUTAS CUSTOMIZADAS PERSONA RELACIONADA
 Route::get('/pacientes/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
@@ -117,17 +125,18 @@ Route::get('/pacientes/{id}/personas/{idP}', 'App\Http\Controllers\PersonasRelac
 Route::get('/pacientes/{id}/personas/{idP}/editar', 'App\Http\Controllers\PersonasRelacionadasController@edit');
 Route::post('/editarPersona', 'App\Http\Controllers\PersonasRelacionadasController@update');
 Route::post('/storePersonaNoView', 'App\Http\Controllers\PersonasRelacionadasController@storeNoView');
+Route::post('/pacientes/{idP}/personas/{id}/restore', 'App\Http\Controllers\PersonasRelacionadasController@restore');
+
 
 //RUTAS CUSTOMIZADAS CALENDARIO
 Route::get('/pacientes/{id}/calendario', 'App\Http\Controllers\CalendarioController@showByPaciente');
 Route::post('/eliminarActividad', 'App\Http\Controllers\CalendarioController@destroy');
-
 Route::post('/modificarActividad', 'App\Http\Controllers\CalendarioController@update');
 Route::post('/calendarioSesion', 'App\Http\Controllers\CalendarioController@registroSesion');
-
 Route::post('/modificarSesion', 'App\Http\Controllers\CalendarioController@updateSesion');
 Route::post('/eliminarSesion', 'App\Http\Controllers\CalendarioController@destroySesion');
 //Route::get('/mostrarActividades/{id}', 'App\Http\Controllers\CalendarioController@show');
+
 
 //RUTAS CUSTOMIZADAS INFORMES SESION
 Route::get('/pacientes/{id}/informesSesion', 'App\Http\Controllers\InformesSesionController@showByPaciente');
@@ -137,6 +146,7 @@ Route::get('/pacientes/{id}/sesiones/{idS}/ver', 'App\Http\Controllers\InformesS
 Route::post('/cerrarInformeSesion', 'App\Http\Controllers\InformesSesionController@store');
 Route::post('/generarPDFInformeSesion', 'App\Http\Controllers\InformesSesionController@generarPDFInformeSesion');
 Route::post('/getRecuerdo', 'App\Http\Controllers\RecuerdosController@getNoView');
+Route::post('/pacientes/{idP}/informesSesion/{id}/restore', 'App\Http\Controllers\InformesSesionController@restore');
 
 
 //RUTAS CUSTOMIZADAS EVALUACION
@@ -148,12 +158,14 @@ Route::get('/pacientes/{id}/evaluaciones/{idE}/ver', 'App\Http\Controllers\Evalu
 Route::post('/cerrarEvaluacion', 'App\Http\Controllers\EvaluacionController@store');
 Route::post('/modificarEvaluacion', 'App\Http\Controllers\EvaluacionController@update');
 Route::post('/generarPDFEvaluacion', 'App\Http\Controllers\EvaluacionController@generarPDFInformeEvaluacion');
+Route::post('/pacientes/{idP}/evaluaciones/{id}/restore', 'App\Http\Controllers\EvaluacionController@restore');
+
 
 //RUTAS CUSTOMIZADAS HISTORIAS DE VIDA
 Route::get('/pacientes/{id}/historias/generarHistoria', 'App\Http\Controllers\HistoriaController@generarHistoria');
 Route::get('/historias/generarLibro', 'App\Http\Controllers\HistoriaController@generarLibroHistoria');
+Route::get('/generarVideoHistoria', 'App\Http\Controllers\HistoriaController@generarVideoHistoria');
 Route::get('/generarPDFHistoria', 'App\Http\Controllers\PDFController@generarPDFHistoria');
-   
 Route::post('/storeTipoNoView', 'App\Http\Controllers\TipoRelacionController@storeNoView');
 
 
@@ -161,18 +173,20 @@ Route::post('/storeTipoNoView', 'App\Http\Controllers\TipoRelacionController@sto
     CREA DATOS EN LA BASE DE DATOS
 *********************************************************/
 Route::post('/prueba', function () {
-    DB::table("rols")->insert([
+    $now = Carbon::now();
+
+    DB::table("rols")->insertOrIgnore([
         ["nombre" => "Terapeuta"],
         ["nombre" => "Cuidador"]
     ]);
 
-    DB::table("generos")->insert([
+    DB::table("generos")->insertOrIgnore([
         ["nombre" => "Hombre"],
         ["nombre" => "Mujer"],
         ["nombre" => "Otro"],
     ]);
 
-    DB::table("etapas")->insert([
+    DB::table("etapas")->insertOrIgnore([
         ["nombre" => "Infancia"],
         ["nombre" => "Adolescencia"],
         ["nombre" => "Adulto joven"],
@@ -180,13 +194,29 @@ Route::post('/prueba', function () {
         ["nombre" => "Adulto Mayor"]
     ]);
 
-    DB::table("estados")->insert([
+    DB::table("participacions")->insertOrIgnore([
+        ["nombre" => "Muy bueno"],
+        ["nombre" => "Bueno"],
+        ["nombre" => "Normal"],
+        ["nombre" => "Malo"],
+        ["nombre" => "Muy malo"]
+    ]);
+
+    DB::table("complejidads")->insertOrIgnore([
+        ["nombre" => "Muy adecuada"],
+        ["nombre" => "Bastante decuada"],
+        ["nombre" => "Adecuada"],
+        ["nombre" => "Poco adecuada"],
+        ["nombre" => "Nada adecuada"]
+    ]);
+
+    DB::table("estados")->insertOrIgnore([
         ["nombre" => "Conservado"],
         ["nombre" => "En riesgo"],
         ["nombre" => "Perdido"]
     ]);
 
-    DB::table("emocions")->insert([
+    DB::table("emocions")->insertOrIgnore([
         ["nombre" => "Alegría"],
         ["nombre" => "Nostalgia"],
         ["nombre" => "Ira"],
@@ -194,7 +224,7 @@ Route::post('/prueba', function () {
         ["nombre" => "Tristeza"]
     ]);
     
-    DB::table("estudios")->insert([
+    DB::table("estudios")->insertOrIgnore([
         ["nombre" => "Educación infantil"],
         ["nombre" => "Educación primaria"],
         ["nombre" => "ESO"],
@@ -206,13 +236,13 @@ Route::post('/prueba', function () {
         ["nombre" => "Sin estudios"]
     ]);
 
-    DB::table("etiquetas")->insert([
+    DB::table("etiquetas")->insertOrIgnore([
         ["nombre" => "Positivo"],
         ["nombre" => "Neutro"],
         ["nombre" => "Negativo"]
     ]);
 
-    DB::table("categorias")->insert([
+    DB::table("categorias")->insertOrIgnore([
         ["nombre" => "Familia"],
         ["nombre" => "Amistad"],
         ["nombre" => "Hobbies"],
@@ -222,7 +252,7 @@ Route::post('/prueba', function () {
         ["nombre" => "Otro"]
     ]);
 
-    DB::table("situacions")->insert([
+    DB::table("situacions")->insertOrIgnore([
         ["nombre" => "Soltero/a"],
         ["nombre" => "Casado/a"],
         ["nombre" => "Unión de hecho"],
@@ -231,7 +261,7 @@ Route::post('/prueba', function () {
         ["nombre" => "Viudo/a"]
     ]);
 
-    DB::table("residencias")->insert([
+    DB::table("residencias")->insertOrIgnore([
         ["nombre" => "Piso"],
         ["nombre" => "Casa"],
         ["nombre" => "Centro de día"],
@@ -240,12 +270,12 @@ Route::post('/prueba', function () {
         ["nombre" => "Otros"]
     ]);
 
-    DB::table("multimedias")->insert([
+    DB::table("multimedias")->insertOrIgnore([
         ["nombre" => "multimedia 1", "fichero" => "/img/avatar_hombre.png"],
         ["nombre" => "multimedia 2", "fichero" => "/img/avatar_mujer.png"]
     ]);
 
-    DB::table("tiporelacions")->insert([
+    DB::table("tiporelacions")->insertOrIgnore([
         ["nombre" => "Padre / Madre"],
         ["nombre" => "Hermano / Hermana"],
         ["nombre" => "Hijo / Hija"],
@@ -255,20 +285,22 @@ Route::post('/prueba', function () {
         ["nombre" => "Otro"]
     ]);
     
-    DB::table("users")->insert([
+    DB::table("users")->insertOrIgnore([
         ['nombre' => "Manuel", 'apellidos' => "López Jordan", 'email' => "terapeuta@gmail.com", 
-             'rol_id' => 1,'telefono'=>null,'localidad'=>null,'parentesco'=>null,  'password' => Hash::make("terapeuta")],
-        ['nombre' => "Cuidador", 'apellidos' => "Alfredo", 'email' => "cuidador@gmail.com",
+             'rol_id' => 1, 'telefono'=>null, 'localidad'=>null, 
+             'parentesco'=>null, "ocupacion" => null, 'password' => Hash::make("terapeuta")],
+        ['nombre' => "Alfredo", 'apellidos' => "Martinez-Almeida Pérez",  'email' => "cuidador@gmail.com",
              'rol_id' => 2,'telefono' => "684847324", 'localidad' => "Argüelles",
-             'parentesco' => "Primer grado",'password' => Hash::make("cuidador")],
-        ['nombre' => "Cuidador", 'apellidos' => "Joya y de Borbón", 'email' => "cuidador2@gmail.com",
+             'parentesco' => "Primer grado", "ocupacion" => "Diseñador",'password' => Hash::make("cuidador")],
+        ['nombre' => "María", 'apellidos' => "Montserrat Plaza", 'email' => "cuidador2@gmail.com",
              'rol_id' => 2,'telefono' => "656789234", 'localidad' => "Nuevos ministerios",
-             'parentesco' => "Segundo grado",'password' => Hash::make("cuidador2")],
+             'parentesco' => "Segundo grado", "ocupacion" => "Profesora", 'password' => Hash::make("cuidador2")],
         ['nombre' => "Sofía", 'apellidos' => "Méndez Alvaro", 'email' => "terapeuta2@gmail.com", 
-             'rol_id' => 1,'telefono'=>null,'localidad'=>null,'parentesco'=>null, 'password' => Hash::make("terapeuta")]
+             'rol_id' => 1,'telefono'=>null,'localidad'=>null,
+             'parentesco'=>null, "ocupacion" => null, 'password' => Hash::make("terapeuta2")]
     ]);
 
-    DB::table("pacientes")->insert([
+    DB::table("pacientes")->insertOrIgnore([
         ["nombre" => "María Concepción", "apellidos" => "Martinez-Almeida García", "genero_id" => 2,
             "lugar_nacimiento" => "Madrid", "nacionalidad" => "Española", "fecha_nacimiento" => Carbon::create(1950, 7, 30),
             "residencia_id" => 1, "residencia_custom" => null, "residencia_actual" => "C/Toledo 49, Ático 9E", "ocupacion" => "Confeccionista", 
@@ -279,7 +311,7 @@ Route::post('/prueba', function () {
             "situacion_id" => 1, "estudio_id" => 4, "fecha_inscripcion" => Carbon::create(2019, 4, 7)]
     ]);
 
-    DB::table("personarelacionadas")->insert([
+    DB::table("personarelacionadas")->insertOrIgnore([
         ["nombre" => "Ignacio", "apellidos" => "Martinez-Almeida García", "telefono" => "678765456", 
             "ocupacion" => "Desconocido", "email" => "igMar@gmail.com", "localidad" => "C/Toledo 49, Ático 9E",
             "contacto" => false, "observaciones" => "Ignacio es el hermano menor de Concepción. Actualmente viven juntos y pasan bastante tiempo juntos. Ignacio es enérgetico desde siempre y lleva cuidando de Concepción 15 años. ",
@@ -306,55 +338,66 @@ Route::post('/prueba', function () {
             "tiporelacion_id" => 6, "paciente_id" => 2 ]
     ]);
 
-    DB::table("actividads")->insert([
-        ["start" => Carbon::now(), "title" => "Primera terapia", "paciente_id" => 1,
-            "description" => "Primera terapia de evaluación a la paciente María Concepción", "color" => "#20809d"],
-        ["start" => Carbon::now(), "title" => "Primera terapia", "paciente_id" => 2,
-            "description" => "Primera terapia de evaluación a la paciente Cristina", "color" => "#20809d"]
+    DB::table("actividads")->insertOrIgnore([
+        ["start" => Carbon::now(), "title" => "Primera actividad", "paciente_id" => 1,
+            "description" => "Primera actividad a la paciente María Concepción", "color" => "#20809d"],
+        ["start" => Carbon::now(), "title" => "Primera actividad", "paciente_id" => 2,
+            "description" => "Primera actividad a la paciente Cristina", "color" => "#20809d"]
     ]);
                                 
-    DB::table("evaluacions")->insert([
-        ["paciente_id"=> 1, "fecha" => Carbon::create(2022, 9, 30), "gds" => 2, "gds_fecha" => Carbon::create(2022, 9, 30),
-            "mental" => 2, "mental_fecha" => Carbon::create(2022, 9, 30), "cdr"=> 2, "cdr_fecha" => Carbon::create(2022, 9, 30),
-            "nombre_escala" => "escala custom", "escala" => 2, "fecha_escala" => Carbon::create(2022, 10, 30),
+    DB::table("evaluacions")->insertOrIgnore([
+        ["paciente_id"=> 1, "fecha" => Carbon::create($now->year, $now->month, 1), "gds" => 2, "gds_fecha" => Carbon::create($now->year, $now->month, 1),
+            "mental" => 2, "mental_fecha" => Carbon::create($now->year, $now->month, 1), "cdr"=> 2, "cdr_fecha" => Carbon::create($now->year, $now->month, 1),
+            "nombre_escala" => "escala custom", "escala" => 2, "fecha_escala" => Carbon::create($now->year, 10, 30),
             "diagnostico" => "Empeora poco a poco.", "observaciones" => "Ninguna" ],
-        ["paciente_id"=> 1, "fecha" => Carbon::create(2022, 10, 30), "gds" => 1, "gds_fecha" => Carbon::create(2022, 10, 30),
-            "mental" => 1, "mental_fecha" => Carbon::create(2022, 10, 30), "cdr"=> 1, "cdr_fecha" => Carbon::create(2022, 10, 30),
-            "nombre_escala" => "nombre cualquiera", "escala" => 1, "fecha_escala" => Carbon::create(2022, 10, 30),
+        ["paciente_id"=> 1, "fecha" => Carbon::create($now->year, $now->month, 2), "gds" => 1, "gds_fecha" => Carbon::create($now->year, $now->month, 2),
+            "mental" => 1, "mental_fecha" => Carbon::create($now->year, $now->month, 2), "cdr"=> 1, "cdr_fecha" => Carbon::create($now->year, $now->month, 2),
+            "nombre_escala" => "nombre cualquiera", "escala" => 1, "fecha_escala" => Carbon::create($now->year, 10, 30),
             "diagnostico" => "Ha empeorado gravemente.", "observaciones" => "No reconoce a su familia" ],
-        ["paciente_id"=> 2, "fecha" => Carbon::create(2022, 10, 30), "gds" => 5, "gds_fecha" => Carbon::create(2022, 10, 30),
-            "mental" => 5, "mental_fecha" => Carbon::create(2022, 10, 30), "cdr"=> 5, "cdr_fecha" => Carbon::create(2022, 10, 30),
-            "nombre_escala" => "escala custom", "escala" => 5, "fecha_escala" => Carbon::create(2022, 10, 30),
+        ["paciente_id"=> 2, "fecha" => Carbon::create($now->year, $now->month, 2), "gds" => 5, "gds_fecha" => Carbon::create($now->year, $now->month, 2),
+            "mental" => 5, "mental_fecha" => Carbon::create($now->year, $now->month, 2), "cdr"=> 5, "cdr_fecha" => Carbon::create($now->year, $now->month, 2),
+            "nombre_escala" => "escala custom", "escala" => 5, "fecha_escala" => Carbon::create($now->year, $now->month, 2),
             "diagnostico" => "Se encuentra en las primeras etapas.", "observaciones" => null ]
     ]);
 
 
-    DB::table("sesions")->insert([
-        ["fecha" => Carbon::create(2022, 9, 17, 15, 30 ,0), "etapa_id" => 1, "objetivo" => "Trabajar los recuerdos en la etapa de la adolescencia con ayuda de imágenes y videos", 
-            "descripcion" => "Etapa importante a nivel de emociones", "barreras"=> "Algunos recuerdos ya no conservados.", "facilitadores" => "El recuerdo con sus amigos", 
-            "fecha_finalizada" => Carbon::create(2022, 9, 19, 14,0,0), "paciente_id" => 1, "user_id" => 1, 
-            "respuesta" => "Gestiona las emociones correctamente.", "observaciones" => "ninguna observacion", "duracion" => "01:30"],
-        ["fecha" => Carbon::create(2022, 9, 22, 10, 15 ,0), "etapa_id" => 2, "objetivo" => "Trabajar la tristeza que le da al recordar a su marido ",
-            "descripcion" => "Al trabajar los recuerdos relacionados con su marido, genera una tristeza en el paciente que hay que controlar", "barreras"=> "Dificultad para hablar de su marido.", "facilitadores" => null, 
-            "fecha_finalizada" => null, "paciente_id" => 1, "user_id" => 1, 
-            "respuesta" => "Ninguna", "observaciones" => null, "duracion" => null],
-        ["fecha" => Carbon::create(2022, 10, 31, 10,30,0), "etapa_id" => 2, "objetivo" => "Pruebas iniciales",
-            "descripcion" => "Iniciaremos la terapia como un repaso general", "barreras"=> null, "facilitadores" => "Las fotografías ayudan.", 
-            "fecha_finalizada" => null, "paciente_id" => 2, "user_id" => 4, 
-            "respuesta" => null, "observaciones" => null, "duracion" => null],
+    DB::table("sesions")->insertOrIgnore([
+        ["fecha" => Carbon::create($now->year, $now->month, 2, 15, 30 ,0), "titulo" => "Trabajar adolescencia", 
+            "etapa_id" => 1,"participacion_id" => 1,"complejidad_id" => 1, "objetivo" => "Trabajar los recuerdos en la etapa de la adolescencia con ayuda de imágenes y videos", 
+            "descripcion" => "Etapa importante a nivel de emociones", "acciones" => "   Seleccionar imágenes y videos de la adolescencia del paciente.
+            Presentarlas al paciente.
+            Hacer preguntas para evocar recuerdos y emociones.
+            Fomentar comentarios y reflexiones sobre lo visto.
+            Profundizar en detalles y emociones asociados.
+            Recapitular y cerrar la sesión, asegurándose de que el paciente se sienta satisfecho.","barreras"=> "Algunos recuerdos ya no conservados.", 
+            "facilitadores" => "El recuerdo con sus amigos", "fecha_finalizada" => Carbon::create($now->year, $now->month, 5, 14,0,0), 
+            "paciente_id" => 1, "user_id" => 1, "respuesta" => "Gestiona las emociones correctamente.", 
+            "observaciones" => "ninguna observacion", "duracion" => "01:30", "finalizada" => true],
+        ["fecha" => Carbon::create($now->year, $now->month, 10, 10, 15 ,0), "titulo" => "Trabajar matrimonio", 
+            "etapa_id" => 2,"participacion_id" => null,"complejidad_id" => null, "objetivo" => "Trabajar la tristeza que le da al recordar a su marido ",
+            "descripcion" => "Al trabajar los recuerdos relacionados con su marido, genera una tristeza en el paciente que hay que controlar","acciones" =>null, "barreras"=> "Dificultad para hablar de su marido.", 
+            "facilitadores" => null, "fecha_finalizada" => null, 
+            "paciente_id" => 1, "user_id" => 1, "respuesta" => "Ninguna", 
+            "observaciones" => null, "duracion" => null, "finalizada" => false],
+        ["fecha" => Carbon::create($now->year, $now->month, 4, 10,30,0), "titulo" => "Inicio terapia", 
+            "etapa_id" => 2,"participacion_id" => null,"complejidad_id" => null, "objetivo" => "Pruebas iniciales",
+            "descripcion" => "Iniciaremos la terapia como un repaso general","acciones" =>null, "barreras"=> null, 
+            "facilitadores" => "Las fotografías ayudan.", "fecha_finalizada" => null, 
+            "paciente_id" => 2, "user_id" => 4, "respuesta" => null, 
+            "observaciones" => null, "duracion" => null, "finalizada" => false],
         ]);
 
     
-    DB::table("recuerdos")->insert([
+    DB::table("recuerdos")->insertOrIgnore([
         [ "fecha" => Carbon::create(2019, 9, 10), "nombre" => "Entrada en el grado",
             "descripcion" => "Inició su formación en costura y recuerda las técnicas que allí aprendió.",
             "localizacion" => "Facultad de Costura UCM", "etapa_id" => 3, "categoria_id" => 6,
             "emocion_id" => 3, "estado_id" => 1, "etiqueta_id" => 3, "puntuacion" => 2, "paciente_id" => 1, "apto"=>0 ],
         [ "fecha" => Carbon::create(2022, 10, 13), "nombre" => "Cena con amigos",
-            "descripcion" => "Cenó en Taco Bell su hijo Pablo y el vecino Eros, entre otros. Recuerda las risas e historias que allí se contaron. También haber pasado algo de frío.",
-            "localizacion" => "Taco Bell Moncloa", "etapa_id" => 3, "categoria_id" => 3, "emocion_id" => 2,
+            "descripcion" => "Cenó en Bell Mondo Italia con su hijo Pablo y su vecino Eros, entre otros. Recuerda las risas e historias que allí se contaron. También haber pasado algo de frío en la terraza, y disfrutar bastante de la comida.",
+            "localizacion" => "Bell Mondo, Moncloa", "etapa_id" => 3, "categoria_id" => 3, "emocion_id" => 2,
             "estado_id" => 1, "etiqueta_id" => 1, "puntuacion" => 10, "paciente_id" => 1 ,"apto"=>1],
-        [ "fecha" => Carbon::create(2022, 10, 13), "nombre" => "Fiesta en La Sierra",
+        [ "fecha" => Carbon::create(2022, 10, 15), "nombre" => "Fiesta en La Sierra",
             "descripcion" => "Asistió a la casa de campo de unos amigos en la Sierra y la recuerda con sentimientos de felicidad y ternura. Cuenta historias del momento y destaca haber ganado dinero en un bingo casero.",
             "localizacion" => "Discoteca Recuer-Dame, La Sierra", "etapa_id" => 3, "categoria_id" => 7, "emocion_id" => 1,
             "estado_id" => 2, "etiqueta_id" => 2, "puntuacion" => 7, "paciente_id" => 2,"apto"=>1 ]

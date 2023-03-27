@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Crear paciente</h5>
+        <h5 class="text-muted">Crear usuario</h5>
         <hr class="lineaTitulo">
     </div>
     <form class="dropzone p-0" id="d" method="post" action="/pacientes">
@@ -31,9 +31,11 @@
 
 @endsection
 
+
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> -->
+    <script src="/js/libs/dropzone.js"></script>
     <script>
         var ruta = "/pacientes/"
         var max = 1

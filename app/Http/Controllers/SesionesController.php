@@ -13,6 +13,7 @@ use App\Models\Emocion;
 use App\Models\Categoria;
 use App\Models\PersonaRelacionada;
 use App\Models\Tiporelacion;
+use ErrorException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,7 @@ class SesionesController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role']);
-        $this->middleware(['asignarPaciente'])->except(['index', 'create', 'destroy']);
+        $this->middleware(['asignarPaciente'])->except(['index', 'create', 'destroy', 'restore']);
     }
     
     /**
@@ -67,7 +68,29 @@ class SesionesController extends Controller
         $idPaciente = $paciente->id;
         $prelacionadas = Personarelacionada::where('paciente_id', $id)->get()->keyBy("id");
 
-        return view("sesiones.create", compact('persona','idPaciente','mostrarFoto','etapas', 'user', 'tipos', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'sesion', 'recuerdo', 'personas', 'show'));
+        $multimedias = [];
+
+        $pacientes_terapeuta = $user->pacientes;
+
+        foreach($pacientes_terapeuta as $p){
+            foreach($p->sesiones as $s){
+                foreach($s->multimedias as $m){
+
+                    $existent = true;
+                    foreach($multimedias as $mult){
+                        if ($mult->id == $m->id){
+                            $existent = false;
+                        }
+                    }
+
+                    if ($existent) array_push($multimedias, $m);
+
+                }
+            }
+        }
+
+
+        return view("sesiones.create", compact('multimedias','persona','idPaciente','mostrarFoto','etapas', 'user', 'tipos', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'sesion', 'recuerdo', 'personas', 'show'));
     }
 
     /**
@@ -79,17 +102,25 @@ class SesionesController extends Controller
     public function store(Request $request)
     {
         
+
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->idSesion],
             ['fecha' => $request->fecha,
+             'titulo' => $request->titulo,
              'etapa_id' => $request->etapa_id,
              'objetivo' => $request->objetivo,
              'descripcion' => $request->descripcion,
+             'acciones' => $request->acciones,
              'fecha_finalizada' => $request->fecha_finalizada,
              'paciente_id' => $request->paciente_id,
              'user_id' => $request->user_id,
              'respuesta' => $request->respuesta]
         );
+
+        $sesion->multimedias()->detach();
+        if (isset($request->mult)) {
+            $sesion->multimedias()->attach($request->mult);
+        }
 
         MultimediasController::savePhotos($request, $sesion);
 
@@ -97,15 +128,16 @@ class SesionesController extends Controller
         if(!is_null($request->recuerdos))
             $sesion->recuerdos()->attach($request->recuerdos);
 
-        if(isset($request->media)) {
-            $sesion->multimedias()->detach($request->media);
-        }
+       
 
         session()->put('created', "true");
+
+      
 
         //return redirect("pacientes/{$sesion->paciente->id}/sesiones");
     }
 
+/*
     public function storeRecuerdo($idPaciente, $idSesion, $recuerdo)
     {
         $recuerdo = Recuerdo::updateOrCreate(
@@ -126,16 +158,8 @@ class SesionesController extends Controller
         
         return $recuerdo->id;
     }
+*/
 
-    public function storeRecuerdos($idSesion, $listaRecuerdos)
-    {
-        return "TO DO";
-    }
-
-    public function storeMultimedia($idSesion, $listaFicheros)
-    {
-        return "TO DO";
-    }
     /**
      * Display the specified resource.
      *
@@ -174,8 +198,29 @@ class SesionesController extends Controller
         $idPaciente = $paciente->id;
         $persona = new Personarelacionada();
 
+        $multimedias = [];
+
+        $pacientes_terapeuta = $user->pacientes;
+
+        foreach($pacientes_terapeuta as $p){
+            foreach($p->sesiones as $s){
+                foreach($s->multimedias as $m){
+
+                    $existent = true;
+                    foreach($multimedias as $mult){
+                        if ($mult->id == $m->id){
+                            $existent = false;
+                        }
+                    }
+
+                    if ($existent) array_push($multimedias, $m);
+
+                }
+            }
+        }
+
         //throw new \Exception($sesion->multimedias);
-        return view('sesiones.edit', compact('persona','idPaciente','mostrarFoto', 'sesion', 'etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'show', 'personas', 'recuerdo', 'tipos'));
+        return view('sesiones.edit', compact('multimedias','persona','idPaciente','mostrarFoto', 'sesion', 'etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'show', 'personas', 'recuerdo', 'tipos'));
     }
 
     public function showByPaciente($idPaciente)
@@ -230,6 +275,10 @@ class SesionesController extends Controller
         Sesion::destroy($id);
         //return redirect("/pacientes/$idP/sesiones");
     }
+    public function restore($idP, $id) 
+    {
+        Sesion::where('id', $id)->withTrashed()->restore();
+    }
 
     public function destroyRecuerdo($idSesion, $idRecuerdo)
     {
@@ -249,6 +298,7 @@ class SesionesController extends Controller
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->id],
             ['fecha' => $request->fecha,
+             'titulo' => $request->titulo,
              'etapa_id' => $request->etapa_id,
              'objetivo' => $request->objetivo,
              'descripcion' => $request->descripcion,
@@ -268,6 +318,7 @@ class SesionesController extends Controller
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->id],
             ['fecha' => $request->fecha,
+             'titulo' => $request->titulo,
              'etapa_id' => $request->etapa_id,
              'objetivo' => $request->objetivo,
              'descripcion' => $request->descripcion,

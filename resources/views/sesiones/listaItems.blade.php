@@ -1,15 +1,18 @@
-<div class="d-flex justify-content-start mb-3">
-    <input hidden id="idUser" name="user_id" value="{{$user->id}}" required @if($show) disabled @endif>
-    <input hidden id="idPaciente" name="paciente_id" value="{{$paciente->id}}" required @if($show) disabled @endif>
+<div class="row justify-content-start mb-3">
+    <input hidden id="idUser" name="user_id" value="{{$user->id}}" required >
+    <input hidden id="idPaciente" name="paciente_id" value="{{$paciente->id}}" required >
     <input type="hidden" name="idSesion" id="idSesion" value="{{$sesion->id}}">
-    <div class="col d-inline">
-        <label for="fecha" class="form-label labelShow">Fecha: <span class="asterisco">*</span></label>
-        <input max="4000-12-31T23:00:00.0" min="1800-01-01T01:00:00.00" type="datetime-local" style="width: fit-content;" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$sesion->fecha}}" required @if($show) disabled @endif>
+    <input type="hidden" name="respuesta" id="idSesion" value="{{$sesion->respuesta}}">
+    <input type="hidden" name="fecha_finalizada" id="idSesion" value="{{$sesion->fecha_finalizada}}">
+
+    <div class=" d-flex col-lg-4 col-md-4 col-sm-12 mb-2 align-items-center">
+        <label for="fecha" style="min-width: 65px" class=" labelShow">Fecha: <span class="asterisco">*</span></label>
+        <input max="4000-12-31T23:00:00.0" min="1800-01-01T01:00:00.00" type="datetime-local" style="width: fit-content;" class="form-control form-control-sm" id="fecha" name="fecha" value="{{$sesion->fecha}}" required >
     </div>
 
-    <div class="col d-inline align-items-center">
-        <label for="etapa" class="form-label labelShow ">Etapa:<span class="asterisco">*</span></label>
-        <select class="form-select form-select-sm " style="width: fit-content;" name="etapa_id" required @if($show) disabled @endif>
+    <div class=" d-flex col-lg-4 col-md-4 col-sm-12 mb-2 align-items-center" id="divEtapa">
+        <label for="etapa" style="min-width: 65px" class=" labelShow">Etapa: <span class="asterisco">*</span></label>
+        <select class="form-select " style="width: fit-content;" name="etapa_id" required >
             @foreach($etapas as $etapa)
             <option value="{{$etapa->id}}" @if($sesion->etapa && $sesion->etapa->id == $etapa->id)
                 selected="selected"
@@ -19,20 +22,30 @@
         </select>
     </div>
 
-    <div class="col d-inline">
+    <div class=" d-flex col-lg-4 col-md-6 col-sm-12 align-items-center" >
         <label for="terapeuta" class="form-label labelShow">Terapeuta:</label>
         <label for="terapeuta" class="form-label form-label-sm">{{$user->nombre}} {{$user->apellidos}}</label>
     </div>
 </div>
 
 <div class="mb-3">
+    <label for="titulo" class="form-label labelShow">Título:<span class="asterisco">*</span></label>
+    <input type="text" maxlength="100" class="form-control form-control-sm" id="titulo" name="titulo" value="{{$sesion->titulo}}" required >
+</div>
+
+<div class="mb-3">
     <label for="objetivo" class="form-label labelShow">Objetivo:<span class="asterisco">*</span></label>
-    <textarea class="form-control form-control-sm" id="objetivo" name="objetivo" rows="3" required @if($show) disabled @endif>{{$sesion->objetivo}}</textarea>
+    <textarea class="form-control form-control-sm" id="objetivo" name="objetivo" rows="3" required >{{$sesion->objetivo}}</textarea>
 </div>
 
 <div class="mb-3">
     <label for="descripcion" class="form-label labelShow">Descripción:</label>
-    <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" rows="3" @if($show) disabled @endif>{{$sesion->descripcion}}</textarea>
+    <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" rows="3" >{{$sesion->descripcion}}</textarea>
+</div>
+
+<div class="mb-3">
+    <label for="acciones" class="form-label labelShow">Secuencia de acciones:</label>
+    <textarea class="form-control form-control-sm" id="acciones" name="acciones" rows="3" >{{$sesion->acciones}}</textarea>
 </div>
 
 <div class="row">
@@ -54,24 +67,22 @@
         <table id="tabla_recuerdos" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de recuerdos</caption>
             <thead>
-                <tr class="bg-primary">
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Etapa</th>
-                    <th scope="col">Categoría</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Etiqueta</th>
+                <tr >
+                    <th scope="col" class="text-center">Nombre</th>
+                    <th scope="col" class="text-center">Etapa</th>
+                    <th scope="col" class="text-center">Categoría</th>
+                    <th scope="col" class="text-center">Estado</th>
+                    <th scope="col" class="text-center">Apto</th>
                     @if($show)
-                    <th class="fit10" scope="col"></th>
+                        <th class="fit5 text-center" scope="col">Acciones</th>
                     @endif
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="shadow-sm">
                 @foreach ($sesion->recuerdos as $recuerdo)
                 <tr>
                     <td>{{$recuerdo->nombre}}</td>
-                    <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
                     <td>
                         @if(isset($recuerdo->etapa)){{$recuerdo->etapa->nombre}}@endif
                     </td>
@@ -81,13 +92,14 @@
                     <td>
                         @if(isset($recuerdo->estado)){{$recuerdo->estado->nombre}}@endif
                     </td>
-                    <td>
-                        @if(isset($recuerdo->etiqueta)){{$recuerdo->etiqueta->nombre}}@endif
+                    
+                    <td class=" text-center">
+                        <input class="form-check-input" type="checkbox" @if($recuerdo->apto) checked @endif disabled>
                     </td>
                     @if($show)
-                    <td class="tableActions">
-                        
-                    </td>
+                        <td class="tableActions">
+                            <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos del recuerdo"></i></a>
+                        </td>
                     @endif
                     <input type="hidden" value="{{$recuerdo->id}}" name="recuerdos[]">
                 </tr>
@@ -103,18 +115,20 @@
 </div>
 
 @if(!$show)
-<div class="row">
-    <div class="col-12 justify-content-end d-flex p-2">
-        <!-- TODO REDIRIGIR A SELECCION DE MULTIMEDIA -->
-        <!-- <a href="#" class="btn btn-success">Añadir existente</button></a> -->
+    <div class="row " id="add-multi-sesion">
+        <div class="justify-content-end d-flex p-2">
+            <button type="button" class="btn btn-success me-2 showmodal" 
+            @if(str_contains(url()->current(), 'calendario')) data-show-modal="modalMultimedia" @else data-bs-toggle="modal" data-bs-target="#modalMultimedia" @endif>
+                Añadir existente
+            </button>
+        </div>
     </div>
-</div>
+    @include('sesiones.modals')
 @endif
 
-@if($show)
-<div id="showMultimedia" class="row pb-2">
-    @foreach ($sesion->multimedias as $media)
-        @include("layouts.multimedia")
-    @endforeach
-</div>
-@endif
+
+
+
+
+
+

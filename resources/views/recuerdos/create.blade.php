@@ -19,7 +19,12 @@
                 </div>
                 <div class="dropzone-previews">
 
-
+                </div>
+                <div class="pt-4 pb-2">
+                    <h5 class="text-muted">Material Existente</h5>
+                </div>
+                <div id="showMultimedia" class="row pb-2">
+                    
                 </div>
         </div>
 
@@ -39,10 +44,14 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+    <!-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>   -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> -->
+    <script src="/js/libs/dataTables.js"></script>
+    <script src="/js/libs/dropzone.js"></script>
+
     <script src="/js/table.js"></script>
     <script>
+        $("#add-multimedia").hide()
         let id = document.getElementById("paciente_id").value;
         var ruta = "/pacientes/" + id + "/recuerdos"
         var max // no borrar
@@ -50,4 +59,5 @@
     </script>
     <script src="/js/dropzone.js"></script>
     <script src="/js/persona.js"></script>
+    <script src="/js/multimediaModal.js"></script>
 @endpush

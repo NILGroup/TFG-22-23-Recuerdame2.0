@@ -19,7 +19,7 @@ class PersonasRelacionadasController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role'])->except(['show']);
-        $this->middleware(['asignarPaciente'])->except(['destroy']);
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
     }
 
     /**
@@ -43,12 +43,11 @@ class PersonasRelacionadasController extends Controller
 
     public function create(int $idPaciente)
     {
-        $show = false;
         $tipos = Tiporelacion::all()->sortBy("id");
         $persona = new Personarelacionada();
         $paciente = Paciente::find($idPaciente);
-        $mostrarFoto = true;
-        return view("personasrelacionadas.create", compact('mostrarFoto',"idPaciente", "paciente", "tipos", "persona", "show"));
+        $mostrarFoto = false;
+        return view("personasrelacionadas.create", compact('mostrarFoto',"idPaciente", "paciente", "tipos", "persona"));
     }
 
     /**
@@ -123,12 +122,11 @@ class PersonasRelacionadasController extends Controller
 
     public function show($idPaciente, $id)
     {
-        $show = true;
         $tipos = Tiporelacion::all()->sortBy("id");
         $persona = Personarelacionada::findOrFail($id);
         $idPaciente = $persona->paciente_id;
         $mostrarFoto = true;
-        return view("personasrelacionadas.show", compact("mostrarFoto","persona", "tipos", "show", "idPaciente"));
+        return view("personasrelacionadas.show", compact("mostrarFoto","persona", "tipos", "idPaciente"));
     }
 
 
@@ -138,12 +136,11 @@ class PersonasRelacionadasController extends Controller
 
     public function edit($idPaciente, $id)
     {
-        $show = false;
         $tipos = Tiporelacion::all()->sortBy("id");
         $persona = Personarelacionada::findOrFail($id);
         $idPaciente = $persona->paciente_id;
         $mostrarFoto = true;
-        return view("personasrelacionadas.edit", compact("mostrarFoto","persona","tipos", "show", "idPaciente"));
+        return view("personasrelacionadas.edit", compact("mostrarFoto","persona","tipos", "idPaciente"));
     }
 
     /**
@@ -174,13 +171,13 @@ class PersonasRelacionadasController extends Controller
 
     public function destroy(int $id)
     {
-        
         $persona = Personarelacionada::findOrFail($id);
-        $paciente = $persona->paciente;
         $persona->delete();
-
         //return redirect("/pacientes/$paciente->id/personas");
-
+    }
+    public function restore($idP, $id) 
+    {
+        Personarelacionada::where('id', $id)->withTrashed()->restore();
     }
 
     public function removePhoto(Request $request){

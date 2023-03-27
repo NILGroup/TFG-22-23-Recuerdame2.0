@@ -39,29 +39,29 @@
             </div>
 
             <div class="modal-body">
-                <table id="tablaRecuerdosExistentes" class="table w-100 table-bordered table-striped table-responsive datatable">
+                <table id="tablaRecuerdosExistentes" class="table w-100 table-bordered table-striped table-responsive datatable nowrap">
                     <thead>
-                        <tr class="bg-primary">
-                            <th scope="col" style="display: none;">Id</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Etapa</th>
-                            <th scope="col">Categoría</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Etiqueta</th>
-                            <th class="fit10" scope="col"></th>
+                        <tr >
+                            <th scope="col" style="display: none;" class="text-center">Id</th>
+                            <th scope="col" class="text-center">Nombre</th>
+                            <th scope="col" class="text-center">Etapa</th>
+                            <th scope="col" class="text-center">Categoría</th>
+                            <th scope="col" class="text-center">Estado</th>
+                            <th scope="col" class="text-center">Apto</th>
+                            <th class="fit5 text-center" scope="col">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="shadow-sm">
                         @foreach ($recuerdos as $recuerdo)
                         <tr>
                             <td style="display: none;">{{$recuerdo->id}}</td>
                             <td>{{$recuerdo->nombre}}</td>
-                            <td>{{date("d/m/Y", strtotime($recuerdo->fecha))}}</td>
                             <td>{{$recuerdo->etapa->nombre}}</td>
                             <td>@if(!is_null($recuerdo->categoria_id)) {{$recuerdo->categoria->nombre}} @endif </td>
                             <td>@if(!is_null($recuerdo->estado_id)) {{$recuerdo->estado->nombre}} @endif </td>
-                            <td>@if(!is_null($recuerdo->etiqueta_id)) {{$recuerdo->etiqueta->nombre}} @endif </td>
+                            <td class=" text-center">
+                                <input class="form-check-input" type="checkbox" @if($recuerdo->apto) checked @endif disabled>
+                            </td>
                             <td id="recuerdosSeleccionados" class="tableActions">
                                 <input class="form-check-input" type="checkbox" value="{{$recuerdo->id}}" name="checkRecuerdo[]" id="checkRecuerdo" @if($sesion->recuerdos->contains($recuerdo)) checked @endif>
                             </td>
@@ -78,7 +78,3 @@
         </div>
     </div>
 </div>
-
-@push('scripts')
-    
-@endpush

@@ -2,8 +2,8 @@
 
 @section('content')
 
-<input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$paciente->id}}" required @if($show) disabled @endif>
-<input type="hidden" name="user_type" class="form-control form-control-sm" id="user_type" value="{{$user->rol_id}}" required @if($show) disabled @endif>
+<input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$paciente->id}}" required >
+<input type="hidden" name="user_type" class="form-control form-control-sm" id="user_type" value="{{$user->rol_id}}" required >
 <!--<select id="typeSelector">
   <option value="all">Todos</option>
   <option value="a">Actividades</option>
@@ -18,22 +18,22 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header bg-info">
-                    <h5 class="modal-title" id="titulo"></h5>
+                    <h5 class="modal-title" id="tituloModal"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" >
                     </button>
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs" id="modalesCalendario">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Actividad</button>
+                            <button class="nav-link active" id="actividad-modal-tab" data-bs-toggle="tab" data-bs-target="#actividad-modal" type="button" role="tab" aria-controls="actividad-modal" aria-selected="true">Actividad</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Sesión</button>
+                            <button class="nav-link" id="sesion-modal-tab" data-bs-toggle="tab" data-bs-target="#sesion-modal" type="button" role="tab" aria-controls="sesion-modal" aria-selected="false">Sesión</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"> @include('calendario.registroActividad') </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"> @include('calendario.registroSesion') </div>
+                        <div class="tab-pane fade show active" id="actividad-modal" role="tabpanel" aria-labelledby="actividad-modal-tab"> @include('calendario.registroActividad') </div>
+                        <div class="tab-pane fade" id="sesion-modal" role="tabpanel" aria-labelledby="sesion-modal-tab"> @include('calendario.registroSesion') </div>
                     </div>
 
                 </div>
@@ -47,14 +47,65 @@
 
 @endsection
 
+@push('styles')
+    <link rel="stylesheet" href="/css/calendario.css">
+@endpush
+
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script> -->
+    <!-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>   -->
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="/js/libs/dataTables.js"></script>
+    <script src="/js/libs/fullcalendar.js"></script>
+    <script src="/js/libs/sweetAlert2.js"></script>
+
     <script src="/js/table.js"></script>
     <script src="/js/calendario.js"></script>
     <script src="/js/recuerdo.js"></script>
     <script src="/js/multiModal.js"></script>
     <script src="/js/confirm.js"></script>
+    <script src="/js/validacion.js"></script>
+    @if (Session::has('created'))
+        <script>
+            var action = "{{Session::get('created')}}"
+        </script>
+        @php 
+            Illuminate\Support\Facades\Session::forget('created');
+        @endphp
+        <script src="/js/successAlert.js"></script>
+    @endif
+
+    <script>
+        $(document).ready(function() {
+            $("#add-multi-sesion").hide()
+            $("#add-multimedia").hide()
+            $('#calendar .fc-dayGridMonth-button').on("click", function() {
+                $('#calendar .fc-dayGridMonth-button').attr("disabled", "");
+                $('#calendar .fc-dayGridWeek-button').removeAttr("disabled");
+                $('#calendar .fc-dayGridDay-button').removeAttr("disabled");
+                $('#calendar .fc-listMonth-button').removeAttr("disabled");
+            });
+            $('#calendar .fc-dayGridWeek-button').on("click", function() {
+                $('#calendar .fc-dayGridMonth-button').removeAttr("disabled");
+                $('#calendar .fc-dayGridWeek-button').attr("disabled", "");
+                $('#calendar .fc-dayGridDay-button').removeAttr("disabled");
+                $('#calendar .fc-listMonth-button').removeAttr("disabled");
+            });
+            $('#calendar .fc-dayGridDay-button').on("click", function() {
+                $('#calendar .fc-dayGridMonth-button').removeAttr("disabled");
+                $('#calendar .fc-dayGridWeek-button').removeAttr("disabled");
+                $('#calendar .fc-dayGridDay-button').attr("disabled", "");
+                $('#calendar .fc-listMonth-button').removeAttr("disabled");
+            });
+            $('#calendar .fc-listMonth-button').on("click", function() {
+                $('#calendar .fc-dayGridMonth-button').removeAttr("disabled");
+                $('#calendar .fc-dayGridWeek-button').removeAttr("disabled");
+                $('#calendar .fc-dayGridDay-button').removeAttr("disabled");
+                $('#calendar .fc-listMonth-button').attr("disabled", "");
+            });
+            $('#calendar .fc-dayGridMonth-button').click();
+            $('#calendar .fc-todo-button').click();
+        }) 
+    </script>
 @endpush

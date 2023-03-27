@@ -13,9 +13,15 @@ var table = $(document).ready(function () {
     $('table.datatable').DataTable({
         paging: false,
         info: false,
+        sDom:"ltipr",
+        /*
+        scrollY: 300,
+        scrollCollapse: true,
+        scrollResize: true,
+        */
         language: { 
             search: "_INPUT_",
-            searchPlaceholder: " Buscar...",
+            searchPlaceholder: "Buscar...",
             emptyTable: " ",
             zeroRecords: "No se han encontrado coincidencias",
         },
@@ -25,7 +31,6 @@ var table = $(document).ready(function () {
                 target: 'tr'
             }
         },
-        "sDom":"ltipr",
         initComplete: function () {
             var table = this.api();
             var search = $(this).closest('div.tabla').children("div.upper").children("div.search");
@@ -50,6 +55,7 @@ var table = $(document).ready(function () {
                 if(this.header().textContent != "")
                     search.children("select").append('<option value="' + i + '">' + this.header().textContent + '</option>');
             })
+            $("table.datatable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");   
         },
     });
 });
