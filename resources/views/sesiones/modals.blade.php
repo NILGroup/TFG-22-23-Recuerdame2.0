@@ -19,8 +19,8 @@
                         @foreach ($multimedias as $multimedia)
                         <tr>
                             <td style="display: none;">{{$recuerdo->id}}</td>
-                            <td>
-                                <a href="{{$multimedia->fichero}}">{{$multimedia->nombre}}</a>
+                            <td class="d-flex justify-content-center">
+                                <a href="{{$multimedia->fichero}}"><img style="height: 20em;" src="{{$multimedia->fichero}}"></img></a>
                             </td>
                             <td class="tableActions seleccionar">
                                 <input class="form-check-input check-multimedia" 

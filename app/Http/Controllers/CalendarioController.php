@@ -151,6 +151,8 @@ class CalendarioController extends Controller
         );
         if (!is_null($request->recuerdos))
             $sesion->recuerdos()->sync($request->recuerdos);
+
+        MultimediasController::savePhotos($request, $sesion);
             
         session()->put('created', "Actualizado");
         return redirect("pacientes/{$sesion->paciente->id}/calendario");
@@ -158,6 +160,7 @@ class CalendarioController extends Controller
 
     public function show(int $idPaciente)
     {
+        
         $tipoUsuario = Auth::user()->rol_id;
         $actividad = Actividad::where("paciente_id", "=", $idPaciente)->get();
         foreach ($actividad as $a) {
@@ -177,6 +180,8 @@ class CalendarioController extends Controller
                 $s->start = $s->fecha;
                 $s->title = $s->titulo;
                 $s->recuerdos = $s->recuerdos;
+                $s->multimedias = $s->multimedias;
+    
                 foreach ($s->recuerdos as $r) {
                     $r->etapa = Etapa::findOrFail($r->etapa_id);
                     //$r->etiqueta = Etiqueta::findOrFail($r->etiqueta_id);
@@ -186,6 +191,8 @@ class CalendarioController extends Controller
             }
             $sesionYactividad = $actividad->concat($sesion);
             $sesionYactividad->all();
+
+            
 
             //CREA UN FICHERO PRUEBAS.JSON EN PUBLIC PARA VER QUE JSON SE OBTIENE, pruebas********
             /*$filename = "PRUEBAS.json";
@@ -240,8 +247,11 @@ class CalendarioController extends Controller
                 'titulo' => $request->titulo
             ]
         );
+        
         if (!is_null($request->recuerdos))
             $sesion->recuerdos()->sync($request->recuerdos);
+
+        MultimediasController::savePhotos($request, $sesion);
         
         session()->put('created', "Creado");
         return redirect("pacientes/{$sesion->paciente->id}/calendario");

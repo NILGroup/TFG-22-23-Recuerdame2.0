@@ -110,12 +110,13 @@
             $('#calendar .fc-todo-button').click();
         }) 
 
-        let max = null
-        let limit = false
+        
+        let id = $("#paciente_id").prop("value")
 
         let dropzone_config = {
             form_id : "#sesion-modal #formulario",
-            submit_id: "#btnGuardarSesion"
+            submit_id: "#btnGuardarSesion",
+            ruta: "/pacientes/" + id + "/calendario"
         }
      
     </script>

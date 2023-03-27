@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', function () {
     let user = document.getElementById('user_type').value; //tipo de usuario (1 terapeuta, 2 cuidador)
     let formulario = document.getElementById('formulario');
@@ -41,8 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         dateClick: function (info) {
             formulario.reset();
+            $("#showMultimedia").children().detach()
+      
             /*TERAPEUTA****************************************************************/
             if (user === '1') {
+                document.getElementById('idSesion').value = "";
                 document.getElementById("modalesCalendario").children[0].style.display = "block";
                 document.getElementById("modalesCalendario").children[1].style.display = "block";
                 formulario.reset();
@@ -79,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 tabla.api().clear().draw();
                 document.getElementById('btnGuardarSesion').classList.remove('d-none');
                 document.getElementById('btnEliminarSesion').classList.add('d-none');
-                document.getElementById('btnModificarSesion').classList.add('d-none');
+               
                 /**********************************************************************/
                 $('#evento').modal('show');
             }
@@ -91,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         eventClick: function (info) {
             formulario.reset();
+            
             /*TERAPEUTA****************************************************************/
             if (user === '1') {
                 /*ACTIVIDAD**********************************************************+*/
@@ -140,6 +146,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 /************************************************************************/
                 /*SESIÓN***************************************************************+*/
                 else {
+                    console.log(info.event.id)
+
                     document.getElementById("modalesCalendario").children[0].style.display = "none";
                     document.getElementById("modalesCalendario").children[1].style.display = "block";
 
@@ -161,9 +169,33 @@ document.addEventListener('DOMContentLoaded', function () {
                         tabla.api().row.add(row).draw()
                     }
 
-                    document.getElementById('btnGuardarSesion').classList.add('d-none');
+               
                     document.getElementById('btnEliminarSesion').classList.remove('d-none');
-                    document.getElementById('btnModificarSesion').classList.remove('d-none');
+                   
+
+                    let div = $("#showMultimedia")
+                    div.children().detach()
+                    let multimedias = info.event.extendedProps.multimedias
+                    multimedias.forEach(e => {
+
+                        let nombre = e.nombre.slice(0, 20)
+                        let img = `<div class="d-flex flex-column align-items-center mb-2" style="width: fit-content;">
+                                    <div class="img-wrap">
+                                        <a href="${e.fichero}" class="visualizarImagen">
+                                            <img style="height: 10em;" src="${e.fichero}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon imagen">
+                                        </a>
+                                    </div>
+                                    <small>${nombre}</small>
+                                </div>`
+
+                        div.append($(img))
+
+                    })
+                   
+
+
+                    
+
                 }
                 /************************************************************************/
             }

@@ -38,6 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
         maxFiles: max,
         paramName: "file",
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+
+
         init: function () {
 
 
@@ -74,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         e.preventDefault()
                         e.stopPropagation()
     
-                        console.log("hola")
+                        console.log(myDropzone.getQueuedFiles())
                      
                         if (form.checkValidity()) {
         
