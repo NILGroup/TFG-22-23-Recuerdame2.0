@@ -148,7 +148,6 @@ Route::post('/generarPDFInformeSesion', 'App\Http\Controllers\InformesSesionCont
 Route::post('/getRecuerdo', 'App\Http\Controllers\RecuerdosController@getNoView');
 Route::post('/pacientes/{idP}/informesSesion/{id}/restore', 'App\Http\Controllers\InformesSesionController@restore');
 
-
 //RUTAS CUSTOMIZADAS EVALUACION
 Route::get('/pacientes/{id}/evaluaciones', 'App\Http\Controllers\EvaluacionController@showByPaciente');
 Route::get('/pacientes/{id}/evaluaciones/generarInforme', 'App\Http\Controllers\EvaluacionController@generarInforme');
@@ -159,6 +158,22 @@ Route::post('/cerrarEvaluacion', 'App\Http\Controllers\EvaluacionController@stor
 Route::post('/modificarEvaluacion', 'App\Http\Controllers\EvaluacionController@update');
 Route::post('/generarPDFEvaluacion', 'App\Http\Controllers\EvaluacionController@generarPDFInformeEvaluacion');
 Route::post('/pacientes/{idP}/evaluaciones/{id}/restore', 'App\Http\Controllers\EvaluacionController@restore');
+
+
+
+
+
+//RUTAS CUSTOMIZADAS DIAGNOSTICO
+Route::get('/pacientes/{id}/diagnostico', 'App\Http\Controllers\DiagnosticoController@show');
+Route::get('/pacientes/{id}/crearDiagnostico', 'App\Http\Controllers\DiagnosticoController@generarInforme');
+Route::get('/pacientes/{id}/informeDiagnostico', 'App\Http\Controllers\PDFController@verInformeDiagnostico');
+Route::get('/pacientes/{id}/editarDiagnostico', 'App\Http\Controllers\DiagnosticoController@showEditable');
+Route::post('/cerrarDiagnostico', 'App\Http\Controllers\DiagnosticoController@store');
+Route::post('/modificarDiagnostico', 'App\Http\Controllers\DiagnosticoController@update');
+Route::post('/generarPDFDiagnostico', 'App\Http\Controllers\DiagnosticoController@generarPDFInforme');
+
+
+
 
 
 //RUTAS CUSTOMIZADAS HISTORIAS DE VIDA

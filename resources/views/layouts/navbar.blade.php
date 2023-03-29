@@ -20,8 +20,12 @@
                         <li><a class="dropdownClaro-item dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/informesSesion">Informes de las sesiones</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a class=" nav-linkClaro nav-link  menu" aria-current="page" href="/pacientes/{{Session::get('paciente')['id']}}/evaluaciones">Informes de seguimiento</a>
+                <li class="nav-item dropdownClaro dropdown">
+                    <a class="nav-linkClaro nav-link dropdown-toggle menu menuLittlemargin"  data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Evaluaciones</a>
+                    <ul class="dropdownClaro-menu dropdown-menu">
+                        <li><a class="dropdownClaro-item dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/diagnostico">Diagnóstico</a></li>
+                        <li><a class="dropdownClaro-item dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/evaluaciones">Informes de seguimiento</a></li>
+                    </ul>
                 </li>
                 @else
                 <li class="nav-item">

@@ -35,6 +35,10 @@ class Paciente extends Model
         return $this->hasMany(Evaluacion::class);
     }
 
+    public function diagnostico(){
+        return $this->hasOne(Diagnostico::class);
+    }
+
     public function recuerdos(){
         return $this->hasMany(Recuerdo::class);
     }
