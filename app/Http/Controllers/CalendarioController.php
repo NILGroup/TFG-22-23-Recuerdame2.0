@@ -152,6 +152,8 @@ class CalendarioController extends Controller
         if (!is_null($request->recuerdos))
             $sesion->recuerdos()->sync($request->recuerdos);
 
+        
+
         MultimediasController::savePhotos($request, $sesion);
             
         session()->put('created', "Actualizado");
@@ -250,6 +252,10 @@ class CalendarioController extends Controller
         
         if (!is_null($request->recuerdos))
             $sesion->recuerdos()->sync($request->recuerdos);
+
+        if (isset($request->mult)) 
+            $sesion->multimedias()->sync($request->mult);
+        
 
         MultimediasController::savePhotos($request, $sesion);
         

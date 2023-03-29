@@ -75,7 +75,7 @@ function getDiv(multimedia){
 
 
 function getRuta(multimedia){
-    let ext = multimedia.fichero.split(".").pop()
+    let ext = multimedia.fichero.split(".").pop().toLowerCase()
    
     
     if (ext == 'pdf')

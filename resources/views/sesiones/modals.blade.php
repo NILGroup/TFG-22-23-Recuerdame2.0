@@ -16,11 +16,20 @@
                         </tr>
                     </thead>
                     <tbody class="shadow-sm">
+                        @php
+                            error_log(json_encode($multimedias));
+                            error_log("-------------------");
+                            error_log(json_encode($sesion->multimedias));
+                        @endphp
                         @foreach ($multimedias as $multimedia)
                         <tr>
-                            <td style="display: none;">{{$recuerdo->id}}</td>
+                            <td style="display: none;">{{$sesion->id}}</td>
                             <td class="d-flex justify-content-center">
-                                <a href="{{$multimedia->fichero}}"><img style="height: 20em;" src="{{$multimedia->fichero}}"></img></a>
+                                <div class="d-flex flex-column text-center">
+                                    <a href="{{$multimedia->fichero}}"><img style="height: 20em;" src="{{$multimedia->getRuta()}}"></img></a>
+                                    <small>{{$multimedia->getNombre()}}</small>
+                                </div>
+                                
                             </td>
                             <td class="tableActions seleccionar">
                                 <input class="form-check-input check-multimedia" 
