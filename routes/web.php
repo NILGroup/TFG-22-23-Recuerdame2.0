@@ -157,7 +157,10 @@ Route::get('/generarPDFHistoria', 'App\Http\Controllers\PDFController@generarPDF
 Route::post('/storeTipoNoView', 'App\Http\Controllers\TipoRelacionController@storeNoView');
 
 //RUTAS CUSTOMIZADAS VIDEO HISTORIAS DE VIDA
+Route::get('/pacientes/{id}/videos/generadorVideo', 'App\Http\Controllers\VideoHistoriaController@generadorVideoHistoria');
+Route::get('/pacientes/{id}/videos', 'App\Http\Controllers\VideoHistoriaController@showByPaciente');
 Route::get('/generarVideoHistoria', 'App\Http\Controllers\VideoHistoriaController@generarVideoHistoria');
+
 /*********************************************************
     CREA DATOS EN LA BASE DE DATOS
 *********************************************************/

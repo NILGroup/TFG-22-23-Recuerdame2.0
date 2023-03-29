@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Generar Historia de Vida</h5>
+        <h5 class="text-muted">Generar Video Historia de Vida</h5>
         <hr class="lineaTitulo">
     </div>
 
@@ -77,8 +77,7 @@
 
 
         <div>
-            <button type="submit" name="generarLibro" value="Generar libro" class="btn btn-outline-primary ">Generar libro</button>
-            <button type="submit" name="generarPdf" formaction="/generarPDFHistoria" value="Generar PDF" class="btn btn-outline-primary ">Generar PDF</button>            
+            <button type="submit" name="generarVideo" formaction="/generarVideoHistoria" value="Generar Video" class="btn btn-outline-primary ">Generar vídeo</button>          
         </div>
 
     </form>

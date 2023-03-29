@@ -12,6 +12,16 @@ use App\VideoHistoriaVida;
 
 class VideoHistoriaController extends Controller
 {
+    public function generadorVideoHistoria(int $idPaciente)
+    {
+        $paciente = Paciente::findOrFail($idPaciente);
+        $fecha = "11/12/2021";
+        $etapas = Etapa::all()->sortBy("id");
+        $categorias = Categoria::all()->sortBy("id");
+        $etiquetas = Etiqueta::all()->sortBy("id");
+
+        return view("historias.generateVideoHistoria", compact("paciente", "fecha", "etapas", "etiquetas", "categorias"));
+    }
     public function generarVideoHistoria(Request $request){
 
 
