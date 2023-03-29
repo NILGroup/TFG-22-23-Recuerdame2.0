@@ -70,7 +70,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     submitBtn.addEventListener("click", function (e) {
 
 
-                
                         const form = document.querySelector(customId)
         
                         e.preventDefault()

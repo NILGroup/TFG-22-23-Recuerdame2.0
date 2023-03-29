@@ -146,7 +146,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 /************************************************************************/
                 /*SESIÓN***************************************************************+*/
                 else {
-                    console.log(info.event.id)
+                    console.log(info.event.extendedProps)
+
+                    let multimediaModal = $("#modalMultimedia .tableActions input")
+                    let multimediaExistente = info.event.extendedProps.multimedias;
+                    
+                  
+
+                    let ficherosExistentes = multimediaExistente.map(e => e.fichero)
+
+                    multimediaModal.each((i, e) => {
+                        if (ficherosExistentes.includes($(e).data("fichero"))){
+                            $(e).prop("checked", true)
+                        }
+                        else{
+                            $(e).prop("checked", false)
+                        }
+                    })
+
+              
+                    console.log(ficherosExistentes)
 
                     document.getElementById("modalesCalendario").children[0].style.display = "none";
                     document.getElementById("modalesCalendario").children[1].style.display = "block";
@@ -179,10 +198,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     multimedias.forEach(e => {
 
                         let nombre = e.nombre.slice(0, 20)
+                        let ruta = getRuta(e)
                         let img = `<div class="d-flex flex-column align-items-center mb-2" style="width: fit-content;">
                                     <div class="img-wrap">
                                         <a href="${e.fichero}" class="visualizarImagen">
-                                            <img style="height: 10em;" src="${e.fichero}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon imagen">
+                                            <img style="height: 10em;" src="${ruta}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon imagen">
                                         </a>
                                     </div>
                                     <small>${nombre}</small>
