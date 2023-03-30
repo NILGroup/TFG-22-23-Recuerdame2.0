@@ -82,7 +82,8 @@ class VideoHistoriaController extends Controller
         }
 
             $VideoGenerator = new VideoHistoriaVida();
-            $url = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck);
+            $url = $VideoGenerator->generateAudio("Hola grupo de Recuerdame 2, soy una IA muy muy molona esquereee xd");
+            //$url = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck);
             return view("historias.videoPlayer", compact("url"));
     
     }
