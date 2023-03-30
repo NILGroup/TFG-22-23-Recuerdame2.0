@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Video extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "url",
+        "estado",
+        "paciente_id"
+    ];
+
+    public function paciente(){
+        return $this->belongsTo(Paciente::class);
+    }
 }

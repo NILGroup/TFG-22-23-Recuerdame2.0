@@ -32,7 +32,6 @@
                     <a class="nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Historias de Vida</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/historias/generarHistoria">Generar Historia de Vida</a></li>
-                        <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/videos/generadorVideo">Generar Video de Historia de Vida</a></li>
                         <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/videos">Ver videos</a></li>
                         <li><a class="dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/recuerdos/">Ver recuerdos</a></li>
                         @if (Auth::user()->rol_id == 1)
