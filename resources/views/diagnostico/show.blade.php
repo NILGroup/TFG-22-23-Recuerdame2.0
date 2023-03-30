@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Datos informe de seguimiento</h5>
+        <h5 class="text-muted">Datos del diagnóstico</h5>
         <hr class="lineaTitulo">
     </div>
 
@@ -34,19 +34,18 @@
     <script src="/js/evaluacion.js"></script>
 
     <script>
-        const fecha = @json($fecha);
+        const fechas = @json($fechas);
         const gds = {{json_encode($gds)}};
         const mini = {{json_encode($mini)}};
         const cdr = {{json_encode($cdr)}};
         const data = [];
-        for (let i = 0; i < fecha.length; i++) {
+        for (let i = 0; i < fechas.length; i++) {
             const item = {
-                x: fecha[i],
+                x: fechas[i],
                 GDS: gds[i],
                 mental: mini[i],
                 CDR: cdr[i]
             };
-            console.log(item)
             if(item.GDS == null)
                 item.GDS = data[i-1].GDS
             if(item.mental == null)
@@ -55,9 +54,7 @@
                 item.CDR = data[i-1].CDR
             data.push(item)
         }
-        console.log(data)
 
-    
     </script>
     <script src="/js/chart.js"></script>
     

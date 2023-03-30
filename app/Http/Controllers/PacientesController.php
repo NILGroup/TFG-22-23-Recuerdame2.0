@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -112,6 +113,7 @@ class PacientesController extends Controller
 
     public function show($id)
     {
+        $show = true;
         //Obtenemos al paciente
         $paciente = Paciente::findOrFail($id);
         $residencias = Residencia::all()->sortBy("id");
@@ -130,8 +132,35 @@ class PacientesController extends Controller
             $evaluacion->numSesiones = count($sesiones);
             $fechaAnterior=$fechaActual;
         }
-        //Devolvemos al paciente a la vista de mostrar paciente
-        return view("pacientes.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas", "cuidadores"));
+
+        if(!is_null($paciente->diagnostico)){
+            $diagnostico = $paciente->diagnostico;
+
+            $fechasNF = $paciente->evaluaciones()->pluck("fecha")->toarray();
+            array_unshift($fechasNF, $diagnostico->fecha);
+            $fechas = array();
+            foreach ($fechasNF as $fecha) {
+                $fecha = Carbon::createFromFormat('Y-m-d', $fecha)->format('d/m/Y');
+                array_push($fechas,$fecha);
+            }
+
+            $gds = $paciente->evaluaciones()->pluck("gds")->toarray();
+            array_unshift($gds, $diagnostico->gds);
+
+            $mini = $paciente->evaluaciones()->pluck("mental")->toarray();
+            array_unshift($mini, $diagnostico->mental);
+
+            $cdr = $paciente->evaluaciones()->pluck("cdr")->toarray();
+            array_unshift($cdr, $diagnostico->cdr);
+        }
+        else{
+            $diagnostico = new Diagnostico();
+            $fechas = array();
+            $gds = array();
+            $mini = array();
+            $cdr = array();
+        }
+        return view("pacientes.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas", "cuidadores", "show", 'diagnostico', 'fechas', 'gds', 'mini', 'cdr'));
 
     }
 

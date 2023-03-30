@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Diagnostico;
 use App\Models\Paciente;
 use App\Models\Sesion;
@@ -89,7 +90,6 @@ class DiagnosticoController extends Controller
     }
     public function show($id)
     {
-        $show = true;
         $paciente = Paciente::find($id);
         if(is_null($paciente->diagnostico)){
             $diagnostico = new Diagnostico();
@@ -97,8 +97,13 @@ class DiagnosticoController extends Controller
         }
         $diagnostico = $paciente->diagnostico;
 
-        $fecha = $paciente->evaluaciones()->pluck("fecha")->toarray();
-        array_unshift($fecha, $diagnostico->fecha);
+        $fechasNF = $paciente->evaluaciones()->pluck("fecha")->toarray();
+        array_unshift($fechasNF, $diagnostico->fecha);
+        $fechas = array();
+        foreach ($fechasNF as $fecha) {
+            $fecha = Carbon::createFromFormat('Y-m-d', $fecha)->format('d/m/Y');
+            array_push($fechas,$fecha);
+        }
 
         $gds = $paciente->evaluaciones()->pluck("gds")->toarray();
         array_unshift($gds, $diagnostico->gds);
@@ -109,7 +114,7 @@ class DiagnosticoController extends Controller
         $cdr = $paciente->evaluaciones()->pluck("cdr")->toarray();
         array_unshift($cdr, $diagnostico->cdr);
 
-        return view('diagnostico.show', compact('diagnostico', 'paciente', 'show', 'fecha', 'gds', 'mini', 'cdr'));
+        return view('diagnostico.show', compact('diagnostico', 'paciente', 'fechas', 'gds', 'mini', 'cdr'));
     }
 
     public function showEditable($id)

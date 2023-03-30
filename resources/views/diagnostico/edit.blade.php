@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Datos informe de seguimiento</h5>
+        <h5 class="text-muted">Editar Diagnóstico</h5>
         <hr class="lineaTitulo">
     </div>
 

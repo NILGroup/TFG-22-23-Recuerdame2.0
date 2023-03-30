@@ -8,12 +8,12 @@ const data2 = [
   {x: '22/03/2023', GDS: 4, mental: 15, CDR: 2}, 
   {x: '29/03/2023', GDS: 3, mental: 10, CDR: 1}, 
 ];
-console.log(data2)
 
 const cfg = {
   type: 'line',
   options: {
-    //responsive: true,
+    responsive: true,
+    maintainAspectRatio: true,
     scales: {
       y: {
         min: 0,
@@ -33,10 +33,10 @@ const cfg = {
             mode: 'horizontal',
             yMin: 3,
             yMax: 3,
-            borderColor: 'gray',
+            borderColor: '#0000FF',
             borderDash: [5, 5],
             label: {
-              content: 'CDR máx.',
+              content: ['CDR máx.'],
               enabled: true,
               position: 'center'
             }
@@ -46,7 +46,7 @@ const cfg = {
             mode: 'horizontal',
             yMin: 7,
             yMax: 7,
-            borderColor: 'gray',
+            borderColor: '#FF0000',
             borderDash: [5, 5],
             label: {
               content: 'GDS máx.',
@@ -59,14 +59,15 @@ const cfg = {
             mode: 'horizontal',
             yMin: 25,
             yMax: 25,
-            borderColor: 'gray',
+            borderColor: '#FF00FF',
             borderDash: [5, 5],
             label: {
               content: 'MEC máx.',
               enabled: true,
               position: 'center'
-            }
-          }
+            },
+          },
+          
         }
       }
     }
@@ -75,18 +76,24 @@ const cfg = {
     datasets: [{
       label: 'GDS',
       data: data,
+      borderColor: '#FF0000',
+      backgroundColor: '#FF0000',
       parsing: {
         yAxisKey: 'GDS'
       }
     }, {
       label: 'Mini mental/MEC de lobo',
       data: data,
+      borderColor: '#FF00FF',
+      backgroundColor: '#FF00FF',
       parsing: {
         yAxisKey: 'mental'
       }
     }, {
       label: 'CDR',
       data: data,
+      borderColor: '#0000FF',
+      backgroundColor: '#0000FF',
       parsing: {
         yAxisKey: 'CDR'
       }

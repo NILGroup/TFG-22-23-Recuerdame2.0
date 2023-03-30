@@ -1,4 +1,18 @@
 <div class="accordion mb-2 shadow-sm"> 
+    <div class="accordion-item accordion-header" id="diagnostico1">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#diagnostico" aria-expanded="true" aria-controls="diagnostico">
+            <div class="w-100">
+                <h5 class="text-muted text-start">Diagnóstico del usuario</h5>
+            </div>
+        </button>
+        
+        <div id="diagnostico" class="tabla accordion-collapse collapse show" aria-labelledby="diagnostico1">
+            @include('diagnostico.listaItems')
+            @include('diagnostico.charts')
+        </div>
+    </div>
+</div>  
+<div class="accordion mb-2 shadow-sm"> 
     <div class="accordion-item accordion-header" id="evaluaciones1">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#evaluaciones" aria-expanded="true" aria-controls="evaluaciones">
             <div class="w-100">

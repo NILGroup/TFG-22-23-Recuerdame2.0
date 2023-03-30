@@ -44,10 +44,38 @@
     <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
     <script src="/js/libs/dataTables.js"></script>
     <script src="/js/libs/sweetAlert2.js"></script>
+    <script src="/js/libs/chart.js"></script>
+    <script src="/js/libs/chartAnnotation.js"></script>
 
     <script src="/js/table.js"></script>
     <script src="/js/confirm.js"></script>
     <script src="/js/showView.js"></script>
+
+    
+    <script>
+        const fechas = @json($fechas);
+        const gds = {{json_encode($gds)}};
+        const mini = {{json_encode($mini)}};
+        const cdr = {{json_encode($cdr)}};
+        const data = [];
+        for (let i = 0; i < fechas.length; i++) {
+            const item = {
+                x: fechas[i],
+                GDS: gds[i],
+                mental: mini[i],
+                CDR: cdr[i]
+            };
+            if(item.GDS == null)
+                item.GDS = data[i-1].GDS
+            if(item.mental == null)
+                item.mental = data[i-1].mental
+            if(item.CDR == null)
+                item.CDR = data[i-1].CDR
+            data.push(item)
+        }
+
+    </script>
+    <script src="/js/chart.js"></script>
     @if (Session::has('created'))
         @php
             Illuminate\Support\Facades\Session::forget('created');
