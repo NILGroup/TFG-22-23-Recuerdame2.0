@@ -81,9 +81,8 @@ class VideoHistoriaController extends Controller
             }
         }
             $VideoGenerator = new VideoHistoriaVida();
-            $url = "lmao";// $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray());
+            $url = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck);
             return view("historias.videoPlayer", compact("url"));
-
     
     }
 
