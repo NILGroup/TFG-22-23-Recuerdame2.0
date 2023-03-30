@@ -40,7 +40,15 @@ use function PHPUnit\Framework\isNull;
                                 ]),
                             ],
                         ]));
-                    } 
+                    }
+
+                    $resultArray->push(new Creatomate\Elements\Audio([
+                        'source' => 'env("NGROK")."/TFG-22-23-Recuerdame2.0/public/audio/video_background_music.wav',
+                        // Make the audio track as long as the output
+                        'duration' => null,
+                        // Fade out for 2 seconds
+                        'audio_fade_out' => 2,
+                    ]));
                 }
                 
                 if($resultArray->isEmpty()){

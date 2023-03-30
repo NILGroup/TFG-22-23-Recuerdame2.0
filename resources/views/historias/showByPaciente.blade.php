@@ -3,25 +3,24 @@
 @section('content')
 <div class="container-fluid">
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Listado de recuerdos</h5>
+        <h5 class="text-muted">Listado de vídeos</h5>
         <hr class="lineaTitulo">
     </div>
     <div class="tabla">
         <div class="d-flex justify-content-between upper">
             @include('layouts.tableSearcher')
             <div class="justify-content-end d-flex">
-                <a href="/pacientes/{{$paciente->id}}/recuerdos/crear"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
+                <a href="/pacientes/{{$paciente->id}}/historias/generarHistoria"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
             </div>
         </div>
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
-            <caption>Listado de recuerdos</caption>
+            <caption>Listado de vídeos</caption>
             <thead>
                 <tr >
-                    <th scope="col" class="text-center">Nombre</th>
                         <th scope="col" class="text-center">Enlace</th>
                         <th scope="col" class="text-center">Estado</th>
                         <th scope="col" class="text-center">Fecha</th>
-                    <th class="fit10 actions text-center" scope="col">Acciones</th>
+                        <th class="fit10 actions text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody class="shadow-sm">

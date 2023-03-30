@@ -87,4 +87,13 @@ class VideoHistoriaController extends Controller
     
     }
 
+    public function showByPaciente($idPaciente)
+    {
+        $paciente = Paciente::find($idPaciente);
+        if (is_null($paciente)) return "ID de paciente no encontrada"; //ESTUDIAR SI SOBRA
+
+        $videos = $paciente->videos;
+        //Devolvemos los recuerdos
+        return view("historias.showByPaciente", compact("videos", "paciente"));
+    }
 }
