@@ -39,6 +39,10 @@ class VideoHistoriaController extends Controller
         $narracionCheck = $request->narracionCheck;
         $paciente = Paciente::find($idPaciente);
 
+        if(!$imagenesCheck && !$videosCheck){
+            $imagenesCheck = true; $videosCheck = true;
+        }
+
         if (is_null($idEtapa))
             $idEtapa = Etapa::select('id');
         if (is_null($idEtiqueta))
@@ -59,11 +63,7 @@ class VideoHistoriaController extends Controller
         //FIN. RECUERDOS YA OBTENIDOS///////////////////////////////////////////////////
 
         //PATH
-        $path = 'public\img\HistoriaVidaCache\\'.$idPaciente.'.mp4';
 
-        if(Storage::exists($path)){
-            Storage::delete($path);
-        }
         
         $videosArray = collect();         $imagesArray = collect();
         foreach ($listaRecuerdos as $rc) { //¿Vacio?
@@ -80,6 +80,7 @@ class VideoHistoriaController extends Controller
                 }
             }
         }
+
             $VideoGenerator = new VideoHistoriaVida();
             $url = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck);
             return view("historias.videoPlayer", compact("url"));
