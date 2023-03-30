@@ -96,7 +96,20 @@ class DiagnosticoController extends Controller
             return redirect("pacientes/{$id}/crearDiagnostico");
         }
         $diagnostico = $paciente->diagnostico;
-        return view('diagnostico.show', compact('diagnostico', 'paciente', 'show'));
+
+        $fecha = $paciente->evaluaciones()->pluck("fecha")->toarray();
+        array_unshift($fecha, $diagnostico->fecha);
+
+        $gds = $paciente->evaluaciones()->pluck("gds")->toarray();
+        array_unshift($gds, $diagnostico->gds);
+
+        $mini = $paciente->evaluaciones()->pluck("mental")->toarray();
+        array_unshift($mini, $diagnostico->mental);
+
+        $cdr = $paciente->evaluaciones()->pluck("cdr")->toarray();
+        array_unshift($cdr, $diagnostico->cdr);
+
+        return view('diagnostico.show', compact('diagnostico', 'paciente', 'show', 'fecha', 'gds', 'mini', 'cdr'));
     }
 
     public function showEditable($id)

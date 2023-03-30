@@ -359,16 +359,28 @@ Route::post('/prueba', function () {
         ["start" => Carbon::now(), "title" => "Primera actividad", "paciente_id" => 2,
             "description" => "Primera actividad a la paciente Cristina", "color" => "#20809d"]
     ]);
-                                
-    DB::table("evaluacions")->insertOrIgnore([
+
+    DB::table("diagnosticos")->insertOrIgnore([
         ["paciente_id"=> 1, "fecha" => Carbon::create($now->year, $now->month, 1), "gds" => 2, "gds_fecha" => Carbon::create($now->year, $now->month, 1),
-            "mental" => 2, "mental_fecha" => Carbon::create($now->year, $now->month, 1), "cdr"=> 2, "cdr_fecha" => Carbon::create($now->year, $now->month, 1),
-            "nombre_escala" => "escala custom", "escala" => 2, "fecha_escala" => Carbon::create($now->year, 10, 30),
+            "mental" => 24, "mental_fecha" => Carbon::create($now->year, $now->month, 1), "cdr"=> 1, "cdr_fecha" => Carbon::create($now->year, $now->month, 1),
+            "nombre_escala" => "Mi escala", "escala" => 8, "fecha_escala" => Carbon::create($now->year, $now->month, 1),
+            "enfermedad" => "Alzheimer", "antecedentes" => "Su familia se dio cuenta de que se olvidaba de algunas cosas con excesiva facilidad, así que decidieron pedir un estudio.", 
+            "observaciones" => null ]
+    ]);
+
+    DB::table("evaluacions")->insertOrIgnore([
+        ["paciente_id"=> 1, "fecha" => Carbon::create($now->year, $now->month, 5), "gds" => 3, "gds_fecha" => Carbon::create($now->year, $now->month, 5),
+            "mental" => 22, "mental_fecha" => Carbon::create($now->year, $now->month, 5), "cdr"=> 1, "cdr_fecha" => Carbon::create($now->year, $now->month, 5),
+            "nombre_escala" => "Mi escala", "escala" => 7, "fecha_escala" => Carbon::create($now->year, $now->month, 5),
             "diagnostico" => "Empeora poco a poco.", "observaciones" => "Ninguna" ],
-        ["paciente_id"=> 1, "fecha" => Carbon::create($now->year, $now->month, 2), "gds" => 1, "gds_fecha" => Carbon::create($now->year, $now->month, 2),
-            "mental" => 1, "mental_fecha" => Carbon::create($now->year, $now->month, 2), "cdr"=> 1, "cdr_fecha" => Carbon::create($now->year, $now->month, 2),
-            "nombre_escala" => "nombre cualquiera", "escala" => 1, "fecha_escala" => Carbon::create($now->year, 10, 30),
+        ["paciente_id"=> 1, "fecha" => Carbon::create($now->year, $now->month, 18), "gds" => 5, "gds_fecha" => Carbon::create($now->year, $now->month, 18),
+            "mental" => 12, "mental_fecha" => Carbon::create($now->year, $now->month, 18), "cdr"=> 2, "cdr_fecha" => Carbon::create($now->year, $now->month, 18),
+            "nombre_escala" => "Mi escala", "escala" => 4, "fecha_escala" => Carbon::create($now->year, $now->month, 18),
             "diagnostico" => "Ha empeorado gravemente.", "observaciones" => "No reconoce a su familia" ],
+        ["paciente_id"=> 1, "fecha" => Carbon::create($now->year, $now->month, 25), "gds" => null, "gds_fecha" => null,
+            "mental" => null, "mental_fecha" => null, "cdr"=> null, "cdr_fecha" => null,
+            "nombre_escala" => null, "escala" => null, "fecha_escala" => null,
+            "diagnostico" => "Parece mantenerse estable.", "observaciones" => null ],
         ["paciente_id"=> 2, "fecha" => Carbon::create($now->year, $now->month, 2), "gds" => 5, "gds_fecha" => Carbon::create($now->year, $now->month, 2),
             "mental" => 5, "mental_fecha" => Carbon::create($now->year, $now->month, 2), "cdr"=> 5, "cdr_fecha" => Carbon::create($now->year, $now->month, 2),
             "nombre_escala" => "escala custom", "escala" => 5, "fecha_escala" => Carbon::create($now->year, $now->month, 2),
