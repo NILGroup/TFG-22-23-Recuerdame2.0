@@ -70,7 +70,6 @@ class CalendarioController extends Controller
             }
         }
 
-
         return view('calendario.showByPaciente', compact("multimedias","idPaciente","paciente", "user", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos", "recuerdos", "personas", "persona", "mostrarFoto", "show"));
     }
 
@@ -84,7 +83,13 @@ class CalendarioController extends Controller
             "color" => "required",
             "description" => "required"
         ]);
+
+        
 */
+
+        error_log("paso por aqui");
+
+
         $actividad = Actividad::updateOrCreate(
             [
                 "start" => $request->start,
@@ -95,6 +100,8 @@ class CalendarioController extends Controller
             ]
         );
 
+        MultimediasController::savePhotos($request, $actividad);
+
         session()->put('created', "Creado");
         return redirect("/pacientes/$actividad->paciente_id/calendario");
     }
@@ -104,7 +111,7 @@ class CalendarioController extends Controller
         /*$actividad = Actividad::findOrFail($request->id);
         $actividad->update($request->all());
         //$actividad = Actividad::findOrFail($request->id);*/
-        if ($request->finished === "" || $request->finished === null)
+        if ($request->finished === "" || $request->finished === null){
             //return "<h1>Nada</h1>";
             $actividad = Actividad::updateOrCreate(
                 ["id" => $request->id],
@@ -116,6 +123,8 @@ class CalendarioController extends Controller
                     "description" => $request->obs
                 ]
             );
+            MultimediasController::savePhotos($request, $actividad);
+        }
         else
             //return "<h1>$request->finished</h1>";
             $actividad = Actividad::updateOrCreate(
@@ -129,7 +138,7 @@ class CalendarioController extends Controller
                     "finished" => $request->finished
                 ]
             );
-            session()->put('created', "Actualizado");
+        session()->put('created', "Actualizado");
         return redirect("/pacientes/$actividad->paciente_id/calendario");
     }
 
@@ -172,6 +181,7 @@ class CalendarioController extends Controller
                 $variable = "(✓) " . $variable;
                 $a->title = $variable;
             }
+            $a->multimedias = $a->multimedias;
         }
         if ($tipoUsuario === 2)
             return response()->json($actividad);

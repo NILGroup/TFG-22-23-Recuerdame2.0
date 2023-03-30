@@ -113,11 +113,17 @@
         
         let id = $("#paciente_id").prop("value")
 
-        let dropzone_config = {
+        let dropzone_config = [{
             form_id : "#sesion-modal #formulario",
             submit_id: "#btnGuardarSesion",
             ruta: "/pacientes/" + id + "/calendario"
+        }, 
+        {
+            form_id : "#actividad-modal #formulario",
+            submit_id: ["#btnGuardar", "#btnModificar"],
+            ruta: "/pacientes/" + id + "/calendario"
         }
+    ]
      
     </script>
     <script src="/js/dropzone.js"></script>

@@ -3,6 +3,19 @@
 Dropzone.autoDiscover = false
 document.addEventListener("DOMContentLoaded", function () {
 
+    console.log("Dropzones: " + $(".dropzone").length)
+
+    if (Array.isArray(dropzone_config)){
+        dropzone_config.forEach(e => createDropzone(e))
+    }
+    else{
+        createDropzone(dropzone_config)
+    }
+    
+})
+
+
+function createDropzone(config){
 
     let customId = "#d"
     let customSubmit = "#guardar"
@@ -11,17 +24,12 @@ document.addEventListener("DOMContentLoaded", function () {
     let ruta = null
     let silenceMode = false
 
-    
-    let config = dropzone_config
-    
     if (config.form_id) customId = config.form_id
     if (config.submit_id) customSubmit = config.submit_id
     if (config.max) max = config.max
     if (config.limit) limit = config.limit
     if (config.silenceMode) silenceMode = config.silenceMode
     ruta = config.ruta
-
-    console.log(customId)
 
     $(customId).dropzone({
 
@@ -61,40 +69,33 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log(msg)
             })
 
-            console.log(customSubmit)
-            var submitBtn = document.querySelector(customSubmit);
+
             var myDropzone = this
  
             if (!silenceMode){
-              
-                    submitBtn.addEventListener("click", function (e) {
 
-
-                        const form = document.querySelector(customId)
+                function evento (e){
+                    const form = document.querySelector(customId)
         
-                        e.preventDefault()
-                        e.stopPropagation()
+                    e.preventDefault()
+                    e.stopPropagation()
+
+                 
+                    if (form.checkValidity()) {
     
-                        console.log(myDropzone.getQueuedFiles())
-                     
-                        if (form.checkValidity()) {
-        
-                            if (myDropzone.getQueuedFiles().length > 0) {
-                                myDropzone.processQueue();
-                            }
-                            else {
-                                console.log("hola")
-                                myDropzone._uploadData([{upload: {filename: ''}}],[{filename: '', name: '', data: new Blob()}]);
-                            }
-        
-        
-                        }
-        
-                    
-                        form.classList.add('was-validated')
-        
-        
-                    });
+                        if (myDropzone.getQueuedFiles().length > 0) myDropzone.processQueue();       
+                        else  myDropzone._uploadData([{upload: {filename: ''}}],[{filename: '', name: '', data: new Blob()}]);
+    
+                    }
+    
+                    form.classList.add('was-validated')
+                }
+                console.log(customSubmit)
+                if (Array.isArray(customSubmit)){
+              
+                    customSubmit.forEach(e => $(e)[0].addEventListener("click", evento))
+                }
+                else $(customSubmit)[0].addEventListener("click", evento)
                 
                 
             }
@@ -110,5 +111,6 @@ document.addEventListener("DOMContentLoaded", function () {
         complete: function (file, response) {
             console.log("Upload Attempt Finished");
         }
-    });
-})
+    })
+
+}

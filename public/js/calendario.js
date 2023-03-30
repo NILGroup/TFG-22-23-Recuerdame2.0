@@ -43,7 +43,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         dateClick: function (info) {
             formulario.reset();
-            $("#showMultimedia").children().detach()
+            
+            $("#sesion-modal #showMultimedia").children().detach();
+            $("#actividad-modal #showMultimedia").children().detach();
+            
       
             /*TERAPEUTA****************************************************************/
             if (user === '1') {
@@ -142,6 +145,29 @@ document.addEventListener('DOMContentLoaded', function () {
                         document.getElementById('btnModificar').classList.add('d-none');
                     }
                     /********************************************************************/
+
+                    let div = $("#actividad-modal #showMultimedia")
+                    div.children().detach()
+                    console.log(info.event.extendedProps)
+                    let multimedias = info.event.extendedProps.multimedias
+                    multimedias.forEach(e => {
+
+                        let nombre = e.nombre.slice(0, 20)
+                        let ruta = getRuta(e)
+                        let img = `<div class="d-flex flex-column align-items-center mb-2" style="width: fit-content;">
+                                    <div class="img-wrap">
+                                        <a href="${e.fichero}" class="visualizarImagen">
+                                            <img style="height: 10em;" src="${ruta}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon imagen">
+                                        </a>
+                                    </div>
+                                    <small>${nombre}</small>
+                                </div>`
+
+                        div.append($(img))
+
+                    })
+
+
                 }
                 /************************************************************************/
                 /*SESIÓN***************************************************************+*/
@@ -192,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('btnEliminarSesion').classList.remove('d-none');
                    
 
-                    let div = $("#showMultimedia")
+                    let div = $("#sesion-modal #showMultimedia")
                     div.children().detach()
                     let multimedias = info.event.extendedProps.multimedias
                     multimedias.forEach(e => {
@@ -399,3 +425,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     calendar.render();
 });
+
+$("#btnModificar").on("click", function(event){
+    let form = $("#actividad-modal #formulario")
+    form.attr("action", "/modificarActividad")
+})
+
+$("#btnGuardar").on("click", function(event){
+    let form = $("#actividad-modal #formulario")
+    form.attr("action", "/calendario")
+})
