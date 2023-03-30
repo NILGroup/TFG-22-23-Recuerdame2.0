@@ -100,7 +100,8 @@
                         <label class="form-check-label mt-3 negrita">Extras <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="En este campo podemos activar la narración de un resumen de la historia de vida generado y narrado por inteligencia artifical."></i></label>
 
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="narracionCheck" checked>
+                            <input type="hidden" name="narracionCheck" id="narracionCheck" value="1">
+                            <input class="form-check-input" type="checkbox" id="narracionCheck" onclick="onCheck('narracionCheck')" checked>
                             <label class="form-check-label" for="narracionCheck">Narración por IA</label>
                         </div>
                 </div>
@@ -112,6 +113,7 @@
 
         <div>
             <button type="submit" name="generarLibro" value="Generar libro" class="btn btn-outline-primary ">Generar libro</button>
+            <button type="submit" name="generarVideo" formaction="/generarVideoHistoria" value="Generar Video" class="btn btn-outline-primary ">Generar vídeo</button>
             <button type="submit" name="generarPdf" formaction="/generarPDFHistoria" value="Generar PDF" class="btn btn-outline-primary ">Generar PDF</button>            
         </div>
 

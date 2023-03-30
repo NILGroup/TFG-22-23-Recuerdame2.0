@@ -34,6 +34,9 @@ class VideoHistoriaController extends Controller
         $idCategoria = $request->seleccionCat;
         $apto = $request->apto;
         $noApto = $request->noApto;
+        $imagenesCheck= $request->imagenesCheck;
+        $videosCheck= $request->videosCheck;
+        $narracionCheck = $request->narracionCheck;
         $paciente = Paciente::find($idPaciente);
 
         if (is_null($idEtapa))
@@ -77,9 +80,8 @@ class VideoHistoriaController extends Controller
                 }
             }
         }
-
             $VideoGenerator = new VideoHistoriaVida();
-            $url = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray());
+            $url = "lmao";// $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray());
             return view("historias.videoPlayer", compact("url"));
 
     
