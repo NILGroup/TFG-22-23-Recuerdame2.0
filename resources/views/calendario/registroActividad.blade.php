@@ -39,14 +39,20 @@
 
             </div>
 
-
+        
+            <div class="pt-4 pb-2">
+                <h5 class="text-muted">Material</h5>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button id="multiActividadBtn" type="button" class="btn btn-success showmodal" data-show-modal="multiActividad">Gestionar multimedia</button>
+            </div>
             <div class="dz-default dz-message dropzone-correct" id="dzp">
                 <div class="container dropzone-container">
                     <img src="/img/upload.png" id="dropzone-img" height="25em" alt="">
                     <h2 id="dropzone-title" class="dropzone-title-correct">Arrastre sus archivos</h1>
                 </div>
             </div>
-            <div class="dropzone-previews">
+            <div class="previews-actividad">
 
 
             </div>
@@ -55,17 +61,62 @@
                 <h5 class="text-muted">Material Existente</h5>
             </div>
 
-            <div id="showMultimedia" class="row pb-2">
+            
+            <div id="showMultimediaActividad" class="row pb-2">
 
             </div>
         </div>
 
         <div class="modal-footer">
-            <input type="submit" formaction="/eliminarActividad" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-outline-primary btn-md d-none confirm_delete_calendario">
-            <input type="submit" formaction="/modificarActividad" id="btnModificar" name="btnModificar" value="Modificar actividad" class="btn btn-primary btn-md d-none">
-            <input type="submit" formaction="/modificarActividad" id="btnFinalizar" name="btnFinalizar" value="Finalizar actividad" class="btn btn-primary btn-md d-none finalizar">
+            <input type="submit" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-outline-primary btn-md d-none confirm_delete_calendario">
+            <input type="submit" id="btnModificar" name="btnModificar" value="Modificar actividad" class="btn btn-primary btn-md d-none">
+            <input type="submit" id="btnFinalizar" name="btnFinalizar" value="Finalizar actividad" class="btn btn-primary btn-md d-none finalizar">
             <input type="submit" id="btnGuardar" name="btnAccion" value="Guardar actividad" class="btn btn-primary btn-md guardar">
         </div>
+
+
+
+
+
+
+
+
+
+        <!-- ========== Empieza el modal ========== -->
+
+        <div class="modal fade" id="multiActividad" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Gestionar Multimedia</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <table id="tablaMultiActividad" class="table w-100 table-bordered table-striped table-responsive datatable">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="display: none;">Id</th>
+                                    <th scope="col text-center">Nombre</th>
+                                    <th class="fit10" scope="col">Seleccionar</th>
+                                </tr>
+                            </thead>
+                            <tbody class="shadow-sm">
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="confirmMultiActividad" type="button" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== End Section ========== -->
 
     </form>
     <!-- <form method="post" id="formularioEliminar" action="/eliminarActividad" style="display:inline!important;">

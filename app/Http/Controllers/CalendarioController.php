@@ -53,68 +53,78 @@ class CalendarioController extends Controller
 
         $sesiones = $paciente->sesiones;
 
-        foreach($sesiones as $s){
-            foreach($s->multimedias as $multimedia){
+        foreach ($sesiones as $s) {
+            foreach ($s->multimedias as $multimedia) {
 
                 $existent = true;
-                foreach ($multimedias as $mult){
-                    if ($mult->id == $multimedia->id){
+                foreach ($multimedias as $mult) {
+                    if ($mult->id == $multimedia->id) {
                         $existent = false;
                     }
                 }
 
-                if ($existent){
+                if ($existent) {
                     array_push($multimedias, $multimedia);
                 }
-                
             }
         }
 
-        return view('calendario.showByPaciente', compact("multimedias","idPaciente","paciente", "user", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos", "recuerdos", "personas", "persona", "mostrarFoto", "show"));
+        return view('calendario.showByPaciente', compact("multimedias", "idPaciente", "paciente", "user", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos", "recuerdos", "personas", "persona", "mostrarFoto", "show"));
     }
 
     public function store(Request $request)
     {
-        //throw new \Exception("{$request->start}");
-        /*$validate = $request->validate([
-            "start" => "required",
-            "title" => "required",
-            "paciente_id" => "required",
-            "color" => "required",
-            "description" => "required"
-        ]);
 
-        
-*/
+        if (isset($request->id)) {
+            //Aqui es update
 
-        error_log("paso por aqui");
+            error_log("update");
+
+            if ($request->finished === "" || $request->finished === null) {
+
+                $actividad = Actividad::updateOrCreate(
+                    ["id" => $request->id],
+                    [
+                        "start" => $request->start,
+                        "title" => $request->title,
+                        "paciente_id" => $request->idPaciente,
+                        "color" => $request->color,
+                        "description" => $request->obs
+                    ]
+                );
 
 
-        $actividad = Actividad::updateOrCreate(
-            [
-                "start" => $request->start,
-                "title" => $request->title,
-                "paciente_id" => $request->idPaciente,
-                "color" => $request->color,
-                "description" => $request->obs
-            ]
-        );
 
-        MultimediasController::savePhotos($request, $actividad);
+                if (isset($request->mult))
+                    $actividad->multimedias()->sync($request->mult);
+                else
+                    $actividad->multimedias()->sync([]);
 
-        session()->put('created', "Creado");
-        return redirect("/pacientes/$actividad->paciente_id/calendario");
-    }
+                MultimediasController::savePhotos($request, $actividad);
+            } 
+            else {
+                //return "<h1>$request->finished</h1>";
+                $actividad = Actividad::updateOrCreate(
+                    ["id" => $request->id],
+                    [
+                        "start" => $request->start,
+                        "title" => $request->title,
+                        "paciente_id" => $request->idPaciente,
+                        "color" => $request->color,
+                        "description" => $request->obs,
+                        "finished" => $request->finished
+                    ]
+                );
+            }
 
-    public function update(Request $request)
-    {
-        /*$actividad = Actividad::findOrFail($request->id);
-        $actividad->update($request->all());
-        //$actividad = Actividad::findOrFail($request->id);*/
-        if ($request->finished === "" || $request->finished === null){
-            //return "<h1>Nada</h1>";
+            session()->put('created', "Actualizado");
+            return redirect("/pacientes/$actividad->paciente_id/calendario");
+        } 
+        else {
+            //Aqui es create
+
+            error_log("Create:");
             $actividad = Actividad::updateOrCreate(
-                ["id" => $request->id],
                 [
                     "start" => $request->start,
                     "title" => $request->title,
@@ -123,23 +133,20 @@ class CalendarioController extends Controller
                     "description" => $request->obs
                 ]
             );
+
+
+
             MultimediasController::savePhotos($request, $actividad);
+
+            session()->put('created', "Creado");
         }
-        else
-            //return "<h1>$request->finished</h1>";
-            $actividad = Actividad::updateOrCreate(
-                ["id" => $request->id],
-                [
-                    "start" => $request->start,
-                    "title" => $request->title,
-                    "paciente_id" => $request->idPaciente,
-                    "color" => $request->color,
-                    "description" => $request->obs,
-                    "finished" => $request->finished
-                ]
-            );
-        session()->put('created', "Actualizado");
+
+
         return redirect("/pacientes/$actividad->paciente_id/calendario");
+    }
+
+    public function update(Request $request)
+    {
     }
 
     public function updateSesion(Request $request)
@@ -161,17 +168,20 @@ class CalendarioController extends Controller
         if (!is_null($request->recuerdos))
             $sesion->recuerdos()->sync($request->recuerdos);
 
-        
+        $sesion->multimedias()->detach();
+
+
+
 
         MultimediasController::savePhotos($request, $sesion);
-            
+
         session()->put('created', "Actualizado");
         return redirect("pacientes/{$sesion->paciente->id}/calendario");
     }
 
     public function show(int $idPaciente)
     {
-        
+
         $tipoUsuario = Auth::user()->rol_id;
         $actividad = Actividad::where("paciente_id", "=", $idPaciente)->get();
         foreach ($actividad as $a) {
@@ -193,7 +203,7 @@ class CalendarioController extends Controller
                 $s->title = $s->titulo;
                 $s->recuerdos = $s->recuerdos;
                 $s->multimedias = $s->multimedias;
-    
+
                 foreach ($s->recuerdos as $r) {
                     $r->etapa = Etapa::findOrFail($r->etapa_id);
                     //$r->etiqueta = Etiqueta::findOrFail($r->etiqueta_id);
@@ -204,7 +214,7 @@ class CalendarioController extends Controller
             $sesionYactividad = $actividad->concat($sesion);
             $sesionYactividad->all();
 
-            
+
 
             //CREA UN FICHERO PRUEBAS.JSON EN PUBLIC PARA VER QUE JSON SE OBTIENE, pruebas********
             /*$filename = "PRUEBAS.json";
@@ -226,7 +236,7 @@ class CalendarioController extends Controller
         session()->put('created', "Eliminado");
         return redirect("/pacientes/$paciente/calendario");
     }
-    public function restore($idP, $id) 
+    public function restore($idP, $id)
     {
         Actividad::where('id', $id)->withTrashed()->restore();
     }
@@ -236,7 +246,7 @@ class CalendarioController extends Controller
         $sesion = Sesion::findOrFail($request->idSesion);
         $paciente = $sesion->paciente_id;
         $sesion->delete();
-        
+
         session()->put('created', "Eliminado");
         return redirect("/pacientes/$paciente/calendario");
         //return "<h1>$request</h1>";
@@ -259,22 +269,26 @@ class CalendarioController extends Controller
                 'titulo' => $request->titulo
             ]
         );
-        
+
         if (!is_null($request->recuerdos))
             $sesion->recuerdos()->sync($request->recuerdos);
 
-        if (isset($request->mult)) 
+
+        if (isset($request->mult))
             $sesion->multimedias()->sync($request->mult);
-        
+        else
+            $sesion->multimedias()->sync([]);
+
 
         MultimediasController::savePhotos($request, $sesion);
-        
+
         session()->put('created', "Creado");
         return redirect("pacientes/{$sesion->paciente->id}/calendario");
         //return "<h1>$request</h1>";
     }
 
-    public static function getNotDone(int $idPaciente) {
+    public static function getNotDone(int $idPaciente)
+    {
         $tipoUsuario = Auth::user()->rol_id;
         $actividad = Actividad::where("paciente_id", "=", $idPaciente)->get();
         $contador = 0;
@@ -285,7 +299,7 @@ class CalendarioController extends Controller
         }
         if ($tipoUsuario === 2)
             return $contador;
-        else 
+        else
             return 0;
     }
 }

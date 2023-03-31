@@ -18,7 +18,7 @@
                             <h2 id="dropzone-title" class="dropzone-title-correct">Arrastre sus archivos</h1>
                         </div>
                     </div>
-                    <div class="dropzone-previews">
+                    <div class="previews-sesion">
 
 
                     </div>

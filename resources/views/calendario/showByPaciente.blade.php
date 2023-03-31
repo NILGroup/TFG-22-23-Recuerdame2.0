@@ -62,8 +62,8 @@
     <script src="/js/libs/dropzone.js"></script>
 
     <script src="/js/table.js"></script>
-    <script src="/js/calendario.js"></script>
     <script src="/js/recuerdo.js"></script>
+    <script src="/js/calendario.js"></script>
     <script src="/js/multiModal.js"></script>
     <script src="/js/confirm.js"></script>
     <script src="/js/validacion.js"></script>
@@ -116,12 +116,14 @@
         let dropzone_config = [{
             form_id : "#sesion-modal #formulario",
             submit_id: "#btnGuardarSesion",
-            ruta: "/pacientes/" + id + "/calendario"
+            ruta: "/pacientes/" + id + "/calendario",
+            previewZone: ".previews-sesion"
         }, 
         {
             form_id : "#actividad-modal #formulario",
             submit_id: ["#btnGuardar", "#btnModificar"],
-            ruta: "/pacientes/" + id + "/calendario"
+            ruta: "/pacientes/" + id + "/calendario",
+            previewZone: ".previews-actividad"
         }
     ]
      

@@ -23,12 +23,14 @@ function createDropzone(config){
     let limit = false
     let ruta = null
     let silenceMode = false
+    let previewZone = ".dropzone-previews"
 
     if (config.form_id) customId = config.form_id
     if (config.submit_id) customSubmit = config.submit_id
     if (config.max) max = config.max
     if (config.limit) limit = config.limit
     if (config.silenceMode) silenceMode = config.silenceMode
+    if (config.previewZone) previewZone = config.previewZone
     ruta = config.ruta
 
     $(customId).dropzone({
@@ -44,6 +46,7 @@ function createDropzone(config){
         dictRemoveFile: "Eliminar archivo",
         dictFileTooBig: "Archivo demasiado grande",
         maxFiles: max,
+        previewsContainer: previewZone,
         paramName: "file",
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
 

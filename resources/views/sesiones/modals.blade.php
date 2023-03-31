@@ -16,11 +16,6 @@
                         </tr>
                     </thead>
                     <tbody class="shadow-sm">
-                        @php
-                            error_log(json_encode($multimedias));
-                            error_log("-------------------");
-                            error_log(json_encode($sesion->multimedias));
-                        @endphp
                         @foreach ($multimedias as $multimedia)
                         <tr>
                             <td style="display: none;">{{$sesion->id}}</td>
