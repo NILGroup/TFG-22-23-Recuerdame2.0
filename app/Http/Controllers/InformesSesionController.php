@@ -62,8 +62,8 @@ class InformesSesionController extends Controller
         $sesion->barreras = $request->barreras;
         $sesion->facilitadores = $request->facilitadores;
         $sesion->duracion = $request->duracion;
-        $sesion->participacion = $request->participacion_id;
-        $sesion->complejidad = $request->complejidad_id;
+        $sesion->participacion_id = $request->participacion_id;
+        $sesion->complejidad_id = $request->complejidad_id;
         $sesion->finalizada = true;
         $sesion->save();
         

@@ -188,6 +188,10 @@ Route::post('/storeTipoNoView', 'App\Http\Controllers\TipoRelacionController@sto
     CREA DATOS EN LA BASE DE DATOS
 *********************************************************/
 Route::post('/prueba', function () {
+    $path = base_path('database/datos.sql');
+    DB::unprepared(file_get_contents($path));
+
+    /*
     $now = Carbon::now();
 
     DB::table("rols")->insertOrIgnore([
@@ -283,11 +287,6 @@ Route::post('/prueba', function () {
         ["nombre" => "Vivienda unifamiliar"],
         ["nombre" => "Residencia para mayores"],
         ["nombre" => "Otros"]
-    ]);
-
-    DB::table("multimedias")->insertOrIgnore([
-        ["nombre" => "multimedia 1", "fichero" => "/img/avatar_hombre.png"],
-        ["nombre" => "multimedia 2", "fichero" => "/img/avatar_mujer.png"]
     ]);
 
     DB::table("tiporelacions")->insertOrIgnore([
@@ -430,6 +429,11 @@ Route::post('/prueba', function () {
             "estado_id" => 2, "etiqueta_id" => 2, "puntuacion" => 7, "paciente_id" => 2,"apto"=>1 ]
     ]);    
     
+    DB::table("multimedias")->insertOrIgnore([
+        ["nombre" => "multimedia 1", "fichero" => "/img/avatar_hombre.png"],
+        ["nombre" => "multimedia 2", "fichero" => "/img/avatar_mujer.png"]
+    ]);
+
     DB::table("multimedia_sesion")->insertOrIgnore([
         ["multimedia_id" => 1, "sesion_id" => 1],
         ["multimedia_id" => 2, "sesion_id" => 1],
@@ -472,6 +476,6 @@ Route::post('/prueba', function () {
         ["paciente_id" => 1, "user_id" => 2],
         ["paciente_id" => 2, "user_id" => 3]
     ]);
-
+    */
     return "<h1> Se ha llenado la base de datos con éxito</h1>";
 });

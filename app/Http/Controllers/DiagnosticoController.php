@@ -90,31 +90,40 @@ class DiagnosticoController extends Controller
     }
     public function show($id)
     {
+        $show = true;
         $paciente = Paciente::find($id);
         if(is_null($paciente->diagnostico)){
             $diagnostico = new Diagnostico();
             return redirect("pacientes/{$id}/crearDiagnostico");
         }
         $diagnostico = $paciente->diagnostico;
+        if(!is_null($diagnostico->gds) && !is_null($diagnostico->mental) && !is_null($diagnostico->cdr)){
+                
+            $fechasNF = $paciente->evaluaciones()->pluck("fecha")->toarray();
+            array_unshift($fechasNF, $diagnostico->fecha);
+            $fechas = array();
+            foreach ($fechasNF as $fecha) {
+                $fecha = Carbon::createFromFormat('Y-m-d', $fecha)->format('d/m/Y');
+                array_push($fechas,$fecha);
+            }
 
-        $fechasNF = $paciente->evaluaciones()->pluck("fecha")->toarray();
-        array_unshift($fechasNF, $diagnostico->fecha);
-        $fechas = array();
-        foreach ($fechasNF as $fecha) {
-            $fecha = Carbon::createFromFormat('Y-m-d', $fecha)->format('d/m/Y');
-            array_push($fechas,$fecha);
+            $gds = $paciente->evaluaciones()->pluck("gds")->toarray();
+            array_unshift($gds, $diagnostico->gds);
+
+            $mini = $paciente->evaluaciones()->pluck("mental")->toarray();
+            array_unshift($mini, $diagnostico->mental);
+
+            $cdr = $paciente->evaluaciones()->pluck("cdr")->toarray();
+            array_unshift($cdr, $diagnostico->cdr);
+        }
+        else{
+            $fechas = array();
+            $gds = array();
+            $mini = array();
+            $cdr = array();
         }
 
-        $gds = $paciente->evaluaciones()->pluck("gds")->toarray();
-        array_unshift($gds, $diagnostico->gds);
-
-        $mini = $paciente->evaluaciones()->pluck("mental")->toarray();
-        array_unshift($mini, $diagnostico->mental);
-
-        $cdr = $paciente->evaluaciones()->pluck("cdr")->toarray();
-        array_unshift($cdr, $diagnostico->cdr);
-
-        return view('diagnostico.show', compact('diagnostico', 'paciente', 'fechas', 'gds', 'mini', 'cdr'));
+        return view('diagnostico.show', compact('diagnostico', 'paciente', 'show', 'fechas', 'gds', 'mini', 'cdr'));
     }
 
     public function showEditable($id)

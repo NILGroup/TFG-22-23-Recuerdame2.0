@@ -162,7 +162,7 @@ class PersonasRelacionadasController extends Controller
         session()->put('created', "true");
 
 
-        //return redirect("/pacientes/$persona->paciente_id/personas/$persona->id");
+        return redirect("/pacientes/$persona->paciente_id/personas/$persona->id");
     }
 
     /**
