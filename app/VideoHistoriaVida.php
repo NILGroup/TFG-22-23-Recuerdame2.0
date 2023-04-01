@@ -75,7 +75,7 @@ use function PHPUnit\Framework\isNull;
         }
 
         function generateAudio($text){
-            $provider = new VoiceRssProvider(env("VOICERRS_KEY"),"es-es");
+            $provider = new VoiceRssProvider(env("VOICERRS_KEY"),"es-es",-2);
             $tts = new TextToSpeech($text, $provider);
             $filename = $tts->getFile(public_path()."/storage/audio");
             return $filename;
