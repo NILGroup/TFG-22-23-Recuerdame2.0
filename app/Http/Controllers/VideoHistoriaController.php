@@ -7,6 +7,7 @@ use App\Models\Paciente;
 use App\Models\Etapa;
 use App\Models\Categoria;
 use App\Models\Etiqueta;
+use App\Models\Video;
 use Illuminate\Support\Facades\Storage;
 use App\VideoHistoriaVida;
 
@@ -84,7 +85,16 @@ class VideoHistoriaController extends Controller
             $VideoGenerator = new VideoHistoriaVida();
             $url = $VideoGenerator->generateAudio("Hola grupo de Recuerdame 2, soy una IA muy muy molona esquereee xd");
             //$url = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck);
-            return view("historias.videoPlayer", compact("url"));
+            //Crear fila en la base de datos
+            $video = Video::create(
+                [
+                    'url' => $url,
+                    'estado' => "Procesando",
+                    'paciente_id' => $idPaciente,
+                ]
+            );
+    
+            return self::showByPaciente($idPaciente);
     
     }
 
@@ -96,5 +106,12 @@ class VideoHistoriaController extends Controller
         $videos = $paciente->videos;
         //Devolvemos los recuerdos
         return view("historias.showByPaciente", compact("videos", "paciente"));
+    }
+
+    public function destroy($idVideo)
+    {
+        $video = Video::find($idVideo); //busca el recuerdo en sí
+        $video->delete();
+        
     }
 }

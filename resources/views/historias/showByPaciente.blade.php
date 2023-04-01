@@ -30,14 +30,14 @@
 
                 <td><a href={{$video->url}}>{{$video->url}}</a></td>
                 <td>{{$video->estado}}</td>
-                <td>{{$video->estado}}</td>
+                <td>{{$video->created_at}}</td>
                 <td class="tableActions">
-                    <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del recuerdo."></i></a>
+                    <a href="{{$video->url}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del video."></i></a>
                         <!-- Boton de eliminar -->
-                        <form method="post" action="{{ route('recuerdo.destroy', $recuerdo->id) }}" style="display:inline!important;">
+                        <form method="post" action="{{ route('video.destroy', $video->id) }}" style="display:inline!important;">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"  data-toggle="tooltip" data-placement="top" title="Eliminar recuerdo."></i></button>
+                            <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"  data-toggle="tooltip" data-placement="top" title="Eliminar video."></i></button>
                         </form>
                 </td>
             </tr>
