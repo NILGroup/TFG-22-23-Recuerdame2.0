@@ -11,8 +11,8 @@
             @include('layouts.tableSearcher')
             <div class="justify-content-end d-flex">
                 @if (Auth::user()->rol_id == 1)
-                <!--<a href="/pacientes/0/cuidadores/crear"><button type="button"  id="mybutton" class="btn btn-primary btn-registro mx-3">Registro cuidador</button></a>-->
-                <a href="{{route('pacientes.create')}}"><button type="button"  class="btn  btn-success"><i class="fa-solid fa-plus"></i></button></a>
+                <!--<a href="/usuarios/0/cuidadores/crear"><button type="button"  id="mybutton" class="btn btn-primary btn-registro mx-3">Registro cuidador</button></a>-->
+                <a href="{{route('usuarios.create')}}"><button type="button"  class="btn  btn-success"><i class="fa-solid fa-plus"></i></button></a>
                 @endif
             </div>
         </div>
@@ -30,7 +30,7 @@
             @foreach($pacientes as $paciente)
                 <tr class="">
                     <td>
-                        <a href=" @if (Auth::user()->rol_id == 1) /pacientes/{{$paciente->id}}/sesiones @else /pacientes/{{$paciente->id}}/calendario @endif" class="link-primary">
+                        <a href=" @if (Auth::user()->rol_id == 1) /usuarios/{{$paciente->id}}/sesiones @else /usuarios/{{$paciente->id}}/calendario @endif" class="link-primary">
                             {{$paciente->nombre}} {{$paciente->apellidos}}
                         </a>
                     </td>
@@ -43,10 +43,10 @@
                     <td class="tableActions">
                         <div class="d-inline">
                         
-                            <a href="/pacientes/{{$paciente->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos del usuario"></i></a>
-                            <a href="{{route('pacientes.edit',$paciente->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar usuario"></i></a>
-                            <a href="/pacientes/{{$paciente->id}}/asignarTerapeutas"><i class="fa-solid fa-users-line text-success tableIcon" data-toggle="tooltip" data-placement="top" title="Asignar más terapeutas"></i></a>
-                            <form method="post" action="{{ route('pacientes.destroy', $paciente->id) }}" style="display:inline!important;">
+                            <a href="/usuarios/{{$paciente->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos del usuario"></i></a>
+                            <a href="{{route('usuarios.edit',$paciente->id)}}"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar usuario"></i></a>
+                            <a href="/usuarios/{{$paciente->id}}/asignarTerapeutas"><i class="fa-solid fa-users-line text-success tableIcon" data-toggle="tooltip" data-placement="top" title="Asignar más terapeutas"></i></a>
+                            <form method="post" action="{{ route('usuarios.destroy', $paciente->id) }}" style="display:inline!important;">
                                 {{csrf_field()}}
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="confirm_delete" data-toggle="tooltip" style="background-color: Transparent; border: none;"><i class="fa-solid fa-trash-can text-danger tableIcon" data-toggle="tooltip" data-placement="top" title="Eliminar usuario"></i></button>

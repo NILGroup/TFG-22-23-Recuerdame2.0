@@ -25,7 +25,7 @@
             </div>
         
         <div class="form-group">
-            <a href="/pacientes/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="/usuarios/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button id="guardar"  type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
@@ -47,7 +47,7 @@
       
 
         let dropzone_config = {
-            ruta : "/pacientes/" + id + "/personas",
+            ruta : "/usuarios/" + id + "/personas",
             max : 1,
             limit : true
         }

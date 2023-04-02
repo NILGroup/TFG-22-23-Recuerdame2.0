@@ -104,7 +104,7 @@
                     </td>
                     @if($show)
                     <td class="tableActions">
-                        <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos del recuerdo"></i></a>
+                        <a href="/usuarios/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos del recuerdo"></i></a>
                     </td>
                     @endif
                     <input type="hidden" value="{{$recuerdo->id}}" name="recuerdos[]">

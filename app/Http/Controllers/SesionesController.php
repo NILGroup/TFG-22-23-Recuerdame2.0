@@ -134,7 +134,7 @@ class SesionesController extends Controller
 
       
 
-        //return redirect("pacientes/{$sesion->paciente->id}/sesiones");
+        //return redirect("usuarios/{$sesion->paciente->id}/sesiones");
     }
 
 /*
@@ -273,7 +273,7 @@ class SesionesController extends Controller
         $sesion = Sesion::find($id);
         $idP = $sesion->paciente_id;
         Sesion::destroy($id);
-        //return redirect("/pacientes/$idP/sesiones");
+        //return redirect("/usuarios/$idP/sesiones");
     }
     public function restore($idP, $id) 
     {
@@ -310,7 +310,7 @@ class SesionesController extends Controller
              'respuesta' => $request->respuesta,
              'observaciones' => $request->observaciones
             ]);
-        return redirect("/pacientes/{id}/recuerdos/crearAndVolverEditar");
+        return redirect("/usuarios/{id}/recuerdos/crearAndVolverEditar");
     }
     
     public function updateAndSeleccionarRecuerdos(Request $request){
@@ -330,7 +330,7 @@ class SesionesController extends Controller
              'respuesta' => $request->respuesta,
              'observaciones' => $request->observaciones
             ]);
-        return redirect("/pacientes/{id}/recuerdos/agregarAndVolverEditar");
+        return redirect("/usuarios/{id}/recuerdos/agregarAndVolverEditar");
     }
 
 }

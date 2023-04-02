@@ -80,7 +80,7 @@ function duplicatedAlert(data) {
         if (result.isConfirmed) {
 
             let idOriginal = $("#id").prop("value")
-            ruta = "/pacientes/" + id + "/cuidadores/" + data.id;
+            ruta = "/usuarios/" + id + "/cuidadores/" + data.id;
             
             $("#id").prop("value", data.id)
             submitDropzone()
@@ -126,14 +126,14 @@ $("#agregarCuidador").on("click", function(event){
         let per = $(elem).children()
         if ($(per[6]).children("input").prop("checked")){
             let row = $("<tr></tr>")
-            row.append("<td><a href='/pacientes/"+$('#paciente_id').prop("value")+"/cuidadores/"+ per[0].textContent +"'> "+ per[1].textContent +" </a></td>")
+            row.append("<td><a href='/usuarios/"+$('#paciente_id').prop("value")+"/cuidadores/"+ per[0].textContent +"'> "+ per[1].textContent +" </a></td>")
             row.append("<td>" + per[2].textContent + "</td>")
             row.append("<td>" + per[3].textContent + "</td>")
             row.append("<td>" + per[4].textContent + "</td>")
             row.append("<td>" + per[5].textContent + "</td>")
             row.append('<td class="tableActions"> '+
-                '<a href="/pacientes/'+$('#paciente_id').prop("value")+'/cuidadores/'+per[0].textContent+'"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver los datos del cuidador"></i></a>' +
-                '<a href="/pacientes/'+$('#paciente_id').prop("value")+'/cuidadores/'+per[0].textContent+'/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar cuidador"></i></a>'+
+                '<a href="/usuarios/'+$('#paciente_id').prop("value")+'/cuidadores/'+per[0].textContent+'"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver los datos del cuidador"></i></a>' +
+                '<a href="/usuarios/'+$('#paciente_id').prop("value")+'/cuidadores/'+per[0].textContent+'/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar cuidador"></i></a>'+
                 '<form method="post" action="/cuidadores/' + per[0].textContent + '" style="display:inline!important;">'+
                     '<input name="_token" value="'+csrf_js_var+'" type="hidden">' +
                     '<input type="hidden" name="_method" value="DELETE">'+

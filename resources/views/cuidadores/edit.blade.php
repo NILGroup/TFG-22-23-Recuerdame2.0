@@ -37,7 +37,7 @@
         </div>
 
         <div class="col-12 mt-3">
-            <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="/usuarios/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button type="submit" value="Guardar" id="guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
@@ -69,7 +69,7 @@
         </div>
 
         <div class="form-group">
-            <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="/usuarios/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button id="guardar" type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
@@ -95,7 +95,7 @@
             limit: true,
             max: 1,
             silenceMode: true,
-            ruta:  "/pacientes/" + id + "/cuidadores/" + id2
+            ruta:  "/usuarios/" + id + "/cuidadores/" + id2
         }
  
 

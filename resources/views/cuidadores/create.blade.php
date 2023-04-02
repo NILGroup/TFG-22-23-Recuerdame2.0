@@ -22,7 +22,7 @@
                     
                 </div>
             <div class="col-12">
-                <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
+                <a href="/usuarios/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
                 <button type="submit" value="Guardar" id="guardar" class="btn btn-outline-primary">Finalizar</button>
             </div>
         </div>
@@ -50,7 +50,7 @@
             limit: true,
             max: 1,
             silenceMode: true,
-            ruta: "/pacientes/" + id + "/cuidadores"
+            ruta: "/usuarios/" + id + "/cuidadores"
         }
         
     </script>

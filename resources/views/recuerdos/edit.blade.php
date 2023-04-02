@@ -31,7 +31,7 @@
         </div>
 
         <div class="col-12">
-            <a href="/pacientes/{{$paciente->id}}/recuerdos"><button type="button" class="btn btn-primary btn">Cancelar</button></a>
+            <a href="/usuarios/{{$paciente->id}}/recuerdos"><button type="button" class="btn btn-primary btn">Cancelar</button></a>
             <button type="submit" id="guardar" value="Guardar" class="btn btn-outline-primary btn">Finalizar</button>
         </div>
     </form>
@@ -54,7 +54,7 @@
         let id2 = document.getElementById("id").value;
 
         let dropzone_config = {
-            ruta: "/pacientes/" + id + "/recuerdos/" + id2
+            ruta: "/usuarios/" + id + "/recuerdos/" + id2
         }
 
     </script>

@@ -28,7 +28,7 @@
                             @foreach($cuidadoresTerapeuta as $cuidador)
                                 <tr>
                                     <td>{{$cuidador->id}}</td>
-                                    <td><a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}"> {{$cuidador->nombre}} {{$cuidador->apellidos}} </a></td>
+                                    <td><a href="/usuarios/{{$paciente->id}}/cuidadores/{{$cuidador->id}}"> {{$cuidador->nombre}} {{$cuidador->apellidos}} </a></td>
                                     <td>{{$cuidador->email}}</td>
                                     <td>{{$cuidador->telefono}}</td>
                                     <td>{{$cuidador->localidad}}</td>

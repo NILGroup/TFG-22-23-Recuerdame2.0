@@ -118,7 +118,7 @@ class CalendarioController extends Controller
             }
 
             session()->put('created', "Actualizado");
-            return redirect("/pacientes/$actividad->paciente_id/calendario");
+            return redirect("/usuarios/$actividad->paciente_id/calendario");
         } 
         else {
             //Aqui es create
@@ -142,7 +142,7 @@ class CalendarioController extends Controller
         }
 
 
-        return redirect("/pacientes/$actividad->paciente_id/calendario");
+        return redirect("/usuarios/$actividad->paciente_id/calendario");
     }
 
     public function update(Request $request)
@@ -176,7 +176,7 @@ class CalendarioController extends Controller
         MultimediasController::savePhotos($request, $sesion);
 
         session()->put('created', "Actualizado");
-        return redirect("pacientes/{$sesion->paciente->id}/calendario");
+        return redirect("usuarios/{$sesion->paciente->id}/calendario");
     }
 
     public function show(int $idPaciente)
@@ -234,7 +234,7 @@ class CalendarioController extends Controller
         $actividad->delete();
 
         session()->put('created', "Eliminado");
-        return redirect("/pacientes/$paciente/calendario");
+        return redirect("/usuarios/$paciente/calendario");
     }
     public function restore($idP, $id)
     {
@@ -248,7 +248,7 @@ class CalendarioController extends Controller
         $sesion->delete();
 
         session()->put('created', "Eliminado");
-        return redirect("/pacientes/$paciente/calendario");
+        return redirect("/usuarios/$paciente/calendario");
         //return "<h1>$request</h1>";
     }
 
@@ -283,7 +283,7 @@ class CalendarioController extends Controller
         MultimediasController::savePhotos($request, $sesion);
 
         session()->put('created', "Creado");
-        return redirect("pacientes/{$sesion->paciente->id}/calendario");
+        return redirect("usuarios/{$sesion->paciente->id}/calendario");
         //return "<h1>$request</h1>";
     }
 

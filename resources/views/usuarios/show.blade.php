@@ -17,10 +17,10 @@
             <div id="general" class="container-fluid accordion-collapse collapse show" aria-labelledby="general">
                 <div class="row text-align-center">
                     <div class="col-lg-3 align-items-center">
-                        @include('pacientes.foto')
+                        @include('usuarios.foto')
                     </div>
                     <div class="col-lg-9">
-                        @include('pacientes.listaItems')
+                        @include('usuarios.listaItems')
                     </div>
                 </div>
             </div>
@@ -28,11 +28,11 @@
     </div>
 
 
-    @include('pacientes.desplegables')
+    @include('usuarios.desplegables')
 
     <div class="col-12">
-        <!-- <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a> -->
-        <a href="/pacientes/{{$paciente->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
+        <!-- <a href="{{route('usuarios.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a> -->
+        <a href="/usuarios/{{$paciente->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
     </div>
 </div>
 

@@ -236,7 +236,7 @@ class RecuerdosController extends Controller
         $recuerdo = Recuerdo::find($idRecuerdo); //busca el recuerdo en sí
         $paciente = $recuerdo->paciente;
         $recuerdo->delete();
-        //return redirect("/pacientes/$paciente->id/recuerdos/");
+        //return redirect("/usuarios/$paciente->id/recuerdos/");
     }
     public function restore($idP, $id) 
     {

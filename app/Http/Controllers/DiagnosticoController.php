@@ -56,7 +56,7 @@ class DiagnosticoController extends Controller
         $this->savePhoto($request, $diagnostico, "icus");
             
         session()->put('created', "true");
-        return redirect("pacientes/{$request->paciente_id}/diagnostico");
+        return redirect("usuarios/{$request->paciente_id}/diagnostico");
     }
 
     public function update(Request $request){
@@ -86,7 +86,7 @@ class DiagnosticoController extends Controller
         $this->savePhoto($request, $diagnostico, "icus");
             
         session()->put('created', "true");
-        return redirect("pacientes/{$request->paciente_id}/diagnostico");
+        return redirect("usuarios/{$request->paciente_id}/diagnostico");
     }
     public function show($id)
     {
@@ -94,7 +94,7 @@ class DiagnosticoController extends Controller
         $paciente = Paciente::find($id);
         if(is_null($paciente->diagnostico)){
             $diagnostico = new Diagnostico();
-            return redirect("pacientes/{$id}/crearDiagnostico");
+            return redirect("usuarios/{$id}/crearDiagnostico");
         }
         $diagnostico = $paciente->diagnostico;
         if(!is_null($diagnostico->gds) && !is_null($diagnostico->mental) && !is_null($diagnostico->cdr)){
@@ -138,7 +138,7 @@ class DiagnosticoController extends Controller
     //     $evaluacion = Evaluacion::find($id);
     //     $paciente_id = $evaluacion->paciente_id;
     //     $evaluacion->delete();
-    //     //return redirect("/pacientes/$paciente_id/evaluaciones");
+    //     //return redirect("/usuarios/$paciente_id/evaluaciones");
 
     // }
     // public function restore($idP, $id) 

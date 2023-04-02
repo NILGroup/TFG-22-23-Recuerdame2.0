@@ -13,9 +13,9 @@
         @include('diagnostico.listaItems')
         @include('diagnostico.charts')
         <div>
-            <!-- <a href="/pacientes/{{$paciente->id}}/evaluaciones"><button type="button" class="btn btn-primary">Atrás</button></a> -->
-            <a href="/pacientes/{{$paciente->id}}/editarDiagnostico"><button type="button" class="btn btn-secondary">Editar</button></a>
-            <a href="/pacientes/{{$paciente->id}}/informeDiagnostico"><button type="button" class="btn btn-outline-primary">Generar PDF</button></a>
+            <!-- <a href="/usuarios/{{$paciente->id}}/evaluaciones"><button type="button" class="btn btn-primary">Atrás</button></a> -->
+            <a href="/usuarios/{{$paciente->id}}/editarDiagnostico"><button type="button" class="btn btn-secondary">Editar</button></a>
+            <a href="/usuarios/{{$paciente->id}}/informeDiagnostico"><button type="button" class="btn btn-outline-primary">Generar PDF</button></a>
         </div>
     </form>
 </div>

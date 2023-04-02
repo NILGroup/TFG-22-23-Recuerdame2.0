@@ -69,7 +69,7 @@ class EvaluacionController extends Controller
         $this->savePhoto($request, $evaluacion, "icus");
             
         session()->put('created', "true");
-        return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones");
+        return redirect("usuarios/{$evaluacion->paciente_id}/evaluaciones");
     }
 
     public function update(Request $request){
@@ -97,7 +97,7 @@ class EvaluacionController extends Controller
         $this->savePhoto($request, $evaluacion, "icus");
             
         session()->put('created', "true");
-        return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones/$evaluacion->id/ver");
+        return redirect("usuarios/{$evaluacion->paciente_id}/evaluaciones/$evaluacion->id/ver");
     }
     public function show($id, $idE)
     {
@@ -119,7 +119,7 @@ class EvaluacionController extends Controller
         $evaluacion = Evaluacion::find($id);
         $paciente_id = $evaluacion->paciente_id;
         $evaluacion->delete();
-        //return redirect("/pacientes/$paciente_id/evaluaciones");
+        //return redirect("/usuarios/$paciente_id/evaluaciones");
 
     }
     public function restore($idP, $id) 

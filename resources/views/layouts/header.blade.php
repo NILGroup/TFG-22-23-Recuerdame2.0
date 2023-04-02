@@ -22,7 +22,7 @@
                     @if (Auth::user()->rol_id == 1)
                     <li class="nav-item" style="margin-right: 10px;border-radius: 1rem;">
                         <div style="border-radius: 1rem;">
-                            <a style="border-radius: 1rem;" class="nav-linkOscuro nav-link p-2" href="{{ route('pacientes.index') }}"><i class="fa-solid fa-users" data-toggle="tooltip" data-placement="top" title="Volver al listado de usuarios"></i></a>
+                            <a style="border-radius: 1rem;" class="nav-linkOscuro nav-link p-2" href="{{ route('usuarios.index') }}"><i class="fa-solid fa-users" data-toggle="tooltip" data-placement="top" title="Volver al listado de usuarios"></i></a>
                         </div>
                     </li>
                     @endif

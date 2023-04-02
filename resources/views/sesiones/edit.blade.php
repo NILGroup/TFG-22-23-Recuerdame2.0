@@ -7,7 +7,7 @@
         <hr class="lineaTitulo">
     </div>
 
-    <form class="dropzone p-0" id="d"  action="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/update" method="POST">
+    <form class="dropzone p-0" id="d"  action="/usuarios/{{$paciente->id}}/sesiones/{{$sesion->id}}/update" method="POST">
         {{csrf_field()}}
         @include('sesiones.listaItems')
         <div class="dz-default dz-message dropzone-correct" id="dzp">
@@ -56,7 +56,7 @@
 
         
         let dropzone_config = {
-            ruta: "/pacientes/" + id + "/sesiones/" + id2
+            ruta: "/usuarios/" + id + "/sesiones/" + id2
         }
         
     </script>

@@ -8,7 +8,7 @@
         <hr class="lineaTitulo">
     </div>
 
-    @include('pacientes.foto')
+    @include('usuarios.foto')
 
     @if(isset($paciente->multimedia))
     <form class="text-center" action="/borrar_foto_paciente" method="post">
@@ -19,9 +19,9 @@
 
     <form method="post" action="/actualizarPaciente">
         {{csrf_field()}}
-        @include('pacientes.listaItems')
+        @include('usuarios.listaItems')
         <div class="col-12">
-            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="{{route('usuarios.index')}}"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button type="submit" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
@@ -31,7 +31,7 @@
         {{csrf_field()}}
         
             <div class="dropzone-inner">
-                @include('pacientes.listaItems')
+                @include('usuarios.listaItems')
                 
                 <div class="dz-default dz-message dropzone-correct" id="dzp">
                     <div class="container dropzone-container">
@@ -45,7 +45,7 @@
             </div>
         
         <div class="form-group">
-            <a href="/pacientes/"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="/usuarios/"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button id="guardar"  type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
@@ -70,7 +70,7 @@
         let dropzone_config = {
             limit: true,
             max: 1,
-            ruta: "/pacientes/" + id
+            ruta: "/usuarios/" + id
         }
         
     </script>

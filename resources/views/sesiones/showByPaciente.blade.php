@@ -11,7 +11,7 @@
         <div class="d-flex justify-content-between upper">
             @include('layouts.tableSearcher')
             <div class="justify-content-end align-items-center  d-flex">
-                <a href="/pacientes/{{$paciente->id}}/sesiones/crear"><button type="button" class="btn btn-success "><i class="fa-solid fa-plus"></i></button></a>
+                <a href="/usuarios/{{$paciente->id}}/sesiones/crear"><button type="button" class="btn btn-success "><i class="fa-solid fa-plus"></i></button></a>
             </div>
         </div>
 
@@ -28,12 +28,12 @@
             <tbody class="shadow-sm">
                 @foreach($sesiones as $sesion)
                 <tr>
-                    <td data-sort="{{ strtotime($sesion->fecha) }}"><a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}">{{date("d/m/Y", strtotime($sesion->fecha))}}</a></td>
+                    <td data-sort="{{ strtotime($sesion->fecha) }}"><a href="/usuarios/{{$paciente->id}}/sesiones/{{$sesion->id}}">{{date("d/m/Y", strtotime($sesion->fecha))}}</a></td>
                     <td>{{$sesion->objetivo}}</td>
                     
                     <td class="tableActions align-center">
-                        <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la sesión"></i></a>
-                        <a href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar sesión"></i></a>
+                        <a href="/usuarios/{{$paciente->id}}/sesiones/{{$sesion->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la sesión"></i></a>
+                        <a href="/usuarios/{{$paciente->id}}/sesiones/{{$sesion->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar sesión"></i></a>
                         
                         <form method="post" action="{{ route('sesiones.destroy', $sesion->id) }}" style="display:inline!important;">
                             {{csrf_field()}}
@@ -43,9 +43,9 @@
                     </td>
                     <td class="tableActions align-center">
                         @if(!$sesion->finalizada)
-                            <a class="btn btn-success btn-sm w-100 botonAccionTablas"  role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
+                            <a class="btn btn-success btn-sm w-100 botonAccionTablas"  role="button" href="/usuarios/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme">Finalizar</a>
                         @else
-                            <a class="btn btn-primary btn-sm w-100 botonAccionTablas"  role="button" href="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/ver">Ver informe</a>
+                            <a class="btn btn-primary btn-sm w-100 botonAccionTablas"  role="button" href="/usuarios/{{$paciente->id}}/sesiones/{{$sesion->id}}/ver">Ver informe</a>
                         @endif
                     </td>
                 </tr>

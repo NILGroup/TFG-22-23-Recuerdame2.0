@@ -54,7 +54,7 @@
         let id = document.getElementById("paciente_id").value;
 
         let dropzone_config = {
-            ruta: "/pacientes/" + id + "/sesiones"
+            ruta: "/usuarios/" + id + "/sesiones"
         }
    
     </script>

@@ -68,7 +68,7 @@ class InformesSesionController extends Controller
         $sesion->save();
         
         session()->put('created', "true");
-        return redirect("/pacientes/$sesion->paciente_id/sesiones/$sesion->id/ver");
+        return redirect("/usuarios/$sesion->paciente_id/sesiones/$sesion->id/ver");
     }
 
     public function show(int $idP, int $idS)
@@ -90,7 +90,7 @@ class InformesSesionController extends Controller
         */
         $sesion->finalizada = false;
         $sesion->save();
-        //return redirect("/pacientes/$sesion->paciente_id/informesSesion");
+        //return redirect("/usuarios/$sesion->paciente_id/informesSesion");
     }
     public function restore($idP, $id){
         $sesion = Sesion::find($id);

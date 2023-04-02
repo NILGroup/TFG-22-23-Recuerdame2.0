@@ -116,13 +116,13 @@
         let dropzone_config = [{
             form_id : "#sesion-modal #formulario",
             submit_id: "#btnGuardarSesion",
-            ruta: "/pacientes/" + id + "/calendario",
+            ruta: "/usuarios/" + id + "/calendario",
             previewZone: ".previews-sesion"
         }, 
         {
             form_id : "#actividad-modal #formulario",
             submit_id: ["#btnGuardar", "#btnModificar"],
-            ruta: "/pacientes/" + id + "/calendario",
+            ruta: "/usuarios/" + id + "/calendario",
             previewZone: ".previews-actividad"
         }
     ]
