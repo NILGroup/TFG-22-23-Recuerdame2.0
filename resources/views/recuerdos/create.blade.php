@@ -28,6 +28,11 @@
                 </div>
         </div>
 
+        <div class="descripciones">
+
+        </div>
+        
+
         <div class="col-12 ">
             <a href="/usuarios/{{$paciente->id}}/recuerdos"><button type="button" class="btn btn-primary btn">Cancelar</button></a>
             <button id="guardar" type="submit" value="Guardar" class="btn btn-outline-primary btn">Finalizar</button>
@@ -36,6 +41,7 @@
 </div>
 
 @include('personasrelacionadas.modals')
+@include('recuerdos.descripcionModal')
 @endsection
 
 @push('styles')
@@ -48,18 +54,16 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> -->
     <script src="/js/libs/dataTables.js"></script>
     <script src="/js/libs/dropzone.js"></script>
-
     <script src="/js/table.js"></script>
+  
     <script>
         $("#add-multimedia").hide()
+
         let id = document.getElementById("paciente_id").value;
-
-        let dropzone_config = {
-            ruta : "/usuarios/" + id + "/recuerdos"
-        }
-
+        let ruta = "/usuarios/" + id + "/recuerdos"
+       
     </script>
-    <script src="/js/dropzone.js"></script>
+    <script src="/js/dropzoneRecuerdo.js"></script>
     <script src="/js/persona.js"></script>
     <script src="/js/multimediaModal.js"></script>
 @endpush
