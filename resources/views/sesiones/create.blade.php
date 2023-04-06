@@ -50,7 +50,10 @@
 
     <script src="/js/table.js"></script>
     <script>
+        
         $("#add-multimedia").hide()
+        $("#remove-multimedia").hide()
+        
         let id = document.getElementById("paciente_id").value;
 
         let dropzone_config = {

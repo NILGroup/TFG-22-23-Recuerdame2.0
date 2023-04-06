@@ -199,15 +199,30 @@
     </div>
 </div>
 
+
+
 @if(!$show)
-<div id="add-multimedia" class="row">
-    <div class="justify-content-end d-flex p-2">
-        <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#modalMultimedia">
-            Añadir existente
+<div class="d-flex justify-content-end">
+    <div id="add-multimedia" class="row justify-content-end">
+        <button id="boton-modal-imagenes" type="button" class="btn btn-success me-4" style="width: fit-content;" data-bs-toggle="modal" data-bs-target="#descripcionModal">
+            <i class="fa-solid fa-plus"></i>
         </button>
     </div>
+    <div id="remove-multimedia" class="row">
+        <div class="justify-content-end d-flex p-2">
+            <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#modalMultimedia">
+                Borrar Multimedia
+            </button>
+        </div>
+    </div>
 </div>
+
+<div id="img-previews" class="d-flex"></div>
+<div id="div-imagenes"></div>
+<div id="div-descripciones"></div>
+
 @include('recuerdos.mediaModal')
+
 @endif
 
 

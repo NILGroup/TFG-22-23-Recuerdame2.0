@@ -51,6 +51,7 @@
     <script src="/js/multiModal.js"></script>
     <script>
         $("#add-multimedia").hide()
+        $("#remove-multimedia").hide()
         let id = document.getElementById("idPaciente").value;
         let id2 = document.getElementById("idSesion").value;
 

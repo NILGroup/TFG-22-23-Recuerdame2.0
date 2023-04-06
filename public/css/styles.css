@@ -709,3 +709,17 @@ div>.row {
        margin-top: 10px;
     }
 }
+
+
+.recuerdo-imagenes{
+    width: 8em; 
+    margin-right: 15px;
+}
+
+.recuerdo-imagenes img{
+    border-radius: 15px;
+}
+
+.recuerdo-imagenes span:hover{
+    cursor: pointer;
+}

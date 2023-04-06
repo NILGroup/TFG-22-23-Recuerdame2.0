@@ -15,7 +15,8 @@ class Multimedia extends Model
         "nombre",
         "fichero",
         "personarelacionada_id",
-        "paciente_id"
+        "paciente_id",
+        "descripcion"
     ];
 
     public function evaluacion(){

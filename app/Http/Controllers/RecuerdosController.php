@@ -109,8 +109,8 @@ class RecuerdosController extends Controller
             $recuerdo->multimedias()->attach($request->mult);
         }
         
-        MultimediasController::savePhotos($request, $recuerdo);
-      
+        MultimediasController::savePhotosWithDescriptions($request, $recuerdo);
+
         
         $personas_relacionar = $request->checkPersona; //Array de ids de las personas
         $recuerdo->personas_relacionadas()->detach();
@@ -119,10 +119,11 @@ class RecuerdosController extends Controller
                 $recuerdo->personas_relacionadas()->attach($p_id);
             }
         }
-       
         
        session()->put('created', "true");
-       //return self::showByPaciente($recuerdo->paciente_id);
+       
+       return redirect("/usuarios/" . $recuerdo->paciente_id . "/recuerdos");
+      
     }
 
     /**

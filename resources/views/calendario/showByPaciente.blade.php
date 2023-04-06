@@ -110,6 +110,8 @@
             $('#calendar .fc-todo-button').click();
         }) 
 
+        $("#add-multimedia").hide()
+        $("#remove-multimedia").hide()
         
         let id = $("#paciente_id").prop("value")
 
