@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Paciente extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     public $timestamps = false;
 
     protected $fillable = [
@@ -32,6 +33,10 @@ class Paciente extends Model
 
     public function evaluaciones(){
         return $this->hasMany(Evaluacion::class);
+    }
+
+    public function diagnostico(){
+        return $this->hasOne(Diagnostico::class);
     }
 
     public function recuerdos(){

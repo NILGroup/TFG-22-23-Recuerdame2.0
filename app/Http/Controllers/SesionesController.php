@@ -29,7 +29,7 @@ class SesionesController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role']);
-        $this->middleware(['asignarPaciente'])->except(['index', 'create', 'destroy']);
+        $this->middleware(['asignarPaciente'])->except(['index', 'create', 'destroy', 'restore']);
     }
     
     /**
@@ -110,6 +110,7 @@ class SesionesController extends Controller
              'etapa_id' => $request->etapa_id,
              'objetivo' => $request->objetivo,
              'descripcion' => $request->descripcion,
+             'acciones' => $request->acciones,
              'fecha_finalizada' => $request->fecha_finalizada,
              'paciente_id' => $request->paciente_id,
              'user_id' => $request->user_id,
@@ -133,7 +134,7 @@ class SesionesController extends Controller
 
       
 
-        //return redirect("pacientes/{$sesion->paciente->id}/sesiones");
+        //return redirect("usuarios/{$sesion->paciente->id}/sesiones");
     }
 
 /*
@@ -272,7 +273,11 @@ class SesionesController extends Controller
         $sesion = Sesion::find($id);
         $idP = $sesion->paciente_id;
         Sesion::destroy($id);
-        //return redirect("/pacientes/$idP/sesiones");
+        //return redirect("/usuarios/$idP/sesiones");
+    }
+    public function restore($idP, $id) 
+    {
+        Sesion::where('id', $id)->withTrashed()->restore();
     }
 
     public function destroyRecuerdo($idSesion, $idRecuerdo)
@@ -305,7 +310,7 @@ class SesionesController extends Controller
              'respuesta' => $request->respuesta,
              'observaciones' => $request->observaciones
             ]);
-        return redirect("/pacientes/{id}/recuerdos/crearAndVolverEditar");
+        return redirect("/usuarios/{id}/recuerdos/crearAndVolverEditar");
     }
     
     public function updateAndSeleccionarRecuerdos(Request $request){
@@ -325,7 +330,7 @@ class SesionesController extends Controller
              'respuesta' => $request->respuesta,
              'observaciones' => $request->observaciones
             ]);
-        return redirect("/pacientes/{id}/recuerdos/agregarAndVolverEditar");
+        return redirect("/usuarios/{id}/recuerdos/agregarAndVolverEditar");
     }
 
 }

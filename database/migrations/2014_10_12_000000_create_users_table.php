@@ -22,11 +22,12 @@ return new class extends Migration
             $table->string('telefono')->nullable();
             $table->string('localidad')->nullable();
             $table->string('parentesco')->nullable();
+            $table->string('ocupacion')->nullable();
             $table->string('password');
             $table->integer('rol_id');
             $table->rememberToken();
             $table->timestamps();
-
+            $table->softDeletes();
         });
     }
 

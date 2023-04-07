@@ -18,9 +18,13 @@
                     <tbody class="shadow-sm">
                         @foreach ($multimedias as $multimedia)
                         <tr>
-                            <td style="display: none;">{{$recuerdo->id}}</td>
-                            <td>
-                                <a href="{{$multimedia->fichero}}">{{$multimedia->nombre}}</a>
+                            <td style="display: none;">{{$sesion->id}}</td>
+                            <td class="d-flex justify-content-center">
+                                <div class="d-flex flex-column text-center">
+                                    <a href="{{$multimedia->fichero}}"><img style="height: 20em;" src="{{$multimedia->getRuta()}}"></img></a>
+                                    <small>{{$multimedia->getNombre()}}</small>
+                                </div>
+                                
                             </td>
                             <td class="tableActions seleccionar">
                                 <input class="form-check-input check-multimedia" 

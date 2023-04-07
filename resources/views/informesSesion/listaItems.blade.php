@@ -19,6 +19,30 @@
         </div>
     </div>
     
+    <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center ">
+        <label for="participacion" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-3">Nivel de participación:</label>
+        <div class="col-sm-12 col-md-12 col-lg-7 align-items-center">
+            <select class="form-select form-select-sm" id="idParticipacion" name="participacion_id">
+                <option></option>
+                @foreach ($participaciones as $participacion)
+                <option value="{{$participacion->id}}" @if($participacion->id == $sesion->participacion_id) selected @endif>{{$participacion->nombre}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center ">
+        <label for="complejidad" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-3">Nivel de complejidad:</label>
+        <div class="col-sm-12 col-md-12 col-lg-7 align-items-center">
+            <select class="form-select form-select-sm" id="idComplejidad" name="complejidada_id">
+                <option></option>
+                @foreach ($complejidades as $complejidad)
+                <option value="{{$complejidad->id}}" @if($complejidad->id == $sesion->complejidad_id) selected @endif>{{$complejidad->nombre}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
     <div class="mb-3">
         <label for="respuesta" class="form-label col-form-label negrita">Respuesta del usuario:<span class="asterisco">*</span></label>
         <textarea class="form-control form-control-sm" id="respuesta" name="respuesta" rows="3" required >{{$sesion->respuesta}}</textarea>

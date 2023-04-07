@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evaluacion;
 use App\Models\Paciente;
 use App\Models\Sesion;
+use App\Models\Multimedia;
 use Illuminate\Http\Request;
 
 class EvaluacionController extends Controller
@@ -17,7 +18,7 @@ class EvaluacionController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role']);
-        $this->middleware(['asignarPaciente'])->except('destroy');
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
     }
     
     public function showByPaciente($idPaciente){
@@ -60,9 +61,15 @@ class EvaluacionController extends Controller
              'escala' => $request->escala,
              'fecha_escala' => $request->fecha_escala
             ]);
+
+
+        $this->savePhoto($request, $evaluacion, "igds");
+        $this->savePhoto($request, $evaluacion, "imec");
+        $this->savePhoto($request, $evaluacion, "icdr");
+        $this->savePhoto($request, $evaluacion, "icus");
             
         session()->put('created', "true");
-        return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones");
+        return redirect("usuarios/{$evaluacion->paciente_id}/evaluaciones");
     }
 
     public function update(Request $request){
@@ -83,9 +90,14 @@ class EvaluacionController extends Controller
              'escala' => $request->escala,
              'fecha_escala' => $request->fecha_escala
             ]);
+
+        $this->savePhoto($request, $evaluacion, "igds");
+        $this->savePhoto($request, $evaluacion, "imec");
+        $this->savePhoto($request, $evaluacion, "icdr");
+        $this->savePhoto($request, $evaluacion, "icus");
             
         session()->put('created', "true");
-        return redirect("pacientes/{$evaluacion->paciente_id}/evaluaciones/$evaluacion->id/ver");
+        return redirect("usuarios/{$evaluacion->paciente_id}/evaluaciones/$evaluacion->id/ver");
     }
     public function show($id, $idE)
     {
@@ -107,8 +119,12 @@ class EvaluacionController extends Controller
         $evaluacion = Evaluacion::find($id);
         $paciente_id = $evaluacion->paciente_id;
         $evaluacion->delete();
-        //return redirect("/pacientes/$paciente_id/evaluaciones");
+        //return redirect("/usuarios/$paciente_id/evaluaciones");
 
+    }
+    public function restore($idP, $id) 
+    {
+        Evaluacion::where('id', $id)->withTrashed()->restore();
     }
     /*
 
@@ -118,4 +134,40 @@ class EvaluacionController extends Controller
         return view('evaluaciones.show', compact('paciente', 'evaluacion'));
     }
     */
+
+    //foto puede ser : gds mec cdr cus
+
+    public static function savePhoto(Request $request, $objeto, $foto){
+        $name = [];
+        $original_name = [];
+        if ($request->has($foto)){
+            
+            $value = $request->file($foto);
+            $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
+                error_log($image);
+                $destinationPath = public_path() . '/storage/img';
+                $value->move($destinationPath, $image);
+                $name[] = $image;
+                $original_name[] = $value->getClientOriginalName();
+
+                
+                $multimedia = new Multimedia([
+                    'nombre' => $value->getClientOriginalName(),
+                    'fichero' => '/storage/img/' . $image
+                ]);
+
+                $multimedia->save();
+
+                if ($foto == "igds")
+                    $multimedia->evaluacion_gds()->save($objeto);
+                else if ($foto == "imec")
+                    $multimedia->evaluacion_mec()->save($objeto);
+                else if ($foto == "icdr")
+                    $multimedia->evaluacion_cdr()->save($objeto);
+                else if ($foto == "icus")
+                    $multimedia->evaluacion_custom()->save($objeto);
+
+                
+        }
+    }
 }

@@ -18,7 +18,7 @@ class CuidadoresController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role']);
-        $this->middleware(['asignarPaciente'])->except(['destroy']);
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
         $this->middleware(['viendoCuidador'])->only(['show', 'edit']);
     }
 
@@ -53,6 +53,9 @@ class CuidadoresController extends Controller
         $cuidadores = $paciente->users->where('rol_id', 2);
         $tID = Auth::user()->id;
         $terapeuta = User::find(Auth::user()->id);
+        $cuidadoresTerapeuta = User::where('rol_id', "2")->get();
+        /*
+        //TO-DO mostrar solo los cuidadores del terapeuta y añadir una forma de asignar el resto
         //Obtiene todos los cuidadores relacionados a ese terapeuta
         //Incluyendo los de pacientes que él no ha creado pero le han sido asignados.
         $cuidadoresTerapeuta = User::whereHas('pacientes', function($query) use ($tID) {
@@ -60,13 +63,12 @@ class CuidadoresController extends Controller
                 $query->where('users.id', $tID);
             });
         })->where('rol_id', "2")->get();
-
+        */
         return view("cuidadores.showByPaciente", compact("paciente", "cuidadores", "cuidadoresTerapeuta"));
     }
 
     protected function registroCuidador(Request $request)
     {
-
         $request->validate([
             'telefono'=> 'numeric|digits:9'
         ]);
@@ -80,6 +82,7 @@ class CuidadoresController extends Controller
             'telefono' => $request->telefono,
             'localidad' => $request->localidad,
             'parentesco' => $request->parentesco,
+            'ocupacion' => $request->ocupacion,
             'password' => Hash::make($request->password)
         ]);
 
@@ -96,7 +99,7 @@ class CuidadoresController extends Controller
 
         session()->put('created', "true");
 
-        return redirect("/pacientes/$paciente->id/cuidadores");
+        return redirect("/usuarios/$paciente->id/cuidadores");
     }
 
     public function update(Request $request)
@@ -112,9 +115,9 @@ class CuidadoresController extends Controller
         
         session()->put('created', "true");
         //Redireccionamos a lista pacientes
-        //return redirect("/pacientes/$request->id");
+        //return redirect("/usuarios/$request->id");
         $id = Session::get('paciente')['id'];
-        return redirect("/pacientes/$id/cuidadores/$cuidador->id");
+        return redirect("/usuarios/$id/cuidadores/$cuidador->id");
         
     }
 
@@ -123,34 +126,25 @@ class CuidadoresController extends Controller
         $cuidador = User::find($id);
         $paciente = Paciente::find(session()->get('paciente')['id']);
         $paciente->users()->detach($cuidador);
-        return redirect("/pacientes/$paciente->id/cuidadores/");
     }
 
     public function destroy_no_view(Request $request){
-
-     
-
-        
         $borrar = User::findOrFail($request->id);
         $permanece = User::findOrFail($request->idCurrent);
-
         $permanece->multimedia()->delete();
-        
-
         $multimedia = $borrar->multimedia;
-
         if (isset($multimedia)){
             $multimedia->user_id = $request->idCurrent;
             $multimedia->save();
         }
-       
-        
-        
-
-        
-
         return User::findOrFail($request->id)->delete();
+    }
 
+    public function restore($idP, $id) 
+    {
+        $paciente = Paciente::find($idP);
+        $cuidador = User::find($id);
+        $paciente->users()->attach($cuidador);
     }
 
     //sirve para chekear si el cuidador ya ha sido registrado
@@ -172,8 +166,16 @@ class CuidadoresController extends Controller
         $cuidador->multimedia->delete();
         $id = Session::get('paciente')['id'];
 
-        return redirect("/pacientes/$id/cuidadores/$cuidador->id/editar");
+        return redirect("/usuarios/$id/cuidadores/$cuidador->id/editar");
     }
 
-
+    public function reasignarCuidadores(Request $request){
+        $paciente = Paciente::find($request->id);
+        $cuidadoresPaciente = $paciente->users()->where('rol_id', 2)->get();
+        info($cuidadoresPaciente);
+        $paciente->users()->detach($cuidadoresPaciente);
+        $cuidadores = $request->checkCuidador;
+        $paciente->users()->attach($cuidadores);
+    }
+    
 }

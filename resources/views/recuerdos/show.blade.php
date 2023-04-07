@@ -16,7 +16,7 @@
     @if (Auth::user()->rol_id == 1)
     <div class="col-12">
         <!-- <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary btn">Atrás</button></a> -->
-        <a href="/pacientes/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
+        <a href="/usuarios/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
     </div>
     @endif
 </div>
@@ -24,8 +24,11 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>   -->
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="/js/libs/dataTables.js"></script>
+    <script src="/js/libs/sweetAlert2.js"></script>
+    
     <script src="/js/table.js"></script>
     <script src="/js/showView.js"></script>
     

@@ -24,7 +24,7 @@ class RolMiddleware
         //Asignamos a un cuidador su paciente relacionado si no lo tenía ya
         $user = Auth::user();
         if($user->rol_id == 2){
-            return redirect('/pacientes');
+            return redirect('/usuarios');
         }
         return $next($request);
     }

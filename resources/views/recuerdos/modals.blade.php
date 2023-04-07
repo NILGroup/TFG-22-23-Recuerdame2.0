@@ -39,7 +39,7 @@
             </div>
 
             <div class="modal-body">
-                <table id="tablaRecuerdosExistentes" class="table w-100 table-bordered table-striped table-responsive datatable">
+                <table id="tablaRecuerdosExistentes" class="table w-100 table-bordered table-striped table-responsive datatable nowrap">
                     <thead>
                         <tr >
                             <th scope="col" style="display: none;" class="text-center">Id</th>
@@ -78,7 +78,3 @@
         </div>
     </div>
 </div>
-
-@push('scripts')
-    
-@endpush

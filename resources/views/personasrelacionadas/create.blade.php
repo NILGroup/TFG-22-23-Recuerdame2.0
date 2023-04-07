@@ -11,7 +11,7 @@
     <form class="dropzone p-0" id="d" method="post" action="/crearPersona">
         {{csrf_field()}}
             <div class="dropzone-inner">
-                @include('personasrelacionadas.foto')
+               
                 @include('personasrelacionadas.listaItems')
                 <div class="dz-default dz-message dropzone-correct" id="dzp">
                     <div class="container dropzone-container">
@@ -25,7 +25,7 @@
             </div>
         
         <div class="form-group">
-            <a href="/pacientes/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="/usuarios/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button id="guardar"  type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
@@ -38,13 +38,20 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> -->
+    <script src="/js/libs/dropzone.js"></script>
+    
     <script src="/js/especificar.js"></script>
     <script>
         let id = document.getElementById("paciente_id").value;
-        var ruta = "/pacientes/" + id + "/personas"
-        var max = 1
-        var limit = true
+      
+
+        let dropzone_config = {
+            ruta : "/usuarios/" + id + "/personas",
+            max : 1,
+            limit : true
+        }
+
     </script>
     <script src="/js/dropzone.js"></script>
 @endpush

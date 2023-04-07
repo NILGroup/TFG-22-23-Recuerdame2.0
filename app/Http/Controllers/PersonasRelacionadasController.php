@@ -19,7 +19,7 @@ class PersonasRelacionadasController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role'])->except(['show']);
-        $this->middleware(['asignarPaciente'])->except(['destroy']);
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
     }
 
     /**
@@ -46,7 +46,7 @@ class PersonasRelacionadasController extends Controller
         $tipos = Tiporelacion::all()->sortBy("id");
         $persona = new Personarelacionada();
         $paciente = Paciente::find($idPaciente);
-        $mostrarFoto = true;
+        $mostrarFoto = false;
         return view("personasrelacionadas.create", compact('mostrarFoto',"idPaciente", "paciente", "tipos", "persona"));
     }
 
@@ -162,7 +162,7 @@ class PersonasRelacionadasController extends Controller
         session()->put('created', "true");
 
 
-        //return redirect("/pacientes/$persona->paciente_id/personas/$persona->id");
+        return redirect("/usuarios/$persona->paciente_id/personas/$persona->id");
     }
 
     /**
@@ -171,13 +171,13 @@ class PersonasRelacionadasController extends Controller
 
     public function destroy(int $id)
     {
-        
         $persona = Personarelacionada::findOrFail($id);
-        $paciente = $persona->paciente;
         $persona->delete();
-
-        //return redirect("/pacientes/$paciente->id/personas");
-
+        //return redirect("/usuarios/$paciente->id/personas");
+    }
+    public function restore($idP, $id) 
+    {
+        Personarelacionada::where('id', $id)->withTrashed()->restore();
     }
 
     public function removePhoto(Request $request){
@@ -185,7 +185,7 @@ class PersonasRelacionadasController extends Controller
         $persona = Personarelacionada::findOrFail($request->id);
         $persona->multimedia->delete();
         
-        return redirect("/pacientes/$persona->paciente_id/personas/$persona->id/editar");
+        return redirect("/usuarios/$persona->paciente_id/personas/$persona->id/editar");
 
     }
 

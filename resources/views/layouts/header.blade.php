@@ -7,22 +7,22 @@
             <div id="">
                 @guest
                 @if (Route::has('login'))
-                <li class="nav-item btn">
-                    <a class="nav-link text-light" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
+                <li class="nav-item btn" style="border-radius: 1rem;">
+                    <a style="padding: 10px;border-radius: 1rem;" class="nav-linkOscuro nav-link text-light" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
                 </li>
                 @endif
 
                 @if (Route::has('register'))
-                <li class="nav-item btn">
-                    <a class="nav-link text-light" href="{{ route('register') }}">{{ __('Registro') }}</a>
+                <li class="nav-item btn" style="border-radius: 1rem;" >
+                    <a style="padding: 10px;border-radius: 1rem;" class="nav-linkOscuro nav-link text-light" href="{{ route('register') }}">{{ __('Registro') }}</a>
                 </li>
                 @endif
                 @else
                 <ul class="navbar-nav d-flex flex-row">
                     @if (Auth::user()->rol_id == 1)
-                    <li class="nav-item" style="margin-right: 10px;">
-                        <div >
-                            <a class="nav-link p-2" href="{{ route('pacientes.index') }}"><i class="fa-solid fa-users" data-toggle="tooltip" data-placement="top" title="Volver al listado de usuarios."></i></a>
+                    <li class="nav-item" style="margin-right: 10px;border-radius: 1rem;">
+                        <div style="border-radius: 1rem;">
+                            <a style="border-radius: 1rem;" class="nav-linkOscuro nav-link p-2" href="{{ route('usuarios.index') }}"><i class="fa-solid fa-users" data-toggle="tooltip" data-placement="top" title="Volver al listado de usuarios"></i></a>
                         </div>
                     </li>
                     @endif

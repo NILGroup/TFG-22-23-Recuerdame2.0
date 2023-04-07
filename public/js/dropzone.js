@@ -1,11 +1,39 @@
+
+
 Dropzone.autoDiscover = false
 document.addEventListener("DOMContentLoaded", function () {
 
-    if (!max)
-        max = 100
+    console.log("Dropzones: " + $(".dropzone").length)
+
+    if (Array.isArray(dropzone_config)){
+        dropzone_config.forEach(e => createDropzone(e))
+    }
+    else{
+        createDropzone(dropzone_config)
+    }
+    
+})
 
 
-    $('#d').dropzone({
+function createDropzone(config){
+
+    let customId = "#d"
+    let customSubmit = "#guardar"
+    let max = 100
+    let limit = false
+    let ruta = null
+    let silenceMode = false
+    let previewZone = ".dropzone-previews"
+
+    if (config.form_id) customId = config.form_id
+    if (config.submit_id) customSubmit = config.submit_id
+    if (config.max) max = config.max
+    if (config.limit) limit = config.limit
+    if (config.silenceMode) silenceMode = config.silenceMode
+    if (config.previewZone) previewZone = config.previewZone
+    ruta = config.ruta
+
+    $(customId).dropzone({
 
         previewsContainer: ".dropzone-previews",
         maxFilesize: 10, //mb
@@ -18,8 +46,11 @@ document.addEventListener("DOMContentLoaded", function () {
         dictRemoveFile: "Eliminar archivo",
         dictFileTooBig: "Archivo demasiado grande",
         maxFiles: max,
+        previewsContainer: previewZone,
         paramName: "file",
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+
+
         init: function () {
 
 
@@ -41,42 +72,33 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log(msg)
             })
 
-            var submitBtn = document.querySelector("#guardar");
+
             var myDropzone = this
  
-          
-            if (typeof silenceMode === "undefined") silenceMode = false
             if (!silenceMode){
-              
-                    submitBtn.addEventListener("click", function (e) {
 
-
-                
-                        const form = document.querySelector("#d")
+                function evento (e){
+                    const form = document.querySelector(customId)
         
-                        e.preventDefault()
-                        e.stopPropagation()
+                    e.preventDefault()
+                    e.stopPropagation()
+
+                 
+                    if (form.checkValidity()) {
     
-                        console.log("hola")
-                     
-                        if (form.checkValidity()) {
-        
-                            if (myDropzone.getQueuedFiles().length > 0) {
-                                myDropzone.processQueue();
-                            }
-                            else {
-                                console.log("hola")
-                                myDropzone._uploadData([{upload: {filename: ''}}],[{filename: '', name: '', data: new Blob()}]);
-                            }
-        
-        
-                        }
-        
-                    
-                        form.classList.add('was-validated')
-        
-        
-                    });
+                        if (myDropzone.getQueuedFiles().length > 0) myDropzone.processQueue();       
+                        else  myDropzone._uploadData([{upload: {filename: ''}}],[{filename: '', name: '', data: new Blob()}]);
+    
+                    }
+    
+                    form.classList.add('was-validated')
+                }
+                console.log(customSubmit)
+                if (Array.isArray(customSubmit)){
+              
+                    customSubmit.forEach(e => $(e)[0].addEventListener("click", evento))
+                }
+                else $(customSubmit)[0].addEventListener("click", evento)
                 
                 
             }
@@ -92,5 +114,6 @@ document.addEventListener("DOMContentLoaded", function () {
         complete: function (file, response) {
             console.log("Upload Attempt Finished");
         }
-    });
-})
+    })
+
+}

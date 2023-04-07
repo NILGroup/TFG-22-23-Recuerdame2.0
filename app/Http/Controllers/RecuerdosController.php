@@ -13,9 +13,13 @@ use App\Models\Multimedia;
 use App\Models\Emocion;
 use App\Models\Personarelacionada;
 use App\Models\Tiporelacion;
+use Carbon\Carbon;
+use DateTime;
 use Error;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Psy\Readline\Hoa\Console;
 
 use function PHPUnit\Framework\isNull;
 
@@ -29,7 +33,7 @@ class RecuerdosController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role'])->except(['show', 'showByPaciente']);
-        $this->middleware(['asignarPaciente'])->except(['destroy']);
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
     }
 
     /**
@@ -78,6 +82,7 @@ class RecuerdosController extends Controller
     public function store(Request $request)
     {
 
+      
         //Ahora que tenemos creado el recuerdo
         $recuerdo = Recuerdo::updateOrCreate(
             ['id' => $request->id],
@@ -98,13 +103,14 @@ class RecuerdosController extends Controller
             ]
         );
 
+
         $recuerdo->multimedias()->detach();
         if (isset($request->mult)) {
             $recuerdo->multimedias()->attach($request->mult);
         }
         
-        MultimediasController::savePhotos($request, $recuerdo);
-      
+        MultimediasController::savePhotosWithDescriptions($request, $recuerdo);
+
         
         $personas_relacionar = $request->checkPersona; //Array de ids de las personas
         $recuerdo->personas_relacionadas()->detach();
@@ -113,10 +119,11 @@ class RecuerdosController extends Controller
                 $recuerdo->personas_relacionadas()->attach($p_id);
             }
         }
-       
         
        session()->put('created', "true");
-       //return self::showByPaciente($recuerdo->paciente_id);
+       
+       return redirect("/usuarios/" . $recuerdo->paciente_id . "/recuerdos");
+      
     }
 
     /**
@@ -230,7 +237,11 @@ class RecuerdosController extends Controller
         $recuerdo = Recuerdo::find($idRecuerdo); //busca el recuerdo en sí
         $paciente = $recuerdo->paciente;
         $recuerdo->delete();
-        //return redirect("/pacientes/$paciente->id/recuerdos/");
+        //return redirect("/usuarios/$paciente->id/recuerdos/");
+    }
+    public function restore($idP, $id) 
+    {
+        Recuerdo::where('id', $id)->withTrashed()->restore();
     }
 
     //Elimina a la persona relacionada del recuerdo en cuestión (su relación)

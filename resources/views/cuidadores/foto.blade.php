@@ -1,10 +1,10 @@
 @if($mostrarFoto)
-<div class="row mb-4">
-    <div class="img-wrap text-center w-25 mx-auto">
+<div class="row pb-2">
+    <div class="img-wrap text-center mx-auto">
         @if (isset($cuidador->multimedia))
-        <a href="#" class="visualizarImagen"><img src="{{$cuidador->multimedia->fichero}}" class="w-25 img-responsive-sm img-thumbnail" style="width: 10em;"></a>
+        <a href="#" class="visualizarImagen"><img src="{{$cuidador->multimedia->fichero}}" class="imagenPaciente img-responsive-sm img-thumbnail"></a>
         @else
-        <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="img-responsive-sm img-thumbnail" style="width: 10em;"></a>
+        <a href="#" class="visualizarImagen"><img src="/img/avatar_hombre.png" class="imagenPaciente img-responsive-sm img-thumbnail" ></a>
         @endif
     </div>
 </div>

@@ -63,7 +63,7 @@
             @endif
         </div>
 
-        <label class="form-check-label mt-3 negrita">Tipo de recuerdos <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Filtrar los recuerdos categorizados como aptos o no aptos para continuar siendo usados."></i></label>
+        <label class="form-check-label mt-3 negrita">Tipo de recuerdos <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Filtrar los recuerdos categorizados como aptos o no aptos para continuar siendo usados"></i></label>
 
         <div class="form-check ">
             <input type="hidden" name="apto" id="apto" value="1">

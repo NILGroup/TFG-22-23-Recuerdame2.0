@@ -27,6 +27,17 @@ $('.confirm_delete').click(function (event) {
                 timer: 2000,
                 showConfirmButton: false,
             }).then(function(){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: 'DELETE',
+                    url: form.attr('action'),
+                    processData: false,
+                    contentType: false,
+                });
                 t.api().row(e).remove().draw(); 
                 Swal.fire({
                     template:"#borrado",
@@ -35,7 +46,7 @@ $('.confirm_delete').click(function (event) {
                     width:"25em",
                     showConfirmButton: false,
                     buttonsStyling:false,
-                    timer: 1000,
+                    timer: 5000,
                     showCancelButton: false,
                     timerProgressBar: true,
                     showClass: {
@@ -51,22 +62,29 @@ $('.confirm_delete').click(function (event) {
                 })
                 .then((result) => {
                     if (result.isDenied) {
-                        t.api().row.add(dr).draw()
-                    }
-                    else{
-                        //$(document.body).append(form).hide();
+                        let id = form.attr('action').split('/');
+                        id = id[id.length - 1];
+
+                        let urlR = window.location.href.split('/');
+                        console.log(urlR)
+                        urlR = urlR[urlR.length - 1] + "/"+ id +"/restore";
+                        console.log(urlR)
+
+                        t.api().row.add(dr).draw();
+                        
                         $.ajaxSetup({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             }
                         });
                         $.ajax({
-                            type: 'DELETE',
-                            url: form.attr('action'),
+                            type: 'POST',
+                            url: urlR,
                             processData: false,
                             contentType: false,
                         });
                     }
+                    
                 });
             })
         }

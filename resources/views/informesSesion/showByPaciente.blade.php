@@ -24,17 +24,17 @@
             <tbody class="shadow-sm">
                 @foreach ($sesiones as $sesion)
                     <tr>
-                        <td data-sort="{{ strtotime($sesion->fecha_finalizada) }}"><a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/ver">Informe {{date("d/m/Y", strtotime($sesion->fecha_finalizada))}}</td>
+                        <td data-sort="{{ strtotime($sesion->fecha_finalizada) }}"><a href="/usuarios/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/ver">Informe {{date("d/m/Y", strtotime($sesion->fecha_finalizada))}}</td>
                         <td> {{$sesion->titulo}}</td>
                         <td> {{$sesion->objetivo}}</td>
                         <td class="tableActions">
-                            <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver los datos del informe."></i></a>
-                            <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/generarInforme"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar informe."></i></a>
-                            <a href="/pacientes/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe"><i class="fa-solid fa-print text-success tableIcon"  data-toggle="tooltip" data-placement="top" title="Vista de impresión del informe."></i></a>
+                            <a href="/usuarios/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver los datos del informe"></i></a>
+                            <a href="/usuarios/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/generarInforme"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar informe"></i></a>
+                            <a href="/usuarios/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe"><i class="fa-solid fa-print text-success tableIcon"  data-toggle="tooltip" data-placement="top" title="Vista de impresión del informe"></i></a>
                             <form method="post" action="{{ route('informesSesion.destroy', $sesion->id) }}" style="display:inline!important;">
                                 {{csrf_field()}}
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon" data-toggle="tooltip" data-placement="top" title="Eliminar informe."></i></button>
+                                <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon" data-toggle="tooltip" data-placement="top" title="Eliminar informe"></i></button>
                             </form>
                         </td>
                     </tr> 
@@ -50,8 +50,11 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>   -->
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="/js/libs/dataTables.js"></script>
+    <script src="/js/libs/sweetAlert2.js"></script>
+    
     <script src="/js/table.js"></script>
     <script src="/js/confirm.js"></script>
     

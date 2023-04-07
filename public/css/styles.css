@@ -10,12 +10,17 @@
 /*GENERALES----------------------------------------- */
 :root {
     --turquesa: #14a2b8;
+    --turquesaOscuro: #017e91;
     --turquesaSuave: #a1dfea3f;
+    --destacadoOscuro: #e1ffff;
+    --turquesaClaroNavBar: #d2f9f9; 
     --white: rgb(255, 255, 255);
     --whiteSuave: #ffffff7b;
     --tamLetra: 18px;
     --tamLetraBotones: 16px;
     --captionSize: 16px;
+    --azulBootstrap: #4582ec;
+    --azulTextoNavBar: #4F7BC5;
 }
 
 html {
@@ -66,7 +71,7 @@ footer {
 }
 
 .yellowbg {
-    background-color: #d2f9f9 !important;
+    background-color: var(--turquesaClaroNavBar) !important;
 }
 
 .lightbluebg {
@@ -108,6 +113,7 @@ thead {
 }
 
 .table {
+    width:100%!important;
     font-size: var(--tamLetra) !important;
     padding: 0.2rem 0.3rem !important;
 }
@@ -162,32 +168,107 @@ caption {
 
 nav {
     background-color: var(--turquesa);
+    align-items: center!important;
 }
 
 .nav-menu {
     border-top: solid;
     border-bottom: solid;
-    border-color: #4F7BC5;
+    border-color: var(--azulTextoNavBar);
     padding: 0;
     border-top-width: thin;
     border-bottom-width: thin;
 }
 
-.nav-link {
-    font-size: 17px !important;
-    padding: 12px 20px 12px 20px !important;
+.text-light:hover{
+    color: dimgray!important;
 }
 
-.nav-link:hover {
-    color: rgb(0, 145, 255) !important;
-    background-color: #ccfff737;
+.navbar .btn{
+    --bs-btn-border-width: 0px!important;
+    text-align: center;
+}
+
+.nav-linkClaro:hover {
+    /*background-color: var(--destacadoOscuro);*/
+    background-color: var(--white);
+    color: var(--azulBootstrap)!important;
     box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
-    border-radius: 1em;
+    
+}
+
+.nav-linkOscuro:hover {
+    /*background-color: var(--destacadoOscuro);*/
+    background-color: var(--turquesaOscuro);
+    color: var(--white)!important;
+    box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
+    font-weight: bold;
+    border-radius: 1rem;
+}
+
+.avatar-mini {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+/**-------- desplegables*/
+
+/*
+.navbar-nav .dropdownClaro:hover {
+    background: var(--white)!important;
+    color: white!important;
+    border-radius: 1rem 1rem 1rem 1rem ;
+    box-shadow: 0 0 6px rgba(59, 58, 58, 0.253);
+  }*/
+
+.nav-linkClaro {
+    font-size: 17px !important;
+    padding: 12px 20px 12px 20px !important;
+    color:var(--azulTextoNavBar)!important;
+    border-radius: 1rem;
+}
+  
+.dropdownClaro-menu {
+    border: none!important;
+    box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
+    color: var(--white)!important;
+    opacity: 1;
+    padding: 7px 0;
+    -webkit-box-shadow: 0 3px 4px rgba(0,0,0,.18)!important;
+    box-shadow: 0 0 15px rgba(59, 58, 58, 0.253);
+    margin-top: -12px !important;
+}
+
+/* SEARCHBAR -------------------------------------------- */
+
+.searchBar{
+    border-radius: 20px!important;
+    margin-left: 5px;
+    box-shadow: inset -2px -2px 2px rgba(255,255,255,0.15), inset 2px 2px 6px rgba(94,104,121,0.2);
+    /*search icon: <a href="https://www.flaticon.com/free-icons/search" title="search icons">Search icons created by Smashicons - Flaticon</a>*/
+    background-image: url(../img/search.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 50px;
+}
+
+.searchBar:focus {
+    outline-width: 0px;
+  }
+
+/* REGISTER --------------------------------------- */
+.msgErrorRegister{
+    float: right;
+    font-size: .875em;
+    color: #d9534f;
 }
 
 /*FOTO PACIENTE----------------------------------------*/
 .imagenPaciente {
-    max-width: 250px !important;
+    height: 14em!important;
 }
 
 /*NUEVO SLIDER PUNTUACIÓN----*/
@@ -337,11 +418,11 @@ margin-left: 40px;
 }
 
 .letra-primary-color {
-    color: #4F7BC5 !important;
+    color: var(--azulTextoNavBar) !important;
 }
 
 .button-primary-color {
-    background-color: #4F7BC5;
+    background-color: var(--azulTextoNavBar);
 }
 
 .contenedor {
@@ -418,7 +499,7 @@ margin-left: 40px;
 }
 
 .hv-title {
-    color: #4F7BC5;
+    color: var(--azulTextoNavBar);
 }
 
 /*
@@ -448,13 +529,6 @@ margin-left: 40px;
 .hv-control {
     padding: 0 !important;
     width: auto !important
-}
-
-.avatar-mini {
-    vertical-align: middle;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
 }
 
 .avatar {
@@ -522,7 +596,7 @@ margin-left: 40px;
     line-height: 2.5em;
     text-align: center;
     border-radius: 50%;
-    background: #4F7BC5;
+    background: var(--azulTextoNavBar);
     vertical-align: middle;
     margin-right: 1em;
     color: white;
@@ -609,9 +683,43 @@ div>.row {
     border-radius: 23px;
 }
 
+.hidden{
+    display:none;
+}
+
+.modal{
+    backdrop-filter: blur(1px) saturate(120%);
+}
+
 /* On smaller resolutions, hide the text for Large screens */
 @media only screen and (max-width: 560px) {
     .largeScreen {
         display: none;
     }
+}
+
+@media only screen and (min-width: 992px) {
+    .smallMediaLeft{
+        align-items: center!important;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .menuLittlemargin{
+       margin-top: 10px;
+    }
+}
+
+
+.recuerdo-imagenes{
+    width: 8em; 
+    margin-right: 15px;
+}
+
+.recuerdo-imagenes img{
+    border-radius: 15px;
+}
+
+.recuerdo-imagenes span:hover{
+    cursor: pointer;
 }

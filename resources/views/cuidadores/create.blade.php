@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Registro cuidador</h5>
+        <h5 class="text-muted">Registro persona cuidadora</h5>
         <hr class="lineaTitulo">
     </div>
 
@@ -22,7 +22,7 @@
                     
                 </div>
             <div class="col-12">
-                <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
+                <a href="/usuarios/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
                 <button type="submit" value="Guardar" id="guardar" class="btn btn-outline-primary">Finalizar</button>
             </div>
         </div>
@@ -37,15 +37,22 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> -->
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="/js/libs/dropzone.js"></script>
+    <script src="/js/libs/sweetAlert2.js"></script>
+
     <script>
         let id = document.getElementById("paciente").value;
-        var ruta = "/pacientes/" + id + "/cuidadores"
-        var max = 1
-        var limit = true
-        var silenceMode = true
         let send_dropzone = true
+
+        let dropzone_config = {
+            limit: true,
+            max: 1,
+            silenceMode: true,
+            ruta: "/usuarios/" + id + "/cuidadores"
+        }
+        
     </script>
     <script src="/js/cuidador.js"></script>
     <script src="/js/dropzone.js"></script>
