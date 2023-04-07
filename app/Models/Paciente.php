@@ -43,6 +43,10 @@ class Paciente extends Model
         return $this->hasMany(Recuerdo::class);
     }
 
+    public function videos(){
+        return $this->hasMany(Video::class);
+    }
+
     public function sesiones(){
         return $this->hasMany(Sesion::class);
     }

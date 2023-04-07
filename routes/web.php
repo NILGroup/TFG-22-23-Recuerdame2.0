@@ -67,7 +67,8 @@ Route::resources([
     'calendario' => CalendarioController::class,
     'informesSesion' => InformesSesionController::class,
     'evaluaciones' => EvaluacionController::class,
-    'cuidadores' => CuidadoresController::class
+    'cuidadores' => CuidadoresController::class,
+    'video' => VideoHistoriaController::class
 ]);
 
 //Registro y login
@@ -179,11 +180,14 @@ Route::post('/generarPDFDiagnostico', 'App\Http\Controllers\DiagnosticoControlle
 //RUTAS CUSTOMIZADAS HISTORIAS DE VIDA
 Route::get('/usuarios/{id}/historias/generarHistoria', 'App\Http\Controllers\HistoriaController@generarHistoria');
 Route::get('/historias/generarLibro', 'App\Http\Controllers\HistoriaController@generarLibroHistoria');
-Route::get('/generarVideoHistoria', 'App\Http\Controllers\HistoriaController@generarVideoHistoria');
 Route::get('/generarPDFHistoria', 'App\Http\Controllers\PDFController@generarPDFHistoria');
 Route::post('/storeTipoNoView', 'App\Http\Controllers\TipoRelacionController@storeNoView');
 
-
+//RUTAS CUSTOMIZADAS VIDEO HISTORIAS DE VIDA
+Route::get('/pacientes/{id}/videos/generadorVideo', 'App\Http\Controllers\VideoHistoriaController@generadorVideoHistoria');
+Route::get('/pacientes/{id}/videos', 'App\Http\Controllers\VideoHistoriaController@showByPaciente');
+Route::get('/generarVideoHistoria', 'App\Http\Controllers\VideoHistoriaController@generarVideoHistoria');
+Route::delete('/eliminarVideo/{id}', 'App\Http\Controllers\VideoHistoriaController@destroy');
 /*********************************************************
     CREA DATOS EN LA BASE DE DATOS
 *********************************************************/
