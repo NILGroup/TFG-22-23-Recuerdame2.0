@@ -1,4 +1,4 @@
-let counter = 0
+
 
     $("#boton-modal-imagenes").on("click", function(event){
         $("#modal-descripcion").prop("value", "")
@@ -19,7 +19,9 @@ let counter = 0
             let cloneDesc = desc.clone().removeAttr("id").hide()
 
             let div = $("<div class='d-flex flex-column text-center recuerdo-imagenes'></div>")
-            let imgDiv = $(`<img style='width: 8em' ></img>`)
+            let backgroundDiv = $("<div style='background-color:white; border-radius: 15px'></div>")
+
+            let imgDiv = $(`<img style='width: 8em; height: 8em;' ></img>`)
 
             if (files[0].type.includes("image")){
                 imgDiv.prop("src", URL.createObjectURL(cloneFile.prop("files")[0]))
@@ -28,10 +30,11 @@ let counter = 0
                 imgDiv.prop("src", getRuta({fichero: files[0].name}))
             }
             
+            backgroundDiv.append(imgDiv)
             
             
-            div.append(imgDiv)
-            div.append($(`<span data-pos='${counter++}' style='color: blue;'>Eliminar</span>`))
+            div.append(backgroundDiv)
+            div.append($(`<span style='color: blue;'>Eliminar</span>`))
         
 
             $("#img-previews").append(div)
@@ -45,7 +48,8 @@ let counter = 0
     })
 
     $("#img-previews").on("click", "span", function(event){
-        let pos = $(event.target).data("pos")
+        let pos = $(event.target).parent().index()
+        
         $("#img-previews").children().eq(pos).detach()
         $("#div-imagenes").children().eq(pos).detach()
         $("#div-descripciones").children().eq(pos).detach()
