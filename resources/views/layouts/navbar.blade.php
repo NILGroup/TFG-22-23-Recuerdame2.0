@@ -63,17 +63,12 @@
 
         <div class="row align-items-center pe-4">
             <div class="col-12">
-                @if (isset($paciente->multimedia))
-                <a href="/usuarios/{{Session::get('paciente')['id']}}"><img src="{{$paciente->multimedia->fichero}}"  alt="Avatar" class="avatar-mini"></a>
-                @else
-
-                @if( Session::get('paciente')['genero_id'] == 1 || Session::get('paciente')['genero_id'] == 3)
-
-                <a  href="/usuarios/{{Session::get('paciente')['id']}}"><img src="/img/avatar_hombre.png" alt="Avatar" class="avatar-mini"></a>
-
+                @if (!is_null(Session::get('img')))
+                    <a href="/usuarios/{{Session::get('paciente')['id']}}"><img src="{{Session::get('img')}}"  alt="Avatar" class="avatar-mini"></a>
+                @elseif( Session::get('paciente')['genero_id'] == 1 || Session::get('paciente')['genero_id'] == 3)
+                    <a href="/usuarios/{{Session::get('paciente')['id']}}"><img src="/img/avatar_hombre.png" alt="Avatar" class="avatar-mini"></a>
                 @elseif( Session::get('paciente')['genero_id'] == 2)
-                <a  href="/usuarios/{{Session::get('paciente')['id']}}"><img src="/img/avatar_mujer.png" alt="Avatar" class="avatar-mini"></a>
-                @endif
+                    <a href="/usuarios/{{Session::get('paciente')['id']}}"><img src="/img/avatar_mujer.png" alt="Avatar" class="avatar-mini"></a>
                 @endif
             </div>
         </div>

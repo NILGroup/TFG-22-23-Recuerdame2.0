@@ -60,6 +60,8 @@ class asignarPaciente
             return redirect("/usuarios");
 
         session()->put('paciente', $paciente->toArray());
+        session()->put('img', $paciente->multimedia->fichero);
+        //throw new \Exception($paciente->multimedia->fichero));
         return $next($request);
     }
 }
