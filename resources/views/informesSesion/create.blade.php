@@ -10,6 +10,9 @@
     <form id="formulario" action="/cerrarInformeSesion" method="POST">
         
         {{csrf_field()}}
+
+        @include('sesiones.desplegable')
+
         @include('informesSesion.listaItems')
 
         @include('informesSesion.desplegable')

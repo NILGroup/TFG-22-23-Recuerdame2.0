@@ -50,7 +50,9 @@ class InformesSesionController extends Controller
         $personas = Personarelacionada::where('paciente_id', $paciente->id)->get()->keyBy("id");
         $show = false;
         $mostrarFoto = false;
-        return view('informesSesion.create', compact('paciente', 'sesion', 'show', 'recuerdos','complejidades','participaciones', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas', 'mostrarFoto'));
+        $user = $sesion->user;
+        
+        return view('informesSesion.create', compact('paciente', 'sesion', 'user', 'show', 'recuerdos','complejidades','participaciones', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas', 'mostrarFoto'));
     }
 
     public function store(Request $request){
@@ -64,6 +66,7 @@ class InformesSesionController extends Controller
         $sesion->duracion = $request->duracion;
         $sesion->participacion_id = $request->participacion_id;
         $sesion->complejidad_id = $request->complejidad_id;
+        $sesion->propuestas = $request->propuestas;
         $sesion->finalizada = true;
         $sesion->save();
         

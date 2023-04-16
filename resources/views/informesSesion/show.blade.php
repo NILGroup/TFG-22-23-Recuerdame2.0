@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="pt-4 pb-2">
-        <h5 class="text-muted">Generar informe de sesión</h5>
+        <h5 class="text-muted">Informe de sesión</h5>
         <hr class="lineaTitulo">
     </div>
     <form action="/generarPDFInformeSesion" method="POST">

@@ -4,7 +4,7 @@
         @include('personasrelacionadas.foto')
     </div>
     @endif
-    <div class= @if($mostrarFoto) "col-lg-9" @endif "col-lg-12">
+    <div class= @if($mostrarFoto) "col-lg-9" @else "col-lg-12" @endif>
 
         <input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$idPaciente}}" required>
         <input type="hidden" name="id" class="form-control form-control-sm" id="id" value="{{$persona->id}}" required>

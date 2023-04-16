@@ -69,7 +69,7 @@
 
         <div class="modal-footer">
             <input type="submit" id="btnEliminar" name="btnEliminar" value="Eliminar actividad" class="btn btn-outline-primary btn-md d-none confirm_delete_calendario">
-            <input type="submit" id="btnModificar" name="btnModificar" value="Modificar actividad" class="btn btn-primary btn-md d-none">
+            <input type="submit" id="btnModificar" name="btnModificar" value="Guardar cambios" class="btn btn-primary btn-md d-none">
             <input type="submit" id="btnFinalizar" name="btnFinalizar" value="Finalizar actividad" class="btn btn-primary btn-md d-none finalizar">
             <input type="submit" id="btnGuardar" name="btnAccion" value="Guardar actividad" class="btn btn-primary btn-md guardar">
         </div>

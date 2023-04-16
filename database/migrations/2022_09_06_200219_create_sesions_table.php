@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('facilitadores')->nullable();
             $table->string('observaciones')->nullable();
             $table->string("duracion")->nullable();
+            $table->string("propuestas")->nullable();
+            
             $table->unsignedBigInteger('paciente_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('etapa_id');

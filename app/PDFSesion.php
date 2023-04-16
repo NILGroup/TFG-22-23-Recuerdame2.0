@@ -96,13 +96,15 @@ class PDFSesion extends FPDF{
         $pdf->MultiCell(0,7,utf8_decode($sesion->objetivo),1);
         $pdf->Ln();
 
-        $pdf->SetFillColor(170);
-        $pdf->SetFont('Times','B',12);
-        $pdf->Cell(0,7,utf8_decode('Descripción'),1,0,'L',true);
-        $pdf->Ln();
-        $pdf->SetFont('Times','',12);
-        $pdf->MultiCell(0,7,utf8_decode($sesion->descripcion),1);
-        $pdf->Ln();
+        if(!empty($sesion->descripcion)){
+            $pdf->SetFillColor(170);
+            $pdf->SetFont('Times','B',12);
+            $pdf->Cell(0,7,utf8_decode('Descripción'),1,0,'L',true);
+            $pdf->Ln();
+            $pdf->SetFont('Times','',12);
+            $pdf->MultiCell(0,7,utf8_decode($sesion->descripcion),1);
+            $pdf->Ln();
+        }
 
         if($sesion->facilitadores != null){
             $pdf->SetFont('Times','B',12);
@@ -129,6 +131,16 @@ class PDFSesion extends FPDF{
         $pdf->Cell(50,7,utf8_decode("Fecha de finalización:"),1,0,'L',true);
         $pdf->SetFont('Times','',12);
         $pdf->Cell(140,7, \Carbon\Carbon::parse($informeSesion->fecha_finalizada)->format("d-m-Y h:i"),1,0,'C');
+        $pdf->Ln();
+        $pdf->SetFont('Times','B',12);
+        $pdf->Cell(50,7,utf8_decode("Nivel de participación:"),1,0,'L',true);
+        $pdf->SetFont('Times','',12);
+        $pdf->Cell(140,7, $informeSesion->participacion->nombre,1,0,'C');
+        $pdf->Ln();
+        $pdf->SetFont('Times','B',12);
+        $pdf->Cell(50,7,utf8_decode("Nivel de complejidad:"),1,0,'L',true);
+        $pdf->SetFont('Times','',12);
+        $pdf->Cell(140,7, $informeSesion->complejidad->nombre,1,0,'C');
         $pdf->Ln(12);
 
         $pdf->SetFillColor(170);
@@ -154,6 +166,15 @@ class PDFSesion extends FPDF{
             $pdf->Ln();
             $pdf->SetFont('Times','',12);
             $pdf->MultiCell(0,7,utf8_decode($informeSesion->observaciones),1);
+            $pdf->Ln();
+        }
+        
+        if(!empty($informeSesion->propuestas)){
+            $pdf->SetFont('Times','B',12);
+            $pdf->Cell(0,7,'Propuestas de mejora',1,0,'L',true);
+            $pdf->Ln();
+            $pdf->SetFont('Times','',12);
+            $pdf->MultiCell(0,7,utf8_decode($informeSesion->propuestas),1);
             $pdf->Ln();
         }
     }

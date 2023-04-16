@@ -7,7 +7,11 @@ $("input, select").each(function () {
             $(this).prop("disabled", true)
             break;
         case "select-one":
-            $(this).replaceWith("<label> " + $(this).find("option:selected").text() + "</label>");
+            if($(this).find("option:selected").text() != "Otro")
+                $(this).replaceWith("<label> " + $(this).find("option:selected").text() + "</label>");
+            else{
+                $(this).remove();
+            }
             break;
         case "date":
             $(this).replaceWith("<label> " + new Date($(this).val()).toLocaleDateString('en-GB')  + "</label>");
