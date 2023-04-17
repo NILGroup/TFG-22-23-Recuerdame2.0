@@ -83,7 +83,7 @@ class ResumenesController extends Controller
 
         /* $data = Http::withHeaders([
                     'Content-Type' => 'application/json',
-                    'Authorization' => 'Bearer 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',
+                    'Authorization' => 'Bearer '.env('OPENAI_API_KEY'),
                   ])
                   ->post("https://api.openai.com/v1/chat/completions", [
                     "model" => "gpt-3.5-turbo",
