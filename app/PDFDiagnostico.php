@@ -8,7 +8,6 @@ use File;
 use DateTime;
 use PDF_LineGraph;
 
-require('PDFlinegraph.php');
 global $fecha;
 
 
@@ -169,10 +168,12 @@ class PDFDiagnostico extends FPDF
 				$ValArray[]=$val;					
 			}
 		}
+
 		//define max value
-		if($maxVal<ceil(max($ValArray))){
-			$maxVal = ceil(max($ValArray));
-		}
+        if($maxVal<ceil(max($ValArray))){
+            $maxVal = ceil(max($ValArray));
+        }
+
 		//draw horizontal lines
 		$vertDivH = $graphH/$nbDiv;
 		if(strstr($options,'H')){
@@ -185,7 +186,7 @@ class PDFDiagnostico extends FPDF
 			}
 		}
 		//draw vertical lines
-		$horiDivW = floor($graphW/(count($data[$keys[0]])-1));
+        $horiDivW = floor($graphW/(count($data[$keys[0]])-1));
 		if(strstr($options,'V')){
 			for($i=0;$i<=(count($data[$keys[0]])-1);$i++){
 				if($i<(count($data[$keys[0]])-1)){
@@ -200,7 +201,9 @@ class PDFDiagnostico extends FPDF
 			$this->setDrawColor($colors[$key][0],$colors[$key][1],$colors[$key][2]);
 			$this->SetLineWidth(0.8);
 			$valueKeys = array_keys($value);
+            
 			for($i=0;$i<count($value);$i++){
+                info($value[$valueKeys[$i]]);
 				if($i==count($value)-2){
 					$this->Line(
 						$graphX+($i*$horiDivW),
@@ -247,32 +250,19 @@ class PDFDiagnostico extends FPDF
 		$this->SetLineWidth(0.2);
 	}
 
-    function writeEvolucion($pdf,$diagnostico)
+    function writeEvolucion($pdf, $diagnostico, $gds, $mini, $cdr)
     {
         $pdf->AddPage();
         $pdf->SetFont('Times', 'B', 15);
         $pdf->Cell(0, 7, utf8_decode('Evolución'));
         $pdf->Ln(9);
              
-        $data = array(
-            'Group 1' => array(
-                '08-02' => 2.7,
-                '08-23' => 3.0,
-                '09-13' => 3.3928571,
-                '10-04' => 3.2903226,
-                '10-25' => 3.1
-            ),
-            'Group 2' => array(
-                '08-02' => 2.5,
-                '08-23' => 2.0,
-                '09-13' => 3.1785714,
-                '10-04' => 2.9677419,
-                '10-25' => 3.33333
-            )
-        );
+        $data = $gds;
+      
         $colors = array(
-            'Group 1' => array(114, 171, 237),
-            'Group 2' => array(163, 36, 153)
+            'GDS' => array(255, 0, 0),
+            'Mini mental' => array(255, 0, 255),
+            'CDR' => array(0, 0, 255)
         );
         
        
@@ -280,32 +270,11 @@ class PDFDiagnostico extends FPDF
         // Colors: fixed
         // Max ordinate: 6
         // Number of divisions: 3
-        $pdf->LineGraph(190,100,$data,'VHkBvBgBdB');
-        
-        $pdf->AddPage();
-        // Display options: horizontal lines, bounding box around the abscissa values
-        // Colors: random
-        // Max ordinate: auto
-        // Number of divisions: default
-        $pdf->LineGraph(190,100,$data,'HvB');
-        
-        $pdf->AddPage();
-        // Display options: vertical lines, bounding box around the legend
-        // Colors: random
-        // Max ordinate: auto
-        // Number of divisions: default
-        $pdf->LineGraph(190,100,$data,'VkB');
-        
-        $pdf->AddPage();
-        // Display options: horizontal lines, bounding boxes around the plotting area and the entire area
-        // Colors: random
-        // Max ordinate: 20
-        // Number of divisions: 10
-        $pdf->LineGraph(190,100,$data,'HgBdB',null,20,10);
+        $pdf->LineGraph(190,100,$data,'VHkBvBgBdB',$colors);
         
     }
 
-    function pdfBody($pdf, $diagnostico, $paciente)
+    function pdfBody($pdf, $diagnostico, $paciente, $gds, $mini, $cdr)
     {
         //$pdf->Cell(0,10,'Fecha del informe: '.$informeSeguimiento->getFecha(),0,1);
         // Colors, line width and bold font
@@ -358,7 +327,7 @@ class PDFDiagnostico extends FPDF
         $this->writeTest($pdf, $diagnostico);
 
     
-        $this->writeEvolucion($pdf, $diagnostico);
+        $this->writeEvolucion($pdf, $diagnostico, $gds, $mini, $cdr);
 
         $fecha = Carbon::now();
         $nombreArchivo = str_replace(" ", "_", "Diagnostico " . $paciente->nombre . " " . $fecha->format("d/m/Y") . ".pdf");
