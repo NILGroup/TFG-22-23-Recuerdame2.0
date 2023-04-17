@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Diagnostico;
 use App\Models\Sesion;
 use App\Models\Evaluacion;
 use App\Models\Paciente;
@@ -10,6 +12,7 @@ use Codedge\Fpdf\Fpdf\Fpdf;
 use App\PDFSesion;
 use App\PDFEvaluacion;
 use App\PDFHistoria;
+use App\PDFDiagnostico;
 
 use function PHPUnit\Framework\isNull;
 
@@ -156,5 +159,28 @@ class PDFController extends Controller
     
         $pdf->Output();
     }
+
+     /**************
+      * PDF DIAGNOSTICO
+      */
     
+      public function verInformeDiagnostico($idPaciente){
+        $diagnostico = Diagnostico::find($idPaciente);
+    
+        $paciente = $diagnostico->paciente;
+        $this->obtenerPDFDiagnostico($paciente, $diagnostico);
+    }
+
+    public function obtenerPDFDiagnostico($paciente, $diagnostico){
+        $GLOBALS['fecha'] = $diagnostico->fecha;
+        $pdf = new PDFDiagnostico( 'P', 'mm', 'A4' );
+        $pdf->AliasNbPages();
+        $pdf->AddPage();
+        $pdf->SetFont('Times','',12);
+    
+        $pdf->pdfBody($pdf, $diagnostico, $paciente);
+    
+        $pdf->Output();
+    }
+
 }
