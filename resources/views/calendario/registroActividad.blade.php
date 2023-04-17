@@ -40,19 +40,19 @@
             </div>
 
         
-            <div class="pt-4 pb-2">
+            <div class="pt-4 pb-2 desaparecer">
                 <h5 class="text-muted">Material</h5>
             </div>
-            <div class="d-flex justify-content-end">
-                <button id="multiActividadBtn" type="button" class="btn btn-success showmodal" data-show-modal="multiActividad">Gestionar multimedia</button>
+            <div class="d-flex justify-content-end desaparecer">
+                <button id="multiActividadBtn" type="button" class="btn btn-success showmodal desaparecer" data-show-modal="multiActividad">Gestionar multimedia</button>
             </div>
-            <div class="dz-default dz-message dropzone-correct" id="dzp">
+            <div class="dz-default dz-message dropzone-correct desaparecer" id="dzp">
                 <div class="container dropzone-container">
                     <img src="/img/upload.png" id="dropzone-img" height="25em" alt="">
                     <h2 id="dropzone-title" class="dropzone-title-correct">Arrastre sus archivos</h1>
                 </div>
             </div>
-            <div class="previews-actividad">
+            <div class="previews-actividad desaparecer">
 
 
             </div>
@@ -62,7 +62,7 @@
             </div>
 
             
-            <div id="showMultimediaActividad" class="row pb-2">
+            <div id="showMultimediaActividad" class="row pb-2 ">
 
             </div>
         </div>

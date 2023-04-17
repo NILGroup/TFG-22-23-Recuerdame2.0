@@ -74,6 +74,7 @@ class CalendarioController extends Controller
 
     public function store(Request $request)
     {
+        error_log("hola");
 
         if (isset($request->id)) {
             //Aqui es update
@@ -103,6 +104,7 @@ class CalendarioController extends Controller
                 MultimediasController::savePhotos($request, $actividad);
             } 
             else {
+           
                 //return "<h1>$request->finished</h1>";
                 $actividad = Actividad::updateOrCreate(
                     ["id" => $request->id],
@@ -147,6 +149,46 @@ class CalendarioController extends Controller
 
     public function update(Request $request)
     {
+        if ($request->finished === "" || $request->finished === null) {
+
+            $actividad = Actividad::updateOrCreate(
+                ["id" => $request->id],
+                [
+                    "start" => $request->start,
+                    "title" => $request->title,
+                    "paciente_id" => $request->idPaciente,
+                    "color" => $request->color,
+                    "description" => $request->obs
+                ]
+            );
+
+
+
+            if (isset($request->mult))
+                $actividad->multimedias()->sync($request->mult);
+            else
+                $actividad->multimedias()->sync([]);
+
+            MultimediasController::savePhotos($request, $actividad);
+        } 
+        else {
+       
+            //return "<h1>$request->finished</h1>";
+            $actividad = Actividad::updateOrCreate(
+                ["id" => $request->id],
+                [
+                    "start" => $request->start,
+                    "title" => $request->title,
+                    "paciente_id" => $request->idPaciente,
+                    "color" => $request->color,
+                    "description" => $request->obs,
+                    "finished" => $request->finished
+                ]
+            );
+        }
+
+        session()->put('created', "Actualizado");
+        return redirect("/usuarios/$actividad->paciente_id/calendario");
     }
 
     public function updateSesion(Request $request)

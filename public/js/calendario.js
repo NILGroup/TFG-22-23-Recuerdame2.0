@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
     let idPaciente = document.getElementById('paciente_id').value;
 
+    if (user != 1){
+        $(".desaparecer").each((i, e) => $(e).hide())
+        
+    }
+
     let url_eventos = "/calendario/" + idPaciente;
     let options = {
         dayHeaderFormat: {
@@ -49,10 +54,11 @@ document.addEventListener('DOMContentLoaded', function () {
             $("#actividad-modal #showMultimediaActividad").children().detach();
             $("#tablaMultiActividad").DataTable().clear().draw()
 
-
+            
             /*TERAPEUTA****************************************************************/
             if (user === '1') {
                 document.getElementById('idSesion').value = "";
+                document.getElementById('id').value = "";
                 document.getElementById("modalesCalendario").children[0].style.display = "block";
                 document.getElementById("modalesCalendario").children[1].style.display = "block";
                 formulario.reset();
