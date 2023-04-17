@@ -7,20 +7,16 @@
         <h5 class="text-muted">Resumen generado</h5>
         <hr class="lineaTitulo">
     </div>
-    <form class="dropzone p-0" id="d" method="post">
-        {{csrf_field()}}
-        <div class="dropzone-inner">
-            @include('resumenes.listaItems')
-        </div>
-    </form>
+    
+    @include('resumenes.listaItems')
 
-    <div class="text-center">
-        <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Regenerar resumen</button></a>
-        <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Guardar resumen</button></a>
+    <div>
+        <!-- <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a> -->
+        <a href="/usuarios/{{$paciente->id}}/resumenes/{{$resumen->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
     </div>
     @endsection
 
     @push('scripts')
     @include('layouts.scripts')
-
+    <script src="/js/showView.js"></script>
     @endpush

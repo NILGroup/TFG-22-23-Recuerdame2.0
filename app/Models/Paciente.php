@@ -47,6 +47,10 @@ class Paciente extends Model
         return $this->hasMany(Video::class);
     }
 
+    public function resumenes(){
+        return $this->hasMany(Resumen::class);
+    }
+
     public function sesiones(){
         return $this->hasMany(Sesion::class);
     }

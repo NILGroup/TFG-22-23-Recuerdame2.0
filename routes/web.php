@@ -68,7 +68,8 @@ Route::resources([
     'informesSesion' => InformesSesionController::class,
     'evaluaciones' => EvaluacionController::class,
     'cuidadores' => CuidadoresController::class,
-    'video' => VideoHistoriaController::class
+    'video' => VideoHistoriaController::class,
+    'resumenes' => ResumenesController::class
 ]);
 
 //Registro y login
@@ -174,9 +175,12 @@ Route::post('/modificarDiagnostico', 'App\Http\Controllers\DiagnosticoController
 Route::post('/generarPDFDiagnostico', 'App\Http\Controllers\DiagnosticoController@generarPDFInforme');
 
 
-Route::get('/generarResumenHistoria', 'App\Http\Controllers\ResumenesController@index');
+Route::get('/generarResumenHistoria', 'App\Http\Controllers\ResumenesController@create');
 Route::get('/usuarios/{id}/resumenes', 'App\Http\Controllers\ResumenesController@showByPaciente');
 Route::post('/guardarResumen', 'App\Http\Controllers\ResumenesController@store');
+Route::post('/modificarResumen', 'App\Http\Controllers\ResumenesController@update');
+Route::get('/usuarios/{id}/resumenes/{idResumen}', 'App\Http\Controllers\ResumenesController@show');
+Route::get('/usuarios/{id}/resumenes/{idS}/editar', 'App\Http\Controllers\ResumenesController@showEditable');
 
 //RUTAS CUSTOMIZADAS HISTORIAS DE VIDA
 Route::get('/usuarios/{id}/historias/generarHistoria', 'App\Http\Controllers\HistoriaController@generarHistoria');

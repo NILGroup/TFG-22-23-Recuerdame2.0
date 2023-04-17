@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('resumenes', function (Blueprint $table) {
+        Schema::create('resumens', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
             $table->date('fecha')->nullable();
             $table->unsignedBigInteger('paciente_id');
-            $table->string('resumen');
+            $table->text('resumen');
             $table->timestamps();
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete("cascade");
         });
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('resumenes');
+        Schema::dropIfExists('resumens');
     }
 };

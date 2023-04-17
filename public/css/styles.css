@@ -723,3 +723,8 @@ div>.row {
 .recuerdo-imagenes span:hover{
     cursor: pointer;
 }
+
+.campoResumen {
+    overflow: hidden;
+   text-overflow: ellipsis;
+}
