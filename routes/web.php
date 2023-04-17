@@ -174,8 +174,9 @@ Route::post('/modificarDiagnostico', 'App\Http\Controllers\DiagnosticoController
 Route::post('/generarPDFDiagnostico', 'App\Http\Controllers\DiagnosticoController@generarPDFInforme');
 
 
-
-
+Route::get('/generarResumenHistoria', 'App\Http\Controllers\ResumenesController@index');
+Route::get('/usuarios/{id}/resumenes', 'App\Http\Controllers\ResumenesController@showByPaciente');
+Route::post('/guardarResumen', 'App\Http\Controllers\ResumenesController@store');
 
 //RUTAS CUSTOMIZADAS HISTORIAS DE VIDA
 Route::get('/usuarios/{id}/historias/generarHistoria', 'App\Http\Controllers\HistoriaController@generarHistoria');
