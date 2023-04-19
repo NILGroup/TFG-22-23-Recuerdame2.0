@@ -53,6 +53,10 @@ class asignarPaciente
                     if(!$paciente->users->contains($url[6]))
                         return redirect("/usuarios/$paciente->id/cuidadores");
                     break;
+                case "informeSesion":
+                    if(!$paciente->informesSesion->contains($url[6]))
+                        return redirect("/usuarios/$paciente->id/informesSesion");
+                    break;
                 default:
                     break;
             endswitch;
@@ -60,7 +64,8 @@ class asignarPaciente
             return redirect("/usuarios");
 
         session()->put('paciente', $paciente->toArray());
-        session()->put('img', $paciente->multimedia->fichero);
+        if(!is_null($paciente->multimedia))
+            session()->put('img', $paciente->multimedia->fichero);
         //throw new \Exception($paciente->multimedia->fichero));
         return $next($request);
     }

@@ -9,6 +9,8 @@
     </div>
     <form action="/generarPDFInformeSesion" method="POST">
         {{csrf_field()}}
+        @include('sesiones.desplegable')
+        
         @include('informesSesion.listaItems')
 
         <div>

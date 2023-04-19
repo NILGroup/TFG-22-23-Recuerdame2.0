@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('resumens', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
+            $table->longText('titulo');
             $table->date('fecha')->nullable();
             $table->unsignedBigInteger('paciente_id');
-            $table->text('resumen');
+            $table->longText('resumen');
             $table->timestamps();
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete("cascade");
         });

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger("paciente_id");
             $table->date("fecha");
             $table->string("enfermedad");
-            $table->string("antecedentes");
+            $table->longText("antecedentes");
             $table->integer("gds")->nullable();
             $table->date("gds_fecha")->nullable();
             $table->integer("mental")->nullable();
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string("nombre_escala")->nullable();
             $table->integer("escala")->nullable();
             $table->date("fecha_escala")->nullable();
-            $table->string("observaciones")->nullable();
+            $table->longText("observaciones")->nullable();
 
             $table->unsignedBigInteger("multimedia_gds_id")->nullable();
             $table->unsignedBigInteger("multimedia_mec_id")->nullable();

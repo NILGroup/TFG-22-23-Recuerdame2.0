@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('recuerdos', function (Blueprint $table) {
             $table->id();
             $table->date('fecha')->nullable();
-            $table->string('nombre');
+            $table->longText('nombre');
             $table->longText('descripcion')->nullable();
-            $table->string('localizacion')->nullable();
+            $table->longText('localizacion')->nullable();
             $table->integer('puntuacion');
             $table->unsignedBigInteger('paciente_id');
             $table->unsignedBigInteger('etapa_id');

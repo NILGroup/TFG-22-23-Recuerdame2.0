@@ -141,10 +141,11 @@ Route::post('/eliminarSesion', 'App\Http\Controllers\CalendarioController@destro
 
 
 //RUTAS CUSTOMIZADAS INFORMES SESION
-Route::get('/usuarios/{id}/informesSesion', 'App\Http\Controllers\InformesSesionController@showByPaciente');
 Route::get('/usuarios/{id}/sesiones/{idS}/generarInforme', 'App\Http\Controllers\InformesSesionController@generarInforme');
-Route::get('/usuarios/{id}/sesiones/{idS}/informe', 'App\Http\Controllers\PDFController@verInformeSesion');
-Route::get('/usuarios/{id}/sesiones/{idS}/ver', 'App\Http\Controllers\InformesSesionController@show');
+Route::get('/usuarios/{id}/informesSesion', 'App\Http\Controllers\InformesSesionController@showByPaciente');
+Route::get('/usuarios/{id}/informesSesion/{idS}/informe', 'App\Http\Controllers\PDFController@verInformeSesion');
+Route::get('/usuarios/{id}/informesSesion/{idS}/editar', 'App\Http\Controllers\InformesSesionController@edit');
+Route::get('/usuarios/{id}/informesSesion/{idS}', 'App\Http\Controllers\InformesSesionController@show');
 Route::post('/cerrarInformeSesion', 'App\Http\Controllers\InformesSesionController@store');
 Route::post('/generarPDFInformeSesion', 'App\Http\Controllers\InformesSesionController@generarPDFInformeSesion');
 Route::post('/getRecuerdo', 'App\Http\Controllers\RecuerdosController@getNoView');

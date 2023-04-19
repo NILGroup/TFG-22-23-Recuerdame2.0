@@ -6,25 +6,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Sesion extends Model
+
+class InformeSesion extends Model
 {
     use HasFactory, SoftDeletes;
     public $timestamps = false;
+    protected $table = "informesesions";
 
     protected $fillable = [
-        "fecha",
-        "titulo",
-        "objetivo",
-        "acciones",
-        "descripcion",
-        "etapa_id",
+        "fecha_finalizada",
+        "duracion",
+        "respuesta",
+        "observaciones",
+        "barreras",
+        "facilitadores",
+        "propuestas",
+        "participacion_id",
+        "complejidad_id",
         "paciente_id",
         "user_id",
+        "sesion_id",
     ];
-
-    public function etapa(){
-        return $this->belongsTo(Etapa::class);
-    }
 
     public function participacion(){
         return $this->belongsTo(Participacion::class);
@@ -42,15 +44,7 @@ class Sesion extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function multimedias(){
-        return $this->belongsToMany(Multimedia::class);
-    }
-
-    public function recuerdos(){
-        return $this->belongsToMany(Recuerdo::class);
-    }
-
-    public function informes(){
-        return $this->hasMany(InformeSesion::class);
+    public function sesion(){
+        return $this->belongsTo(Sesion::class);
     }
 }

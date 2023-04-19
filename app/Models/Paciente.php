@@ -82,4 +82,8 @@ class Paciente extends Model
     public function users(){
         return $this->belongsToMany(User::class);
     }
+    
+    public function informesSesion(){
+        return $this->hasMany(InformeSesion::class);
+    }
 }

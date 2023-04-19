@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('actividads', function (Blueprint $table) {
             $table->id();
             $table->date("start");
-            $table->string("title");
-            $table->string("description");
+            $table->longText("title");
+            $table->longText("description");
             $table->string("color");
             $table->unsignedBigInteger("paciente_id");
-            $table->string("finished")->nullable();;
+            $table->string("finished")->nullable();
             
             $table->foreign("paciente_id")->references("id")->on("pacientes")->onDelete("cascade");
             $table->softDeletes();
