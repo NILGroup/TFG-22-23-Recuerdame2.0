@@ -1,3 +1,4 @@
+@if(Auth::user()->rol_id == 1)
 <div class="accordion mb-2 shadow-sm"> 
     <div class="accordion-item accordion-header" id="diagnostico1">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#diagnostico" aria-expanded="true" aria-controls="diagnostico">
@@ -60,6 +61,7 @@
         </div>
     </div>
 </div>  
+@endif
 
 <div class="accordion mb-2 shadow-sm"> 
     <div class="accordion-item accordion-header" id="cuidadores1">
