@@ -54,7 +54,7 @@ class InformesSesionController extends Controller
         $mostrarFoto = false;
         $user = $sesion->user;
         
-        return view('informesSesion.edit', compact('paciente', 'informe', 'sesion', 'user', 'show', 'recuerdos','complejidades','participaciones', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas', 'mostrarFoto'));
+        return view('informesSesion.create', compact('paciente', 'informe', 'sesion', 'user', 'show', 'recuerdos','complejidades','participaciones', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas', 'mostrarFoto'));
     }
 
     public function edit($idPaciente, $idI){
@@ -76,11 +76,32 @@ class InformesSesionController extends Controller
         $show = false;
         $mostrarFoto = false;
         $user = $sesion->user;
-        
         return view('informesSesion.create', compact('paciente', 'informe', 'sesion', 'user', 'show', 'recuerdos','complejidades','participaciones', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas', 'mostrarFoto'));
     }
 
     public function store(Request $request){
+        
+        $informe = InformeSesion::updateOrCreate(
+            ['id' => $request->id],
+            ['fecha_finalizada' => $request->fecha_finalizada,
+            'duracion' => $request->duracion,
+            'respuesta' => $request->respuesta,
+            'observaciones' => $request->observaciones,
+            'barreras' => $request->barreras,
+            'facilitadores' => $request->facilitadores,
+            'propuestas' => $request->propuestas,
+            'paciente_id' => $request->paciente_id,
+            'user_id' => $request->user_id,
+            'sesion_id' => $request->sesion_id,
+            'participacion_id' => $request->participacion_id,
+            'complejidad_id' => $request->complejidad_id,
+        ]);
+        
+        session()->put('created', "true");
+        return redirect("/usuarios/$informe->paciente_id/informesSesion");
+    }
+
+    public function update(Request $request){
         
         $informe = InformeSesion::updateOrCreate(
             ['id' => $request->id],

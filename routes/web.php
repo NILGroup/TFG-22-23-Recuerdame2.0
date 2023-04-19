@@ -116,6 +116,7 @@ Route::get('/usuarios/{id}/recuerdos/{idR}/editar', 'App\Http\Controllers\Recuer
 Route::delete('/eliminarRecuerdo/{id}', 'App\Http\Controllers\RecuerdosController@destroy');
 Route::post('/storeRecuerdoNoView', 'App\Http\Controllers\RecuerdosController@storeNoView');
 Route::post('/usuarios/{idP}/recuerdos/{id}/restore', 'App\Http\Controllers\RecuerdosController@restore');
+Route::post('/actualizarRecuerdo', 'App\Http\Controllers\RecuerdosController@update');
 
 
 //RUTAS CUSTOMIZADAS PERSONA RELACIONADA
@@ -147,6 +148,7 @@ Route::get('/usuarios/{id}/informesSesion/{idS}/informe', 'App\Http\Controllers\
 Route::get('/usuarios/{id}/informesSesion/{idS}/editar', 'App\Http\Controllers\InformesSesionController@edit');
 Route::get('/usuarios/{id}/informesSesion/{idS}', 'App\Http\Controllers\InformesSesionController@show');
 Route::post('/cerrarInformeSesion', 'App\Http\Controllers\InformesSesionController@store');
+Route::post('/actualizarInforme', 'App\Http\Controllers\InformesSesionController@update');
 Route::post('/generarPDFInformeSesion', 'App\Http\Controllers\InformesSesionController@generarPDFInformeSesion');
 Route::post('/getRecuerdo', 'App\Http\Controllers\RecuerdosController@getNoView');
 Route::post('/usuarios/{idP}/informesSesion/{id}/restore', 'App\Http\Controllers\InformesSesionController@restore');
@@ -194,6 +196,8 @@ Route::get('/pacientes/{id}/videos/generadorVideo', 'App\Http\Controllers\VideoH
 Route::get('/pacientes/{id}/videos', 'App\Http\Controllers\VideoHistoriaController@showByPaciente');
 Route::get('/generarVideoHistoria', 'App\Http\Controllers\VideoHistoriaController@generarVideoHistoria');
 Route::delete('/eliminarVideo/{id}', 'App\Http\Controllers\VideoHistoriaController@destroy');
+
+
 /*********************************************************
     CREA DATOS EN LA BASE DE DATOS
 *********************************************************/

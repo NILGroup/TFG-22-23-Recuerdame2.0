@@ -8,7 +8,7 @@
         <hr class="lineaTitulo">
     </div>
 
-    <form action="/cerrarInformeSesion" method="POST" enctype="multipart/form-data">
+    <form action="/actualizarInforme" method="POST" enctype="multipart/form-data">
         {{csrf_field()}}
         @include('sesiones.desplegable')
         

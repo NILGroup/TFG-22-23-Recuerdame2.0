@@ -6,7 +6,7 @@
         <h5 class="text-muted">Editar recuerdo</h5>
         <hr class="lineaTitulo">
     </div>
-    <form id="recuerdo-form" method="post" action="/recuerdo" enctype="multipart/form-data">
+    <form id="recuerdo-form" method="post" action="/actualizarRecuerdo" enctype="multipart/form-data">
         {{csrf_field()}}
         @include('recuerdos.listaItems')
 
