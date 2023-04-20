@@ -1,6 +1,6 @@
 <div class="accordion mb-2">
     <div class="accordion-item accordion-header shadow-sm" id="recuerdos1">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#recuerdos" aria-expanded="true" aria-controls="evaluaciones">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tabla_recuerdos" aria-expanded="true" aria-controls="tabla_recuerdos">
             <div class="w-100">
                 <h5 class="text-muted text-start">Modificar recuerdos</h5>
             </div>

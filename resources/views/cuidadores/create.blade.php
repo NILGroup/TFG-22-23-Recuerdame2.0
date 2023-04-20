@@ -22,7 +22,7 @@
                     
                 </div>
             <div class="col-12">
-                <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
+                <a href="/usuarios/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
                 <button type="submit" value="Guardar" id="guardar" class="btn btn-outline-primary">Finalizar</button>
             </div>
         </div>
@@ -44,11 +44,15 @@
 
     <script>
         let id = document.getElementById("paciente").value;
-        var ruta = "/pacientes/" + id + "/cuidadores"
-        var max = 1
-        var limit = true
-        var silenceMode = true
         let send_dropzone = true
+
+        let dropzone_config = {
+            limit: true,
+            max: 1,
+            silenceMode: true,
+            ruta: "/usuarios/" + id + "/cuidadores"
+        }
+        
     </script>
     <script src="/js/cuidador.js"></script>
     <script src="/js/dropzone.js"></script>

@@ -17,17 +17,9 @@ class Sesion extends Model
         "objetivo",
         "acciones",
         "descripcion",
-        "fecha_finalizada",
-        "barreras",
-        "facilitadores",
-        "respuesta",
-        "observaciones",
         "etapa_id",
-        "participacion_id",
-        "complejidad_id",
         "paciente_id",
         "user_id",
-        "finalizada"
     ];
 
     public function etapa(){
@@ -56,5 +48,9 @@ class Sesion extends Model
 
     public function recuerdos(){
         return $this->belongsToMany(Recuerdo::class);
+    }
+
+    public function informes(){
+        return $this->hasMany(InformeSesion::class);
     }
 }

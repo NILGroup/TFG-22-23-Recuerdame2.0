@@ -35,8 +35,20 @@ class Paciente extends Model
         return $this->hasMany(Evaluacion::class);
     }
 
+    public function diagnostico(){
+        return $this->hasOne(Diagnostico::class);
+    }
+
     public function recuerdos(){
         return $this->hasMany(Recuerdo::class);
+    }
+
+    public function videos(){
+        return $this->hasMany(Video::class);
+    }
+
+    public function resumenes(){
+        return $this->hasMany(Resumen::class);
     }
 
     public function sesiones(){
@@ -69,5 +81,9 @@ class Paciente extends Model
 
     public function users(){
         return $this->belongsToMany(User::class);
+    }
+    
+    public function informesSesion(){
+        return $this->hasMany(InformeSesion::class);
     }
 }

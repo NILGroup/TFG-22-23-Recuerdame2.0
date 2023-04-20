@@ -23,4 +23,8 @@ class Actividad extends Model
     public function paciente(){
         return $this->belongsTo(Paciente::class);
     }
+
+    public function multimedias(){
+        return $this->belongsToMany(Multimedia::class);
+    }
 }

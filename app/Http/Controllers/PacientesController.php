@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -11,6 +12,7 @@ use App\Models\Situacion;
 use App\Models\Estudio;
 use App\Models\Genero;
 use App\Models\Multimedia;
+use App\Models\InformeSesion;
 use Illuminate\Support\Facades\Auth;
 
 use function PHPUnit\Framework\isNull;
@@ -38,7 +40,7 @@ class PacientesController extends Controller
         $idTerapeuta = Auth::id();
         $pacientes = User::find($idTerapeuta)->pacientes;
         //Redireccionamos a la vista devolviendo la lista de pacientes
-        return view("pacientes.index", compact("pacientes"));
+        return view("usuarios.index", compact("pacientes"));
 
         
     }
@@ -54,7 +56,7 @@ class PacientesController extends Controller
         $situaciones = Situacion::all()->sortBy("id");
         $estudios = Estudio::all()->sortBy("id");
         $generos = Genero::all()->sortBy("id");
-        return view("pacientes.create", compact("residencias", "situaciones", "estudios", "generos", "paciente"));
+        return view("usuarios.create", compact("residencias", "situaciones", "estudios", "generos", "paciente"));
     }
 
     /**
@@ -102,7 +104,7 @@ class PacientesController extends Controller
         $paciente->users()->save($user);
         session()->put('created', "true");
         //Redireccionamos a la vista de lista pacientes
-        //return redirect("/pacientes");
+        //return redirect("/usuarios");
         
     }
 
@@ -112,6 +114,7 @@ class PacientesController extends Controller
 
     public function show($id)
     {
+        $show = true;
         //Obtenemos al paciente
         $paciente = Paciente::findOrFail($id);
         $residencias = Residencia::all()->sortBy("id");
@@ -126,12 +129,39 @@ class PacientesController extends Controller
         foreach($evaluaciones as $evaluacion){
             $fechaActual = \Carbon\Carbon::parse($evaluacion->fecha)->addDays(1)->format("Y-m-d h:i:s");
             //$fechas->push([$fechaAnterior, $fechaActual]);
-            $sesiones = Sesion::whereBetween("fecha_finalizada", [$fechaAnterior, $fechaActual])->get();
+            $sesiones = InformeSesion::whereBetween("fecha_finalizada", [$fechaAnterior, $fechaActual])->get();
             $evaluacion->numSesiones = count($sesiones);
             $fechaAnterior=$fechaActual;
         }
-        //Devolvemos al paciente a la vista de mostrar paciente
-        return view("pacientes.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas", "cuidadores"));
+
+        if(!is_null($paciente->diagnostico)){
+            $diagnostico = $paciente->diagnostico;
+
+            $fechasNF = $paciente->evaluaciones()->pluck("fecha")->toarray();
+            array_unshift($fechasNF, $diagnostico->fecha);
+            $fechas = array();
+            foreach ($fechasNF as $fecha) {
+                $fecha = Carbon::createFromFormat('Y-m-d', $fecha)->format('d/m/Y');
+                array_push($fechas,$fecha);
+            }
+
+            $gds = $paciente->evaluaciones()->pluck("gds")->toarray();
+            array_unshift($gds, $diagnostico->gds);
+
+            $mini = $paciente->evaluaciones()->pluck("mental")->toarray();
+            array_unshift($mini, $diagnostico->mental);
+
+            $cdr = $paciente->evaluaciones()->pluck("cdr")->toarray();
+            array_unshift($cdr, $diagnostico->cdr);
+        }
+        else{
+            $diagnostico = new Diagnostico();
+            $fechas = array();
+            $gds = array();
+            $mini = array();
+            $cdr = array();
+        }
+        return view("usuarios.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas", "cuidadores", "show", 'diagnostico', 'fechas', 'gds', 'mini', 'cdr'));
 
     }
 
@@ -149,7 +179,7 @@ class PacientesController extends Controller
         $generos = Genero::all()->sortBy("id");
 
         //Devolvemos al paciente a la vista de editar paciente
-        return view("pacientes.edit", compact("paciente", "residencias", "situaciones", "estudios", "generos"));
+        return view("usuarios.edit", compact("paciente", "residencias", "situaciones", "estudios", "generos"));
     }
 
     /**
@@ -168,7 +198,7 @@ class PacientesController extends Controller
         
         session()->put('created', "true");
         //Redireccionamos a lista pacientes
-        //return redirect("/pacientes/$request->id");
+        //return redirect("/usuarios/$request->id");
         
     }
 
@@ -182,7 +212,7 @@ class PacientesController extends Controller
         Paciente::findOrFail($id)->delete();
         session()->forget('paciente');
         //Redireccionamos a lista pacientes
-        //return redirect("/pacientes");
+        //return redirect("/usuarios");
     }
     public function restore($id) 
     {
@@ -193,14 +223,14 @@ class PacientesController extends Controller
         $paciente = Paciente::findOrFail($id);
         $users = User::where("rol_id","=",1)->get();
 
-        return view("pacientes.addPacienteToTerapeuta", compact("paciente", "users"));
+        return view("usuarios.addPacienteToTerapeuta", compact("paciente", "users"));
     }
 
     public function asignacionTerapeutas(Request $request)
     {
         $paciente = Paciente::find($request->paciente_id);
         $paciente->users()->sync($request->seleccion);
-        return redirect("/pacientes");
+        return redirect("/usuarios");
     }
 
     public function removePhoto(Request $request){
@@ -208,7 +238,7 @@ class PacientesController extends Controller
         $paciente = Paciente::findOrFail($request->id);
         $paciente->multimedia->delete();
         
-        return redirect("/pacientes/$paciente->id/editar");
+        return redirect("/usuarios/$paciente->id/editar");
 
     }
 

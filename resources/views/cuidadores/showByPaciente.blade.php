@@ -12,7 +12,7 @@
             @include('layouts.tableSearcher')
             <div class="justify-content-end align-items-center d-flex">
                 <button type="button" class="btn btn-success showmodal mx-1" data-bs-toggle="modal" data-bs-target="#cuidadorExistente">Añadir existente</button>
-                <a href="/pacientes/{{$paciente->id}}/cuidadores/crear"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
+                <a href="/usuarios/{{$paciente->id}}/cuidadores/crear"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
             </div>
         </div>
         <table id="tabla-cuidadores" class="table table-bordered table-striped table-responsive datatable">
@@ -30,14 +30,14 @@
             <tbody class="shadow-sm">
                 @foreach($cuidadores as $cuidador)
                 <tr>
-                    <td><a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}"> {{$cuidador->nombre}} {{$cuidador->apellidos}} </a></td>
+                    <td><a href="/usuarios/{{$paciente->id}}/cuidadores/{{$cuidador->id}}"> {{$cuidador->nombre}} {{$cuidador->apellidos}} </a></td>
                     <td>{{$cuidador->email}}</td>
                     <td>{{$cuidador->telefono}}</td>
                     <td>{{$cuidador->localidad}}</td>
                     <td>{{$cuidador->parentesco}}</td>
                     <td class="tableActions">
-                        <a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver los datos del cuidador"></i></a>
-                        <a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar cuidador"></i></a>
+                        <a href="/usuarios/{{$paciente->id}}/cuidadores/{{$cuidador->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver los datos del cuidador"></i></a>
+                        <a href="/usuarios/{{$paciente->id}}/cuidadores/{{$cuidador->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar cuidador"></i></a>
                         <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" style="display:inline!important;">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">

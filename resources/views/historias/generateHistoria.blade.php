@@ -74,10 +74,46 @@
             <label class="form-label col-form-label-sm" for="0">No aptos</label>
         </div>
 
+        <div class="accordion my-3" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Opciones de generación de vídeos
+                </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                        <label class="form-check-label mt-3 negrita">Tipo de contenido <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="En este campo podemos elegir los elementos que queremos dentro del nuevo vídeo generado: solo imágenes, solo vídeos o ambos."></i></label>
+
+                        <div class="form-check ">
+                            <input type="hidden" name="imagenesCheck" id="imagenesCheck" value="1">
+                            
+                            <input type="checkbox" class="form-check-input" onclick="onCheck('imagenesCheck')" checked>
+                            <label class=" col-form-label-sm " for="1">Imágenes</label><br>
+                            
+                            <input type="hidden" name="videosCheck" id="videosCheck" value="1">
+                            
+                            <input type="checkbox" class="form-check-input" onclick="onCheck('videosCheck')" checked>
+                            <label class="form-label col-form-label-sm" for="1">Vídeos</label>
+                        </div>
+
+                        <label class="form-check-label mt-3 negrita">Extras <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="En este campo podemos activar la narración de un resumen de la historia de vida generado y narrado por inteligencia artifical."></i></label>
+
+                        <div class="form-check form-switch">
+                            <input type="hidden" name="narracionCheck" id="narracionCheck" value="1">
+                            <input class="form-check-input" type="checkbox" id="narracionCheck" onclick="onCheck('narracionCheck')" checked>
+                            <label class="form-check-label" for="narracionCheck">Narración por IA</label>
+                        </div>
+                </div>
+                </div>
+            </div>
+
+        </div>
 
 
         <div>
             <button type="submit" name="generarLibro" value="Generar libro" class="btn btn-outline-primary ">Generar libro</button>
+            <button type="submit" name="generarResumen" formaction="/generarResumenHistoria" value="Generar Resumen" class="btn btn-outline-primary ">Generar resumen</button>
             <button type="submit" name="generarVideo" formaction="/generarVideoHistoria" value="Generar Video" class="btn btn-outline-primary ">Generar vídeo</button>
             <button type="submit" name="generarPdf" formaction="/generarPDFHistoria" value="Generar PDF" class="btn btn-outline-primary ">Generar PDF</button>            
         </div>

@@ -162,7 +162,7 @@ class PersonasRelacionadasController extends Controller
         session()->put('created', "true");
 
 
-        //return redirect("/pacientes/$persona->paciente_id/personas/$persona->id");
+        return redirect("/usuarios/$persona->paciente_id/personas/$persona->id");
     }
 
     /**
@@ -173,7 +173,7 @@ class PersonasRelacionadasController extends Controller
     {
         $persona = Personarelacionada::findOrFail($id);
         $persona->delete();
-        //return redirect("/pacientes/$paciente->id/personas");
+        //return redirect("/usuarios/$paciente->id/personas");
     }
     public function restore($idP, $id) 
     {
@@ -185,7 +185,7 @@ class PersonasRelacionadasController extends Controller
         $persona = Personarelacionada::findOrFail($request->id);
         $persona->multimedia->delete();
         
-        return redirect("/pacientes/$persona->paciente_id/personas/$persona->id/editar");
+        return redirect("/usuarios/$persona->paciente_id/personas/$persona->id/editar");
 
     }
 

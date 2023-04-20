@@ -14,7 +14,7 @@
     @if (Auth::user()->rol_id == 1)
     <div class="col-12">
         <!-- <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a> -->
-        <a href="/pacientes/{{$idPaciente}}/personas/{{$persona->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
+        <a href="/usuarios/{{$idPaciente}}/personas/{{$persona->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
     </div>
     @endif
 </div>

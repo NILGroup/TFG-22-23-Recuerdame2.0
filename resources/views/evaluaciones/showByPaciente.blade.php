@@ -12,7 +12,7 @@
         <div class="d-flex justify-content-between upper">
             @include('layouts.tableSearcher')
             <div class="justify-content-end d-flex">
-                <a href="/pacientes/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
+                <a href="/usuarios/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
             </div>
         </div>
         <table id="tabla" class="table table-bordered table-striped datatable">
@@ -28,13 +28,13 @@
             <tbody class="shadow-sm">
                 @foreach ($evaluaciones as $informe)
                 <tr>
-                    <td data-sort="{{ strtotime($informe->fecha) }}"><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver">Informe {{date("d/m/Y", strtotime($informe->fecha))}}</td>
+                    <td data-sort="{{ strtotime($informe->fecha) }}"><a href="/usuarios/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver">Informe {{date("d/m/Y", strtotime($informe->fecha))}}</td>
                     <td>{{$informe->numSesiones}}</td>
                     <td>{{$informe->diagnostico}}</td>
                     <td class="tableActions">
-                        <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver informe"></i></a>
-                        <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar informe"></i></a>
-                        <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe"><i class="fa-solid fa-print text-success tableIcon" data-toggle="tooltip" data-placement="top" title="Vista de impresión del informe"></i></a>
+                        <a href="/usuarios/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver informe"></i></a>
+                        <a href="/usuarios/{{$paciente->id}}/evaluaciones/{{$informe->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar informe"></i></a>
+                        <a href="/usuarios/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe"><i class="fa-solid fa-print text-success tableIcon" data-toggle="tooltip" data-placement="top" title="Vista de impresión del informe"></i></a>
                         <form method="post" action="{{ route('evaluaciones.destroy', $informe->id) }}" style="display:inline!important;">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">

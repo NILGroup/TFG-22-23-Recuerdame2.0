@@ -99,7 +99,7 @@ class CuidadoresController extends Controller
 
         session()->put('created', "true");
 
-        return redirect("/pacientes/$paciente->id/cuidadores");
+        return redirect("/usuarios/$paciente->id/cuidadores");
     }
 
     public function update(Request $request)
@@ -115,9 +115,9 @@ class CuidadoresController extends Controller
         
         session()->put('created', "true");
         //Redireccionamos a lista pacientes
-        //return redirect("/pacientes/$request->id");
+        //return redirect("/usuarios/$request->id");
         $id = Session::get('paciente')['id'];
-        return redirect("/pacientes/$id/cuidadores/$cuidador->id");
+        return redirect("/usuarios/$id/cuidadores/$cuidador->id");
         
     }
 
@@ -166,7 +166,7 @@ class CuidadoresController extends Controller
         $cuidador->multimedia->delete();
         $id = Session::get('paciente')['id'];
 
-        return redirect("/pacientes/$id/cuidadores/$cuidador->id/editar");
+        return redirect("/usuarios/$id/cuidadores/$cuidador->id/editar");
     }
 
     public function reasignarCuidadores(Request $request){

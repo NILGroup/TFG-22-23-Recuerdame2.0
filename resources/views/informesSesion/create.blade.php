@@ -10,12 +10,15 @@
     <form id="formulario" action="/cerrarInformeSesion" method="POST">
         
         {{csrf_field()}}
+
+        @include('sesiones.desplegable')
+
         @include('informesSesion.listaItems')
 
         @include('informesSesion.desplegable')
         <input type="hidden" id="idRecuerdoModal" value=""/>
         <div>
-            <a href="/pacientes/{{$sesion->paciente->id}}/sesiones"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="/usuarios/{{$sesion->paciente->id}}/sesiones"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button type="submit" id="guardar" name="guardarInformeSesion" value="Guardar" class="btn btn-outline-primary guardar">Finalizar</button>
         </div>
 

@@ -6,11 +6,11 @@
         <h5 class="text-muted">Crear usuario</h5>
         <hr class="lineaTitulo">
     </div>
-    <form class="dropzone p-0" id="d" method="post" action="/pacientes">
+    <form class="dropzone p-0" id="d" method="post" action="/usuarios">
         {{csrf_field()}}
 
         <div class="dropzone-inner">
-            @include('pacientes.listaItems')
+            @include('usuarios.listaItems')
             <div class="dz-default dz-message dropzone-correct" id="dzp">
                 <div class="container dropzone-container">
                     <img src="/img/upload.png" id="dropzone-img" height="25em" alt="">
@@ -23,7 +23,7 @@
         </div>
 
         <div class="col-12">
-            <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="{{route('usuarios.index')}}"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button id="guardar" type="submit" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
@@ -37,9 +37,13 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> -->
     <script src="/js/libs/dropzone.js"></script>
     <script>
-        var ruta = "/pacientes/"
-        var max = 1
-        var limit = true
+
+        let dropzone_config = {
+            limit: true,
+            max: 1,
+            ruta: "/usuarios/"
+        }
+        
     </script>
     <script src="/js/especificar.js"></script>
     <script src="/js/dropzone.js"></script>

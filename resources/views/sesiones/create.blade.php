@@ -50,11 +50,16 @@
 
     <script src="/js/table.js"></script>
     <script>
+        
         $("#add-multimedia").hide()
+        $("#remove-multimedia").hide()
+        
         let id = document.getElementById("paciente_id").value;
-        var ruta = "/pacientes/" + id + "/sesiones"
-        var max
-        var limit = false
+
+        let dropzone_config = {
+            ruta: "/usuarios/" + id + "/sesiones"
+        }
+   
     </script>
     <script src="/js/dropzone.js"></script>
     <script src="/js/recuerdo.js"></script>

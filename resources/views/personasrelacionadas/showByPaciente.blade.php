@@ -12,7 +12,7 @@
         <div class="d-flex justify-content-between upper">
             @include('layouts.tableSearcher')
             <div class="justify-content-end d-flex">
-                <a href="/pacientes/{{$paciente->id}}/crearPersona"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
+                <a href="/usuarios/{{$paciente->id}}/crearPersona"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
             </div>
         </div>
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
@@ -28,12 +28,12 @@
             <tbody class="shadow-sm">
                 @foreach($personas as $persona)
                 <tr>
-                    <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}} {{$persona->apellidos}}</a> @if($persona->contacto)★@endif</td>
+                    <td><a href="/usuarios/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}} {{$persona->apellidos}}</a> @if($persona->contacto)★@endif</td>
                     <td>{{$persona->localidad}}</td>
                     <td>{{$persona->tiporelacion->nombre}}</td>
                     <td class="tableActions">
-                        <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona"></i></a>
-                        <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar persona"></i></a>
+                        <a href="/usuarios/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona"></i></a>
+                        <a href="/usuarios/{{$paciente->id}}/personas/{{$persona->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar persona"></i></a>
                         <form method="post" action="{{ route('personas.destroy', $persona->id) }}" style="display:inline!important;">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">

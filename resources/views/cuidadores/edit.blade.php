@@ -37,7 +37,7 @@
         </div>
 
         <div class="col-12 mt-3">
-            <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="/usuarios/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button type="submit" value="Guardar" id="guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
@@ -69,7 +69,7 @@
         </div>
 
         <div class="form-group">
-            <a href="/pacientes/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="/usuarios/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button id="guardar" type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
@@ -91,10 +91,15 @@
     let id = document.getElementById("paciente").value;
     let id2 = document.getElementById("id").value
 
-    var ruta = "/pacientes/" + id + "/cuidadores/" + id2;
-    var max = 1
-    var limit = true
-    var silenceMode = true
+    let dropzone_config = {
+            limit: true,
+            max: 1,
+            silenceMode: true,
+            ruta:  "/usuarios/" + id + "/cuidadores/" + id2
+        }
+ 
+
+
     let send_dropzone = null
 </script>
 

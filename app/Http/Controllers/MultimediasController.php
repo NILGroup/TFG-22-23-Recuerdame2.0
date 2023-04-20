@@ -145,4 +145,29 @@ class MultimediasController extends Controller
             }
         }
     }
+
+
+    public static function savePhotosWithDescriptions(Request $request, $object){
+        if ($request->has("file")) { //EN CASO DE MULTIMEDIA
+            $name = [];
+            $original_name = [];
+
+            $counter = 0;
+            foreach ($request->file('file') as $key => $value) {
+                $image = uniqid() . time() . '.' . $value->getClientOriginalExtension();
+                $destinationPath = public_path() . '/storage/img';
+                $value->move($destinationPath, $image);
+                $name[] = $image;
+                $original_name[] = $value->getClientOriginalName();
+                $multimedia = Multimedia::create([
+                    'nombre' => $value->getClientOriginalName(),
+                    'fichero' => '/storage/img/' . $image,
+                    'descripcion' => $request->descripciones[$counter]
+                ]);
+
+                $object->multimedias()->attach($multimedia->id);
+                $counter++;
+            }
+        }
+    }
 }

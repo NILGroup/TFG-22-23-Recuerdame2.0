@@ -59,13 +59,16 @@
     <script src="/js/libs/dataTables.js"></script>
     <script src="/js/libs/fullcalendar.js"></script>
     <script src="/js/libs/sweetAlert2.js"></script>
+    <script src="/js/libs/dropzone.js"></script>
 
     <script src="/js/table.js"></script>
-    <script src="/js/calendario.js"></script>
     <script src="/js/recuerdo.js"></script>
+    <script src="/js/calendario.js"></script>
     <script src="/js/multiModal.js"></script>
     <script src="/js/confirm.js"></script>
     <script src="/js/validacion.js"></script>
+    <script src="/js/multimediaModal.js"></script>
+    
     @if (Session::has('created'))
         <script>
             var action = "{{Session::get('created')}}"
@@ -78,8 +81,7 @@
 
     <script>
         $(document).ready(function() {
-            $("#add-multi-sesion").hide()
-            $("#add-multimedia").hide()
+           
             $('#calendar .fc-dayGridMonth-button').on("click", function() {
                 $('#calendar .fc-dayGridMonth-button').attr("disabled", "");
                 $('#calendar .fc-dayGridWeek-button').removeAttr("disabled");
@@ -107,5 +109,26 @@
             $('#calendar .fc-dayGridMonth-button').click();
             $('#calendar .fc-todo-button').click();
         }) 
+
+        $("#add-multimedia").hide()
+        $("#remove-multimedia").hide()
+        
+        let id = $("#paciente_id").prop("value")
+
+        let dropzone_config = [{
+            form_id : "#sesion-modal #formulario",
+            submit_id: "#btnGuardarSesion",
+            ruta: "/usuarios/" + id + "/calendario",
+            previewZone: ".previews-sesion"
+        }, 
+        {
+            form_id : "#actividad-modal #formulario",
+            submit_id: ["#btnGuardar", "#btnModificar"],
+            ruta: "/usuarios/" + id + "/calendario",
+            previewZone: ".previews-actividad"
+        }
+    ]
+     
     </script>
+    <script src="/js/dropzone.js"></script>
 @endpush

@@ -4,7 +4,7 @@
         @include('personasrelacionadas.foto')
     </div>
     @endif
-    <div class= @if($mostrarFoto) "col-lg-9" @endif "col-lg-12">
+    <div class= @if($mostrarFoto) "col-lg-9" @else "col-lg-12" @endif>
 
         <input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$idPaciente}}" required>
         <input type="hidden" name="id" class="form-control form-control-sm" id="id" value="{{$persona->id}}" required>
@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="row col-sm-12 col-md-6 col-lg-6 align-items-center">
-                <label for="localidad" class="form-label col-form-label negrita col-sm-12 col-md-5 col-lg-4">Localidad:<span class="asterisco">*</span></label>
+                <label for="localidad" class="form-label col-form-label negrita col-sm-12 col-md-5 col-lg-4">Dirección:<span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-6 col-lg-8 ">
                     <input type="text" name="localidad" class="form-control form-control-sm" id="localidad" value="{{$persona->localidad}}" required>
                 </div>

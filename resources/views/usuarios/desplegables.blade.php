@@ -1,3 +1,18 @@
+@if(Auth::user()->rol_id == 1)
+<div class="accordion mb-2 shadow-sm"> 
+    <div class="accordion-item accordion-header" id="diagnostico1">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#diagnostico" aria-expanded="true" aria-controls="diagnostico">
+            <div class="w-100">
+                <h5 class="text-muted text-start">Diagnóstico del usuario</h5>
+            </div>
+        </button>
+        
+        <div id="diagnostico" class="tabla accordion-collapse collapse show" aria-labelledby="diagnostico1">
+            @include('diagnostico.listaItems')
+            @include('diagnostico.charts')
+        </div>
+    </div>
+</div>  
 <div class="accordion mb-2 shadow-sm"> 
     <div class="accordion-item accordion-header" id="evaluaciones1">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#evaluaciones" aria-expanded="true" aria-controls="evaluaciones">
@@ -10,7 +25,7 @@
             <div class="d-flex justify-content-between upper">
                 @include('layouts.tableSearcher')
                 <div class="justify-content-end d-flex">
-                    <a href="/pacientes/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
+                    <a href="/usuarios/{{$paciente->id}}/evaluaciones/generarInforme"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
             <table id="tabla" class="table table-bordered table-striped datatable">
@@ -26,13 +41,13 @@
                 <tbody class="shadow-sm">
                     @foreach ($evaluaciones as $informe)
                     <tr>
-                        <td data-sort="{{ strtotime($informe->fecha) }}"><a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver">Informe {{date("d/m/Y", strtotime($informe->fecha))}}</td>
+                        <td data-sort="{{ strtotime($informe->fecha) }}"><a href="/usuarios/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver">Informe {{date("d/m/Y", strtotime($informe->fecha))}}</td>
                         <td>{{$informe->numSesiones}}</td>
                         <td>{{$informe->diagnostico}}</td>
                         <td class="tableActions">
-                            <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver informe"></i></a>
-                            <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar informe"></i></a>
-                            <a href="/pacientes/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe"><i class="fa-solid fa-print text-success tableIcon" data-toggle="tooltip" data-placement="top" title="Vista de impresión del informe"></i></a>
+                            <a href="/usuarios/{{$paciente->id}}/evaluaciones/{{$informe->id}}/ver"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver informe"></i></a>
+                            <a href="/usuarios/{{$paciente->id}}/evaluaciones/{{$informe->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar informe"></i></a>
+                            <a href="/usuarios/{{$paciente->id}}/evaluaciones/{{$informe->id}}/informe"><i class="fa-solid fa-print text-success tableIcon" data-toggle="tooltip" data-placement="top" title="Vista de impresión del informe"></i></a>
                             <form method="post" action="{{ route('evaluaciones.destroy', $informe->id) }}" style="display:inline!important;">
                                 {{csrf_field()}}
                                 <input type="hidden" name="_method" value="DELETE">
@@ -46,6 +61,7 @@
         </div>
     </div>
 </div>  
+@endif
 
 <div class="accordion mb-2 shadow-sm"> 
     <div class="accordion-item accordion-header" id="cuidadores1">
@@ -59,7 +75,7 @@
             <div class="d-flex justify-content-between upper">
                 @include('layouts.tableSearcher')
                 <div class="justify-content-end d-flex">
-                    <a href="/pacientes/{{$paciente->id}}/cuidadores/crear"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
+                    <a href="/usuarios/{{$paciente->id}}/cuidadores/crear"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
             <table id="tabla-cuidadores" class="table table-bordered table-striped table-responsive datatable">
@@ -77,14 +93,14 @@
                 <tbody class="shadow-sm">
                     @foreach($cuidadores as $cuidador)
                     <tr>
-                        <td><a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}"> {{$cuidador->nombre}} {{$cuidador->apellidos}} </a></td>
+                        <td><a href="/usuarios/{{$paciente->id}}/cuidadores/{{$cuidador->id}}"> {{$cuidador->nombre}} {{$cuidador->apellidos}} </a></td>
                         <td>{{$cuidador->email}}</td>
                         <td>{{$cuidador->telefono}}</td>
                         <td>{{$cuidador->localidad}}</td>
                         <td>{{$cuidador->parentesco}}</td>
                         <td class="tableActions">
-                            <a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver los datos del cuidador"></i></a>
-                            <a href="/pacientes/{{$paciente->id}}/cuidadores/{{$cuidador->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar cuidador"></i></a>
+                            <a href="/usuarios/{{$paciente->id}}/cuidadores/{{$cuidador->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver los datos del cuidador"></i></a>
+                            <a href="/usuarios/{{$paciente->id}}/cuidadores/{{$cuidador->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar cuidador"></i></a>
                             <form method="post" action="{{ route('cuidadores.destroy', $cuidador->id) }}" style="display:inline!important;">
                                 {{csrf_field()}}
                                 <input type="hidden" name="_method" value="DELETE">
@@ -112,7 +128,7 @@
             <div class="d-flex justify-content-between upper">
                 @include('layouts.tableSearcher')
                 <div class="justify-content-end d-flex">
-                    <a href="/pacientes/{{$paciente->id}}/crearPersona"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
+                    <a href="/usuarios/{{$paciente->id}}/crearPersona"><button type="button" class="btn btn-success mt-2 mx-2"><i class="fa-solid fa-plus"></i></button></a>
                 </div>
             </div>
             <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
@@ -128,12 +144,12 @@
                 <tbody class="shadow-sm">
                     @foreach($personas as $persona)
                     <tr>
-                        <td><a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}} {{$persona->apellidos}}</a> @if($persona->contacto)★@endif</td>
+                        <td><a href="/usuarios/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}} {{$persona->apellidos}}</a> @if($persona->contacto)★@endif</td>
                         <td>{{$persona->localidad}}</td>
                         <td>{{$persona->tiporelacion->nombre}}</td>
                         <td class="tableActions">
-                            <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona"></i></a>
-                            <a href="/pacientes/{{$paciente->id}}/personas/{{$persona->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar persona"></i></a>
+                            <a href="/usuarios/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona"></i></a>
+                            <a href="/usuarios/{{$paciente->id}}/personas/{{$persona->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar persona"></i></a>
                             <form method="post" action="{{ route('personas.destroy', $persona->id) }}" style="display:inline!important;">
                                 {{csrf_field()}}
                                 <input type="hidden" name="_method" value="DELETE">

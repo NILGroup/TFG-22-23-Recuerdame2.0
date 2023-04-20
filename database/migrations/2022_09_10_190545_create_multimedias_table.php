@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('multimedias', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('fichero');
+            $table->longText('nombre');
+            $table->longText('fichero');
+            $table->longText('descripcion')->nullable();
             $table->unsignedBigInteger('personarelacionada_id')->nullable();
             $table->unsignedBigInteger('paciente_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();

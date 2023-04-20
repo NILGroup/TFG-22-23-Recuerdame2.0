@@ -14,6 +14,7 @@ use App\Models\Complejidad;
 use App\Models\Tiporelacion;
 use App\Models\Recuerdo;
 use App\Models\Personarelacionada;
+use App\Models\InformeSesion;
 
 class InformesSesionController extends Controller
 {
@@ -29,12 +30,13 @@ class InformesSesionController extends Controller
     }
     
     public function showByPaciente($idPaciente){
-        $sesiones = Sesion::where('paciente_id',$idPaciente)->where("finalizada", true)->get();
-        return view("informesSesion.showByPaciente", compact('sesiones'));
+        $informes = InformeSesion::where('paciente_id',$idPaciente)->get();
+        return view("informesSesion.showByPaciente", compact('informes'));
     }
 
     public function generarInforme($idPaciente, $idSesion){
         $sesion = Sesion::find($idSesion);
+        $informe = new InformeSesion();
         $paciente = $sesion->paciente;
         $recuerdos = $sesion->recuerdos;
         $estados = Estado::all()->sortBy("id");
@@ -50,35 +52,88 @@ class InformesSesionController extends Controller
         $personas = Personarelacionada::where('paciente_id', $paciente->id)->get()->keyBy("id");
         $show = false;
         $mostrarFoto = false;
-        return view('informesSesion.create', compact('paciente', 'sesion', 'show', 'recuerdos','complejidades','participaciones', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas', 'mostrarFoto'));
+        $user = $sesion->user;
+        
+        return view('informesSesion.create', compact('paciente', 'informe', 'sesion', 'user', 'show', 'recuerdos','complejidades','participaciones', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas', 'mostrarFoto'));
+    }
+
+    public function edit($idPaciente, $idI){
+        $informe = InformeSesion::find($idI);
+        $sesion = $informe->sesion;
+        $paciente = $sesion->paciente;
+        $recuerdos = $sesion->recuerdos;
+        $estados = Estado::all()->sortBy("id");
+        $etiquetas = Etiqueta::all()->sortBy("id");
+        $etapas = Etapa::all()->sortBy("id");
+        $participaciones = Participacion::all()->sortBy("id");
+        $complejidades = Complejidad::all()->sortBy("id");
+        $emociones = Emocion::all()->sortBy("id");
+        $categorias = Categoria::all()->sortBy("id");
+        $tipos = Tiporelacion::all()->sortBy("id");
+        $recuerdo = new Recuerdo();
+        $persona = new Personarelacionada();
+        $personas = Personarelacionada::where('paciente_id', $paciente->id)->get()->keyBy("id");
+        $show = false;
+        $mostrarFoto = false;
+        $user = $sesion->user;
+        return view('informesSesion.create', compact('paciente', 'informe', 'sesion', 'user', 'show', 'recuerdos','complejidades','participaciones', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas', 'mostrarFoto'));
     }
 
     public function store(Request $request){
-        $sesion = Sesion::find($request->id);
-        $sesion->fecha = $request->fecha;
-        $sesion->fecha_finalizada = $request->fecha_finalizada;
-        $sesion->respuesta = $request->respuesta;
-        $sesion->observaciones = $request->observaciones;
-        $sesion->barreras = $request->barreras;
-        $sesion->facilitadores = $request->facilitadores;
-        $sesion->duracion = $request->duracion;
-        $sesion->participacion = $request->participacion_id;
-        $sesion->complejidad = $request->complejidad_id;
-        $sesion->finalizada = true;
-        $sesion->save();
+        
+        $informe = InformeSesion::updateOrCreate(
+            ['id' => $request->id],
+            ['fecha_finalizada' => $request->fecha_finalizada,
+            'duracion' => $request->duracion,
+            'respuesta' => $request->respuesta,
+            'observaciones' => $request->observaciones,
+            'barreras' => $request->barreras,
+            'facilitadores' => $request->facilitadores,
+            'propuestas' => $request->propuestas,
+            'paciente_id' => $request->paciente_id,
+            'user_id' => $request->user_id,
+            'sesion_id' => $request->sesion_id,
+            'participacion_id' => $request->participacion_id,
+            'complejidad_id' => $request->complejidad_id,
+        ]);
         
         session()->put('created', "true");
-        return redirect("/pacientes/$sesion->paciente_id/sesiones/$sesion->id/ver");
+        return redirect("/usuarios/$informe->paciente_id/informesSesion");
     }
 
-    public function show(int $idP, int $idS)
+    public function update(Request $request){
+        
+        $informe = InformeSesion::updateOrCreate(
+            ['id' => $request->id],
+            ['fecha_finalizada' => $request->fecha_finalizada,
+            'duracion' => $request->duracion,
+            'respuesta' => $request->respuesta,
+            'observaciones' => $request->observaciones,
+            'barreras' => $request->barreras,
+            'facilitadores' => $request->facilitadores,
+            'propuestas' => $request->propuestas,
+            'paciente_id' => $request->paciente_id,
+            'user_id' => $request->user_id,
+            'sesion_id' => $request->sesion_id,
+            'participacion_id' => $request->participacion_id,
+            'complejidad_id' => $request->complejidad_id,
+        ]);
+        
+        session()->put('created', "true");
+        return redirect("/usuarios/$informe->paciente_id/informesSesion/$informe->id");
+    }
+
+    public function show(int $idP,int $idI)
     {
-        $sesion = Sesion::findOrFail($idS);
+        $informe = InformeSesion::findOrFail($idI);
+        $sesion = $informe->sesion;
         $paciente = $sesion->paciente;
+        $user = $informe->user;
         $participaciones = Participacion::all()->sortBy("id");
         $complejidades = Complejidad::all()->sortBy("id");
+        $etapas = Etapa::all()->sortBy("id");
         $show = true;
-        return view("informesSesion.show", compact("sesion","participaciones","complejidades", "paciente", "show"));
+        return view("informesSesion.show", compact("sesion","informe","user","etapas",  "participaciones","complejidades", "paciente", "show"));
     }
 
     public function destroy($id){
@@ -90,7 +145,7 @@ class InformesSesionController extends Controller
         */
         $sesion->finalizada = false;
         $sesion->save();
-        //return redirect("/pacientes/$sesion->paciente_id/informesSesion");
+        //return redirect("/usuarios/$sesion->paciente_id/informesSesion");
     }
     public function restore($idP, $id){
         $sesion = Sesion::find($id);

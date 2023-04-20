@@ -7,7 +7,7 @@
         <hr class="lineaTitulo">
     </div>
 
-    <form class="dropzone p-0" id="d"  action="/pacientes/{{$paciente->id}}/sesiones/{{$sesion->id}}/update" method="POST">
+    <form class="dropzone p-0" id="d"  action="/usuarios/{{$paciente->id}}/sesiones/{{$sesion->id}}/update" method="POST">
         {{csrf_field()}}
         @include('sesiones.listaItems')
         <div class="dz-default dz-message dropzone-correct" id="dzp">
@@ -51,11 +51,15 @@
     <script src="/js/multiModal.js"></script>
     <script>
         $("#add-multimedia").hide()
+        $("#remove-multimedia").hide()
         let id = document.getElementById("idPaciente").value;
         let id2 = document.getElementById("idSesion").value;
-        var ruta = "/pacientes/" + id + "/sesiones/" + id2;
-        var max
-        var limit = false
+
+        
+        let dropzone_config = {
+            ruta: "/usuarios/" + id + "/sesiones/" + id2
+        }
+        
     </script>
     <script src="/js/dropzone.js"></script>
     <script src="/js/persona.js"></script>

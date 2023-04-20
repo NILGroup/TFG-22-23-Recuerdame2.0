@@ -25,7 +25,7 @@
             </div>
         
         <div class="form-group">
-            <a href="/pacientes/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="/usuarios/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button id="guardar"  type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>
@@ -44,9 +44,14 @@
     <script src="/js/especificar.js"></script>
     <script>
         let id = document.getElementById("paciente_id").value;
-        var ruta = "/pacientes/" + id + "/personas"
-        var max = 1
-        var limit = true
+      
+
+        let dropzone_config = {
+            ruta : "/usuarios/" + id + "/personas",
+            max : 1,
+            limit : true
+        }
+
     </script>
     <script src="/js/dropzone.js"></script>
 @endpush

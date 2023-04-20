@@ -1,8 +1,15 @@
+
+
 document.addEventListener('DOMContentLoaded', function () {
     let user = document.getElementById('user_type').value; //tipo de usuario (1 terapeuta, 2 cuidador)
     let formulario = document.getElementById('formulario');
     var calendarEl = document.getElementById('calendar');
     let idPaciente = document.getElementById('paciente_id').value;
+
+    if (user != 1){
+        $(".desaparecer").each((i, e) => $(e).hide())
+        
+    }
 
     let url_eventos = "/calendario/" + idPaciente;
     let options = {
@@ -41,8 +48,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
         dateClick: function (info) {
             formulario.reset();
+
+            //Borra la multimedia del los modales
+            $("#sesion-modal #showMultimedia").children().detach();
+            $("#actividad-modal #showMultimediaActividad").children().detach();
+            $("#tablaMultiActividad").DataTable().clear().draw()
+
+            
             /*TERAPEUTA****************************************************************/
             if (user === '1') {
+                document.getElementById('idSesion').value = "";
+                document.getElementById('id').value = "";
                 document.getElementById("modalesCalendario").children[0].style.display = "block";
                 document.getElementById("modalesCalendario").children[1].style.display = "block";
                 formulario.reset();
@@ -61,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('btnEliminar').classList.add('d-none');
                 document.getElementById('btnModificar').classList.add('d-none');
                 document.getElementById('btnFinalizar').classList.add('d-none');
+                $("#multiActividadBtn").hide()
                 /**********************************************************************/
                 /*SESIÓN*************************************************************+*/
                 document.getElementById('sesion-modal-tab').removeAttribute("disabled");
@@ -79,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 tabla.api().clear().draw();
                 document.getElementById('btnGuardarSesion').classList.remove('d-none');
                 document.getElementById('btnEliminarSesion').classList.add('d-none');
-                document.getElementById('btnModificarSesion').classList.add('d-none');
+
                 /**********************************************************************/
                 $('#evento').modal('show');
             }
@@ -91,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         eventClick: function (info) {
             formulario.reset();
+
             /*TERAPEUTA****************************************************************/
             if (user === '1') {
                 /*ACTIVIDAD**********************************************************+*/
@@ -108,6 +126,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('finished').setAttribute("readonly", "");
                     document.getElementById('btnGuardar').classList.add('d-none');
                     document.getElementById('btnFinalizar').classList.add('d-none');
+
+
+                   
+
                     /*ACTIVIDAD NO FINALIZADA******************************************/
                     if (info.event.extendedProps.finished === null) {
                         document.getElementById('title').removeAttribute("readonly");
@@ -136,10 +158,61 @@ document.addEventListener('DOMContentLoaded', function () {
                         document.getElementById('btnModificar').classList.add('d-none');
                     }
                     /********************************************************************/
+
+                    let multimedias = info.event.extendedProps.multimedias
+                    let div = $("#showMultimediaActividad")
+                    div.children().detach()
+                 
+                    if (multimedias.length > 0)
+                        $("#multiActividadBtn").show()
+                    
+                    multimedias.forEach(e => {
+
+                        let nombre = e.nombre.slice(0, 20)
+                        let ruta = getRuta(e)
+                        let img = `<div class="d-flex flex-column align-items-center mb-2" style="width: fit-content;">
+                                    <div class="img-wrap">
+                                        <a href="${e.fichero}" class="visualizarImagen">
+                                            <img style="height: 10em;" src="${ruta}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon imagen">
+                                        </a>
+                                    </div>
+                                    <small>${nombre}</small>
+                                </div>`
+
+                        div.append($(img))
+
+                        let table = $("#tablaMultiActividad")
+
+                        let row = $("<tr></tr>")
+                        row.append("<td style='display: none'>Hola</td>")
+                        row.append(`"<td class='d-flex justify-content-center'>
+                                        <div class="d-flex flex-column text-center">
+                                            <a href="${e.fichero}"><img style="height: 20em;" src="${ruta}" alt=""></img></a>
+                                            <small>${nombre}</small>
+                                        </div>
+                                    </td>"`)
+
+                        row.append(`<td class="tableActions seleccionar">
+                                    <input class="form-check-input check-multimedia" 
+                                        data-nombre="${e.nombre}"
+                                        data-fichero="${e.fichero}"
+                                        type="checkbox" value="${e.id}" name="mult[]" checked>
+                                    </td>`)
+
+                        setRow(table.dataTable(), row)
+
+                    })
+
+
                 }
                 /************************************************************************/
                 /*SESIÓN***************************************************************+*/
                 else {
+                   
+                    let ficherosExistentes = info.event.extendedProps.multimedias.map(e => e.fichero)
+                    $("#modalMultimedia .tableActions input").each((i, e) =>  $(e).prop("checked", ficherosExistentes.includes($(e).data("fichero"))))
+
+
                     document.getElementById("modalesCalendario").children[0].style.display = "none";
                     document.getElementById("modalesCalendario").children[1].style.display = "block";
 
@@ -161,9 +234,34 @@ document.addEventListener('DOMContentLoaded', function () {
                         tabla.api().row.add(row).draw()
                     }
 
-                    document.getElementById('btnGuardarSesion').classList.add('d-none');
+
                     document.getElementById('btnEliminarSesion').classList.remove('d-none');
-                    document.getElementById('btnModificarSesion').classList.remove('d-none');
+
+
+                    let div = $("#showMultimedia")
+                    div.children().detach()
+                    let multimedias = info.event.extendedProps.multimedias
+                    
+
+                    multimedias.forEach(e => {
+
+                        let nombre = e.nombre.slice(0, 20)
+                        let ruta = getRuta(e)
+
+                        let img = `<div class="d-flex flex-column align-items-center mb-2" style="width: fit-content;">
+                                    <div class="img-wrap">
+                                        <a href="${e.fichero}" class="visualizarImagen">
+                                            <img style="height: 10em;" src="${ruta}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon imagen">
+                                        </a>
+                                    </div>
+                                    <small>${nombre}</small>
+                                </div>`
+
+                        div.append($(img))
+                        
+
+                    })
+
                 }
                 /************************************************************************/
             }
@@ -347,3 +445,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
     calendar.render();
 });
+
+
+$("#confirmMultiActividad").on("click", function(event){
+
+    let selected = []
+    $("#tablaMultiActividad tbody input").each((i, e) =>{
+        let elem = $(e)
+        if(elem.prop("checked")){
+            selected.push({
+                id: Number(elem.prop("value")),
+                nombre: elem.data("nombre"),
+                fichero: elem.data("fichero")
+            })
+        }
+    })
+
+
+    $("#multiActividad").modal("hide")
+
+    let div = $("#showMultimediaActividad")
+    div.children().detach()
+
+    selected.forEach(e => {
+        div.append(getDiv(e))
+    });
+
+})
+
+
+
+
+
+

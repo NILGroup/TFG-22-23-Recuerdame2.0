@@ -55,81 +55,84 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return redirect('/pacientes');
+    return redirect('/usuarios');
 });
 
 Route::resources([
     'recuerdo' => RecuerdosController::class,
     'sesiones' => SesionesController::class,
-    'pacientes' => PacientesController::class,
+    'usuarios' => PacientesController::class,
     'multimedias' => MultimediasController::class,
     'personas' => PersonasRelacionadasController::class,
     'calendario' => CalendarioController::class,
     'informesSesion' => InformesSesionController::class,
     'evaluaciones' => EvaluacionController::class,
-    'cuidadores' => CuidadoresController::class
+    'cuidadores' => CuidadoresController::class,
+    'video' => VideoHistoriaController::class,
+    'resumenes' => ResumenesController::class
 ]);
 
 //Registro y login
 Auth::routes();
 
 //RUTAS CUSTOMIZADAS CUIDADOR
-Route::get('/pacientes/{id}/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
+Route::get('/usuarios/{id}/cuidadores/crear', 'App\Http\Controllers\CuidadoresController@create');
 Route::post('/registroCuidador','App\Http\Controllers\CuidadoresController@registroCuidador');
 Route::post('/actualizarCuidador','App\Http\Controllers\CuidadoresController@update');
-Route::get('/pacientes/{id}/cuidadores', 'App\Http\Controllers\CuidadoresController@showByPaciente');
-Route::get('/pacientes/{id}/cuidadores/{idC}', 'App\Http\Controllers\CuidadoresController@show');
-Route::get('/pacientes/{id}/cuidadores/{idC}/editar', 'App\Http\Controllers\CuidadoresController@edit');
+Route::get('/usuarios/{id}/cuidadores', 'App\Http\Controllers\CuidadoresController@showByPaciente');
+Route::get('/usuarios/{id}/cuidadores/{idC}', 'App\Http\Controllers\CuidadoresController@show');
+Route::get('/usuarios/{id}/cuidadores/{idC}/editar', 'App\Http\Controllers\CuidadoresController@edit');
 Route::post('/repeatedCuidador', 'App\Http\Controllers\CuidadoresController@repeatedCuidador');
 Route::post('/borrar_foto_cuidador', 'App\Http\Controllers\CuidadoresController@removePhoto');
 Route::post('/borrar_cuidador', 'App\Http\Controllers\CuidadoresController@destroy_no_view');
 Route::delete('cuidadores/{id}', 'App\Http\Controllers\CuidadoresController@destroy');
-Route::post('/pacientes/{idP}/cuidadores/{id}/restore', 'App\Http\Controllers\CuidadoresController@restore');
+Route::post('/usuarios/{idP}/cuidadores/{id}/restore', 'App\Http\Controllers\CuidadoresController@restore');
 Route::post('/reasignarCuidadores', 'App\Http\Controllers\CuidadoresController@reasignarCuidadores');
 
 //RUTAS CUSTOMIZADAS SESION
 Route::post('/guardarSesion', 'App\Http\Controllers\SesionesController@store');
-Route::get('/pacientes/{id}/sesiones/crear', 'App\Http\Controllers\SesionesController@create');
-Route::get('/pacientes/{id}/sesiones/{idS}', 'App\Http\Controllers\SesionesController@show');
-Route::get('/pacientes/{id}/sesiones/{idS}/editar', 'App\Http\Controllers\SesionesController@showEditable');
-Route::get('/pacientes/{id}/sesiones', 'App\Http\Controllers\SesionesController@showByPaciente');
+Route::get('/usuarios/{id}/sesiones/crear', 'App\Http\Controllers\SesionesController@create');
+Route::get('/usuarios/{id}/sesiones/{idS}', 'App\Http\Controllers\SesionesController@show');
+Route::get('/usuarios/{id}/sesiones/{idS}/editar', 'App\Http\Controllers\SesionesController@showEditable');
+Route::get('/usuarios/{id}/sesiones', 'App\Http\Controllers\SesionesController@showByPaciente');
 Route::get('/sesion/showAll', 'App\Http\Controllers\SesionesController@showAll');
-Route::post('/pacientes/{id}/sesiones/{idS}/update', 'App\Http\Controllers\SesionesController@store');
+Route::post('/usuarios/{id}/sesiones/{idS}/update', 'App\Http\Controllers\SesionesController@store');
 Route::post('/updateAndRecuerdoNuevo','App\Http\Controllers\SesionesController@updateAndRecuerdoNuevo');
 Route::post('/updateAndSeleccionarRecuerdos','App\Http\Controllers\SesionesController@updateAndSeleccionarRecuerdos');
-Route::post('/pacientes/{idP}/sesiones/{id}/restore', 'App\Http\Controllers\SesionesController@restore');
+Route::post('/usuarios/{idP}/sesiones/{id}/restore', 'App\Http\Controllers\SesionesController@restore');
 
 //RUTAS CUSTOMIZADAS PACIENTE
-Route::get('/pacientes/{id}/asignarTerapeutas', 'App\Http\Controllers\PacientesController@addPacienteToTerapeuta');
+Route::get('/usuarios/{id}/asignarTerapeutas', 'App\Http\Controllers\PacientesController@addPacienteToTerapeuta');
 Route::post('/asignacionTerapeutas','App\Http\Controllers\PacientesController@asignacionTerapeutas');
 Route::post('/actualizarPaciente','App\Http\Controllers\PacientesController@update');
 Route::post('/borrar_foto_paciente', 'App\Http\Controllers\PacientesController@removePhoto');
-Route::post('/pacientes/{id}/restore', 'App\Http\Controllers\PacientesController@restore');
+Route::post('/usuarios/{id}/restore', 'App\Http\Controllers\PacientesController@restore');
 
 //RUTAS CUSTOMIZADAS RECUERDO
-Route::get('/pacientes/{id}/recuerdos', 'App\Http\Controllers\RecuerdosController@showByPaciente');
-Route::get('/pacientes/{id}/recuerdos/crear', 'App\Http\Controllers\RecuerdosController@create');
-Route::get('/pacientes/{id}/recuerdos/{idR}', 'App\Http\Controllers\RecuerdosController@show');
-Route::get('/pacientes/{id}/recuerdos/{idR}/editar', 'App\Http\Controllers\RecuerdosController@edit');
+Route::get('/usuarios/{id}/recuerdos', 'App\Http\Controllers\RecuerdosController@showByPaciente');
+Route::get('/usuarios/{id}/recuerdos/crear', 'App\Http\Controllers\RecuerdosController@create');
+Route::get('/usuarios/{id}/recuerdos/{idR}', 'App\Http\Controllers\RecuerdosController@show');
+Route::get('/usuarios/{id}/recuerdos/{idR}/editar', 'App\Http\Controllers\RecuerdosController@edit');
 Route::delete('/eliminarRecuerdo/{id}', 'App\Http\Controllers\RecuerdosController@destroy');
 Route::post('/storeRecuerdoNoView', 'App\Http\Controllers\RecuerdosController@storeNoView');
-Route::post('/pacientes/{idP}/recuerdos/{id}/restore', 'App\Http\Controllers\RecuerdosController@restore');
+Route::post('/usuarios/{idP}/recuerdos/{id}/restore', 'App\Http\Controllers\RecuerdosController@restore');
+Route::post('/actualizarRecuerdo', 'App\Http\Controllers\RecuerdosController@update');
 
 
 //RUTAS CUSTOMIZADAS PERSONA RELACIONADA
-Route::get('/pacientes/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
-Route::get('/pacientes/{id}/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@create');
+Route::get('/usuarios/{id}/personas', 'App\Http\Controllers\PersonasRelacionadasController@showByPaciente');
+Route::get('/usuarios/{id}/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@create');
 Route::post('/crearPersona', 'App\Http\Controllers\PersonasRelacionadasController@store');
 Route::post('/borrarFoto', 'App\Http\Controllers\PersonasRelacionadasController@removePhoto');
-Route::get('/pacientes/{id}/personas/{idP}', 'App\Http\Controllers\PersonasRelacionadasController@show');
-Route::get('/pacientes/{id}/personas/{idP}/editar', 'App\Http\Controllers\PersonasRelacionadasController@edit');
+Route::get('/usuarios/{id}/personas/{idP}', 'App\Http\Controllers\PersonasRelacionadasController@show');
+Route::get('/usuarios/{id}/personas/{idP}/editar', 'App\Http\Controllers\PersonasRelacionadasController@edit');
 Route::post('/editarPersona', 'App\Http\Controllers\PersonasRelacionadasController@update');
 Route::post('/storePersonaNoView', 'App\Http\Controllers\PersonasRelacionadasController@storeNoView');
-Route::post('/pacientes/{idP}/personas/{id}/restore', 'App\Http\Controllers\PersonasRelacionadasController@restore');
+Route::post('/usuarios/{idP}/personas/{id}/restore', 'App\Http\Controllers\PersonasRelacionadasController@restore');
 
 
 //RUTAS CUSTOMIZADAS CALENDARIO
-Route::get('/pacientes/{id}/calendario', 'App\Http\Controllers\CalendarioController@showByPaciente');
+Route::get('/usuarios/{id}/calendario', 'App\Http\Controllers\CalendarioController@showByPaciente');
 Route::post('/eliminarActividad', 'App\Http\Controllers\CalendarioController@destroy');
 Route::post('/modificarActividad', 'App\Http\Controllers\CalendarioController@update');
 Route::post('/calendarioSesion', 'App\Http\Controllers\CalendarioController@registroSesion');
@@ -139,40 +142,70 @@ Route::post('/eliminarSesion', 'App\Http\Controllers\CalendarioController@destro
 
 
 //RUTAS CUSTOMIZADAS INFORMES SESION
-Route::get('/pacientes/{id}/informesSesion', 'App\Http\Controllers\InformesSesionController@showByPaciente');
-Route::get('/pacientes/{id}/sesiones/{idS}/generarInforme', 'App\Http\Controllers\InformesSesionController@generarInforme');
-Route::get('/pacientes/{id}/sesiones/{idS}/informe', 'App\Http\Controllers\PDFController@verInformeSesion');
-Route::get('/pacientes/{id}/sesiones/{idS}/ver', 'App\Http\Controllers\InformesSesionController@show');
+Route::get('/usuarios/{id}/sesiones/{idS}/generarInforme', 'App\Http\Controllers\InformesSesionController@generarInforme');
+Route::get('/usuarios/{id}/informesSesion', 'App\Http\Controllers\InformesSesionController@showByPaciente');
+Route::get('/usuarios/{id}/informesSesion/{idS}/informe', 'App\Http\Controllers\PDFController@verInformeSesion');
+Route::get('/usuarios/{id}/informesSesion/{idS}/editar', 'App\Http\Controllers\InformesSesionController@edit');
+Route::get('/usuarios/{id}/informesSesion/{idS}', 'App\Http\Controllers\InformesSesionController@show');
 Route::post('/cerrarInformeSesion', 'App\Http\Controllers\InformesSesionController@store');
+Route::post('/actualizarInforme', 'App\Http\Controllers\InformesSesionController@update');
 Route::post('/generarPDFInformeSesion', 'App\Http\Controllers\InformesSesionController@generarPDFInformeSesion');
 Route::post('/getRecuerdo', 'App\Http\Controllers\RecuerdosController@getNoView');
-Route::post('/pacientes/{idP}/informesSesion/{id}/restore', 'App\Http\Controllers\InformesSesionController@restore');
-
+Route::post('/usuarios/{idP}/informesSesion/{id}/restore', 'App\Http\Controllers\InformesSesionController@restore');
 
 //RUTAS CUSTOMIZADAS EVALUACION
-Route::get('/pacientes/{id}/evaluaciones', 'App\Http\Controllers\EvaluacionController@showByPaciente');
-Route::get('/pacientes/{id}/evaluaciones/generarInforme', 'App\Http\Controllers\EvaluacionController@generarInforme');
-Route::get('/pacientes/{id}/evaluaciones/{idE}/informe', 'App\Http\Controllers\PDFController@verInformeEvaluacion');
-Route::get('/pacientes/{id}/evaluaciones/{idE}/editar', 'App\Http\Controllers\EvaluacionController@showEditable');
-Route::get('/pacientes/{id}/evaluaciones/{idE}/ver', 'App\Http\Controllers\EvaluacionController@show');
+Route::get('/usuarios/{id}/evaluaciones', 'App\Http\Controllers\EvaluacionController@showByPaciente');
+Route::get('/usuarios/{id}/evaluaciones/generarInforme', 'App\Http\Controllers\EvaluacionController@generarInforme');
+Route::get('/usuarios/{id}/evaluaciones/{idE}/informe', 'App\Http\Controllers\PDFController@verInformeEvaluacion');
+Route::get('/usuarios/{id}/evaluaciones/{idE}/editar', 'App\Http\Controllers\EvaluacionController@showEditable');
+Route::get('/usuarios/{id}/evaluaciones/{idE}/ver', 'App\Http\Controllers\EvaluacionController@show');
 Route::post('/cerrarEvaluacion', 'App\Http\Controllers\EvaluacionController@store');
 Route::post('/modificarEvaluacion', 'App\Http\Controllers\EvaluacionController@update');
 Route::post('/generarPDFEvaluacion', 'App\Http\Controllers\EvaluacionController@generarPDFInformeEvaluacion');
-Route::post('/pacientes/{idP}/evaluaciones/{id}/restore', 'App\Http\Controllers\EvaluacionController@restore');
+Route::post('/usuarios/{idP}/evaluaciones/{id}/restore', 'App\Http\Controllers\EvaluacionController@restore');
 
+
+
+
+
+//RUTAS CUSTOMIZADAS DIAGNOSTICO
+Route::get('/usuarios/{id}/diagnostico', 'App\Http\Controllers\DiagnosticoController@show');
+Route::get('/usuarios/{id}/crearDiagnostico', 'App\Http\Controllers\DiagnosticoController@generarInforme');
+Route::get('/usuarios/{id}/informeDiagnostico', 'App\Http\Controllers\PDFController@verInformeDiagnostico');
+Route::get('/usuarios/{id}/editarDiagnostico', 'App\Http\Controllers\DiagnosticoController@showEditable');
+Route::post('/cerrarDiagnostico', 'App\Http\Controllers\DiagnosticoController@store');
+Route::post('/modificarDiagnostico', 'App\Http\Controllers\DiagnosticoController@update');
+Route::post('/generarPDFDiagnostico', 'App\Http\Controllers\DiagnosticoController@generarPDFInforme');
+
+
+Route::get('/generarResumenHistoria', 'App\Http\Controllers\ResumenesController@create');
+Route::get('/usuarios/{id}/resumenes', 'App\Http\Controllers\ResumenesController@showByPaciente');
+Route::post('/guardarResumen', 'App\Http\Controllers\ResumenesController@store');
+Route::post('/modificarResumen', 'App\Http\Controllers\ResumenesController@update');
+Route::get('/usuarios/{id}/resumenes/{idResumen}', 'App\Http\Controllers\ResumenesController@show');
+Route::get('/usuarios/{id}/resumenes/{idS}/editar', 'App\Http\Controllers\ResumenesController@showEditable');
 
 //RUTAS CUSTOMIZADAS HISTORIAS DE VIDA
-Route::get('/pacientes/{id}/historias/generarHistoria', 'App\Http\Controllers\HistoriaController@generarHistoria');
+Route::get('/usuarios/{id}/historias/generarHistoria', 'App\Http\Controllers\HistoriaController@generarHistoria');
 Route::get('/historias/generarLibro', 'App\Http\Controllers\HistoriaController@generarLibroHistoria');
-Route::get('/generarVideoHistoria', 'App\Http\Controllers\HistoriaController@generarVideoHistoria');
 Route::get('/generarPDFHistoria', 'App\Http\Controllers\PDFController@generarPDFHistoria');
 Route::post('/storeTipoNoView', 'App\Http\Controllers\TipoRelacionController@storeNoView');
+
+//RUTAS CUSTOMIZADAS VIDEO HISTORIAS DE VIDA
+Route::get('/pacientes/{id}/videos/generadorVideo', 'App\Http\Controllers\VideoHistoriaController@generadorVideoHistoria');
+Route::get('/pacientes/{id}/videos', 'App\Http\Controllers\VideoHistoriaController@showByPaciente');
+Route::get('/generarVideoHistoria', 'App\Http\Controllers\VideoHistoriaController@generarVideoHistoria');
+Route::delete('/eliminarVideo/{id}', 'App\Http\Controllers\VideoHistoriaController@destroy');
 
 
 /*********************************************************
     CREA DATOS EN LA BASE DE DATOS
 *********************************************************/
 Route::post('/prueba', function () {
+    $path = base_path('database/datos.sql');
+    DB::unprepared(file_get_contents($path));
+
+    /*
     $now = Carbon::now();
 
     DB::table("rols")->insertOrIgnore([
@@ -270,11 +303,6 @@ Route::post('/prueba', function () {
         ["nombre" => "Otros"]
     ]);
 
-    DB::table("multimedias")->insertOrIgnore([
-        ["nombre" => "multimedia 1", "fichero" => "/img/avatar_hombre.png"],
-        ["nombre" => "multimedia 2", "fichero" => "/img/avatar_mujer.png"]
-    ]);
-
     DB::table("tiporelacions")->insertOrIgnore([
         ["nombre" => "Padre / Madre"],
         ["nombre" => "Hermano / Hermana"],
@@ -344,16 +372,28 @@ Route::post('/prueba', function () {
         ["start" => Carbon::now(), "title" => "Primera actividad", "paciente_id" => 2,
             "description" => "Primera actividad a la paciente Cristina", "color" => "#20809d"]
     ]);
-                                
-    DB::table("evaluacions")->insertOrIgnore([
+
+    DB::table("diagnosticos")->insertOrIgnore([
         ["paciente_id"=> 1, "fecha" => Carbon::create($now->year, $now->month, 1), "gds" => 2, "gds_fecha" => Carbon::create($now->year, $now->month, 1),
-            "mental" => 2, "mental_fecha" => Carbon::create($now->year, $now->month, 1), "cdr"=> 2, "cdr_fecha" => Carbon::create($now->year, $now->month, 1),
-            "nombre_escala" => "escala custom", "escala" => 2, "fecha_escala" => Carbon::create($now->year, 10, 30),
+            "mental" => 24, "mental_fecha" => Carbon::create($now->year, $now->month, 1), "cdr"=> 1, "cdr_fecha" => Carbon::create($now->year, $now->month, 1),
+            "nombre_escala" => "Mi escala", "escala" => 8, "fecha_escala" => Carbon::create($now->year, $now->month, 1),
+            "enfermedad" => "Alzheimer", "antecedentes" => "Su familia se dio cuenta de que se olvidaba de algunas cosas con excesiva facilidad, así que decidieron pedir un estudio.", 
+            "observaciones" => null ]
+    ]);
+
+    DB::table("evaluacions")->insertOrIgnore([
+        ["paciente_id"=> 1, "fecha" => Carbon::create($now->year, $now->month, 5), "gds" => 3, "gds_fecha" => Carbon::create($now->year, $now->month, 5),
+            "mental" => 22, "mental_fecha" => Carbon::create($now->year, $now->month, 5), "cdr"=> 1, "cdr_fecha" => Carbon::create($now->year, $now->month, 5),
+            "nombre_escala" => "Mi escala", "escala" => 7, "fecha_escala" => Carbon::create($now->year, $now->month, 5),
             "diagnostico" => "Empeora poco a poco.", "observaciones" => "Ninguna" ],
-        ["paciente_id"=> 1, "fecha" => Carbon::create($now->year, $now->month, 2), "gds" => 1, "gds_fecha" => Carbon::create($now->year, $now->month, 2),
-            "mental" => 1, "mental_fecha" => Carbon::create($now->year, $now->month, 2), "cdr"=> 1, "cdr_fecha" => Carbon::create($now->year, $now->month, 2),
-            "nombre_escala" => "nombre cualquiera", "escala" => 1, "fecha_escala" => Carbon::create($now->year, 10, 30),
+        ["paciente_id"=> 1, "fecha" => Carbon::create($now->year, $now->month, 18), "gds" => 5, "gds_fecha" => Carbon::create($now->year, $now->month, 18),
+            "mental" => 12, "mental_fecha" => Carbon::create($now->year, $now->month, 18), "cdr"=> 2, "cdr_fecha" => Carbon::create($now->year, $now->month, 18),
+            "nombre_escala" => "Mi escala", "escala" => 4, "fecha_escala" => Carbon::create($now->year, $now->month, 18),
             "diagnostico" => "Ha empeorado gravemente.", "observaciones" => "No reconoce a su familia" ],
+        ["paciente_id"=> 1, "fecha" => Carbon::create($now->year, $now->month, 25), "gds" => null, "gds_fecha" => null,
+            "mental" => null, "mental_fecha" => null, "cdr"=> null, "cdr_fecha" => null,
+            "nombre_escala" => null, "escala" => null, "fecha_escala" => null,
+            "diagnostico" => "Parece mantenerse estable.", "observaciones" => null ],
         ["paciente_id"=> 2, "fecha" => Carbon::create($now->year, $now->month, 2), "gds" => 5, "gds_fecha" => Carbon::create($now->year, $now->month, 2),
             "mental" => 5, "mental_fecha" => Carbon::create($now->year, $now->month, 2), "cdr"=> 5, "cdr_fecha" => Carbon::create($now->year, $now->month, 2),
             "nombre_escala" => "escala custom", "escala" => 5, "fecha_escala" => Carbon::create($now->year, $now->month, 2),
@@ -403,6 +443,11 @@ Route::post('/prueba', function () {
             "estado_id" => 2, "etiqueta_id" => 2, "puntuacion" => 7, "paciente_id" => 2,"apto"=>1 ]
     ]);    
     
+    DB::table("multimedias")->insertOrIgnore([
+        ["nombre" => "multimedia 1", "fichero" => "/img/avatar_hombre.png"],
+        ["nombre" => "multimedia 2", "fichero" => "/img/avatar_mujer.png"]
+    ]);
+
     DB::table("multimedia_sesion")->insertOrIgnore([
         ["multimedia_id" => 1, "sesion_id" => 1],
         ["multimedia_id" => 2, "sesion_id" => 1],
@@ -445,6 +490,6 @@ Route::post('/prueba', function () {
         ["paciente_id" => 1, "user_id" => 2],
         ["paciente_id" => 2, "user_id" => 3]
     ]);
-
+    */
     return "<h1> Se ha llenado la base de datos con éxito</h1>";
 });

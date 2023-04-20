@@ -29,7 +29,7 @@
         @include('personasrelacionadas.listaItems')
 
         <div class="col-12">
-            <a href="/pacientes/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="/usuarios/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
 </div>
@@ -58,7 +58,7 @@
     </div>
 
     <div class="form-group">
-        <a href="/pacientes/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary">Cancelar</button></a>
+        <a href="/usuarios/{{$idPaciente}}/personas"><button type="button" class="btn btn-primary">Cancelar</button></a>
         <button id="guardar" type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
     </div>
 </form>
@@ -81,9 +81,15 @@
     <script>
         let id = document.getElementById("paciente_id").value;
         let id2 = document.getElementById("id").value
-        var ruta = "/pacientes/" + id + "/personas/" + id2
-        var max = 1
-        var limit = true
+       
+
+        let dropzone_config = {
+            ruta : "/usuarios/" + id + "/personas/" + id2,
+            max : 1,
+            limit : true
+        }
+
+
     </script>
     <script src="/js/dropzone.js"></script>
 @endpush

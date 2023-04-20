@@ -27,7 +27,7 @@ class asignarPaciente
 
         $paciente = Paciente::find($url[4]);
         if(!Auth::User()->pacientes->contains($url[4])){
-            return redirect("/pacientes");
+            return redirect("/usuarios");
         }
 
         $valido = true;
@@ -35,31 +35,38 @@ class asignarPaciente
             switch ($url[5]):
                 case "sesiones":
                     if(!$paciente->sesiones->contains($url[6]))
-                        return redirect("/pacientes/$paciente->id/sesiones");
+                        return redirect("/usuarios/$paciente->id/sesiones");
                     break;
                 case "evaluaciones":
                     if(!$paciente->evaluaciones->contains($url[6]))
-                        return redirect("/pacientes/$paciente->id/evaluaciones");
+                        return redirect("/usuarios/$paciente->id/evaluaciones");
                     break;
                 case "recuerdos":
                     if(!$paciente->recuerdos->contains($url[6]))
-                        return redirect("/pacientes/$paciente->id/recuerdos");
+                        return redirect("/usuarios/$paciente->id/recuerdos");
                     break;
                 case "personas":
                     if(!$paciente->personasrelacionadas->contains($url[6]))
-                        return redirect("/pacientes/$paciente->id/personas");
+                        return redirect("/usuarios/$paciente->id/personas");
                     break;
                 case "cuidadores":
                     if(!$paciente->users->contains($url[6]))
-                        return redirect("/pacientes/$paciente->id/cuidadores");
+                        return redirect("/usuarios/$paciente->id/cuidadores");
+                    break;
+                case "informeSesion":
+                    if(!$paciente->informesSesion->contains($url[6]))
+                        return redirect("/usuarios/$paciente->id/informesSesion");
                     break;
                 default:
                     break;
             endswitch;
         if(!$valido)
-            return redirect("/pacientes");
+            return redirect("/usuarios");
 
         session()->put('paciente', $paciente->toArray());
+        if(!is_null($paciente->multimedia))
+            session()->put('img', $paciente->multimedia->fichero);
+        //throw new \Exception($paciente->multimedia->fichero));
         return $next($request);
     }
 }

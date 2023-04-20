@@ -12,7 +12,7 @@
         {{csrf_field()}}
         @include('evaluaciones.listaItems')
         <div>
-            <a href="/pacientes/{{$paciente->id}}/evaluaciones"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            <a href="/usuarios/{{$paciente->id}}/evaluaciones"><button type="button" class="btn btn-primary">Cancelar</button></a>
             <button type="submit" name="guardarInformeSeguimiento" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
     </form>

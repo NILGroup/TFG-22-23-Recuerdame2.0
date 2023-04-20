@@ -21,7 +21,8 @@ function all(){
 function getSelected(){
 
     let selected = []
-
+    
+    
     $(".tabla-multimedias-existentes tbody input").each((i, e) =>{
         let elem = $(e)
         if(elem.prop("checked")){
@@ -75,7 +76,7 @@ function getDiv(multimedia){
 
 
 function getRuta(multimedia){
-    let ext = multimedia.fichero.split(".").pop()
+    let ext = multimedia.fichero.split(".").pop().toLowerCase()
    
     
     if (ext == 'pdf')

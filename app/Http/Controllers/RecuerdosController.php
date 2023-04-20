@@ -66,7 +66,7 @@ class RecuerdosController extends Controller
         $idPaciente = $paciente->id;
         $mostrarFoto = false;
         $persona = new Personarelacionada();
-        $recuerdo->apto=true;
+        $recuerdo->apto = true;
 
       
 
@@ -81,8 +81,6 @@ class RecuerdosController extends Controller
      */
     public function store(Request $request)
     {
-
-      
         //Ahora que tenemos creado el recuerdo
         $recuerdo = Recuerdo::updateOrCreate(
             ['id' => $request->id],
@@ -102,16 +100,11 @@ class RecuerdosController extends Controller
                 'apto' => !is_null($request->apto)
             ]
         );
-
-
         $recuerdo->multimedias()->detach();
         if (isset($request->mult)) {
             $recuerdo->multimedias()->attach($request->mult);
         }
-        
-        MultimediasController::savePhotos($request, $recuerdo);
-      
-        
+        MultimediasController::savePhotosWithDescriptions($request, $recuerdo);
         $personas_relacionar = $request->checkPersona; //Array de ids de las personas
         $recuerdo->personas_relacionadas()->detach();
         if (!is_null($personas_relacionar)) {
@@ -119,10 +112,45 @@ class RecuerdosController extends Controller
                 $recuerdo->personas_relacionadas()->attach($p_id);
             }
         }
-       
-        
        session()->put('created', "true");
-       //return self::showByPaciente($recuerdo->paciente_id);
+       return redirect("/usuarios/" . $recuerdo->paciente_id . "/recuerdos");
+    }
+
+    public function update(Request $request)
+    {
+        //Ahora que tenemos creado el recuerdo
+        $recuerdo = Recuerdo::updateOrCreate(
+            ['id' => $request->id],
+            [
+                'fecha' => $request->fecha,
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion,
+                'localizacion' => $request->localizacion,
+                'etapa_id' => $request->etapa_id,
+                'categoria_id' => $request->categoria_id,
+                'emocion_id' => $request->emocion_id,
+                'estado_id' => $request->estado_id,
+                'etiqueta_id' => $request->etiqueta_id,
+                'puntuacion' => $request->puntuacion,
+                'tipo_custom' => $request->tipo_custom,
+                'paciente_id' => $request->paciente_id,
+                'apto' => !is_null($request->apto)
+            ]
+        );
+        $recuerdo->multimedias()->detach();
+        if (isset($request->mult)) {
+            $recuerdo->multimedias()->attach($request->mult);
+        }
+        MultimediasController::savePhotosWithDescriptions($request, $recuerdo);
+        $personas_relacionar = $request->checkPersona; //Array de ids de las personas
+        $recuerdo->personas_relacionadas()->detach();
+        if (!is_null($personas_relacionar)) {
+            foreach ($personas_relacionar as $p_id) {
+                $recuerdo->personas_relacionadas()->attach($p_id);
+            }
+        }
+        session()->put('created', "true");
+        return redirect("/usuarios/$recuerdo->paciente_id/recuerdos/$recuerdo->id");
     }
 
     /**
@@ -212,19 +240,6 @@ class RecuerdosController extends Controller
 
         return view("recuerdos.edit", compact("multimedias", "idPaciente","mostrarFoto", "persona","recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "paciente", "show"));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Recuerdo  $recuerdo
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Recuerdo $recuerdo)
-    {
-        //
-    }
-
     /**
      * Elimina el recuerdo en cuestión
      *
@@ -236,7 +251,7 @@ class RecuerdosController extends Controller
         $recuerdo = Recuerdo::find($idRecuerdo); //busca el recuerdo en sí
         $paciente = $recuerdo->paciente;
         $recuerdo->delete();
-        //return redirect("/pacientes/$paciente->id/recuerdos/");
+        //return redirect("/usuarios/$paciente->id/recuerdos/");
     }
     public function restore($idP, $id) 
     {

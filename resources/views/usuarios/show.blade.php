@@ -17,10 +17,10 @@
             <div id="general" class="container-fluid accordion-collapse collapse show" aria-labelledby="general">
                 <div class="row text-align-center">
                     <div class="col-lg-3 align-items-center">
-                        @include('pacientes.foto')
+                        @include('usuarios.foto')
                     </div>
                     <div class="col-lg-9">
-                        @include('pacientes.listaItems')
+                        @include('usuarios.listaItems')
                     </div>
                 </div>
             </div>
@@ -28,11 +28,11 @@
     </div>
 
 
-    @include('pacientes.desplegables')
+    @include('usuarios.desplegables')
 
     <div class="col-12">
-        <!-- <a href="{{route('pacientes.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a> -->
-        <a href="/pacientes/{{$paciente->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
+        <!-- <a href="{{route('usuarios.index')}}"><button type="button" class="btn btn-primary">Atrás</button></a> -->
+        <a href="/usuarios/{{$paciente->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
     </div>
 </div>
 
@@ -44,10 +44,38 @@
     <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
     <script src="/js/libs/dataTables.js"></script>
     <script src="/js/libs/sweetAlert2.js"></script>
+    <script src="/js/libs/chart.js"></script>
+    <script src="/js/libs/chartAnnotation.js"></script>
 
     <script src="/js/table.js"></script>
     <script src="/js/confirm.js"></script>
     <script src="/js/showView.js"></script>
+
+    
+    <script>
+        const fechas = @json($fechas);
+        const gds = {{json_encode($gds)}};
+        const mini = {{json_encode($mini)}};
+        const cdr = {{json_encode($cdr)}};
+        const data = [];
+        for (let i = 0; i < fechas.length; i++) {
+            const item = {
+                x: fechas[i],
+                GDS: gds[i],
+                mental: mini[i],
+                CDR: cdr[i]
+            };
+            if(item.GDS == null)
+                item.GDS = data[i-1].GDS
+            if(item.mental == null)
+                item.mental = data[i-1].mental
+            if(item.CDR == null)
+                item.CDR = data[i-1].CDR
+            data.push(item)
+        }
+
+    </script>
+    <script src="/js/chart.js"></script>
     @if (Session::has('created'))
         @php
             Illuminate\Support\Facades\Session::forget('created');
