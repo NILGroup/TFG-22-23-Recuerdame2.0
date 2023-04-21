@@ -17,7 +17,7 @@
             <caption>Listado de vídeos</caption>
             <thead>
                 <tr >
-                        <th scope="col" class="text-center">Enlace</th>
+                        <th scope="col" class="text-center">Vídeo</th>
                         <th scope="col" class="text-center">Estado</th>
                         <th scope="col" class="text-center">Fecha</th>
                         <th class="fit10 actions text-center" scope="col">Acciones</th>
