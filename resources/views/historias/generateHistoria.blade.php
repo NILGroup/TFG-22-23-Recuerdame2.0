@@ -114,6 +114,7 @@
         <div>
             <button type="submit" name="generarLibro" value="Generar libro" class="btn btn-outline-primary ">Generar libro</button>
             <button type="submit" name="generarResumen" formaction="/generarResumenHistoria" value="Generar Resumen" class="btn btn-outline-primary ">Generar resumen</button>
+            <a onclick="actualizaModalVideo()" type="button" id="updateVideo" name="updateVideo" class="showmodal" data-bs-toggle="modal" data-bs-target="#videosCreator"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Generar vídeo"></i></a>
             <button type="submit" name="generarVideo" formaction="/generarVideoHistoria" value="Generar Video" class="btn btn-outline-primary ">Generar vídeo</button>
             <button type="submit" name="generarPdf" formaction="/generarPDFHistoria" value="Generar PDF" class="btn btn-outline-primary ">Generar PDF</button>            
         </div>
@@ -121,6 +122,9 @@
     </form>
 
 </div>
+
+@include('historias.modalVideos')
+
 @endsection
 
 @push('scripts')
