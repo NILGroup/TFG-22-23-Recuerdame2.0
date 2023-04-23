@@ -5,15 +5,9 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title" id="personasExistentesLabel">Crear: Recuerdo</h5>
+                <h5 class="modal-title" id="personasExistentesLabel">Recuerdo</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
             </div>
-
-            <!-- 
-                TRANQUILIDAD. SE QUE ES UN FORM DENTRO DE OTRO PERO ESTE NUNCA SE ENVÍA SOLO SE USA
-                PARA LA VALIDACIÓN Y DESPUÉS SE MANDAN LOS DATOS POR AJAX, POR FAVOR QUE NADIE
-                LO QUITE :((
-            -->
             <form class="modal-body" id="recuerdosCreatorForm">
                 @include("recuerdos.listaItems")
             </form> <!-- Modal body -->
