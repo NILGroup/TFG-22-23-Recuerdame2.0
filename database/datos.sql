@@ -147,11 +147,11 @@ INSERT INTO evaluacions (id, paciente_id, fecha, diagnostico, gds, gds_fecha, me
 (3, 1, '2023-03-10', 'Parece mantenerse estable.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (4, 2, '2023-03-02', 'Se encuentra en las primeras etapas.', 5, '2023-03-02', 5, '2023-03-02', 5, '2023-03-02', 'escala custom', 5, '2023-03-02', NULL, NULL, NULL, NULL, NULL, NULL);
 
-INSERT INTO sesions (id, titulo, objetivo, descripcion, acciones, paciente_id, user_id, etapa_id, deleted_at) VALUES
-(1, 'Trabajar infancia', 'Trabajar los recuerdos de su infancia como toma de contacto.', NULL, '- Presentarse a María Concepción.\n-Realizar CDR, Mental y GDS para el diagnóstico.\n- Hacer preguntas para evocar recuerdos y emociones.\n- Mostrarle fotos de los recuerdos.\n- Intentar profundizar.', 1, 1, 1, NULL),
-(2, 'Trabajar recuerdos actuales', 'Intentar recordar sucesos recientes para ver si es capaz de retenerlos', NULL, '- Hablar de lo sucedido en la última semana\r\n- Mostrarle los recuerdos desde inicio de año\r\n- Profundizar en aquellos que más emociones generen.', 1, 1, 5, NULL),
-(3, 'Inicio terapia', 'Pruebas iniciales', 'Iniciaremos las sesiones de terapia con un repaso general', NULL, 2, 4, 2, NULL),
-(4, 'Tratar su entrada en la universidad', 'Recordar su primer día en la universidad', NULL, NULL, 1, 1, 3, NULL);
+INSERT INTO sesions (id, fecha, titulo, objetivo, descripcion, acciones, paciente_id, user_id, etapa_id, deleted_at) VALUES
+(1, '2023-03-03','Trabajar infancia', 'Trabajar los recuerdos de su infancia como toma de contacto.', NULL, '- Presentarse a María Concepción.\n-Realizar CDR, Mental y GDS para el diagnóstico.\n- Hacer preguntas para evocar recuerdos y emociones.\n- Mostrarle fotos de los recuerdos.\n- Intentar profundizar.', 1, 1, 1, NULL),
+(2, '2023-03-05','Trabajar recuerdos actuales', 'Intentar recordar sucesos recientes para ver si es capaz de retenerlos', NULL, '- Hablar de lo sucedido en la última semana\r\n- Mostrarle los recuerdos desde inicio de año\r\n- Profundizar en aquellos que más emociones generen.', 1, 1, 5, NULL),
+(3, '2023-03-01','Inicio terapia', 'Pruebas iniciales', 'Iniciaremos las sesiones de terapia con un repaso general', NULL, 2, 4, 2, NULL),
+(4, '2023-03-12','Tratar su entrada en la universidad', 'Recordar su primer día en la universidad', NULL, NULL, 1, 1, 3, NULL);
 
 INSERT INTO informesesions (id, fecha_finalizada, respuesta, barreras, facilitadores, observaciones, duracion, propuestas, paciente_id, user_id, participacion_id, complejidad_id, sesion_id, deleted_at) VALUES
 (1,'2023-03-05 12:00:00', 'Gestiona las emociones correctamente.', 'Ha olvidado completamente algunos de los recuerdos.', 'El recuerdo con sus amigos', 'ninguna observacion', '01:30', NULL, 1, 1, 1, 1, 1, NULL),
