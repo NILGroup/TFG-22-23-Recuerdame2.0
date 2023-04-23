@@ -130,8 +130,7 @@ function crearRecuerdo() {
     $("#tablaPersonasExistentes tbody tr").each(function(i, e){
 
         let per = $(e).children()
-
-        if ($(per[4]).children("input").prop("checked")){
+        if ($(per[3]).children("input").prop("checked")){
             ids.push(per[0].textContent)
         }
 
