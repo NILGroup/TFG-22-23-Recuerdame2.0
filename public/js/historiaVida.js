@@ -42,6 +42,7 @@ function anadirInfo(array, string) {
 }
 
 function onSelect(string, elementoSeleccionado) {
+    console.log(string+"//"+elementoSeleccionado);
     var select = document.getElementById(elementoSeleccionado);
 
     if (select.getAttribute("id") == 'seleccionadoEtiqueta') {
@@ -64,6 +65,21 @@ function onCheck(elementoSeleccionado) {
 }
 
 function videoModalCreator(){
-    
+
+
+            document.getElementById('fechaInicioModal').value = document.getElementById('fechaInicio').value;
+            document.getElementById('fechaFinModal').value = document.getElementById('fechaFin').value
+            document.getElementById('aptoModal').value = document.getElementById('aptoModal').value;
+            document.getElementById('noAptoModal').value = document.getElementById('noAptoModal').value;
+
+            $('input[name="seleccionEtapa[]"]').each(function(i,originalCheck) {
+                $('input[name="seleccionEtapaModal[]"]').eq(i).prop("check",$(originalCheck).prop("checked"));
+            });
+            $('input[name="seleccionCat[]"]').each(function(i,originalCheck) {
+                $('input[name="seleccionCatModal[]"]').eq(i).prop("check",$(originalCheck).prop("checked"));
+            });
+            $('input[name="seleccionEtiq[]"]').each(function(i,originalCheck) {
+                $('input[name="seleccionEtiqModal[]"]').eq(i).prop("check",$(originalCheck).prop("checked"));
+            });
 }
 

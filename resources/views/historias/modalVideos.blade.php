@@ -45,24 +45,24 @@
                         <input type="hidden" class="form-control form-control-sm" id="fechaFinModal" name="fechaFin" value="{{Carbon\Carbon::now()->format('Y-m-d')}}">
                         <input type="hidden" name="paciente_id" id="paciente_id" value="{{Session::get('paciente')['id']}}">
         
-                        <div id="checkboxesModal" class="checkboxes">
-                            @foreach ($etapas as $etapa)
-                            <input style="margin-right: 5px;" class="form-check-input" type="hidden" onclick="onSelect('{{$etapa->nombre}}', 'seleccionadoEtapa')" value={{$etapa->id}} name="seleccionEtapa[]">
-                            @endforeach
-                        </div>
 
-                        <div id="checkboxesCat" class="checkboxes">
-                            @foreach ($categorias as $categoria)
-                            <input type="hidden" style="margin-right: 5px;" class="form-check-input" onclick="onSelect('{{$categoria->nombre}}', 'seleccionadoCat')" value={{$categoria->id}} name="seleccionCat[]">
+                            @foreach ($etapas as $etapa)
+                            <input  type="hidden" class="form-check-input" value={{$etapa->id}} name="seleccionEtapaModal[]">
                             @endforeach
-                        </div>
+
+
+
+                            @foreach ($categorias as $categoria)
+                            <input type="hidden"  class="form-check-input" value={{$categoria->id}} name="seleccionCatModal[]">
+                            @endforeach
+
 
                     @if (Auth::user()->rol_id == 1)
-                        <div id="checkboxesEtiqueta" class="checkboxes">
+
                             @foreach ($etiquetas as $etiqueta)
-                            <input type="hidden" style="margin-right: 5px;" class="form-check-input" onclick="onSelect('{{$etiqueta->nombre}}','seleccionadoEtiqueta')" value={{$etiqueta->id}} name="seleccionEtiq[]">
+                            <input type="hidden"class="form-check-input" value={{$etiqueta->id}} name="seleccionEtiqModal[]">
                             @endforeach
-                        </div>
+
                     @endif
                 </div>
                     <input type="hidden" name="apto" id="aptoModal" value="1">
