@@ -8,6 +8,8 @@ use App\Models\Etapa;
 use App\Models\Categoria;
 use App\Models\Etiqueta;
 
+use function PHPUnit\Framework\returnSelf;
+
 class HistoriaController extends Controller
 {
     public function __construct()
@@ -18,10 +20,11 @@ class HistoriaController extends Controller
 
     public function oldestMemoryDate($idPaciente)
     {
-
         $memory = Paciente::find($idPaciente)->recuerdos
+            ->whereNotNull('fecha')
             ->sortBy('fecha')
             ->first();
+        
         if ($memory != null) return $memory->fecha;
     }
 
@@ -32,7 +35,6 @@ class HistoriaController extends Controller
         $etapas = Etapa::all()->sortBy("id");
         $categorias = Categoria::all()->sortBy("id");
         $etiquetas = Etiqueta::all()->sortBy("id");
-
         return view("historias.generateHistoria", compact("paciente", "fecha", "etapas", "etiquetas", "categorias"));
     }
 
