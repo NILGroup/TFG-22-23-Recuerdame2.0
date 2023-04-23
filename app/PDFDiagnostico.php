@@ -252,7 +252,6 @@ class PDFDiagnostico extends FPDF
 
     function writeEvolucion($pdf, $diagnostico, $gds, $mini, $cdr)
     {
-        $pdf->AddPage();
         $pdf->SetFont('Times', 'B', 15);
         $pdf->Cell(0, 7, utf8_decode('Evolución'));
         $pdf->Ln(9);
@@ -270,8 +269,7 @@ class PDFDiagnostico extends FPDF
         // Colors: fixed
         // Max ordinate: 6
         // Number of divisions: 3
-        $pdf->LineGraph(190,100,$data,'VHkBvBgBdB',$colors);
-        
+        $pdf->LineGraph(190,100,$data,'VHkBvBgBdB',$colors);        
     }
 
     function pdfBody($pdf, $diagnostico, $paciente, $gds, $mini, $cdr)
@@ -326,7 +324,12 @@ class PDFDiagnostico extends FPDF
 
         $this->writeTest($pdf, $diagnostico);
 
-    
+        $H = $pdf->GetY();
+
+        if($H > 240-75){
+            $pdf->addPage(); //297 es el alto de un A4, 18 ocupa el footer 287-18=279
+            $H = $pdf->GetY();
+        }
         $this->writeEvolucion($pdf, $diagnostico, $gds, $mini, $cdr);
 
         $fecha = Carbon::now();

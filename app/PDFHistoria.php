@@ -59,7 +59,7 @@ class PDFHistoria extends FPDF
                 $image = "../public/" . $multimedia->fichero;
                 if ($H > 240) {
 
-                    $pdf->addPage(); //297 es el alto de un A4, 18 ocupa el footer 287-18=279
+                    $pdf->addPage(); 
                     $H = $pdf->GetY();
                 }
                 if ($i == 3) { // 3 imágenes por filas
