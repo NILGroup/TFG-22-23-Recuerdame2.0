@@ -95,9 +95,18 @@ class PDFEvaluacion extends FPDF{
     }
 
     function writeSign($pdf){
-        $pdf->Cell(4,7,"");
+        
+        $H = $pdf->GetY();
+        $pdf->Cell(160,7,$H);
+        if($H > 260-10){
+            $pdf->addPage(); //297 es el alto de un A4, 18 ocupa el footer 287-18=279
+            $H = $pdf->GetY();
+        }
+
+        // Go to 1.5 cm from bottom
+        $this->SetY(-60);
+
         $pdf->Cell(50,35,$pdf->Image("img/FDOWhite.png", $pdf->GetX(), $pdf->GetY(), 75,50),0,0,'C');
-        $pdf->Ln(55);
     }
     
     function pdfBody($pdf, $informeSeguimiento, $paciente){

@@ -59,7 +59,7 @@
         let dropzone_config = {
             ruta: "/usuarios/" + id + "/sesiones"
         }
-   
+
     </script>
     <script src="/js/dropzone.js"></script>
     <script src="/js/recuerdo.js"></script>
