@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Diagnostico;
 use App\Models\Sesion;
+use App\Models\InformeSesion;
 use App\Models\Evaluacion;
 use App\Models\Paciente;
 use App\Models\Recuerdo;
@@ -36,27 +37,28 @@ class PDFController extends Controller
     public function generarPDFInformeSesion(Request $request)
     {
 
-        $sesion = Sesion::find($request->id);
-
-        $paciente = $sesion->paciente;
+        $informe = InformeSesion::find($request->id);
+        $sesion = $informe->sesion;
+        $paciente = $informe->paciente;
 
         $usuario = $sesion->user;
 
-        $this->obtenerPDFSesion($paciente, $sesion, $usuario);
+        $this->obtenerPDFSesion($paciente, $sesion, $informe, $usuario);
     }
 
-    public function verInformeSesion($idPaciente, $idSesion)
+    public function verInformeSesion($idPaciente, $idInforme)
     {
-        $sesion = Sesion::find($idSesion);
 
+        $informe = InformeSesion::find($idInforme);
+        $sesion = $informe->sesion;
         $paciente = $sesion->paciente;
 
         $usuario = $sesion->user;
 
-        $this->obtenerPDFSesion($paciente, $sesion, $usuario);
+        $this->obtenerPDFSesion($paciente, $sesion, $informe, $usuario);
     }
 
-    public function obtenerPDFSesion($paciente, $sesion, $usuario)
+    public function obtenerPDFSesion($paciente, $sesion, $informe, $usuario)
     {
         $GLOBALS['titulo'] = $sesion->titulo;
         $pdf = new PDFSesion('P', 'mm', 'A4');
@@ -64,7 +66,7 @@ class PDFController extends Controller
         $pdf->AddPage();
         $pdf->SetFont('Times', '', 12);
 
-        $pdf->pdfBody($pdf, $paciente, $sesion, $usuario);
+        $pdf->pdfBody($pdf, $paciente, $sesion, $informe, $usuario);
 
         $pdf->Output();
     }

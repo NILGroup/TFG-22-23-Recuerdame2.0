@@ -185,7 +185,7 @@ class PDFSesion extends FPDF{
         $pdf->Ln(55);
     }
 
-    function pdfBody($pdf, $paciente, $sesion, $usuario){
+    function pdfBody($pdf, $paciente, $sesion, $informe, $usuario){
         $pdf->SetFillColor(220);
 
         $pdf->SetFont('Times','B',15);
@@ -205,7 +205,7 @@ class PDFSesion extends FPDF{
         $pdf->Cell(0,7,utf8_decode('Informe de la sesión '));
         $pdf->Ln(9);
 
-        $this->writeInformeSesion($pdf,$sesion);
+        $this->writeInformeSesion($pdf,$informe);
         $pdf->Ln(9);
 
         $this->writeSign($pdf);
