@@ -62,3 +62,8 @@ function onCheck(elementoSeleccionado) {
 
     } else select.setAttribute("value", 0);
 }
+
+function videoModalCreator(){
+    
+}
+
