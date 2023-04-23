@@ -6,7 +6,7 @@
                     <img style="height: 10em;" src="{{$media->getRuta()}}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon imagen">
                 </a>
             </div>
-            <small>{{substr($media->nombre, 0, 20);}}</small>
+            <small>{{substr($media->descripcion, 0, 20);}}</small>
         </div>
        
 </div>
