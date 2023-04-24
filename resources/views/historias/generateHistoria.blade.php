@@ -36,7 +36,7 @@
                 <label for="etapa" class="form-check-label negrita">Etapa de la vida</label>
                 <div id="checkboxes" class="checkboxes">
                     @foreach ($etapas as $etapa)
-                    <label class="mt-1"> <input style="margin-right: 5px;" class="form-check-input" type="checkbox" onclick="onSelect('{{$etapa->nombre}}', 'seleccionadoEtapa')" value={{$etapa->id}} name="seleccionEtapa[]">{{$etapa->nombre}}</label>
+                    <label class="mt-1"> <input style="margin-right: 5px;" class="form-check-input" type="checkbox"  value={{$etapa->id}} name="seleccionEtapa[]">{{$etapa->nombre}}</label>
                     @endforeach
                 </div>
             </div>
@@ -44,9 +44,9 @@
 
             <div class="col-sm-3 col-md-2 col-lg-2">
                 <label for="categoria" class="form-check-label negrita">Categoría</label>
-                <div id="checkboxesCat" class="checkboxes">
+                <div id="seleccionadoCat" class="checkboxes">
                     @foreach ($categorias as $categoria)
-                    <label class="mt-1"> <input type="checkbox" style="margin-right: 5px;" class="form-check-input" onclick="onSelect('{{$categoria->nombre}}', 'seleccionadoCat')" value={{$categoria->id}} name="seleccionCat[]">{{$categoria->nombre}}</label>
+                    <label class="mt-1"> <input type="checkbox" style="margin-right: 5px;" class="form-check-input"  value={{$categoria->id}} name="seleccionCat[]">{{$categoria->nombre}}</label>
                     @endforeach
                 </div>
             </div>
@@ -56,7 +56,7 @@
 
                 <div id="checkboxesEtiqueta" class="checkboxes">
                     @foreach ($etiquetas as $etiqueta)
-                    <label class="mt-1"> <input type="checkbox" style="margin-right: 5px;" class="form-check-input" onclick="onSelect('{{$etiqueta->nombre}}','seleccionadoEtiqueta')" value={{$etiqueta->id}} name="seleccionEtiq[]">{{$etiqueta->nombre}}</label>
+                    <label class="mt-1"> <input type="checkbox" style="margin-right: 5px;" class="form-check-input" value={{$etiqueta->id}} name="seleccionEtiq[]">{{$etiqueta->nombre}}</label>
                     @endforeach
                 </div>
             </div>

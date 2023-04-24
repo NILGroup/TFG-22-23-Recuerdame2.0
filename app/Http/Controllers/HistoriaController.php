@@ -64,7 +64,7 @@ class HistoriaController extends Controller
             ->whereIn('categoria_id', $idCategoria)->orWhereNull('categoria_id')
             ->whereBetween('fecha', [$fechaInicio, $fechaFin])
             ->get();
-        
+        //return $listaRecuerdos;
         if(!($apto == 0 && $noApto == 0) && !($apto == 1 && $noApto == 1))
             $listaRecuerdos = $listaRecuerdos
                 ->whereIn('apto', $apto);
