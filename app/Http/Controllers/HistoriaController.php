@@ -85,11 +85,12 @@ class HistoriaController extends Controller
                       
            })->where(function($query) use ($puntuacionFinal){
             $query ->whereIn('puntuacion', $puntuacionFinal)->orWhereNull('puntuacion');
+          
+        
+           })->where(function($query) use ($fechaInicio,$fechaFin){
+                $query->whereBetween('fecha', [$fechaInicio, $fechaFin])->orWhereNull('fecha');
            })
             ->get();
-            /*->whereIn('etiqueta_id', $idEtiqueta)->orWhereNull('etiqueta_id') */
-
-            /*->whereBetween('fecha', [$fechaInicio, $fechaFin])*/
 
         return $listaRecuerdos;
         if(!($apto == 0 && $noApto == 0) && !($apto == 1 && $noApto == 1))

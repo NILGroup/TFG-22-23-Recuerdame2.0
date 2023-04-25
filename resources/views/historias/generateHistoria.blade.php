@@ -52,7 +52,7 @@
             </div>
             @if (Auth::user()->rol_id == 1)
             <div class="col-sm-3 col-md-2 col-lg-2">
-                <label for="etiqueta" class="form-check-label negrita">Etiqueta</label>
+                <label for="etiqueta" class="form-check-label negrita">Puntuación</label>
 
                 <div id="checkboxesEtiqueta" class="checkboxes">
                     @foreach ($etiquetas as $etiqueta)
