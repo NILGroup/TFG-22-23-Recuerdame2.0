@@ -97,7 +97,6 @@ class PDFEvaluacion extends FPDF{
     function writeSign($pdf){
         
         $H = $pdf->GetY();
-        $pdf->Cell(160,7,$H);
         if($H > 260-10){
             $pdf->addPage(); //297 es el alto de un A4, 18 ocupa el footer 287-18=279
             $H = $pdf->GetY();
