@@ -22,7 +22,7 @@
                         <th scope="col" class="text-center">Etapa</th>
                         <th scope="col" class="text-center">Categoría</th>
                         <th scope="col" class="text-center">Estado</th>
-                        <th scope="col" class="text-center">Etiqueta</th>
+                        <th scope="col" class="text-center">Puntuación</th>
                         <th scope="col" class="text-center">Apto</th>
                     @endif
                     <th class="fit10 actions text-center" scope="col">Acciones</th>
@@ -46,10 +46,16 @@
                     @else
                         <td>Sin estado</td>
                     @endif
-                    @if(!is_null($recuerdo->etiqueta))
-                        <td>{{$recuerdo->etiqueta->nombre}}</td>
+                    @if(!is_null($recuerdo->puntuacion))
+                        @if($recuerdo->puntuacion > 5)
+                            <td>Positivo ({{$recuerdo->puntuacion}})</td>
+                        @elseif($recuerdo->puntuacion < 5)
+                            <td>Negativo ({{$recuerdo->puntuacion}})</td>
+                        @else
+                            <td>Neutro ({{$recuerdo->puntuacion}})</td>
+                        @endif
                     @else
-                        <td>Sin etiqueta</td>
+                        <td>Sin puntuación</td>
                     @endif
                     <td class=" text-center">
                         <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif disabled>
