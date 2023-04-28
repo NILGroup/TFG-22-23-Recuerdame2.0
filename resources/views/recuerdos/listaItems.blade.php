@@ -164,6 +164,7 @@
             <thead>
                 <tr>
                     <th scope="col" class="text-center">Nombre</th>
+                    <th class="fit10 text-center" scope="col">Localidad</th>
                     <th class="fit10 text-center" scope="col">Tipo de relación</th>
                     @if($show)
                     <th class="fit5 text-center" scope="col">Acciones</th>
@@ -173,7 +174,8 @@
             <tbody class="shadow-sm">
                 @foreach ($recuerdo->personas_relacionadas as $persona)
                 <tr>
-                    <td>{{$persona->nombre}} {{$persona->apellidos}}</td>
+                    <td>{{$persona->nombre}} {{$persona->apellidos}} <a>@if($persona->contacto)★@endif</a></td>
+                    <td>{{$persona->localidad}}</td>
                     <td>{{$persona->tiporelacion->nombre}}</td>
                     @if($show)
                     <td class="tableActions">
