@@ -53,6 +53,20 @@
                     }
                 }
                 
+                if($narracionCheck){
+
+                    $urlNarracionPath = $this->generateAudio("Esto es una narracion de prueba");
+                    
+                    $urlNarracion = env("NGROK")."/TFG-22-23-Recuerdame2.0/public/".str_replace(public_path(), '', $urlNarracionPath);
+                    $resultArray->push(new Creatomate\Elements\Audio([
+                        'source' => $urlNarracion,
+                        // Make the audio track as long as the output
+                        'duration' => null,
+                        // Fade out for 2 seconds
+                        'audio_fade_out' => 2,
+                    ]));
+                }
+
                 if($resultArray->isEmpty()){
                     return "ERROR";
                 }else{
@@ -76,7 +90,6 @@
             $provider = new VoiceRssProvider(env("VOICERRS_KEY"),"es-es",1);
             $tts = new TextToSpeech($text, $provider);
             $filename = $tts->getFile(public_path()."/storage/audio");
-            //print_r(var_dump($filename));
             return $filename;
         }
     }

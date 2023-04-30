@@ -106,7 +106,7 @@ class VideoHistoriaController extends Controller
         }
 
             $VideoGenerator = new VideoHistoriaVida();
-            //$url = $VideoGenerator->generateAudio("Yo que se. Me da igual. PFFFF. Que me da igual");
+            //$url = $VideoGenerator->generateAudio("Test test test");
             $url = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck);
 
             //Crear fila en la base de datos
