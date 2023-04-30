@@ -25,19 +25,23 @@ class VideoHistoriaController extends Controller
     }
     public function generarVideoHistoria(Request $request){
 
-
+        $imagenesCheck= $request->imagenesCheck;
+        $videosCheck= $request->videosCheck;
+        $narracionCheck = $request->narracionCheck;
+        if(!$imagenesCheck && !$videosCheck){
+            $imagenesCheck = true; $videosCheck = true;
+        }
         //OBTENER LOS RECUERDOS BUSCADOS///////////////////////////////////////////////////
         $idPaciente = $request->paciente_id;
         $fechaInicio = $request->fechaInicio;
         $fechaFin = $request->fechaFin;
-        $idEtapa = $request->seleccionEtapa;
-        $puntuacion = $request->seleccionEtiq;
-        $idCategoria = $request->seleccionCat;
+        $idEtapa = $request->seleccionEtapaModal;
+        $puntuacion = $request->seleccionEtiqModal;
+        $idCategoria = $request->seleccionCatModal;
         $apto = $request->apto;
         $noApto = $request->noApto;
         $paciente = Paciente::find($idPaciente);
         $puntuacionFinal = collect([]);
-    
         if (is_null($idEtapa))
             $idEtapa = Etapa::select('id');
         if (is_null($idCategoria))
@@ -81,6 +85,7 @@ class VideoHistoriaController extends Controller
                 ->whereIn('apto', $apto);
         //FIN. RECUERDOS YA OBTENIDOS///////////////////////////////////////////////////
 
+
         //PATH
 
         
@@ -90,7 +95,7 @@ class VideoHistoriaController extends Controller
                 $extension = pathinfo($media->fichero, PATHINFO_EXTENSION);
                 $rememberpath = env("NGROK")."/TFG-22-23-Recuerdame2.0/public".$media->fichero;//str_replace('/storage/', '/public/', $media->fichero);
                 
-                if($extension == 'png' || $extension == 'jpg'){
+                if($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg'){
                     $imagesArray->push($rememberpath);
                 }
 
@@ -101,8 +106,9 @@ class VideoHistoriaController extends Controller
         }
 
             $VideoGenerator = new VideoHistoriaVida();
-            $url = $VideoGenerator->generateAudio("Hola grupo de Recuerdame 2, soy una IA muy muy molona esquereee xd");
-            //$url = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck);
+            //$url = $VideoGenerator->generateAudio("Yo que se. Me da igual. PFFFF. Que me da igual");
+            $url = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck);
+
             //Crear fila en la base de datos
             $video = Video::create(
                 [
@@ -131,5 +137,10 @@ class VideoHistoriaController extends Controller
         $video = Video::find($idVideo); //busca el recuerdo en sí
         $video->delete();
         
+    }
+
+    public function restore($idVideo) 
+    {
+        Video::where('id', $idVideo)->withTrashed()->restore();
     }
 }

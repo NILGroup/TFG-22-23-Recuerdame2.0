@@ -7,13 +7,11 @@
     use duncan3dc\Speaker\TextToSpeech;
     use duncan3dc\Speaker\Providers\VoiceRssProvider;
 
-use function PHPUnit\Framework\isNull;
-
     class VideoHistoriaVida{
 
         function generateVideo($videosArray, $imagesArray, $imagenesCheck, $videosCheck, $narracionCheck){
             $apikey = env("CREATOMATE_KEY");
-            if($apikey.isNull()){
+            if($apikey == null){
                 return null;
             }else{
                 $client = new Client($apikey);
@@ -44,16 +42,15 @@ use function PHPUnit\Framework\isNull;
                         ]));
                     }
 
-                    if(!$videosCheck){
+                    if(!$videosCheck && !$narracionCheck){
                         $resultArray->push(new Creatomate\Elements\Audio([
-                            'source' => 'env("NGROK")."/TFG-22-23-Recuerdame2.0/public/audio/video_background_music.wav',
+                            'source' => 'https://creatomate-static.s3.amazonaws.com/demo/music1.mp3',
                             // Make the audio track as long as the output
                             'duration' => null,
                             // Fade out for 2 seconds
                             'audio_fade_out' => 2,
                         ]));
                     }
-            
                 }
                 
                 if($resultArray->isEmpty()){
@@ -61,6 +58,7 @@ use function PHPUnit\Framework\isNull;
                 }else{
                     $source = new Creatomate\Source([
                         'output_format' => 'mp4',
+                        'frame_rate' => 30,
                         'width' => 1280,
                         'height' => 720,
                         'elements' => $resultArray->toArray(),
@@ -75,7 +73,7 @@ use function PHPUnit\Framework\isNull;
         }
 
         function generateAudio($text){
-            $provider = new VoiceRssProvider(env("VOICERRS_KEY"),"es-es",-2);
+            $provider = new VoiceRssProvider(env("VOICERRS_KEY"),"es-es",1);
             $tts = new TextToSpeech($text, $provider);
             $filename = $tts->getFile(public_path()."/storage/audio");
             //print_r(var_dump($filename));

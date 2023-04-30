@@ -11,7 +11,7 @@
             
             <form class="modal-body" id="videosCreatorForm">
                 <div class="container">
-                                <label class="form-check-label mt-3 negrita">Tipo de contenido<span class="asterisco">*</span><i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="En este campo podemos elegir los elementos que queremos dentro del nuevo vídeo generado: solo imágenes, solo vídeos o ambos."></i></label>
+                                <label class="form-check-label mt-3 negrita">Tipo de contenido<span class="asterisco">*</span> <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="En este campo podemos elegir los elementos que queremos dentro del nuevo vídeo generado: solo imágenes, solo vídeos o ambos."></i></label>
         
                                 <div class="form-check ">
                                     <input type="hidden" name="imagenesCheck" id="imagenesCheck" value="1">
@@ -47,20 +47,20 @@
         
 
                             @foreach ($etapas as $etapa)
-                            <input  type="hidden" class="form-check-input" value={{$etapa->id}} name="seleccionEtapaModal[]">
+                            <input  type="checkbox" class="form-check-input" style="display: none" value={{$etapa->id}} name="seleccionEtapaModal[]">
                             @endforeach
 
 
 
                             @foreach ($categorias as $categoria)
-                            <input type="hidden"  class="form-check-input" value={{$categoria->id}} name="seleccionCatModal[]">
+                            <input type="checkbox"  class="form-check-input" style="display: none" value={{$categoria->id}} name="seleccionCatModal[]">
                             @endforeach
 
 
                     @if (Auth::user()->rol_id == 1)
 
                             @foreach ($etiquetas as $etiqueta)
-                            <input type="hidden"class="form-check-input" value={{$etiqueta->id}} name="seleccionEtiqModal[]">
+                            <input type="checkbox" class="form-check-input" style="display: none" value={{$etiqueta->id}} name="seleccionEtiqModal[]">
                             @endforeach
 
                     @endif
