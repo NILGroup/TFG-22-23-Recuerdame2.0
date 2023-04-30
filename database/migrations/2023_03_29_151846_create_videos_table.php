@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('estado');
             $table->timestamps();
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete("cascade");
-
+            $table->softDeletes();
         });
     }
 

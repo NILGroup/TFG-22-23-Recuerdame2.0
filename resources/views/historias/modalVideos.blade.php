@@ -11,7 +11,7 @@
             
             <form class="modal-body" id="videosCreatorForm">
                 <div class="container">
-                                <label class="form-check-label mt-3 negrita">Tipo de contenido<span class="asterisco">*</span> <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="En este campo podemos elegir los elementos que queremos dentro del nuevo vídeo generado: solo imágenes, solo vídeos o ambos."></i></label>
+                                <label class="form-check-label mt-3 negrita">Tipo de contenido<span class="asterisco">*</span><i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="En este campo podemos elegir los elementos que queremos dentro del nuevo vídeo generado: solo imágenes, solo vídeos o ambos."></i></label>
         
                                 <div class="form-check ">
                                     <input type="hidden" name="imagenesCheck" id="imagenesCheck" value="1">
