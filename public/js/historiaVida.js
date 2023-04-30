@@ -30,6 +30,41 @@ function onCheck(elementoSeleccionado) {
     } else select.setAttribute("value", 0);
 }
 
+
+function onCheckModal(elementoSeleccionado) {
+    var select = document.getElementById(elementoSeleccionado);
+
+    if (select.getAttribute("value") == 0) {
+        select.setAttribute("value", 1);
+
+    } else select.setAttribute("value", 0);
+
+
+    var acceptButton = document.getElementById('modal_video_guardar');
+    if (select.getAttribute("value") == 0) {
+        if(elementoSeleccionado == 'imagenesCheck'){
+            var select2 = document.getElementById('videosCheck');
+            if (select2.getAttribute("value") == 0) {
+                acceptButton.disabled = true;
+            }else{
+                acceptButton.disabled = false;
+            }
+            
+        }else{
+            var select2 = document.getElementById('imagenesCheck');
+            if (select2.getAttribute("value") == 0) {
+                acceptButton.disabled = true;
+            }else{
+                acceptButton.disabled = false;
+            }
+        }    
+    }else{
+        acceptButton.disabled = false;
+    }
+    
+}
+
+
 function videoModalCreator(){
 
 

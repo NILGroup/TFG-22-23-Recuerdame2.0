@@ -16,12 +16,12 @@
                                 <div class="form-check ">
                                     <input type="hidden" name="imagenesCheck" id="imagenesCheck" value="1">
                                     
-                                    <input type="checkbox" class="form-check-input" onclick="onCheck('imagenesCheck')" checked>
+                                    <input type="checkbox" class="form-check-input" onclick="onCheckModal('imagenesCheck')" checked>
                                     <label class=" col-form-label-sm " for="1">Imágenes</label><br>
                                     
                                     <input type="hidden" name="videosCheck" id="videosCheck" value="1">
                                     
-                                    <input type="checkbox" class="form-check-input" onclick="onCheck('videosCheck')" checked>
+                                    <input type="checkbox" class="form-check-input" onclick="onCheckModal('videosCheck')" checked>
                                     <label class="form-label col-form-label-sm" for="1">Vídeos</label>
                                 </div>
         
