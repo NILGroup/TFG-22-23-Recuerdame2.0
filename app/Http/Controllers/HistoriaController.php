@@ -77,19 +77,19 @@ class HistoriaController extends Controller
                 
 
         $listaRecuerdos =  $paciente->recuerdos()
-           ->where(function($query) use ($idEtapa){
+        ->where(function($query) use ($idEtapa){
             $query->whereIn('etapa_id', $idEtapa)->orWhereNull('etapa_id');
 
-           })->where(function($query) use ($idCategoria){
+        })->where(function($query) use ($idCategoria){
             $query->whereIn('categoria_id',$idCategoria)->orWhereNull('categoria_id');
-                      
-           })->where(function($query) use ($puntuacionFinal){
+                
+        })->where(function($query) use ($puntuacionFinal){
             $query ->whereIn('puntuacion', $puntuacionFinal)->orWhereNull('puntuacion');
-          
         
-           })->where(function($query) use ($fechaInicio,$fechaFin){
+        
+        })->where(function($query) use ($fechaInicio,$fechaFin){
                 $query->whereBetween('fecha', [$fechaInicio, $fechaFin])->orWhereNull('fecha');
-           })
+        })
             ->get();
 
         if(!($apto == 0 && $noApto == 0) && !($apto == 1 && $noApto == 1))
