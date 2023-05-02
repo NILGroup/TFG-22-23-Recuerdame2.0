@@ -195,8 +195,8 @@ Route::post('/storeTipoNoView', 'App\Http\Controllers\TipoRelacionController@sto
 Route::get('/pacientes/{id}/videos/generadorVideo', 'App\Http\Controllers\VideoHistoriaController@generadorVideoHistoria');
 Route::get('/pacientes/{id}/videos', 'App\Http\Controllers\VideoHistoriaController@showByPaciente');
 Route::get('/generarVideoHistoria', 'App\Http\Controllers\VideoHistoriaController@generarVideoHistoria');
-Route::delete('/eliminarVideo/{id}', 'App\Http\Controllers\VideoHistoriaController@destroy');
-
+Route::delete('/video/{id}', 'App\Http\Controllers\VideoHistoriaController@destroy');
+Route::post('/renderVideo/{id}', 'App\Http\Controllers\VideoHistoriaController@renderResponse');
 
 /*********************************************************
     CREA DATOS EN LA BASE DE DATOS

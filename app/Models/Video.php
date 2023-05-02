@@ -13,7 +13,8 @@ class Video extends Model
     protected $fillable = [
         "url",
         "estado",
-        "paciente_id"
+        "paciente_id",
+        "crea_id"
     ];
 
     public function paciente(){

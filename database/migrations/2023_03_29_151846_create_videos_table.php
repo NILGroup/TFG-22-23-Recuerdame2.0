@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->longText("url");
             $table->unsignedBigInteger('paciente_id');
+            $table->string('crea_id');
             $table->string('estado');
             $table->timestamps();
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete("cascade");
