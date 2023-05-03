@@ -32,7 +32,7 @@
                 <caption>Listado de informes de seguimiento</caption>
                 <thead>
                     <tr >
-                        <th class="fit10 text-center" scope="col">Informe</th>
+                        <th class="fit10 text-center" scope="col">Fecha del informe</th>
                         <th class="fit10 text-center" scope="col">Sesiones desde el anterior</th>
                         <th class=" text-center" scope="col">Diagnóstico</th>
                         <th class="fit10 text-center" scope="col">Acciones</th>
