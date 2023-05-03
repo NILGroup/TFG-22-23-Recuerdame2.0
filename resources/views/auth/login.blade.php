@@ -12,8 +12,8 @@
                         <!-- <img src="/img/Marca_recuerdame-nobg.png" class="card-img-top"> -->
                         <div class="card-body">
                             <div class="row mb-3 form-floating mb-3">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Correo electrónico" autofocus>
-                                <label class="text-muted" for="email">Correo electrónico</label>
+                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Correo electrónico" autofocus>
+                                <label class="text-muted" for="email">Correo electrónico o teléfono</label>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong> Correo electrónico o contraseña incorrectos</strong>
