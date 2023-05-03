@@ -10,6 +10,8 @@ use App\Http\Controllers\InformesSesionController;
 use App\Http\Controllers\EvaluacionController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\CuidadoresController;
+use App\Http\Controllers\ResumenesController;
+use App\Http\Controllers\VideoHistoriaController;
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Paciente;

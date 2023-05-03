@@ -216,8 +216,12 @@ class ResumenesController extends Controller
     public function destroy($id)
     {
         $resumen = Resumen::find($id);
-        Resumen::destroy($id);
+        $resumen->delete();
         //return redirect("/usuarios/$idP/sesiones");
+    }
+    public function restore($idP, $id) 
+    {
+        Resumen::where('id', $id)->withTrashed()->restore();
     }
 
     public function showEditable($idPaciente, $idResumen)
