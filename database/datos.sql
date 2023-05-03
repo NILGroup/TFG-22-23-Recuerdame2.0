@@ -112,7 +112,8 @@ INSERT INTO users (id, nombre, apellidos, email, email_verified_at, telefono, lo
 
 INSERT INTO pacientes (id, nombre, apellidos, fecha_nacimiento, lugar_nacimiento, nacionalidad, ocupacion, residencia_actual, fecha_inscripcion, residencia_custom, residencia_id, situacion_id, estudio_id, genero_id, deleted_at) VALUES
 (1, 'María Concepción', 'Martinez-Almeida García', '1950-07-30', 'Madrid', 'Española', 'Confeccionista', 'C/Toledo 49, Ático 9E', '2021-07-07', NULL, 1, 1, 4, 2, NULL),
-(2, 'Cristina', 'Montserrat Plaza', '1969-01-21', 'Madrid', 'Española', 'Enfermera', 'P.º de la Castellana, 261, 28046 Madrid', '2019-04-07', NULL, 2, 1, 4, 2, NULL);
+(2, 'Cristina', 'Montserrat Plaza', '1969-01-21', 'Madrid', 'Española', 'Enfermera', 'P.º de la Castellana, 261, 28046 Madrid', '2019-04-07', NULL, 2, 1, 4, 2, NULL),
+(3, 'Antonio', 'Sagunto de la Torre', '1940-02-28', 'Madrid', 'Española', 'Economista', 'C/ de Nuestra Señora del Perpetuo Socorro 11, 4ºD, 28053 Madrid', '2022-12-14', NULL, 3, 6, 5, 1, NULL);
 
 
 INSERT INTO personarelacionadas (id, nombre, apellidos, telefono, ocupacion, email, localidad, contacto, observaciones, tiporelacion_id, tipo_custom, paciente_id, deleted_at) VALUES
@@ -125,7 +126,10 @@ INSERT INTO personarelacionadas (id, nombre, apellidos, telefono, ocupacion, ema
 (7, 'Camino', 'Martínez-Almeida González', NULL, 'Ingeniera industrial', 'CamiMart@gmail.com', 'Pº de la Castellana 12, 2ºB', 0, NULL, 3, NULL, 1, NULL),
 (8, 'Gustavo', 'Merino Reverte', NULL, 'Jubilado', 'GusMer@gmail.com', 'C/ Toledo 49, Ático 9D', 0, 'Es su vecino de toda la vida. La familia mantiene una gran amistad con él y siempre está dispuesto a ayudar. Suele pasar largos ratos con María Concepción, haciéndose compañía el uno al otro', 7, 'Vecino', 1, NULL),
 (9, 'Mariano', 'Menéndez González', NULL, 'Amo de casa', 'MarMen@gmail.com', 'C/ Toledo 7, 4ºB', 0, 'Es el marido de su hijo Alfredo. a María Concepción le costó aceptarle en la familia porque creía que solo buscaba dinero, pero ahora le quiere como a un hijo más.', 7, 'Yerno', 1, NULL),
-(10, 'Gregoria', 'Díez Gutiérrez', NULL, 'Ama de casa', 'GreDiez@gmail.com', 'C/ La Rozadura, 2', 0, 'La mejor amiga de María Concepción desde que eran pequeñas.', 6, NULL, 1, NULL);
+(10, 'Gregoria', 'Díez Gutiérrez', NULL, 'Ama de casa', 'GreDiez@gmail.com', 'C/ La Rozadura, 2', 0, 'La mejor amiga de María Concepción desde que eran pequeñas.', 6, NULL, 1, NULL),
+(11, 'Antonio', 'Sagunto Rosas', '674444789', 'Periodista', 'c.sagunto.rosas@gmail.com', 'C/ de Medina Sidonia 11, 1ºA', 1, 'Hijo mayor de Antonio. A día de hoy, es quien se encarga de llevarle y traerle al centro de día', 3, NULL, 3, NULL),
+(12, 'Inés', 'Sagunto Rosas', '674444789', 'Actriz', 'i.sagunto.rosas@gmail.com', 'Av. Infante Don Luis 27', 0, 'Hijoamayor de Antonio. Debido a su trabajo, se ven poco', 3, NULL, 3, NULL),
+(13, 'Carlos', 'Sagunto Rosas', '674444789', 'Escritor', 'i.sagunto.rosas@gmail.com', 'C/ del Calvario 34, BºA', 0, 'Benjamín de los Sagunto Rosas. Nunca han tenido muy buena relación, pero se ven una vez por semana', 3, NULL, 3, NULL);
 
 
 INSERT INTO actividads (id, start, title, description, color, paciente_id, finished, deleted_at) VALUES
@@ -163,7 +167,18 @@ INSERT INTO recuerdos (id, fecha, nombre, descripcion, localizacion, puntuacion,
 (3, '2022-10-15', 'Fiesta en La Sierra', 'Asistió a la casa de campo de unos amigos en la Sierra y la recuerda con sentimientos de felicidad y ternura. Cuenta historias del momento y destaca haber ganado dinero en un bingo casero.', 'Discoteca Recuer-Dame, La Sierra', 7, 2, 3, 7, 1, 2, 2, 1, NULL, NULL),
 (4, '2023-01-18', 'Visita al ginecólogo con su hija', 'Hizo una visita al ginecólogo con su hija Camino, para hacer un seguimiento de su embarazo. El ginecólogo les reveló el sexo del bebé (niña) y regaló una foto de la ecografía.', 'Hospital HLA Universitario Moncloa', 10, 1, 5, 1, 1, 1, NULL, 1, NULL, NULL),
 (5, NULL, 'Aprender a montar en bici', 'Sus hermanos le enseñaros a montar en la nueva bici que le regalaron por su cumpleaños.', 'Su finca en Las Rozas, Madrid', 6, 1, 1, 1, 2, 2, NULL, 1, NULL, NULL),
-(6, NULL, 'Juegos con sus amigos', 'Durante su infancia jugaba y bailaba con su grupo de amigos. Siempre conseguía sacarles una sonrisa a todos', NULL, 7, 1, 1, 2, 2, 3, NULL, 0, NULL, NULL);
+(6, NULL, 'Juegos con sus amigos', 'Durante su infancia jugaba y bailaba con su grupo de amigos. Siempre conseguía sacarles una sonrisa a todos', NULL, 7, 1, 1, 2, 2, 3, NULL, 0, NULL, NULL),
+
+(7, '1975-03-15', 'Nacimiento de su hermana pequeña', 'Su hermana pequeña nació el el Hospital Clínico, y fue un día muy feliz para ella. Siempre han estado muy unidas, y han hecho juntas prácticamente todo. Sin embargo, recordar a su hermana pone a Cristina muy triste, puesto que falleció en un accidente de tráfico hace algunos años', 'Hospital Clínico', 3, 2, 2, 1, 5, 2, NULL, 0, NULL, NULL),
+(8, '1977-10-02', 'Entrada a la universidad', 'Comienza sus estudios de enfermería en la Universidad Complutense de Madrid. Para ella fueron unos años muy felices, donde hizo todo tipo de amigos y conoció al que fue el padre de sus hijos', 'Facultad de Medicina UCM', 10, 2, 3, 6, 1, 1, NULL, 1, NULL, NULL),
+(9, '1982-12-25', 'Primer viaje en avión', 'Montó por primera vez en avión para cruzar el charco y llegar a Argentina. Allí vivía desde hacía muchos años su prima favorita, que tuvo que exiliarse en 1972', 'Madrid-Argentina', 7, 2, 4, 7, 1, 2, 2, 1, NULL, NULL),
+
+(10, '1968-09-26', 'Entrada a la universidad', 'Inició su formación en el Grado en Económicas en la Universidad Complutense de Madrid. Lo recuerda como una de las etapas más felices de su vida y de mayor cambio', 'Facultad de Eonómicas UCM', 9, 3, 3, 6, 1, 2, NULL, 1, NULL, NULL),
+(11, '1970-05-15', 'Nacimiento de su hija Inés', 'Nació su hija Inés, en el Hospital Universitario La Paz', 'Hospital Universitario La Paz', 10, 3, 5, 3, 2, 1, NULL, 1, NULL, NULL),
+(12, '1972-08-12', 'Nacimiento de su hija Antonio', 'Nació su hijo Antonio, en el Hospital Universitario La Paz', 'Hospital Universitario La Paz', 7, 3, 3, 7, 1, 2, 2, 1, NULL, NULL),
+(13, '1978-12-01', 'Nacimiento de su hijo Carlos', 'Nació su hija Carlos, en el Hospital Universitario La Paz', 'Hospital Universitario La Paz', 10, 3, 5, 1, 1, 1, NULL, 1, NULL, NULL),
+(14, '1980-03-17', 'Nombramiento como Director General de Producción Agraria', 'Fue nombrado Director General de Producción Agraria, convirtiéndose así en lo que se denominó como Un Hombre de Suárez', 'Ministerio de Agricultura', 8, 3, 4, 4, 2, 1, NULL, 1, NULL, NULL);
+
 
 
 INSERT INTO multimedias (id, nombre, fichero, personarelacionada_id, paciente_id, user_id) VALUES
@@ -228,7 +243,8 @@ INSERT INTO paciente_user (id, paciente_id, user_id) VALUES
 (4, 1, 2),
 (2, 1, 4),
 (5, 2, 3),
-(3, 2, 4);
+(3, 2, 4),
+(6, 3, 1);
 
 INSERT INTO resumens (id, titulo, fecha, resumen, paciente_id, created_at, updated_at) VALUES
 (1, "Primer resumen", "2023-03-13", "Iniciaste tu formación en Diseño de Moda en la Universidad Complutense de Madrid, momento que recuerdas como una de las etapas más felices y de mayor cambio. Fuiste al acto de presentación con tu difunto marido, lo que también te causa cierta tristeza recordar. Cenaste en Bell Mondo Italia con tu hijo, vecino y mejor amiga el 13 de octubre del 2022; se rieron mucho mientras ayudaban a María a recordar viejos tiempos y sacaron fotos de algunos platos del menú degustación. Visistaste al ginecólogo con tu hija Camino el 18 de enero del 2023 para hacer un seguimiento del embarazo y les revelaron el sexo del bebé (niña) y además regalaron una foto de la ecografía. Tus hermanos te enseñaron a montar en la nueva bici que te regalaron por tu cumpleaños, mientras durante tu infancia jugabas y bailabas con tus amigos logrando siempre sacarles una sonrisa a todos.", 1, NULL, NULL),
