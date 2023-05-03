@@ -29,7 +29,7 @@
                 </li>
                 @else
                 <li class="nav-item">
-                    <a class="nav-linkClaro nav-link letra-primary-color menu" aria-current="page" href="/usuarios/{{ Session::get('paciente')['id'] }}">Usuarios</a>
+                    <a class="nav-linkClaro nav-link letra-primary-color menu" aria-current="page" href="/usuarios">Usuarios</a>
                 </li>
                 @endif
                 <li class="nav-item dropdownClaro dropdown">
