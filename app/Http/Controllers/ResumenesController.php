@@ -17,6 +17,18 @@ use GuzzleHttp\Client;
 
 class ResumenesController extends Controller
 {
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'role'])->except(['show']);
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
+    }
+
     public function create(Request $request)
     {
         $show = false;

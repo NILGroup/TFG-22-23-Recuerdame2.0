@@ -13,6 +13,18 @@ use App\VideoHistoriaVida;
 
 class VideoHistoriaController extends Controller
 {
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'role'])->except(['show']);
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
+    }
+
     public function generadorVideoHistoria(int $idPaciente)
     {
         $paciente = Paciente::findOrFail($idPaciente);
