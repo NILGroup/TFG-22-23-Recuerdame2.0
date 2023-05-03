@@ -169,7 +169,7 @@ INSERT INTO recuerdos (id, fecha, nombre, descripcion, localizacion, puntuacion,
 INSERT INTO multimedias (id, nombre, fichero, personarelacionada_id, paciente_id, user_id) VALUES
 (1, 'multimedia 1', '/img/avatar_hombre.png', NULL, NULL, NULL),
 (2, 'multimedia 2', '/img/avatar_mujer.png', NULL, NULL, NULL),
-(4, 'Alfredo.jpg', '/storage/img/6426d063320fe1680265315.jpg', NULL, NULL, 2),
+(4, 'Alfredo.jpg', '/storage/img/6426d81a9cb951680267290.jpg', NULL, NULL, 2),
 (5, 'Maria concepcion.jpg', '/storage/img/6426d0d56bb6a1680265429.jpg', NULL, 1, NULL),
 (6, 'Ignacio.jpg', '/storage/img/6426d1c57d85b1680265669.jpg', 1, NULL, NULL),
 (7, 'Camino.jpg', '/storage/img/6426d582ba02d1680266626.jpg', 7, NULL, NULL),
