@@ -124,7 +124,7 @@ class VideoHistoriaController extends Controller
                 ]
             );
     
-            return self::showByPaciente($idPaciente);
+            return redirect("/pacientes/$idPaciente/videos");
     
     }
 
