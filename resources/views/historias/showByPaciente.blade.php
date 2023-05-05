@@ -28,11 +28,11 @@
             @foreach($videos as $video)
             <tr>
 
-                <td><a href={{$video->url}}>{{$video->url}}</a></td>
+                <td><a href="/usuarios/{{$video->paciente_id}}/videos/{{$video->id}}">{{$video->url}}</a></td>
                 <td>{{$video->estado}}</td>
                 <td>{{$video->created_at}}</td>
                 <td class="tableActions">
-                    <a href="{{$video->url}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del video."></i></a>
+                    <a href="/usuarios/{{$video->paciente_id}}/videos/{{$video->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del video."></i></a>
                         <!-- Boton de eliminar -->
                         <form method="post" action="{{ route('video.destroy', $video->id) }}" style="display:inline!important;">
                             {{csrf_field()}}

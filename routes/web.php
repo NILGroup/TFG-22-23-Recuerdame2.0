@@ -195,8 +195,9 @@ Route::get('/generarPDFHistoria', 'App\Http\Controllers\PDFController@generarPDF
 Route::post('/storeTipoNoView', 'App\Http\Controllers\TipoRelacionController@storeNoView');
 
 //RUTAS CUSTOMIZADAS VIDEO HISTORIAS DE VIDA
-Route::get('/pacientes/{id}/videos/generadorVideo', 'App\Http\Controllers\VideoHistoriaController@generadorVideoHistoria');
-Route::get('/pacientes/{id}/videos', 'App\Http\Controllers\VideoHistoriaController@showByPaciente');
+Route::get('/usuarios/{id}/videos/generadorVideo', 'App\Http\Controllers\VideoHistoriaController@generadorVideoHistoria');
+Route::get('/usuarios/{id}/videos', 'App\Http\Controllers\VideoHistoriaController@showByPaciente');
+Route::get('/usuarios/{id}/videos/{video}', 'App\Http\Controllers\VideoHistoriaController@show');
 Route::get('/generarVideoHistoria', 'App\Http\Controllers\VideoHistoriaController@generarVideoHistoria');
 Route::delete('/video/{id}', 'App\Http\Controllers\VideoHistoriaController@destroy');
 Route::post('/renderVideo/{id}', 'App\Http\Controllers\VideoHistoriaController@renderResponse');

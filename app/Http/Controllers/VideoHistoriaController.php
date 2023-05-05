@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\Etapa;
 use App\Models\Categoria;
-use App\Models\Etiqueta;
+use App\Mail\videoMail;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Video;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +28,12 @@ class VideoHistoriaController extends Controller
         $this->middleware(['auth'])->except(['renderResponse']);
         $this->middleware(['asignarPaciente'])->except(['destroy', 'restore','renderResponse']);
     }
-
+    public function show($idPaciente,$idVideo)
+    {
+        $video = Video::find($idVideo);
+        $url = $video->url;   
+        return view("historias.videoplayer", compact("url"));
+    }
     public function generarVideoHistoria(Request $request){
 
         $imagenesCheck= $request->imagenesCheck;
@@ -112,7 +118,7 @@ class VideoHistoriaController extends Controller
 
             $VideoGenerator = new VideoHistoriaVida();
             //$url = $VideoGenerator->generateAudio("Test test test");
-            $renders = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck);
+            $renders = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos);
 
             //Crear fila en la base de datos
             $video = Video::create(
@@ -124,13 +130,13 @@ class VideoHistoriaController extends Controller
                 ]
             );
     
-            return redirect("/pacientes/$idPaciente/videos");
+            return redirect("/usuarios/$idPaciente/videos");
     
     }
 
     public function showByPaciente($idPaciente){
         $paciente = Paciente::find($idPaciente);
-        if (is_null($paciente)) return "ID de paciente no encontrada"; //ESTUDIAR SI SOBRA
+        if (is_null($paciente)) return "ID de usario no encontrada"; //ESTUDIAR SI SOBRA
 
         $videos = $paciente->videos;
         //Devolvemos los recuerdos
@@ -138,7 +144,7 @@ class VideoHistoriaController extends Controller
     }
 
     public function destroy($idVideo){
-        $video = Video::find($idVideo); //busca el recuerdo en sí
+        $video = Video::find($idVideo);
         $video->delete();   
     }
 
@@ -148,13 +154,25 @@ class VideoHistoriaController extends Controller
 
     public function renderResponse($idPaciente, Request $request){
 
-        
         $video = Video::where('crea_id', $request->id)->get();
         if($video->count() > 0){
-           $userId = $video->first()->paciente_id; 
-           User::find($userId);
+           //$userId = $video->first()->paciente_id; 
+           //User::find($userId);
+           //Mail::to("erosguer@gmail.com")->send(new VideoMail());
+
+            $videoNew = Video::updateOrCreate(
+                ['id' => $video->id],
+                [
+                    'url' => $video->url,
+                    'estado' => $request->status == "succeeded"?"Finalizado":"Error",
+                    'paciente_id' => $idPaciente,
+                    'crea_id' => $video->crea_id
+                ]
+            );
+
+            return "Hecho";
         }else{
-            return "ERROR".$request;
+            abort(500);
         }
 
     }

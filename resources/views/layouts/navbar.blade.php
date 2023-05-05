@@ -36,7 +36,7 @@
                     <a class="nav-linkClaro nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Historias de Vida</a>
                     <ul class="dropdownClaro-menu dropdown-menu">
                         <li><a class="dropdownClaro-item dropdown-item" href="/usuarios/{{Session::get('paciente')['id']}}/historias/generarHistoria">Generar Historia de Vida</a></li>
-                        <li><a class="dropdownClaro-item dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/videos">Ver vídeos</a></li>
+                        <li><a class="dropdownClaro-item dropdown-item" href="/usuarios/{{Session::get('paciente')['id']}}/videos">Ver vídeos</a></li>
                         <li><a class="dropdownClaro-item dropdown-item" href="/usuarios/{{Session::get('paciente')['id']}}/resumenes">Ver resúmenes</a></li>
                         <li><a class="dropdownClaro-item dropdown-item" href="/usuarios/{{Session::get('paciente')['id']}}/recuerdos">Ver recuerdos</a></li>
                         @if (Auth::user()->rol_id == 1)

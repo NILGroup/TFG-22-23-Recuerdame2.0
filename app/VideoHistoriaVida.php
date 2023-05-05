@@ -7,9 +7,10 @@
     use duncan3dc\Speaker\TextToSpeech;
     use duncan3dc\Speaker\Providers\VoiceRssProvider;
     use wapmorgan\Mp3Info\Mp3Info;
+    use App\ResumenHistoriaVida;
     class VideoHistoriaVida{
 
-        function generateVideo($videosArray, $imagesArray, $imagenesCheck, $videosCheck, $narracionCheck){
+        function generateVideo($videosArray, $imagesArray, $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos){
             $apikey = env("CREATOMATE_KEY");
             if($apikey == null){
                 return null;
@@ -55,13 +56,19 @@
                 
                 if($narracionCheck){
 
-                    $urlNarracionPath = $this->generateAudio("Esto es una narracion de prueba.");
+                   // $sumManager = new ResumenHistoriaVida();
                     
-                    $urlNarracion = env("NGROK")."/TFG-22-23-Recuerdame2.0/public/".str_replace(public_path(), '', $urlNarracionPath);
+                   //$urlNarracionPath = $this->generateAudio($sumManager->generarResumen($listaRecuerdos));
 
-                    $audio = new Mp3Info($urlNarracion);
+                    $urlNarracionPath = $this->generateAudio("Esto es una narracion de prueba 2.");
+
+
+                    $urlNarracion = env("NGROK")."/TFG-22-23-Recuerdame2.0/public/".str_replace(public_path(), '', $urlNarracionPath); //cambiamos Public por URL
+                    
+                    $audio = new Mp3Info($urlNarracion); //Objeto para extraer la duración
+
                     $resultArray->push(new Creatomate\Elements\Audio([
-                        'source' => $urlNarracionPath,
+                        'source' => $urlNarracion,
                         // Make the audio track as long as the output
                         'duration' => $audio->duration,
                         // Fade out for 2 seconds
