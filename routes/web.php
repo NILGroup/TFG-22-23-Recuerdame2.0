@@ -179,13 +179,14 @@ Route::post('/cerrarDiagnostico', 'App\Http\Controllers\DiagnosticoController@st
 Route::post('/modificarDiagnostico', 'App\Http\Controllers\DiagnosticoController@update');
 Route::post('/generarPDFDiagnostico', 'App\Http\Controllers\DiagnosticoController@generarPDFInforme');
 
-
+//RUTAS CUSTOMIZADAS RESÚMENES
 Route::get('/generarResumenHistoria', 'App\Http\Controllers\ResumenesController@create');
 Route::get('/usuarios/{id}/resumenes', 'App\Http\Controllers\ResumenesController@showByPaciente');
 Route::post('/guardarResumen', 'App\Http\Controllers\ResumenesController@store');
 Route::post('/modificarResumen', 'App\Http\Controllers\ResumenesController@update');
 Route::get('/usuarios/{id}/resumenes/{idResumen}', 'App\Http\Controllers\ResumenesController@show');
 Route::get('/usuarios/{id}/resumenes/{idS}/editar', 'App\Http\Controllers\ResumenesController@showEditable');
+Route::post('/usuarios/{idP}/resumenes/{id}/restore', 'App\Http\Controllers\ResumenesController@restore');
 
 //RUTAS CUSTOMIZADAS HISTORIAS DE VIDA
 Route::get('/usuarios/{id}/historias/generarHistoria', 'App\Http\Controllers\HistoriaController@generarHistoria');
@@ -199,6 +200,7 @@ Route::get('/pacientes/{id}/videos', 'App\Http\Controllers\VideoHistoriaControll
 Route::get('/generarVideoHistoria', 'App\Http\Controllers\VideoHistoriaController@generarVideoHistoria');
 Route::delete('/video/{id}', 'App\Http\Controllers\VideoHistoriaController@destroy');
 Route::post('/renderVideo/{id}', 'App\Http\Controllers\VideoHistoriaController@renderResponse');
+Route::post('/usuarios/{idP}/videos/{id}/restore', 'App\Http\Controllers\VideoHistoriaController@restore');
 
 /*********************************************************
     CREA DATOS EN LA BASE DE DATOS
