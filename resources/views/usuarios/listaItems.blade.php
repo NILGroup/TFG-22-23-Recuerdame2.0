@@ -116,7 +116,7 @@
     </div>
 
     <div id="residencia_custom" @if($paciente->residencia_id != 6) style="display: none;" @endif class="row col-sm-12 col-md-6 col-lg-7 align-items-center">
-        <label for="residencia_custom" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Especifique<span class="asterisco">*</span></label>
+        <label for="residencia_custom" class="form-label col-form-label-sm negrita col-sm-12 col-md-12 col-lg-4">Especifique:<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-8">
             <input type="text" name="residencia_custom" value="{{$paciente->residencia_custom}}" class="form-control form-control-sm" id ="residencia_custom" >
         </div>
