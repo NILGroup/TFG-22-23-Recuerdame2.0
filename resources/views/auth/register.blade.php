@@ -37,17 +37,7 @@
                         @enderror
                     </div>
 
-                    <div class="d-block-inline align-items-center mt-4">
-                        <div class="d-flex align-items-center ">
-                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                            <input id="usuario" type="text" class="form-control @error('usuario') is-invalid @enderror" placeholder="Nombre de Usuario" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario" autofocus>
-                        </div>
-                        @error('usuario')
-                        <span role="alert" class="msgErrorRegister">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+                  
 
 
                     <div class="d-block-inline align-items-center mt-4">
@@ -75,8 +65,8 @@
 
                     </div>
                 
-                        <div class="d-flex flex-row align-items-center ">
-                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                        <div class="d-flex flex-row align-items-center mt-2">
+                            <i class="fas fa-lock fa-lg me-3 fa-fw "></i>
                             <input id="password-confirm" type="password" class=" form-control" name="password_confirmation" placeholder="Confirmar Contraseña" required autocomplete="new-password">
                         </div>
                
