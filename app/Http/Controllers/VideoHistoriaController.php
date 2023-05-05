@@ -8,8 +8,11 @@ use App\Models\Etapa;
 use App\Models\Categoria;
 use App\Models\Etiqueta;
 use App\Models\Video;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use App\VideoHistoriaVida;
+
+use function PHPUnit\Framework\isNull;
 
 class VideoHistoriaController extends Controller
 {
@@ -21,20 +24,10 @@ class VideoHistoriaController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'role'])->except(['show']);
-        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
+        $this->middleware(['auth'])->except(['renderResponse']);
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore','renderResponse']);
     }
 
-    public function generadorVideoHistoria(int $idPaciente)
-    {
-        $paciente = Paciente::findOrFail($idPaciente);
-        $fecha = "11/12/2021";
-        $etapas = Etapa::all()->sortBy("id");
-        $categorias = Categoria::all()->sortBy("id");
-        $etiquetas = Etiqueta::all()->sortBy("id");
-
-        return view("historias.generateVideoHistoria", compact("paciente", "fecha", "etapas", "etiquetas", "categorias"));
-    }
     public function generarVideoHistoria(Request $request){
 
         $imagenesCheck= $request->imagenesCheck;
@@ -119,14 +112,15 @@ class VideoHistoriaController extends Controller
 
             $VideoGenerator = new VideoHistoriaVida();
             //$url = $VideoGenerator->generateAudio("Test test test");
-            $url = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck);
+            $renders = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck);
 
             //Crear fila en la base de datos
             $video = Video::create(
                 [
-                    'url' => $url,
+                    'url' => $renders['url'],
                     'estado' => "Procesando",
                     'paciente_id' => $idPaciente,
+                    'crea_id' => $renders['id']
                 ]
             );
     
@@ -134,8 +128,7 @@ class VideoHistoriaController extends Controller
     
     }
 
-    public function showByPaciente($idPaciente)
-    {
+    public function showByPaciente($idPaciente){
         $paciente = Paciente::find($idPaciente);
         if (is_null($paciente)) return "ID de paciente no encontrada"; //ESTUDIAR SI SOBRA
 
@@ -144,15 +137,25 @@ class VideoHistoriaController extends Controller
         return view("historias.showByPaciente", compact("videos", "paciente"));
     }
 
-    public function destroy($idVideo)
-    {
+    public function destroy($idVideo){
         $video = Video::find($idVideo); //busca el recuerdo en sí
-        $video->delete();
-        
+        $video->delete();   
     }
 
-    public function restore($idVideo) 
-    {
+    public function restore($idVideo) {
         Video::where('id', $idVideo)->withTrashed()->restore();
+    }
+
+    public function renderResponse($idPaciente, Request $request){
+
+        
+        $video = Video::where('crea_id', $request->id)->get();
+        if($video->count() > 0){
+           $userId = $video->first()->paciente_id; 
+           User::find($userId);
+        }else{
+            return "ERROR".$request;
+        }
+
     }
 }

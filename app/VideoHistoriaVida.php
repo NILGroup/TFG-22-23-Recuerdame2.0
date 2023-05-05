@@ -6,7 +6,7 @@
     use Creatomate;
     use duncan3dc\Speaker\TextToSpeech;
     use duncan3dc\Speaker\Providers\VoiceRssProvider;
-
+    use wapmorgan\Mp3Info\Mp3Info;
     class VideoHistoriaVida{
 
         function generateVideo($videosArray, $imagesArray, $imagenesCheck, $videosCheck, $narracionCheck){
@@ -55,13 +55,15 @@
                 
                 if($narracionCheck){
 
-                    $urlNarracionPath = $this->generateAudio("Esto es una narracion de prueba");
+                    $urlNarracionPath = $this->generateAudio("Esto es una narracion de prueba.");
                     
                     $urlNarracion = env("NGROK")."/TFG-22-23-Recuerdame2.0/public/".str_replace(public_path(), '', $urlNarracionPath);
+
+                    $audio = new Mp3Info($urlNarracion);
                     $resultArray->push(new Creatomate\Elements\Audio([
-                        'source' => $urlNarracion,
+                        'source' => $urlNarracionPath,
                         // Make the audio track as long as the output
-                        'duration' => null,
+                        'duration' => $audio->duration,
                         // Fade out for 2 seconds
                         'audio_fade_out' => 2,
                     ]));
@@ -77,12 +79,13 @@
                         'height' => 720,
                         'elements' => $resultArray->toArray(),
                     ]);
-    
-                    $renders = $client->render(['source' => $source]);
+                    
+                    $webhook_url =env("NGROK")."/TFG-22-23-Recuerdame2.0/public/renderVideo/1";
+                    $renders = $client->render(['source' => $source,'webhook_url' => $webhook_url]);
                 }
 
                 //print_r($renders[0]['url']);
-                return $renders[0]['url'];
+                return $renders[0];
             }
         }
 

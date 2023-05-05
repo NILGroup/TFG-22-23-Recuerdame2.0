@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f7c2b3794e6a5a325cae7b9430da200",
+    "content-hash": "43af6e4b912bcbda7b57dcd87a7b6013",
     "packages": [
         {
             "name": "brick/math",
@@ -7471,6 +7471,55 @@
                 }
             ],
             "time": "2022-03-08T17:03:00+00:00"
+        },
+        {
+            "name": "wapmorgan/mp3info",
+            "version": "0.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wapmorgan/Mp3Info.git",
+                "reference": "13d1c142a75ca5bf63dd29d706c9a93d8436dbcb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wapmorgan/Mp3Info/zipball/13d1c142a75ca5bf63dd29d706c9a93d8436dbcb",
+                "reference": "13d1c142a75ca5bf63dd29d706c9a93d8436dbcb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "wapmorgan/terminal-info": "dev-master"
+            },
+            "bin": [
+                "bin/mp3scan"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "wapmorgan\\Mp3Info\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "description": "The fastest php library to extract mp3 tags & meta information.",
+            "keywords": [
+                "audio",
+                "id3",
+                "id3v1",
+                "id3v2",
+                "mp3",
+                "mpeg"
+            ],
+            "support": {
+                "issues": "https://github.com/wapmorgan/Mp3Info/issues",
+                "source": "https://github.com/wapmorgan/Mp3Info/tree/0.0.8"
+            },
+            "time": "2022-06-15T23:39:26+00:00"
         },
         {
             "name": "webmozart/assert",
