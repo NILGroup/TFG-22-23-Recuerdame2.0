@@ -16,31 +16,36 @@
         Además no habrá dropzone mientras haya ya una foto subida
 
     -->
-    <form class="text-left" action="/borrar_foto_cuidador" method="post" style="margin-left:130px;">
-        {{csrf_field()}}
-        <input type="hidden" name="id" value="{{$cuidador->id}}">
-        <button type="submit" class="align-center btn btn-danger mb-1" id="borrar_foto">Eliminar Foto</button>
-    </form>
-
-    <form id="d" method="post" action="/actualizarCuidador">
-        {{csrf_field()}}
-        <div id="general" class="container-fluid accordion-collapse collapse show" aria-labelledby="general">
-            <div class="row text-align-center">
-                <div class="text-center col-lg-3 align-items-center">
-                    @include('cuidadores.foto')
-
-                </div>
-                <div class="col-lg-9" style="margin-top: -50px;">
-                    @include('cuidadores.listaItems')
-                </div>
-            </div>
+    <div id="general" class="container-fluid accordion-collapse collapse show" aria-labelledby="general">
+                 
+    <div class="row text-align-center"  style="align-items: flex-start!important;">
+        <div class="d-flex flex-column text-center col-lg-3 align-items-center justify-content-center ">
+        @include('cuidadores.foto')
+        <div class="img-wrap text-center mx-auto">
+            <form action="/borrar_foto_cuidador" method="post">
+                {{csrf_field()}}
+                <input type="hidden" name="id" value="{{$cuidador->id}}">
+                <button type="submit" class="mx-auto text-center align-center btn btn-danger mb-1" id="borrar_foto">Eliminar foto</button>
+            </form>
         </div>
-
-        <div class="col-12 mt-3">
-            <a href="/usuarios/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
-            <button type="submit" value="Guardar" id="guardar" class="btn btn-outline-primary">Finalizar</button>
         </div>
-    </form>
+        
+        <div class="col-lg-9 mt-4">
+            <form id="d" method="post" action="/actualizarCuidador">
+                {{csrf_field()}}
+                            @include('cuidadores.listaItems')
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mt-3">
+                    <a href="/usuarios/{{$paciente->id}}/cuidadores"><button type="button" class="btn btn-primary">Cancelar</button></a>
+                    <button type="submit" value="Guardar" id="guardar" class="btn btn-outline-primary">Finalizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
     @else
     <form class="dropzone p-0" id="d" method="post" action="/registroCuidador">
