@@ -14,7 +14,7 @@ use App\Models\Genero;
 use App\Models\Multimedia;
 use App\Models\InformeSesion;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Diagnostico;
 use function PHPUnit\Framework\isNull;
 
 class PacientesController extends Controller
@@ -198,7 +198,7 @@ class PacientesController extends Controller
         
         session()->put('created', "true");
         //Redireccionamos a lista pacientes
-        //return redirect("/usuarios/$request->id");
+        return redirect("/usuarios/$request->id");
         
     }
 
