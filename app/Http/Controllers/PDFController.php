@@ -307,7 +307,7 @@ class PDFController extends Controller
         $pdf->AddPage();
         $pdf->SetFont('Times', '', 12);
 
-        $pdf->pdfBody($pdf, $resumen, $paciente, $imagen);
+        $pdf->pdfBody($pdf, $paciente, $resumen, $imagen);
 
         $pdf->Output();
     }
