@@ -32,7 +32,7 @@
                         $resultArray->push(new Creatomate\Elements\Image([
                             'source' => $ficheroURL,
                             "track"=> 1,
-                            "duration"=> 5,
+                            "duration"=> 8,
                             'animations' => [
                                 new Creatomate\Animations\PanCenter([
                                     'start_scale' => '100%',
@@ -56,11 +56,11 @@
                 
                 if($narracionCheck){
 
-                   // $sumManager = new ResumenHistoriaVida();
+                    $sumManager = new ResumenHistoriaVida();
                     
-                   //$urlNarracionPath = $this->generateAudio($sumManager->generarResumen($listaRecuerdos));
+                    $urlNarracionPath = $this->generateAudio($sumManager->generarResumen($listaRecuerdos));
 
-                    $urlNarracionPath = $this->generateAudio("Esto es una narracion de prueba 2.");
+                    //$urlNarracionPath = $this->generateAudio("Esto es una narracion de prueba 2.");
 
 
                     $urlNarracion = env("NGROK")."/TFG-22-23-Recuerdame2.0/public/".str_replace(public_path(), '', $urlNarracionPath); //cambiamos Public por URL
@@ -97,7 +97,7 @@
         }
 
         function generateAudio($text){
-            $provider = new VoiceRssProvider(env("VOICERRS_KEY"),"es-es",1);
+            $provider = new VoiceRssProvider(env("VOICERRS_KEY"),"es-es",0);
             $tts = new TextToSpeech($text, $provider);
             $filename = $tts->getFile(public_path()."/storage/audio");
             return $filename;
