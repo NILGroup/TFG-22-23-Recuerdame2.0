@@ -87,7 +87,7 @@ INSERT INTO situacions (id, nombre) VALUES
 INSERT INTO residencias (id, nombre) VALUES
 (2, 'Casa'),
 (3, 'Centro de día'),
-(6, 'Otros'),
+(6, 'Otro'),
 (1, 'Piso'),
 (5, 'Residencia para mayores'),
 (4, 'Vivienda unifamiliar');
@@ -110,10 +110,10 @@ INSERT INTO users (id, nombre, apellidos, email, email_verified_at, telefono, lo
 (4, 'Sofía', 'Méndez Alvaro', 'terapeuta2@gmail.com', NULL, NULL, NULL, NULL, NULL, '$2y$10$DWMFxY54JeWKrE9yXKsQmOeDNdNhbrk66SM/kTvJEAQZsj76whI.O', 1, NULL, NULL, NULL, NULL);
 
 
-INSERT INTO pacientes (id, nombre, apellidos, fecha_nacimiento, lugar_nacimiento, nacionalidad, ocupacion, residencia_actual, fecha_inscripcion, residencia_custom, residencia_id, situacion_id, estudio_id, genero_id, deleted_at) VALUES
-(1, 'María Concepción', 'Martinez-Almeida García', '1950-07-30', 'Madrid', 'Española', 'Confeccionista', 'C/Toledo 49, Ático 9E', '2021-07-07', NULL, 1, 1, 4, 2, NULL),
-(2, 'Cristina', 'Montserrat Plaza', '1969-01-21', 'Madrid', 'Española', 'Enfermera', 'P.º de la Castellana, 261, 28046 Madrid', '2019-04-07', NULL, 2, 1, 4, 2, NULL),
-(3, 'Antonio', 'Sagunto de la Torre', '1940-02-28', 'Madrid', 'Española', 'Economista', 'C/ de Nuestra Señora del Perpetuo Socorro 11, 4ºD, 28053 Madrid', '2022-12-14', NULL, 3, 6, 5, 1, NULL);
+INSERT INTO pacientes (id, nombre, apellidos, fecha_nacimiento, lugar_nacimiento, nacionalidad, ocupacion, residencia_actual, fecha_inscripcion, residencia_custom, residencia_id, situacion_id, estudio_id, genero_id,genero_custom, deleted_at) VALUES
+(1, 'María Concepción', 'Martinez-Almeida García', '1950-07-30', 'Madrid', 'Española', 'Confeccionista', 'C/Toledo 49, Ático 9E', '2021-07-07', NULL, 1, 1, 4, 2,NULL, NULL),
+(2, 'Cristina', 'Montserrat Plaza', '1969-01-21', 'Madrid', 'Española', 'Enfermera', 'P.º de la Castellana, 261, 28046 Madrid', '2019-04-07', NULL, 2, 1, 4, 2,NULL, NULL),
+(3, 'Antonio', 'Sagunto de la Torre', '1940-02-28', 'Madrid', 'Española', 'Economista', 'C/ de Nuestra Señora del Perpetuo Socorro 11, 4ºD, 28053 Madrid', '2022-12-14', NULL, 3, 6, 5, 1,NULL, NULL);
 
 
 INSERT INTO personarelacionadas (id, nombre, apellidos, telefono, ocupacion, email, localidad, contacto, observaciones, tiporelacion_id, tipo_custom, paciente_id, deleted_at) VALUES

@@ -82,11 +82,15 @@
         <div class="row align-items-center pe-4">
             <div class="col-12">
                 @if( Session::get('paciente')['genero_id'] == 1)
-                Hombre
+                Género: Hombre
                 @elseif( Session::get('paciente')['genero_id'] == 2)
-                Mujer
+                Género: Mujer
                 @else
-                Otro
+                    @if(!is_null($paciente->genero_custom) && $paciente->genero_id == "3")
+                        Género: {{$paciente->genero_custom}}
+                    @else
+                        Género: {{$paciente->genero->nombre}}
+                    @endif
                 @endif
             </div>
         </div>

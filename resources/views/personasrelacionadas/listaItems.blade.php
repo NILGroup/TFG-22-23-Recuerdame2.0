@@ -63,7 +63,7 @@
                         <option value="{{$tipo->id}}" @if($tipo->id == $persona->tiporelacion_id) selected @endif>{{$tipo->nombre}}</option>
                         @endforeach
                     </select>
-                    <input @if($persona->tiporelacion_id != 7) style="display: none;" @endif type="text" name="tipo_custom" value="{{$persona->tipo_custom}}" class="form-control form-control-sm" id = "tipo_custom" >
+                    <input @if($persona->tiporelacion_id != 7) style="display: none;" @endif type="text" name="tipo_custom" value="{{$persona->tipo_custom}}" placeholder="Especifique..." class="form-control form-control-sm" id = "tipo_custom" >
                 </div>
             </div>
 

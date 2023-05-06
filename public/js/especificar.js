@@ -32,3 +32,13 @@ function especifiqueCategoria(){
         $("#tipo_custom").hide();
     }
 }
+
+function especifiqueGenero(){
+    let select = document.getElementById("genero_id")
+    if (select.value === "3"){
+        $("#genero_custom").show()
+    }
+    else{
+        $("#genero_custom").hide()
+    }
+}
