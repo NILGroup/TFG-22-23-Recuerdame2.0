@@ -12,6 +12,7 @@ use App\Models\Etapa;
 use App\Models\Categoria;
 use App\Models\Etiqueta;
 use App\Models\Resumen;
+use Carbon\Carbon;
 
 use App\ResumenHistoriaVida;
 
@@ -472,6 +473,8 @@ class ResumenesController extends Controller
         //$completed_text = $data['choices'][0]['message']['content'];
         $resumen->resumen = $resumenGenerator->generarResumen($arrayRecuerdosFinal);
         $resumen->titulo = $titulo;
+        $resumen->fecha = Carbon::now()->format("Y-m-d");
+        return  $resumen;
 
         //return $resumen;
         //return $data['choices'][0]['message']['content'];
@@ -586,8 +589,8 @@ class ResumenesController extends Controller
 
         session()->put('created', "Actualizado");
 
-        //return redirect("/usuarios/$resumen->paciente_id/resumenes/$resumen->id");
-        return "<h1>$request->idResumen</h1>";
+        return redirect("/usuarios/$resumen->paciente_id/resumenes/$resumen->id");
+        //return "<h1>$request->idResumen</h1>";
     }
 
     public function show($idPaciente, $idResumen)

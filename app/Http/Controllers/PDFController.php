@@ -8,12 +8,14 @@ use App\Models\InformeSesion;
 use App\Models\Evaluacion;
 use App\Models\Paciente;
 use App\Models\Recuerdo;
+use App\Models\Resumen;
 use Illuminate\Http\Request;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use App\PDFSesion;
 use App\PDFEvaluacion;
 use App\PDFHistoria;
 use App\PDFDiagnostico;
+use App\PDFResumen;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 
@@ -250,6 +252,62 @@ class PDFController extends Controller
         $pdf->SetFont('Times', '', 12);
 
         $pdf->pdfBody($pdf, $diagnostico, $paciente, $gds, $mini, $cdr);
+
+        $pdf->Output();
+    }
+
+    /***********************************************************
+     * PDFs RESUMENES
+     ************************************************************/
+    /*public function generarPDFResumen(Request $request)
+    {
+
+        $resumen = Resumen::find($request->id);
+        $paciente = $resumen->paciente_id;
+        $imagen = $paciente->multimedia;
+
+        if (empty($imagen)) {
+            if ($paciente->genero_id == 1) { //hombre
+                $imagen = "/img/avatar_hombre.png";
+            } else {
+                $imagen = "/img/avatar_mujer.png";
+            }
+        } else {
+            $imagen = $paciente->multimedia->fichero;
+        }
+
+        $this->obtenerPDFResumen($paciente, $resumen, $imagen);
+    }*/
+
+    public function verPDFResumen($idPaciente, $idResumen)
+    {
+        
+        $resumen = Resumen::find($idResumen);
+        $paciente = Paciente::find($idPaciente);
+        $imagen = $paciente->multimedia;
+
+        if (empty($imagen)) {
+            if ($paciente->genero_id == 1) { //hombre
+                $imagen = "/img/avatar_hombre.png";
+            } else {
+                $imagen = "/img/avatar_mujer.png";
+            }
+        } else {
+            $imagen = $paciente->multimedia->fichero;
+        }
+
+        $this->obtenerPDFResumen($paciente, $resumen, $imagen);
+    }
+
+    public function obtenerPDFResumen($paciente, $resumen, $imagen)
+    {
+        $GLOBALS['fecha'] = $resumen->fecha;
+        $pdf = new PDFResumen('P', 'mm', 'A4');
+        $pdf->AliasNbPages();
+        $pdf->AddPage();
+        $pdf->SetFont('Times', '', 12);
+
+        $pdf->pdfBody($pdf, $resumen, $paciente, $imagen);
 
         $pdf->Output();
     }

@@ -187,6 +187,8 @@ Route::post('/modificarResumen', 'App\Http\Controllers\ResumenesController@updat
 Route::get('/usuarios/{id}/resumenes/{idResumen}', 'App\Http\Controllers\ResumenesController@show');
 Route::get('/usuarios/{id}/resumenes/{idS}/editar', 'App\Http\Controllers\ResumenesController@showEditable');
 Route::post('/usuarios/{idP}/resumenes/{id}/restore', 'App\Http\Controllers\ResumenesController@restore');
+//Route::post('/generarPDFResumen', 'App\Http\Controllers\ResumenesController@generarPDFResumen');
+Route::get('/usuarios/{id}/resumenes/{idResumen}/pdf', 'App\Http\Controllers\PDFController@verPDFResumen');
 
 //RUTAS CUSTOMIZADAS HISTORIAS DE VIDA
 Route::get('/usuarios/{id}/historias/generarHistoria', 'App\Http\Controllers\HistoriaController@generarHistoria');

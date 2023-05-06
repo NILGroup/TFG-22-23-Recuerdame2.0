@@ -1,5 +1,5 @@
 <input type="hidden" id="idPaciente" name="paciente_id" value="{{$paciente->id}}" required>
-<input type="hidden" id="idResumen" name="idResumen" value=1>
+<input type="hidden" id="idResumen" name="idResumen" value="{{$resumen->id}}">
 <div class="row justify-content-start mb-3">
     <div class=" d-flex col-lg-4 col-md-6 col-sm-12 mb-2 align-items-center">
         <label for="fecha" style="min-width: 70px" class="col-sm-12 col-md-4 col-lg-4 labelShow">Fecha: <span class="asterisco">*</span></label>
