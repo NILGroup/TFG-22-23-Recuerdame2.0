@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\Paciente;
 use App\Models\Etapa;
 use App\Models\Categoria;
@@ -12,7 +13,6 @@ use App\Models\Video;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use App\VideoHistoriaVida;
-
 use function PHPUnit\Framework\isNull;
 
 class VideoHistoriaController extends Controller
@@ -155,6 +155,8 @@ class VideoHistoriaController extends Controller
 
     public function renderResponse($idPaciente, Request $request){
 
+        return Response::download(Storage::url("/img/6426d93f510181680267583.jpg"));
+        
         $video = Video::where('crea_id', $request->id)->get();
         if($video->count() > 0){
             $userId = $video->first()->paciente_id; 
