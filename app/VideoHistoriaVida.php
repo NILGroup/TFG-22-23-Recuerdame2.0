@@ -1,6 +1,6 @@
 <?php
     namespace App;
-    require __DIR__.'/../vendor/autoload.php';
+    require '/www/wwwroot/recuerdame2.ddns.net/vendor/autoload.php';
 
     use Creatomate\Client;
     use Creatomate;
