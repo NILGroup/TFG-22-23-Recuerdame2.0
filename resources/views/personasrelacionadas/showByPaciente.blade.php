@@ -20,7 +20,7 @@
             <thead>
                 <tr >
                     <th class="fit15 text-center" scope="col">Nombre</th>
-                    <th class="fit10 text-center" scope="col">Localidad</th>
+                    <th class="fit10 text-center" scope="col">Dirección</th>
                     <th class="fit10 text-center" scope="col">Tipo de relación</th>
                     <th class="fit10 actions text-center" scope="col">Acciones</th>
                 </tr>
@@ -30,7 +30,13 @@
                 <tr>
                     <td><a href="/usuarios/{{$paciente->id}}/personas/{{$persona->id}}">{{$persona->nombre}} {{$persona->apellidos}}</a> @if($persona->contacto)★@endif</td>
                     <td>{{$persona->localidad}}</td>
-                    <td>{{$persona->tiporelacion->nombre}}</td>
+                    <td>
+                        @if (isset($persona->tipo_custom))
+                            {{$persona->tipo_custom}}
+                        @else
+                            {{$persona->tiporelacion->nombre}}
+                        @endif
+                    </td>
                     <td class="tableActions">
                         <a href="/usuarios/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona"></i></a>
                         <a href="/usuarios/{{$paciente->id}}/personas/{{$persona->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar persona"></i></a>

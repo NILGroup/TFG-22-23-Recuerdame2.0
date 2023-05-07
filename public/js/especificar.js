@@ -17,10 +17,11 @@ function especifiqueResidencia() {
 function especifique(){
     let select = document.getElementById("tiporelacion_id")
     if (select.value === "7"){
-        $("#tipo_custom").show()
+        $("#tipo_custom").show().prop("required", true)
+        
     }
     else{
-        $("#tipo_custom").hide()
+        $("#tipo_custom").hide().prop("required", false)
     }
 }
 
