@@ -30,7 +30,7 @@
                 if($imagenesCheck){
                     foreach ($imagesArray as $ficheroURL) {
                         $resultArray->push(new Creatomate\Elements\Image([
-                            'source' => $ficheroURL,
+                            'source' => "https://recuerdame2.ddns.net/renderVideo/1?id=78e914b0-64de-4980-af40-a7a6a9b011ce&url=https://cdn.creatomate.com/renders/f2d70434-a3a4-491a-9a78-fd6281ce99ff.mp4",//$ficheroURL,
                             "track"=> 1,
                             "duration"=> 8,
                             'animations' => [
