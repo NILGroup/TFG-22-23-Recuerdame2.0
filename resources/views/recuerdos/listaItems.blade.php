@@ -164,11 +164,11 @@
             <thead>
                 <tr>
                     <th scope="col" class="text-center">Nombre</th>
-                    <th class="fit10 text-center" scope="col">Localidad</th>
+                    <th class="fit10 text-center" scope="col">Dirección</th>
                     <th class="fit10 text-center" scope="col">Tipo de relación</th>
-                    @if($show)
+
                     <th class="fit5 text-center" scope="col">Acciones</th>
-                    @endif
+                   
                 </tr>
             </thead>
             <tbody class="shadow-sm">
@@ -176,12 +176,12 @@
                 <tr>
                     <td>{{$persona->nombre}} {{$persona->apellidos}} <a>@if($persona->contacto)★@endif</a></td>
                     <td>{{$persona->localidad}}</td>
-                    <td>{{$persona->tiporelacion->nombre}}</td>
-                    @if($show)
+                    <td>@if(isset($persona->tipo_custom)) {{$persona->tipo_custom}} @else {{$persona->tiporelacion->nombre}} @endif </td>
+                    
                     <td class="tableActions">
                         <a href="/usuarios/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona"></i></a>
                     </td>
-                    @endif
+                   
                     <input type="hidden" value="{{$persona->id}}" name="checkPersona[]">
                 </tr>
                 @endforeach

@@ -38,7 +38,7 @@
                         <tr >
                             <th style="display: none;" class="text-center">ID</th>
                             <th class="text-center" scope="col">Nombre </th> 
-                            <th class="text-center" scope="col">Localidad</th>
+                            <th class="text-center" scope="col">Dirección</th>
                             <th class="text-center" scope="col">Tipo de Relacion</th>
                             <th class="fit5 text-center m-1" scope="col">Seleccionar</th>
                         </tr>
@@ -49,7 +49,7 @@
                             <td style="display: none;">{{$persona->id}}</td>
                             <td>{{$persona->nombre}} {{$persona->apellidos}} <a>@if($persona->contacto)★@endif</a></td>
                             <td>{{$persona->localidad}}</td>
-                            <td>{{$persona->tiporelacion->nombre}}</td>
+                            <td>@if(isset($persona->tipo_custom)) {{$persona->tipo_custom}} @else {{$persona->tiporelacion->nombre}} @endif </td>
                             <td id="personasSeleccionadas" class="tableActions">
                                 <input class="form-check-input" type="checkbox" value="{{$persona->id}}" name="checkPersonaExistente[]" id="checkPersonaExistente" @if($recuerdo->personas_relacionadas->contains($persona)) checked @endif>
                             </td>
