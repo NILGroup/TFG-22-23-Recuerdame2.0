@@ -68,7 +68,7 @@ class PDFResumen extends FPDF
         $pdf->SetFont('Times', 'B', 12);
         $pdf->Cell(30, 7, 'Genero: ', 1, 0, 'L', true);
         $pdf->SetFont('Times', '', 12);
-        $pdf->Cell(160, 7, ' ' . $paciente->nombre, true);
+        $pdf->Cell(160, 7, ' ' . $paciente->genero->nombre, true);
 
         $pdf->Ln(7);
         $pdf->SetFont('Times', 'B', 12);
@@ -118,7 +118,9 @@ class PDFResumen extends FPDF
         $this->writeResumen($pdf, $resumen->resumen);
 
         $fecha = Carbon::now();
-        $nombreArchivo = str_replace(" ", "_", $paciente->nombre . "_" . $fecha->format("d/m/Y") . ".pdf");
+        $nombreArchivo = str_replace(" ", "_", $paciente->nombre . "_" . $resumen->titulo . ".pdf");
+        $nombreArchivo = str_replace("-", "", $nombreArchivo);
+        $nombreArchivo = str_replace("__", "_", $nombreArchivo);
         $pdf->Output('I', $nombreArchivo, true);
     }
 }

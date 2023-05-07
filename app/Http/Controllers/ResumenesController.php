@@ -474,7 +474,7 @@ class ResumenesController extends Controller
         $resumen->resumen = $resumenGenerator->generarResumen($arrayRecuerdosFinal);
         $resumen->titulo = $titulo;
         $resumen->fecha = Carbon::now()->format("Y-m-d");
-        return  $resumen;
+        //return  $resumen;
 
         //return $resumen;
         //return $data['choices'][0]['message']['content'];
