@@ -19,7 +19,7 @@
 
                 <div class=" d-flex col-lg-8 col-md-5 col-sm-12 mb-2 align-items-center" id="color">
                     <label for="color" class="form-label labelShow">Color:</label>
-                    <input type="color" class="form-control form-control-sm" name="color" value="#20809d" required>
+                    <input type="color" class="form-control form-control-sm" name="color" id="colorImp" required>
                 </div>
 
             </div>
