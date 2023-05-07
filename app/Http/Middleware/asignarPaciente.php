@@ -74,6 +74,8 @@ class asignarPaciente
         session()->put('paciente', $paciente->toArray());
         if(!is_null($paciente->multimedia))
             session()->put('img', $paciente->multimedia->fichero);
+        else
+            session()->put('img', null);
         //throw new \Exception($paciente->multimedia->fichero));
         return $next($request);
     }
