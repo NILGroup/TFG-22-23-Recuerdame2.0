@@ -60,12 +60,9 @@
                     
                     $urlNarracionPath = $this->generateAudio($sumManager->generarResumen($listaRecuerdos));
 
-                    //$urlNarracionPath = $this->generateAudio("Esto es una narracion de prueba 2.");
-
-
                     $urlNarracion = env("APP_URL").str_replace(public_path(), '', $urlNarracionPath); //cambiamos Public por URL
                     
-                    $audio = new Mp3Info($urlNarracion); //Objeto para extraer la duración
+                    $audio = new Mp3Info($urlNarracionPath); //Objeto para extraer la duración
 
                     $resultArray->push(new Creatomate\Elements\Audio([
                         'source' => $urlNarracion,
