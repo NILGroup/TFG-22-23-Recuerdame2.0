@@ -101,7 +101,7 @@ class PacientesController extends Controller
 
 
         MultimediasController::savePhoto($request, $paciente);
-      
+    
         $paciente->users()->save($user);
         session()->put('created', "true");
         //Redireccionamos a la vista de lista pacientes
