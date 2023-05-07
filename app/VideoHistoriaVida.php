@@ -60,7 +60,7 @@
                     
                     $urlNarracionPath = $this->generateAudio($sumManager->generarResumen($listaRecuerdos));
 
-                    $urlNarracion = env("APP_URL").str_replace(public_path(), '', $urlNarracionPath); //cambiamos Public por URL
+                    $urlNarracion = "http://".env("APP_URL").str_replace(public_path(), '', $urlNarracionPath); //cambiamos Public por URL
                     
                     $audio = new Mp3Info($urlNarracionPath); //Objeto para extraer la duración
 
