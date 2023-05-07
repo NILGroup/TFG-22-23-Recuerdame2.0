@@ -27,10 +27,10 @@ class TipoRelacionController extends Controller
         return Tiporelacion::all()->sortBy("id");
     }
 
-   
+
     /**
-     * Display the specified resource.
-     *
+     * Display the specified resource. 
+     * t
      * @param  \App\Models\Tiporelacion  $tiporelacion
      * @return \Illuminate\Http\Response
      */
@@ -45,6 +45,6 @@ class TipoRelacionController extends Controller
 
     }
 
-   
+
     
 }
