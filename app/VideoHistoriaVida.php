@@ -91,7 +91,6 @@
                     $renders = $client->render(['source' => $source,'webhook_url' => $webhook_url]);
                 }
 
-                print_r($renders[0]);
                 return $renders[0];
             }
         }

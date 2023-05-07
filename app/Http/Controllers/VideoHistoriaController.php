@@ -120,7 +120,6 @@ class VideoHistoriaController extends Controller
             //$url = $VideoGenerator->generateAudio("Test test test");
 
             $renders = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos);
-            return $renders;
             //Crear fila en la base de datos
             $video = Video::create(
                 [
@@ -154,8 +153,6 @@ class VideoHistoriaController extends Controller
     }
 
     public function renderResponse($idPaciente, Request $request){
-
-        return Response::download(Storage::path("public/img/6426d93f510181680267583.jpg"));
 
         $video = Video::where('crea_id', $request->id)->get();
         if($video->count() > 0){
