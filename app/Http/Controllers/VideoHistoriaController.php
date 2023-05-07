@@ -104,7 +104,7 @@ class VideoHistoriaController extends Controller
         foreach ($listaRecuerdos as $rc) { //¿Vacio?
             foreach($rc->multimedias as $media){
                 $extension = pathinfo($media->fichero, PATHINFO_EXTENSION);
-                $rememberpath = env("APP_URL").$media->fichero;//str_replace('/storage/', '/public/', $media->fichero);
+                $rememberpath = storage::url().str_replace('/storage/', '', $media->fichero);//env("APP_URL").$media->fichero;
                 
                 if($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg'){
                     $imagesArray->push($rememberpath);
