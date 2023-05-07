@@ -63,7 +63,7 @@
                     //$urlNarracionPath = $this->generateAudio("Esto es una narracion de prueba 2.");
 
 
-                    $urlNarracion = env("NGROK")."/TFG-22-23-Recuerdame2.0/public/".str_replace(public_path(), '', $urlNarracionPath); //cambiamos Public por URL
+                    $urlNarracion = env("APP_URL").str_replace(public_path(), '', $urlNarracionPath); //cambiamos Public por URL
                     
                     $audio = new Mp3Info($urlNarracion); //Objeto para extraer la duración
 
@@ -87,7 +87,7 @@
                         'elements' => $resultArray->toArray(),
                     ]);
                     
-                    $webhook_url =env("NGROK")."/TFG-22-23-Recuerdame2.0/public/renderVideo/1";
+                    $webhook_url =env("APP_URL")."/renderVideo/1";
                     $renders = $client->render(['source' => $source,'webhook_url' => $webhook_url]);
                 }
 

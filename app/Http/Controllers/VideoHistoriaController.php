@@ -104,7 +104,7 @@ class VideoHistoriaController extends Controller
         foreach ($listaRecuerdos as $rc) { //¿Vacio?
             foreach($rc->multimedias as $media){
                 $extension = pathinfo($media->fichero, PATHINFO_EXTENSION);
-                $rememberpath = env("NGROK")."/TFG-22-23-Recuerdame2.0/public".$media->fichero;//str_replace('/storage/', '/public/', $media->fichero);
+                $rememberpath = env("APP_URL").$media->fichero;//str_replace('/storage/', '/public/', $media->fichero);
                 
                 if($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg'){
                     $imagesArray->push($rememberpath);
@@ -156,9 +156,9 @@ class VideoHistoriaController extends Controller
 
         $video = Video::where('crea_id', $request->id)->get();
         if($video->count() > 0){
-           //$userId = $video->first()->paciente_id; 
-           //User::find($userId);
-           //Mail::to("erosguer@gmail.com")->send(new VideoMail());
+            $userId = $video->first()->paciente_id; 
+            User::find($userId);
+            //Mail::to("erosguer@gmail.com")->send(new VideoMail());
 
             $videoNew = Video::updateOrCreate(
                 ['id' => $video->id],
