@@ -115,7 +115,7 @@ class VideoHistoriaController extends Controller
                 }
             }
         }
-
+            return $rememberpath;
             $VideoGenerator = new VideoHistoriaVida();
             //$url = $VideoGenerator->generateAudio("Test test test");
             $renders = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos);
