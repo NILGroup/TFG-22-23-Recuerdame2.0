@@ -52,7 +52,7 @@ class SesionesController extends Controller
     {
         $show = false;
         $mostrarFoto = false;
-        $persona = new Personarelacionada();
+        $persona = new PersonaRelacionada();
         $sesion = new Sesion();
         $recuerdo = new Recuerdo();
         $user = Auth::user();
