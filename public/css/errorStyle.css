@@ -25,6 +25,7 @@ body {
 
 img{
     min-width: 300px!important;
+    margin-left: 10px!important;
 }
 
 .fondo {
@@ -37,9 +38,9 @@ img{
 }
 
 .error-main h1 {
-    font-weight: bold;
+   
     color: #444444;
-    font-size: 120px;
+    font-size: 90px;
     text-shadow: 2px 4px 5px #6E6E6E;
 }
 

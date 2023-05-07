@@ -16,7 +16,7 @@
               <h1 class="m-0">500</h1>
               <h6>Internal Server Error</h6>
               <p>Error interno del servidor.
-              Inténtelo más tarde o contacte con soporte.
+              Inténtelo más tarde o contacte con el administrado del sitio.
               </p>
              
             </div>
