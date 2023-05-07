@@ -118,7 +118,7 @@ class VideoHistoriaController extends Controller
 
             $VideoGenerator = new VideoHistoriaVida();
             //$url = $VideoGenerator->generateAudio("Test test test");
-
+            return __DIR__.'/../vendor/autoload.php';
             $renders = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos);
 
             //Crear fila en la base de datos
