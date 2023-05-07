@@ -118,7 +118,8 @@ class VideoHistoriaController extends Controller
 
             $VideoGenerator = new VideoHistoriaVida();
             //$url = $VideoGenerator->generateAudio("Test test test");
-            $renders = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos);
+            return $imagesArray;
+            /*$renders = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos);
 
             //Crear fila en la base de datos
             $video = Video::create(
@@ -128,7 +129,7 @@ class VideoHistoriaController extends Controller
                     'paciente_id' => $idPaciente,
                     'crea_id' => $renders['id']
                 ]
-            );
+            );*/
     
             return redirect("/usuarios/$idPaciente/videos");
     
