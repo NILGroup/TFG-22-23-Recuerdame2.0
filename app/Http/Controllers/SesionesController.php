@@ -11,7 +11,7 @@ use App\Models\Estado;
 use App\Models\Etiqueta;
 use App\Models\Emocion;
 use App\Models\Categoria;
-use App\Models\PersonaRelacionada;
+use App\Models\Personarelacionada;
 use App\Models\Tiporelacion;
 use ErrorException;
 use Illuminate\Http\Request;
@@ -52,7 +52,7 @@ class SesionesController extends Controller
     {
         $show = false;
         $mostrarFoto = false;
-        $persona = new PersonaRelacionada();
+        $persona = new Personarelacionada();
         $sesion = new Sesion();
         $recuerdo = new Recuerdo();
         $user = Auth::user();
