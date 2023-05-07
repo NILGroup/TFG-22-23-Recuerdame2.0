@@ -86,10 +86,10 @@
                 @elseif( Session::get('paciente')['genero_id'] == 2)
                 Género: Mujer
                 @else
-                    @if(!is_null($paciente->genero_custom) && $paciente->genero_id == "3")
-                        Género: {{$paciente->genero_custom}}
+                    @if(!is_null(Session::get('paciente')['genero_custom']) && Session::get('paciente')['genero_id'] == "3")
+                        Género: {{Session::get('paciente')['genero_custom']}}
                     @else
-                        Género: {{$paciente->genero->nombre}}
+                        Género: Otro
                     @endif
                 @endif
             </div>
