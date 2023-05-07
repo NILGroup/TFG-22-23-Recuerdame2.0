@@ -12,7 +12,7 @@
                 <input type="file" name="file[]" id="modal-file" class="form-control">
                 <div class="form-group mt-4">
                     <label class="form-label">Descripcion: </label>
-                    <textarea class="form-control" name="descripciones[]" id="modal-descripcion" cols="30" rows="10">
+                    <textarea class="form-control" name="descripciones[]" id="modal-descripcion" cols="30" rows="2">
 
                     </textarea>
                 </div>
