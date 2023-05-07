@@ -140,6 +140,8 @@ Route::post('/modificarActividad', 'App\Http\Controllers\CalendarioController@up
 Route::post('/calendarioSesion', 'App\Http\Controllers\CalendarioController@registroSesion');
 Route::post('/modificarSesion', 'App\Http\Controllers\CalendarioController@updateSesion');
 Route::post('/eliminarSesion', 'App\Http\Controllers\CalendarioController@destroySesion');
+Route::post('/usuarios/{idP}/calendario/{id}/restoreActividad', 'App\Http\Controllers\CalendarioController@restore');
+Route::post('/usuarios/{idP}/calendario/{id}/restoreSesion', 'App\Http\Controllers\CalendarioController@restoreSesion');
 //Route::get('/mostrarActividades/{id}', 'App\Http\Controllers\CalendarioController@show');
 
 

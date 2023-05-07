@@ -44,6 +44,7 @@
 
 @include('recuerdos.modals')
 @include('personasrelacionadas.modals')
+@include('layouts.deletePopUp')
 
 @endsection
 
