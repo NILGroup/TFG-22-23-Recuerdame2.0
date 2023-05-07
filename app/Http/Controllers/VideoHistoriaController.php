@@ -32,7 +32,7 @@ class VideoHistoriaController extends Controller
     {
         $video = Video::find($idVideo);
         $url = $video->url;   
-        return view("historias.videoplayer", compact("url"));
+        return view("historias.videoPlayer", compact("url"));
     }
     public function generarVideoHistoria(Request $request){
 
