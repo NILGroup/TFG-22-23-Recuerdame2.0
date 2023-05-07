@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 /**********************************************************************/
                 /*ACTIVIDAD**********************************************************+*/
                 document.getElementById('start').value = info.dateStr;
+                document.getElementById('colorImp').value = "#20809d";
                 document.getElementById('start').removeAttribute("readonly");
                 document.getElementById('obs').removeAttribute("readonly");
                 document.getElementById('color').classList.remove('d-none');
@@ -119,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('id').value = info.event.id;
                     document.getElementById('title').value = info.event.title;
                     document.getElementById('start').value = info.event.startStr;
-                    document.getElementById('color').value = info.event.backgroundColor;
+                    document.getElementById('colorImp').value = info.event.backgroundColor;
                     document.getElementById('obs').value = info.event.extendedProps.description;
 
                     document.getElementById('finished').removeAttribute("required");
@@ -271,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('id').value = info.event.id;
                 document.getElementById('title').value = info.event.title;
                 document.getElementById('start').value = info.event.startStr;
-                document.getElementById('color').value = info.event.backgroundColor;
+                document.getElementById('colorImp').value = info.event.backgroundColor;
                 document.getElementById('obs').value = info.event.extendedProps.description;
 
                 document.getElementById('title').setAttribute("readonly", "");
