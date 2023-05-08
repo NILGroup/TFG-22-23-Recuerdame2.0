@@ -204,7 +204,7 @@ Route::get('/usuarios/{id}/videos', 'App\Http\Controllers\VideoHistoriaControlle
 Route::get('/usuarios/{id}/videos/{video}', 'App\Http\Controllers\VideoHistoriaController@show');
 Route::get('/generarVideoHistoria', 'App\Http\Controllers\VideoHistoriaController@generarVideoHistoria');
 Route::delete('/video/{id}', 'App\Http\Controllers\VideoHistoriaController@destroy');
-Route::get('/renderVideo/{id}', 'App\Http\Controllers\VideoHistoriaController@renderResponse');
+Route::post('/renderVideo/{id}', 'App\Http\Controllers\VideoHistoriaController@renderResponse');
 Route::post('/usuarios/{idP}/videos/{id}/restore', 'App\Http\Controllers\VideoHistoriaController@restore');
 
 /*********************************************************
