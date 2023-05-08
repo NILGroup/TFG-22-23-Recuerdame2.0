@@ -84,7 +84,7 @@
                         'elements' => $resultArray->toArray(),
                     ]);
                     
-                    $webhook_url =env("APP_URL")."/renderVideo/1";
+                    $webhook_url ="http://".env("APP_URL")."/renderVideo";
                     $renders = $client->render(['source' => $source,'webhook_url' => $webhook_url]);
                 }
 

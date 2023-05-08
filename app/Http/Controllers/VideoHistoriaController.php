@@ -164,7 +164,7 @@ class VideoHistoriaController extends Controller
         Video::where('id', $idVideo)->withTrashed()->restore();
     }
 
-    public function renderResponse($idPaciente, Request $request){
+    public function renderResponse(Request $request){
 
         $videos = Video::where('crea_id', $request->id)->get();
         if($videos->count() > 0){
@@ -178,7 +178,7 @@ class VideoHistoriaController extends Controller
                 [
                     'url' => $video->url,
                     'estado' => $request->status == "succeeded"?"Finalizado":"Error",
-                    'paciente_id' => $idPaciente,
+                    'paciente_id' => $userId,
                     'crea_id' => $video->crea_id
                 ]
             );
