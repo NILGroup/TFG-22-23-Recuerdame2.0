@@ -9,5 +9,5 @@ Ver vídeo
 
 Gracias por usar nuestros servicios,<br>
 El equipo de {{ config('app.name') }}
-![logo]($logo)
+![logo]("https://i.imgur.com/UH44r9L.jpeg")
 </x-mail::message>
