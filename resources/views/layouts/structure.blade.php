@@ -42,6 +42,7 @@
     <link rel="stylesheet" href="/css/registro.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/imagen.css">
+    <link rel="stylesheet" href="/css/errorStyle.css">
     
     @stack('styles')
 

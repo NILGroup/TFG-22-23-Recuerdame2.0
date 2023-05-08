@@ -14,21 +14,12 @@
     --colorFondoClaro: #e5f1f1;
 }
 
-html {
-    margin-top: 100px;
-    background-color: var(--colorFondoClaro);
-}
-
-body {
-    background-color: var(--colorFondoClaro);
-}
-
-img{
+.error-img-recuerdame{
     min-width: 300px!important;
     margin-left: 10px!important;
 }
 
-.fondo {
+.error-fondo {
     background-color: var(--colorFondoClaro);
 }
 
