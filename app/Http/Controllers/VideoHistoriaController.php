@@ -133,7 +133,10 @@ class VideoHistoriaController extends Controller
 
             $renders = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos);
             //Crear fila en la base de datos
-           return $renders;
+            $renders->then( function (Response $resp) {
+                Mail::to("erosguer@gmail.com")->send(new VideoMail());
+            });
+            return var_dump($renders);
             $video = Video::create(
                 [
                     'nombre' => $titulo,
