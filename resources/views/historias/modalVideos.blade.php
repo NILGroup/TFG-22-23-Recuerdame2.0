@@ -22,16 +22,18 @@
                                     <input type="hidden" name="videosCheck" id="videosCheck" value="1">
                                     
                                     <input type="checkbox" class="form-check-input" onclick="onCheckModal('videosCheck')" checked>
-                                    <label class="form-label col-form-label-sm" for="1">Vídeos</label>
-                                </div>
-        
-                                <label class="form-check-label mt-3 negrita">Extras <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="En este campo podemos activar la narración de un resumen de la historia de vida generado y narrado por inteligencia artifical."></i></label>
-        
-                                <div class="form-check form-switch">
+                                    <label class="form-label col-form-label-sm" for="1">Vídeos</label><br>
+
+
                                     <input type="hidden" name="narracionCheck" id="narracionCheck" value="1">
-                                    <input class="form-check-input" type="checkbox" id="narracionCheck" onclick="onCheck('narracionCheck')" checked>
-                                    <label class="form-check-label" for="narracionCheck">Narración por IA</label>
+                                    
+                                    <input type="checkbox" class="form-check-input" onclick="onCheckModal('naraccionCheck')" checked>
+                                    <label class="form-label col-form-label-sm" for="narracionCheck">Narración</label>
+
+
                                 </div>
+        
+
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cerrar</button>
