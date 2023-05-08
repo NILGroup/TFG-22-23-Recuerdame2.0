@@ -154,11 +154,13 @@ class VideoHistoriaController extends Controller
 
     public function renderResponse($idPaciente, Request $request){
 
-        $video = Video::where('crea_id', $request->id)->get();
-        if($video->count() > 0){
-            $userId = $video->first()->paciente_id; 
+        $videos = Video::where('crea_id', $request->id)->get();
+        if($videos->count() > 0){
+            $video = $videos->first();
+            $userId = $video->paciente_id; 
             User::find($userId);
-            Mail::to("erosguer@gmail.com")->send(new VideoMail());
+            return response()->json(['error' => $video->id], 500);
+            //Mail::to("erosguer@gmail.com")->send(new VideoMail());
 
             $videoNew = Video::updateOrCreate(
                 ['id' => $video->id],
