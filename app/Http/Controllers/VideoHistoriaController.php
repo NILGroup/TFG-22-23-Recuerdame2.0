@@ -98,11 +98,17 @@ class VideoHistoriaController extends Controller
 
         //NOMBRE VÍDEO
         $titulo = "";
-        for ($i = 0; $i < sizeof($idEtapa); $i++) {
-            $titulo = $titulo . Etapa::find($i + 1)['nombre'];
-            if($i < sizeOf($idEtapa) - 1)
-                $titulo = $titulo . " - ";
-        }
+
+        if (is_null($idEtapa)){
+            $titulo = $titulo .  "de todas las etapas ";
+        }else{
+            for ($i = 0; $i < sizeof($idEtapa); $i++) {
+                $titulo = $titulo . Etapa::find($i + 1)['nombre'];
+                if($i < sizeOf($idEtapa) - 1)
+                    $titulo = $titulo . " - ";
+            }
+        } 
+            
         if($narracionCheck){
             $titulo = $titulo .  "con narración";
         }
