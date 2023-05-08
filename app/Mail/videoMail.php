@@ -70,7 +70,6 @@ class videoMail extends Mailable
                         [
                             'url' => 'https://cdn.creatomate.com/renders/932c3e8c-84e9-4527-9a08-f4bd0548f017.mp4',
                             'logo' => "http://".env('APP_URL').'/img/Marca_recuerdame-nobg.png',
-                            'message' => $this,
                         ]) ;
     }
 }
