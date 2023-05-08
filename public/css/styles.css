@@ -693,18 +693,19 @@ div>.row {
 }
 
 /* On smaller resolutions, hide the text for Large screens */
+/*small screen*/
 @media only screen and (max-width: 560px) {
     .largeScreen {
         display: none;
     }
 }
-
+/*medium screen*/
 @media only screen and (min-width: 992px) {
     .smallMediaLeft{
         align-items: center!important;
     }
 }
-
+/*large screen*/
 @media only screen and (max-width: 992px) {
     .menuLittlemargin{
        margin-top: 10px;

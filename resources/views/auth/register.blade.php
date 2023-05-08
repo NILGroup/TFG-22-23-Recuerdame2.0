@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <form method="POST" action="{{ route('register') }}">
                 {{csrf_field()}}
-                <div class="card form-registro">
+                <div class="card form-login">
                     <div class="d-flex justify-content-center">
                         <img src="/img/Marca_recuerdame-nobg.png" class="card-img-top">
                     </div>
