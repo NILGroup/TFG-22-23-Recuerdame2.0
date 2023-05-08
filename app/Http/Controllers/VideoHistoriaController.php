@@ -136,7 +136,11 @@ class VideoHistoriaController extends Controller
             $renders->then( function (Response $resp) {
                 Mail::to("erosguer@gmail.com")->send(new VideoMail());
             });
-            return var_dump($renders);
+
+            return "ok";
+            
+            
+
             $video = Video::create(
                 [
                     'nombre' => $titulo,
