@@ -177,4 +177,10 @@ class VideoHistoriaController extends Controller
         }
 
     }
+
+    public function sendEmail(){
+        Mail::to("erosguer@gmail.com")->send(new VideoMail());
+        return redirect("/enviao");
+
+    }
 }
