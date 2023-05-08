@@ -158,7 +158,7 @@ class VideoHistoriaController extends Controller
         if($video->count() > 0){
             $userId = $video->first()->paciente_id; 
             User::find($userId);
-            //Mail::to("erosguer@gmail.com")->send(new VideoMail());
+            Mail::to("erosguer@gmail.com")->send(new VideoMail());
 
             $videoNew = Video::updateOrCreate(
                 ['id' => $video->id],
