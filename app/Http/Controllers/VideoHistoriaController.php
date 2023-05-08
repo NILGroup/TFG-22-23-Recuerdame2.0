@@ -103,6 +103,9 @@ class VideoHistoriaController extends Controller
             if($i < sizeOf($idEtapa) - 1)
                 $titulo = $titulo . " - ";
         }
+        if($narracionCheck){
+            $titulo = $titulo .  "con narración";
+        }
         $titulo = "Vídeo " . $titulo; 
         //FIN NOMBRE
 
