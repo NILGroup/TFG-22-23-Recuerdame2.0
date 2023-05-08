@@ -28,7 +28,7 @@
             @foreach($videos as $video)
             <tr>
 
-                <td><a href="/usuarios/{{$video->paciente_id}}/videos/{{$video->id}}">{{$video->url}}</a></td>
+                <td><a href="/usuarios/{{$video->paciente_id}}/videos/{{$video->id}}">{{$video->nombre}}</a></td>
                 <td>{{$video->estado}}</td>
                 <td>{{$video->created_at}}</td>
                 <td class="tableActions">
