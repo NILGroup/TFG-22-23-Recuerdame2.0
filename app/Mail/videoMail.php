@@ -64,7 +64,7 @@ class videoMail extends Mailable
 */
     public function build()
     {
-        return $this->from('sender@example.com')
+        return $this->from(env('MAIL_FROM_ADDRESS'))
                     ->view('vide-mail')
                     ->with(
                         [
