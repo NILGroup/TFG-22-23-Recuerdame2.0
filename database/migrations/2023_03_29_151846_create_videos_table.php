@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
-            $table->longText("url");
+            $table->longText("nombre");
             $table->unsignedBigInteger('paciente_id');
             $table->string('crea_id');
             $table->string('estado');

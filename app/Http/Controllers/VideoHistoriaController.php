@@ -96,6 +96,15 @@ class VideoHistoriaController extends Controller
                 ->whereIn('apto', $apto);
         //FIN. RECUERDOS YA OBTENIDOS///////////////////////////////////////////////////
 
+        //NOMBRE VÍDEO
+        $titulo = "";
+        for ($i = 0; $i < sizeof($idEtapa); $i++) {
+            $titulo = $titulo . Etapa::find($i + 1)['nombre'];
+            if($i < sizeOf($idEtapa) - 1)
+                $titulo = $titulo . " - ";
+        }
+        $titulo = "Vídeo " . $titulo; 
+        //FIN NOMBRE
 
         //PATH
 
@@ -123,7 +132,7 @@ class VideoHistoriaController extends Controller
             //Crear fila en la base de datos
             $video = Video::create(
                 [
-                    'url' => $renders['url'],
+                    'nombre' => $titulo,
                     'estado' => "Procesando",
                     'paciente_id' => $idPaciente,
                     'crea_id' => $renders['id']

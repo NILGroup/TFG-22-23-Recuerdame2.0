@@ -11,7 +11,7 @@ class Video extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        "url",
+        "nombre",
         "estado",
         "paciente_id",
         "crea_id"
