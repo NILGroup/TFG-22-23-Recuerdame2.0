@@ -85,10 +85,10 @@
                     ]);
                     
                     $webhook_url ="http://".env("APP_URL")."/renderVideo";
-                    $renders = $client->startRender(['source' => $source,'webhook_url' => $webhook_url]);
+                    $renders = $client->render(['source' => $source,'webhook_url' => $webhook_url]);
                 }
 
-                return $renders;
+                return $renders[0];
             }
         }
 
