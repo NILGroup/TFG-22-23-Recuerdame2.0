@@ -172,7 +172,7 @@ class VideoHistoriaController extends Controller
 
             return "Hecho";
         }else{
-            abort(500);
+            return response()->json(['error' => 'External API call failed.'], 500);
         }
 
     }
