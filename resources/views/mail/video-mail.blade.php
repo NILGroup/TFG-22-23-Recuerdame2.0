@@ -9,5 +9,5 @@ Ver vídeo
 
 Gracias por usar nuestros servicios,<br>
 El equipo de {{ config('app.name') }}
-<img src={{$logo}} class="img-header">
+<img src="https://recuerdame2.ddns.net/img/Marca_recuerdame-nobg.png" class="img-header">
 </x-mail::message>
