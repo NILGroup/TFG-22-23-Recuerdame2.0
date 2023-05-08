@@ -133,6 +133,7 @@ class VideoHistoriaController extends Controller
 
             $renders = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos);
             //Crear fila en la base de datos
+           return $renders;
             $video = Video::create(
                 [
                     'nombre' => $titulo,
