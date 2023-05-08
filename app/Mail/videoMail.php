@@ -67,9 +67,9 @@ class videoMail extends Mailable
         return $this->from('sender@example.com')
                     ->view('vide-mail')
                     ->with(
-                      [
+                        [
                             'url' => 'https://cdn.creatomate.com/renders/932c3e8c-84e9-4527-9a08-f4bd0548f017.mp4',
-                            'logo' => asset(public_path('/img').'/Marca_recuerdame-nobg.png')
-                      ]) ;
+                            'logo' => "http://".env('APP_URL').'/Marca_recuerdame-nobg.png',
+                        ]) ;
     }
 }
