@@ -9,5 +9,5 @@ Ver vídeo
 
 Gracias por usar nuestros servicios,<br>
 El equipo de {{ config('app.name') }}
-<img src="https://drive.google.com/file/d/1BwagZfUTGKV74wwXPQAypYObbNn4OZwO/preview" class="img-header">
+<img src="https://drive.google.com/uc?export=view&id=1BwagZfUTGKV74wwXPQAypYObbNn4OZwO" class="img-header">
 </x-mail::message>
