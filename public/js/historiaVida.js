@@ -36,28 +36,14 @@ function onCheckModal(elementoSeleccionado) {
 
     if (select.getAttribute("value") == 0) {
         select.setAttribute("value", 1);
-
     } else select.setAttribute("value", 0);
 
-
-    var acceptButton = document.getElementById('modal_video_guardar');
-    if (select.getAttribute("value") == 0) {
-        if(elementoSeleccionado == 'imagenesCheck'){
-            var select2 = document.getElementById('videosCheck');
-            if (select2.getAttribute("value") == 0) {
-                acceptButton.disabled = true;
-            }else{
-                acceptButton.disabled = false;
-            }
-            
-        }else{
-            var select2 = document.getElementById('imagenesCheck');
-            if (select2.getAttribute("value") == 0) {
-                acceptButton.disabled = true;
-            }else{
-                acceptButton.disabled = false;
-            }
-        }    
+    var acceptButton = document.getElementById('modal_video_guardar'); //Botón de mandar modal
+    var select1 = document.getElementById('imagenesCheck');
+    var select2 = document.getElementById('videosCheck');
+    var select3 = document.getElementById('narracionCheck');
+    if (select1.getAttribute("value") == 0 && select2.getAttribute("value") == 0 && select3.getAttribute("value") == 0) {
+        acceptButton.disabled = true; 
     }else{
         acceptButton.disabled = false;
     }

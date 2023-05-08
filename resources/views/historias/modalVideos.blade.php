@@ -27,8 +27,8 @@
 
                                     <input type="hidden" name="narracionCheck" id="narracionCheck" value="1">
                                     
-                                    <input type="checkbox" class="form-check-input" onclick="onCheckModal('naraccionCheck')" checked>
-                                    <label class="form-label col-form-label-sm" for="narracionCheck">Narración</label>
+                                    <input type="checkbox" class="form-check-input" onclick="onCheckModal('narracionCheck')" checked>
+                                    <label class="form-label col-form-label-sm" for="1">Narración</label>
 
 
                                 </div>
