@@ -9,5 +9,5 @@ Ver vídeo
 
 Gracias por usar nuestros servicios,<br>
 El equipo de {{ config('app.name') }}
-<img src={{$logo}} alt="Logo Recuérdame 2.0">
+![logo]($logo)
 </x-mail::message>
