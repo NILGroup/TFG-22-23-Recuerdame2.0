@@ -54,7 +54,7 @@ class VideoHistoriaController extends Controller
         $paciente = Paciente::find($idPaciente);
         $puntuacionFinal = collect([]);
         if (is_null($idEtapa))
-            $idEtapa = Etapa::select('id');
+            $idEtapa = Etapa::select('id')->get();
         if (is_null($idCategoria))
             $idCategoria = Categoria::select('id');
         if (is_null($puntuacion)){
