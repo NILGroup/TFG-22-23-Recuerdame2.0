@@ -53,8 +53,15 @@ class VideoHistoriaController extends Controller
         $noApto = $request->noApto;
         $paciente = Paciente::find($idPaciente);
         $puntuacionFinal = collect([]);
-        if (is_null($idEtapa))
+        $idEtapas = $idEtapa;
+        if (is_null($idEtapa)){
             $idEtapa = Etapa::select('id')->get();
+            $idTodasEtapas = $idEtapa;
+            for ($i = 0; $i < sizeOf($idTodasEtapas); $i++) {
+                $idEtapas[$i] = $idTodasEtapas[$i]['id'];
+            }
+
+        }
         if (is_null($idCategoria))
             $idCategoria = Categoria::select('id');
         if (is_null($puntuacion)){
@@ -99,10 +106,10 @@ class VideoHistoriaController extends Controller
         //NOMBRE VÍDEO
         $titulo = "";
 
-        if (is_null($idEtapa)){
+        if (is_null($idEtapas)){
             $titulo = $titulo .  "de todas las etapas ";
         }else{
-            for ($i = 0; $i < sizeof($idEtapa); $i++) {
+            for ($i = 0; $i < sizeof($idEtapas); $i++) {
                 $titulo = $titulo . Etapa::find($i + 1)['nombre'];
                 if($i < sizeOf($idEtapa) - 1)
                     $titulo = $titulo . " - ";
