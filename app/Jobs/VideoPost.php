@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Jobs;
-require __DIR__.'/../vendor/autoload.php';
+require base_path('vendor/autoload.php');
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -31,20 +31,19 @@ class VideoPost implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
-    {
+    public function handle(){
         $apikey = env("CREATOMATE_KEY");
         $client = new Client($apikey);
         $resultArray = collect();
-
-                        $resultArray->push(new Creatomate\Elements\Audio([
-                            'source' => 'https://creatomate-static.s3.amazonaws.com/demo/music1.mp3',
-                            // Make the audio track as long as the output
-                            'duration' => 1,
-                            // Fade out for 2 seconds
-                            'audio_fade_out' => 2,
-                        ]));
-
+        
+        $resultArray->push(new Creatomate\Elements\Audio([
+            'source' => 'https://creatomate-static.s3.amazonaws.com/demo/music1.mp3',
+            // Make the audio track as long as the output
+            'duration' => 1,
+            // Fade out for 2 seconds
+            'audio_fade_out' => 2,
+        ]));
+        
         $source = new Creatomate\Source([
             'output_format' => 'mp4',
             'frame_rate' => 30,
@@ -52,6 +51,9 @@ class VideoPost implements ShouldQueue
             'height' => 720,
             'elements' => $resultArray->toArray(),
         ]);
-        $client->render(['source' => $source,'webhook_url' => "test"]);
-    }
+    
+        $webhook_url ="http://".env("APP_URL")."/renderVideo";
+        $client->render(['source' => $source,'webhook_url' => $webhook_url]);
+        }
+
 }

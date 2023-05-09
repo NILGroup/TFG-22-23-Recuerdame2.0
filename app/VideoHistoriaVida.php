@@ -1,7 +1,6 @@
 <?php
     namespace App;
-    require '/www/wwwroot/recuerdame2.ddns.net/vendor/autoload.php';
-    //require __DIR__.'/../vendor/autoload.php';
+    require base_path('vendor/autoload.php');
 
     use App\Jobs\VideoPost;
     use Creatomate\Client;
@@ -96,30 +95,9 @@
         }
 
         function testVideo(){
-                $resultArray = collect();
-
-                        $resultArray->push(new Creatomate\Elements\Audio([
-                            'source' => 'https://creatomate-static.s3.amazonaws.com/demo/music1.mp3',
-                            // Make the audio track as long as the output
-                            'duration' => 1,
-                            // Fade out for 2 seconds
-                            'audio_fade_out' => 2,
-                        ]));
-                    
-            
-                    $source = new Creatomate\Source([
-                        'output_format' => 'mp4',
-                        'frame_rate' => 30,
-                        'width' => 1280,
-                        'height' => 720,
-                        'elements' => $resultArray->toArray(),
-                    ]);
-                    
-                    $webhook_url ="http://".env("APP_URL")."/renderVideo";
-                    VideoPost::dispatch($resultArray->toArray(), $webhook_url);
-                    //$renders = $client->startrender(['source' => $source,'webhook_url' => $webhook_url]);
+                    VideoPost::dispatch();  
                     return "lmao";
-                //return $renders;
+
         }
 
         function generateAudio($text){
