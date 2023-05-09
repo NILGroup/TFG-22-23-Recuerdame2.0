@@ -203,6 +203,7 @@ Route::get('/usuarios/{id}/videos/generadorVideo', 'App\Http\Controllers\VideoHi
 Route::get('/usuarios/{id}/videos', 'App\Http\Controllers\VideoHistoriaController@showByPaciente');
 Route::get('/usuarios/{id}/videos/{video}', 'App\Http\Controllers\VideoHistoriaController@show');
 Route::get('/generarVideoHistoria', 'App\Http\Controllers\VideoHistoriaController@generarVideoHistoria');
+Route::get('/testVideo', 'App\Http\Controllers\VideoHistoriaController@testVideo');
 Route::delete('/video/{id}', 'App\Http\Controllers\VideoHistoriaController@destroy');
 Route::post('/renderVideo', 'App\Http\Controllers\VideoHistoriaController@renderResponse');
 Route::post('/usuarios/{idP}/videos/{id}/restore', 'App\Http\Controllers\VideoHistoriaController@restore');

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use App\Models\Paciente;
 use App\Models\Etapa;
 use App\Models\Categoria;
@@ -11,9 +10,8 @@ use App\Mail\videoMail;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Video;
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
 use App\VideoHistoriaVida;
-use function PHPUnit\Framework\isNull;
+
 
 class VideoHistoriaController extends Controller
 {
@@ -33,6 +31,12 @@ class VideoHistoriaController extends Controller
         $video = Video::find($idVideo);
         $url = $video->url;   
         return view("historias.videoPlayer", compact("url"));
+    }
+
+    public function testVideo(Request $request){
+        $VideoGenerator = new VideoHistoriaVida();
+        $renders = $VideoGenerator->testVideo();
+        return "efsfesf";
     }
     public function generarVideoHistoria(Request $request){
 
@@ -150,9 +154,6 @@ class VideoHistoriaController extends Controller
             //     Mail::to("erosguer@gmail.com")->send(new VideoMail());
             // });
 
-
-            
-            
 
             $video = Video::create(
                 [

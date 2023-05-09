@@ -1,13 +1,16 @@
 <?php
     namespace App;
     require '/www/wwwroot/recuerdame2.ddns.net/vendor/autoload.php';
+    //require __DIR__.'/../vendor/autoload.php';
 
+    use App\Jobs\VideoPost;
     use Creatomate\Client;
     use Creatomate;
     use duncan3dc\Speaker\TextToSpeech;
     use duncan3dc\Speaker\Providers\VoiceRssProvider;
     use wapmorgan\Mp3Info\Mp3Info;
     use App\ResumenHistoriaVida;
+
     class VideoHistoriaVida{
 
         function generateVideo($videosArray, $imagesArray, $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos){
@@ -90,6 +93,33 @@
 
                 return $renders[0];
             }
+        }
+
+        function testVideo(){
+                $resultArray = collect();
+
+                        $resultArray->push(new Creatomate\Elements\Audio([
+                            'source' => 'https://creatomate-static.s3.amazonaws.com/demo/music1.mp3',
+                            // Make the audio track as long as the output
+                            'duration' => 1,
+                            // Fade out for 2 seconds
+                            'audio_fade_out' => 2,
+                        ]));
+                    
+            
+                    $source = new Creatomate\Source([
+                        'output_format' => 'mp4',
+                        'frame_rate' => 30,
+                        'width' => 1280,
+                        'height' => 720,
+                        'elements' => $resultArray->toArray(),
+                    ]);
+                    
+                    $webhook_url ="http://".env("APP_URL")."/renderVideo";
+                    VideoPost::dispatch($resultArray->toArray(), $webhook_url);
+                    //$renders = $client->startrender(['source' => $source,'webhook_url' => $webhook_url]);
+                    return "lmao";
+                //return $renders;
         }
 
         function generateAudio($text){
