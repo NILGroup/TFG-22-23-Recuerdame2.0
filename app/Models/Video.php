@@ -14,7 +14,8 @@ class Video extends Model
         "nombre",
         "estado",
         "paciente_id",
-        "crea_id"
+        "crea_id",
+        "url",
     ];
 
     public function paciente(){
