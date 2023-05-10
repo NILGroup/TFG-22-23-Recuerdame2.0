@@ -113,11 +113,13 @@ class VideoPost implements ShouldQueue
                 $webhook_url ="http://".env("APP_URL")."/renderVideo";
                 $renders = $client->render(['source' => $source,'webhook_url' => $webhook_url]);
                 //Video Generado, actualizamos y notificamos
-
-                $this->video->estado = "Completado";
+                $this->video->estado = $renders[0]['status']=="succeeded"?"Completado":"Error";
                 $this->video->crea_id = $renders[0]['id'];
                 $this->video->url = $renders[0]['url'];
                 $this->video->save();
+
+                $usuario = User::find($this->idPaciente);
+                Mail::to($usuario->email)->send(new VideoMail($this->video));
             }
         }
 

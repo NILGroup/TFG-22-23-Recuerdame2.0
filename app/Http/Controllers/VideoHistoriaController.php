@@ -116,7 +116,7 @@ class VideoHistoriaController extends Controller
         } 
             
         if($narracionCheck){
-            $titulo = $titulo .  "con narración";
+            $titulo = $titulo .  " con narración";
         }
         $titulo = "Vídeo " . $titulo; 
         //FIN NOMBRE
@@ -144,14 +144,7 @@ class VideoHistoriaController extends Controller
             //$url = $VideoGenerator->generateAudio("Test test test");
 
             $VideoGenerator->generateVideo($titulo, $videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos, $idPaciente);
-            //Crear fila en la base de datos
-            // $renders->then( function (Response $resp) {
-            //     Mail::to("erosguer@gmail.com")->send(new VideoMail());
-            // });
 
-
-
-    
             return redirect("/usuarios/$idPaciente/videos");
     
     }

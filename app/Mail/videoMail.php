@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use App\Models\Video;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -18,7 +19,7 @@ class videoMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public Video $video)
     {
         //
     }
@@ -68,7 +69,8 @@ class videoMail extends Mailable
                     ->view('vide-mail')
                     ->with(
                         [
-                            'url' => 'https://cdn.creatomate.com/renders/932c3e8c-84e9-4527-9a08-f4bd0548f017.mp4',
+                            'titulo' => $this->video->titulo,
+                            'url' => $this->video->url,
                             'logo' => "http://".env('APP_URL').'/img/Marca_recuerdame-nobg.png',
                         ]) ;
     }

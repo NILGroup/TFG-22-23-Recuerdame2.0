@@ -1,5 +1,5 @@
 <x-mail::message>
-# Su vídeo está listo
+# Su {{$titulo}} está listo
 
 A partir de ahora podrá visualizar su vídeo en el siguiente enlace
 
