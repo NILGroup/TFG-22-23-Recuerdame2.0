@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->longText("nombre");
-            $table->longText("url");
+            $table->longText("url")->nullable();
             $table->unsignedBigInteger('paciente_id');
             $table->string('crea_id')->nullable();
             $table->string('estado');
