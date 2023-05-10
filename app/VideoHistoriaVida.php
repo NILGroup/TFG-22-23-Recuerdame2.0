@@ -13,7 +13,7 @@ require base_path('vendor/autoload.php');
                     'nombre' => $titulo,
                     'estado' => "Procesando",
                     'paciente_id' => $idPaciente,
-
+                    'url' => "",
                 ]
             );
 

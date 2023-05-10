@@ -116,6 +116,7 @@ class VideoPost implements ShouldQueue
 
                 $this->video->estado = "Completado";
                 $this->video->crea_id = $renders[0]['id'];
+                $this->video->url = $renders[0]['url'];
                 $this->video->save();
             }
         }
