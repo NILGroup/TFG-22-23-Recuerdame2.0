@@ -143,21 +143,14 @@ class VideoHistoriaController extends Controller
             $VideoGenerator = new VideoHistoriaVida();
             //$url = $VideoGenerator->generateAudio("Test test test");
 
-            $renders = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos);
+            $VideoGenerator->generateVideo($titulo, $videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos, $idPaciente);
             //Crear fila en la base de datos
             // $renders->then( function (Response $resp) {
             //     Mail::to("erosguer@gmail.com")->send(new VideoMail());
             // });
 
 
-            // $video = Video::create(
-            //     [
-            //         'nombre' => $titulo,
-            //         'estado' => "Procesando",
-            //         'paciente_id' => $idPaciente,
-            //         'crea_id' => $renders['id']
-            //     ]
-            // );
+
     
             return redirect("/usuarios/$idPaciente/videos");
     
@@ -183,27 +176,27 @@ class VideoHistoriaController extends Controller
 
     public function renderResponse(Request $request){
 
-        $videos = Video::where('crea_id', $request->id)->get();
-        if($videos->count() > 0){
-            $video = $videos->first();
-            $userId = $video->paciente_id; 
-            $usuario = User::find($userId);
-            Mail::to($usuario->email)->send(new VideoMail());
+        // $videos = Video::where('crea_id', $request->id)->get();
+        // if($videos->count() > 0){
+        //     $video = $videos->first();
+        //     $userId = $video->paciente_id; 
+        //     $usuario = User::find($userId);
+        //     Mail::to($usuario->email)->send(new VideoMail());
 
-            $videoNew = Video::updateOrCreate(
-                ['id' => $video->id],
-                [
-                    'url' => $video->url,
-                    'estado' => $request->status == "succeeded"?"Finalizado":"Error",
-                    'paciente_id' => $userId,
-                    'crea_id' => $video->crea_id
-                ]
-            );
+        //     $videoNew = Video::updateOrCreate(
+        //         ['id' => $video->id],
+        //         [
+        //             'url' => $video->url,
+        //             'estado' => $request->status == "succeeded"?"Finalizado":"Error",
+        //             'paciente_id' => $userId,
+        //             'crea_id' => $video->crea_id
+        //         ]
+        //     );
 
-            return "Hecho";
-        }else{
-            return response()->json(['error' => 'External API call failed.'], 500);
-        }
+        //     return "Hecho";
+        // }else{
+        //     return response()->json(['error' => 'External API call failed.'], 500);
+        // }
 
     }
 

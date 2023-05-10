@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Log;
 use duncan3dc\Speaker\TextToSpeech;
 use duncan3dc\Speaker\Providers\VoiceRssProvider;
 use wapmorgan\Mp3Info\Mp3Info;
+use App\Mail\videoMail;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Video;
+use App\Models\User;
 use App\ResumenHistoriaVida;
 use Creatomate\Client;
 use Creatomate;
@@ -25,8 +29,8 @@ class VideoPost implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(public $videosArray, public $imagesArray, public $imagenesCheck,
-    public $videosCheck, public $narracionCheck, public $listaRecuerdos ){
+    public function __construct(public Video $video, public $videosArray, public $imagesArray, public $imagenesCheck,
+    public $videosCheck, public $narracionCheck, public $listaRecuerdos, public $idPaciente ){
     
         //
     }
@@ -108,6 +112,11 @@ class VideoPost implements ShouldQueue
                 
                 $webhook_url ="http://".env("APP_URL")."/renderVideo";
                 $renders = $client->render(['source' => $source,'webhook_url' => $webhook_url]);
+                //Video Generado, actualizamos y notificamos
+
+                $this->video->estado = "Completado";
+                $this->video->crea_id = $renders['id'];
+                $this->video->save();
             }
         }
 
@@ -118,26 +127,4 @@ class VideoPost implements ShouldQueue
             return $filename;
         }
 
-
-        /*
-               
-
-                
-                
-
-                if($resultArray->isEmpty()){
-                    return "ERROR";
-                }else{
-                    $source = new Creatomate\Source([
-                        'output_format' => 'mp4',
-                        'frame_rate' => 30,
-                        'width' => 1280,
-                        'height' => 720,
-                        'elements' => $resultArray->toArray(),
-                    ]);
-                    
-                    $webhook_url ="http://".env("APP_URL")."/renderVideo";
-                   // $renders = $client->render(['source' => $source,'webhook_url' => $webhook_url]);
-                }
-*/
 }

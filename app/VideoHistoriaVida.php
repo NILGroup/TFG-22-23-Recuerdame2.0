@@ -3,16 +3,21 @@
 require base_path('vendor/autoload.php');
 
     use App\Jobs\VideoPost;
-
+    use App\Models\Video;
+    use App\Models\User;
     class VideoHistoriaVida{
 
-        function generateVideo($videosArray, $imagesArray, $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos){
+        function generateVideo($titulo, $videosArray, $imagesArray, $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos, $idPaciente){
+            $video = Video::create(
+                [
+                    'nombre' => $titulo,
+                    'estado' => "Procesando",
+                    'paciente_id' => $idPaciente,
 
-            VideoPost::dispatch($videosArray, $imagesArray, $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos);  
+                ]
+            );
 
-
-
-                return "lmao";//$renders[0];
+            VideoPost::dispatch($video,$videosArray, $imagesArray, $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos, $idPaciente);  
             
         }
 
