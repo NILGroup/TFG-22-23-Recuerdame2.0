@@ -69,7 +69,7 @@ class videoMail extends Mailable
                     ->view('vide-mail')
                     ->with(
                         [
-                            'titulo' => $this->video->titulo,
+                            'titulo' => $this->video->nombre,
                             'url' => $this->video->url,
                             'logo' => "http://".env('APP_URL').'/img/Marca_recuerdame-nobg.png',
                         ]) ;
