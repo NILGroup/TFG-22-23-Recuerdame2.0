@@ -115,7 +115,7 @@ class VideoPost implements ShouldQueue
                 //Video Generado, actualizamos y notificamos
 
                 $this->video->estado = "Completado";
-                $this->video->crea_id = $renders['id'];
+                $this->video->crea_id = $renders[0]['id'];
                 $this->video->save();
             }
         }
