@@ -1,109 +1,19 @@
 <?php
     namespace App;
-    require base_path('vendor/autoload.php');
+require base_path('vendor/autoload.php');
 
     use App\Jobs\VideoPost;
-    use Creatomate\Client;
-    use Creatomate;
-    use duncan3dc\Speaker\TextToSpeech;
-    use duncan3dc\Speaker\Providers\VoiceRssProvider;
-    use wapmorgan\Mp3Info\Mp3Info;
-    use App\ResumenHistoriaVida;
 
     class VideoHistoriaVida{
 
         function generateVideo($videosArray, $imagesArray, $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos){
-            $apikey = env("CREATOMATE_KEY");
-            if($apikey == null){
-                return null;
-            }else{
-                $client = new Client($apikey);
-                $resultArray = collect();
 
-                if($videosCheck){
-                    foreach ($videosArray as $ficheroURL) {
-                        $resultArray->push(new Creatomate\Elements\Video([
-                            'track' => 1,
-                            'source' => $ficheroURL,
-                        ]));
-                    } 
-                }
+            VideoPost::dispatch($videosArray, $imagesArray, $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos);  
 
-                if($imagenesCheck){
-                    foreach ($imagesArray as $ficheroURL) {
-                        $resultArray->push(new Creatomate\Elements\Image([
-                            'source' => $ficheroURL,
-                            "track"=> 1,
-                            "duration"=> 8,
-                            'animations' => [
-                                new Creatomate\Animations\PanCenter([
-                                    'start_scale' => '100%',
-                                    'end_scale' => '120%',
-                                    'easing' => 'linear',
-                                ]),
-                            ],
-                        ]));
-                    }
 
-                    if(!$videosCheck && !$narracionCheck){
-                        $resultArray->push(new Creatomate\Elements\Audio([
-                            'source' => 'https://creatomate-static.s3.amazonaws.com/demo/music1.mp3',
-                            // Make the audio track as long as the output
-                            'duration' => null,
-                            // Fade out for 2 seconds
-                            'audio_fade_out' => 2,
-                        ]));
-                    }
-                }
-                
-                if($narracionCheck){
 
-                    $sumManager = new ResumenHistoriaVida();
-                    
-                    $urlNarracionPath = $this->generateAudio($sumManager->generarResumen($listaRecuerdos));
-
-                    $urlNarracion = "http://".env("APP_URL").str_replace(public_path(), '', $urlNarracionPath); //cambiamos Public por URL
-                    
-                    $audio = new Mp3Info($urlNarracionPath); //Objeto para extraer la duración
-
-                    $resultArray->push(new Creatomate\Elements\Audio([
-                        'source' => $urlNarracion,
-                        // Make the audio track as long as the output
-                        'duration' => $audio->duration,
-                        // Fade out for 2 seconds
-                        'audio_fade_out' => 2,
-                    ]));
-                }
-
-                if($resultArray->isEmpty()){
-                    return "ERROR";
-                }else{
-                    $source = new Creatomate\Source([
-                        'output_format' => 'mp4',
-                        'frame_rate' => 30,
-                        'width' => 1280,
-                        'height' => 720,
-                        'elements' => $resultArray->toArray(),
-                    ]);
-                    
-                    $webhook_url ="http://".env("APP_URL")."/renderVideo";
-                    $renders = $client->render(['source' => $source,'webhook_url' => $webhook_url]);
-                }
-
-                return $renders[0];
-            }
+                return "lmao";//$renders[0];
+            
         }
 
-        function testVideo(){
-                    VideoPost::dispatch();  
-                    return "lmao";
-
-        }
-
-        function generateAudio($text){
-            $provider = new VoiceRssProvider(env("VOICERRS_KEY"),"es-es",0);
-            $tts = new TextToSpeech($text, $provider);
-            $filename = $tts->getFile(public_path()."/storage/audio");
-            return $filename;
-        }
     }

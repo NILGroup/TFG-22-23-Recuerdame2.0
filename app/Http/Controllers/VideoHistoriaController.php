@@ -33,11 +33,6 @@ class VideoHistoriaController extends Controller
         return view("historias.videoPlayer", compact("url"));
     }
 
-    public function testVideo(Request $request){
-        $VideoGenerator = new VideoHistoriaVida();
-        $renders = $VideoGenerator->testVideo();
-        return "efsfesf";
-    }
     public function generarVideoHistoria(Request $request){
 
         $imagenesCheck= $request->imagenesCheck;
@@ -155,14 +150,14 @@ class VideoHistoriaController extends Controller
             // });
 
 
-            $video = Video::create(
-                [
-                    'nombre' => $titulo,
-                    'estado' => "Procesando",
-                    'paciente_id' => $idPaciente,
-                    'crea_id' => $renders['id']
-                ]
-            );
+            // $video = Video::create(
+            //     [
+            //         'nombre' => $titulo,
+            //         'estado' => "Procesando",
+            //         'paciente_id' => $idPaciente,
+            //         'crea_id' => $renders['id']
+            //     ]
+            // );
     
             return redirect("/usuarios/$idPaciente/videos");
     
