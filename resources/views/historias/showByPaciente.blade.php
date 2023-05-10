@@ -28,11 +28,11 @@
             @foreach($videos as $video)
             <tr>
 
-                <td><a @if($video->url != "") href="/usuarios/{{$video->paciente_id}}/videos/{{$video->id}}" @endif>{{$video->nombre}}</a></td>
+                <td><a @if($video->url == "") href="/usuarios/{{$video->paciente_id}}/videos/{{$video->id}}" @endif>{{$video->nombre}}</a></td>
                 <td>{{$video->estado}}</td>
                 <td>{{$video->created_at}}</td>
                 <td class="tableActions">
-                    @if($video->url != "") <a href="/usuarios/{{$video->paciente_id}}/videos/{{$video->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del video."></i></a> @endif
+                    @if($video->url == "") <a href="/usuarios/{{$video->paciente_id}}/videos/{{$video->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del video."></i></a> @endif
                         <!-- Boton de eliminar -->
                         <form method="post" action="{{ route('video.destroy', $video->id) }}" style="display:inline!important;">
                             {{csrf_field()}}
