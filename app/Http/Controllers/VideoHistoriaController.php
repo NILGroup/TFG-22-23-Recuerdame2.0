@@ -30,7 +30,7 @@ class VideoHistoriaController extends Controller
     {
         $video = Video::find($idVideo);
         $url = $video->url;   
-        return view("historias.videoPlayer", compact("url"));
+        return view("videos.videoPlayer", compact("url"));
     }
 
     public function generarVideoHistoria(Request $request){
@@ -155,7 +155,7 @@ class VideoHistoriaController extends Controller
 
         $videos = $paciente->videos;
         //Devolvemos los recuerdos
-        return view("historias.showByPaciente", compact("videos", "paciente"));
+        return view("videos.showByPaciente", compact("videos", "paciente"));
     }
 
     public function destroy($idVideo){

@@ -9,6 +9,9 @@
     <div class="tabla">
         <div class="d-flex justify-content-between upper">
             @include('layouts.tableSearcher')
+            <div class="justify-content-end d-flex">
+                <a href="/usuarios/{{$paciente->id}}/historias/generarHistoria"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
+            </div>
         </div>
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de resúmenes</caption>
@@ -24,14 +27,14 @@
                 @foreach($resumenes as $resumen)
                 <tr>
                     <td><a href="/usuarios/{{$paciente->id}}/resumenes/{{$resumen->id}}">{{$resumen->titulo}}</a></td>
-                    <td>{{$resumen->fecha}}</td>
+                    <td>{{date("d/m/Y", strtotime($resumen->fecha))}}</td>
                     <!--<td><div class="campoResumen">{{$resumen->resumen}}</div></td>-->
                     <td class="tableActions">
                         <a href="/usuarios/{{$paciente->id}}/resumenes/{{$resumen->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del resumen"></i></a>
 
                         <!-- Boton de editar -->
                         <a href="/usuarios/{{$paciente->id}}/resumenes/{{$resumen->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar resumen"></i></a>
-                        <a href="/usuarios/{{$paciente->id}}/resumenes/{{$resumen->id}}/pdf"><i class="fa-solid fa-print text-success tableIcon"  data-toggle="tooltip" data-placement="top" title="Vista de impresión del informe"></i></a>
+                        <a href="/usuarios/{{$paciente->id}}/resumenes/{{$resumen->id}}/pdf"><i class="fa-solid fa-print text-success tableIcon"  data-toggle="tooltip" data-placement="top" title="Vista de impresión del resumen"></i></a>
                         <!-- Boton de eliminar -->
                         <form method="post" action="{{ route('resumenes.destroy', $resumen->id) }}" style="display:inline!important;">
                             {{csrf_field()}}

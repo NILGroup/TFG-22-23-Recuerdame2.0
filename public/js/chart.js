@@ -102,4 +102,5 @@ const cfg = {
 };
 
 const ctx = document.getElementById('myChart');
-new Chart(ctx,cfg,data);
+if(ctx != null)
+  new Chart(ctx,cfg,data);

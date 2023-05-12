@@ -132,17 +132,6 @@ class PDFSesion extends FPDF{
         $pdf->SetFont('Times','',12);
         $pdf->Cell(140,7, \Carbon\Carbon::parse($informeSesion->fecha_finalizada)->format("d-m-Y h:i"),1,0,'C');
         $pdf->Ln();
-        $pdf->SetFont('Times','B',12);
-        $pdf->Cell(50,7,utf8_decode("Nivel de participación:"),1,0,'L',true);
-        $pdf->SetFont('Times','',12);
-        $pdf->Cell(140,7, $informeSesion->participacion->nombre,1,0,'C');
-        $pdf->Ln();
-        $pdf->SetFont('Times','B',12);
-        $pdf->Cell(50,7,utf8_decode("Nivel de complejidad:"),1,0,'L',true);
-        $pdf->SetFont('Times','',12);
-        $pdf->Cell(140,7, $informeSesion->complejidad->nombre,1,0,'C');
-        $pdf->Ln(12);
-
         $pdf->SetFillColor(170);
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(0,7,'Respuesta',1,0,'L',true);
@@ -150,16 +139,23 @@ class PDFSesion extends FPDF{
         $pdf->SetFont('Times','',12);
         $pdf->MultiCell(0,7,utf8_decode($informeSesion->respuesta),1);
         $pdf->Ln();
-
-        if($informeSesion->Respuesta != null){
+        
+        if(!is_null($informeSesion->participacion)){
             $pdf->SetFont('Times','B',12);
-            $pdf->Cell(0,7,'Respuesta',1,0,'L',true);
-            $pdf->Ln();
+            $pdf->Cell(50,7,utf8_decode("Nivel de participación:"),1,0,'L',true);
             $pdf->SetFont('Times','',12);
-            $pdf->MultiCell(0,7,utf8_decode($informeSesion->Respuesta),1);
+            $pdf->Cell(140,7, $informeSesion->participacion->nombre,1,0,'C');
             $pdf->Ln();
         }
-        
+
+        if(!is_null($informeSesion->complejidad)){
+            $pdf->SetFont('Times','B',12);
+            $pdf->Cell(50,7,utf8_decode("Nivel de complejidad:"),1,0,'L',true);
+            $pdf->SetFont('Times','',12);
+            $pdf->Cell(140,7, $informeSesion->complejidad->nombre,1,0,'C');
+            $pdf->Ln(12);
+        }
+
         if(!empty($informeSesion->observaciones)){
             $pdf->SetFont('Times','B',12);
             $pdf->Cell(0,7,'Observaciones',1,0,'L',true);

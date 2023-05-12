@@ -30,7 +30,7 @@
 
                 <td><a @if(!is_null($video->url)) href="/usuarios/{{$video->paciente_id}}/videos/{{$video->id}}" @endif>{{$video->nombre}}</a></td>
                 <td>{{$video->estado}}</td>
-                <td>{{$video->created_at}}</td>
+                <td>{{date("d/m/Y", strtotime($video->created_at))}}</td>
                 <td class="tableActions">
                     @if(!is_null($video->url))<a href="/usuarios/{{$video->paciente_id}}/videos/{{$video->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del video."></i></a> @endif
                         <!-- Boton de eliminar -->

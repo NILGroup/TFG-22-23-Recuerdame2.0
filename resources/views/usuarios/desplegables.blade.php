@@ -1,4 +1,4 @@
-@if(Auth::user()->rol_id == 1)
+@if(Auth::user()->rol_id == 1 &&  $diagnostico->fecha != null)
 <div class="accordion mb-2 shadow-sm"> 
     <div class="accordion-item accordion-header" id="diagnostico1">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#diagnostico" aria-expanded="true" aria-controls="diagnostico">
