@@ -109,24 +109,6 @@ class PDFSesion extends FPDF{
             $pdf->Ln();
         }
 
-        if($sesion->facilitadores != null){
-            $pdf->SetFont('Times','B',12);
-            $pdf->Cell(0,7,'Facilitadores',1,0,'L',true);
-            $pdf->Ln();
-            $pdf->SetFont('Times','',12);
-            $pdf->MultiCell(0,7,utf8_decode($sesion->facilitadores),1);
-            $pdf->Ln();
-        }
-
-        if($sesion->barreras != null){
-            $pdf->SetFont('Times','B',12);
-            $pdf->Cell(0,7,'Barreras',1,0,'L',true);
-            $pdf->Ln();
-            $pdf->SetFont('Times','',12);
-            $pdf->MultiCell(0,7,utf8_decode($sesion->barreras),1);
-            $pdf->Ln();
-        }
-
     }
 
     function writeInformeSesion($pdf, $informeSesion){
@@ -167,7 +149,25 @@ class PDFSesion extends FPDF{
             $pdf->MultiCell(0,7,utf8_decode($informeSesion->observaciones),1);
             $pdf->Ln();
         }
-        
+
+        if(!is_null($sesion->barreras)){
+            $pdf->SetFont('Times','B',12);
+            $pdf->Cell(0,7,'Barreras',1,0,'L',true);
+            $pdf->Ln();
+            $pdf->SetFont('Times','',12);
+            $pdf->MultiCell(0,7,utf8_decode($sesion->barreras),1);
+            $pdf->Ln();
+        }
+
+        if(!is_null($sesion->facilitadores)){
+            $pdf->SetFont('Times','B',12);
+            $pdf->Cell(0,7,'Facilitadores',1,0,'L',true);
+            $pdf->Ln();
+            $pdf->SetFont('Times','',12);
+            $pdf->MultiCell(0,7,utf8_decode($sesion->facilitadores),1);
+            $pdf->Ln();
+        }
+
         if(!empty($informeSesion->propuestas)){
             $pdf->SetFont('Times','B',12);
             $pdf->Cell(0,7,'Propuestas de mejora',1,0,'L',true);
