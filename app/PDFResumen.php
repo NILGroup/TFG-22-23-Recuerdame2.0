@@ -115,7 +115,7 @@ class PDFResumen extends FPDF
         $this->writePatient($pdf, $paciente, $imagen);
 
         $pdf->SetFont('Times', 'B', 15);
-        $pdf->Cell(0, 7, $resumen->titulo);
+        $pdf->Cell(0, 7, utf8_decode($resumen->titulo));
         $pdf->Ln(9);
 
         $this->writeResumen($pdf, $resumen->resumen);
