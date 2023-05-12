@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Video;
 use App\Models\User;
 use App\ResumenHistoriaVida;
+use Illuminate\Support\Facades\File; 
 use Creatomate\Client;
 use Creatomate;
 class VideoPost implements ShouldQueue
@@ -120,6 +121,9 @@ class VideoPost implements ShouldQueue
 
                 $usuario = User::find($this->idPaciente);
                 Mail::to($usuario->email)->send(new VideoMail($this->video));
+                if(File::exists($urlNarracionPath)){
+                    File::delete($urlNarracionPath);
+                  }
             }
         }
 
