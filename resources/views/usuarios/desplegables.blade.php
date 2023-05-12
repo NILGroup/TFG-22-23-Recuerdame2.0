@@ -71,7 +71,7 @@
             </div>
         </button>
         
-        <div id="cuidadores" class="accordion-collapse collapse show" aria-labelledby="cuidadores1">
+        <div id="cuidadores" class="tabla accordion-collapse collapse show" aria-labelledby="cuidadores1">
             <div class="d-flex justify-content-between upper">
                 @include('layouts.tableSearcher')
                 <div class="justify-content-end d-flex">
@@ -124,7 +124,7 @@
             </div>
         </button>
         
-        <div id="personasrelacionadas" class="accordion-collapse collapse show" aria-labelledby="personasrelacionadas1">
+        <div id="personasrelacionadas" class="tabla accordion-collapse collapse show" aria-labelledby="personasrelacionadas1">
             <div class="d-flex justify-content-between upper">
                 @include('layouts.tableSearcher')
                 <div class="justify-content-end d-flex">
