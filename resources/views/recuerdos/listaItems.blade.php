@@ -45,7 +45,7 @@
                     <option value="{{$categoria->id}}" @if($categoria->id == $recuerdo->categoria_id) selected @endif>{{$categoria->nombre}}</option>
                     @endforeach
                 </select>
-                <input @if($recuerdo->categoria_id != 7) style="display: none;" @endif type="text" name="tipo_custom" value="{{$recuerdo->tipo_custom}}" placeholder="Especifique..." class="form-control form-control-sm" id = "tipo_custom" >
+                <input @if($recuerdo->categoria_id != 7) style="display: none;" @endif type="text" name="tipo_custom" value="{{$recuerdo->tipo_custom}}" placeholder="Especifique..." class="form-control form-control-sm" id = "categoria_custom" >
                 </select>
             </div>
         </div>
