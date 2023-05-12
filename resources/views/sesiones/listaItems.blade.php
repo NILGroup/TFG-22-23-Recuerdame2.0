@@ -5,6 +5,7 @@
     <input type="hidden" name="respuesta" id="idSesion" value="{{$sesion->respuesta}}">
     <input type="hidden" name="fecha_finalizada" id="idSesion" value="{{$sesion->fecha_finalizada}}">
 
+    <div>
     <div class=" d-flex col-lg-4 col-md-6 col-sm-12 mb-2 align-items-center">
         <label for="fecha" style="min-width: 70px" class="col-sm-12 col-md-4 col-lg-4 labelShow">Fecha: <span class="asterisco">*</span></label>
         <div class="col-sm-6 col-md-6 col-lg-7" style="min-width: 220px">
@@ -142,10 +143,12 @@
     </div>
 </div>
 
+
 <div class="pt-4 pb-2">
     <h5 class="text-muted">Material</h5>
     <hr class="lineaTitulo">
 </div>
+
 
 @if(!$show)
 <div class="row " id="add-multi-sesion">
@@ -157,3 +160,5 @@
 </div>
 @include('sesiones.modals')
 @endif
+
+</div>
