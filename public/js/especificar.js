@@ -28,18 +28,18 @@ function especifique(){
 function especifiqueCategoria(){
     let select = document.getElementById("categoria_id")
     if (select.value === "7"){
-        $("#tipo_custom").show();
+        $("#tipo_custom").show().prop("required", true);
     }else{
-        $("#tipo_custom").hide();
+        $("#tipo_custom").hide().prop("required", false);
     }
 }
 
 function especifiqueGenero(){
     let select = document.getElementById("genero_id")
     if (select.value === "3"){
-        $("#genero_custom").show()
+        $("#genero_custom").show().prop("required", true)
     }
     else{
-        $("#genero_custom").hide()
+        $("#genero_custom").hide().prop("required", false)
     }
 }
