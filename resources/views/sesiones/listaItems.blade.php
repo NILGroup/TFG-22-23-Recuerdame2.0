@@ -88,7 +88,7 @@
             </thead>
             <tbody class="shadow-sm">
 
-            @foreach($recuerdos as $recuerdo)
+            @foreach($sesion->recuerdos as $recuerdo)
             <tr>
 
                 <td><a href="/usuarios/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}">{{$recuerdo->nombre}}</a></td>
