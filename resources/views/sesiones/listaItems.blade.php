@@ -71,7 +71,7 @@
             </div>
             @endif
         </div>
-        <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
+        <table id="tabla_recuerdos" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de recuerdos</caption>
             <thead>
                 <tr >

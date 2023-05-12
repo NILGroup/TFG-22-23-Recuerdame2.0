@@ -27,7 +27,6 @@ function actualizaModalRecuerdo(idR){
         data: fd,
         success: function(data) {
             var data = JSON.parse(data);
-            //console.log(data.personasrelacionadas)
 
 
             document.getElementById('id').value = data.id;
@@ -51,7 +50,6 @@ function actualizaModalRecuerdo(idR){
             setValue();
 
             data.personasrelacionadas.forEach(p => {
-                //console.log(p)
                 let row = $("<tr></tr>")
                 row.append($('<td style="display: none;" class="row_id">' + p.id + '</td>'))
                 row.append($('<td>' + p.nombre + '</td>'))
@@ -63,7 +61,6 @@ function actualizaModalRecuerdo(idR){
                 setRow(table, row)
 
                 if(checked){
-                    console.log(p)
                     let row = $("<tr></tr>")
                     row.append($("<td>" + p.nombre  + "</td>"))
                     row.append($("<td>" + p.apellidos + "</td>"))
@@ -138,11 +135,6 @@ function crearRecuerdo() {
 
 
     var fd = new FormData();
-    /*
-    console.log(inputValues)
-    console.log(selectValues)
-    console.log(textValues)
-    */
 
     let recuerdo_id = $("#recuerdo_id").prop("value")
 
@@ -152,7 +144,6 @@ function crearRecuerdo() {
         fd.append('id', recuerdo_id)
     }
 
-    console.log($("#apto").parents())
     
     fd.append('paciente_id', $("#paciente_id").prop("value"));
     fd.append('nombre', $("#nombre").prop("value"));
@@ -177,7 +168,6 @@ function crearRecuerdo() {
         fd.append('ids_personas[]', ids[i]);
     }
 
-    console.log($("#apto"))
 
     $.ajaxSetup({
         headers: {
@@ -212,21 +202,21 @@ function agregarRecuerdosExistentes(r) {
     $("#tablaRecuerdosExistentes tbody tr").each(function(i, elem){
 
         let rec = $(elem).children()  
-        if ($(rec[6]).children("input").prop("checked")){
+        if ($(rec[7]).children("input").prop("checked")){
 
             let row = $("<tr></tr>")
 
-            for (let i = 1; i < 5; i++){
+            for (let i = 1; i < 6; i++){
                 row.append($('<td>' + rec[i].textContent + '</td>'))
             }
-
-            if($(rec[5]).children("input").prop("checked"))
+            if($(rec[6]).children("input").prop("checked"))
                 row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox" checked disabled> </td>'))
             else
                 row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox" disabled> </td>'))
             
-            row.append($('<input type="hidden" value=' + rec[0].textContent + ' name="recuerdos[]">'))
+            row.append($('<td class="tableActions"><input type="hidden" value=' + rec[0].textContent + ' name="recuerdos[]"></td>'))
 
+            console.log($(row).html())
             table.api().row.add(row).draw()
 
         }
@@ -309,12 +299,10 @@ function addRowToTable(r){
  */
 
 function addFields(row, rec){
-    console.log(rec)
     row.append($('<td>' + rec.nombre + '</td>'))
     row.append($('<td>' + rec.etapa.nombre + '</td>' ))
     row.append($('<td>' + rec.categoria.nombre + '</td>'))
     row.append($('<td>' + rec.estado.nombre + '</td>'))
-    console.log(rec.apto)
     if(rec.apto == 1)
         row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox" checked disabled> </td>'))
     else

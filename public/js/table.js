@@ -36,7 +36,6 @@ var table = $(document).ready(function () {
         initComplete: function () {
             var table = this.api();
             var search = $(this).closest('div.tabla').children("div.upper").children("div.search");
-            console.log($(this).closest('div.tabla'))
             var sel = $(search).children("select.searchSelector")
                 .on('change', function() {
                     let val = $(search).children("input.searchInput").val();
