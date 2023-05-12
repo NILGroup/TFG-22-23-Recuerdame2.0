@@ -87,12 +87,12 @@ class PDFEvaluacion extends FPDF{
         $pdf->Cell(160,7,' '.$edad->y,1);
         $pdf->Ln();
         $pdf->SetFont('Times','B',12);
-        $pdf->Cell(30, 7, 'Género: ', 1, 0, 'L', true);
+        $pdf->Cell(30, 7, utf8_decode('Género: '), 1, 0, 'L', true);
         $pdf->SetFont('Times', '', 12);
         if($paciente->genero_id != 3)
-            $pdf->Cell(160, 7, ' ' . $paciente->genero->nombre, true);
+            $pdf->Cell(160, 7, ' ' . utf8_decode($paciente->genero->nombre), true);
         else
-            $pdf->Cell(160, 7, ' ' . $paciente->genero_custom, true);
+            $pdf->Cell(160, 7, ' ' . utf8_decode($paciente->genero_custom), true);
         $pdf->Ln(12);
         
     }
@@ -142,7 +142,7 @@ class PDFEvaluacion extends FPDF{
     
         $pdf->SetFillColor(170);
         $pdf->SetFont('Times','B',12);
-        $pdf->Cell(0,7,'Diagnostico',1,0,'L',true);
+        $pdf->Cell(0,7,utf8_decode('Diagnóstico'),1,0,'L',true);
         $pdf->Ln();
         $pdf->SetFont('Times','',12);
         $pdf->MultiCell(0,7,utf8_decode($informeSeguimiento->diagnostico),1);
