@@ -173,9 +173,10 @@ class SesionesController extends Controller
         $etapas = Etapa::all()->sortBy("id");
         $paciente = $sesion->paciente;
         $user = $sesion->user;
+        $recuerdos = $sesion->recuerdos;
         $show = true;
         //throw new \Exception($sesion->multimedias);
-        return view('sesiones.show', compact('sesion', 'etapas', 'paciente', 'user', 'show'));
+        return view('sesiones.show', compact('sesion', 'etapas', 'paciente', 'user', 'show', 'recuerdos'));
     }
 
     public function showEditable($idP, $id)
