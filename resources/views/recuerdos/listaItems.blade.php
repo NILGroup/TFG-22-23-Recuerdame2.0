@@ -179,7 +179,9 @@
                     <td>@if(isset($persona->tipo_custom)) {{$persona->tipo_custom}} @else {{$persona->tiporelacion->nombre}} @endif </td>
                     
                     <td class="tableActions">
+                        @if($show)
                         <a href="/usuarios/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona"></i></a>
+                        @endif
                     </td>
                    
                     <input type="hidden" value="{{$persona->id}}" name="checkPersona[]">
