@@ -115,12 +115,12 @@ class PDFHistoria extends FPDF
         $pdf->Cell(160, 7, ' ' . $edad->y, 1);
         $pdf->Ln(7);
         $pdf->SetFont('Times', 'B', 12);
-        $pdf->Cell(30, 7, 'Género: ', 1, 0, 'L', true);
+        $pdf->Cell(30, 7, utf8_decode('Género: '), 1, 0, 'L', true);
         $pdf->SetFont('Times', '', 12);
         if($paciente->genero_id != 3)
-            $pdf->Cell(160, 7, ' ' . $paciente->genero->nombre, true);
+            $pdf->Cell(160, 7, ' ' . utf8_decode($paciente->genero->nombre), true);
         else
-            $pdf->Cell(160, 7, ' ' . $paciente->genero_custom, true);
+            $pdf->Cell(160, 7, ' ' . utf8_decode($paciente->genero_custom), true);
 
         $pdf->Ln(7);
         $pdf->SetFont('Times', 'B', 12);
