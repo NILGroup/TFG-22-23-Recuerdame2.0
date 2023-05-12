@@ -47,7 +47,7 @@
                         @foreach ($personas as $persona)
                         <tr>
                             <td style="display: none;">{{$persona->id}}</td>
-                            <td>{{$persona->nombre}} {{$persona->apellidos}} <a>@if($persona->contacto)★@endif</a></td>
+                            <td>{{$persona->nombre}} {{$persona->apellidos}} @if($persona->contacto)★@endif</td>
                             <td>{{$persona->localidad}}</td>
                             <td>@if(isset($persona->tipo_custom)) {{$persona->tipo_custom}} @else {{$persona->tiporelacion->nombre}} @endif </td>
                             <td id="personasSeleccionadas" class="tableActions">

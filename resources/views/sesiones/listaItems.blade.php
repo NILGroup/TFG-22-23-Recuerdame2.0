@@ -91,7 +91,7 @@
             @foreach($sesion->recuerdos as $recuerdo)
             <tr>
 
-                <td><a href="/usuarios/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}">{{$recuerdo->nombre}}</a></td>
+                <td>{{$recuerdo->nombre}}</td>
                 @if (Auth::user()->rol_id == 1)
                     <td>{{$recuerdo->etapa->nombre}}</td>
 
@@ -124,6 +124,7 @@
                     </td>
                 @endif
                 <td class="tableActions">
+                    <input type="hidden" value=' + rec[0].textContent + ' name="recuerdos[]"></td>
                     <a href="/usuarios/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del recuerdo"></i></a>
                     @if (Auth::user()->rol_id == 1)
                         <!-- Boton de editar -->
