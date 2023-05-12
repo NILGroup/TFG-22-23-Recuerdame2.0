@@ -150,7 +150,7 @@ class PDFSesion extends FPDF{
             $pdf->Ln();
         }
 
-        if(!is_null($sesion->barreras)){
+        if(!is_null($informeSesion->barreras)){
             $pdf->SetFont('Times','B',12);
             $pdf->Cell(0,7,'Barreras',1,0,'L',true);
             $pdf->Ln();
@@ -159,7 +159,7 @@ class PDFSesion extends FPDF{
             $pdf->Ln();
         }
 
-        if(!is_null($sesion->facilitadores)){
+        if(!is_null($informeSesion->facilitadores)){
             $pdf->SetFont('Times','B',12);
             $pdf->Cell(0,7,'Facilitadores',1,0,'L',true);
             $pdf->Ln();
