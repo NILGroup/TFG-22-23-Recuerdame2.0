@@ -87,9 +87,12 @@ class PDFEvaluacion extends FPDF{
         $pdf->Cell(160,7,' '.$edad->y,1);
         $pdf->Ln();
         $pdf->SetFont('Times','B',12);
-        $pdf->Cell(30,7,'Genero: ',1,0,'L',true);
-        $pdf->SetFont('Times','',12);
-        $pdf->Cell(160,7,' '. $paciente->genero->nombre,true);
+        $pdf->Cell(30, 7, 'Género: ', 1, 0, 'L', true);
+        $pdf->SetFont('Times', '', 12);
+        if($paciente->genero_id != 3)
+            $pdf->Cell(160, 7, ' ' . $paciente->genero->nombre, true);
+        else
+            $pdf->Cell(160, 7, ' ' . $paciente->genero_custom, true);
         $pdf->Ln(12);
         
     }

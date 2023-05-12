@@ -54,7 +54,10 @@ class PDFSesion extends FPDF{
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(50,7,utf8_decode('Género: '),1,0,'L',true);
         $pdf->SetFont('Times','',12);
-        $pdf->Cell(140,7, $paciente->genero->nombre,1,0,'C');
+        if($paciente->genero_id != 3)
+            $pdf->Cell(160, 7, ' ' . $paciente->genero->nombre, true);
+        else
+            $pdf->Cell(160, 7, ' ' . $paciente->genero_custom, true);
         $pdf->Ln(12);
     }
 
