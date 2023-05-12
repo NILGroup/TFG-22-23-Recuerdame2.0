@@ -9,7 +9,7 @@
     </div>
     
     <div class="mb-3">
-        <label for="diagnostico" class="form-label col-form-label negrita">Diagnostico:<span class="asterisco">*</span></label>
+        <label for="diagnostico" class="form-label col-form-label negrita">Diagnóstico:<span class="asterisco">*</span></label>
         <textarea class="form-control form-control-sm" id="diagnostico" name="diagnostico" rows="3" required >{{$evaluacion->diagnostico}}</textarea>
     </div>
 

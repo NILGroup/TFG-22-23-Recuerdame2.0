@@ -16,7 +16,7 @@
             <thead>
                 <tr >
                     <th class="fit10 text-center" scope="col">Fecha del informe</th>
-                    <th class="fit10 text-center" scope="col">Titulo</th>
+                    <th class="fit10 text-center" scope="col">Título</th>
                     <th class="fit15 text-center" scope="col">Objetivo</th>
                     <th class="fit10 actions text-center" scope="col">Acciones</th>
                 </tr>
