@@ -84,8 +84,8 @@ const cfg = {
     }, {
       label: 'Mini mental/MEC de lobo',
       data: data,
-      borderColor: '#FF00FF',
-      backgroundColor: '#FF00FF',
+      borderColor: '#00FF00',
+      backgroundColor: '#00FF00',
       parsing: {
         yAxisKey: 'mental'
       }

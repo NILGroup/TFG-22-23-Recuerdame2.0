@@ -263,7 +263,7 @@ class PDFDiagnostico extends FPDF
       
         $colors = array(
             'GDS' => array(255, 0, 0),
-            'Mini mental' => array(255, 0, 255),
+            'Mini mental' => array(0, 255, 0),
             'CDR' => array(0, 0, 255)
         );
         
