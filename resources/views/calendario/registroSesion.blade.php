@@ -1,6 +1,5 @@
 <!-- <form id="formulario" method="post" action="/calendarioSesion">
     {{csrf_field()}}
-    @include('sesiones.listaItems')
     <div class="modal-footer">
         <input type="submit" id="btnEliminarSesion" name="btnEliminar" value="Eliminar sesión" class="btn btn-outline-primary btn-md d-none confirm_delete_calendario">
         <input type="submit" formaction="/modificarSesion" id="btnModificarSesion" name="btnModificar" value="Modificar sesión" class="btn btn-primary btn-md d-none">
@@ -15,7 +14,7 @@
                     <div class="dz-default dz-message dropzone-correct" id="dzp">
                         <div class="container dropzone-container">
                             <img src="/img/upload.png" id="dropzone-img" height="25em" alt="">
-                            <h2 id="dropzone-title" class="dropzone-title-correct">Arrastre sus archivos</h1>
+                            <h2 id="dropzone-title" class="dropzone-title-correct">Arrastre sus archivos</h2>
                         </div>
                     </div>
                     <div class="previews-sesion">
