@@ -15,6 +15,7 @@ var table = $(document).ready(function () {
         paging: false,
         info: false,
         sDom:"ltipr",
+        "order": [],
         /*
         scrollY: 300,
         scrollCollapse: true,

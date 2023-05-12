@@ -27,7 +27,7 @@
                 @foreach($resumenes as $resumen)
                 <tr>
                     <td><a href="/usuarios/{{$paciente->id}}/resumenes/{{$resumen->id}}">{{$resumen->titulo}}</a></td>
-                    <td>{{date("d/m/Y", strtotime($resumen->fecha))}}</td>
+                    <td data-sort="{{ strtotime($resumen->fecha) }}">{{date("d/m/Y", strtotime($resumen->fecha))}}</td>
                     <!--<td><div class="campoResumen">{{$resumen->resumen}}</div></td>-->
                     <td class="tableActions">
                         <a href="/usuarios/{{$paciente->id}}/resumenes/{{$resumen->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del resumen"></i></a>

@@ -36,28 +36,32 @@
                 <td><a href="/usuarios/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}">{{$recuerdo->nombre}}</a></td>
                 @if (Auth::user()->rol_id == 1)
                     <td>{{$recuerdo->etapa->nombre}}</td>
+
                     @if(!is_null($recuerdo->categoria))
                         <td>{{$recuerdo->categoria->nombre}}</td>
                     @else
                         <td>Sin categoría</td>
                     @endif
+
                     @if(!is_null($recuerdo->estado))
                         <td>{{$recuerdo->estado->nombre}}</td>
                     @else
                         <td>Sin estado</td>
                     @endif
+
                     @if(!is_null($recuerdo->puntuacion))
                         @if($recuerdo->puntuacion > 5)
-                            <td>Positivo ({{$recuerdo->puntuacion}})</td>
+                            <td data-sort="{{ $recuerdo->puntuacion }}">Positivo ({{$recuerdo->puntuacion}})</td>
                         @elseif($recuerdo->puntuacion < 5)
-                            <td>Negativo ({{$recuerdo->puntuacion}})</td>
+                            <td data-sort="{{ $recuerdo->puntuacion }}">Negativo ({{$recuerdo->puntuacion}})</td>
                         @else
-                            <td>Neutro ({{$recuerdo->puntuacion}})</td>
+                            <td data-sort="{{ $recuerdo->puntuacion }}">Neutro ({{$recuerdo->puntuacion}})</td>
                         @endif
                     @else
                         <td>Sin puntuación</td>
                     @endif
-                    <td class=" text-center">
+
+                    <td class=" text-center"  data-sort="{{ $recuerdo->apto }}">
                         <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif disabled>
                     </td>
                 @endif
