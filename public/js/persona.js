@@ -91,9 +91,7 @@ function CrearPersonas() {
             row.append($("<td>" + data["nombre"] + " " + data["apellidos"] + "</td>"))
             row.append($("<td>" + data["localidad"] + "</td>"))
             row.append($("<td>" +  data["tiporelacion_id"]  + "</td>"))
-            row.append(`<td class="tableActions">
-            <a href="/usuarios/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona"></i></a>
-            </td>`)
+            row.append($('<td class="tableActions"></td>'))
             row.append($('<input type="hidden" value=' + data["id"] + ' name="checkPersona[]">'))
             setRow(tabla, row)
                 
@@ -120,8 +118,7 @@ function reloadPersona(p) {
     row.append($('<td>' + p.nombre + " " + p.apellidos + '</td>'))
     row.append($('<td>' + p.localidad + '</td>'))
     row.append($('<td>' + p.tiporelacion_id + '</td>'))
-    row.append($('<td id="personasSeleccionadas" class="tableActions"><input class="form-check-input" type="checkbox" value=' + p.id + ' name="checkPersonaExistente[]" id="checkPersonaExistente" checked>' +
-    '</td></tr>'))
+    row.append($('<td class="tableActions"></td>'))
     
     setRow(tabla, row)
 
@@ -152,9 +149,7 @@ function agregarPersonas(p) {
             row.append("<td>" + per[1].textContent + "</td>")
             row.append("<td>" + per[2].textContent + "</td>")
             row.append("<td>" + per[3].textContent + "</td>")
-            row.append(`<td class="tableActions">
-            <a href="/usuarios/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona"></i></a>
-        </td>`)
+            row.append($('<td class="tableActions"></td>'))
             row.append('<input type="hidden" value=' + per[0].textContent + ' name="checkPersona[]">')
             setRow(tabla, row)
         }
