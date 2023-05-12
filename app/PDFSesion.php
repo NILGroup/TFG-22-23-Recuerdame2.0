@@ -155,7 +155,7 @@ class PDFSesion extends FPDF{
             $pdf->Cell(0,7,'Barreras',1,0,'L',true);
             $pdf->Ln();
             $pdf->SetFont('Times','',12);
-            $pdf->MultiCell(0,7,utf8_decode($sesion->barreras),1);
+            $pdf->MultiCell(0,7,utf8_decode($informeSesion->barreras),1);
             $pdf->Ln();
         }
 
@@ -164,7 +164,7 @@ class PDFSesion extends FPDF{
             $pdf->Cell(0,7,'Facilitadores',1,0,'L',true);
             $pdf->Ln();
             $pdf->SetFont('Times','',12);
-            $pdf->MultiCell(0,7,utf8_decode($sesion->facilitadores),1);
+            $pdf->MultiCell(0,7,utf8_decode($informeSesion->facilitadores),1);
             $pdf->Ln();
         }
 
