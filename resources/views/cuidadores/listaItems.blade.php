@@ -19,7 +19,7 @@
     <div class="row col-sm-12 col-md-6 col-lg-6 align-items-center">
         <label for="telefono" class="form-label col-form-label negrita col-sm-12 col-md-5 col-lg-3">Teléfono: <i data-toggle="tooltip" data-placement="top" title="Se debe completar al menos un método de contacto" class="asterisco text-primary bi bi-exclamation-triangle-fill"></i></label>
         <div class="col-sm-12 col-md-6 col-lg-8 align-items-center">
-            <input id="telefono" type="text" class="form-control form-control-sm @error('telefono') is-invalid @enderror" placeholder="Número de teléfono" name="telefono" value="{{ $cuidador->telefono }}"autocomplete="telefono" autofocus>
+            <input id="telefono" type="text" class="form-control form-control-sm @error('telefono') is-invalid @enderror" placeholder="Número de teléfono" name="telefono" value="{{ $cuidador->telefono }}" required autocomplete="telefono" autofocus>
          
         </div>
     </div>
@@ -34,7 +34,7 @@
     <div class="row col-sm-12 col-md-6 col-lg-6 align-items-center">
         <label for="fecha" class="form-label col-form-label negrita col-sm-12 col-md-5 col-lg-3">Correo: <i data-toggle="tooltip" data-placement="top" title="Se debe completar al menos un método de contacto" class="asterisco text-primary bi bi-exclamation-triangle-fill"></i></label>
         <div class="col-sm-12 col-md-6 col-lg-8 align-items-center">
-            <input id="email" type="email" class="form-control form-control-sm @error('email') is-invalid @enderror" placeholder="Correo Electrónico" name="email" value="{{ $cuidador->email }}" autocomplete="email" autofocus>
+            <input id="email" type="email" class="form-control form-control-sm @error('email') is-invalid @enderror" placeholder="Correo Electrónico" name="email" value="{{ $cuidador->email }}" required autocomplete="email" autofocus>
         </div>
     </div>
     <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
