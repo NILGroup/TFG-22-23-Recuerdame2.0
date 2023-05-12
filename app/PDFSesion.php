@@ -137,11 +137,6 @@ class PDFSesion extends FPDF{
         $pdf->Ln();
         $pdf->SetFillColor(170);
         $pdf->SetFont('Times','B',12);
-        $pdf->Cell(0,7,'Respuesta',1,0,'L',true);
-        $pdf->Ln();
-        $pdf->SetFont('Times','',12);
-        $pdf->MultiCell(0,7,utf8_decode($informeSesion->respuesta),1);
-        $pdf->Ln();
         
         if(!is_null($informeSesion->participacion)){
             $pdf->SetFont('Times','B',12);
@@ -158,6 +153,11 @@ class PDFSesion extends FPDF{
             $pdf->Cell(140,7, $informeSesion->complejidad->nombre,1,0,'C');
             $pdf->Ln(12);
         }
+        $pdf->Cell(0,7,'Respuesta',1,0,'L',true);
+        $pdf->Ln();
+        $pdf->SetFont('Times','',12);
+        $pdf->MultiCell(0,7,utf8_decode($informeSesion->respuesta),1);
+        $pdf->Ln();
 
         if(!empty($informeSesion->observaciones)){
             $pdf->SetFont('Times','B',12);

@@ -8,7 +8,7 @@ $('#searcher').each(function () {
         console.log(headers)
 });
 */
-var noBusqueda = ['Acciones', 'Informe', 'id', 'Id', 'iD','ID'];
+var noBusqueda = ['Acciones', 'Informe', 'id', 'Id', 'iD', 'ID', 'Apto'];
 
 var table = $(document).ready(function () {
     $('table.datatable').DataTable({
