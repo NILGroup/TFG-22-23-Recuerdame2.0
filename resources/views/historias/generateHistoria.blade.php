@@ -77,8 +77,10 @@
 
         <div>
             <button type="submit" name="generarLibro" value="Generar libro" class="btn btn-outline-primary ">Generar libro</button>
+            @if (Auth::user()->rol_id == 1)
             <button type="submit" name="generarResumen" formaction="/generarResumenHistoria" value="Generar Resumen" class="btn btn-outline-primary ">Generar resumen</button>
             <button type="button" onclick="videoModalCreator()" name="generarVideo"  value="Generar Video" class="btn btn-outline-primary " data-bs-toggle="modal" data-bs-target="#videosCreator">Generar vídeo</button>
+            @endif
             <button type="submit" name="generarPdf" formaction="/generarPDFHistoria" value="Generar PDF" class="btn btn-outline-primary ">Generar PDF</button>            
         </div>
 

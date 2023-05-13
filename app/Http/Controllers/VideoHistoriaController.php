@@ -23,7 +23,7 @@ class VideoHistoriaController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth'])->except(['renderResponse']);
+        $this->middleware(['auth', 'role'])->except(['renderResponse']);
         $this->middleware(['asignarPaciente'])->except(['destroy', 'restore','renderResponse']);
     }
     public function show($idPaciente,$idVideo)
