@@ -42,6 +42,7 @@
 <script src="/js/table.js"></script>
 <script>
     $("#remove-multimedia").hide()
+
     
 </script>
 

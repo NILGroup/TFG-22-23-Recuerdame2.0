@@ -110,6 +110,7 @@ $("#modal_recuerdo_guardar").on("click", function(event){
     form.classList.add('was-validated')
 })
 
+
 function crearRecuerdo() {
 
     
