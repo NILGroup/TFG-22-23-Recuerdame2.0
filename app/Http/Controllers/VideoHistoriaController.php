@@ -12,8 +12,6 @@ use App\Models\Video;
 use App\Models\User;
 use App\VideoHistoriaVida;
 
-use function PHPUnit\Framework\isEmpty;
-
 class VideoHistoriaController extends Controller
 {
     
@@ -136,7 +134,7 @@ class VideoHistoriaController extends Controller
             }
         }
 
-        if($imagesArray.isEmpty() && $videosArray.isEmpty()){
+        if(empty($imagesArray) && empty($videosArray)){
             $listaRecuerdos = collect();
             return view("historias.generarLibro", compact("fechaInicio", "fechaFin", "listaRecuerdos"));
         }
