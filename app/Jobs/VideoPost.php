@@ -48,7 +48,7 @@ class VideoPost implements ShouldQueue
             if($this->videosCheck){
                 foreach ($this->videosArray as $ficheroURL) {
                     $resultArray->push(new Creatomate\Elements\Video([
-                        'track' => 1,
+                        'track' => 2,
                         'source' => $ficheroURL,
                     ]));
                 } 
@@ -58,7 +58,7 @@ class VideoPost implements ShouldQueue
                 foreach ($this->imagesArray as $ficheroURL) {
                     $resultArray->push(new Creatomate\Elements\Image([
                         'source' => $ficheroURL,
-                        "track"=> 1,
+                        "track"=> 2,
                         "duration"=> 8,
                         'animations' => [
                             new Creatomate\Animations\PanCenter([
@@ -89,7 +89,19 @@ class VideoPost implements ShouldQueue
                 $urlNarracion = "http://".env("APP_URL").str_replace(public_path(), '', $urlNarracionPath); //cambiamos Public por URL
                 
                 $audio = new Mp3Info($urlNarracionPath); //Objeto para extraer la duración
-
+                
+                $resultArray->push(new Creatomate\Elements\Image([
+                    'source' => "https://drive.google.com/uc?export=view&id=166ss2R9vIu8TAf0T9_BohEQdfNEnpMEN",
+                    "track"=> 1,
+                    "duration"=> $audio->duration,
+                    'animations' => [
+                        new Creatomate\Animations\PanCenter([
+                            'start_scale' => '100%',
+                            'end_scale' => '120%',
+                            'easing' => 'linear',
+                        ]),
+                    ],
+                ]));
                 $resultArray->push(new Creatomate\Elements\Audio([
                     'source' => $urlNarracion,
                     // Make the audio track as long as the output
