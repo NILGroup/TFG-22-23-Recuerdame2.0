@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                             <img style="height: 10em;" src="${ruta}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon imagen">
                                         </a>
                                     </div>
-                                    <small>${nombre}</small>
+                                    
                                 </div>`
 
                         div.append($(img))
@@ -256,7 +256,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                             <img style="height: 10em;" src="${ruta}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon imagen">
                                         </a>
                                     </div>
-                                    <small>${nombre}</small>
                                 </div>`
 
                         div.append($(img))

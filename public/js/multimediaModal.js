@@ -67,7 +67,6 @@ function getDiv(multimedia){
                         <img style="height: 10em;" src="${ruta}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon imagen">
                     </a>
                 </div>
-                <small>${multimedia.nombre.slice(0, 20)}</small>
         </div>
     </div>`
 
