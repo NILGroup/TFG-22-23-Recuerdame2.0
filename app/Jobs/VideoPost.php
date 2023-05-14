@@ -111,7 +111,7 @@ class VideoPost implements ShouldQueue
                     'elements' => $resultArray->toArray(),
                 ]);
                 
-                $webhook_url ="http://".env("APP_URL")."/renderVideo";
+                //Renderizamos de forma síncrona
                 $renders = $client->render(['source' => $source]);
                 //Video Generado, actualizamos y notificamos
                 $this->video->estado = $renders[0]['status']=="succeeded"?"Completado":"Error";
