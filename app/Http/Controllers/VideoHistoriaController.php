@@ -122,8 +122,6 @@ class VideoHistoriaController extends Controller
         //FIN NOMBRE
 
         //PATH
-
-        
         $videosArray = collect();         $imagesArray = collect();
         foreach ($listaRecuerdos as $rc) { //¿Vacio?
             foreach($rc->multimedias as $media){
@@ -141,12 +139,9 @@ class VideoHistoriaController extends Controller
         }
 
             $VideoGenerator = new VideoHistoriaVida();
-            //$url = $VideoGenerator->generateAudio("Test test test");
-
             $VideoGenerator->generateVideo($titulo, $videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos, $idPaciente);
 
             return redirect("/usuarios/$idPaciente/videos");
-    
     }
 
     public function showByPaciente($idPaciente){
@@ -165,32 +160,6 @@ class VideoHistoriaController extends Controller
 
     public function restore($idVideo) {
         Video::where('id', $idVideo)->withTrashed()->restore();
-    }
-
-    public function renderResponse(Request $request){
-
-        // $videos = Video::where('crea_id', $request->id)->get();
-        // if($videos->count() > 0){
-        //     $video = $videos->first();
-        //     $userId = $video->paciente_id; 
-        //     $usuario = User::find($userId);
-        //     Mail::to($usuario->email)->send(new VideoMail());
-
-        //     $videoNew = Video::updateOrCreate(
-        //         ['id' => $video->id],
-        //         [
-        //             'url' => $video->url,
-        //             'estado' => $request->status == "succeeded"?"Finalizado":"Error",
-        //             'paciente_id' => $userId,
-        //             'crea_id' => $video->crea_id
-        //         ]
-        //     );
-
-        //     return "Hecho";
-        // }else{
-        //     return response()->json(['error' => 'External API call failed.'], 500);
-        // }
-
     }
 
 }

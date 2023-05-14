@@ -17,7 +17,6 @@ require base_path('vendor/autoload.php');
             );
 
             VideoPost::dispatch($video,$videosArray, $imagesArray, $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos, $idPaciente);  
-            
         }
 
     }
