@@ -166,7 +166,7 @@ INSERT INTO sesions (id, titulo, fecha, objetivo, descripcion, acciones, pacient
 (2, 'Trabajar recuerdos actuales', '2023-03-05 00:00:00', 'Intentar recordar sucesos recientes para ver si es capaz de retenerlos', NULL, '- Hablar de lo sucedido en la última semana\r\n- Mostrarle los recuerdos desde inicio de año\r\n- Profundizar en aquellos que más emociones generen.', 1, 1, 5, NULL),
 (3, 'Inicio terapia', '2023-03-01 00:00:00', 'Pruebas iniciales', 'Iniciaremos las sesiones de terapia con un repaso general', NULL, 2, 4, 2, NULL),
 (4, 'Tratar su entrada en la universidad', '2023-03-12 00:00:00', 'Recordar su primer día en la universidad', NULL, NULL, 1, 1, 3, NULL),
-(5, 'Sesión de prueba', '2023-05-11 20:29:00', 'Objetivo de sesión de prueba', NULL, NULL, 4, 5, 1, '2023-05-13 18:09:32'),
+(5, 'Sesión de prueba', '2023-05-11 20:29:00', 'Objetivo de sesión de prueba', NULL, NULL, 4, 5, 1, NULL),
 (6, 'Sesión Etapa Infancia', '2023-03-17 09:00:00', 'Trabajar los recuerdos relacionados con su infancia', 'Se utilizarán vídeos y resúmenes de su historia de vida para trabajar sus recuerdos de la infancia', NULL, 4, 5, 1, NULL),
 (7, 'Sesión Etapa Adulto Mayor', '2023-04-15 11:30:00', 'Trabajar los recuerdos relacionados con sus años de adulto mayor', 'Se utilizarán vídeos y resúmenes de su historia de vida para trabajar sus recuerdos de sus años de adulto mayor', NULL, 4, 5, 4, NULL),
 (8, 'Sesión Etapa Adulto', '2023-05-11 09:00:00', 'Trabajar los recuerdos relacionados con su adultez', 'Se utilizarán vídeos y resúmenes de su historia de vida para trabajar sus recuerdos de la adultez', NULL, 4, 5, 4, NULL);

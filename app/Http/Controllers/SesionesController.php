@@ -13,6 +13,7 @@ use App\Models\Emocion;
 use App\Models\Categoria;
 use App\Models\Personarelacionada;
 use App\Models\Tiporelacion;
+use App\Models\InformeSesion;
 use ErrorException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -272,6 +273,7 @@ class SesionesController extends Controller
     public function destroy($id)
     {
         $sesion = Sesion::find($id);
+        $sesion->informes()->delete();
         $idP = $sesion->paciente_id;
         Sesion::destroy($id);
         //return redirect("/usuarios/$idP/sesiones");
@@ -279,6 +281,7 @@ class SesionesController extends Controller
     public function restore($idP, $id) 
     {
         Sesion::where('id', $id)->withTrashed()->restore();
+        InformeSesion::where('sesion_id', $id)->withTrashed()->restore();
     }
 
     public function destroyRecuerdo($idSesion, $idRecuerdo)
