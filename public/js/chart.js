@@ -59,7 +59,7 @@ const cfg = {
             mode: 'horizontal',
             yMin: 25,
             yMax: 25,
-            borderColor: '#FF00FF',
+            borderColor: '#00FF00',
             borderDash: [5, 5],
             label: {
               content: 'MEC máx.',
