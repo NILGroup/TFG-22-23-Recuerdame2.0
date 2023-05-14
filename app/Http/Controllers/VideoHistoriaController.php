@@ -105,7 +105,7 @@ class VideoHistoriaController extends Controller
             $titulo = $titulo .  "de todas las etapas ";
         }else{
             for ($i = 0; $i < sizeof($idEtapas); $i++) {
-                $titulo = $titulo . Etapa::find($i + 1)['nombre'];
+                $titulo = $titulo . Etapa::find($idEtapas[$i])['nombre'];
                 if($i < sizeOf($idEtapa) - 1)
                     $titulo = $titulo . " - ";
             }
