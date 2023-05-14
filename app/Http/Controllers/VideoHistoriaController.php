@@ -12,6 +12,7 @@ use App\Models\Video;
 use App\Models\User;
 use App\VideoHistoriaVida;
 
+use function PHPUnit\Framework\isEmpty;
 
 class VideoHistoriaController extends Controller
 {
@@ -135,6 +136,10 @@ class VideoHistoriaController extends Controller
             }
         }
 
+        if($imagesArray.isEmpty() && $videosArray.isEmpty()){
+            $listaRecuerdos = collect();
+            return view("historias.generarLibro", compact("fechaInicio", "fechaFin", "listaRecuerdos"));
+        }
             $VideoGenerator = new VideoHistoriaVida();
             $VideoGenerator->generateVideo($titulo, $videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos, $idPaciente);
 

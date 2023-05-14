@@ -4,7 +4,7 @@
 
 <div class="container-fluid" style="height: 80% !important">
 <div class="pt-4 pb-2">
-        <h5 class="text-muted">Libro Historia de Vida</h5>
+        <h5 class="text-muted">Historia de Vida</h5>
         <hr class="lineaTitulo">
     </div>
     @if (is_null($listaRecuerdos)|| empty($listaRecuerdos) || $listaRecuerdos=='[]')
