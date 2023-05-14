@@ -64,11 +64,11 @@
     <div class="tabla">
         <div class="d-flex justify-content-between upper">
             @if(!$show)
-            @include('layouts.tableSearcher')
-            <div class="justify-content-end d-flex p-2">
-                <button type="button" id="crearRecuerdo" name="crearRecuerdo" class="btn btn-success me-2 showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosCreator" @else data-bs-toggle="modal" data-bs-target="#recuerdosCreator" @endif><i class="fa-solid fa-plus"></i></button>
-                <button type="button" class="btn btn-success showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosExistentes" @else data-bs-toggle="modal" data-bs-target="#recuerdosExistentes" @endif>Añadir existente</button>
-            </div>
+                @include('layouts.tableSearcher')
+                <div class="justify-content-end d-flex p-2">
+                    <button type="button" id="crearRecuerdo" name="crearRecuerdo" class="btn btn-success me-2 showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosCreator" @else data-bs-toggle="modal" data-bs-target="#recuerdosCreator" @endif><i class="fa-solid fa-plus"></i></button>
+                    <button type="button" class="btn btn-success showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosExistentes" @else data-bs-toggle="modal" data-bs-target="#recuerdosExistentes" @endif>Añadir existente</button>
+                </div>
             @endif
         </div>
         <table id="tabla_recuerdos" class="table table-bordered table-striped table-responsive datatable">
@@ -124,7 +124,7 @@
                     </td>
                 @endif
                 <td class="tableActions">
-                    <input type="hidden" value=' + rec[0].textContent + ' name="recuerdos[]"></td>
+                    <input type="hidden" value=' + rec[0].textContent + ' name="recuerdos[]">
                     <a href="/usuarios/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del recuerdo"></i></a>
                     @if (Auth::user()->rol_id == 1)
                         <!-- Boton de editar -->
