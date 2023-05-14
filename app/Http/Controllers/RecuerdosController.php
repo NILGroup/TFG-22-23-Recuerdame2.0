@@ -340,7 +340,12 @@ class RecuerdosController extends Controller
             else{
                 $p->related = 0;
             }
-            $p->tiporelacion_id = $p->tiporelacion->nombre;
+            if($p->tiporelacion_id == 7){
+                $p->tiporelacion_id = $p->tipo_custom;
+            }
+            else{
+                $p->tiporelacion_id = $p->tiporelacion->nombre;
+            }
         }
         $recuerdo->personasrelacionadas = $personas;    
         return json_encode($recuerdo);

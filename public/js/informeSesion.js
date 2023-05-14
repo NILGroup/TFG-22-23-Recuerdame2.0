@@ -25,7 +25,6 @@ function actualizaModalRecuerdo(idR){
         data: fd,
         success: function(data) {
             var data = JSON.parse(data);
-
             document.getElementById('recuerdo_id').value = data.id;
             document.getElementById('nombre').value = data.nombre;
             if(data.estado_id)
@@ -55,16 +54,19 @@ function actualizaModalRecuerdo(idR){
                 let row = $("<tr></tr>")
                 row.append($('<td style="display: none;" class="row_id">' + p.id + '</td>'))
                 row.append($('<td>' + p.nombre + " " + p.apellidos + '</td>'))
+                row.append($('<td>' + p.direccion + '</td>'))
                 row.append($('<td>' + p.tiporelacion_id + '</td>'))
                 let checked = p.related ? "checked":"";
                 row.append($('<td id="personasSeleccionadas" class="tableActions"><input class="form-check-input" type="checkbox" value=' + p.id + ' name="checkPersonaExistente[]" id="checkPersonaExistente" ' + checked +'>' +
                 '</td></tr>'))
+                console.log(row.html())
                 setRow(table, row)
                 if(checked){
                     let row = $("<tr></tr>")
                     row.append($("<td>" + p.nombre + " " + p.apellidos +"</td>"))
+                    row.append($('<td>' + p.direccion + '</td>'))
                     row.append($("<td>" + p.tiporelacion_id  + "</td>"))
-                    row.append($('<input type="hidden" value=' + p.id + ' name="checkPersona[]">'))
+                    row.append($('<td><input type="hidden" value=' + p.id + ' name="checkPersona[]"></td>'))
                     setRow(tablaAsignados, row)
                 }
             });
