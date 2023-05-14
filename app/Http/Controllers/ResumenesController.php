@@ -81,7 +81,7 @@ class ResumenesController extends Controller
         $titulo = "";
 
         for ($i = 0; $i < sizeof($idEtapa); $i++) {
-            $titulo = $titulo . Etapa::find($i + 1)['nombre'];
+            $titulo = $titulo . Etapa::find($idEtapa[$i])['nombre'];
             if($i < sizeOf($idEtapa) - 1)
                 $titulo = $titulo . " - ";
 
