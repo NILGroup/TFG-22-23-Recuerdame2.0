@@ -38,9 +38,6 @@ class VideoHistoriaController extends Controller
         $imagenesCheck= $request->imagenesCheck;
         $videosCheck= $request->videosCheck;
         $narracionCheck = $request->narracionCheck;
-        if(!$imagenesCheck && !$videosCheck){
-            $imagenesCheck = true; $videosCheck = true;
-        }
         //OBTENER LOS RECUERDOS BUSCADOS///////////////////////////////////////////////////
         $idPaciente = $request->paciente_id;
         $fechaInicio = $request->fechaInicio;
