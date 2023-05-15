@@ -22,6 +22,10 @@ Instalar todas las dependencias utilizando Composer
 Copiar el .env.example a .env y configurar las variables necesarias
 
     cp .env.example .env
+
+Generar una nueva key de aplicación
+
+    php artisan key:generate
     
 Configurar la base de datos
 
@@ -43,6 +47,14 @@ Configurar la generación de voces de [VoiceRSS](https://www.voicerss.org)
 Configurar la generación de resúmenes de [ChatGPT](https://openai.com/blog/chatgpt)
 
     OPENAI_API_KEY=<your_key>
+    
+Crear la base de datos de la aplicación
+
+    php artisan migrate
+    
+Ejecutar y desplegar la aplicación
+
+    php artisan serve
     
   
     
