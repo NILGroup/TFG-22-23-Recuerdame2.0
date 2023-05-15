@@ -72,5 +72,12 @@ Ejecutar y desplegar la aplicación.
     php artisan serve
     
   
+# Observaciones
+
+La generación de vídeos y audios no funcionará con la aplicación desplegada en un servidor local ya que la API [Creatomate](https://creatomate.com) necesita acceder a la multimedia del dispositivo en cuestión, por lo que para generar vídeos y audio la aplicación deberá ser accesible desde la web alojándose en algún servidor.
+
+También será necesario ejecutar el siguiente comando
+
+    php artisan queue:work
     
  
