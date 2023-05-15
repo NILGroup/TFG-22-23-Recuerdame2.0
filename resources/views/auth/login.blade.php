@@ -6,10 +6,10 @@
         <div class="col-md-8">
             <div class="card-body">
                 <div class="card form-login">
-                    <input id="rellenaBBDD" type="image" src="/img/Marca_recuerdame-nobg.png" formaction="/prueba">
+                    
                     <form method="POST" action="{{ route('login') }}">
                         {{csrf_field()}}
-                        <!-- <img src="/img/Marca_recuerdame-nobg.png" class="card-img-top"> -->
+                        <img src="/img/Marca_recuerdame-nobg.png" class="card-img-top">
                         <div class="card-body">
                             <div class="row mb-3 form-floating mb-3">
                                 <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Correo electrónico" autofocus>
