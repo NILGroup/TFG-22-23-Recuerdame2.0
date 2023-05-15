@@ -1,3 +1,9 @@
+
+<p align="center">
+    <img width="345" alt="image" src="https://github.com/NILGroup/TFG-22-23-Recuerdame2.0/assets/95294905/0d871ff8-6835-4784-83f4-22f28329ed05">
+</p>
+
+
 # Introducción
 Recuérdame2.0 es una herramienta diseñada para agilizar y acelerar las terapias de reminiscencia que los terapeutas utilizan para tratar a pacientes con alzheimer.
 
