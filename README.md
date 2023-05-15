@@ -20,5 +20,30 @@ Instalar todas las dependencias utilizando Composer
     composer install
     
 Copiar el .env.example a .env y configurar las variables necesarias
+
+    cp .env.example .env
+    
+Configurar la base de datos
+
+    DB_CONNECTION=mysql
+    DB_HOST=<host>
+    DB_PORT=<port>
+    DB_DATABASE=<database>
+    DB_USERNAME=<username>
+    DB_PASSWORD=<password>
+   
+Configurar key de [Creatomate](https://creatomate.com) para la generación de vídeos 
+
+    CREATOMATE_KEY=<your_key>
+    
+Configurar la generación de voces de [VoiceRSS](https://www.voicerss.org)
+
+    VOICERRS_KEY=<your_key>
+    
+Configurar la generación de resúmenes de [ChatGPT](https://openai.com/blog/chatgpt)
+
+    OPENAI_API_KEY=<your_key>
+    
+  
     
  
