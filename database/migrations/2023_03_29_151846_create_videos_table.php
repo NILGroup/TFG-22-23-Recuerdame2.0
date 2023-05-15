@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
-            $table->longText("url");
+            $table->longText("nombre");
+            $table->longText("url")->nullable();
             $table->unsignedBigInteger('paciente_id');
+            $table->string('crea_id')->nullable();
             $table->string('estado');
             $table->timestamps();
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete("cascade");
-
+            $table->softDeletes();
         });
     }
 

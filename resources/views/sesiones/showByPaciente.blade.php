@@ -22,7 +22,7 @@
                     <th class="fit10 text-center" scope="col">Fecha</th>
                     <th scope="col" class="text-center">Objetivo</th>
                     <th class="fit5 text-center tableActions" scope="col">Acciones</th>
-                    <th class="fit10 actions text-center" scope="col">Estado</th>
+                    <th class="fit10 actions text-center" scope="col">Informe</th>
                 </tr>
             </thead>
             <tbody class="shadow-sm">

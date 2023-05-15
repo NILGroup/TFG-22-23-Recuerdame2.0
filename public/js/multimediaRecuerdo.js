@@ -1,10 +1,29 @@
+$("#modal-file").on("change", (e) => {
 
+    let submit = $("#modal-imagenes-guardar")
+    let error = $("#file-error")
+   
+    if (e.target.files[0].size > 2097152){
+        submit.prop("disabled", true)
+
+        if (error.length === 0)
+            $("#modal-file").after("<small id='file-error' class='text-danger'>El archivo es demasiado grande</small>")
+    }
+    else{
+        if (error.length > 0)
+            error.remove()
+        submit.prop("disabled", false)
+    }
+})
 
     $("#boton-modal-imagenes").on("click", function(event){
         $("#modal-descripcion").prop("value", "")
         $("#modal-file").prop("value", "")
+        $("#modal-imagenes-guardar").prop("disabled", false)
+        if ($("#file-error").length > 0)
+            $("#file-error").remove()
     })
-
+   
     $("#modal-imagenes-guardar").on("click", function(event){
 
         let file = $("#modal-file")

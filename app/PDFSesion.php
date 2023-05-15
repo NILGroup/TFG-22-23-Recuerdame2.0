@@ -41,7 +41,7 @@ class PDFSesion extends FPDF{
         $pdf->Cell(50,7,'Nombre: ',1,0,'L',true);
         $pdf->SetFont('Times','',12);
         $s = utf8_decode(' ' . $paciente->nombre . ' ' . $paciente->apellidos);
-        $pdf->Cell(140,7, $s,1,0,'C');
+        $pdf->Cell(140,7, $s,1,0);
         $pdf->Ln();
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(50,7,'Edad: ',1,0,'L',true);
@@ -49,12 +49,15 @@ class PDFSesion extends FPDF{
         $fecha_nacimiento = new DateTime ($paciente->fecha_nacimiento);
         $hoy = new DateTime();
         $edad = $hoy->diff($fecha_nacimiento);
-        $pdf->Cell(140,7, $edad->y,1,0,'C');
+        $pdf->Cell(140,7,' ' .  $edad->y,1,0);
         $pdf->Ln();
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(50,7,utf8_decode('Género: '),1,0,'L',true);
         $pdf->SetFont('Times','',12);
-        $pdf->Cell(140,7, $paciente->genero->nombre,1,0,'C');
+        if($paciente->genero_id != 3)
+            $pdf->Cell(160, 7, ' ' . utf8_decode($paciente->genero->nombre), true);
+        else
+            $pdf->Cell(160, 7, ' ' . utf8_decode($paciente->genero_custom), true);
         $pdf->Ln(12);
     }
 
@@ -63,7 +66,7 @@ class PDFSesion extends FPDF{
         $pdf->Cell(50,7,"Terapeuta:",1,0,'L',true);
         $pdf->SetFont('Times','',12);
         $nombreCompleto = utf8_decode($usuario->nombre . " " . $usuario->apellidos);
-        $pdf->Cell(140,7,  $nombreCompleto,1,0,'C');
+        $pdf->Cell(140,7, ' ' . $nombreCompleto,1,0);
         $pdf->Ln();
     }
 
@@ -72,20 +75,20 @@ class PDFSesion extends FPDF{
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(50,7,utf8_decode("Fecha de la sesión:"),1,0,'L',true);
         $pdf->SetFont('Times','',12);
-        $pdf->Cell(140,7, \Carbon\Carbon::parse($sesion->fecha)->format("d-m-Y h:i"),1,0,'C');
+        $pdf->Cell(140,7, ' ' .\Carbon\Carbon::parse($sesion->fecha)->format("d-m-Y h:i"),1,0);
         $pdf->Ln();
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(50,7,utf8_decode("Duración:"),1,0,'L',true);
         $pdf->SetFont('Times','',12);
-        $pdf->Cell(140,7, \Carbon\Carbon::parse($sesion->duracion)->format("h:i"),1,0,'C');
+        $pdf->Cell(140,7,' ' . \Carbon\Carbon::parse($sesion->duracion)->format("h:i"),1,0);
         $pdf->Ln(12);
 
         $pdf->SetFillColor(170);
         $pdf->SetFont('Times','B',12);
-        $pdf->Cell(0,7,'Titulo',1,0,'L',true);
+        $pdf->Cell(0,7,utf8_decode('Título'),1,0,'L',true);
         $pdf->Ln();
         $pdf->SetFont('Times','',12);
-        $pdf->MultiCell(0,7,utf8_decode($sesion->titulo),1);
+        $pdf->MultiCell(0,7,' ' .utf8_decode($sesion->titulo),1);
         $pdf->Ln();
 
         $pdf->SetFillColor(170);
@@ -93,7 +96,7 @@ class PDFSesion extends FPDF{
         $pdf->Cell(0,7,'Objetivo',1,0,'L',true);
         $pdf->Ln();
         $pdf->SetFont('Times','',12);
-        $pdf->MultiCell(0,7,utf8_decode($sesion->objetivo),1);
+        $pdf->MultiCell(0,7,' ' .utf8_decode($sesion->objetivo),1);
         $pdf->Ln();
 
         if(!empty($sesion->descripcion)){
@@ -102,25 +105,7 @@ class PDFSesion extends FPDF{
             $pdf->Cell(0,7,utf8_decode('Descripción'),1,0,'L',true);
             $pdf->Ln();
             $pdf->SetFont('Times','',12);
-            $pdf->MultiCell(0,7,utf8_decode($sesion->descripcion),1);
-            $pdf->Ln();
-        }
-
-        if($sesion->facilitadores != null){
-            $pdf->SetFont('Times','B',12);
-            $pdf->Cell(0,7,'Facilitadores',1,0,'L',true);
-            $pdf->Ln();
-            $pdf->SetFont('Times','',12);
-            $pdf->MultiCell(0,7,utf8_decode($sesion->facilitadores),1);
-            $pdf->Ln();
-        }
-
-        if($sesion->barreras != null){
-            $pdf->SetFont('Times','B',12);
-            $pdf->Cell(0,7,'Barreras',1,0,'L',true);
-            $pdf->Ln();
-            $pdf->SetFont('Times','',12);
-            $pdf->MultiCell(0,7,utf8_decode($sesion->barreras),1);
+            $pdf->MultiCell(0,7,' ' .utf8_decode($sesion->descripcion),1);
             $pdf->Ln();
         }
 
@@ -130,62 +115,85 @@ class PDFSesion extends FPDF{
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(50,7,utf8_decode("Fecha de finalización:"),1,0,'L',true);
         $pdf->SetFont('Times','',12);
-        $pdf->Cell(140,7, \Carbon\Carbon::parse($informeSesion->fecha_finalizada)->format("d-m-Y h:i"),1,0,'C');
+        $pdf->Cell(140,7,' ' . \Carbon\Carbon::parse($informeSesion->fecha_finalizada)->format("d-m-Y h:i"),1,0);
         $pdf->Ln();
-        $pdf->SetFont('Times','B',12);
-        $pdf->Cell(50,7,utf8_decode("Nivel de participación:"),1,0,'L',true);
-        $pdf->SetFont('Times','',12);
-        $pdf->Cell(140,7, $informeSesion->participacion->nombre,1,0,'C');
-        $pdf->Ln();
-        $pdf->SetFont('Times','B',12);
-        $pdf->Cell(50,7,utf8_decode("Nivel de complejidad:"),1,0,'L',true);
-        $pdf->SetFont('Times','',12);
-        $pdf->Cell(140,7, $informeSesion->complejidad->nombre,1,0,'C');
-        $pdf->Ln(12);
-
         $pdf->SetFillColor(170);
+        $pdf->SetFont('Times','B',12);
+        
+        if(!is_null($informeSesion->participacion)){
+            $pdf->SetFont('Times','B',12);
+            $pdf->Cell(50,7,utf8_decode("Nivel de participación:"),1,0,'L',true);
+            $pdf->SetFont('Times','',12);
+            $pdf->Cell(140,7,' ' . $informeSesion->participacion->nombre,1,0);
+            $pdf->Ln();
+        }
+
+        if(!is_null($informeSesion->complejidad)){
+            $pdf->SetFont('Times','B',12);
+            $pdf->Cell(50,7,utf8_decode("Nivel de complejidad:"),1,0,'L',true);
+            $pdf->SetFont('Times','',12);
+            $pdf->Cell(140,7, ' ' .$informeSesion->complejidad->nombre,1,0);
+            $pdf->Ln(12);
+        }
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(0,7,'Respuesta',1,0,'L',true);
         $pdf->Ln();
         $pdf->SetFont('Times','',12);
-        $pdf->MultiCell(0,7,utf8_decode($informeSesion->respuesta),1);
+        $pdf->MultiCell(0,7,' ' .utf8_decode($informeSesion->respuesta),1);
         $pdf->Ln();
 
-        if($informeSesion->Respuesta != null){
-            $pdf->SetFont('Times','B',12);
-            $pdf->Cell(0,7,'Respuesta',1,0,'L',true);
-            $pdf->Ln();
-            $pdf->SetFont('Times','',12);
-            $pdf->MultiCell(0,7,utf8_decode($informeSesion->Respuesta),1);
-            $pdf->Ln();
-        }
-        
         if(!empty($informeSesion->observaciones)){
             $pdf->SetFont('Times','B',12);
             $pdf->Cell(0,7,'Observaciones',1,0,'L',true);
             $pdf->Ln();
             $pdf->SetFont('Times','',12);
-            $pdf->MultiCell(0,7,utf8_decode($informeSesion->observaciones),1);
+            $pdf->MultiCell(0,7,' ' .utf8_decode($informeSesion->observaciones),1);
             $pdf->Ln();
         }
-        
+
+        if(!is_null($informeSesion->barreras)){
+            $pdf->SetFont('Times','B',12);
+            $pdf->Cell(0,7,'Barreras',1,0,'L',true);
+            $pdf->Ln();
+            $pdf->SetFont('Times','',12);
+            $pdf->MultiCell(0,7,' ' .utf8_decode($informeSesion->barreras),1);
+            $pdf->Ln();
+        }
+
+        if(!is_null($informeSesion->facilitadores)){
+            $pdf->SetFont('Times','B',12);
+            $pdf->Cell(0,7,'Facilitadores',1,0,'L',true);
+            $pdf->Ln();
+            $pdf->SetFont('Times','',12);
+            $pdf->MultiCell(0,7,' ' .utf8_decode($informeSesion->facilitadores),1);
+            $pdf->Ln();
+        }
+
         if(!empty($informeSesion->propuestas)){
             $pdf->SetFont('Times','B',12);
             $pdf->Cell(0,7,'Propuestas de mejora',1,0,'L',true);
             $pdf->Ln();
             $pdf->SetFont('Times','',12);
-            $pdf->MultiCell(0,7,utf8_decode($informeSesion->propuestas),1);
+            $pdf->MultiCell(0,7,' ' .utf8_decode($informeSesion->propuestas),1);
             $pdf->Ln();
         }
     }
 
     function writeSign($pdf){
-        $pdf->Cell(4,7,"");
+        
+        $H = $pdf->GetY();
+        if($H > 260-10){
+            $pdf->addPage(); //297 es el alto de un A4, 18 ocupa el footer 287-18=279
+            $H = $pdf->GetY();
+        }
+
+        // Go to 1.5 cm from bottom
+        $this->SetY(-60);
+
         $pdf->Cell(50,35,$pdf->Image("img/FDOWhite.png", $pdf->GetX(), $pdf->GetY(), 75,50),0,0,'C');
-        $pdf->Ln(55);
     }
 
-    function pdfBody($pdf, $paciente, $sesion, $usuario){
+    function pdfBody($pdf, $paciente, $sesion, $informe, $usuario){
         $pdf->SetFillColor(220);
 
         $pdf->SetFont('Times','B',15);
@@ -205,7 +213,7 @@ class PDFSesion extends FPDF{
         $pdf->Cell(0,7,utf8_decode('Informe de la sesión '));
         $pdf->Ln(9);
 
-        $this->writeInformeSesion($pdf,$sesion);
+        $this->writeInformeSesion($pdf,$informe);
         $pdf->Ln(9);
 
         $this->writeSign($pdf);

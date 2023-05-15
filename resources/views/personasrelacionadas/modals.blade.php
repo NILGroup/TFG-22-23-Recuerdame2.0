@@ -37,17 +37,19 @@
                     <thead>
                         <tr >
                             <th style="display: none;" class="text-center">ID</th>
-                            <th scope="col" class="text-center">Nombre</th>
-                            <th class="fit10 text-center" scope="col">Tipo de Relacion</th>
-                            <th class="text-center" scope="col">Seleccionar</th>
+                            <th class="text-center" scope="col">Nombre </th> 
+                            <th class="text-center" scope="col">Dirección</th>
+                            <th class="text-center" scope="col">Tipo de Relacion</th>
+                            <th class="fit5 text-center m-1" scope="col">Seleccionar</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($personas as $persona)
                         <tr>
                             <td style="display: none;">{{$persona->id}}</td>
-                            <td>{{$persona->nombre}} {{$persona->apellidos}}</td>
-                            <td>{{$persona->tiporelacion->nombre}}</td>
+                            <td>{{$persona->nombre}} {{$persona->apellidos}} @if($persona->contacto)★@endif</td>
+                            <td>{{$persona->localidad}}</td>
+                            <td>@if(isset($persona->tipo_custom)) {{$persona->tipo_custom}} @else {{$persona->tiporelacion->nombre}} @endif </td>
                             <td id="personasSeleccionadas" class="tableActions">
                                 <input class="form-check-input" type="checkbox" value="{{$persona->id}}" name="checkPersonaExistente[]" id="checkPersonaExistente" @if($recuerdo->personas_relacionadas->contains($persona)) checked @endif>
                             </td>

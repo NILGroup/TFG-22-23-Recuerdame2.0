@@ -10,6 +10,8 @@ use App\Http\Controllers\InformesSesionController;
 use App\Http\Controllers\EvaluacionController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\CuidadoresController;
+use App\Http\Controllers\ResumenesController;
+use App\Http\Controllers\VideoHistoriaController;
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Paciente;
@@ -138,6 +140,8 @@ Route::post('/modificarActividad', 'App\Http\Controllers\CalendarioController@up
 Route::post('/calendarioSesion', 'App\Http\Controllers\CalendarioController@registroSesion');
 Route::post('/modificarSesion', 'App\Http\Controllers\CalendarioController@updateSesion');
 Route::post('/eliminarSesion', 'App\Http\Controllers\CalendarioController@destroySesion');
+Route::post('/usuarios/{idP}/calendario/{id}/restoreActividad', 'App\Http\Controllers\CalendarioController@restore');
+Route::post('/usuarios/{idP}/calendario/{id}/restoreSesion', 'App\Http\Controllers\CalendarioController@restoreSesion');
 //Route::get('/mostrarActividades/{id}', 'App\Http\Controllers\CalendarioController@show');
 
 
@@ -177,13 +181,16 @@ Route::post('/cerrarDiagnostico', 'App\Http\Controllers\DiagnosticoController@st
 Route::post('/modificarDiagnostico', 'App\Http\Controllers\DiagnosticoController@update');
 Route::post('/generarPDFDiagnostico', 'App\Http\Controllers\DiagnosticoController@generarPDFInforme');
 
-
+//RUTAS CUSTOMIZADAS RESÚMENES
 Route::get('/generarResumenHistoria', 'App\Http\Controllers\ResumenesController@create');
 Route::get('/usuarios/{id}/resumenes', 'App\Http\Controllers\ResumenesController@showByPaciente');
 Route::post('/guardarResumen', 'App\Http\Controllers\ResumenesController@store');
 Route::post('/modificarResumen', 'App\Http\Controllers\ResumenesController@update');
 Route::get('/usuarios/{id}/resumenes/{idResumen}', 'App\Http\Controllers\ResumenesController@show');
 Route::get('/usuarios/{id}/resumenes/{idS}/editar', 'App\Http\Controllers\ResumenesController@showEditable');
+Route::post('/usuarios/{idP}/resumenes/{id}/restore', 'App\Http\Controllers\ResumenesController@restore');
+//Route::post('/generarPDFResumen', 'App\Http\Controllers\ResumenesController@generarPDFResumen');
+Route::get('/usuarios/{id}/resumenes/{idResumen}/pdf', 'App\Http\Controllers\PDFController@verPDFResumen');
 
 //RUTAS CUSTOMIZADAS HISTORIAS DE VIDA
 Route::get('/usuarios/{id}/historias/generarHistoria', 'App\Http\Controllers\HistoriaController@generarHistoria');
@@ -192,11 +199,12 @@ Route::get('/generarPDFHistoria', 'App\Http\Controllers\PDFController@generarPDF
 Route::post('/storeTipoNoView', 'App\Http\Controllers\TipoRelacionController@storeNoView');
 
 //RUTAS CUSTOMIZADAS VIDEO HISTORIAS DE VIDA
-Route::get('/pacientes/{id}/videos/generadorVideo', 'App\Http\Controllers\VideoHistoriaController@generadorVideoHistoria');
-Route::get('/pacientes/{id}/videos', 'App\Http\Controllers\VideoHistoriaController@showByPaciente');
+Route::get('/usuarios/{id}/videos/generadorVideo', 'App\Http\Controllers\VideoHistoriaController@generadorVideoHistoria');
+Route::get('/usuarios/{id}/videos', 'App\Http\Controllers\VideoHistoriaController@showByPaciente');
+Route::get('/usuarios/{id}/videos/{video}', 'App\Http\Controllers\VideoHistoriaController@show');
 Route::get('/generarVideoHistoria', 'App\Http\Controllers\VideoHistoriaController@generarVideoHistoria');
-Route::delete('/eliminarVideo/{id}', 'App\Http\Controllers\VideoHistoriaController@destroy');
-
+Route::delete('/video/{id}', 'App\Http\Controllers\VideoHistoriaController@destroy');
+Route::post('/usuarios/{idP}/videos/{id}/restore', 'App\Http\Controllers\VideoHistoriaController@restore');
 
 /*********************************************************
     CREA DATOS EN LA BASE DE DATOS

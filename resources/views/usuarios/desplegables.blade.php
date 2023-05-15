@@ -1,4 +1,4 @@
-@if(Auth::user()->rol_id == 1)
+@if(Auth::user()->rol_id == 1 &&  $diagnostico->fecha != null)
 <div class="accordion mb-2 shadow-sm"> 
     <div class="accordion-item accordion-header" id="diagnostico1">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#diagnostico" aria-expanded="true" aria-controls="diagnostico">
@@ -32,7 +32,7 @@
                 <caption>Listado de informes de seguimiento</caption>
                 <thead>
                     <tr >
-                        <th class="fit10 text-center" scope="col">Informe</th>
+                        <th class="fit10 text-center" scope="col">Fecha del informe</th>
                         <th class="fit10 text-center" scope="col">Sesiones desde el anterior</th>
                         <th class=" text-center" scope="col">Diagnóstico</th>
                         <th class="fit10 text-center" scope="col">Acciones</th>
@@ -71,7 +71,7 @@
             </div>
         </button>
         
-        <div id="cuidadores" class="accordion-collapse collapse show" aria-labelledby="cuidadores1">
+        <div id="cuidadores" class="tabla accordion-collapse collapse show" aria-labelledby="cuidadores1">
             <div class="d-flex justify-content-between upper">
                 @include('layouts.tableSearcher')
                 <div class="justify-content-end d-flex">
@@ -124,7 +124,7 @@
             </div>
         </button>
         
-        <div id="personasrelacionadas" class="accordion-collapse collapse show" aria-labelledby="personasrelacionadas1">
+        <div id="personasrelacionadas" class="tabla accordion-collapse collapse show" aria-labelledby="personasrelacionadas1">
             <div class="d-flex justify-content-between upper">
                 @include('layouts.tableSearcher')
                 <div class="justify-content-end d-flex">

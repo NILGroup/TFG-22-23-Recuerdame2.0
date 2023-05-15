@@ -59,7 +59,7 @@ const cfg = {
             mode: 'horizontal',
             yMin: 25,
             yMax: 25,
-            borderColor: '#FF00FF',
+            borderColor: '#00FF00',
             borderDash: [5, 5],
             label: {
               content: 'MEC máx.',
@@ -84,8 +84,8 @@ const cfg = {
     }, {
       label: 'Mini mental/MEC de lobo',
       data: data,
-      borderColor: '#FF00FF',
-      backgroundColor: '#FF00FF',
+      borderColor: '#00FF00',
+      backgroundColor: '#00FF00',
       parsing: {
         yAxisKey: 'mental'
       }
@@ -102,4 +102,5 @@ const cfg = {
 };
 
 const ctx = document.getElementById('myChart');
-new Chart(ctx,cfg,data);
+if(ctx != null)
+  new Chart(ctx,cfg,data);

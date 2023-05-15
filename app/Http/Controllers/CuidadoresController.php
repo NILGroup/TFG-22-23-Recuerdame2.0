@@ -69,10 +69,7 @@ class CuidadoresController extends Controller
 
     protected function registroCuidador(Request $request)
     {
-        $request->validate([
-            'telefono'=> 'numeric|digits:9'
-        ]);
-        
+       
         $user = User::updateOrCreate(
             ['id' => $request->id],
             ['nombre' => $request->nombre,

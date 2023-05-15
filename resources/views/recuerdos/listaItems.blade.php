@@ -9,20 +9,17 @@
                 <input type="text" name="nombre" value="{{$recuerdo->nombre}}" class="form-control form-control-sm" id="nombre" maxlength="50" required>
             </div>
         </div>
-        <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
-            <label for="categoria" class="form-label col-form-label negrita col-sm-4 col-md-6 col-lg-3">Categoría:</label>
-            <div class="col-sm-12 col-md-12 col-lg-7">
-                <select onchange="especifiqueCategoria()" style="margin-right: 5px" class="form-select form-select-sm form-control" id="categoria_id" name="categoria_id">
+        <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center ">
+            <label for="etapa" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-3">Etapa de la vida:<span class="asterisco">*</span></label>
+            <div class="col-sm-12 col-md-12 col-lg-7 align-items-center">
+                <select class="form-select form-select-sm" id="idEtapa" name="etapa_id" required>
                     <option></option>
-                    @foreach ($categorias as $categoria)
-                    <option value="{{$categoria->id}}" @if($categoria->id == $recuerdo->categoria_id) selected @endif>{{$categoria->nombre}}</option>
+                    @foreach ($etapas as $etapa)
+                    <option value="{{$etapa->id}}" @if($etapa->id == $recuerdo->etapa_id) selected @endif>{{$etapa->nombre}}</option>
                     @endforeach
-                </select>
-                <input @if($recuerdo->categoria_id != 7) style="display: none;" @endif type="text" name="tipo_custom" value="{{$recuerdo->tipo_custom}}" class="form-control form-control-sm" id = "tipo_custom" >
                 </select>
             </div>
         </div>
-
     </div>
 
     <div class="row form-group justify-content-start">
@@ -39,14 +36,16 @@
                 @endif
             </div>
         </div>
-        <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center ">
-            <label for="etapa" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-3">Etapa de la vida:<span class="asterisco">*</span></label>
-            <div class="col-sm-12 col-md-12 col-lg-7 align-items-center">
-                <select class="form-select form-select-sm" id="idEtapa" name="etapa_id" required>
+        <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
+            <label for="categoria" class="form-label col-form-label negrita col-sm-4 col-md-6 col-lg-3">Categoría:</label>
+            <div class="col-sm-12 col-md-12 col-lg-7">
+                <select onchange="especifiqueCategoria()" style="margin-right: 5px" class="form-select form-select-sm form-control" id="categoria_id" name="categoria_id">
                     <option></option>
-                    @foreach ($etapas as $etapa)
-                    <option value="{{$etapa->id}}" @if($etapa->id == $recuerdo->etapa_id) selected @endif>{{$etapa->nombre}}</option>
+                    @foreach ($categorias as $categoria)
+                    <option value="{{$categoria->id}}" @if($categoria->id == $recuerdo->categoria_id) selected @endif>{{$categoria->nombre}}</option>
                     @endforeach
+                </select>
+                <input @if($recuerdo->categoria_id != 7) style="display: none;" @endif type="text" name="tipo_custom" value="{{$recuerdo->tipo_custom}}" placeholder="Especifique..." class="form-control form-control-sm" id = "categoria_custom" >
                 </select>
             </div>
         </div>
@@ -165,22 +164,26 @@
             <thead>
                 <tr>
                     <th scope="col" class="text-center">Nombre</th>
+                    <th class="fit10 text-center" scope="col">Dirección</th>
                     <th class="fit10 text-center" scope="col">Tipo de relación</th>
-                    @if($show)
+
                     <th class="fit5 text-center" scope="col">Acciones</th>
-                    @endif
+                   
                 </tr>
             </thead>
             <tbody class="shadow-sm">
                 @foreach ($recuerdo->personas_relacionadas as $persona)
                 <tr>
-                    <td>{{$persona->nombre}} {{$persona->apellidos}}</td>
-                    <td>{{$persona->tiporelacion->nombre}}</td>
-                    @if($show)
+                    <td>{{$persona->nombre}} {{$persona->apellidos}} <a>@if($persona->contacto)★@endif</a></td>
+                    <td>{{$persona->localidad}}</td>
+                    <td>@if(isset($persona->tipo_custom)) {{$persona->tipo_custom}} @else {{$persona->tiporelacion->nombre}} @endif </td>
+                    
                     <td class="tableActions">
+                        @if($show)
                         <a href="/usuarios/{{$paciente->id}}/personas/{{$persona->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos de la persona"></i></a>
+                        @endif
                     </td>
-                    @endif
+                   
                     <input type="hidden" value="{{$persona->id}}" name="checkPersona[]">
                 </tr>
                 @endforeach

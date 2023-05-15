@@ -19,7 +19,7 @@
 
                 <div class=" d-flex col-lg-8 col-md-5 col-sm-12 mb-2 align-items-center" id="color">
                     <label for="color" class="form-label labelShow">Color:</label>
-                    <input type="color" class="form-control form-control-sm" name="color" value="#20809d" required>
+                    <input type="color" class="form-control form-control-sm" name="color" id="colorImp" required>
                 </div>
 
             </div>
@@ -49,7 +49,7 @@
             <div class="dz-default dz-message dropzone-correct desaparecer" id="dzp">
                 <div class="container dropzone-container">
                     <img src="/img/upload.png" id="dropzone-img" height="25em" alt="">
-                    <h2 id="dropzone-title" class="dropzone-title-correct">Arrastre sus archivos</h1>
+                    <h2 id="dropzone-title" class="dropzone-title-correct">Arrastre sus archivos</h2>
                 </div>
             </div>
             <div class="previews-actividad desaparecer">

@@ -6,73 +6,125 @@ use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\Etapa;
 use App\Models\Categoria;
-use App\Models\Etiqueta;
+use App\Mail\videoMail;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Video;
-use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 use App\VideoHistoriaVida;
 
 class VideoHistoriaController extends Controller
 {
-    public function generadorVideoHistoria(int $idPaciente)
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $paciente = Paciente::findOrFail($idPaciente);
-        $fecha = "11/12/2021";
-        $etapas = Etapa::all()->sortBy("id");
-        $categorias = Categoria::all()->sortBy("id");
-        $etiquetas = Etiqueta::all()->sortBy("id");
-
-        return view("historias.generateVideoHistoria", compact("paciente", "fecha", "etapas", "etiquetas", "categorias"));
+        $this->middleware(['auth', 'role'])->except(['renderResponse']);
+        $this->middleware(['asignarPaciente'])->except(['destroy', 'restore','renderResponse']);
     }
+    public function show($idPaciente,$idVideo)
+    {
+        $video = Video::find($idVideo);
+        $url = $video->url;   
+        return view("videos.videoPlayer", compact("url"));
+    }
+
     public function generarVideoHistoria(Request $request){
 
-
+        $imagenesCheck= $request->imagenesCheck;
+        $videosCheck= $request->videosCheck;
+        $narracionCheck = $request->narracionCheck;
         //OBTENER LOS RECUERDOS BUSCADOS///////////////////////////////////////////////////
         $idPaciente = $request->paciente_id;
         $fechaInicio = $request->fechaInicio;
         $fechaFin = $request->fechaFin;
-        $idEtapa = $request->seleccionEtapa;
-        $idEtiqueta = $request->seleccionEtiq;
-        $idCategoria = $request->seleccionCat;
+        $idEtapa = $request->seleccionEtapaModal;
+        $puntuacion = $request->seleccionEtiqModal;
+        $idCategoria = $request->seleccionCatModal;
         $apto = $request->apto;
         $noApto = $request->noApto;
-        $imagenesCheck= $request->imagenesCheck;
-        $videosCheck= $request->videosCheck;
-        $narracionCheck = $request->narracionCheck;
         $paciente = Paciente::find($idPaciente);
+        $puntuacionFinal = collect([]);
+        $idEtapas = $idEtapa;
+        if (is_null($idEtapa)){
+            $idEtapa = Etapa::select('id')->get();
+            $idTodasEtapas = $idEtapa;
+            for ($i = 0; $i < sizeOf($idTodasEtapas); $i++) {
+                $idEtapas[$i] = $idTodasEtapas[$i]['id'];
+            }
 
-        if(!$imagenesCheck && !$videosCheck){
-            $imagenesCheck = true; $videosCheck = true;
         }
-
-        if (is_null($idEtapa))
-            $idEtapa = Etapa::select('id');
-        if (is_null($idEtiqueta))
-            $idEtiqueta = Etiqueta::select('id');
         if (is_null($idCategoria))
             $idCategoria = Categoria::select('id');
+        if (is_null($puntuacion)){
+            $puntuacionFinal = collect([0,1,2,3,4,5,6,7,8,9,10]);
+        }else {
+            
+            if(in_array("1", $puntuacion))
+            {
+                $puntuacionFinal->push(6,7,8,9,10);
+            }
+            if(in_array("2", $puntuacion))
+            {
+                $puntuacionFinal->push(5);
+            }
+            if(in_array("3", $puntuacion))
+            {
+                $puntuacionFinal->push(0,1,2,3,4);
+            }
+        }
+                
 
         $listaRecuerdos =  $paciente->recuerdos()
-            ->whereIn('etapa_id', $idEtapa)->orWhereNull('etapa_id')
-            ->whereIn('etiqueta_id', $idEtiqueta)->orWhereNull('etiqueta_id')
-            ->whereIn('categoria_id', $idCategoria)->orWhereNull('categoria_id')
-            ->whereBetween('fecha', [$fechaInicio, $fechaFin])
-            ->get();
+        ->where(function($query) use ($idEtapa){
+            $query->whereIn('etapa_id', $idEtapa)->orWhereNull('etapa_id');
+
+        })->where(function($query) use ($idCategoria){
+            $query->whereIn('categoria_id',$idCategoria)->orWhereNull('categoria_id');         
+        })->where(function($query) use ($puntuacionFinal){
+            $query ->whereIn('puntuacion', $puntuacionFinal)->orWhereNull('puntuacion');
         
+        
+        })->where(function($query) use ($fechaInicio,$fechaFin){
+                $query->whereBetween('fecha', [$fechaInicio, $fechaFin])->orWhereNull('fecha');
+        })
+            ->get();
+
         if(!($apto == 0 && $noApto == 0) && !($apto == 1 && $noApto == 1))
             $listaRecuerdos = $listaRecuerdos
                 ->whereIn('apto', $apto);
         //FIN. RECUERDOS YA OBTENIDOS///////////////////////////////////////////////////
 
-        //PATH
+        //NOMBRE VÍDEO
+        $titulo = "";
 
-        
+        if (is_null($idEtapas)){
+            $titulo = $titulo .  "de todas las etapas ";
+        }else{
+            for ($i = 0; $i < sizeof($idEtapas); $i++) {
+                $titulo = $titulo . Etapa::find($idEtapas[$i])['nombre'];
+                if($i < sizeOf($idEtapa) - 1)
+                    $titulo = $titulo . " - ";
+            }
+        } 
+            
+        if($narracionCheck){
+            $titulo = $titulo .  " con narración";
+        }
+        $titulo = "Vídeo " . $titulo; 
+        //FIN NOMBRE
+
+        //PATH
         $videosArray = collect();         $imagesArray = collect();
         foreach ($listaRecuerdos as $rc) { //¿Vacio?
             foreach($rc->multimedias as $media){
                 $extension = pathinfo($media->fichero, PATHINFO_EXTENSION);
-                $rememberpath = env("NGROK")."/TFG-22-23-Recuerdame2.0/public".$media->fichero;//str_replace('/storage/', '/public/', $media->fichero);
+                $rememberpath = "http://".env('APP_URL').$media->fichero;//Storage::url(str_replace('storage/' ,'', $media->fichero));//env("APP_URL").$media->fichero;
                 
-                if($extension == 'png' || $extension == 'jpg'){
+                if($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg'){
                     $imagesArray->push($rememberpath);
                 }
 
@@ -82,36 +134,33 @@ class VideoHistoriaController extends Controller
             }
         }
 
+        if($imagesArray->isEmpty() && $videosArray->isEmpty()){
+            $listaRecuerdos = collect();
+            return view("historias.generarLibro", compact("fechaInicio", "fechaFin", "listaRecuerdos"));
+        }else{
             $VideoGenerator = new VideoHistoriaVida();
-            $url = $VideoGenerator->generateAudio("Hola grupo de Recuerdame 2, soy una IA muy muy molona esquereee xd");
-            //$url = $VideoGenerator->generateVideo($videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck);
-            //Crear fila en la base de datos
-            $video = Video::create(
-                [
-                    'url' => $url,
-                    'estado' => "Procesando",
-                    'paciente_id' => $idPaciente,
-                ]
-            );
-    
-            return self::showByPaciente($idPaciente);
-    
+            $VideoGenerator->generateVideo($titulo, $videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos, $idPaciente);
+
+            return redirect("/usuarios/$idPaciente/videos");
+        }
     }
 
-    public function showByPaciente($idPaciente)
-    {
+    public function showByPaciente($idPaciente){
         $paciente = Paciente::find($idPaciente);
-        if (is_null($paciente)) return "ID de paciente no encontrada"; //ESTUDIAR SI SOBRA
+        if (is_null($paciente)) return "ID de usario no encontrada"; //ESTUDIAR SI SOBRA
 
         $videos = $paciente->videos;
         //Devolvemos los recuerdos
-        return view("historias.showByPaciente", compact("videos", "paciente"));
+        return view("videos.showByPaciente", compact("videos", "paciente"));
     }
 
-    public function destroy($idVideo)
-    {
-        $video = Video::find($idVideo); //busca el recuerdo en sí
-        $video->delete();
-        
+    public function destroy($idVideo){
+        $video = Video::find($idVideo);
+        $video->delete();   
     }
+
+    public function restore($idVideo) {
+        Video::where('id', $idVideo)->withTrashed()->restore();
+    }
+
 }

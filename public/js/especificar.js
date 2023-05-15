@@ -16,19 +16,31 @@ function especifiqueResidencia() {
 
 function especifique(){
     let select = document.getElementById("tiporelacion_id")
+    console.log(select)
     if (select.value === "7"){
-        $("#tipo_custom").show()
+        $("#tipo_custom").show().prop("required", true)
+        
     }
     else{
-        $("#tipo_custom").hide()
+        $("#tipo_custom").hide().prop("required", false)
     }
 }
 
 function especifiqueCategoria(){
     let select = document.getElementById("categoria_id")
     if (select.value === "7"){
-        $("#tipo_custom").show();
+        $("#categoria_custom").show().prop("required", true);
     }else{
-        $("#tipo_custom").hide();
+        $("#categoria_custom").hide().prop("required", false);
+    }
+}
+
+function especifiqueGenero(){
+    let select = document.getElementById("genero_id")
+    if (select.value === "3"){
+        $("#genero_custom").show().prop("required", true)
+    }
+    else{
+        $("#genero_custom").hide().prop("required", false)
     }
 }

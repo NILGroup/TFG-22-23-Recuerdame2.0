@@ -15,8 +15,8 @@
 
         <div>
             <!-- <a href="/usuarios/{{$sesion->paciente->id}}/informesSesion"><button type="button" class="btn btn-primary">Atrás</button></a> -->
-            <a href="/usuarios/{{$paciente->id}}/sesiones/{{$sesion->id}}/generarInforme"><button type="button" class="btn btn-secondary">Editar</button></a>
-            <a href="/usuarios/{{$sesion->paciente_id}}/sesiones/{{$sesion->id}}/informe" ><button type="button" class="btn btn-outline-primary">Generar PDF</button></a>
+            <a href="/usuarios/{{$paciente->id}}/informesSesion/{{$informe->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
+            <a href="/usuarios/{{$sesion->paciente_id}}/informesSesion/{{$informe->id}}/informe" ><button type="button" class="btn btn-outline-primary">Generar PDF</button></a>
         </div>
     </form>
 </div>

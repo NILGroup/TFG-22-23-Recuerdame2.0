@@ -39,6 +39,7 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> -->
     <script src="/js/libs/dataTables.js"></script>
     <script src="/js/table.js"></script>
+    <script src="/js/especificar.js"></script>
     <script src="/js/persona.js"></script>
     <script src="/js/multimediaModal.js"></script>
     <script src="/js/multimediaRecuerdo.js"></script>

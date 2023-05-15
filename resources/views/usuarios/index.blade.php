@@ -35,7 +35,11 @@
                         </a>
                     </td>
                     <td>
-                        {{$paciente->genero->nombre}}
+                        @if(!is_null($paciente->genero_custom) && $paciente->genero_id == "3")
+                            {{$paciente->genero_custom}}
+                        @else
+                            {{$paciente->genero->nombre}}
+                        @endif
                     </td>
                     <td>
                         {{Carbon\Carbon::parse($paciente['fecha_nacimiento'])->age}} 

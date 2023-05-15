@@ -5,6 +5,7 @@
     <input type="hidden" name="respuesta" id="idSesion" value="{{$sesion->respuesta}}">
     <input type="hidden" name="fecha_finalizada" id="idSesion" value="{{$sesion->fecha_finalizada}}">
 
+    <div>
     <div class=" d-flex col-lg-4 col-md-6 col-sm-12 mb-2 align-items-center">
         <label for="fecha" style="min-width: 70px" class="col-sm-12 col-md-4 col-lg-4 labelShow">Fecha: <span class="asterisco">*</span></label>
         <div class="col-sm-6 col-md-6 col-lg-7" style="min-width: 220px">
@@ -63,62 +64,92 @@
     <div class="tabla">
         <div class="d-flex justify-content-between upper">
             @if(!$show)
-            @include('layouts.tableSearcher')
-            <div class="justify-content-end d-flex p-2">
-                <button type="button" id="crearRecuerdo" name="crearRecuerdo" class="btn btn-success me-2 showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosCreator" @else data-bs-toggle="modal" data-bs-target="#recuerdosCreator" @endif><i class="fa-solid fa-plus"></i></button>
-                <button type="button" class="btn btn-success showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosExistentes" @else data-bs-toggle="modal" data-bs-target="#recuerdosExistentes" @endif>Añadir existente</button>
-            </div>
+                @include('layouts.tableSearcher')
+                <div class="justify-content-end d-flex p-2">
+                    <button type="button" id="crearRecuerdo" name="crearRecuerdo" class="btn btn-success me-2 showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosCreator" @else data-bs-toggle="modal" data-bs-target="#recuerdosCreator" @endif><i class="fa-solid fa-plus"></i></button>
+                    <button type="button" class="btn btn-success showmodal" @if(!str_contains(url()->current(), 'sesion')) data-show-modal="recuerdosExistentes" @else data-bs-toggle="modal" data-bs-target="#recuerdosExistentes" @endif>Añadir existente</button>
+                </div>
             @endif
         </div>
         <table id="tabla_recuerdos" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de recuerdos</caption>
             <thead>
-                <tr>
+                <tr >
                     <th scope="col" class="text-center">Nombre</th>
-                    <th scope="col" class="text-center">Etapa</th>
-                    <th scope="col" class="text-center">Categoría</th>
-                    <th scope="col" class="text-center">Estado</th>
-                    <th scope="col" class="text-center">Apto</th>
-                    @if($show)
-                    <th class="fit5 text-center" scope="col">Acciones</th>
+                    @if (Auth::user()->rol_id == 1)
+                        <th scope="col" class="text-center">Etapa</th>
+                        <th scope="col" class="text-center">Categoría</th>
+                        <th scope="col" class="text-center">Estado</th>
+                        <th scope="col" class="text-center">Puntuación</th>
+                        <th scope="col" class="text-center">Apto</th>
                     @endif
+                    <th class="fit10 actions text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
-
             <tbody class="shadow-sm">
-                @foreach ($sesion->recuerdos as $recuerdo)
-                <tr>
-                    <td>{{$recuerdo->nombre}}</td>
-                    <td>
-                        @if(isset($recuerdo->etapa)){{$recuerdo->etapa->nombre}}@endif
-                    </td>
-                    <td>
-                        @if(isset($recuerdo->categoria)){{$recuerdo->categoria->nombre}}@endif
-                    </td>
-                    <td>
-                        @if(isset($recuerdo->estado)){{$recuerdo->estado->nombre}}@endif
-                    </td>
 
-                    <td class=" text-center">
-                        <input class="form-check-input" type="checkbox" @if($recuerdo->apto) checked @endif disabled>
-                    </td>
-                    @if($show)
-                    <td class="tableActions">
-                        <a href="/usuarios/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver datos del recuerdo"></i></a>
-                    </td>
+            @foreach($sesion->recuerdos as $recuerdo)
+            <tr>
+
+                <td>{{$recuerdo->nombre}}</td>
+                @if (Auth::user()->rol_id == 1)
+                    <td>{{$recuerdo->etapa->nombre}}</td>
+
+                    @if(!is_null($recuerdo->categoria))
+                        <td>{{$recuerdo->categoria->nombre}}</td>
+                    @else
+                        <td>Sin categoría</td>
                     @endif
-                    <input type="hidden" value="{{$recuerdo->id}}" name="recuerdos[]">
-                </tr>
-                @endforeach
+
+                    @if(!is_null($recuerdo->estado))
+                        <td>{{$recuerdo->estado->nombre}}</td>
+                    @else
+                        <td>Sin estado</td>
+                    @endif
+
+                    @if(!is_null($recuerdo->puntuacion))
+                        @if($recuerdo->puntuacion > 5)
+                            <td data-sort="{{ $recuerdo->puntuacion }}">Positivo ({{$recuerdo->puntuacion}})</td>
+                        @elseif($recuerdo->puntuacion < 5)
+                            <td data-sort="{{ $recuerdo->puntuacion }}">Negativo ({{$recuerdo->puntuacion}})</td>
+                        @else
+                            <td data-sort="{{ $recuerdo->puntuacion }}">Neutro ({{$recuerdo->puntuacion}})</td>
+                        @endif
+                    @else
+                        <td>Sin puntuación</td>
+                    @endif
+
+                    <td class=" text-center"  data-sort="{{ $recuerdo->apto }}">
+                        <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif disabled>
+                    </td>
+                @endif
+                <td class="tableActions">
+                    <input type="hidden" value=' + rec[0].textContent + ' name="recuerdos[]">
+                    <a href="/usuarios/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del recuerdo"></i></a>
+                    @if (Auth::user()->rol_id == 1)
+                        <!-- Boton de editar -->
+                        <a href="/usuarios/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}/editar"><i class="fa-solid fa-pencil text-primary tableIcon" data-toggle="tooltip" data-placement="top" title="Modificar recuerdo"></i></a>
+                        <!-- Boton de eliminar -->
+                        <form method="post" action="{{ route('recuerdo.destroy', $recuerdo->id) }}" style="display:inline!important;">
+                            {{csrf_field()}}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" style="background-color: Transparent; border: none;" class="confirm_delete"><i class="fa-solid fa-trash-can text-danger tableIcon"  data-toggle="tooltip" data-placement="top" title="Eliminar recuerdo"></i></button>
+                        </form>
+                    @endif
+                </td>
+            </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
 </div>
 
+
 <div class="pt-4 pb-2">
     <h5 class="text-muted">Material</h5>
     <hr class="lineaTitulo">
 </div>
+
 
 @if(!$show)
 <div class="row " id="add-multi-sesion">
@@ -130,3 +161,5 @@
 </div>
 @include('sesiones.modals')
 @endif
+
+</div>

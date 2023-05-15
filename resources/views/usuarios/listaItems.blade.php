@@ -20,12 +20,14 @@
     <div class="row col-sm-12 col-md-6 col-lg-5 align-items-center">
         <label for="genero" class="form-label col-form-label col-sm-12 col-md-12 col-lg-6 negrita">Género:<span class="asterisco">*</span></label>
         <div class="col-sm-12 col-md-12 col-lg-6">
-            <select id="genero" name="genero_id" class="form-control form-select form-select-sm" required >
+        <select onchange="especifiqueGenero()" id="genero_id" name="genero_id" class="form-control form-select form-select-sm" required >
                 <option selected disabled></option>
-                    @foreach($generos as $genero)
+                    @foreach($generos as $genero)   
                         <option value="{{$genero->id}}" @if($genero->id == $paciente->genero_id) selected @endif>{{$genero->nombre}}</option>
                     @endforeach
-            </select>
+        </select> 
+       
+        <input @if($paciente->genero_id != 3) style="display: none;" @endif type="text" name="genero_custom" value="{{$paciente->genero_custom}}" placeholder="Especifique..." class="form-control form-control-sm" id ="genero_custom" >   
         </div>
     </div>
     
@@ -104,7 +106,8 @@
                 @foreach($residencias as $residencia)
                     <option value="{{$residencia->id}}" @if($residencia->id == $paciente->residencia_id) selected @endif>{{$residencia->nombre}}</option>
                 @endforeach
-            </select>   
+            </select> 
+             <input @if($paciente->residencia_id != 6) style="display: none;" @endif type="text" name="residencia_custom" value="{{$paciente->residencia_custom}}" placeholder="Especifique..." class="form-control form-control-sm" id = "residencia_custom" >  
             </div>
     </div>
 
@@ -115,10 +118,8 @@
         </div>
     </div>
 
-    <div id="residencia_custom" @if($paciente->residencia_id != 6) style="display: none;" @endif class="row col-sm-12 col-md-6 col-lg-7 align-items-center">
-        <label for="residencia_custom" class="form-label col-form-label-sm col-sm-12 col-md-12 col-lg-4">Especifique<span class="asterisco">*</span></label>
-        <div class="col-sm-12 col-md-12 col-lg-8">
-            <input type="text" name="residencia_custom" value="{{$paciente->residencia_custom}}" class="form-control form-control-sm" id ="residencia_custom" >
-        </div>
-    </div>
 </div>
+
+@push('scripts')
+    <script src="/js/especificar.js"></script>
+@endpush

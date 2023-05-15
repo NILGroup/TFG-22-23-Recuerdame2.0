@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Diagnostico;
 use App\Models\Sesion;
+use App\Models\InformeSesion;
 use App\Models\Evaluacion;
 use App\Models\Paciente;
 use App\Models\Recuerdo;
+use App\Models\Resumen;
 use Illuminate\Http\Request;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use App\PDFSesion;
 use App\PDFEvaluacion;
 use App\PDFHistoria;
 use App\PDFDiagnostico;
+use App\PDFResumen;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 
@@ -36,27 +39,28 @@ class PDFController extends Controller
     public function generarPDFInformeSesion(Request $request)
     {
 
-        $sesion = Sesion::find($request->id);
-
-        $paciente = $sesion->paciente;
+        $informe = InformeSesion::find($request->id);
+        $sesion = $informe->sesion;
+        $paciente = $informe->paciente;
 
         $usuario = $sesion->user;
 
-        $this->obtenerPDFSesion($paciente, $sesion, $usuario);
+        $this->obtenerPDFSesion($paciente, $sesion, $informe, $usuario);
     }
 
-    public function verInformeSesion($idPaciente, $idSesion)
+    public function verInformeSesion($idPaciente, $idInforme)
     {
-        $sesion = Sesion::find($idSesion);
 
+        $informe = InformeSesion::find($idInforme);
+        $sesion = $informe->sesion;
         $paciente = $sesion->paciente;
 
         $usuario = $sesion->user;
 
-        $this->obtenerPDFSesion($paciente, $sesion, $usuario);
+        $this->obtenerPDFSesion($paciente, $sesion, $informe, $usuario);
     }
 
-    public function obtenerPDFSesion($paciente, $sesion, $usuario)
+    public function obtenerPDFSesion($paciente, $sesion, $informe, $usuario)
     {
         $GLOBALS['titulo'] = $sesion->titulo;
         $pdf = new PDFSesion('P', 'mm', 'A4');
@@ -64,7 +68,7 @@ class PDFController extends Controller
         $pdf->AddPage();
         $pdf->SetFont('Times', '', 12);
 
-        $pdf->pdfBody($pdf, $paciente, $sesion, $usuario);
+        $pdf->pdfBody($pdf, $paciente, $sesion, $informe, $usuario);
 
         $pdf->Output();
     }
@@ -248,6 +252,62 @@ class PDFController extends Controller
         $pdf->SetFont('Times', '', 12);
 
         $pdf->pdfBody($pdf, $diagnostico, $paciente, $gds, $mini, $cdr);
+
+        $pdf->Output();
+    }
+
+    /***********************************************************
+     * PDFs RESUMENES
+     ************************************************************/
+    /*public function generarPDFResumen(Request $request)
+    {
+
+        $resumen = Resumen::find($request->id);
+        $paciente = $resumen->paciente_id;
+        $imagen = $paciente->multimedia;
+
+        if (empty($imagen)) {
+            if ($paciente->genero_id == 1) { //hombre
+                $imagen = "/img/avatar_hombre.png";
+            } else {
+                $imagen = "/img/avatar_mujer.png";
+            }
+        } else {
+            $imagen = $paciente->multimedia->fichero;
+        }
+
+        $this->obtenerPDFResumen($paciente, $resumen, $imagen);
+    }*/
+
+    public function verPDFResumen($idPaciente, $idResumen)
+    {
+        
+        $resumen = Resumen::find($idResumen);
+        $paciente = Paciente::find($idPaciente);
+        $imagen = $paciente->multimedia;
+
+        if (empty($imagen)) {
+            if ($paciente->genero_id == 1) { //hombre
+                $imagen = "/img/avatar_hombre.png";
+            } else {
+                $imagen = "/img/avatar_mujer.png";
+            }
+        } else {
+            $imagen = $paciente->multimedia->fichero;
+        }
+
+        $this->obtenerPDFResumen($paciente, $resumen, $imagen);
+    }
+
+    public function obtenerPDFResumen($paciente, $resumen, $imagen)
+    {
+        $GLOBALS['fecha'] = $resumen->fecha;
+        $pdf = new PDFResumen('P', 'mm', 'A4');
+        $pdf->AliasNbPages();
+        $pdf->AddPage();
+        $pdf->SetFont('Times', '', 12);
+
+        $pdf->pdfBody($pdf, $paciente, $resumen, $imagen);
 
         $pdf->Output();
     }

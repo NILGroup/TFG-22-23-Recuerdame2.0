@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
     let idPaciente = document.getElementById('paciente_id').value;
 
-    if (user != 1){
+    if (user != 1) {
         $(".desaparecer").each((i, e) => $(e).hide())
-        
+
     }
 
     let url_eventos = "/calendario/" + idPaciente;
@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         },
+        eventDurationEditable: false,
         footerToolbar: {
             center: 'prev,next',
         },
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
             $("#actividad-modal #showMultimediaActividad").children().detach();
             $("#tablaMultiActividad").DataTable().clear().draw()
 
-            
+
             /*TERAPEUTA****************************************************************/
             if (user === '1') {
                 document.getElementById('idSesion').value = "";
@@ -68,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 /**********************************************************************/
                 /*ACTIVIDAD**********************************************************+*/
                 document.getElementById('start').value = info.dateStr;
+                document.getElementById('colorImp').value = "#20809d";
                 document.getElementById('start').removeAttribute("readonly");
                 document.getElementById('obs').removeAttribute("readonly");
                 document.getElementById('color').classList.remove('d-none');
@@ -119,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('id').value = info.event.id;
                     document.getElementById('title').value = info.event.title;
                     document.getElementById('start').value = info.event.startStr;
-                    document.getElementById('color').value = info.event.backgroundColor;
+                    document.getElementById('colorImp').value = info.event.backgroundColor;
                     document.getElementById('obs').value = info.event.extendedProps.description;
 
                     document.getElementById('finished').removeAttribute("required");
@@ -128,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('btnFinalizar').classList.add('d-none');
 
 
-                   
+
 
                     /*ACTIVIDAD NO FINALIZADA******************************************/
                     if (info.event.extendedProps.finished === null) {
@@ -162,10 +164,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     let multimedias = info.event.extendedProps.multimedias
                     let div = $("#showMultimediaActividad")
                     div.children().detach()
-                 
+
                     if (multimedias.length > 0)
                         $("#multiActividadBtn").show()
-                    
+
                     multimedias.forEach(e => {
 
                         let nombre = e.nombre.slice(0, 20)
@@ -176,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                             <img style="height: 10em;" src="${ruta}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon imagen">
                                         </a>
                                     </div>
-                                    <small>${nombre}</small>
+                                    
                                 </div>`
 
                         div.append($(img))
@@ -208,9 +210,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 /************************************************************************/
                 /*SESIÓN***************************************************************+*/
                 else {
-                   
+
                     let ficherosExistentes = info.event.extendedProps.multimedias.map(e => e.fichero)
-                    $("#modalMultimedia .tableActions input").each((i, e) =>  $(e).prop("checked", ficherosExistentes.includes($(e).data("fichero"))))
+                    $("#modalMultimedia .tableActions input").each((i, e) => $(e).prop("checked", ficherosExistentes.includes($(e).data("fichero"))))
 
 
                     document.getElementById("modalesCalendario").children[0].style.display = "none";
@@ -241,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     let div = $("#showMultimedia")
                     div.children().detach()
                     let multimedias = info.event.extendedProps.multimedias
-                    
+
 
                     multimedias.forEach(e => {
 
@@ -254,11 +256,10 @@ document.addEventListener('DOMContentLoaded', function () {
                                             <img style="height: 10em;" src="${ruta}" class="img-responsive-sm card-img-top img-thumbnail multimedia-icon imagen">
                                         </a>
                                     </div>
-                                    <small>${nombre}</small>
                                 </div>`
 
                         div.append($(img))
-                        
+
 
                     })
 
@@ -271,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('id').value = info.event.id;
                 document.getElementById('title').value = info.event.title;
                 document.getElementById('start').value = info.event.startStr;
-                document.getElementById('color').value = info.event.backgroundColor;
+                document.getElementById('colorImp').value = info.event.backgroundColor;
                 document.getElementById('obs').value = info.event.extendedProps.description;
 
                 document.getElementById('title').setAttribute("readonly", "");
@@ -440,19 +441,158 @@ document.addEventListener('DOMContentLoaded', function () {
             if (calendar.getEvents()[i].extendedProps.tipo === 's')
                 calendar.getEvents()[i].setProp('display', 'auto');
         }
+
         calendar.render();
     }
+
+
+
+    $('.confirm_delete_calendario').click(function (event) {
+
+        var form = $(this).closest("form");
+        var t = $(this).closest("div .tab-pane").attr("id");
+        var idEvento = $(this).closest("form").find("#id").val(); //Tenemos el id del evento que queremos eliminar
+        var eventoEncontrado;
+        var pos;
+        for (let i = 0; i < calendar.getEvents().length; i++) {
+            if (calendar.getEvents()[i].id === idEvento) {
+                eventoEncontrado = calendar.getEvents()[i];
+                pos = i;
+            }
+        } //Tenemos el evento que queremos eliminar
+
+        event.preventDefault();
+        swal.fire({
+            title: '¿Seguro que desea eliminar?',
+            text: "Si lo elimina, no podrá recuperar los datos",
+            icon: "warning",
+            showCancelButton: true,
+            cancelButtonColor: '#3085d6',
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                confirmButton: 'btn btn-danger me-3',
+                cancelButton: 'btn btn-outline-dark'
+            },
+            buttonsStyling: false
+        })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: '¡Eliminado!',
+                        text: 'Se han borrado los datos',
+                        icon: 'success',
+                        timer: 2000,
+                        showConfirmButton: false,
+                    }).then(function () {
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        if (t == 'actividad-modal') {
+                            console.log("Actividad");
+                            $.ajax({
+                                url: '/eliminarActividad',
+                                type: 'post',
+                                data: form.serialize(),
+                                success: function () {
+                                    $('#evento').modal('hide')
+                                },
+                                error: function (e) {
+                                    console.log(e);
+                                }
+                            });
+                        } else if (t == 'sesion-modal') {
+                            $.ajax({
+                                url: '/eliminarSesion',
+                                type: 'post',
+                                data: form.serialize(),
+                                success: function () {
+                                    $('#evento').modal('hide');
+                                },
+                                error: function (e) {
+                                    console.log(e);
+                                }
+                            });
+                        }
+                        calendar.getEvents()[pos].remove();
+                        Swal.fire({
+                            template: "#borrado",
+                            position: 'top-end',
+                            backdrop: false,
+                            width: "25em",
+                            showConfirmButton: false,
+                            buttonsStyling: false,
+                            timer: 5000,
+                            showCancelButton: false,
+                            timerProgressBar: true,
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            },
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            },
+                        }).then((result) => {
+                            if (result.isDenied) {
+
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+                                if (t == 'actividad-modal') {
+                                    let urlR = window.location.href.split("/");
+                                    urlR = "calendario/"+ idEvento + "/restoreActividad";
+                                    $.ajax({
+                                        url: urlR,
+                                        type: 'post',
+                                        success: function () {
+                                            calendar.render();
+                                            location.reload();
+                                        },
+                                        error: function (e) {
+                                            console.log(e);
+                                        }
+                                    });
+                                } else if (t == 'sesion-modal') {
+                                    let urlR = window.location.href.split("/");
+                                    urlR = "calendario/"+ idEvento + "/restoreSesion";
+                                    $.ajax({
+                                        url: urlR,
+                                        type: 'post',
+                                        success: function () {
+                                            calendar.render();
+                                            location.reload();
+                                        },
+                                        error: function (e) {
+                                            console.log(e);
+                                        }
+                                    });
+                                }
+                            }
+
+                        });
+                    });
+                }
+            });
+    });
 
     calendar.render();
 });
 
 
-$("#confirmMultiActividad").on("click", function(event){
+$("#confirmMultiActividad").on("click", function (event) {
 
     let selected = []
-    $("#tablaMultiActividad tbody input").each((i, e) =>{
+    $("#tablaMultiActividad tbody input").each((i, e) => {
         let elem = $(e)
-        if(elem.prop("checked")){
+        if (elem.prop("checked")) {
             selected.push({
                 id: Number(elem.prop("value")),
                 nombre: elem.data("nombre"),
@@ -460,7 +600,6 @@ $("#confirmMultiActividad").on("click", function(event){
             })
         }
     })
-
 
     $("#multiActividad").modal("hide")
 

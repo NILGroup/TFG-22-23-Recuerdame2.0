@@ -13,6 +13,7 @@
     <div>
         <!-- <a href="{{ url()->previous() }}"><button type="button" class="btn btn-primary">Atrás</button></a> -->
         <a href="/usuarios/{{$paciente->id}}/resumenes/{{$resumen->id}}/editar"><button type="button" class="btn btn-secondary">Editar</button></a>
+        <a href="/usuarios/{{$paciente->id}}/resumenes/{{$resumen->id}}/pdf"><button type="button" class="btn btn-outline-primary">Generar PDF</button></a>
     </div>
     @endsection
 

@@ -1,10 +1,6 @@
-<div id="esta" class="row text-align-center">
-    @if($mostrarFoto)
-    <div class="col-lg-3 align-items-center" style="padding-right: 50px!important;">
-        @include('personasrelacionadas.foto')
-    </div>
-    @endif
-    <div class= @if($mostrarFoto) "col-lg-9" @else "col-lg-12" @endif>
+
+    
+   
 
         <input type="hidden" name="paciente_id" class="form-control form-control-sm" id="paciente_id" value="{{$idPaciente}}" required>
         <input type="hidden" name="id" class="form-control form-control-sm" id="id" value="{{$persona->id}}" required>
@@ -58,12 +54,20 @@
                 <label for="tipo" class="form-label col-form-label negrita col-sm-12 col-md-6 col-lg-3">Tipo de relación:<span class="asterisco">*</span></label>
                 <div class="col-sm-12 col-md-6 col-lg-8 align-items-center">
 
-                    <select onchange="especifique()" style="margin-right: 5px" class="form-select form-select-sm form-control" id="tiporelacion_id" name="tiporelacion_id">
+                    <select required onchange="especifique()" style="margin-right: 5px" class="form-select form-select-sm form-control" id="tiporelacion_id" name="tiporelacion_id">
+                        <option></option>
                         @foreach ($tipos as $tipo)
                         <option value="{{$tipo->id}}" @if($tipo->id == $persona->tiporelacion_id) selected @endif>{{$tipo->nombre}}</option>
                         @endforeach
                     </select>
-                    <input @if($persona->tiporelacion_id != 7) style="display: none;" @endif type="text" name="tipo_custom" value="{{$persona->tipo_custom}}" class="form-control form-control-sm" id = "tipo_custom" >
+                    <input 
+                    @if($persona->tiporelacion_id != 7) 
+                        style="display: none;"
+                    @else
+                        required
+                    @endif 
+
+                    type="text" name="tipo_custom" value="{{$persona->tipo_custom}}" placeholder="Especifique..." class="form-control form-control-sm" id = "tipo_custom" >
                 </div>
             </div>
 
@@ -81,5 +85,4 @@
                 <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3">{{$persona->observaciones}}</textarea>
             </div>
         </div>
-    </div>
-</div>
+    

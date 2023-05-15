@@ -13,7 +13,7 @@
         <div class="dz-default dz-message dropzone-correct" id="dzp">
             <div class="container dropzone-container">
                 <img src="/img/upload.png" id="dropzone-img" height="25em" alt="">
-                <h2 id="dropzone-title" class="dropzone-title-correct">Arrastre sus archivos</h1>
+                <h2 id="dropzone-title" class="dropzone-title-correct">Arrastre sus archivos</h2>
             </div>
         </div>
         <div class="dropzone-previews">
@@ -64,5 +64,6 @@
     <script src="/js/dropzone.js"></script>
     <script src="/js/persona.js"></script>
     <script src="/js/recuerdo.js"></script>
+    <script src="/js/especificar.js"></script>
     <script src="/js/multimediaModal.js"></script>
 @endpush

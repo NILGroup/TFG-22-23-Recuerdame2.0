@@ -163,3 +163,19 @@ $("#agregarCuidador").on("click", function(event){
 function setRow(tabla, r){
     tabla.api().row.add(r).draw()
 }
+
+$(document).ready(function() {
+    // Seleccionar los campos y agregar un evento keyup
+    $("#telefono, #email").on("keyup", function() {
+      // Verificar si el valor de cualquier campo es no vacío
+      var telefonoVacio = $("#telefono").val() == "";
+      var emailVacio = $("#email").val() == "";
+      // Actualizar el atributo required en ambos campos
+      $("#telefono").prop("required", telefonoVacio && emailVacio);
+      $("#email").prop("required", telefonoVacio && emailVacio);
+    });
+});
+  
+  
+  
+  

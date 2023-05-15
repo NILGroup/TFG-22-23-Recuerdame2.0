@@ -42,10 +42,12 @@
 <script src="/js/table.js"></script>
 <script>
     $("#remove-multimedia").hide()
+
     
 </script>
 
 <script src="/js/persona.js"></script>
+<script src="/js/especificar.js"></script>
 <script src="/js/multimediaModal.js"></script>
 <script src="/js/multimediaRecuerdo.js"></script>
 

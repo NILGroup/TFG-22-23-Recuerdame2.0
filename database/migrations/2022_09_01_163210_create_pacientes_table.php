@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer("situacion_id");
             $table->integer("estudio_id");
             $table->integer("genero_id");
+            $table->string("genero_custom")->nullable();
             $table->softDeletes();
         });
     }

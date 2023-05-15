@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('sesions', function (Blueprint $table) {
             $table->id();
             $table->longText('titulo');
-            //$table->dateTime('fecha');
+            $table->dateTime('fecha');
             $table->longText('objetivo'); 
             $table->longText('descripcion')->nullable();
             $table->longText('acciones')->nullable();

@@ -7,9 +7,18 @@
         <h5 class="text-muted">Datos persona relacionada</h5>
         <hr class="lineaTitulo">
     </div>
-    <div style="margin-right: 50px;">
-        @include('personasrelacionadas.listaItems')
+
+    
+    <div class="row align-items-start">
+        <div class="col-lg-3">
+            @include('personasrelacionadas.foto')
+        </div>
+        <div class="col-lg-9">
+            @include('personasrelacionadas.listaItems')
+        </div>
+        
     </div>
+   
 
     @if (Auth::user()->rol_id == 1)
     <div class="col-12">

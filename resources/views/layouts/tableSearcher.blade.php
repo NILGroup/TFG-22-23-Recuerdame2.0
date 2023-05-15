@@ -1,6 +1,7 @@
 <div class="justify-content-start d-flex w-50 search">
-    <select class="form-select form-select-sm w-25 search searchSelector">
+    <select id="select-busqueda" class="my-form-select w-25 search searchSelector">
         <option value="">Todos</option>
+        
     </select>
-    <input class="searchBar form-control form-control-md search searchInput" placeholder="Buscar..."/>
+    <input  id="input-busqueda" class="searchBar my-form-control search searchInput" placeholder="Buscar..."/>
 </div>

@@ -11,8 +11,9 @@ use App\Models\Estado;
 use App\Models\Etiqueta;
 use App\Models\Emocion;
 use App\Models\Categoria;
-use App\Models\PersonaRelacionada;
+use App\Models\Personarelacionada;
 use App\Models\Tiporelacion;
+use App\Models\InformeSesion;
 use ErrorException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -173,9 +174,10 @@ class SesionesController extends Controller
         $etapas = Etapa::all()->sortBy("id");
         $paciente = $sesion->paciente;
         $user = $sesion->user;
+        $recuerdos = $sesion->recuerdos;
         $show = true;
         //throw new \Exception($sesion->multimedias);
-        return view('sesiones.show', compact('sesion', 'etapas', 'paciente', 'user', 'show'));
+        return view('sesiones.show', compact('sesion', 'etapas', 'paciente', 'user', 'show', 'recuerdos'));
     }
 
     public function showEditable($idP, $id)
@@ -271,6 +273,7 @@ class SesionesController extends Controller
     public function destroy($id)
     {
         $sesion = Sesion::find($id);
+        $sesion->informes()->delete();
         $idP = $sesion->paciente_id;
         Sesion::destroy($id);
         //return redirect("/usuarios/$idP/sesiones");
@@ -278,6 +281,7 @@ class SesionesController extends Controller
     public function restore($idP, $id) 
     {
         Sesion::where('id', $id)->withTrashed()->restore();
+        InformeSesion::where('sesion_id', $id)->withTrashed()->restore();
     }
 
     public function destroyRecuerdo($idSesion, $idRecuerdo)

@@ -6,6 +6,7 @@ use App\Models\Evaluacion;
 use App\Models\Paciente;
 use App\Models\Sesion;
 use App\Models\Multimedia;
+use App\Models\InformeSesion;
 use Illuminate\Http\Request;
 
 class EvaluacionController extends Controller
@@ -29,7 +30,7 @@ class EvaluacionController extends Controller
         foreach($evaluaciones as $evaluacion){
             $fechaActual = \Carbon\Carbon::parse($evaluacion->fecha)->addDays(1)->format("Y-m-d h:i:s");
             //$fechas->push([$fechaAnterior, $fechaActual]);
-            $sesiones = Sesion::whereBetween("fecha_finalizada", [$fechaAnterior, $fechaActual])->get();
+            $sesiones = InformeSesion::whereBetween("fecha_finalizada", [$fechaAnterior, $fechaActual])->get();
             $evaluacion->numSesiones = count($sesiones);
             $fechaAnterior=$fechaActual;
         }

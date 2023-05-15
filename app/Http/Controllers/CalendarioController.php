@@ -283,6 +283,11 @@ class CalendarioController extends Controller
         Actividad::where('id', $id)->withTrashed()->restore();
     }
 
+    public function restoreSesion($idP, $id) 
+    {
+        Sesion::where('id', $id)->withTrashed()->restore();
+    }
+
     public function destroySesion(Request $request)
     {
         $sesion = Sesion::findOrFail($request->idSesion);

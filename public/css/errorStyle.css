@@ -1,0 +1,46 @@
+:root {
+    --turquesa: #14a2b8;
+    --turquesaOscuro: #017e91;
+    --turquesaSuave: #a1dfea3f;
+    --destacadoOscuro: #e1ffff;
+    --turquesaClaroNavBar: #d2f9f9;
+    --white: rgb(255, 255, 255);
+    --whiteSuave: #ffffff7b;
+    --tamLetra: 18px;
+    --tamLetraBotones: 16px;
+    --captionSize: 16px;
+    --azulBootstrap: #4582ec;
+    --azulTextoNavBar: #4F7BC5;
+    --colorFondoClaro: #e5f1f1;
+}
+
+.error-img-recuerdame{
+    min-width: 10vh!important;
+    margin-left: 10px!important;
+}
+
+.error-fondo {
+    background-color: var(--colorFondoClaro);
+}
+
+.error-main {
+    background-color: var(--white);
+    box-shadow: 0px 10px 10px -10px #5D6572;
+}
+
+.error-main h1 {
+   
+    color: #444444;
+    font-size: 90px;
+    text-shadow: 2px 4px 5px #6E6E6E;
+}
+
+.error-main h6 {
+    color: #42494F;
+    font-size: 20px;
+}
+
+.error-main p {
+    color: #9897A0;
+    font-size: 15px;
+}

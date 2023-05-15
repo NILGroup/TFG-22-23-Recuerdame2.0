@@ -8,12 +8,14 @@ $('#searcher').each(function () {
         console.log(headers)
 });
 */
+var noBusqueda = ['Acciones', 'Informe', 'id', 'Id', 'iD', 'ID', 'Apto', 'Asignar'];
 
 var table = $(document).ready(function () {
     $('table.datatable').DataTable({
         paging: false,
         info: false,
         sDom:"ltipr",
+        "order": [],
         /*
         scrollY: 300,
         scrollCollapse: true,
@@ -52,7 +54,7 @@ var table = $(document).ready(function () {
                         table.column(col).search(this.value).draw();
                 });
             var column = this.api().columns().every(function(i) {
-                if(this.header().textContent != "")
+                if(!noBusqueda.includes(this.header().textContent))
                     search.children("select").append('<option value="' + i + '">' + this.header().textContent + '</option>');
             })
             $("table.datatable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");   

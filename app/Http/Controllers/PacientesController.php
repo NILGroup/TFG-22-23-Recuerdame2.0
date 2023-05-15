@@ -14,7 +14,7 @@ use App\Models\Genero;
 use App\Models\Multimedia;
 use App\Models\InformeSesion;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Diagnostico;
 use function PHPUnit\Framework\isNull;
 
 class PacientesController extends Controller
@@ -86,6 +86,7 @@ class PacientesController extends Controller
             "nombre" => $request->nombre,
             "apellidos" => $request->apellidos,
             "genero_id" => $request->genero_id,
+            "genero_custom" => $request->genero_custom,
             "lugar_nacimiento" => $request->lugar_nacimiento,
             "nacionalidad" => $request->nacionalidad,
             "fecha_nacimiento" => $request->fecha_nacimiento,
@@ -100,7 +101,7 @@ class PacientesController extends Controller
 
 
         MultimediasController::savePhoto($request, $paciente);
-
+    
         $paciente->users()->save($user);
         session()->put('created', "true");
         //Redireccionamos a la vista de lista pacientes
@@ -177,7 +178,6 @@ class PacientesController extends Controller
         $situaciones = Situacion::all()->sortBy("id");
         $estudios = Estudio::all()->sortBy("id");
         $generos = Genero::all()->sortBy("id");
-
         //Devolvemos al paciente a la vista de editar paciente
         return view("usuarios.edit", compact("paciente", "residencias", "situaciones", "estudios", "generos"));
     }
@@ -198,7 +198,7 @@ class PacientesController extends Controller
         
         session()->put('created', "true");
         //Redireccionamos a lista pacientes
-        //return redirect("/usuarios/$request->id");
+        return redirect("/usuarios/$request->id");
         
     }
 

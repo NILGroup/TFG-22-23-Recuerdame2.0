@@ -9,6 +9,7 @@
         "codedge/laravel-fpdf": "^1.9",
         "creatomate/creatomate": "^1.0",
         "duncan3dc/speaker": "^1.4",
+        "eduardokum/laravel-mail-auto-embed": "^2.10",
         "google/cloud": "^0.195.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
@@ -18,7 +19,8 @@
         "laravelcollective/html": "^6.4",
         "pbmedia/laravel-ffmpeg": "^8.3",
         "php-ffmpeg/php-ffmpeg": "^1.1",
-        "twbs/bootstrap-icons": "^1.10"
+        "twbs/bootstrap-icons": "^1.10",
+        "wapmorgan/mp3info": "^0.0.8"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

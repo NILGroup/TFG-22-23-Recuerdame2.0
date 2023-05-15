@@ -29,19 +29,19 @@
                 </li>
                 @else
                 <li class="nav-item">
-                    <a class="nav-linkClaro nav-link letra-primary-color menu" aria-current="page" href="/usuarios/{{ Session::get('paciente')['id'] }}">Usuarios</a>
+                    <a class="nav-linkClaro nav-link letra-primary-color menu" aria-current="page" href="/usuarios">Usuarios</a>
                 </li>
                 @endif
                 <li class="nav-item dropdownClaro dropdown">
                     <a class="nav-linkClaro nav-link dropdown-toggle letra-primary-color menu" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Historias de Vida</a>
                     <ul class="dropdownClaro-menu dropdown-menu">
                         <li><a class="dropdownClaro-item dropdown-item" href="/usuarios/{{Session::get('paciente')['id']}}/historias/generarHistoria">Generar Historia de Vida</a></li>
-                        <li><a class="dropdownClaro-item dropdown-item" href="/pacientes/{{Session::get('paciente')['id']}}/videos">Ver vídeos</a></li>
-                        <li><a class="dropdownClaro-item dropdown-item" href="/usuarios/{{Session::get('paciente')['id']}}/resumenes">Ver resúmenes</a></li>
-                        <li><a class="dropdownClaro-item dropdown-item" href="/usuarios/{{Session::get('paciente')['id']}}/recuerdos">Ver recuerdos</a></li>
                         @if (Auth::user()->rol_id == 1)
-                        <li><a class="dropdownClaro-item dropdown-item" href="/usuarios/{{Session::get('paciente')['id']}}/personas">Personas relacionadas</a></li>
+                            <li><a class="dropdownClaro-item dropdown-item" href="/usuarios/{{Session::get('paciente')['id']}}/videos">Ver vídeos</a></li>
+                            <li><a class="dropdownClaro-item dropdown-item" href="/usuarios/{{Session::get('paciente')['id']}}/resumenes">Ver resúmenes</a></li>
                         @endif
+                        <li><a class="dropdownClaro-item dropdown-item" href="/usuarios/{{Session::get('paciente')['id']}}/recuerdos">Ver recuerdos</a></li>
+                        <li><a class="dropdownClaro-item dropdown-item" href="/usuarios/{{Session::get('paciente')['id']}}/personas">Personas relacionadas</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -82,11 +82,15 @@
         <div class="row align-items-center pe-4">
             <div class="col-12">
                 @if( Session::get('paciente')['genero_id'] == 1)
-                Hombre
+                Género: Hombre
                 @elseif( Session::get('paciente')['genero_id'] == 2)
-                Mujer
+                Género: Mujer
                 @else
-                Otro
+                    @if(!is_null(Session::get('paciente')['genero_custom']) && Session::get('paciente')['genero_id'] == "3")
+                        Género: {{Session::get('paciente')['genero_custom']}}
+                    @else
+                        Género: Otro
+                    @endif
                 @endif
             </div>
         </div>

@@ -6,14 +6,14 @@
         <div class="col-md-8">
             <div class="card-body">
                 <div class="card form-login">
-                    <input id="rellenaBBDD" type="image" src="/img/Marca_recuerdame-nobg.png" formaction="/prueba">
+                    
                     <form method="POST" action="{{ route('login') }}">
                         {{csrf_field()}}
-                        <!-- <img src="/img/Marca_recuerdame-nobg.png" class="card-img-top"> -->
+                        <img src="/img/Marca_recuerdame-nobg.png" class="card-img-top">
                         <div class="card-body">
                             <div class="row mb-3 form-floating mb-3">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Correo electrónico" autofocus>
-                                <label class="text-muted" for="email">Correo electrónico</label>
+                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Correo electrónico" autofocus>
+                                <label class="text-muted" for="email">Correo electrónico o teléfono</label>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong> Correo electrónico o contraseña incorrectos</strong>
@@ -46,9 +46,7 @@
                             <p></p>
                             <p></p>
                             @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('He olvidado mi contraseña') }}
-                                </a>
+                                <!-- <a class="btn btn-link" href="{{ route('password.request') }}">{{ __('He olvidado mi contraseña') }}</a> -->
                             @endif
                         </div>
                     </form>
@@ -65,13 +63,9 @@
 
 
 @push('scripts')
-
-    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @include('layouts.scripts')
     <script src="/js/general.js"></script>
+    <script src="/js/libs/sweetAlert2.js"></script>
     <script>
         $("#rellenaBBDD").on("click", function(event){
             event.stopPropagation()

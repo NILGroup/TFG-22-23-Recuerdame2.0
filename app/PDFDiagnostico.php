@@ -92,9 +92,12 @@ class PDFDiagnostico extends FPDF
         $pdf->Cell(160, 7, ' ' . $edad->y, 1);
         $pdf->Ln();
         $pdf->SetFont('Times', 'B', 12);
-        $pdf->Cell(30, 7, 'Genero: ', 1, 0, 'L', true);
+        $pdf->Cell(30, 7, utf8_decode('Género: '), 1, 0, 'L', true);
         $pdf->SetFont('Times', '', 12);
-        $pdf->Cell(160, 7, ' ' . $paciente->genero->nombre, true);
+        if($paciente->genero_id != 3)
+            $pdf->Cell(160, 7, ' ' . utf8_decode($paciente->genero->nombre), true);
+        else
+            $pdf->Cell(160, 7, ' ' . utf8_decode($paciente->genero_custom), true);
         $pdf->Ln(12);
     }
 
@@ -252,7 +255,6 @@ class PDFDiagnostico extends FPDF
 
     function writeEvolucion($pdf, $diagnostico, $gds, $mini, $cdr)
     {
-        $pdf->AddPage();
         $pdf->SetFont('Times', 'B', 15);
         $pdf->Cell(0, 7, utf8_decode('Evolución'));
         $pdf->Ln(9);
@@ -261,7 +263,7 @@ class PDFDiagnostico extends FPDF
       
         $colors = array(
             'GDS' => array(255, 0, 0),
-            'Mini mental' => array(255, 0, 255),
+            'Mini mental' => array(0, 255, 0),
             'CDR' => array(0, 0, 255)
         );
         
@@ -270,8 +272,7 @@ class PDFDiagnostico extends FPDF
         // Colors: fixed
         // Max ordinate: 6
         // Number of divisions: 3
-        $pdf->LineGraph(190,100,$data,'VHkBvBgBdB',$colors);
-        
+        $pdf->LineGraph(190,100,$data,'VHkBvBgBdB',$colors);        
     }
 
     function pdfBody($pdf, $diagnostico, $paciente, $gds, $mini, $cdr)
@@ -326,7 +327,12 @@ class PDFDiagnostico extends FPDF
 
         $this->writeTest($pdf, $diagnostico);
 
-    
+        $H = $pdf->GetY();
+
+        if($H > 240-75){
+            $pdf->addPage(); //297 es el alto de un A4, 18 ocupa el footer 287-18=279
+            $H = $pdf->GetY();
+        }
         $this->writeEvolucion($pdf, $diagnostico, $gds, $mini, $cdr);
 
         $fecha = Carbon::now();

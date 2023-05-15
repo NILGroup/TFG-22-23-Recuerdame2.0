@@ -299,6 +299,7 @@ class RecuerdosController extends Controller
    
 
         $personas_relacionar = $request->ids_personas; //Array de ids de las personas
+        //throw new \Exception(json_encode($personas_relacionar));
         $recuerdo->personas_relacionadas()->detach();
         if (!is_null($personas_relacionar)) {
             foreach ($personas_relacionar as $p_id) {  
@@ -339,7 +340,12 @@ class RecuerdosController extends Controller
             else{
                 $p->related = 0;
             }
-            $p->tiporelacion_id = $p->tiporelacion->nombre;
+            if($p->tiporelacion_id == 7){
+                $p->tiporelacion_id = $p->tipo_custom;
+            }
+            else{
+                $p->tiporelacion_id = $p->tiporelacion->nombre;
+            }
         }
         $recuerdo->personasrelacionadas = $personas;    
         return json_encode($recuerdo);

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Recuérdame</title>
-    <link rel="icon" type="image/x-icon" href="/img/logo_recuerdame.png">
+    <link rel="icon" type="image/x-icon" href="/img/Logo_recuerdame.png">
     <!-- <title>{{ config('app.name', 'Laravel') }}</title> -->
 
     <!-- CSRF Token -->
@@ -42,6 +42,7 @@
     <link rel="stylesheet" href="/css/registro.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/imagen.css">
+    <link rel="stylesheet" href="/css/errorStyle.css">
     
     @stack('styles')
 

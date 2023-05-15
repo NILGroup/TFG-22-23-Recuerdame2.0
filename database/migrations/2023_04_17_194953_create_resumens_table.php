@@ -21,6 +21,7 @@ return new class extends Migration
             $table->longText('resumen');
             $table->timestamps();
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete("cascade");
+            $table->softDeletes();
         });
     }
 

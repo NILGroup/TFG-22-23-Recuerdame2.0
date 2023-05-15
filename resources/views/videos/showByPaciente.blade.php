@@ -10,14 +10,14 @@
         <div class="d-flex justify-content-between upper">
             @include('layouts.tableSearcher')
             <div class="justify-content-end d-flex">
-                <a href="/pacientes/{{$paciente->id}}/historias/generarHistoria"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
+                <a href="/usuarios/{{$paciente->id}}/historias/generarHistoria"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></a>
             </div>
         </div>
         <table id="tabla" class="table table-bordered table-striped table-responsive datatable">
             <caption>Listado de vídeos</caption>
             <thead>
                 <tr >
-                        <th scope="col" class="text-center">Enlace</th>
+                        <th scope="col" class="text-center">Vídeo</th>
                         <th scope="col" class="text-center">Estado</th>
                         <th scope="col" class="text-center">Fecha</th>
                         <th class="fit10 actions text-center" scope="col">Acciones</th>
@@ -28,11 +28,11 @@
             @foreach($videos as $video)
             <tr>
 
-                <td><a href={{$video->url}}>{{$video->url}}</a></td>
+                <td><a @if(!is_null($video->url)) href="/usuarios/{{$video->paciente_id}}/videos/{{$video->id}}" @endif>{{$video->nombre}}</a></td>
                 <td>{{$video->estado}}</td>
-                <td>{{$video->created_at}}</td>
+                <td data-sort="{{ strtotime($video->created_at) }}">{{date("d/m/Y", strtotime($video->created_at))}}</td>
                 <td class="tableActions">
-                    <a href="{{$video->url}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del video."></i></a>
+                    @if(!is_null($video->url))<a href="/usuarios/{{$video->paciente_id}}/videos/{{$video->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del video."></i></a> @endif
                         <!-- Boton de eliminar -->
                         <form method="post" action="{{ route('video.destroy', $video->id) }}" style="display:inline!important;">
                             {{csrf_field()}}
@@ -52,8 +52,8 @@
 
 @push('scripts')
     @include('layouts.scripts')
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>  
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/libs/dataTables.js"></script>
+    <script src="/js/libs/sweetAlert2.js"></script>
     <script src="/js/table.js"></script>
     <script src="/js/confirm.js"></script>
     
