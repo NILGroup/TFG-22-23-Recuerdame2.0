@@ -134,7 +134,7 @@ class VideoHistoriaController extends Controller
             }
         }
 
-        if(empty($imagesArray) && empty($videosArray)){
+        if($imagesArray->isEmpty() && $videosArray->isEmpty()){
             $listaRecuerdos = collect();
             return view("historias.generarLibro", compact("fechaInicio", "fechaFin", "listaRecuerdos"));
         }else{
