@@ -137,11 +137,12 @@ class VideoHistoriaController extends Controller
         if(empty($imagesArray) && empty($videosArray)){
             $listaRecuerdos = collect();
             return view("historias.generarLibro", compact("fechaInicio", "fechaFin", "listaRecuerdos"));
-        }
+        }else{
             $VideoGenerator = new VideoHistoriaVida();
             $VideoGenerator->generateVideo($titulo, $videosArray->toArray(), $imagesArray->toArray(), $imagenesCheck, $videosCheck, $narracionCheck, $listaRecuerdos, $idPaciente);
 
             return redirect("/usuarios/$idPaciente/videos");
+        }
     }
 
     public function showByPaciente($idPaciente){
