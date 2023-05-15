@@ -131,14 +131,16 @@ class VideoPost implements ShouldQueue
                 $this->video->url = $renders[0]['url'];
                 $this->video->save();
 
-                //Borramos caché vídeos
-                if(File::exists($urlNarracionPath)){
-                    File::delete($urlNarracionPath);
-                }
+
 
                 $usuario = User::find($this->idPaciente);
                 Mail::to($usuario->email)->send(new VideoMail($this->video));
-
+                //Borramos caché vídeos
+                if($this->narracionCheck){
+                    if(File::exists($urlNarracionPath)){
+                        File::delete($urlNarracionPath);
+                    }
+                }
             }
         }
 
