@@ -143,6 +143,11 @@ class ResumenesController extends Controller
             $arrayRecuerdosFinal = array_merge($arrayRecuerdosFinal, $arrayRecuerdosMezclaEtapa);
         }
 
+        if(sizeof($arrayRecuerdosFinal) == 0){
+            $listaRecuerdos = collect();
+            return view("historias.generarLibro", compact("fechaInicio", "fechaFin", "listaRecuerdos"));
+        }
+
         $titulo = "Resumen " . $titulo; 
 
         //return $titulo;
