@@ -137,15 +137,8 @@ class InformesSesionController extends Controller
     }
 
     public function destroy($id){
-        $sesion = Sesion::find($id);
-        /*
-        $sesion->respuesta = null;
-        $sesion->fecha_finalizada = null;
-        $sesion->observaciones = null;
-        */
-        $sesion->finalizada = false;
-        $sesion->save();
-        //return redirect("/usuarios/$sesion->paciente_id/informesSesion");
+        InformeSesion::destroy($id);
+        InformeSesion::where('id', $id)->withTrashed()->restore();
     }
     public function restore($idP, $id){
         $sesion = Sesion::find($id);
