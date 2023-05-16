@@ -124,7 +124,7 @@
                     </td>
                 @endif
                 <td class="tableActions">
-                    <input type="hidden" value=' + rec[0].textContent + ' name="recuerdos[]">
+                    <a href="/usuarios/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del recuerdo"></i></a>
                 </td>
             </tr>
             @endforeach
