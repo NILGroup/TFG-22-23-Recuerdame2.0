@@ -286,17 +286,17 @@ class CalendarioController extends Controller
     public function restoreSesion($idP, $id) 
     {
         Sesion::where('id', $id)->withTrashed()->restore();
+        InformeSesion::where('sesion_id', $id)->withTrashed()->restore();
     }
 
     public function destroySesion(Request $request)
     {
-        $sesion = Sesion::findOrFail($request->idSesion);
-        $paciente = $sesion->paciente_id;
-        $sesion->delete();
-
-        session()->put('created', "Eliminado");
+        $sesion = Sesion::find($id);
+        $sesion->informes()->delete();
+        $idP = $sesion->paciente_id;
+        Sesion::destroy($id);
+        //return redirect("/usuarios/$idP/sesiones");
         return redirect("/usuarios/$paciente/calendario");
-        //return "<h1>$request</h1>";
     }
 
     public function registroSesion(Request $request)
