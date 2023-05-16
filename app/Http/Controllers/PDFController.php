@@ -182,9 +182,9 @@ class PDFController extends Controller
 
     public function verInformeDiagnostico($idPaciente)
     {
-        $diagnostico = Diagnostico::find($idPaciente);
+        $paciente = Paciente::find($idPaciente);
 
-        $paciente = $diagnostico->paciente;
+        $diagnostico = $paciente->diagnostico;
         if (!is_null($diagnostico->gds) && !is_null($diagnostico->mental) && !is_null($diagnostico->cdr)) {
 
             $fechasNF = $paciente->evaluaciones()->pluck("fecha")->toarray();
