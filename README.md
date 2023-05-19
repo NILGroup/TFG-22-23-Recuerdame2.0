@@ -58,7 +58,22 @@ Configurar key de [Creatomate](https://creatomate.com) para la generación de v�
 Configurar la generación de voces de [VoiceRSS](https://www.voicerss.org).
 
     VOICERRS_KEY=<your_key>
-    
+
+Configurar el envío de correos electronicos para la generación de vídeos.
+
+    MAIL_MAILER=smtp
+    MAIL_HOST=smtp.gmail.com
+    MAIL_PORT=465
+    MAIL_USERNAME=<your_mail>
+    MAIL_PASSWORD=<gmail_external_apps_password>
+    MAIL_ENCRYPTION=ssl
+    MAIL_FROM_ADDRESS=<your_mail>
+    MAIL_FROM_NAME="${APP_NAME}"
+
+Configurar tareas asíncronas para la generación de vídeos.
+
+    QUEUE_CONNECTION=database
+
 Configurar la generación de resúmenes de [ChatGPT](https://openai.com/blog/chatgpt).
 
     OPENAI_API_KEY=<your_key>
