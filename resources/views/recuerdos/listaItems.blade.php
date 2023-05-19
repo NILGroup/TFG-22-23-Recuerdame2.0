@@ -77,7 +77,7 @@
     <hr style="color: lightgray;">
     <div class="mt-3 row form-group justify-content-start" style="align-items: stretch!important;">
         <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
-            <label for="emocion" class="form-label col-form-label negrita col-sm-6 col-md-12 col-lg-3">Emoción: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Emoción que estima el terapeuta que el recuerdo le ha generado al paciente"></i></label>
+            <label for="emocion" class="form-label col-form-label negrita col-sm-6 col-md-12 col-lg-3">Emoción: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Emoción que estima el terapeuta que el recuerdo le ha generado al usuario"></i></label>
             <div class="col-sm-12 col-md-12 col-lg-7 align-items-center">
                 <select class="form-select form-select-sm" id="idEmocion" name="emocion_id">
                     <option></option>
@@ -91,7 +91,7 @@
             @if(Auth::user()->rol_id == 1)
             <div class="slidecontainer" id="pruebaa">
                 <div class="row col-sm-12 col-md-12 col-lg-12 justify-content-start " >
-                    <label for="puntuacion" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-2">Nivel: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Grado de positividad de la emoción generada al paciente por el recuerdo"></i></label>
+                    <label for="puntuacion" class="form-label col-form-label negrita col-sm-12 col-md-12 col-lg-2">Nivel: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Grado de positividad de la emoción generada al usuario por el recuerdo"></i></label>
 
 
                     <div class="col-sm-12 col-md-12 col-lg-9 align-items-center">
