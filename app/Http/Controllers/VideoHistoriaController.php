@@ -124,11 +124,11 @@ class VideoHistoriaController extends Controller
                 $extension = pathinfo($media->fichero, PATHINFO_EXTENSION);
                 $rememberpath = "http://".env('APP_URL').$media->fichero;//Storage::url(str_replace('storage/' ,'', $media->fichero));//env("APP_URL").$media->fichero;
                 
-                if($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg'){
+                if($imagenesCheck && ($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg')){
                     $imagesArray->push($rememberpath);
                 }
 
-                if($extension == 'mp4' || $extension == 'avi'){
+                if($videosCheck && ($extension == 'mp4' || $extension == 'avi')){
                     $videosArray->push($rememberpath);
                 }
             }
