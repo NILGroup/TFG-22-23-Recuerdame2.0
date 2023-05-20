@@ -1,52 +1,23 @@
-$('.escalaPersonalizada').change(function (){
-    var nombreEscala = document.getElementById('nombre_escala').value, 
-        escala = document.getElementById('escala').value;
-    if((nombreEscala == null && escala == null) || (nombreEscala == "" && escala == "") ){
-        document.getElementById('nombre_escala').required = false;
-        escala = document.getElementById('escala').required = false;
-        fechaEscala = document.getElementById('fecha_escala').required = false;
-    }
-    else{
-        document.getElementById('nombre_escala').required = true;
-        escala = document.getElementById('escala').required = true;
-        fechaEscala = document.getElementById('fecha_escala').required = true;
-    }
-});
-$('.gds').change(function (){
-    var nombreEscala = document.getElementById('gds').value
-    if(nombreEscala == null || nombreEscala == ""){
-        escala = document.getElementById('gds').required = false;
-        fechaEscala = document.getElementById('gds_fecha').required = false;
-    }
-    else{
-        escala = document.getElementById('gds').required = true;
-        fechaEscala = document.getElementById('gds_fecha').required = true;
-    }
-});
+function cambiarRequired(input, fecha){
+    let req = ($(input).prop("value") || $(fecha).prop("value")) ? 1 : 0
+    $(input).prop("required", req)
+    $(fecha).prop("required", req)  
+}
 
-$('.mental').change(function (){
-    var nombreEscala = document.getElementById('mental').value
-    if(nombreEscala == null || nombreEscala == ""){
-        escala = document.getElementById('mental').required = false;
-        fechaEscala = document.getElementById('mental_fecha').required = false;
-    }
-    else{
-        escala = document.getElementById('mental').required = true;
-        fechaEscala = document.getElementById('mental_fecha').required = true;
-    }
-});
+function cambiarRequiredCustom(value){
+    $("#nombre_escala").prop("required", value)
+    $("#escala").prop("required", value)
+    $("#fecha_escala").prop("required", value)
+}
 
-$('.cdr').change(function (){
-    var nombreEscala = document.getElementById('mental').value
-    if(nombreEscala == null || nombreEscala == ""){
-        escala = document.getElementById('cdr').required = false;
-        fechaEscala = document.getElementById('cdr_fecha').required = false;
-    }
-    else{
-        escala = document.getElementById('cdr').required = true;
-        fechaEscala = document.getElementById('cdr_fecha').required = true;
-    }
-});
+$("#nombre_escala").on("keyup", (e) => cambiarRequiredCustom(($("#escala").prop("value") || $("#nombre_escala").prop("value") || $("#fecha_escala").prop("value"))))
+$(".custom-control").each((i, e) => $(e).on("change", (ev) =>cambiarRequiredCustom(($("#escala").prop("value") || $("#nombre_escala").prop("value") || $("#fecha_escala").prop("value")))))
+$(".cdr-control").each((i, e) => $(e).on("change", (ev) => cambiarRequired("#cdr", "#cdr_fecha")))
+$(".mental-control").each((i, e) => $(e).on("change", (ev) => cambiarRequired("#mental", "#mental_fecha")))
+$(".gds-control").each((i, e) => $(e).on("change", (ev) => cambiarRequired("#gds", "#gds_fecha")))
+
+
+
 
 $(document).ready(function () {
     $("input[type='number']").each(function(){

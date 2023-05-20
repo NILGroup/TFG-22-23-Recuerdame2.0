@@ -10,7 +10,7 @@
     <div class="d-flex flex-row justify-content-start  align-items-center" >
         <label for="Enfermedad" class=" form-label col-form-label negrita">Enfermedad:<span class="asterisco">*</span></label>
         <div class="col p-2">
-            <input type="text" style="width: fit-content;" class="form-control form-control-sm" id="enfermedad" name="enfermedad" value="{{$diagnostico->enfermedad}}">
+            <input required type="text" style="width: fit-content;" class="form-control form-control-sm" id="enfermedad" name="enfermedad" value="{{$diagnostico->enfermedad}}">
         </div>
     </div>
     <div class="mb-3">
@@ -35,10 +35,10 @@
     <div class="row">
         <label for="GDS" class="col form-label col-form-label-sm col-sm-5 col-md-4 col-lg-3" style="min-width: 100px;">GDS</label>
         <div class="col col-sm-2 col-md-3 col-lg-2">
-            <input type="number" min="1" max="7" class="form-control form-control-sm gds" id="gds" name="gds" value="{{$diagnostico->gds}}">
+            <input type="number" min="1" max="7" class="form-control form-control-sm gds-control" id="gds" name="gds" value="{{$diagnostico->gds}}">
         </div>
         <div class="col col-sm-3 col-md-3 col-lg-2">
-            <input type="date" class="form-control form-control-sm gds" id="gds_fecha" name="gds_fecha" value="{{$diagnostico->gds_fecha}}">
+            <input type="date" class="form-control form-control-sm gds-control" id="gds_fecha" name="gds_fecha" value="{{$diagnostico->gds_fecha}}">
         </div>
         <div class="col">
             <input type="file" name="igds" id="igds" class="form-control form-control-sm">
@@ -53,10 +53,10 @@
     <div class="row">
         <label for="Mental" class="col form-label col-form-label-sm col-sm-5 col-md-4 col-lg-3" style="min-width: 100px;">Mini mental/MEC de Lobo</label>
         <div class="col col-sm-2 col-md-3 col-lg-2">
-            <input type="number" min="0" max="25" class="form-control form-control-sm mental" id="mental" name="mental" value="{{$diagnostico->mental}}">
+            <input type="number" min="0" max="25" class="form-control form-control-sm mental-control" id="mental" name="mental" value="{{$diagnostico->mental}}">
         </div>
         <div class="col col-sm-3 col-md-3 col-lg-2">
-            <input type="date" class="form-control form-control-sm mental" id="mental_fecha" name="mental_fecha" value="{{$diagnostico->mental_fecha}}">
+            <input type="date" class="form-control form-control-sm mental-control" id="mental_fecha" name="mental_fecha" value="{{$diagnostico->mental_fecha}}">
         </div>
         <div class="col">
             <input type="file" name="imec" id="imec" class="form-control form-control-sm">
@@ -68,10 +68,10 @@
     <div class="row mb-3">
         <label for="CDR" class="col form-label col-form-label-sm col-sm-5 col-md-4 col-lg-3" style="min-width: 100px;">CDR</span></label>
         <div class="col col-sm-2 col-md-3 col-lg-2">
-            <input type="number" min="0" max="3" class="form-control form-control-sm nombre_escala" id="cdr" name="cdr" value="{{$diagnostico->cdr}}">
+            <input type="number" min="0" max="3" class="form-control form-control-sm cdr-control" id="cdr" name="cdr" value="{{$diagnostico->cdr}}">
         </div>
         <div class="col col-sm-3 col-md-3 col-lg-2">
-            <input type="date" class="form-control form-control-sm" id="cdr_fecha" name="cdr_fecha" value="{{$diagnostico->cdr_fecha}}">
+            <input type="date" class="form-control form-control-sm cdr-control" id="cdr_fecha" name="cdr_fecha" value="{{$diagnostico->cdr_fecha}}">
         </div>
         <div class="col">
             <input type="file" name="icdr" id="icdr" class="form-control form-control-sm">
@@ -91,13 +91,13 @@
         </div>
         <div class="row">
             <div class="col col-sm-5 col-md-4 col-lg-3">
-                    <input type="text" class="col form-control form-control-sm escalaPersonalizada" name="nombre_escala" value="{{$diagnostico->nombre_escala}}">
+                    <input type="text" class="col form-control form-control-sm" id="nombre_escala" name="nombre_escala" value="{{$diagnostico->nombre_escala}}">
             </div>
             <div class="col col-sm-2 col-md-3 col-lg-2">
-                    <input type="number" class="col form-control form-control-sm escalaPersonalizada" name="escala" value="{{$diagnostico->escala}}">
+                    <input type="number" class="col form-control form-control-sm custom-control" id="escala" name="escala" value="{{$diagnostico->escala}}">
             </div>
             <div class="col col-sm-3 col-md-3 col-lg-2">
-                <input type="date" class=" form-control form-control-sm escalaPersonalizada" name="fecha_escala" value="{{$diagnostico->fecha_escala}}">
+                <input type="date" class=" form-control form-control-sm custom-control"  id="fecha_escala" name="fecha_escala" value="{{$diagnostico->fecha_escala}}">
             </div>
             <div class="col">
             <input type="file" name="icus" id="icus" class="form-control form-control-sm">

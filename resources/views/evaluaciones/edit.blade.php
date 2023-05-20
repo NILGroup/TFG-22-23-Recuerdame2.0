@@ -13,7 +13,7 @@
         @include('evaluaciones.listaItems')
         <div>
             <a href="/usuarios/{{$paciente->id}}/evaluaciones"><button type="button" class="btn btn-primary">Cancelar</button></a>
-            <button type="submit" name="guardarInformeSeguimiento" value="Guardar" class="btn btn-outline-primary">Finalizar</button>
+            <button type="submit" name="guardarInformeSeguimiento" value="Guardar" class="btn btn-outline-primary guardar">Finalizar</button>
         </div>
     </form>
 </div>
@@ -23,6 +23,6 @@
     @include('layouts.scripts')
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-touchspin/4.2.5/jquery.bootstrap-touchspin.min.js"></script> -->
     <script src="/js/libs/touchSpin.js"></script>
-    
+    <script src="/js/validacion.js"></script>
     <script src="/js/evaluacion.js"></script>
 @endpush
