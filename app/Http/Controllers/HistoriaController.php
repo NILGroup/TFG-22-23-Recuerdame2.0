@@ -52,7 +52,7 @@ class HistoriaController extends Controller
         $noApto = $request->noApto;
         $paciente = Paciente::find($idPaciente);
         $puntuacionFinal = collect([]);
-       
+    
         if (is_null($idEtapa))
             $idEtapa = Etapa::select('id');
         if (is_null($idCategoria))

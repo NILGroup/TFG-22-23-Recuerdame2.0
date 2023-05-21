@@ -54,32 +54,36 @@ class PDFHistoria extends FPDF
             $countfotos = 0;
 
             foreach ($listaMultimedia as $multimedia) {
-                $i++;
-                $countfotos++;
-                $image = "../public/" . $multimedia->fichero;
-                if ($H > 240) {
 
-                    $pdf->addPage(); 
-                    $H = $pdf->GetY();
-                }
-                if ($i == 3) { // 3 imágenes por filas
+                $extension = pathinfo($multimedia->fichero, PATHINFO_EXTENSION);
+                if($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg'){
+                    $i++;
+                    $countfotos++;
+                    $image = "../public/" . $multimedia->fichero;
+                    if ($H > 240) {
 
-                    $pdf->Cell(4, 7, "");
-                    $pdf->Cell(50, 35, $pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50, 50), 0, 0, 'C');
-                    $pdf->Ln(55);
-                    $i = 0;
-                } else if ($i == 1 || $i == 2) {
-                    $pdf->Cell(4, 7, "");
-                    $pdf->Cell(50, 35, $pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50, 50), 0, 0, 'C');
-                    $pdf->Cell(5, 35, '', 0); //SEPARACIÓN
-                } else {
-                    $pdf->Cell(4, 7, $i);
-                    $pdf->MultiCell(50, 35, $pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50, 50), 0, 'C');
-                }
+                        $pdf->addPage(); 
+                        $H = $pdf->GetY();
+                    }
+                    if ($i == 3) { // 3 imágenes por filas
 
-                if ($countfotos == sizeof($listaMultimedia)) {
-                    $pdf->Cell(4, 7, "");
-                    $pdf->Ln(55);
+                        $pdf->Cell(4, 7, "");
+                        $pdf->Cell(50, 35, $pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50, 50), 0, 0, 'C');
+                        $pdf->Ln(55);
+                        $i = 0;
+                    } else if ($i == 1 || $i == 2) {
+                        $pdf->Cell(4, 7, "");
+                        $pdf->Cell(50, 35, $pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50, 50), 0, 0, 'C');
+                        $pdf->Cell(5, 35, '', 0); //SEPARACIÓN
+                    } else {
+                        $pdf->Cell(4, 7, $i);
+                        $pdf->MultiCell(50, 35, $pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 50, 50), 0, 'C');
+                    }
+
+                    if ($countfotos == sizeof($listaMultimedia)) {
+                        $pdf->Cell(4, 7, "");
+                        $pdf->Ln(55);
+                    }
                 }
             }
         }
