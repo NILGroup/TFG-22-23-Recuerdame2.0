@@ -27,6 +27,9 @@
     @include('layouts.scripts')
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-touchspin/4.2.5/jquery.bootstrap-touchspin.min.js"></script> -->
     <script src="/js/libs/touchSpin.js"></script>
-    
+    <script>
+        $("#add-multimedia").hide()
+        $("#remove-multimedia").hide()
+    </script>
     <script src="/js/evaluacion.js"></script>
 @endpush

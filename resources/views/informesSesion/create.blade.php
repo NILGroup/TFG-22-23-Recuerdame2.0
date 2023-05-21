@@ -40,4 +40,8 @@
     <script src="/js/multiModal.js"></script>
     <script src="/js/validacion.js"></script>
     <script src="/js/informeSesion.js"></script>
+    <script>
+        $("#add-multimedia").hide()
+        $("#remove-multimedia").hide()
+    </script>
 @endpush

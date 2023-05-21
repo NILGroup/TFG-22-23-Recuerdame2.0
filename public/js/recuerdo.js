@@ -198,6 +198,7 @@ function agregarRecuerdosExistentes(r) {
     $("#tablaRecuerdosExistentes tbody tr").each(function(i, elem){
 
         let rec = $(elem).children()  
+
         if ($(rec[7]).children("input").prop("checked")){
 
             let row = $("<tr></tr>")
@@ -209,7 +210,7 @@ function agregarRecuerdosExistentes(r) {
             row.append($('<td>' + rec[5].textContent + '</td>'))
 
 
-            if($(rec[6]).children("input").prop("checked"))
+            if($(rec[7]).children("input").prop("checked"))
                 row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox" checked disabled> </td>'))
             else
                 row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox" disabled> </td>'))

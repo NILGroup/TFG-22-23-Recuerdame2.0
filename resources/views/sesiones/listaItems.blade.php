@@ -124,8 +124,9 @@
                     </td>
                 @endif
                 <td class="tableActions">
-                    <a href="/usuarios/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del recuerdo"></i></a>
+                    @if ($show) <a href="/usuarios/{{$paciente->id}}/recuerdos/{{$recuerdo->id}}"><i class="fa-solid fa-eye text-black tableIcon" data-toggle="tooltip" data-placement="top" title="Ver información del recuerdo"></i></a> @endif
                 </td>
+                <input type="hidden" value="{{$recuerdo->id}}" name="recuerdos[]">
             </tr>
             @endforeach
             </tbody>
