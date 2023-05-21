@@ -227,12 +227,23 @@ document.addEventListener('DOMContentLoaded', function () {
                     var tabla = $("#tabla_recuerdos").dataTable();
                     tabla.api().clear();
                     for (let recuerdo of info.event.extendedProps.recuerdos) {
+                        console.log(recuerdo);
                         let row = $("<tr></tr>");
                         row.append($('<td>' + recuerdo.nombre + '</td>'));
-                        row.append($('<td>' + recuerdo.fecha + '</td>'));
                         row.append($('<td>' + recuerdo.etapa.nombre + '</td>'));
                         row.append($('<td>' + recuerdo.categoria.nombre + '</td>'));
                         row.append($('<td>' + recuerdo.estado.nombre + '</td>'));
+                        if (recuerdo.puntuacion > 5)
+                            row.append($('<td> Positivo (' + recuerdo.puntuacion + ') </td>'));
+                        else if (recuerdo.puntuacion < 5)
+                            row.append($('<td> Negativo (' + recuerdo.puntuacion + ') </td>'));
+                        else if (recuerdo.puntuacion == 5)
+                            row.append($('<td> Neutro (' + recuerdo.puntuacion + ') </td>'));
+                        if (recuerdo.apto == 1)
+                            row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox" checked disabled> </td>'))
+                        else
+                            row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox"  disabled> </td>'))
+                            row.append($('<td> </td>'))
                         tabla.api().row.add(row).draw()
                     }
 
