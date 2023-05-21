@@ -5,7 +5,6 @@ namespace App;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use File;
 use DateTime;
-
 global $fecha;
 
 class PDFSesion extends FPDF{
@@ -78,10 +77,7 @@ class PDFSesion extends FPDF{
         $pdf->Cell(140,7, ' ' .\Carbon\Carbon::parse($sesion->fecha)->format("d-m-Y h:i"),1,0);
         $pdf->Ln();
         $pdf->SetFont('Times','B',12);
-        $pdf->Cell(50,7,utf8_decode("Duración:"),1,0,'L',true);
-        $pdf->SetFont('Times','',12);
-        $pdf->Cell(140,7,' ' . \Carbon\Carbon::parse($sesion->duracion),1,0);
-        $pdf->Ln(12);
+        $pdf->Ln();
 
         $pdf->SetFillColor(170);
         $pdf->SetFont('Times','B',12);
@@ -112,6 +108,11 @@ class PDFSesion extends FPDF{
     }
 
     function writeInformeSesion($pdf, $informeSesion){
+        $pdf->SetFont('Times','B',12);
+        $pdf->Cell(50,7,utf8_decode("Duración:"),1,0,'L',true);
+        $pdf->SetFont('Times','',12);
+        $pdf->Cell(140,7,' ' . $informeSesion->duracion,1,0);
+        $pdf->Ln();
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(50,7,utf8_decode("Fecha de finalización:"),1,0,'L',true);
         $pdf->SetFont('Times','',12);
