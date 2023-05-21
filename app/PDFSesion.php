@@ -80,7 +80,7 @@ class PDFSesion extends FPDF{
         $pdf->SetFont('Times','B',12);
         $pdf->Cell(50,7,utf8_decode("Duración:"),1,0,'L',true);
         $pdf->SetFont('Times','',12);
-        $pdf->Cell(140,7,' ' . utf8_decode($sesion->duracion),1,0);
+        $pdf->Cell(140,7,' ' . \Carbon\Carbon::parse($sesion->duracion),1,0);
         $pdf->Ln(12);
 
         $pdf->SetFillColor(170);
