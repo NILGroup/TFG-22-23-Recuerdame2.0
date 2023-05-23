@@ -1,5 +1,4 @@
 $("input, select").each(function () {
-    console.log($(this).prop("type"))
     if(!$(this).is(":hidden") && !$(this).hasClass("search"))
     switch ($(this).prop("type")) {
         case "checkbox":
@@ -14,7 +13,10 @@ $("input, select").each(function () {
             }
             break;
         case "date":
-            $(this).replaceWith("<label> " + new Date($(this).val()).toLocaleDateString('en-GB')  + "</label>");
+            if($(this).val())
+                $(this).replaceWith("<label> " + new Date($(this).val()).toLocaleDateString('en-GB')  + "</label>");
+            else
+                $(this).replaceWith("<label> </label>");
             break;
         case "datetime-local":
             $(this).replaceWith("<label> " + new Date($(this).val()).toLocaleDateString('en-GB') + " " + new Date($(this).val()).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })  + "</label>");
