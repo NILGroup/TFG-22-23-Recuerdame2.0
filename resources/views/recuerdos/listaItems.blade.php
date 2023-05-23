@@ -68,7 +68,7 @@
         <div class="row col-sm-6 col-md-6 col-lg-6 align-items-center">
             <label for="apto" class="form-label col-form-label negrita col-sm-4 col-md-4 col-lg-3">Apto: <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="right" title="Si está opcion está marcada, significa que el recuerdo sigue siendo apto para trabajar con él"></i></label>
             <div class="col-sm-6 col-md-6 col-lg-7 align-items-center">
-                <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif >
+                <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif />
             </div>
         </div>
         @endif

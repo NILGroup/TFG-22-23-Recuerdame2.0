@@ -59,7 +59,7 @@
                         @endif
 
                         <td class=" text-center"  data-sort="{{ $recuerdo->apto }}">
-                            <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto" @if($recuerdo->apto) checked @endif disabled>
+                            <input class="form-check-input" type="checkbox" name="apto" value="1" id="apto_tabla" @if($recuerdo->apto) checked @endif disabled>
                         </td>
                     @endif
                     <td class="tableActions">

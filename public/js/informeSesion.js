@@ -41,7 +41,17 @@ function actualizaModalRecuerdo(idR){
                 document.getElementById('categoria_id').getElementsByTagName('option')[data.categoria_id].selected = 'selected';
 
             document.getElementById('localizacion').value = data.localizacion;
-            document.getElementById('apto').checked  = data.apto;
+            
+            document.getElementById('apto').checked  = data.apto ? "checked" : "";
+/*
+            console.log(document.getElementById('apto').checked)
+            console.log(data.apto)
+
+            if(document.getElementById('apto').checked != data.apto){
+                document.getElementById('apto').click();
+                console.log("click")
+            }
+*/
             if(data.categoria_id == 7)
                 document.getElementById('tipo_custom').value = data.tipo_custom;
             else
@@ -59,7 +69,6 @@ function actualizaModalRecuerdo(idR){
                 let checked = p.related ? "checked":"";
                 row.append($('<td id="personasSeleccionadas" class="tableActions"><input class="form-check-input" type="checkbox" value=' + p.id + ' name="checkPersonaExistente[]" id="checkPersonaExistente" ' + checked +'>' +
                 '</td></tr>'))
-                console.log(row.html())
                 setRow(table, row)
                 if(checked){
                     let row = $("<tr></tr>")
