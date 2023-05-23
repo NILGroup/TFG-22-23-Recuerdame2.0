@@ -61,7 +61,7 @@
         </div>
     </div>
     <div class="row mb-3">
-        <label for="CDR" class="col form-label col-form-label-sm col-sm-5 col-md-4 col-lg-3" style="min-width: 100px;">CDR</span></label>
+        <label for="CDR_label" class="col form-label col-form-label-sm col-sm-5 col-md-4 col-lg-3" style="min-width: 100px;">CDR</span></label>
         <div class="col col-sm-2 col-md-3 col-lg-2">
             <input type="number" min="0" max="3" class="form-control form-control-sm cdr-control" id="cdr" name="cdr" value="{{$evaluacion->cdr}}">
         </div>
@@ -86,10 +86,10 @@
         </div>
         <div class="row">
             <div class="col col-sm-5 col-md-4 col-lg-3">
-                    <input type="text" class="col form-control form-control-sm" id="nombre_escala" name="nombre_escala" value="{{$evaluacion->nombre_escala}}">
+                <input type="text" class="col form-control form-control-sm" id="nombre_escala" name="nombre_escala" value="{{$evaluacion->nombre_escala}}">
             </div>
             <div class="col col-sm-2 col-md-3 col-lg-2">
-                    <input type="number" class="col form-control form-control-sm custom-control" id="escala" name="escala" value="{{$evaluacion->escala}}">
+                <input type="number" class="col form-control form-control-sm custom-control" id="escala" name="escala" value="{{$evaluacion->escala}}">
             </div>
             <div class="col col-sm-3 col-md-3 col-lg-2">
                 <input type="date" class=" form-control form-control-sm custom-control" id="fecha_escala" name="fecha_escala" value="{{$evaluacion->fecha_escala}}">
