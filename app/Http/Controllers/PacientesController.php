@@ -229,7 +229,8 @@ class PacientesController extends Controller
     public function asignacionTerapeutas(Request $request)
     {
         $paciente = Paciente::find($request->paciente_id);
-        $paciente->users()->sync($request->seleccion);
+        $paciente->users()->detach($paciente->users->where("rol_id", 1));   
+        $paciente->users()->syncWithoutDetaching($request->seleccion);
         return redirect("/usuarios");
     }
 
