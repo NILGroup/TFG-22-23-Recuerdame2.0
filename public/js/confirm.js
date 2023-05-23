@@ -1,4 +1,6 @@
-$('.confirm_delete').click(function (event) {
+$(document).on('click', '.confirm_delete', function (event) {
+    event.stopPropagation()
+    event.preventDefault()
     var form = $(this).closest("form").clone();
     var t = $(this).closest("table.datatable").dataTable();
     var e = $(this).closest("tr");
