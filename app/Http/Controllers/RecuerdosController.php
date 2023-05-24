@@ -68,7 +68,7 @@ class RecuerdosController extends Controller
         $persona = new Personarelacionada();
         $recuerdo->apto = true;
 
-      
+    
 
         return view("recuerdos.create", compact("idPaciente","mostrarFoto", "persona","estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "recuerdo", "personas", "paciente", "show"));
     }
@@ -112,10 +112,11 @@ class RecuerdosController extends Controller
                 $recuerdo->personas_relacionadas()->attach($p_id);
             }
         }
-       session()->put('created', "true");
-       return redirect("/usuarios/" . $recuerdo->paciente_id . "/recuerdos");
+        session()->put('created', "true");
+        return redirect("/usuarios/" . $recuerdo->paciente_id . "/recuerdos");
     }
 
+    //Actualiza el recuerdo en cuestión
     public function update(Request $request)
     {
         //Ahora que tenemos creado el recuerdo
@@ -173,6 +174,7 @@ class RecuerdosController extends Controller
         return view("recuerdos.show", compact("recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "paciente", "show", "tipos"));
     }
 
+    //Muestra la lista de recuerdos del usuario
     public function showByPaciente($idPaciente)
     {
         $paciente = Paciente::find($idPaciente);
@@ -253,6 +255,8 @@ class RecuerdosController extends Controller
         $recuerdo->delete();
         //return redirect("/usuarios/$paciente->id/recuerdos/");
     }
+
+    //Recupera un recuerdo borrado
     public function restore($idP, $id) 
     {
         Recuerdo::where('id', $id)->withTrashed()->restore();
@@ -296,7 +300,7 @@ class RecuerdosController extends Controller
                 'apto' => $request->apto
             ]
         );
-   
+
 
         $personas_relacionar = $request->ids_personas; //Array de ids de las personas
         //throw new \Exception(json_encode($personas_relacionar));
@@ -329,6 +333,7 @@ class RecuerdosController extends Controller
         return $recuerdo;
     }
 
+    //Devuelve un recuerdo sin redirigir la vista
     public function getNoView(Request $request){
         $recuerdo = Recuerdo::find($request->id);
         $personas = $recuerdo->paciente->personasrelacionadas;
