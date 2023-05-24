@@ -25,6 +25,8 @@ class VideoHistoriaController extends Controller
         $this->middleware(['auth', 'role'])->except(['renderResponse']);
         $this->middleware(['asignarPaciente'])->except(['destroy', 'restore','renderResponse']);
     }
+
+    //Carga la vista del reproductor
     public function show($idPaciente,$idVideo)
     {
         $video = Video::find($idVideo);
@@ -32,6 +34,7 @@ class VideoHistoriaController extends Controller
         return view("videos.videoPlayer", compact("url"));
     }
 
+    //Genera el vídeo de la historia de vida
     public function generarVideoHistoria(Request $request){
 
         $imagenesCheck= $request->imagenesCheck;
@@ -145,6 +148,7 @@ class VideoHistoriaController extends Controller
         }
     }
 
+    //Genera la vista de la tabla de vídeos del usuario
     public function showByPaciente($idPaciente){
         $paciente = Paciente::find($idPaciente);
         if (is_null($paciente)) return "ID de usario no encontrada"; //ESTUDIAR SI SOBRA
@@ -154,11 +158,13 @@ class VideoHistoriaController extends Controller
         return view("videos.showByPaciente", compact("videos", "paciente"));
     }
 
+    //Elimina un vídeo encuestión
     public function destroy($idVideo){
         $video = Video::find($idVideo);
         $video->delete();   
     }
 
+    //Recupera un vídeo que fue eliminado
     public function restore($idVideo) {
         Video::where('id', $idVideo)->withTrashed()->restore();
     }

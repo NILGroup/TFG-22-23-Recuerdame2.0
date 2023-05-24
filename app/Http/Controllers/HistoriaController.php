@@ -39,7 +39,7 @@ class HistoriaController extends Controller
         return view("historias.generateHistoria", compact("paciente", "fecha", "etapas", "etiquetas", "categorias"));
     }
 
-
+    
     public function generarLibroHistoria(Request $request)
     {
         $idPaciente = $request->paciente_id;

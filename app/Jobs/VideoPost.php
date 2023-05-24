@@ -38,7 +38,7 @@ class VideoPost implements ShouldQueue
 
     /**
      * Execute the job.
-     *
+     * Crea el vídeo, actualiza la bbdd con su estado y manda un email al usuario de forma asíncrona
      * @return void
      */
     public function handle(){
