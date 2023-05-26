@@ -179,17 +179,18 @@ class PDFController extends Controller
      * PDF DIAGNOSTICO
      */
 
-
-    public function verInformeDiagnostico($idPaciente)
+     
+    public function verInformeDiagnostico($idPaciente, $idDiagnostico)
     {
-        $diagnostico = Diagnostico::find($idPaciente);
-
+        
+        $diagnostico = Diagnostico::find($idDiagnostico);
+        info($diagnostico);
         $paciente = $diagnostico->paciente;
         if (!is_null($diagnostico->gds) && !is_null($diagnostico->mental) && !is_null($diagnostico->cdr)) {
 
             $fechasNF = $paciente->evaluaciones()->pluck("fecha")->toarray();
             array_unshift($fechasNF, $diagnostico->fecha);
-
+            
             //////GDS
             $fechasGDS = array();
             $gds = $paciente->evaluaciones()->pluck("gds")->toarray();
@@ -212,6 +213,9 @@ class PDFController extends Controller
             $gds = array();
             $mini = array();
             $cdr = array();
+            $fechasNF = array();
+            $fechasMini = array();
+            $fechasCDR = array();
         }
 
         $datos = array();
@@ -228,15 +232,17 @@ class PDFController extends Controller
                 $array = $cdr;
             }
 
-            for ($j = 0; $j < sizeof($fechasNF); $j++) {
-                $fecha = Carbon::createFromFormat('Y-m-d', $fechasNF[$j])->format('d/m/Y');
+            if(!empty($fechasNF)){
+                for ($j = 0; $j < sizeof($fechasNF); $j++) {
+                    $fecha = Carbon::createFromFormat('Y-m-d', $fechasNF[$j])->format('d/m/Y');
 
-                if ($array[$j] === null) {
-                    $valor = $array[$j - 1];
-                } else {
-                    $valor = $array[$j];
+                    if ($array[$j] === null) {
+                        $valor = $array[$j - 1];
+                    } else {
+                        $valor = $array[$j];
+                    }
+                    $datos[$escala][$fecha] = $valor;
                 }
-                $datos[$escala][$fecha] = $valor;
             }
         }
 

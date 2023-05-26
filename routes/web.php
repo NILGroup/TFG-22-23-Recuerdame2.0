@@ -175,7 +175,7 @@ Route::post('/usuarios/{idP}/evaluaciones/{id}/restore', 'App\Http\Controllers\E
 //RUTAS CUSTOMIZADAS DIAGNOSTICO
 Route::get('/usuarios/{id}/diagnostico', 'App\Http\Controllers\DiagnosticoController@show');
 Route::get('/usuarios/{id}/crearDiagnostico', 'App\Http\Controllers\DiagnosticoController@generarInforme');
-Route::get('/usuarios/{id}/informeDiagnostico', 'App\Http\Controllers\PDFController@verInformeDiagnostico');
+Route::get('/usuarios/{id}/informeDiagnostico/{idd}', 'App\Http\Controllers\PDFController@verInformeDiagnostico');
 Route::get('/usuarios/{id}/editarDiagnostico', 'App\Http\Controllers\DiagnosticoController@showEditable');
 Route::post('/cerrarDiagnostico', 'App\Http\Controllers\DiagnosticoController@store');
 Route::post('/modificarDiagnostico', 'App\Http\Controllers\DiagnosticoController@update');

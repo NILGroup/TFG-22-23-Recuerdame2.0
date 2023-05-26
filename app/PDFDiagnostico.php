@@ -171,7 +171,7 @@ class PDFDiagnostico extends FPDF
 				$ValArray[]=$val;					
 			}
 		}
-
+        
 		//define max value
         if($maxVal<ceil(max($ValArray))){
             $maxVal = ceil(max($ValArray));
@@ -188,6 +188,20 @@ class PDFDiagnostico extends FPDF
 				}
 			}
 		}
+
+        //si solo está el diagnóstico inical no se ponen líneas verticales
+        if((count($data[$keys[0]]))==1){
+            $horiDivW = floor($graphW/(count($data[$keys[0]])));
+            if(strstr($options,'V')){
+                for($i=0;$i<=(count($data[$keys[0]])-1);$i++){
+                    if($i<(count($data[$keys[0]])-1)){
+                        $this->Line($graphX+$i*$horiDivW,$graphY,$graphX+$i*$horiDivW,$graphY+$graphH);
+                    } else {
+                        $this->Line($graphX+$graphW,$graphY,$graphX+$graphW,$graphY+$graphH);
+                    }
+                }
+            }
+        }else{
 		//draw vertical lines
         $horiDivW = floor($graphW/(count($data[$keys[0]])-1));
 		if(strstr($options,'V')){
@@ -199,6 +213,7 @@ class PDFDiagnostico extends FPDF
 				}
 			}
 		}
+    }
 		//draw graph lines
 		foreach($data as $key => $value){
 			$this->setDrawColor($colors[$key][0],$colors[$key][1],$colors[$key][2]);
@@ -207,6 +222,16 @@ class PDFDiagnostico extends FPDF
             
 			for($i=0;$i<count($value);$i++){
                 info($value[$valueKeys[$i]]);
+                info(count($value));
+                //si solo hay un valor dibujar punto
+                if(count($value)==1){
+                    $this->Line(
+						$graphX+($i*$horiDivW),
+						$graphY+$graphH-($value[$valueKeys[0]]/$maxVal*$graphH),
+						$graphX+1,
+						$graphY+$graphH-($value[$valueKeys[0]]/$maxVal*$graphH)
+					);
+                }
 				if($i==count($value)-2){
 					$this->Line(
 						$graphX+($i*$horiDivW),
@@ -223,6 +248,7 @@ class PDFDiagnostico extends FPDF
 					);
 				}
 			}
+            
 			//Set the Key (legend)
 			$this->SetFont('Courier','',10);
 			if(!isset($n))$n=0;
@@ -231,6 +257,7 @@ class PDFDiagnostico extends FPDF
 			$this->Cell($keyW,$lineh,$key,0,1,'L');
 			$n++;
 		}
+    
 		//print the abscissa values
 		foreach($valueKeys as $key => $value){
 			if($key==0){
@@ -272,7 +299,9 @@ class PDFDiagnostico extends FPDF
         // Colors: fixed
         // Max ordinate: 6
         // Number of divisions: 3
-        $pdf->LineGraph(190,100,$data,'VHkBvBgBdB',$colors);        
+        
+        $pdf->LineGraph(190,100,$data,'VHkBvBgBdB',$colors);   
+          
     }
 
     function pdfBody($pdf, $diagnostico, $paciente, $gds, $mini, $cdr)
@@ -333,7 +362,11 @@ class PDFDiagnostico extends FPDF
             $pdf->addPage(); //297 es el alto de un A4, 18 ocupa el footer 287-18=279
             $H = $pdf->GetY();
         }
-        $this->writeEvolucion($pdf, $diagnostico, $gds, $mini, $cdr);
+
+        if(!empty($gds)){
+            $this->writeEvolucion($pdf, $diagnostico, $gds, $mini, $cdr);
+        }
+      
 
         $fecha = Carbon::now();
         $nombreArchivo = str_replace(" ", "_", "Diagnostico " . $paciente->nombre . " " . $fecha->format("d/m/Y") . ".pdf");

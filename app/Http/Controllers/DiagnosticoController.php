@@ -102,9 +102,11 @@ class DiagnosticoController extends Controller
             $fechasNF = $paciente->evaluaciones()->pluck("fecha")->toarray();
             array_unshift($fechasNF, $diagnostico->fecha);
             $fechas = array();
-            foreach ($fechasNF as $fecha) {
-                $fecha = Carbon::createFromFormat('Y-m-d', $fecha)->format('d/m/Y');
-                array_push($fechas,$fecha);
+            if(!is_null($fechasNF)){
+                foreach ($fechasNF as $fecha) {
+                    $fecha = Carbon::createFromFormat('Y-m-d', $fecha)->format('d/m/Y');
+                    array_push($fechas,$fecha);
+                }
             }
 
             $gds = $paciente->evaluaciones()->pluck("gds")->toarray();
