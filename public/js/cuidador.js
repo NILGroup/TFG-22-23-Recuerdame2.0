@@ -23,8 +23,8 @@ $("#guardar").on("click", function(event){
             async: false,
             data: fd,
             success: function (data) {
-                console.log(data)
-                if (data && $("#id").prop("value") != data.id) { 
+                
+                if (data && !(data.email === undefined || data.email === null)  && $("#id").prop("value") != data.id) { 
                     Swal.fire({
                         title: 'Este correo ya está registrado',
                         icon: "error",
@@ -35,7 +35,7 @@ $("#guardar").on("click", function(event){
                 }
             },
             error: function (data) {
-                console.log(data)
+                
             }
         })
 
