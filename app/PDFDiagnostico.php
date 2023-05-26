@@ -221,8 +221,7 @@ class PDFDiagnostico extends FPDF
 			$valueKeys = array_keys($value);
             
 			for($i=0;$i<count($value);$i++){
-                info($value[$valueKeys[$i]]);
-                info(count($value));
+
                 //si solo hay un valor dibujar punto
                 if(count($value)==1){
                     $this->Line(

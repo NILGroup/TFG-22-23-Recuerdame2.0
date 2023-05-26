@@ -184,7 +184,6 @@ class PDFController extends Controller
     {
         
         $diagnostico = Diagnostico::find($idDiagnostico);
-        info($diagnostico);
         $paciente = $diagnostico->paciente;
         if (!is_null($diagnostico->gds) && !is_null($diagnostico->mental) && !is_null($diagnostico->cdr)) {
 
