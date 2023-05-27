@@ -103,7 +103,9 @@ function reloadPersona(p) {
     row.append($('<td>' + p.nombre + " " + p.apellidos + '</td>'))
     row.append($('<td>' + p.localidad + '</td>'))
     row.append($('<td>' + p.tiporelacion_id + '</td>'))
-    row.append($('<td class="tableActions"></td>'))
+    row.append($(`<td class="tableActions">
+        <input class="form-check-input" type="checkbox" value="${p.id}" name="checkPersonaExistente[]"  checked>
+    </td>`))
     
     setRow(tabla, row)
 
@@ -118,7 +120,7 @@ function reloadPersona(p) {
 
 }
 
-function agregarPersonas(p) {
+function agregarPersonas() {
 
     let tabla = $("#tabla_personas").dataTable()
     tabla.api().rows().remove().draw()

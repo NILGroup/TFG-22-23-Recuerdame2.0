@@ -51,7 +51,7 @@
                             <td>{{$persona->localidad}}</td>
                             <td>@if(isset($persona->tipo_custom)) {{$persona->tipo_custom}} @else {{$persona->tiporelacion->nombre}} @endif </td>
                             <td id="personasSeleccionadas" class="tableActions">
-                                <input class="form-check-input" type="checkbox" value="{{$persona->id}}" name="checkPersonaExistente[]" id="checkPersonaExistente" @if($recuerdo->personas_relacionadas->contains($persona)) checked @endif>
+                                <input class="form-check-input" type="checkbox" value="{{$persona->id}}" name="checkPersonaExistente[]"  @if($recuerdo->personas_relacionadas->contains($persona)) checked @endif>
                             </td>
                         </tr>
                         @endforeach
@@ -61,7 +61,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="return agregarPersonas(checkPersonaExistente);">Finalizar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="return agregarPersonas();">Finalizar</button>
             </div>
         </div>
     </div>
