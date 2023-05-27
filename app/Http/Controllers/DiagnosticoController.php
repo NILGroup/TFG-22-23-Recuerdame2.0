@@ -21,32 +21,32 @@ class DiagnosticoController extends Controller
         $this->middleware(['auth', 'role']);
         $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
     }
-    
+    //Redirige a la vista para generar el informe
     public function generarInforme($idPaciente){
         $paciente = Paciente::find($idPaciente);
         $diagnostico = new Diagnostico();
         $show = false;
         return view('diagnostico.create', compact('paciente', 'diagnostico', 'show'));
     }
-
+    //Almacena el diágnostico en la base de datos
     public function store(Request $request){
 
         $diagnostico = Diagnostico::updateOrCreate(
             ['id' => $request->id],
             ['paciente_id' => $request->paciente_id,
-             'enfermedad' => $request->enfermedad,
-             'fecha' => $request->fecha,
-             'gds' => $request->gds,
-             'gds_fecha' => $request->gds_fecha,
-             'mental' => $request->mental,
-             'mental_fecha' => $request->mental_fecha,
-             'cdr' => $request->cdr,
-             'cdr_fecha' => $request->cdr_fecha,
-             'antecedentes' => $request->antecedentes,
-             'observaciones' => $request->observaciones,
-             'nombre_escala' => $request->nombre_escala,
-             'escala' => $request->escala,
-             'fecha_escala' => $request->fecha_escala
+            'enfermedad' => $request->enfermedad,
+            'fecha' => $request->fecha,
+            'gds' => $request->gds,
+            'gds_fecha' => $request->gds_fecha,
+            'mental' => $request->mental,
+            'mental_fecha' => $request->mental_fecha,
+            'cdr' => $request->cdr,
+            'cdr_fecha' => $request->cdr_fecha,
+            'antecedentes' => $request->antecedentes,
+            'observaciones' => $request->observaciones,
+            'nombre_escala' => $request->nombre_escala,
+            'escala' => $request->escala,
+            'fecha_escala' => $request->fecha_escala
             ]);
 
 
@@ -58,25 +58,25 @@ class DiagnosticoController extends Controller
         session()->put('created', "true");
         return redirect("usuarios/{$request->paciente_id}/diagnostico");
     }
-
+    //Actualiza el diágnostico en la base de datos
     public function update(Request $request){
 
         $diagnostico = Diagnostico::updateOrCreate(
             ['id' => $request->id],
             ['paciente_id' => $request->paciente_id,
-             'enfermedad' => $request->enfermedad,
-             'fecha' => $request->fecha,
-             'gds' => $request->gds,
-             'gds_fecha' => $request->gds_fecha,
-             'mental' => $request->mental,
-             'mental_fecha' => $request->mental_fecha,
-             'cdr' => $request->cdr,
-             'cdr_fecha' => $request->cdr_fecha,
-             'antecedentes' => $request->antecedentes,
-             'observaciones' => $request->observaciones,
-             'nombre_escala' => $request->nombre_escala,
-             'escala' => $request->escala,
-             'fecha_escala' => $request->fecha_escala
+            'enfermedad' => $request->enfermedad,
+            'fecha' => $request->fecha,
+            'gds' => $request->gds,
+            'gds_fecha' => $request->gds_fecha,
+            'mental' => $request->mental,
+            'mental_fecha' => $request->mental_fecha,
+            'cdr' => $request->cdr,
+            'cdr_fecha' => $request->cdr_fecha,
+            'antecedentes' => $request->antecedentes,
+            'observaciones' => $request->observaciones,
+            'nombre_escala' => $request->nombre_escala,
+            'escala' => $request->escala,
+            'fecha_escala' => $request->fecha_escala
             ]);
 
 
@@ -88,6 +88,8 @@ class DiagnosticoController extends Controller
         session()->put('created', "true");
         return redirect("usuarios/{$request->paciente_id}/diagnostico");
     }
+
+    //Redirige a la vista del diágnostico
     public function show($id)
     {
         $show = true;
@@ -134,28 +136,8 @@ class DiagnosticoController extends Controller
         return view('diagnostico.edit', compact('diagnostico', 'paciente', 'show'));
     }
     
-    // public function destroy($id){
-    //     $evaluacion = Evaluacion::find($id);
-    //     $paciente_id = $evaluacion->paciente_id;
-    //     $evaluacion->delete();
-    //     //return redirect("/usuarios/$paciente_id/evaluaciones");
 
-    // }
-    // public function restore($idP, $id) 
-    // {
-    //     Evaluacion::where('id', $id)->withTrashed()->restore();
-    // }
-    /*
-
-    public function verInformeEvaluacion($idPaciente, $idEvaluacion){
-        $evaluacion = Evaluacion::find($idEvaluacion);
-        $paciente = $sesion->paciente;
-        return view('evaluaciones.show', compact('paciente', 'evaluacion'));
-    }
-    */
-
-    //foto puede ser : gds mec cdr cus
-
+    //foto puede ser : gds mec cdr cus. Guarda la foto.
     public static function savePhoto(Request $request, $objeto, $foto){
         $name = [];
         $original_name = [];
