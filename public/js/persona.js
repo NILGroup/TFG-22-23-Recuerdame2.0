@@ -1,4 +1,5 @@
 
+/* Hacer aparecer el input de especifique al seleccionar otro en la relación */
 function especifique(){
     let select = document.getElementById("tiporelacion_id")
     if (select.value === "7"){
@@ -9,12 +10,14 @@ function especifique(){
     }
 }
 
+/* Validar los campos del formulario de persona relacionada */
 $("#crearPersona").on("click", function(event){
     let form = $("#personasCreatorForm");
     form.removeClass("was-validated")
     form[0].reset()
 })
 
+/* Validar los campos del modal y crear la persona relacionada */
 $("#modal_guardar").on("click", function(event){
 
     let form = $("#personasCreatorForm")[0]
@@ -32,6 +35,7 @@ $("#modal_guardar").on("click", function(event){
 
 
 
+/* Crear una nueva persona relacionada a partir de los datos del modal */
 function CrearPersonas() {
 
     const inputValues = document.querySelectorAll('#personasCreatorForm input')
@@ -88,6 +92,7 @@ function CrearPersonas() {
     });
 }
 
+/* Recargar la tabla de personas relacionadas del recuerdo */
 function reloadPersona(p) {
 
     
@@ -120,6 +125,7 @@ function reloadPersona(p) {
 
 }
 
+/* Añadir una nueva persona relacionada a la tabla al guardar desde el modal de añadir existente */
 function agregarPersonas() {
 
     let tabla = $("#tabla_personas").dataTable()

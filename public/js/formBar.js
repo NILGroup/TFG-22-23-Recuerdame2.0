@@ -1,3 +1,9 @@
+/*
+* Funcionalidad desechada. Mostrar el % de completitud de los formularios
+*/
+
+
+
 var inputs = 0;
 $(document).ready(function () {
     let barra = $('<div id="formBar" class="position-fixed bottom-5 start-50 translate-middle formBar rounded-pill border border-dark w-25"></div>');

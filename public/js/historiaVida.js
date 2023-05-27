@@ -1,4 +1,4 @@
-//multiple seleccion con checkbox en generar Historia de vida
+/* Función desechada para un primer intento de filtros */
 var expanded = false;
 var expandedEtiqueta = false;
 var expandedEtapa = false;
@@ -20,7 +20,7 @@ let arrayEt = [];
 let arrayCat = [];
 let arrayEtapa = [];
 
-
+/* Función desechada para un primer intento de filtros */
 function onCheck(elementoSeleccionado) {
     var select = document.getElementById(elementoSeleccionado);
 
@@ -30,7 +30,7 @@ function onCheck(elementoSeleccionado) {
     } else select.setAttribute("value", 0);
 }
 
-
+/* Marcar correctamente las opciones del modal de videos al abrirlo */
 function onCheckModal(elementoSeleccionado) {
     var select = document.getElementById(elementoSeleccionado);
 
@@ -50,7 +50,10 @@ function onCheckModal(elementoSeleccionado) {
     
 }
 
-
+/* 
+* Añadir las opciones de la historia de vida al modal de los 
+* videos para que filtre recuerdos correctamente
+*/
 function videoModalCreator(){
             document.getElementById('fechaInicioModal').value = document.getElementById('fechaInicio').value;
             document.getElementById('fechaFinModal').value = document.getElementById('fechaFin').value

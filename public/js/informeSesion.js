@@ -1,3 +1,15 @@
+/*
+* ¿¡Por qué este archivo tiene funciones duplicadas de recuerdo.js!?
+* Debería tener solo las relacionadas al informe...
+*/
+
+
+/* 
+* Función utilizada al generar un informe. Al pulsar
+* el botón para modificar un recuerdo, limpia por completo
+* la ventana modal donde se van a mostrar los datos y añade
+* los del recuerdo a editar.
+*/
 function actualizaModalRecuerdo(idR){
 
     borrarDatos()
@@ -30,7 +42,6 @@ function actualizaModalRecuerdo(idR){
             if(data.estado_id)
                 document.getElementById('idEstado').getElementsByTagName('option')[data.estado_id].selected = 'selected';
             document.getElementById('fecha').value = data.fecha;
-            //document.getElementById('idEtiqueta').getElementsByTagName('option')[data.etiqueta_id].selected = 'selected';
             document.getElementById('puntuacion').value = data.puntuacion;
             document.getElementById('descripcion').value = data.descripcion;
             if(data.etapa_id)
