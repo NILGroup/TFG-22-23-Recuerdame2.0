@@ -1,3 +1,4 @@
+/*Al añadir un nuevo fichero se comprueba el tamaño del mismo y si supera el maximo permitido. */
 $("#modal-file").on("change", (e) => {
 
     let submit = $("#modal-imagenes-guardar")
@@ -16,6 +17,7 @@ $("#modal-file").on("change", (e) => {
     }
 })
 
+/**Al hacer click en el botón que despliega el modal se resetean los campos del mismo y los errores */
     $("#boton-modal-imagenes").on("click", function(event){
         $("#modal-descripcion").prop("value", "")
         $("#modal-file").prop("value", "")
@@ -24,6 +26,7 @@ $("#modal-file").on("change", (e) => {
             $("#file-error").remove()
     })
    
+/**Al hacer click en el botón de guardar el modal se añade el fichero a la cola */
     $("#modal-imagenes-guardar").on("click", function(event){
 
         let file = $("#modal-file")
@@ -66,6 +69,7 @@ $("#modal-file").on("change", (e) => {
 
     })
 
+// función que elimina una imagen de la cola
     $("#img-previews").on("click", "span", function(event){
         let pos = $(event.target).parent().index()
         
@@ -75,6 +79,7 @@ $("#modal-file").on("change", (e) => {
 
     })
 
+// función que valida el formulario del recuerdo y si es válido lo envia
     $("#recuerdo-guardar").on("click", function(event){
         let form = $("#recuerdo-form")
 

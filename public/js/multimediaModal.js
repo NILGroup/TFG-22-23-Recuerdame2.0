@@ -1,12 +1,9 @@
 "use strict"
 
 $(function(){
-
     $(".guardar-multimedia").each(function(i, e){
         $(e).on("click", all)
     })
-
-
 })
 
 function all(){
@@ -15,6 +12,7 @@ function all(){
     addSelectedToDiv(selected)
 }
 
+// función que recorre la tabla de multimedias y devuelve un array de aquellas que están marcadas.
 function getSelected(){
 
     let selected = []
@@ -37,6 +35,7 @@ function getSelected(){
  
 }   
 
+//Para cada una de las multimedias marcadas crea su elemento visual y lo añade a la cola de multimedias
 function addSelectedToDiv(selected){
 
     let div = $("#showMultimedia")
@@ -69,6 +68,7 @@ function getDiv(multimedia){
 
     return e
 }
+
 
 
 function getRuta(multimedia){
