@@ -10,24 +10,16 @@ use App\Models\Multimedia;
 
 class PersonasRelacionadasController extends Controller
 {
-    
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware(['auth', 'role'])->except(['show']);
         $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
     }
 
-    /**
-     * Obtiene al paciente y la lista de sus personas relacionadas. Redirecciona a lista personasrelacionadas
-     * de un paciente pasandole la lista
-     */
-
-
+    /*
+    * Obtiene al paciente y la lista de sus personas relacionadas. Redirecciona a lista personasrelacionadas
+    * de un paciente pasandole la lista
+    */
     public function showByPaciente(int $idPaciente){
 
         $paciente = Paciente::findOrFail($idPaciente);
@@ -36,11 +28,9 @@ class PersonasRelacionadasController extends Controller
         return view("personasrelacionadas.showByPaciente", compact("paciente", "personas"));
     }
 
-
-    /**
-     * Redirecciona a la vista de crear personarelacionada pasando al paciente concreto al que queremos añadirla
-     */
-
+    /*
+    * Redirecciona a la vista de crear personarelacionada pasando al paciente concreto al que queremos añadirla
+    */
     public function create(int $idPaciente)
     {
         $tipos = Tiporelacion::all()->sortBy("id");
@@ -51,9 +41,8 @@ class PersonasRelacionadasController extends Controller
     }
 
     /**
-     * Almacena una nueva personarelacionada en la base de datos
-     */
-
+    * Almacena una nueva personarelacionada en la base de datos
+    */
     public function store(Request $request)
     {
         $contacto = false;
@@ -61,8 +50,6 @@ class PersonasRelacionadasController extends Controller
             $contacto = true;
             Personarelacionada::where('contacto', '=', true)->update(["contacto" => false]);
         }
-
-        
 
         $persona = Personarelacionada::create([
 
@@ -88,13 +75,11 @@ class PersonasRelacionadasController extends Controller
     /*Como el store pero no devuelve a una vista*/
     public function storeNoView(Request $request)
     {
-
         $contacto = false;
         if (isset($request->contacto)){
             $contacto = true;
             Personarelacionada::where('contacto', '=', true)->update(["contacto" => false]);
         }
-
         
         $persona = Personarelacionada::create([
 
@@ -116,10 +101,10 @@ class PersonasRelacionadasController extends Controller
 
         return $persona; //falta relacionarlo con el recuerdo
     }
-    /**
-     * Devuelve una personarelacionada concreta
-     */
 
+    /*
+    * Devuelve una personarelacionada concreta
+    */
     public function show($idPaciente, $id)
     {
         $tipos = Tiporelacion::all()->sortBy("id");
@@ -130,10 +115,9 @@ class PersonasRelacionadasController extends Controller
     }
 
 
-    /**
-     * Edita una personarelacionada concreta
-     */
-
+    /*
+    * Edita una personarelacionada concreta
+    */
     public function edit($idPaciente, $id)
     {
         $tipos = Tiporelacion::all()->sortBy("id");
@@ -143,10 +127,9 @@ class PersonasRelacionadasController extends Controller
         return view("personasrelacionadas.edit", compact("mostrarFoto","persona","tipos", "idPaciente"));
     }
 
-    /**
-     * Actualiza una persona relacionada concreta y redirecciona a la lista de personasrelacionadas
-     */
-
+    /*
+    * Actualiza una persona relacionada concreta y redirecciona a la lista de personasrelacionadas
+    */
     public function update(Request $request)
     {
         $persona = Personarelacionada::findOrFail($request->id);
@@ -161,33 +144,32 @@ class PersonasRelacionadasController extends Controller
         MultimediasController::savePhoto($request, $persona);
         session()->put('created', "true");
 
-
         return redirect("/usuarios/$persona->paciente_id/personas/$persona->id");
     }
 
-    /**
-     * Elimina una persona relacionada concreta
-     */
-
+    /*
+    * Elimina una persona relacionada concreta
+    */
     public function destroy(int $id)
     {
         $persona = Personarelacionada::findOrFail($id);
         $persona->delete();
-        //return redirect("/usuarios/$paciente->id/personas");
     }
+
+    /*
+    * Deshace la eliminación de una persona relacionada concreta
+    */
     public function restore($idP, $id) 
     {
         Personarelacionada::where('id', $id)->withTrashed()->restore();
     }
-
+    
+    /*
+    * Elimina la foto de una persona relacionada concreta
+    */
     public function removePhoto(Request $request){
-
         $persona = Personarelacionada::findOrFail($request->id);
         $persona->multimedia->delete();
-        
         return redirect("/usuarios/$persona->paciente_id/personas/$persona->id/editar");
-
     }
-
-   
 }

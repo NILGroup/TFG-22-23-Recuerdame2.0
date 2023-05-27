@@ -18,22 +18,23 @@ use App\Models\InformeSesion;
 
 class InformesSesionController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware(['auth', 'role']);
         $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
     }
     
+    /*
+    * Muestra la lista de informes de sesión del paciente
+    */
     public function showByPaciente($idPaciente){
         $informes = InformeSesion::where('paciente_id',$idPaciente)->get();
         return view("informesSesion.showByPaciente", compact('informes'));
     }
 
+    /*
+    * Muestra la vista de creación de un informe de sesión para la sesión seleccionada
+    */
     public function generarInforme($idPaciente, $idSesion){
         $sesion = Sesion::find($idSesion);
         $informe = new InformeSesion();
@@ -57,6 +58,9 @@ class InformesSesionController extends Controller
         return view('informesSesion.create', compact('paciente', 'informe', 'sesion', 'user', 'show', 'recuerdos','complejidades','participaciones', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas', 'mostrarFoto'));
     }
 
+    /*
+    * Muestra la vista de edición del informe de sesión seleccionado
+    */
     public function edit($idPaciente, $idI){
         $informe = InformeSesion::find($idI);
         $sesion = $informe->sesion;
@@ -79,8 +83,11 @@ class InformesSesionController extends Controller
         return view('informesSesion.create', compact('paciente', 'informe', 'sesion', 'user', 'show', 'recuerdos','complejidades','participaciones', 'estados', 'etiquetas', 'etapas', 'emociones', 'categorias', 'tipos', 'recuerdo', 'idPaciente', 'persona', 'personas', 'mostrarFoto'));
     }
 
+
+    /*
+    * Guarda el informe de sesión en la BBDD
+    */
     public function store(Request $request){
-        
         $informe = InformeSesion::updateOrCreate(
             ['id' => $request->id],
             ['fecha_finalizada' => $request->fecha_finalizada,
@@ -101,8 +108,10 @@ class InformesSesionController extends Controller
         return redirect("/usuarios/$informe->paciente_id/informesSesion");
     }
 
+    /*
+    * Actualiza en la BBDD el informe de sesión editado
+    */
     public function update(Request $request){
-        
         $informe = InformeSesion::updateOrCreate(
             ['id' => $request->id],
             ['fecha_finalizada' => $request->fecha_finalizada,
@@ -123,6 +132,9 @@ class InformesSesionController extends Controller
         return redirect("/usuarios/$informe->paciente_id/informesSesion/$informe->id");
     }
 
+    /*
+    * Visualiza el informe de sesión seleccionado
+    */
     public function show(int $idP,int $idI)
     {
         $informe = InformeSesion::findOrFail($idI);
@@ -136,16 +148,23 @@ class InformesSesionController extends Controller
         return view("informesSesion.show", compact("sesion","informe","user","etapas",  "participaciones","complejidades", "paciente", "show"));
     }
 
+    /*
+    * Elimina un informe de sesión seleccionado
+    */
     public function destroy($id){
         InformeSesion::destroy($id);
-        InformeSesion::where('id', $id)->withTrashed()->restore();
-    }
-    public function restore($idP, $id){
-        $sesion = Sesion::find($id);
-        $sesion->finalizada = true;
-        $sesion->save();
     }
 
+    /*
+    * Deshace la eliminación del informe de sesión seleccionado
+    */
+    public function restore($idP, $id){
+        InformeSesion::where('id', $id)->withTrashed()->restore();
+    }
+
+    /*
+    *  ¿Función desechada?
+    */
     public function verInformeSesion($idPaciente, $idSesion){
         $sesion = Sesion::find($idSesion);
         $paciente = $sesion->paciente;

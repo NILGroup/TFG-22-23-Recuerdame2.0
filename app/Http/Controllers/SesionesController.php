@@ -22,33 +22,15 @@ use Illuminate\Support\Facades\Session;
 
 class SesionesController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware(['auth', 'role']);
         $this->middleware(['asignarPaciente'])->except(['index', 'create', 'destroy', 'restore']);
     }
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-        return "Index de las sesiones";
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * Redirige a la vista de creación de una sesión
+    */
     public function create($id)
     {
         $show = false;
@@ -89,21 +71,14 @@ class SesionesController extends Controller
                 }
             }
         }
-
-
         return view("sesiones.create", compact('multimedias','persona','idPaciente','mostrarFoto','etapas', 'user', 'tipos', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'sesion', 'recuerdo', 'personas', 'show'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * Guarda una nueva sesión en la BBDD y redirige a la lista de sesiones
+    */
     public function store(Request $request)
     {
-        
-
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->idSesion],
             ['fecha' => $request->fecha,
@@ -129,44 +104,15 @@ class SesionesController extends Controller
         if(!is_null($request->recuerdos))
             $sesion->recuerdos()->attach($request->recuerdos);
 
-       
-
         session()->put('created', "true");
-
-      
 
         //return redirect("usuarios/{$sesion->paciente->id}/sesiones");
     }
 
-/*
-    public function storeRecuerdo($idPaciente, $idSesion, $recuerdo)
-    {
-        $recuerdo = Recuerdo::updateOrCreate(
-            ['id' => $recuerdo->id],
-            ['fecha' => $recuerdo->fecha,
-             'nombre' => $recuerdo->etapa_id,
-             'descripcion' => $recuerdo->objetivo,
-             'localizacion' => $recuerdo->descripcion,
-             'etapa_id' => $recuerdo->barreras,
-             'categoria_id' => $recuerdo->facilitadores,
-             'emocion_id' => $recuerdo->fecha_finalizada,
-             'estado_id' => $recuerdo->paciente_id,
-             'etiqueta_id' => $recuerdo->user_id,
-             'puntuacion' => $recuerdo->respuesta,
-             'paciente_id' => $idPaciente]
-        );
 
-        
-        return $recuerdo->id;
-    }
-*/
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Sesion  $sesion
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * Redirige a la visualización de una sesión
+    */
     public function show($idP, $id)
     {
         //https://youtu.be/g-Y9uiAjOE4
@@ -180,6 +126,9 @@ class SesionesController extends Controller
         return view('sesiones.show', compact('sesion', 'etapas', 'paciente', 'user', 'show', 'recuerdos'));
     }
 
+    /*
+    * Redirige a la edición de una sesión
+    */
     public function showEditable($idP, $id)
     {
         $show = false;
@@ -221,69 +170,50 @@ class SesionesController extends Controller
             }
         }
 
-        //throw new \Exception($sesion->multimedias);
         return view('sesiones.edit', compact('multimedias','persona','idPaciente','mostrarFoto', 'sesion', 'etapas', 'user', 'recuerdos', 'estados', 'etiquetas','emociones', 'categorias', 'prelacionadas', 'paciente', 'show', 'personas', 'recuerdo', 'tipos'));
     }
 
+    /*
+    * Muestra la lista de sesiones de un paciente
+    */
     public function showByPaciente($idPaciente)
     {
-        //https://www.youtube.com/watch?v=y3p10h_00A8&ab_channel=CodeStepByStep
-
         $paciente = Paciente::findOrFail($idPaciente);
         $sesiones = $paciente->sesiones;
         return view('sesiones.showByPaciente', compact('paciente', 'sesiones'));
     }
 
+    /*
+    * ¿Función desechada? Muestra todos los archivos multimedia de una sesión
+    */
     public function showMultimedia($idSesion)
     {
-        //https://www.youtube.com/watch?v=y3p10h_00A8&ab_channel=CodeStepByStep
-
         return Sesion::find($idSesion)->multimedias;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Sesion  $sesion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Sesion $sesion)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sesion  $sesion
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Sesion $sesion)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Sesion  $sesion
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * Elimina una sesión y todos sus informes
+    */
     public function destroy($id)
     {
         $sesion = Sesion::find($id);
         $sesion->informes()->delete();
         $idP = $sesion->paciente_id;
         Sesion::destroy($id);
-        //return redirect("/usuarios/$idP/sesiones");
     }
+
+    /*
+    * Recupera una sesión eliminada y todos sus informes
+    */
     public function restore($idP, $id) 
     {
         Sesion::where('id', $id)->withTrashed()->restore();
         InformeSesion::where('sesion_id', $id)->withTrashed()->restore();
     }
 
+    /*
+    * ¿Función desechada?
+    */
     public function destroyRecuerdo($idSesion, $idRecuerdo)
     {
         //
@@ -296,8 +226,10 @@ class SesionesController extends Controller
        return Sesion::find($idSesion)->multimedias::destroy($idMultimedia);
     }
 
-    //Agregar un nuevo recuerdo cuando editas una sesión
-    //Guarda los cambios y te redirige a la vista de crear recuerdo
+    /*
+    * Agregar un nuevo recuerdo cuando editas una sesión
+    * Guarda los cambios y te redirige a la vista de crear recuerdo
+    */
     public function updateAndRecuerdoNuevo(Request $request){
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->id],
@@ -317,8 +249,10 @@ class SesionesController extends Controller
         return redirect("/usuarios/{id}/recuerdos/crearAndVolverEditar");
     }
     
+    /*
+    *
+    */
     public function updateAndSeleccionarRecuerdos(Request $request){
-        
         $sesion = Sesion::updateOrCreate(
             ['id' => $request->id],
             ['fecha' => $request->fecha,

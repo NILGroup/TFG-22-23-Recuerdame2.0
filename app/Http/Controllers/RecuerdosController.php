@@ -25,32 +25,15 @@ use function PHPUnit\Framework\isNull;
 
 class RecuerdosController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware(['auth', 'role'])->except(['show', 'showByPaciente']);
         $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * Muestra la vista de creación de un recuedo
+    */
     public function create()
     {
         $show = false;
@@ -68,20 +51,14 @@ class RecuerdosController extends Controller
         $persona = new Personarelacionada();
         $recuerdo->apto = true;
 
-    
-
         return view("recuerdos.create", compact("idPaciente","mostrarFoto", "persona","estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "recuerdo", "personas", "paciente", "show"));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * Crea un nuevo recuerdo
+    */
     public function store(Request $request)
     {
-        //Ahora que tenemos creado el recuerdo
         $recuerdo = Recuerdo::updateOrCreate(
             ['id' => $request->id],
             [
@@ -116,10 +93,11 @@ class RecuerdosController extends Controller
         return redirect("/usuarios/" . $recuerdo->paciente_id . "/recuerdos");
     }
 
-    //Actualiza el recuerdo en cuestión
+    /*
+    * Actualiza un recuerdo existente
+    */
     public function update(Request $request)
     {
-        //Ahora que tenemos creado el recuerdo
         $recuerdo = Recuerdo::updateOrCreate(
             ['id' => $request->id],
             [
@@ -154,12 +132,9 @@ class RecuerdosController extends Controller
         return redirect("/usuarios/$recuerdo->paciente_id/recuerdos/$recuerdo->id");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Recuerdo  $recuerdo
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * Muestra un recuerdo
+    */
     public function show($idPaciente, $idRecuerdo)
     {
         $show = true;
@@ -174,32 +149,37 @@ class RecuerdosController extends Controller
         return view("recuerdos.show", compact("recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "paciente", "show", "tipos"));
     }
 
-    //Muestra la lista de recuerdos del usuario
+    /*
+    * Muestra la lista de recuerdos del paciente
+    */
     public function showByPaciente($idPaciente)
     {
         $paciente = Paciente::find($idPaciente);
-        if (is_null($paciente)) return "ID de paciente no encontrada"; //ESTUDIAR SI SOBRA
 
         $recuerdos = $paciente->recuerdos;
         //Devolvemos los recuerdos
         return view("recuerdos.showByPaciente", compact("recuerdos", "paciente"));
     }
 
+    /*
+    * Devuelve los recuerdos de una sesión
+    */
     public function showBySesion($idSesion)
     {
         return Sesion::find($idSesion)->recuerdos;
     }
 
+    /*
+    * ¿Función obsoleta? El código al menos es incorrecto
+    */
     public function showMultimedia($idRecuerdo)
     {
         return Sesion::find($idRecuerdo)->multimedias;
     }
-    /**
-     * Show the form for editing the specified resource.
-     * 
-     * @param  \App\Models\Recuerdo  $recuerdo
-     * @return \Illuminate\Http\Response
-     */
+    
+    /*
+    * Redirige a la vista de edición de un recuerdo
+    */
     public function edit($idP, $idRecuerdo)
     {
         $show = false;
@@ -238,38 +218,30 @@ class RecuerdosController extends Controller
             }
         }
 
-
-
         return view("recuerdos.edit", compact("multimedias", "idPaciente","mostrarFoto", "persona","recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "personas", "tipos", "paciente", "show"));
     }
-    /**
-     * Elimina el recuerdo en cuestión
-     *
-     * @param  \App\Models\Recuerdo  $recuerdo
-     * @return \Illuminate\Http\Response
-     */
+    
+    /*
+    * Elimina un recuerdo
+    */
     public function destroy($idRecuerdo)
     {
-        $recuerdo = Recuerdo::find($idRecuerdo); //busca el recuerdo en sí
+        $recuerdo = Recuerdo::find($idRecuerdo);
         $paciente = $recuerdo->paciente;
         $recuerdo->delete();
-        //return redirect("/usuarios/$paciente->id/recuerdos/");
     }
 
-    //Recupera un recuerdo borrado
+    /*
+    * Recupera un recuerdo eliminado
+    */
     public function restore($idP, $id) 
     {
         Recuerdo::where('id', $id)->withTrashed()->restore();
     }
 
-    //Elimina a la persona relacionada del recuerdo en cuestión (su relación)
-    public function destroyPersonaRelacionada($idRecuerdo, $idPersona)
-    {
-        //¿unsetRelation?
-        //    Recuerdo::find($idRecuerdo)->personas_relacionadas   destroy($idRecuerdo);
-    }
-
-    //Devuelve la fecha del recuerdo más antiguo del paciente
+    /*
+    * Devuelve la fecha del recuerdo más antiguo del paciente
+    */
     public function oldestMemoryDate($idPaciente)
     {
         $memory = Paciente::find($idPaciente)->recuerdos
@@ -279,7 +251,7 @@ class RecuerdosController extends Controller
         return $memory->fecha;
     }
 
-    /*Como el store pero no devuelve a una vista*/
+    /*Como el store pero no redirige a una vista*/
     public function storeNoView(Request $request)
     {
         $recuerdo = Recuerdo::updateOrCreate(
@@ -301,9 +273,7 @@ class RecuerdosController extends Controller
             ]
         );
 
-
         $personas_relacionar = $request->ids_personas; //Array de ids de las personas
-        //throw new \Exception(json_encode($personas_relacionar));
         $recuerdo->personas_relacionadas()->detach();
         if (!is_null($personas_relacionar)) {
             foreach ($personas_relacionar as $p_id) {  
@@ -333,11 +303,12 @@ class RecuerdosController extends Controller
         return $recuerdo;
     }
 
-    //Devuelve un recuerdo sin redirigir la vista
+    /*
+    * Devuelve un recuerdo sin redirigir la vista
+    */
     public function getNoView(Request $request){
         $recuerdo = Recuerdo::find($request->id);
         $personas = $recuerdo->paciente->personasrelacionadas;
-        //throw new \Exception(json_encode($personas)." ".json_encode($recuerdo->personas_relacionadas));
         foreach($personas as $p){
             if($recuerdo->personas_relacionadas->contains($p->id)){
                 $p->related = 1;
@@ -356,4 +327,14 @@ class RecuerdosController extends Controller
         return json_encode($recuerdo);
     }
 
+    /*
+    * ¿Función obsoleta? Elimina a la persona relacionada del recuerdo en cuestión (su relación)
+    */
+    public function destroyPersonaRelacionada($idRecuerdo, $idPersona)
+    {
+        //¿unsetRelation?
+        //    Recuerdo::find($idRecuerdo)->personas_relacionadas   destroy($idRecuerdo);
+    }
 }
+
+

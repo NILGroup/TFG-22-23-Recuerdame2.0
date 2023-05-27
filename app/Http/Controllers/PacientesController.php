@@ -19,36 +19,26 @@ use function PHPUnit\Framework\isNull;
 
 class PacientesController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware(['auth']);
         $this->middleware(['asignarPaciente'])->except(['index', 'create','destroy', 'restore']);
     }
-    
-    /**
-     * Obtiene la lista completa de pacientes y se los devuelve a la vista de lista pacientes
-     */
 
+    /*
+    * Obtiene la lista completa de pacientes del 
+    * terapeuta y redirige a la lista pacientes
+    */
     public function index()
     {
-        //Sacamos a todos los pacientes de la bd
         $idTerapeuta = Auth::id();
         $pacientes = User::find($idTerapeuta)->pacientes;
-        //Redireccionamos a la vista devolviendo la lista de pacientes
         return view("usuarios.index", compact("pacientes"));
-
-        
     }
 
-    /**
-     * Devuelve la vista de crear paciente
-     */
-
+    /*
+    * Devuelve la vista de crear paciente
+    */
     public function create()
     {
         $paciente = new Paciente();
@@ -59,13 +49,11 @@ class PacientesController extends Controller
         return view("usuarios.create", compact("residencias", "situaciones", "estudios", "generos", "paciente"));
     }
 
-    /**
-     * Almacena un paciente en la base de datos y redireccionamos a la lista de pacientes
-     */
-
+    /*
+    * Almacena un paciente en la base de datos y redireccionamos a la lista de pacientes
+    */
     public function store(Request $request)
     {
-        //Se valida la request
         $validate = $request->validate([
             "nombre" => "required",
             "apellidos" => "required",
@@ -78,8 +66,7 @@ class PacientesController extends Controller
             "estudio_id" => "required",
             "situacion_id" => "required"
         ]);
-
-        //Almacenamos al paciente en la bd
+        
         $user = User::find(Auth::id());
 
         $paciente = Paciente::updateOrcreate([
@@ -109,10 +96,9 @@ class PacientesController extends Controller
         
     }
 
-    /**
-     * Obtiene el paciente especificado y lo devuelve a la vista de mostrar paciente
-     */
-
+    /*
+    * Obtiene el paciente especificado y lo devuelve a la vista de mostrar paciente
+    */
     public function show($id)
     {
         $show = true;
@@ -162,14 +148,13 @@ class PacientesController extends Controller
             $mini = array();
             $cdr = array();
         }
-        return view("usuarios.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas", "cuidadores", "show", 'diagnostico', 'fechas', 'gds', 'mini', 'cdr'));
 
+        return view("usuarios.show", compact("paciente", "residencias", "situaciones", "estudios", "generos", "evaluaciones", "personas", "cuidadores", "show", 'diagnostico', 'fechas', 'gds', 'mini', 'cdr'));
     }
 
-    /**
-     * Obtiene al paciente a editar y lo devuelve a la vista de editar paciente
-     */
-
+    /*
+    * Redirige a la vista de editar el paciente seleccionado
+    */
     public function edit(int $id)
     {
         //Sacamos al paciente de la bd
@@ -182,10 +167,9 @@ class PacientesController extends Controller
         return view("usuarios.edit", compact("paciente", "residencias", "situaciones", "estudios", "generos"));
     }
 
-    /**
-     * Actualiza al paciente especificado y redirecciona a la lista de pacientes
-     */
-
+    /*
+    * Actualiza al paciente especificado y redirecciona a la lista de pacientes
+    */
     public function update(Request $request)
     {
         //Sacamos al paciente de la bd
@@ -202,23 +186,26 @@ class PacientesController extends Controller
         
     }
 
-    /**
-     * Elimina al paciente especificado de la base de datos y redirecciona a la lista de pacientes
-     */
-
+    /*
+    * Elimina al paciente especificado de la base de datos
+    */
     public function destroy($id)
     {
-        //Sacamos al paciente y lo borramos
         Paciente::findOrFail($id)->delete();
         session()->forget('paciente');
-        //Redireccionamos a lista pacientes
-        //return redirect("/usuarios");
     }
+
+    /*
+    * Deshace la eliminación del paciente especificado
+    */
     public function restore($id) 
     {
         Paciente::where('id', $id)->withTrashed()->restore();
     }
 
+    /*
+    * Redirecciona a la vista de asignación de nuevos terapeutas
+    */
     public function addPacienteToTerapeuta(int $id) {
         $paciente = Paciente::findOrFail($id);
         $users = User::where("rol_id","=",1)->get();
@@ -226,6 +213,9 @@ class PacientesController extends Controller
         return view("usuarios.addPacienteToTerapeuta", compact("paciente", "users"));
     }
 
+    /*
+    * Reasigna los terapeutas al guardar en la vista de asignación y redirige a la lista de pacientes
+    */
     public function asignacionTerapeutas(Request $request)
     {
         $paciente = Paciente::find($request->paciente_id);
@@ -234,13 +224,13 @@ class PacientesController extends Controller
         return redirect("/usuarios");
     }
 
+    /*
+    * Elimina la foto de perfil del paciente
+    */
     public function removePhoto(Request $request){
-
         $paciente = Paciente::findOrFail($request->id);
         $paciente->multimedia->delete();
-        
         return redirect("/usuarios/$paciente->id/editar");
-
     }
 
 }

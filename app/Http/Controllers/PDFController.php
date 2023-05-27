@@ -24,18 +24,14 @@ use function PHPUnit\Framework\isNull;
 
 class PDFController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware(['auth', 'role', 'asignarPaciente']);
     }
-    /***********************************************************
-     * PDFs INFORME DE SESIÓN
-     ************************************************************/
+
+    /*
+    * PDFs INFORME DE SESIÓN
+    */
     public function generarPDFInformeSesion(Request $request)
     {
 
@@ -50,7 +46,6 @@ class PDFController extends Controller
 
     public function verInformeSesion($idPaciente, $idInforme)
     {
-
         $informe = InformeSesion::find($idInforme);
         $sesion = $informe->sesion;
         $paciente = $sesion->paciente;
@@ -73,9 +68,9 @@ class PDFController extends Controller
         $pdf->Output();
     }
 
-    /***********************************************************
-     * PDFs INFORME DE SEGUIMIENTO
-     ************************************************************/
+    /*
+    * PDFs INFORME DE SEGUIMIENTO
+    */
     public function generarPDFInformeEvaluacion(Request $request)
     {
 
@@ -107,9 +102,9 @@ class PDFController extends Controller
         $pdf->Output();
     }
 
-    /***********************************************************
-     * PDFs HISTORIA
-     ************************************************************/
+    /*
+    * PDFs HISTORIA
+    */
     public function generarPDFHistoria(Request $request)
     {
         $paciente = Paciente::find($request->paciente_id);
@@ -158,7 +153,6 @@ class PDFController extends Controller
             $listafinal = collect();
         }
 
-        //return $listadoRecuerdos;
         $this->obtenerPDFHistoria($paciente, $listadoRecuerdos, $imagen);
     }
 
@@ -175,11 +169,9 @@ class PDFController extends Controller
         $pdf->Output();
     }
 
-    /**************
-     * PDF DIAGNOSTICO
-     */
-
-
+    /*
+    * PDFs DIAGNOSTICO
+    */
     public function verInformeDiagnostico($idPaciente)
     {
         $paciente = Paciente::find($idPaciente);
@@ -256,29 +248,9 @@ class PDFController extends Controller
         $pdf->Output();
     }
 
-    /***********************************************************
+    /*
      * PDFs RESUMENES
-     ************************************************************/
-    /*public function generarPDFResumen(Request $request)
-    {
-
-        $resumen = Resumen::find($request->id);
-        $paciente = $resumen->paciente_id;
-        $imagen = $paciente->multimedia;
-
-        if (empty($imagen)) {
-            if ($paciente->genero_id == 1) { //hombre
-                $imagen = "/img/avatar_hombre.png";
-            } else {
-                $imagen = "/img/avatar_mujer.png";
-            }
-        } else {
-            $imagen = $paciente->multimedia->fichero;
-        }
-
-        $this->obtenerPDFResumen($paciente, $resumen, $imagen);
-    }*/
-
+    */
     public function verPDFResumen($idPaciente, $idResumen)
     {
         

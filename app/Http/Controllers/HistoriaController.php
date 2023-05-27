@@ -19,7 +19,9 @@ class HistoriaController extends Controller
         $this->middleware(['asignarPaciente'])->except('generarLibroHistoria');
     }
 
-    //Devuelve el recuerdo más viejo
+    /*
+    * Devuelve el recuerdo más viejo
+    */
     public function oldestMemoryDate($idPaciente)
     {
         $memory = Paciente::find($idPaciente)->recuerdos
@@ -30,7 +32,9 @@ class HistoriaController extends Controller
         if ($memory != null) return $memory->fecha;
     }
 
-    //Devuelve la vista para generar multimedia con la historia de vida
+    /*
+    * Devuelve la vista para generar multimedia con la historia de vida
+    */
     public function generarHistoria(int $idPaciente)
     {
         $paciente = Paciente::findOrFail($idPaciente);
@@ -40,8 +44,10 @@ class HistoriaController extends Controller
         $etiquetas = Etiqueta::all()->sortBy("id");
         return view("historias.generateHistoria", compact("paciente", "fecha", "etapas", "etiquetas", "categorias"));
     }
-
-    //Genera un libro con los filtros seleccionados
+    
+    /*
+    * Genera un libro con los filtros seleccionados
+    */
     public function generarLibroHistoria(Request $request)
     {
         $idPaciente = $request->paciente_id;
@@ -77,7 +83,6 @@ class HistoriaController extends Controller
             }
         }
                 
-
         $listaRecuerdos =  $paciente->recuerdos()
         ->where(function($query) use ($idEtapa){
             $query->whereIn('etapa_id', $idEtapa)->orWhereNull('etapa_id');

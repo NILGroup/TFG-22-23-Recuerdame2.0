@@ -11,24 +11,25 @@ use Illuminate\Http\Request;
 
 class DiagnosticoController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware(['auth', 'role']);
         $this->middleware(['asignarPaciente'])->except(['destroy', 'restore']);
     }
-    //Redirige a la vista para generar el informe
+
+    /*
+    * Redirige a la vista para generar el informe
+    */
     public function generarInforme($idPaciente){
         $paciente = Paciente::find($idPaciente);
         $diagnostico = new Diagnostico();
         $show = false;
         return view('diagnostico.create', compact('paciente', 'diagnostico', 'show'));
     }
-    //Almacena el diágnostico en la base de datos
+
+    /*
+    * Almacena el diágnostico en la base de datos
+    */
     public function store(Request $request){
 
         $diagnostico = Diagnostico::updateOrCreate(
@@ -58,7 +59,10 @@ class DiagnosticoController extends Controller
         session()->put('created', "true");
         return redirect("usuarios/{$request->paciente_id}/diagnostico");
     }
-    //Actualiza el diágnostico en la base de datos
+
+    /*
+    * Actualiza el diágnostico en la base de datos
+    */
     public function update(Request $request){
 
         $diagnostico = Diagnostico::updateOrCreate(
@@ -89,7 +93,9 @@ class DiagnosticoController extends Controller
         return redirect("usuarios/{$request->paciente_id}/diagnostico");
     }
 
-    //Redirige a la vista del diágnostico
+    /*
+    * Redirige a la vista del diágnostico
+    */
     public function show($id)
     {
         $show = true;
@@ -128,6 +134,9 @@ class DiagnosticoController extends Controller
         return view('diagnostico.show', compact('diagnostico', 'paciente', 'show', 'fechas', 'gds', 'mini', 'cdr'));
     }
 
+    /*
+    * Muestra la vista de edición del diagnóstico
+    */
     public function showEditable($id)
     {
         $show = false;
@@ -137,7 +146,9 @@ class DiagnosticoController extends Controller
     }
     
 
-    //foto puede ser : gds mec cdr cus. Guarda la foto.
+    /*
+    * Aunque se llame savePhoto, guarda los informes de las escalas: gds mec cdr cus...
+    */
     public static function savePhoto(Request $request, $objeto, $foto){
         $name = [];
         $original_name = [];
