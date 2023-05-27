@@ -1,7 +1,11 @@
+/* 
+* Función utilizada al generar un informe. Al pulsar
+* el botón para modificar un recuerdo, limpia por completo
+* la ventana modal donde se van a mostrar los datos y añade
+* los del recuerdo a editar.
+*/
 function actualizaModalRecuerdo(idR){
-
     borrarDatos()
-
     $("#recuerdo_id").prop("value", String(idR))
     
     var fd = new FormData();
@@ -77,18 +81,24 @@ function actualizaModalRecuerdo(idR){
     });
 }
 
+/*
+* Borrar todos los datos del formulario del modal
+*/
 function borrarDatos(){
     let form = $("#recuerdosCreatorForm");
     form.removeClass("was-validated")
     form[0].reset()
 
     //Borrar la tabla de las personas
-
     $("#tabla_personas tbody tr").each(function(i, e){
         $(e).detach()
     })
 }
 
+/*
+* Igual que el anterior pero se ejecuta cuando se abre un
+* nuevo modal de recuerdo.
+*/
 $("#crearRecuerdo").on("click", function(event){
     
    $("#recuerdo_id").prop("value", "")
@@ -96,6 +106,9 @@ $("#crearRecuerdo").on("click", function(event){
 
 })
 
+/*
+* Actualiza la tabla de recuerdos
+*/
 $("#modal_recuerdo_guardar").on("click", function(event){
 
     let form = $("#recuerdosCreatorForm")[0]
@@ -110,7 +123,10 @@ $("#modal_recuerdo_guardar").on("click", function(event){
     form.classList.add('was-validated')
 })
 
-
+/*
+* Llama mediante AJAX a la creación de recuerdos y lo añade
+* a la tabla de la sesión.
+*/
 function crearRecuerdo() {
 
     
@@ -133,8 +149,6 @@ function crearRecuerdo() {
     var fd = new FormData();
 
     let recuerdo_id = $("#recuerdo_id").prop("value")
-
-    //recuerdosCreatorForm
 
     if (recuerdo_id){
         fd.append('id', recuerdo_id)
@@ -189,6 +203,10 @@ function crearRecuerdo() {
     $("#recuerdosCreator").modal("hide")
 }
 
+/*
+* Actualiza la tabla de recuerdos de la sesión cuando se 
+* guardan cambios desde el modal de añadir existente.
+*/
 function agregarRecuerdosExistentes(r) {
    
     let table = $("#tabla_recuerdos").dataTable()
@@ -226,6 +244,9 @@ function agregarRecuerdosExistentes(r) {
     
 }
 
+/*
+* Recarga la tabla de recuerdos de la sesión
+*/
 function reloadRecuerdos(r) {
 
 
@@ -258,11 +279,11 @@ function reloadRecuerdos(r) {
 }
 
 
-/**
- * Dado un recuerdo añade una fila a la tabla de existente. 
- * Introduce un campo al principio con el id (que posteriormente se ocultara)
- * Introduce un campo al final que es el checkbox que muestra si está seleccionado o no
- */
+/*
+* Dado un recuerdo añade una fila a la tabla de existente. 
+* Introduce un campo al principio con el id (que posteriormente se ocultara)
+* Introduce un campo al final que es el checkbox que muestra si está seleccionado o no
+*/
 
 function addRowToExistent(r){
    
@@ -275,8 +296,8 @@ function addRowToExistent(r){
 
 
 /*
-Dado un recuerdo añade una fila a la tabla de recuerdos asociados a la sesion
-Tiene un input extra con la id del recuerdo que se enviará al back para linkear dicho recuerdo con la sesión
+* Dado un recuerdo añade una fila a la tabla de recuerdos asociados a la sesion
+* Tiene un input extra con la id del recuerdo que se enviará al back para linkear dicho recuerdo con la sesión
 */
 function addRowToTable(r){
 
@@ -289,10 +310,9 @@ function addRowToTable(r){
 
 
 
-/**
- * Dada una fila y un recuerdo añade los campos principales a la fila
- */
-
+/*
+* Dada una fila y un recuerdo añade los campos principales a la fila
+*/
 function addFields(row, rec){
     row.append($('<td>' + rec.nombre + '</td>'))
     row.append($('<td>' + (rec.etapa.nombre  ? rec.etapa.nombre : "Sin etapa") + '</td>' ))

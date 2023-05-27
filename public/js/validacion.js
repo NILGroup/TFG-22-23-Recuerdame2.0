@@ -1,8 +1,13 @@
 "use strict"
 
+
+
 $(function () {
 
-
+    /* 
+    *  Script utilizado para que se muestre la validación al enviar los formularios.
+    *  Los botones para enviar deben tener la clase guardar para que se ejecute
+    */
     $(".guardar").each(function (i, e) {
         $(e).on("click", function (event) {
             let form = $(event.target).parents("form")[0]
@@ -15,7 +20,9 @@ $(function () {
             form.classList.add('was-validated')
         })
     })
-
+    /* 
+    *  Script específico para finalizar las actividades
+    */
     $(".finalizar").each(function (i, e) {
         $(e).on("click", function (event) {
             var form = $(event.target).parents("form")[0]

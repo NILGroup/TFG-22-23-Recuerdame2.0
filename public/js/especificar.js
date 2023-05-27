@@ -1,3 +1,10 @@
+/*
+* Todas las funciones que hacen aparecer los campos "Especifique"
+* al seleccionar la opción "Otro" de los select
+*/
+
+
+
 function especifiqueResidencia() {
     let select = document.getElementById("residencia")
     if (select.value === "6") {

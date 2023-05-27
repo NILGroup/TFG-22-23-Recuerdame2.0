@@ -1,4 +1,6 @@
-// Get the button
+/* Todo lo relacionado al botón de scroll up */
+
+
 $(() => {
   var mybuttonn = document.getElementById("scrollBtn");
   mybuttonn.style.display = "none";
@@ -8,7 +10,6 @@ $(() => {
   };
 
   function scrollHider() {
-    //console.log("scrollTop= " + document.body.scrollTop + "Element = "+ document.documentElement.scrollTop);
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 300) {
       mybuttonn.style.display = "inline";
     } else {
@@ -17,10 +18,6 @@ $(() => {
   }
 
 });
-
-
-
-
 
 
 //Funcion que no sirve de nada?

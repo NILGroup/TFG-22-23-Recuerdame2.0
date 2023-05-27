@@ -1,3 +1,7 @@
+/* 
+* Mostrar las ventanas emergentes para confirmar y deshacer eliminación
+* junto a la actualización del elemento en la tabla correspondiente.
+*/
 $(document).on('click', '.confirm_delete', function (event) {
     event.stopPropagation()
     event.preventDefault()
@@ -90,52 +94,11 @@ $(document).on('click', '.confirm_delete', function (event) {
         }
     });
 });
-/*
-$('.confirm_delete').click(function deshacer(event) {
-    var form =  $(this).closest("form");
-    var t = $(this).closest("table.datatable").dataTable();
-    var e = $(this).closest("tr");
-    var dr = e.clone(true, true);
-    event.preventDefault();
-    removeFromTable(t, e);
 
-    Swal.fire({
-        template:"#borrado",
-        position: 'top-end',
-        backdrop: false,
-        width:"25em",
-        showConfirmButton: false,
-        buttonsStyling:false,
-        timer: 5000,
-        showCancelButton: false,
-        timerProgressBar: true,
-        showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-        },
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-      })
-      .then((result) => {
-        if (!result.isDenied) {
-            form.submit()
-        }
-        else{
-            t.api().row.add(dr).draw()
-        }
-    });
-});
-*/
 
 /*
+* Lo mismo pero para calendario.
 */
-
-
-//CALENDARIO
 $('.confirm_finish').click(function (event) {
     var form = $(this).closest("form");
     var t = $(this).closest("div .tab-pane").attr("id");

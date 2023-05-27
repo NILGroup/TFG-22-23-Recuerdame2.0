@@ -1,4 +1,4 @@
-
+/* Configuración y funciones del dropzone */
 
 Dropzone.autoDiscover = false
 document.addEventListener("DOMContentLoaded", function () {

@@ -1,7 +1,11 @@
-
+/*
+*  Columnas excluidas par el filtro de las tablas.
+*  El nombre introducido debe ser igual que el introducido en la cabecera.
+*/
 var noBusqueda = ['Acciones', 'Informe', 'id', 'Id', 'iD', 'ID', 'Apto', 'Asignar'];
 
 var table = $(document).ready(function () {
+    /* Inicialización de todas las datatables con clase datatable */
     $('table.datatable').DataTable({
         paging: false,
         info: false,
@@ -19,6 +23,11 @@ var table = $(document).ready(function () {
                 target: 'tr'
             }
         },
+        /*
+        * Una vez inicializadas, se buscan los elementos de la clase searchSelector y searchInput más
+        * cercanos y se establecen como los buscadores de las tablas. Para encontrarlo deben encontrarse
+        * contenidos en el mismo div que la tabla.
+        */
         initComplete: function () {
             var table = this.api();
             var search = $(this).closest('div.tabla').children("div.upper").children("div.search");

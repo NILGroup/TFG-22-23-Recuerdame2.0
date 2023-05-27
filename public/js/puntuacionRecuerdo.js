@@ -1,37 +1,23 @@
-/*function setValue() {
-    const
-        newValue = Number((range.value - range.min) * 100 / (range.max - range.min)),
-        newPosition = 10 - (newValue * 0.2);
-    rangeV.innerHTML = `<span>${range.value}</span>`;
-    rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
-};
-const
-    range = document.getElementById('puntuacion'),
-    rangeV = document.getElementById('rangeV');
-document.addEventListener("DOMContentLoaded", setValue);
-range.addEventListener('input', setValue); */
+/*
+* Actualización del slider de nivel en los recuerdos.
+*/
+
+
+
 
 var slider = document.getElementById("puntuacion");
 var output = document.getElementById("demo-puntuacion");
 var style = document.querySelector('[data="test"]');
 
-
-//output.innerHTML = slider.value;
 setData(slider.value);
 
 slider.oninput = function () {
-    //output.innerHTML = this.value;
     setData(slider.value);
 }
 
 
 
 function setData(x) {
-  /*  var declaration = document.styleSheets[6].cssRules[0].style;
-    var setprop = declaration.setProperty("background", "yellow", "important");*/
-
-    /*!!!!NO TOCAAAAAAAAAAAAAAAAAAAAAAAAAAR!!!!!!!!!!!!!!!!!!!!!!!!!
-    stylesheet=6 (si cambia structure cambiará) */
     var declaration = document.styleSheets[5].cssRules[1].style;
     if(x==0){
         var setprop = declaration.setProperty("--webkit-slider-thumb-background", "url(../img/0.png)", "important");
@@ -56,18 +42,4 @@ function setData(x) {
     }else {
         var setprop10 = declaration.setProperty("--webkit-slider-thumb-background", "url(../img/10.png)", "important");
     }
-    
-    
-    
-    
-    
-    
-   
-    //var prueba = document.getElementById("#pruebaa");
-    //alert(prueba)
-    //.style.setProperty("background-color", "yellow", "important");
-    //document.getElementById("#puntuacion").style.setProperty('--webkit-slider-thumb-background', url(..\img\2.png));
-    //style.innerHTML = ".slider::-webkit-slider-thumb { background: url(../img/2.png) !important;  }";
-
-
 }

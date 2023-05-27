@@ -1,3 +1,4 @@
+/* Se comprueba que el cuidador no exista y se envía el formulario y el dropzone */
 $("#guardar").on("click", function(event){
     event.stopPropagation()
     event.preventDefault()
@@ -23,7 +24,6 @@ $("#guardar").on("click", function(event){
             async: false,
             data: fd,
             success: function (data) {
-                
                 if (data && !(data.email === undefined || data.email === null)  && $("#id").prop("value") != data.id) { 
                     Swal.fire({
                         title: 'Este correo ya está registrado',
@@ -35,17 +35,14 @@ $("#guardar").on("click", function(event){
                 }
             },
             error: function (data) {
-                
+                console.log(data)
             }
         })
-
     }
-
     form.classList.add('was-validated')
-
-    
 })
 
+/* Envío del dropzone y formulario */
 function submitDropzone(){
 
     if (send_dropzone){
@@ -62,6 +59,7 @@ function submitDropzone(){
     }
 }
 
+/* Muestra que el correo ya está registrado y permite actualizar sus datos */
 function duplicatedAlert(data) {
     Swal.fire({
         title: 'Este correo ya está registrado',
@@ -72,7 +70,6 @@ function duplicatedAlert(data) {
         confirmButtonText: 'Guardar cambios',
 
     }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
 
             let idOriginal = $("#id").prop("value")
@@ -109,6 +106,10 @@ function duplicatedAlert(data) {
     })
 }
 
+/* 
+* Actualiza la lista de cuidadores de un paciente 
+* al guardar los cambios del modal de añadir existente
+*/
 $("#agregarCuidador").on("click", function(event){
 
     event.stopPropagation()
@@ -154,17 +155,19 @@ $("#agregarCuidador").on("click", function(event){
     })
 })
 
+/* Coloca una nueva fila en la tabla */
 function setRow(tabla, r){
     tabla.api().row.add(r).draw()
 }
 
+/*
+* Obliga al crear o editar un cuidador a introducir al menos
+* un método de contacto para acceder a la aplicación
+*/
 $(document).ready(function() {
-    // Seleccionar los campos y agregar un evento keyup
     $("#telefono, #email").on("keyup", function() {
-      // Verificar si el valor de cualquier campo es no vacío
       var telefonoVacio = $("#telefono").val() == "";
       var emailVacio = $("#email").val() == "";
-      // Actualizar el atributo required en ambos campos
       $("#telefono").prop("required", telefonoVacio && emailVacio);
       $("#email").prop("required", telefonoVacio && emailVacio);
     });

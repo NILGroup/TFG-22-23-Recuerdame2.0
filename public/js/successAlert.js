@@ -1,3 +1,8 @@
+/* Script utilizado para mostrar el mensaje de creación o modificación satisfactorio.
+*  Convendría cambiar el funcionamiento, pasando a usar mensajes flash que llamen a esta
+*  función. De esta forma al recargar la página en la que se muestran estos mensajes
+*  no deberían volver a mostrarse.
+*/
 $(document).ready(function() {
     Swal.fire({
         toast: true,

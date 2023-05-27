@@ -1,3 +1,10 @@
+/*
+* Todo este script modifica las vistas show, cambiando los inputs
+* por labels, desactivandolos, etc.
+*/
+
+
+
 $("input, select").each(function () {
     if(!$(this).is(":hidden") && !$(this).hasClass("search"))
     switch ($(this).prop("type")) {

@@ -1,3 +1,5 @@
+/* Funciones para el correcto funcionamiento de varios modales abiertos a la vez */
+
 Array.from(document.getElementsByClassName('showmodal')).forEach( (e) => {
     e.addEventListener('click', function(element) {
         element.preventDefault();
@@ -6,7 +8,7 @@ Array.from(document.getElementsByClassName('showmodal')).forEach( (e) => {
         }
     }); 
 });
-// Show modal dialog
+
 function showModal(modal) {
     const mid = document.getElementById(modal);
     let myModal = new bootstrap.Modal(mid);

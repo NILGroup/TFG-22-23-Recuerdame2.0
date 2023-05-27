@@ -1,5 +1,4 @@
-
-
+/* Configuración y funciones relacionadas al calendario */
 document.addEventListener('DOMContentLoaded', function () {
     let user = document.getElementById('user_type').value; //tipo de usuario (1 terapeuta, 2 cuidador)
     let formulario = document.getElementById('formulario');
@@ -619,9 +618,3 @@ $("#confirmMultiActividad").on("click", function (event) {
     });
 
 })
-
-
-
-
-
-

@@ -1,14 +1,17 @@
-    
-const data2 = [
-  {x: '01/03/2023', GDS: 7, mental: 20, CDR: 3}, 
-  {x: '03/03/2023', GDS: 7, mental: 20, CDR: 3}, 
-  {x: '05/03/2023', GDS: 5, mental: 15, CDR: 2}, 
-  {x: '10/03/2023', GDS: 4, mental: 15, CDR: 2}, 
-  {x: '18/03/2023', GDS: 4, mental: 15, CDR: 2}, 
-  {x: '22/03/2023', GDS: 4, mental: 15, CDR: 2}, 
-  {x: '29/03/2023', GDS: 3, mental: 10, CDR: 1}, 
-];
+/* Datos de prueba con el formato que deben tener 
+* para aparecer en la gráfica de evolucion del paciente
+*/
+// const data2 = [
+//   {x: '01/03/2023', GDS: 7, mental: 20, CDR: 3}, 
+//   {x: '03/03/2023', GDS: 7, mental: 20, CDR: 3}, 
+//   {x: '05/03/2023', GDS: 5, mental: 15, CDR: 2}, 
+//   {x: '10/03/2023', GDS: 4, mental: 15, CDR: 2}, 
+//   {x: '18/03/2023', GDS: 4, mental: 15, CDR: 2}, 
+//   {x: '22/03/2023', GDS: 4, mental: 15, CDR: 2}, 
+//   {x: '29/03/2023', GDS: 3, mental: 10, CDR: 1}, 
+// ];
 
+/* Opciones de configuración de las gráficas de evolución del paciente */
 const cfg = {
   type: 'line',
   options: {
@@ -101,6 +104,8 @@ const cfg = {
   },
 };
 
+
+/* Creación de la gráfica en el canvas con id myChart */
 const ctx = document.getElementById('myChart');
 if(ctx != null)
   new Chart(ctx,cfg,data);

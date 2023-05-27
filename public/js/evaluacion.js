@@ -1,3 +1,7 @@
+/* Obliga a introducir una fecha si se ha especificado un valor en alguna de las escalas */
+
+
+
 function cambiarRequired(input, fecha){
     let req = ($(input).prop("value") || $(fecha).prop("value")) ? 1 : 0
     $(input).prop("required", req)
@@ -12,13 +16,13 @@ function cambiarRequiredCustom(value){
 
 $("#nombre_escala").on("keyup", (e) => cambiarRequiredCustom(($("#escala").prop("value") || $("#nombre_escala").prop("value") || $("#fecha_escala").prop("value"))))
 $(".custom-control").each((i, e) => $(e).on("change", (ev) =>cambiarRequiredCustom(($("#escala").prop("value") || $("#nombre_escala").prop("value") || $("#fecha_escala").prop("value")))))
+
 $(".cdr-control").each((i, e) => $(e).on("change", (ev) => cambiarRequired("#cdr", "#cdr_fecha")))
 $(".mental-control").each((i, e) => $(e).on("change", (ev) => cambiarRequired("#mental", "#mental_fecha")))
 $(".gds-control").each((i, e) => $(e).on("change", (ev) => cambiarRequired("#gds", "#gds_fecha")))
 
 
-
-
+/* Añade el valor máximo posible a los campos de las escalas */
 $(document).ready(function () {
     $("input[type='number']").each(function(){
         if($(this).attr("max")){
