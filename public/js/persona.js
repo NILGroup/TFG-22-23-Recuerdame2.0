@@ -33,21 +33,10 @@ $("#modal_guardar").on("click", function(event){
 
 
 function CrearPersonas() {
-    /*
-    0 Token
-    1 Paciente_id
-    2 Nombre
-    3 Apellidos
-    4 Telefono
-    5 Ocupaacion
-    6 Email
-    */
 
     const inputValues = document.querySelectorAll('#personasCreatorForm input')
     var rel = document.getElementById("tiporelacion_id");
-    
 
-    //console.log(inputValues)
 
     var fd = new FormData();
     
@@ -66,8 +55,6 @@ function CrearPersonas() {
     fd.append('tiporelacion_id', rel.value);
     fd.append('paciente_id', inputValues[0].value);
 
-    //console.log([...fd.entries()])
-
     $("#personasCreator").modal("hide")
     $.ajaxSetup({
         headers: {
@@ -82,8 +69,6 @@ function CrearPersonas() {
         contentType: false, // tell jQuery not to set contentType
         data: fd,
         success: function(data) {
-
-            console.log("ID NUEVA PERSONA:" + data["id"]);
 
             let tabla = $("#tabla_personas").dataTable()
             let row = $("<tr></tr>")
@@ -140,8 +125,6 @@ function agregarPersonas(p) {
 
     $("#tablaPersonasExistentes tbody tr").each(function(i, elem){
         let per = $(elem).children()
-        console.log("id:" + per[0].textContent + " N:" + per[1].textContent +" R:" + per[2].textContent + " Check:" + per[3].textContent)
-
 
         if ($(per[4]).children("input").prop("checked")){
         

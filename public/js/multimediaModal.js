@@ -12,9 +12,6 @@ $(function(){
 function all(){
 
     let selected = getSelected()
-
-    console.log(selected)
-
     addSelectedToDiv(selected)
 }
 

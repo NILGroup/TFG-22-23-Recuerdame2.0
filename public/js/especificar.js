@@ -16,7 +16,6 @@ function especifiqueResidencia() {
 
 function especifique(){
     let select = document.getElementById("tiporelacion_id")
-    console.log(select)
     if (select.value === "7"){
         $("#tipo_custom").show().prop("required", true)
         

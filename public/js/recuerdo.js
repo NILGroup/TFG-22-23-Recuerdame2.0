@@ -231,7 +231,6 @@ function reloadRecuerdos(r) {
 
     let selected = []
     $("#tabla_recuerdos tbody input").each(function(i, elem){
-        console.log(elem)
         selected.push($(elem).prop("value"))
     })
 
@@ -295,7 +294,6 @@ function addRowToTable(r){
  */
 
 function addFields(row, rec){
-    console.log(rec)
     row.append($('<td>' + rec.nombre + '</td>'))
     row.append($('<td>' + (rec.etapa.nombre  ? rec.etapa.nombre : "Sin etapa") + '</td>' ))
     row.append($('<td>' + (rec.categoria.nombre ? rec.categoria.nombre : "Sin categoría") + '</td>'))
@@ -306,7 +304,6 @@ function addFields(row, rec){
     else
         row.append($('<td class=" text-center"> <input class="form-check-input" type="checkbox"  disabled> </td>'))
     row.append($('<td class="tableActions"></td>'))
-    console.log(row.html())
 }
 
 

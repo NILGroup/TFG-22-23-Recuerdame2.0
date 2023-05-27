@@ -104,7 +104,6 @@
                     })
                 },
                 error: function (data) {
-                    console.log(data)
                     Swal.fire({
                         toast: true,
                         position: 'top-end',

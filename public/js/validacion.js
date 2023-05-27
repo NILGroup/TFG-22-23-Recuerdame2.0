@@ -19,14 +19,12 @@ $(function () {
     $(".finalizar").each(function (i, e) {
         $(e).on("click", function (event) {
             var form = $(event.target).parents("form")[0]
-            console.log($(form));
 
             event.stopPropagation()
             event.preventDefault()
 
             if (form.checkValidity()) {
                 var t = $(this).closest("div .tab-pane").attr("id");
-                console.log(t);
                 event.preventDefault();
                 swal.fire({
                     title: '¿Seguro que desea finalizar la actividad?',
@@ -58,14 +56,12 @@ $(function () {
                                     data: $(form).serialize(),
                                     success: function () {
                                         location.reload();
-                                        console.log("Prueba");
                                     },
                                     error: function (e) {
                                         console.log(e);
                                     }
                                 });
                             })
-                            console.log("Actividad");
                             
                         }
                     });

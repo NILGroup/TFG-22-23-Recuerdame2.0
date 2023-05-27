@@ -1,13 +1,4 @@
-/*
-$('#searcher').each(function () {
-    let chosenHeaderText = 'x2',
-        headers = $('table tr th'),
-        chosenHeader = headers.filter(function(header) {
-            return headers[header].innerHTML == chosenHeaderText;
-        })
-        console.log(headers)
-});
-*/
+
 var noBusqueda = ['Acciones', 'Informe', 'id', 'Id', 'iD', 'ID', 'Apto', 'Asignar'];
 
 var table = $(document).ready(function () {
@@ -16,11 +7,6 @@ var table = $(document).ready(function () {
         info: false,
         sDom:"ltipr",
         "order": [],
-        /*
-        scrollY: 300,
-        scrollCollapse: true,
-        scrollResize: true,
-        */
         language: { 
             search: "_INPUT_",
             searchPlaceholder: "Buscar...",

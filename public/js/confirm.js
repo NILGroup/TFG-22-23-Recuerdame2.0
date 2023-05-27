@@ -68,9 +68,7 @@ $(document).on('click', '.confirm_delete', function (event) {
                         id = id[id.length - 1];
 
                         let urlR = window.location.href.split('/');
-                        console.log(urlR)
                         urlR = urlR[urlR.length - 1] + "/"+ id +"/restore";
-                        console.log(urlR)
 
                         t.api().row.add(dr).draw();
                         
@@ -141,7 +139,6 @@ $('.confirm_delete').click(function deshacer(event) {
 $('.confirm_finish').click(function (event) {
     var form = $(this).closest("form");
     var t = $(this).closest("div .tab-pane").attr("id");
-    console.log(t);
     event.preventDefault();
     swal.fire({
         title: '¿Seguro que desea finalizar la actividad?',
@@ -167,13 +164,11 @@ $('.confirm_finish').click(function (event) {
                     timer: 2000,
                     showConfirmButton: false,
                 })
-                console.log("Actividad");
                 $.ajax({
                     url: '/modificarActividad',
                     type: 'post',
                     data: form.serialize(),
                     success: function () {
-                        console.log("Prueba");
                         location.reload();
                     },
                     error: function (e) {

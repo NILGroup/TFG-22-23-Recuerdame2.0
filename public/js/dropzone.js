@@ -3,8 +3,6 @@
 Dropzone.autoDiscover = false
 document.addEventListener("DOMContentLoaded", function () {
 
-    console.log("Dropzones: " + $(".dropzone").length)
-
     if (Array.isArray(dropzone_config)){
         dropzone_config.forEach(e => createDropzone(e))
     }
@@ -93,7 +91,6 @@ function createDropzone(config){
     
                     form.classList.add('was-validated')
                 }
-                console.log(customSubmit)
                 if (Array.isArray(customSubmit)){
               
                     customSubmit.forEach(e => $(e)[0].addEventListener("click", evento))

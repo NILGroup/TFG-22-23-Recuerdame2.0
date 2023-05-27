@@ -63,7 +63,6 @@ $(document).ready(function () {
         }
 
         var percentOfSuccess = (correctFields/length).toFixed(2);
-        console.log(formFields)
         bar.animate(percentOfSuccess);
     }
 

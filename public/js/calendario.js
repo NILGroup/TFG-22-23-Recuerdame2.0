@@ -221,13 +221,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('idSesion').value = info.event.id;
                     document.getElementById('fecha').value = info.event.extendedProps.fecha;
                     document.getElementById('titulo').value = info.event.title;
-                    console.log(document.getElementById('titulo'));
                     document.getElementById('objetivo').value = info.event.extendedProps.objetivo;
                     document.getElementById('descripcion').value = info.event.extendedProps.descripcion;
                     var tabla = $("#tabla_recuerdos").dataTable();
                     tabla.api().clear();
                     for (let recuerdo of info.event.extendedProps.recuerdos) {
-                        console.log(recuerdo);
                         let row = $("<tr></tr>");
                         row.append($('<td>' + recuerdo.nombre + '</td>'));
                         row.append($('<td>' + recuerdo.etapa.nombre + '</td>'));
@@ -503,7 +501,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             }
                         });
                         if (t == 'actividad-modal') {
-                            console.log("Actividad");
                             $.ajax({
                                 url: '/eliminarActividad',
                                 type: 'post',

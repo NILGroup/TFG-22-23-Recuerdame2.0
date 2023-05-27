@@ -63,7 +63,6 @@ function submitDropzone(){
 }
 
 function duplicatedAlert(data) {
-    console.log("alerta")
     Swal.fire({
         title: 'Este correo ya está registrado',
         text: '¿Desea actualizar los datos del usuario?',
@@ -85,7 +84,6 @@ function duplicatedAlert(data) {
             if (idOriginal){
 
                 var fdn = new FormData();
-                console.log(idOriginal)
                 fdn.append('id', idOriginal)
                 fdn.append('idCurrent', data.id)
 
@@ -141,7 +139,6 @@ $("#agregarCuidador").on("click", function(event){
         }
     })
     var form = $(this).closest("form");
-    console.log(form.serializeArray())
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -43,24 +43,14 @@ function actualizaModalRecuerdo(idR){
             document.getElementById('localizacion').value = data.localizacion;
             
             document.getElementById('apto').checked  = data.apto ? "checked" : "";
-/*
-            console.log(document.getElementById('apto').checked)
-            console.log(data.apto)
 
-            if(document.getElementById('apto').checked != data.apto){
-                document.getElementById('apto').click();
-                console.log("click")
-            }
-*/
             if(data.categoria_id == 7)
                 document.getElementById('tipo_custom').value = data.tipo_custom;
             else
                 document.getElementById('tipo_custom').value = "";
    
-            //setValue();
 
             data.personasrelacionadas.forEach(p => {
-                //console.log(p)
                 let row = $("<tr></tr>")
                 row.append($('<td style="display: none;" class="row_id">' + p.id + '</td>'))
                 row.append($('<td>' + p.nombre + " " + p.apellidos + '</td>'))
@@ -112,7 +102,6 @@ $("#crearRecuerdo").on("click", function(event){
 $("#modal_recuerdo_guardar").on("click", function(event){
 
     let form = $("#recuerdosCreatorForm")[0]
-    //console.log(form)
     if (!form.checkValidity()){
         event.preventDefault()
         event.stopPropagation()
@@ -144,11 +133,6 @@ function crearRecuerdo() {
     })
 
     var fd = new FormData();
-    /*
-    console.log(inputValues)
-    console.log(selectValues)
-    console.log(textValues)
-    */
 
     let recuerdo_id = $("#recuerdo_id").prop("value")
 
@@ -232,7 +216,6 @@ function reloadRecuerdos(r) {
 
 
     let row = $("<tr></tr>")
-    //console.log()
     addFields(row, r)
     
 
