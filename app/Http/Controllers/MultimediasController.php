@@ -9,104 +9,40 @@ use Illuminate\Http\Request;
 
 class MultimediasController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware(['auth']);
     }
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-        return "Index de la Multimedia";
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Muestra todos los multimedias de la base de datos
-     *
-     * @param  \App\Models\Multimedia  $multimedia
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * Muestra todos los multimedias de la base de datos
+    */
     public function show(Multimedia $multimedia)
     {
         return Multimedia::all()->sortBy("id");
     }
 
-    //Devuelve los archivos multimedia de un recuerdo concreto
+    /*
+    * Devuelve los archivos multimedia de un recuerdo concreto
+    */
     public function showByRecuerdo($idRecuerdo)
     {
         return Recuerdo::find($idRecuerdo)->multimedias;
     }
 
-    //Devuelve los archivos multimedia de un recuerdo concreto
+    /*
+    * Devuelve los archivos multimedia de una sesión concreta
+    */
     public function showBySesion($idSesion)
     {
         return Sesion::find($idSesion)->multimedias;
     }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Multimedia  $multimedia
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Multimedia $multimedia)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Multimedia  $multimedia
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Multimedia $multimedia)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Multimedia  $multimedia
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Multimedia $multimedia)
-    {
-        //
-    }
-
+    /*
+    * Guarda una foto en la base de datos.
+    * Se llama desde dropzones que permiten un
+    * único archivo multimedia
+    */
     public static function savePhoto(Request $request, $objeto){
         $name = [];
         $original_name = [];
@@ -126,6 +62,9 @@ class MultimediasController extends Controller
         }
     }
 
+    /*
+    * Guarda una lista de multimedia en la base de datos.
+    */
     public static function savePhotos(Request $request, $object){
         if ($request->has("file")) { //EN CASO DE MULTIMEDIA
             $name = [];
@@ -146,7 +85,10 @@ class MultimediasController extends Controller
         }
     }
 
-
+   /*
+    * Guarda multimedia de recuerdo con
+    * descripción en la base de datos.
+    */
     public static function savePhotosWithDescriptions(Request $request, $object){
         if ($request->has("file")) { //EN CASO DE MULTIMEDIA
             $name = [];

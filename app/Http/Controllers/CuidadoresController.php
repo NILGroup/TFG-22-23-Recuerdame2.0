@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 class CuidadoresController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware(['auth', 'role']);
@@ -22,6 +17,9 @@ class CuidadoresController extends Controller
         $this->middleware(['viendoCuidador'])->only(['show', 'edit']);
     }
 
+    /*
+    * Renderiza la vista de creación de cuidador
+    */
     public function create($idP){
         $pacientes = Auth::User()->pacientes;
         $paciente = Paciente::find($idP);
@@ -30,6 +28,9 @@ class CuidadoresController extends Controller
         return view('cuidadores.create', compact('mostrarFoto','pacientes', 'paciente', 'cuidador'));
     }
 
+    /*
+    * Renderiza el cuidador seleccionado
+    */
     public function show($idP, $id)
     {
         $pacientes = Auth::User()->pacientes;
@@ -39,6 +40,9 @@ class CuidadoresController extends Controller
         return view('cuidadores.show', compact('mostrarFoto','pacientes', 'paciente', 'cuidador'));
     }
 
+    /*
+    * Renderiza la vista de edición del cuidador seleccionado
+    */
     public function edit($idP, $id){
         $pacientes = Auth::User()->pacientes;
         $paciente = Paciente::find($idP);
@@ -47,6 +51,9 @@ class CuidadoresController extends Controller
         return view('cuidadores.edit', compact('mostrarFoto','pacientes', 'paciente', 'cuidador'));
     }
 
+    /*
+    * Renderiza la lista de cuidadores del paciente seleccionado
+    */
     public function showByPaciente(int $idPaciente){
 
         $paciente = Paciente::findOrFail($idPaciente);
@@ -55,9 +62,9 @@ class CuidadoresController extends Controller
         $terapeuta = User::find(Auth::user()->id);
         $cuidadoresTerapeuta = User::where('rol_id', "2")->get();
         /*
-        //TO-DO mostrar solo los cuidadores del terapeuta y añadir una forma de asignar el resto
-        //Obtiene todos los cuidadores relacionados a ese terapeuta
-        //Incluyendo los de pacientes que él no ha creado pero le han sido asignados.
+        * TO-DO mostrar solo los cuidadores del terapeuta y añadir una forma de asignar el resto
+        * Obtiene todos los cuidadores relacionados a ese terapeuta
+        * Incluyendo los de pacientes que él no ha creado pero le han sido asignados.
         $cuidadoresTerapeuta = User::whereHas('pacientes', function($query) use ($tID) {
             $query->whereHas('users', function($query) use ($tID) {
                 $query->where('users.id', $tID);
@@ -67,6 +74,9 @@ class CuidadoresController extends Controller
         return view("cuidadores.showByPaciente", compact("paciente", "cuidadores", "cuidadoresTerapeuta"));
     }
 
+    /*
+    * Registramos un nuevo cuidador
+    */
     protected function registroCuidador(Request $request)
     {
        
@@ -98,26 +108,24 @@ class CuidadoresController extends Controller
 
         return redirect("/usuarios/$paciente->id/cuidadores");
     }
-
+    /*
+    * Actualizamos un cuidador
+    */
     public function update(Request $request)
     {
-        //Sacamos al paciente de la bd
         $cuidador = User::findOrFail($request->id);
-
-        //Actualizamos masivamente los datos del paciente
         $cuidador->update($request->all());
-        $cuidador->update(['password' => Hash::make($request->password)]);
-
-        //MultimediasController::savePhoto($request, $cuidador);
-        
+        $cuidador->update(['password' => Hash::make($request->password)]);        
         session()->put('created', "true");
-        //Redireccionamos a lista pacientes
-        //return redirect("/usuarios/$request->id");
         $id = Session::get('paciente')['id'];
         return redirect("/usuarios/$id/cuidadores/$cuidador->id");
         
     }
 
+    /*
+    * En lugar de eliminar su cuenta, desasignamos al paciente
+    * desde el que ha sido eliminado el cuidador
+    */
     public function destroy($id)
     {
         $cuidador = User::find($id);
@@ -125,6 +133,10 @@ class CuidadoresController extends Controller
         $paciente->users()->detach($cuidador);
     }
 
+    /*
+    * Elimina el cuidado, asignandole sus datos a otro
+    * (Desde el script que muestra la ventana de cuidador ya registado)
+    */
     public function destroy_no_view(Request $request){
         $borrar = User::findOrFail($request->id);
         $permanece = User::findOrFail($request->idCurrent);
@@ -136,7 +148,9 @@ class CuidadoresController extends Controller
         }
         return User::findOrFail($request->id)->delete();
     }
-
+   /*
+    * Reasigna el paciente al cuidador
+    */
     public function restore($idP, $id) 
     {
         $paciente = Paciente::find($idP);
@@ -144,20 +158,19 @@ class CuidadoresController extends Controller
         $paciente->users()->attach($cuidador);
     }
 
-    //sirve para chekear si el cuidador ya ha sido registrado
+   /*
+    * Comprueba si el cuidador ya ha sido registrado.
+    * Es necesario actualizarlo porque falta comprobar
+    * por el número de telefono.
+    */
     public function repeatedCuidador(Request $request){
         $email = $request->email;
         $encontrado = User::where('email', $email)->first();
-        /*info($email);
-        info("hey");
-        if($encontrado == false){
-            info("false");
-        }else{
-            info("true");
-        }*/
         return User::where('email', $email)->first();
     }
-
+   /*
+    * Elimina la foto del cuidador
+    */
     public function removePhoto(Request $request){
         $cuidador = User::findOrFail($request->id);
         $cuidador->multimedia->delete();
@@ -165,11 +178,12 @@ class CuidadoresController extends Controller
 
         return redirect("/usuarios/$id/cuidadores/$cuidador->id/editar");
     }
-
+   /*
+    * Reasigna los cuidadores al guardar el modal de añadir existente
+    */
     public function reasignarCuidadores(Request $request){
         $paciente = Paciente::find($request->id);
         $cuidadoresPaciente = $paciente->users()->where('rol_id', 2)->get();
-        info($cuidadoresPaciente);
         $paciente->users()->detach($cuidadoresPaciente);
         $cuidadores = $request->checkCuidador;
         $paciente->users()->attach($cuidadores);

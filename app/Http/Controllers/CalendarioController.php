@@ -20,20 +20,20 @@ use Illuminate\Support\Facades\Auth;
 
 class CalendarioController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    /*
+    * Constructor del controlador. Laravel se encarga de llamarlo automáticamente
+    */
     public function __construct()
     {
         $this->middleware(['auth', 'asignarPaciente']);
     }
 
+    /*
+    * Renderizar el calendario del paciente seleccionado
+    */
     public function showByPaciente(int $idPaciente)
     {
         $show = false;
-        //$actividades = Actividad::all()->sortBy("id");
         $user = Auth::user();
         $paciente = Paciente::find($idPaciente);
         $sesion = new Sesion();
@@ -72,14 +72,12 @@ class CalendarioController extends Controller
         return view('calendario.showByPaciente', compact("multimedias", "idPaciente", "paciente", "user", "sesion", "recuerdo", "estados", "etiquetas", "etapas", "emociones", "categorias", "tipos", "recuerdos", "personas", "persona", "mostrarFoto", "show"));
     }
 
+    /*
+    * Guardar una actividad nueva o actualizar una antigua en el calendario
+    */
     public function store(Request $request)
     {
-        error_log("hola");
-
         if (isset($request->id)) {
-            //Aqui es update
-
-            error_log("update");
 
             if ($request->finished === "" || $request->finished === null) {
 
@@ -94,8 +92,6 @@ class CalendarioController extends Controller
                     ]
                 );
 
-
-
                 if (isset($request->mult))
                     $actividad->multimedias()->sync($request->mult);
                 else
@@ -104,8 +100,6 @@ class CalendarioController extends Controller
                 MultimediasController::savePhotos($request, $actividad);
             } 
             else {
-           
-                //return "<h1>$request->finished</h1>";
                 $actividad = Actividad::updateOrCreate(
                     ["id" => $request->id],
                     [
@@ -123,9 +117,6 @@ class CalendarioController extends Controller
             return redirect("/usuarios/$actividad->paciente_id/calendario");
         } 
         else {
-            //Aqui es create
-
-            error_log("Create:");
             $actividad = Actividad::updateOrCreate(
                 [
                     "start" => $request->start,
@@ -136,8 +127,6 @@ class CalendarioController extends Controller
                 ]
             );
 
-
-
             MultimediasController::savePhotos($request, $actividad);
 
             session()->put('created', "Creado");
@@ -147,10 +136,12 @@ class CalendarioController extends Controller
         return redirect("/usuarios/$actividad->paciente_id/calendario");
     }
 
+    /*
+    * Solo actualizar una actividad existente. La función no se usa.
+    */
     public function update(Request $request)
     {
         if ($request->finished === "" || $request->finished === null) {
-
             $actividad = Actividad::updateOrCreate(
                 ["id" => $request->id],
                 [
@@ -162,8 +153,6 @@ class CalendarioController extends Controller
                 ]
             );
 
-
-
             if (isset($request->mult))
                 $actividad->multimedias()->sync($request->mult);
             else
@@ -172,8 +161,6 @@ class CalendarioController extends Controller
             MultimediasController::savePhotos($request, $actividad);
         } 
         else {
-       
-            //return "<h1>$request->finished</h1>";
             $actividad = Actividad::updateOrCreate(
                 ["id" => $request->id],
                 [
@@ -190,7 +177,10 @@ class CalendarioController extends Controller
         session()->put('created', "Actualizado");
         return redirect("/usuarios/$actividad->paciente_id/calendario");
     }
-
+    
+    /*
+    * Actualizar una sesión desde el calendario.
+    */
     public function updateSesion(Request $request)
     {
         $sesion = Sesion::updateOrCreate(
@@ -212,15 +202,15 @@ class CalendarioController extends Controller
 
         $sesion->multimedias()->detach();
 
-
-
-
         MultimediasController::savePhotos($request, $sesion);
 
         session()->put('created', "Actualizado");
         return redirect("usuarios/{$sesion->paciente->id}/calendario");
     }
-
+  
+    /*
+    * Muestra en formato JSON lo que se ha intentado cargar en calendario.
+    */
     public function show(int $idPaciente)
     {
 
@@ -268,7 +258,10 @@ class CalendarioController extends Controller
             return response()->json($sesionYactividad);
         }
     }
-
+  
+    /*
+    * Elimina la actividad escogida
+    */
     public function destroy(Request $request)
     {
         $actividad = Actividad::findOrFail($request->id);
@@ -278,17 +271,27 @@ class CalendarioController extends Controller
         session()->put('created', "Eliminado");
         return redirect("/usuarios/$paciente/calendario");
     }
+      
+    /*
+    * Deshace la eliminación de la actividad escogida.
+    */
     public function restore($idP, $id)
     {
         Actividad::where('id', $id)->withTrashed()->restore();
     }
 
+    /*
+    * Deshace la eliminación de la sesión escogida.
+    */
     public function restoreSesion($idP, $id) 
     {
         Sesion::where('id', $id)->withTrashed()->restore();
         InformeSesion::where('sesion_id', $id)->withTrashed()->restore();
     }
 
+    /*
+    * Elimina la sesión escogida.
+    */
     public function destroySesion(Request $request)
     {
         $sesion = Sesion::find($id);
@@ -299,6 +302,9 @@ class CalendarioController extends Controller
         return redirect("/usuarios/$paciente/calendario");
     }
 
+    /*
+    * Crea una nueva sesión desde calendario
+    */
     public function registroSesion(Request $request)
     {
         // NOTA: el atributo recuerdos es un array con los ids de cada recuerdo
@@ -331,9 +337,11 @@ class CalendarioController extends Controller
 
         session()->put('created', "Creado");
         return redirect("usuarios/{$sesion->paciente->id}/calendario");
-        //return "<h1>$request</h1>";
     }
 
+    /*
+    * Obtiene el número de actividades no completadas desde la vista de cuidador
+    */
     public static function getNotDone(int $idPaciente)
     {
         $tipoUsuario = Auth::user()->rol_id;
